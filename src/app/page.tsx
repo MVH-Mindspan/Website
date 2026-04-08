@@ -788,6 +788,158 @@ export default function Home() {
         </div>
       </section>
 
+      {/* FOR PROVIDERS */}
+      <section id="for-providers" className="studio-section" style={{ background: "#fff" }}>
+        <div className="studio-container">
+          <SectionHeader
+            eyebrow="For providers"
+            title="Two ways to work with Mindspan."
+            lead="Whether you are referring a patient you already care about or looking for a place to practice this kind of medicine yourself, we would love to hear from you."
+          />
+
+          <motion.div
+            className="mt-14 grid md:grid-cols-2 gap-6 md:gap-8"
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="show"
+            viewport={VIEWPORT}
+          >
+            <motion.article
+              className="rounded-[1.5rem] p-8 md:p-10 relative overflow-hidden group"
+              style={{
+                background: CREAM,
+                border: "1px solid rgba(8,54,48,0.1)",
+              }}
+              variants={fadeUp}
+            >
+              <div
+                className="absolute -top-12 -right-12 h-48 w-48 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                style={{
+                  background:
+                    "radial-gradient(60% 60% at 50% 50%, rgba(251,77,23,0.18) 0%, transparent 70%)",
+                }}
+              />
+              <div className="relative">
+                <p className="studio-eyebrow" style={{ color: ORANGE }}>
+                  Refer a patient
+                </p>
+                <h3 className="studio-h3 mt-3" style={{ color: GREEN }}>
+                  Get your patient seen by a neurologist in weeks.
+                </h3>
+                <p className="studio-prose mt-4" style={{ color: "rgba(8,54,48,0.72)" }}>
+                  You are already the trusted doctor. We are the specialist partner who makes that
+                  job easier. Fast access for your patient, a thoughtful assessment, and clean
+                  notes back in your chart. Nothing slips. Nothing gets handed off and forgotten.
+                </p>
+
+                <ul className="mt-6 space-y-2.5 text-[15px]" style={{ color: "rgba(8,54,48,0.82)" }}>
+                  {[
+                    "First appointment typically within two to three weeks",
+                    "Integrated with Athena and most referral workflows",
+                    "Structured notes back to your office, in the format you prefer",
+                    "APOE, biomarkers, imaging coordinated on our side",
+                    "Your patient stays yours, we handle the cognitive specialty piece",
+                  ].map((item) => (
+                    <li key={item} className="flex items-start gap-3">
+                      <span
+                        className="mt-2 h-1.5 w-1.5 rounded-full flex-shrink-0"
+                        style={{ background: ORANGE }}
+                      />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                <div className="mt-8 flex flex-wrap gap-3">
+                  <a href="/providers/refer" className="studio-btn studio-btn-primary">
+                    Start a referral
+                    <Arrow />
+                  </a>
+                  <a href="/providers" className="studio-btn studio-btn-ghost">
+                    Referral pathway
+                  </a>
+                </div>
+              </div>
+            </motion.article>
+
+            <motion.article
+              className="rounded-[1.5rem] p-8 md:p-10 relative overflow-hidden group text-white"
+              style={{
+                background: GREEN,
+              }}
+              variants={fadeUp}
+            >
+              <div
+                className="absolute inset-0 pointer-events-none"
+                style={{
+                  background:
+                    "radial-gradient(120% 100% at 100% 0%, rgba(251,77,23,0.18) 0%, transparent 55%)",
+                }}
+              />
+              <div className="relative">
+                <p className="studio-eyebrow" style={{ color: ORANGE }}>
+                  Join Mindspan
+                </p>
+                <h3
+                  className="studio-h3 mt-3"
+                  style={{
+                    color: "#fff",
+                    fontFamily: "var(--font-pt-serif), Georgia, serif",
+                  }}
+                >
+                  Practice the medicine you wanted to when you trained.
+                </h3>
+                <p className="studio-prose mt-4 text-white/80">
+                  If you are a neurologist, a clinical psychologist, a nurse practitioner, or a
+                  care partner who is tired of fifteen-minute visits and broken handoffs, come talk
+                  to us. We built Mindspan so clinicians can give their patients the time,
+                  attention, and science these families deserve.
+                </p>
+
+                <ul className="mt-6 space-y-2.5 text-[15px] text-white/85">
+                  {[
+                    "Unhurried visits, structured around the patient, not the clock",
+                    "Real tools that make your clinical work safer and more precise",
+                    "A care orchestration engine that handles protocol compliance for you",
+                    "A team culture that respects craft and rewards seniority",
+                    "Competitive compensation, meaningful equity, and real work-life balance",
+                  ].map((item) => (
+                    <li key={item} className="flex items-start gap-3">
+                      <span
+                        className="mt-2 h-1.5 w-1.5 rounded-full flex-shrink-0"
+                        style={{ background: ORANGE }}
+                      />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                <div className="mt-8 flex flex-wrap gap-3">
+                  <a
+                    href="/careers"
+                    className="studio-btn studio-btn-accent"
+                  >
+                    See open roles
+                    <Arrow />
+                  </a>
+                  <a
+                    href="mailto:clinicians@mindspan.co"
+                    className="studio-btn"
+                    style={{
+                      background: "transparent",
+                      color: "#fff",
+                      border: "1px solid rgba(255,255,255,0.35)",
+                    }}
+                  >
+                    Talk to our team
+                  </a>
+                </div>
+              </div>
+            </motion.article>
+          </motion.div>
+        </div>
+      </section>
+
       {/* FINAL CTA */}
       <section className="studio-section text-white" style={{ background: GREEN }}>
         <motion.div
