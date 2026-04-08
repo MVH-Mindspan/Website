@@ -76,9 +76,9 @@ export const howItWorks = [
       "An unhurried visit, in one of our clinics or on video, where a Mindspan neurologist goes through your history, any recent tests, and where you are today. You’ll leave knowing what they’re seeing and why.",
   },
   {
-    title: "Looking at it together",
+    title: "The latest science, pointed at you",
     body:
-      "We combine what we’ve learned about you with decades of research from patients who’ve been where you are now. It helps us see which treatments and changes are most likely to help, specifically for you.",
+      "This is where Mindspan’s real edge shows up. Your neurologist brings together decades of research, the newest peer-reviewed findings, and advanced diagnostics, then matches it all to everything we know about you. You get the benefit of tomorrow’s neurology, aimed directly at the outcomes that matter in your life and your family’s.",
   },
   {
     title: "Ongoing partnership",
