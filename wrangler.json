@@ -1,5 +1,5 @@
 {
-  "name": "mindspan-web",
+  "name": "website",
   "main": "worker.ts",
   "compatibility_date": "2025-03-27",
   "assets": {
