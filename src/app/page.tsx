@@ -627,7 +627,8 @@ export default function Home() {
                   >
                     <iframe
                       src={mapSrc}
-                      className="absolute inset-0 w-full h-full border-0 pointer-events-none transition-transform duration-500 group-hover:scale-[1.05]"
+                      className="absolute left-0 right-0 top-0 w-full border-0 pointer-events-none transition-transform duration-500 group-hover:scale-[1.05]"
+                      style={{ height: "calc(100% + 60px)" }}
                       loading="lazy"
                       title={`Map of ${l.city}, ${l.state}`}
                       aria-hidden="true"
