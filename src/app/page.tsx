@@ -499,31 +499,34 @@ export default function Home() {
 
             <article>
               <p className="studio-eyebrow" style={{ color: ORANGE }}>
-                A personalized model of your brain health
+                Your Cognitive Digital Twin
               </p>
               <h3 className="studio-h3 mt-3" style={{ color: GREEN }}>
-                Your own picture — not a generic chart.
+                A personalized model of your brain.
               </h3>
               <p className="studio-prose mt-4" style={{ color: "rgba(8,54,48,0.75)" }}>
-                Behind the scenes, our team uses a personalized model built from your medical
+                Behind the scenes, our team builds something we call your Cognitive Digital Twin —
+                a personalized picture of your brain health, put together from your medical
                 history, labs, imaging, and cognitive assessments. It helps your neurologist see
-                which treatments are most likely to help <em>you</em>, drawing on research from tens
-                of thousands of other patient journeys. It updates as we learn more about you.
+                what’s most likely going on and what’s most likely to help <em>you</em>, drawing on
+                research from tens of thousands of other patient journeys. Your twin updates as we
+                learn more about you.
               </p>
             </article>
 
             <article>
               <p className="studio-eyebrow" style={{ color: ORANGE }}>
-                The latest science, translated for real life
+                Our Care Orchestration Engine
               </p>
               <h3 className="studio-h3 mt-3" style={{ color: GREEN }}>
-                We read the research so you don’t have to.
+                The latest science, matched to you.
               </h3>
               <p className="studio-prose mt-4" style={{ color: "rgba(8,54,48,0.75)" }}>
-                Cognitive medicine is changing fast. New drugs, new diagnostics, new understanding
-                of how the brain ages. We follow it closely and pull in what’s worth your attention
-                — then explain what it means for your specific situation, in plain language, when
-                you’re in the room with us.
+                Cognitive medicine is moving fast. New drugs, new diagnostics, new understanding of
+                how the brain ages. Our Care Orchestration Engine quietly tracks that research and
+                pairs it with your twin — so your neurologist can see which of today’s options are
+                actually worth considering for your situation. You get the benefit of tomorrow’s
+                neurology, explained in plain language today.
               </p>
             </article>
 
