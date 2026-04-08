@@ -285,76 +285,184 @@ export default function Home() {
         </div>
       </section>
 
-      {/* WHY CARE AT MINDSPAN IS DIFFERENT — names the tech */}
+      {/* WHY CARE AT MINDSPAN IS DIFFERENT — Core + Edge protocols, plus the tech stack */}
       <section id="how-we-think" className="studio-section">
         <div className="studio-container">
           <SectionHeader
             eyebrow="Why care at Mindspan is different"
-            title="Neurologists who take the time, with the tools to back it up."
-            lead="A lot of the technology in healthcare is invisible to patients. At Mindspan, we want you to see what is under the hood, because it is part of what makes your care feel different."
+            title="Standard of care, made better by precision medicine."
+            lead="Every Mindspan patient gets the full standard of neurological care. And every patient gets access to breakthroughs that were sitting in research papers a year ago, translated into their plan, explained in their language, covered by their insurance."
           />
 
-          <div className="mt-14 grid md:grid-cols-2 gap-6 md:gap-8">
-            <article className="studio-card">
-              <p className="studio-eyebrow" style={{ color: ORANGE }}>
-                A care team that stays with you
+          {/* Protocol comparison */}
+          <div className="mt-14 grid lg:grid-cols-2 gap-6 md:gap-8">
+            <article
+              className="rounded-[1.5rem] p-8 md:p-10"
+              style={{
+                background: "#fff",
+                border: "1px solid rgba(8,54,48,0.1)",
+              }}
+            >
+              <p className="studio-eyebrow" style={{ color: "rgba(8,54,48,0.6)" }}>
+                The Core Protocol
               </p>
               <h3 className="studio-h3 mt-3" style={{ color: GREEN }}>
-                One team for the whole family.
+                The full standard of care, delivered without compromise.
               </h3>
               <p className="studio-prose mt-4" style={{ color: "rgba(8,54,48,0.72)" }}>
-                You have a neurologist and a care partner who know your name, your history, and
-                what matters most to you. They talk to each other. They talk to your primary care
-                doctor. And they talk to your family, because cognitive care affects everyone in
-                the house, not just the patient.
+                Everything a great neurology clinic should offer. No waiting. No rushed visits.
+                Every patient is treated like the complex person they are.
               </p>
+              <ul className="mt-6 space-y-2.5 text-[15px]" style={{ color: "rgba(8,54,48,0.82)" }}>
+                {[
+                  "Unhurried time with a board-certified neurologist",
+                  "Comprehensive cognitive testing and functional assessment",
+                  "MRI, PET imaging, and full dementia lab panel when indicated",
+                  "FDA-approved anti-amyloid therapies (Leqembi, Kisunla) for eligible patients",
+                  "Caregiver included. Your primary care doctor kept in the loop.",
+                  "Billed through insurance, just like any other specialist visit",
+                ].map((item) => (
+                  <li key={item} className="flex items-start gap-3">
+                    <span
+                      className="mt-2 h-1.5 w-1.5 rounded-full flex-shrink-0"
+                      style={{ background: "rgba(8,54,48,0.5)" }}
+                    />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
             </article>
 
-            <article className="studio-card">
-              <p className="studio-eyebrow" style={{ color: ORANGE }}>
-                Your Cognitive Digital Twin
-              </p>
-              <h3 className="studio-h3 mt-3" style={{ color: GREEN }}>
-                A personalized model of your brain.
-              </h3>
-              <p className="studio-prose mt-4" style={{ color: "rgba(8,54,48,0.72)" }}>
-                Behind the scenes, our team builds something we call your Cognitive Digital Twin, a
-                personalized picture of your brain health, put together from your medical history,
-                labs, imaging, and cognitive assessments. It helps your neurologist see what is
-                most likely going on and what is most likely to help <em>you</em>, drawing on
-                research from tens of thousands of other patient journeys.
-              </p>
+            <article
+              className="rounded-[1.5rem] p-8 md:p-10 relative overflow-hidden"
+              style={{
+                background: GREEN,
+                color: "#fff",
+              }}
+            >
+              <div
+                className="absolute inset-0 opacity-60 pointer-events-none"
+                style={{
+                  background:
+                    "radial-gradient(120% 100% at 100% 0%, rgba(251,77,23,0.18) 0%, transparent 55%)",
+                }}
+              />
+              <div className="relative">
+                <p className="studio-eyebrow" style={{ color: ORANGE }}>
+                  The Edge Protocol
+                </p>
+                <h3
+                  className="studio-h3 mt-3"
+                  style={{ color: "#fff", fontFamily: "var(--font-pt-serif), Georgia, serif" }}
+                >
+                  Precision medicine, layered on top.
+                </h3>
+                <p className="studio-prose mt-4 text-white/80">
+                  The breakthroughs that move the needle, delivered to you as part of normal care.
+                  Not clinical trial, not concierge, just better medicine.
+                </p>
+                <ul className="mt-6 space-y-2.5 text-[15px] text-white/85">
+                  {[
+                    "Blood biomarker panel that can confirm amyloid status without needing a PET scan",
+                    "Genetic testing (APOE) for personalized risk and safer treatment decisions",
+                    "2024 biological disease staging framework (A/T/N)",
+                    "Your own Cognitive Digital Twin, built and updated visit by visit",
+                    "Structured plan across 9 lifestyle factors with actual targets, not generic advice",
+                    "Both anti-amyloid therapies, with genotype-informed safety planning",
+                  ].map((item) => (
+                    <li key={item} className="flex items-start gap-3">
+                      <span
+                        className="mt-2 h-1.5 w-1.5 rounded-full flex-shrink-0"
+                        style={{ background: ORANGE }}
+                      />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </article>
+          </div>
 
-            <article className="studio-card">
+          {/* Technology sub-section */}
+          <div
+            className="mt-20 pt-16 border-t"
+            style={{ borderColor: "rgba(8,54,48,0.1)" }}
+          >
+            <div className="max-w-3xl">
               <p className="studio-eyebrow" style={{ color: ORANGE }}>
-                Our Care Orchestration Engine
+                The technology behind your care
               </p>
-              <h3 className="studio-h3 mt-3" style={{ color: GREEN }}>
-                The latest science, matched to you.
+              <h3 className="studio-h2 mt-4" style={{ color: GREEN }}>
+                Three quiet systems that make all of this possible.
               </h3>
-              <p className="studio-prose mt-4" style={{ color: "rgba(8,54,48,0.72)" }}>
-                Cognitive medicine is moving fast. Our Care Orchestration Engine quietly tracks
-                emerging research and pairs it with your twin, so your neurologist can see which of
-                today’s options are actually worth considering for your situation. The benefit of
-                tomorrow’s neurology, explained in plain language today.
+              <p className="studio-lead mt-5" style={{ color: "rgba(8,54,48,0.7)" }}>
+                You will never have to learn how any of this works. Your neurologist uses it so
+                your experience with us feels unhurried, personal, and safe.
               </p>
-            </article>
+            </div>
 
-            <article className="studio-card">
-              <p className="studio-eyebrow" style={{ color: ORANGE }}>
-                In clinic or on video
-              </p>
-              <h3 className="studio-h3 mt-3" style={{ color: GREEN }}>
-                Full visits, however you want to be seen.
-              </h3>
-              <p className="studio-prose mt-4" style={{ color: "rgba(8,54,48,0.72)" }}>
-                Whether you sit across from a neurologist in one of our clinics or join from your
-                living room with a family member on the couch beside you, you get the same
-                attention and the same time. Video visits are full visits. And we bill insurance
-                either way.
-              </p>
-            </article>
+            <div className="mt-12 grid md:grid-cols-3 gap-5 md:gap-6">
+              <article className="studio-card">
+                <p className="studio-eyebrow" style={{ color: ORANGE }}>
+                  Cognitive Digital Twin
+                </p>
+                <h4 className="studio-h3 mt-3" style={{ color: GREEN }}>
+                  A model of your brain, built from your own data.
+                </h4>
+                <p className="studio-prose mt-4" style={{ color: "rgba(8,54,48,0.72)" }}>
+                  We bring together your history, labs, imaging, biomarkers, genetics, and
+                  cognitive testing into a personalized model of your brain health. Your
+                  neurologist uses it to show you where you are biologically, where you might be
+                  heading, and which changes could actually shift that trajectory for <em>you</em>.
+                </p>
+              </article>
+
+              <article className="studio-card">
+                <p className="studio-eyebrow" style={{ color: ORANGE }}>
+                  Care Orchestration Engine
+                </p>
+                <h4 className="studio-h3 mt-3" style={{ color: GREEN }}>
+                  Nothing falls through the cracks.
+                </h4>
+                <p className="studio-prose mt-4" style={{ color: "rgba(8,54,48,0.72)" }}>
+                  Our operational brain quietly tracks every safety checkpoint, every required MRI,
+                  every follow-up, every medication decision. If a scan is due before your next
+                  infusion, it is already scheduled. If a symptom could signal something urgent, it
+                  routes straight to your care team. Protocol without memorization. Safety without
+                  gaps.
+                </p>
+              </article>
+
+              <article className="studio-card">
+                <p className="studio-eyebrow" style={{ color: ORANGE }}>
+                  Mindy, your care companion
+                </p>
+                <h4 className="studio-h3 mt-3" style={{ color: GREEN }}>
+                  A familiar voice between visits.
+                </h4>
+                <p className="studio-prose mt-4" style={{ color: "rgba(8,54,48,0.72)" }}>
+                  Mindy is our AI care companion for the weeks and months between appointments.
+                  She helps track symptoms, supports adherence, answers common questions, and pages
+                  your clinical team when something needs real attention. A friendly, always-on
+                  helper that never forgets you.
+                </p>
+              </article>
+            </div>
+
+            <div className="mt-12 flex flex-wrap gap-3">
+              <a
+                href={brand.primaryCtaHref}
+                target="_blank"
+                rel="noopener"
+                className="studio-btn studio-btn-accent"
+              >
+                {brand.primaryCta}
+                <Arrow />
+              </a>
+              <a href={brand.secondaryCtaHref} className="studio-btn studio-btn-ghost">
+                {brand.secondaryCta}
+              </a>
+            </div>
           </div>
         </div>
       </section>
