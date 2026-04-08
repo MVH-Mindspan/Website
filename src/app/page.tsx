@@ -439,6 +439,102 @@ export default function Home() {
         </div>
       </section>
 
+      {/* WHY MINDSPAN IS DIFFERENT */}
+      <section className="studio-section" style={{ background: "#fff" }}>
+        <div className="studio-container">
+          <div className="max-w-3xl">
+            <p className="studio-eyebrow" style={{ color: ORANGE }}>
+              Why care at Mindspan is different
+            </p>
+            <h2 className="studio-h2 mt-4" style={{ color: GREEN }}>
+              Neurologists who take the time — with the tools to back it up.
+            </h2>
+            <p className="studio-lead mt-5" style={{ color: "rgba(8,54,48,0.7)" }}>
+              A lot of the technology in healthcare is invisible to patients. At Mindspan, we want
+              you to see what’s under the hood — because it’s part of what makes your care feel
+              different.
+            </p>
+          </div>
+
+          <div className="mt-14 grid md:grid-cols-2 gap-8 md:gap-10">
+            <article>
+              <p className="studio-eyebrow" style={{ color: ORANGE }}>
+                A care team that actually stays with you
+              </p>
+              <h3 className="studio-h3 mt-3" style={{ color: GREEN }}>
+                One team for the whole family.
+              </h3>
+              <p className="studio-prose mt-4" style={{ color: "rgba(8,54,48,0.75)" }}>
+                You’ll have a neurologist and a care partner who know your name, your history, and
+                what matters most to you. They talk to each other. They talk to your primary care
+                doctor. And they talk to your family — because cognitive care affects everyone in
+                the house, not just the patient.
+              </p>
+            </article>
+
+            <article>
+              <p className="studio-eyebrow" style={{ color: ORANGE }}>
+                A personalized model of your brain health
+              </p>
+              <h3 className="studio-h3 mt-3" style={{ color: GREEN }}>
+                Your own picture — not a generic chart.
+              </h3>
+              <p className="studio-prose mt-4" style={{ color: "rgba(8,54,48,0.75)" }}>
+                Behind the scenes, our team uses a personalized model built from your medical
+                history, labs, imaging, and cognitive assessments. It helps your neurologist see
+                which treatments are most likely to help <em>you</em>, drawing on research from tens
+                of thousands of other patient journeys. It updates as we learn more about you.
+              </p>
+            </article>
+
+            <article>
+              <p className="studio-eyebrow" style={{ color: ORANGE }}>
+                The latest science, translated for real life
+              </p>
+              <h3 className="studio-h3 mt-3" style={{ color: GREEN }}>
+                We read the research so you don’t have to.
+              </h3>
+              <p className="studio-prose mt-4" style={{ color: "rgba(8,54,48,0.75)" }}>
+                Cognitive medicine is changing fast. New drugs, new diagnostics, new understanding
+                of how the brain ages. We follow it closely and pull in what’s worth your attention
+                — then explain what it means for your specific situation, in plain language, when
+                you’re in the room with us.
+              </p>
+            </article>
+
+            <article>
+              <p className="studio-eyebrow" style={{ color: ORANGE }}>
+                Built for however you want to be seen
+              </p>
+              <h3 className="studio-h3 mt-3" style={{ color: GREEN }}>
+                Visit us, or we’ll come to you on video.
+              </h3>
+              <p className="studio-prose mt-4" style={{ color: "rgba(8,54,48,0.75)" }}>
+                Whether you want to sit across from a neurologist in one of our clinics, or join
+                from your living room with a family member on the couch beside you — we make it
+                work. Video visits are full visits, not a check-in. And we bill insurance either
+                way.
+              </p>
+            </article>
+          </div>
+
+          <div className="mt-12 flex flex-wrap gap-3">
+            <a
+              href={brand.primaryCtaHref}
+              target="_blank"
+              rel="noopener"
+              className="studio-btn studio-btn-accent"
+            >
+              {brand.primaryCta}
+              <Arrow />
+            </a>
+            <a href={brand.secondaryCtaHref} className="studio-btn studio-btn-ghost">
+              {brand.secondaryCta}
+            </a>
+          </div>
+        </div>
+      </section>
+
       {/* FOOTER CTA */}
       <section className="studio-section text-white" style={{ background: GREEN }}>
         <div className="studio-container text-center max-w-3xl">
