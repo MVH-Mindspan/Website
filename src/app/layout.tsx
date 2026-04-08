@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { PT_Serif, Bitter, Inter } from "next/font/google";
 import "./globals.css";
-import VersionToggle from "@/components/VersionToggle";
 
 const ptSerif = PT_Serif({
   variable: "--font-pt-serif",
@@ -37,10 +36,7 @@ export default function RootLayout({
       lang="en"
       className={`${ptSerif.variable} ${bitter.variable} ${inter.variable} antialiased`}
     >
-      <body>
-        {children}
-        <VersionToggle />
-      </body>
+      <body>{children}</body>
     </html>
   );
 }
