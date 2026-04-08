@@ -98,8 +98,8 @@ export default function Home() {
       </header>
 
       {/* HERO */}
-      <section className="pt-16 md:pt-24 pb-10 md:pb-14">
-        <div className="studio-container grid lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+      <section className="pt-12 md:pt-20 pb-20 md:pb-28">
+        <div className="studio-container grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           <div className="lg:col-span-7">
             <p
               className="studio-eyebrow studio-fade studio-fade-1"
@@ -155,7 +155,7 @@ export default function Home() {
           </div>
 
           <div className="lg:col-span-5 studio-fade studio-fade-3">
-            <div className="relative">
+            <div className="relative mx-auto max-w-md lg:max-w-none">
               <div
                 className="absolute -inset-4 rounded-[2.5rem] -z-10"
                 style={{
@@ -166,7 +166,7 @@ export default function Home() {
               <img
                 src="/assets/hero.png"
                 alt="A Mindspan neurologist meeting with a patient and family member"
-                className="w-full rounded-[2rem] shadow-[0_30px_60px_-30px_rgba(8,54,48,0.45)]"
+                className="w-full aspect-[4/5] object-cover rounded-[2rem] shadow-[0_30px_60px_-30px_rgba(8,54,48,0.45)]"
               />
             </div>
           </div>
