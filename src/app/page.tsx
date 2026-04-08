@@ -398,19 +398,53 @@ export default function Home() {
             whileInView="show"
             viewport={VIEWPORT}
           >
-            {expectations.map((e) => (
-              <motion.article key={e.title} className="studio-card" variants={fadeUp}>
-                <p className="studio-eyebrow" style={{ color: ORANGE }}>
-                  {e.kicker}
-                </p>
-                <h3 className="studio-h3 mt-3" style={{ color: GREEN }}>
-                  {e.title}
-                </h3>
-                <p className="studio-prose mt-3" style={{ color: "rgba(8,54,48,0.72)" }}>
-                  {e.body}
-                </p>
-              </motion.article>
-            ))}
+            {expectations.map((e, i) => {
+              const icons = [
+                // How soon - clock
+                <svg key="clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="h-6 w-6">
+                  <circle cx="12" cy="12" r="9" />
+                  <path d="M12 7v5l3 2" />
+                </svg>,
+                // Who - users
+                <svg key="users" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="h-6 w-6">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2" />
+                  <circle cx="10" cy="8" r="4" />
+                  <path d="M21 21v-2a4 4 0 0 0-3-3.87" />
+                  <path d="M17 4a4 4 0 0 1 0 7.75" />
+                </svg>,
+                // What we do - clipboard
+                <svg key="clipboard" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="h-6 w-6">
+                  <rect x="5" y="4" width="14" height="17" rx="2" />
+                  <path d="M9 2h6v4H9z" />
+                  <path d="M9 12h6M9 16h4" />
+                </svg>,
+                // Next steps - compass / arrow
+                <svg key="compass" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="h-6 w-6">
+                  <circle cx="12" cy="12" r="9" />
+                  <path d="m15 9-3.5 6.5L8 12l7-3Z" />
+                </svg>,
+              ];
+              return (
+                <motion.article key={e.title} className="studio-card" variants={fadeUp}>
+                  <div
+                    className="h-12 w-12 rounded-2xl flex items-center justify-center"
+                    style={{ background: SKY, color: GREEN }}
+                    aria-hidden
+                  >
+                    {icons[i]}
+                  </div>
+                  <p className="studio-eyebrow mt-6" style={{ color: ORANGE }}>
+                    {e.kicker}
+                  </p>
+                  <h3 className="studio-h3 mt-3" style={{ color: GREEN }}>
+                    {e.title}
+                  </h3>
+                  <p className="studio-prose mt-3" style={{ color: "rgba(8,54,48,0.72)" }}>
+                    {e.body}
+                  </p>
+                </motion.article>
+              );
+            })}
           </motion.div>
         </div>
       </section>
@@ -592,7 +626,17 @@ export default function Home() {
               viewport={VIEWPORT}
             >
               <motion.article className="studio-card" variants={fadeUp}>
-                <p className="studio-eyebrow" style={{ color: ORANGE }}>
+                <div
+                  className="h-12 w-12 rounded-2xl flex items-center justify-center"
+                  style={{ background: SKY, color: GREEN }}
+                  aria-hidden
+                >
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" className="h-6 w-6">
+                    <path d="M12 3a4.5 4.5 0 0 0-4.5 4.5v.3A3.5 3.5 0 0 0 5 11.1a3.6 3.6 0 0 0 1.2 5.6A3.6 3.6 0 0 0 12 20a3.6 3.6 0 0 0 5.8-3.3 3.6 3.6 0 0 0 1.2-5.6 3.5 3.5 0 0 0-2.5-3.3v-.3A4.5 4.5 0 0 0 12 3Z" />
+                    <path d="M12 8v8M9 11.5h6M9 14.5h6" />
+                  </svg>
+                </div>
+                <p className="studio-eyebrow mt-6" style={{ color: ORANGE }}>
                   Cognitive Digital Twin
                 </p>
                 <h4 className="studio-h3 mt-3" style={{ color: GREEN }}>
@@ -607,7 +651,20 @@ export default function Home() {
               </motion.article>
 
               <motion.article className="studio-card" variants={fadeUp}>
-                <p className="studio-eyebrow" style={{ color: ORANGE }}>
+                <div
+                  className="h-12 w-12 rounded-2xl flex items-center justify-center"
+                  style={{ background: SKY, color: GREEN }}
+                  aria-hidden
+                >
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" className="h-6 w-6">
+                    <circle cx="12" cy="5" r="2" />
+                    <circle cx="5" cy="19" r="2" />
+                    <circle cx="19" cy="19" r="2" />
+                    <circle cx="12" cy="12" r="2" />
+                    <path d="M12 7v3M10.5 13.3 6.5 17.5M13.5 13.3l4 4.2" />
+                  </svg>
+                </div>
+                <p className="studio-eyebrow mt-6" style={{ color: ORANGE }}>
                   Care Orchestration Engine
                 </p>
                 <h4 className="studio-h3 mt-3" style={{ color: GREEN }}>
@@ -623,7 +680,17 @@ export default function Home() {
               </motion.article>
 
               <motion.article className="studio-card" variants={fadeUp}>
-                <p className="studio-eyebrow" style={{ color: ORANGE }}>
+                <div
+                  className="h-12 w-12 rounded-2xl flex items-center justify-center"
+                  style={{ background: SKY, color: GREEN }}
+                  aria-hidden
+                >
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" className="h-6 w-6">
+                    <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8Z" />
+                    <path d="M9 10h.01M12 10h.01M15 10h.01" />
+                  </svg>
+                </div>
+                <p className="studio-eyebrow mt-6" style={{ color: ORANGE }}>
                   Mindy, your care companion
                 </p>
                 <h4 className="studio-h3 mt-3" style={{ color: GREEN }}>
