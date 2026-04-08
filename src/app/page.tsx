@@ -98,52 +98,39 @@ export default function Home() {
   return (
     <div style={{ background: CREAM, color: GREEN }}>
       {/* ANNOUNCEMENT BANNER — non-sticky, scrolls away with content */}
-      <div
-        className="text-[13px] md:text-sm border-b"
+      <a
+        href={brand.primaryCtaHref}
+        target="_blank"
+        rel="noopener"
+        className="block text-[13px] md:text-sm border-b transition-colors group"
         style={{
           background: SKY,
           color: GREEN,
           borderColor: "rgba(8,54,48,0.1)",
         }}
       >
-        <div className="studio-container flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-6 py-3.5 text-center sm:text-left">
-          <div className="flex flex-col sm:flex-row sm:items-center sm:gap-5 gap-2">
-            <span className="inline-flex items-center justify-center sm:justify-start gap-2.5 font-semibold">
-              <span className="relative flex h-2 w-2" aria-hidden>
-                <span
-                  className="absolute inline-flex h-full w-full rounded-full opacity-70 animate-ping"
-                  style={{ background: "#22c55e" }}
-                />
-                <span
-                  className="relative inline-flex rounded-full h-2 w-2"
-                  style={{ background: "#22c55e" }}
-                />
-              </span>
-              Appointments open this week
+        <div className="studio-container flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-6 py-3.5 text-center sm:text-left">
+          <span className="inline-flex items-center justify-center sm:justify-start gap-2.5 font-semibold">
+            <span className="relative flex h-2 w-2" aria-hidden>
+              <span
+                className="absolute inline-flex h-full w-full rounded-full opacity-70 animate-ping"
+                style={{ background: "#22c55e" }}
+              />
+              <span
+                className="relative inline-flex rounded-full h-2 w-2"
+                style={{ background: "#22c55e" }}
+              />
             </span>
-            <span
-              className="hidden sm:inline-block h-1 w-1 rounded-full flex-shrink-0"
-              style={{ background: "rgba(8,54,48,0.35)" }}
-              aria-hidden
-            />
-            <span style={{ color: "rgba(8,54,48,0.72)" }}>
-              Danvers, Irvine, Bay Area &amp; telehealth across MA and CA
-            </span>
-          </div>
-          <a
-            href={brand.primaryCtaHref}
-            target="_blank"
-            rel="noopener"
-            className="inline-flex items-center justify-center sm:justify-start gap-1.5 font-semibold underline underline-offset-4 decoration-1 hover:decoration-2 transition-all flex-shrink-0"
-            style={{ color: GREEN }}
+            Appointments open this week
+          </span>
+          <span
+            className="transition-colors"
+            style={{ color: "rgba(8,54,48,0.72)" }}
           >
-            Book today
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="h-3.5 w-3.5">
-              <path d="M5 12h14M13 5l7 7-7 7" />
-            </svg>
-          </a>
+            Danvers, Irvine, Bay Area &amp; telehealth across MA and CA
+          </span>
         </div>
-      </div>
+      </a>
 
       {/* NAV */}
       <header
