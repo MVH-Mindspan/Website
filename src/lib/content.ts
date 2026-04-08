@@ -87,11 +87,50 @@ export const howItWorks = [
   },
 ];
 
-export const locations = [
-  { city: "Danvers", state: "Massachusetts", href: "/locations/danvers" },
-  { city: "Telehealth", state: "Massachusetts", href: "/locations/telehealth-ma" },
-  { city: "Irvine", state: "California", href: "/locations/irvine" },
-  { city: "Bay Area", state: "California", href: "/locations/bay-area" },
+export type Location = {
+  city: string;
+  state: string;
+  href: string;
+  // OSM bbox as "minLon,minLat,maxLon,maxLat"
+  bbox: string;
+  // marker position "lat,lon"
+  marker: string;
+  kind: "clinic" | "telehealth";
+};
+
+export const locations: Location[] = [
+  {
+    city: "Danvers",
+    state: "Massachusetts",
+    href: "/locations/danvers",
+    bbox: "-70.97,42.555,-70.89,42.595",
+    marker: "42.575,-70.933",
+    kind: "clinic",
+  },
+  {
+    city: "Telehealth",
+    state: "Massachusetts",
+    href: "/locations/telehealth-ma",
+    bbox: "-73.51,41.24,-69.93,42.89",
+    marker: "42.36,-71.06",
+    kind: "telehealth",
+  },
+  {
+    city: "Irvine",
+    state: "California",
+    href: "/locations/irvine",
+    bbox: "-117.87,33.65,-117.76,33.72",
+    marker: "33.684,-117.827",
+    kind: "clinic",
+  },
+  {
+    city: "Bay Area",
+    state: "California",
+    href: "/locations/bay-area",
+    bbox: "-122.52,37.70,-122.35,37.82",
+    marker: "37.775,-122.418",
+    kind: "clinic",
+  },
 ];
 
 // Three audiences, written directly to each reader.

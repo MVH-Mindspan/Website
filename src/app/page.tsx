@@ -607,48 +607,91 @@ export default function Home() {
           />
 
           <div className="mt-14 grid sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6">
-            {locations.map((l) => (
-              <a
-                key={l.city + l.state}
-                href={l.href}
-                className="group relative overflow-hidden rounded-[1.5rem] p-7 min-h-[15rem] flex flex-col justify-between text-white transition-transform hover:-translate-y-1"
-                style={{ background: GREEN }}
-              >
-                <div
-                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity"
+            {locations.map((l) => {
+              const mapSrc = `https://www.openstreetmap.org/export/embed.html?bbox=${l.bbox}&layer=mapnik&marker=${l.marker}`;
+              const isTelehealth = l.kind === "telehealth";
+              return (
+                <a
+                  key={l.city + l.state}
+                  href={l.href}
+                  className="group relative overflow-hidden rounded-[1.5rem] flex flex-col transition-transform hover:-translate-y-1 hover:shadow-[0_20px_40px_-20px_rgba(8,54,48,0.35)]"
                   style={{
-                    background:
-                      "radial-gradient(120% 100% at 0% 0%, rgba(251,77,23,0.25) 0%, transparent 60%)",
+                    background: "#fff",
+                    border: "1px solid rgba(8,54,48,0.1)",
                   }}
-                />
-                <div className="relative">
-                  <span className="inline-flex items-center gap-2 text-xs font-medium">
-                    <span
-                      className="h-2 w-2 rounded-full"
-                      style={{ background: "#22c55e" }}
-                    />
-                    Appointments open
-                  </span>
-                </div>
-                <div className="relative">
-                  <h3
-                    className="!text-[1.75rem] leading-[1.1]"
-                    style={{
-                      color: "#fff",
-                      fontFamily: "var(--font-pt-serif), Georgia, serif",
-                      letterSpacing: "-0.02em",
-                    }}
+                >
+                  {/* Map teaser */}
+                  <div
+                    className="relative overflow-hidden h-40"
+                    style={{ background: CREAM }}
                   >
-                    {l.city}
-                  </h3>
-                  <p className="mt-1 text-white/70 text-sm">{l.state}</p>
-                  <p className="mt-5 text-sm text-white/80 group-hover:text-white flex items-center gap-2">
-                    Visit clinic
-                    <Arrow />
-                  </p>
-                </div>
-              </a>
-            ))}
+                    <iframe
+                      src={mapSrc}
+                      className="absolute inset-0 w-full h-full border-0 pointer-events-none transition-transform duration-500 group-hover:scale-[1.05]"
+                      loading="lazy"
+                      title={`Map of ${l.city}, ${l.state}`}
+                      aria-hidden="true"
+                    />
+                    {/* Overlay so map reads as texture, not an interactive element */}
+                    <div
+                      className="absolute inset-0"
+                      style={{
+                        background:
+                          "linear-gradient(180deg, rgba(8,54,48,0.0) 0%, rgba(8,54,48,0.08) 60%, rgba(8,54,48,0.2) 100%)",
+                      }}
+                    />
+                    {isTelehealth && (
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <span
+                          className="rounded-full px-4 py-2 text-xs font-semibold backdrop-blur"
+                          style={{
+                            background: "rgba(255,255,255,0.92)",
+                            color: GREEN,
+                            border: "1px solid rgba(8,54,48,0.1)",
+                          }}
+                        >
+                          Video visits statewide
+                        </span>
+                      </div>
+                    )}
+                    <div className="absolute top-3 left-3 flex items-center gap-2 rounded-full bg-white/95 backdrop-blur px-3 py-1.5 text-[11px] font-semibold shadow-sm" style={{ color: GREEN }}>
+                      <span
+                        className="h-2 w-2 rounded-full"
+                        style={{ background: "#22c55e" }}
+                      />
+                      Open
+                    </div>
+                  </div>
+
+                  {/* Text block */}
+                  <div className="flex flex-col flex-1 p-6">
+                    <h3
+                      className="!text-[1.65rem] leading-[1.05]"
+                      style={{
+                        color: GREEN,
+                        fontFamily: "var(--font-pt-serif), Georgia, serif",
+                        letterSpacing: "-0.02em",
+                      }}
+                    >
+                      {l.city}
+                    </h3>
+                    <p
+                      className="mt-1 text-sm"
+                      style={{ color: "rgba(8,54,48,0.6)" }}
+                    >
+                      {l.state}
+                    </p>
+                    <p
+                      className="mt-5 text-sm font-semibold flex items-center gap-2 group-hover:gap-3 transition-all"
+                      style={{ color: ORANGE }}
+                    >
+                      {isTelehealth ? "Book a video visit" : "Visit clinic"}
+                      <Arrow />
+                    </p>
+                  </div>
+                </a>
+              );
+            })}
           </div>
         </div>
       </section>
