@@ -97,6 +97,48 @@ function SectionHeader({
 export default function Home() {
   return (
     <div style={{ background: CREAM, color: GREEN }}>
+      {/* ANNOUNCEMENT BANNER — non-sticky, scrolls away with content */}
+      <div
+        className="text-[13px] md:text-sm"
+        style={{ background: SKY, color: GREEN }}
+      >
+        <div className="studio-container flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-5 py-3 text-center sm:text-left">
+          <span className="inline-flex items-center gap-2 font-semibold">
+            <span className="relative flex h-2 w-2" aria-hidden>
+              <span
+                className="absolute inline-flex h-full w-full rounded-full opacity-70 animate-ping"
+                style={{ background: "#22c55e" }}
+              />
+              <span
+                className="relative inline-flex rounded-full h-2 w-2"
+                style={{ background: "#22c55e" }}
+              />
+            </span>
+            Appointments open this week
+          </span>
+          <span
+            className="hidden sm:inline h-1 w-1 rounded-full"
+            style={{ background: "rgba(8,54,48,0.35)" }}
+            aria-hidden
+          />
+          <span style={{ color: "rgba(8,54,48,0.78)" }}>
+            Danvers, Irvine, Bay Area &amp; telehealth across MA and CA
+          </span>
+          <a
+            href={brand.primaryCtaHref}
+            target="_blank"
+            rel="noopener"
+            className="inline-flex items-center gap-1.5 font-semibold underline underline-offset-4 decoration-1 hover:decoration-2 transition-all"
+            style={{ color: GREEN }}
+          >
+            Book today
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="h-3.5 w-3.5">
+              <path d="M5 12h14M13 5l7 7-7 7" />
+            </svg>
+          </a>
+        </div>
+      </div>
+
       {/* NAV */}
       <header
         className="sticky top-0 z-50 backdrop-blur-md"
