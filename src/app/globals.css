@@ -72,5 +72,109 @@ h1, h2, h3 {
 .loc-card { background: #083630; transition: background 0.2s; }
 .loc-card:hover { background: #1f514a; }
 
+/* === Studio version utilities === */
+
+/* Fluid container with responsive gutters */
+.studio-container {
+  width: 100%;
+  max-width: 1440px;
+  margin-inline: auto;
+  padding-inline: clamp(1.25rem, 4vw, 4rem);
+}
+
+/* Fluid section vertical rhythm */
+.studio-section {
+  padding-block: clamp(4rem, 9vw, 9rem);
+}
+
+/* Fluid display / headings */
+.studio-display {
+  font-family: var(--font-pt-serif), Georgia, serif;
+  font-size: clamp(2.5rem, 5.5vw + 1rem, 5.5rem);
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+}
+.studio-h2 {
+  font-family: var(--font-pt-serif), Georgia, serif;
+  font-size: clamp(2rem, 3vw + 1rem, 3.75rem);
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+}
+.studio-h3 {
+  font-family: var(--font-pt-serif), Georgia, serif;
+  font-size: clamp(1.375rem, 0.8vw + 1rem, 1.75rem);
+  line-height: 1.18;
+  letter-spacing: -0.02em;
+}
+.studio-eyebrow {
+  font-family: var(--font-bitter), Georgia, serif;
+  font-style: italic;
+  font-size: 0.8125rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+.studio-lead {
+  font-size: clamp(1rem, 0.4vw + 0.95rem, 1.25rem);
+  line-height: 1.55;
+  max-width: 62ch;
+}
+.studio-prose {
+  font-size: 0.9375rem;
+  line-height: 1.55;
+}
+
+/* Studio buttons */
+.studio-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.95rem 1.65rem;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  letter-spacing: -0.005em;
+  transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  white-space: nowrap;
+}
+.studio-btn:hover { transform: scale(0.975); }
+.studio-btn-primary { background: #083630; color: #fff; }
+.studio-btn-primary:hover { background: #1f514a; }
+.studio-btn-accent { background: #fb4d17; color: #fff; }
+.studio-btn-accent:hover { background: #e23d08; }
+.studio-btn-ghost {
+  background: transparent;
+  color: #083630;
+  border: 1px solid rgba(8, 54, 48, 0.25);
+}
+.studio-btn-ghost:hover {
+  background: #083630;
+  color: #fff;
+  border-color: #083630;
+}
+
+/* Studio card */
+.studio-card {
+  background: #fff;
+  border: 1px solid rgba(8, 54, 48, 0.08);
+  border-radius: 1.5rem;
+  padding: clamp(1.5rem, 2vw, 2.25rem);
+  transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+.studio-card:hover {
+  border-color: rgba(8, 54, 48, 0.2);
+  box-shadow: 0 18px 40px -24px rgba(8, 54, 48, 0.25);
+}
+
+/* Animated fade-up used by studio */
+@keyframes studio-fade-up {
+  from { opacity: 0; transform: translate3d(0, 18px, 0); }
+  to   { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+.studio-fade { animation: studio-fade-up 0.9s cubic-bezier(0.22, 0.61, 0.36, 1) both; }
+.studio-fade-1 { animation-delay: 0.05s; }
+.studio-fade-2 { animation-delay: 0.15s; }
+.studio-fade-3 { animation-delay: 0.25s; }
+.studio-fade-4 { animation-delay: 0.35s; }
+
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
