@@ -1,11 +1,11 @@
 import {
   brand,
   nav,
-  pillars,
+  expectations,
   howItWorks,
   locations,
   audiences,
-  digitalTwinBullets,
+  whatWeLookAt,
 } from "@/lib/content";
 
 const GREEN = "#083630";
@@ -63,17 +63,12 @@ export default function Home() {
             </p>
             <h1 className="studio-display mt-4 studio-fade studio-fade-2" style={{ color: GREEN }}>
               {brand.headline}
-              <br />
-              <span style={{ color: ORANGE, fontStyle: "italic" }}>Personal. Accessible. Today.</span>
             </h1>
             <p
               className="studio-lead mt-6 studio-fade studio-fade-3"
               style={{ color: "rgba(8,54,48,0.78)" }}
             >
-              Mindspan is a clinical-grade cognitive care company built by neurologists. We see
-              patients in our clinics and virtually anywhere. We build a personalized model of your
-              brain health \u2014 your Cognitive Digital Twin \u2014 and use it to match you to the
-              interventions most likely to help.
+              {brand.subhead}
             </p>
             <div className="mt-9 flex flex-wrap gap-3 studio-fade studio-fade-4">
               <a
@@ -85,11 +80,14 @@ export default function Home() {
                 {brand.primaryCta}
                 <Arrow />
               </a>
-              <a href="#digital-twin" className="studio-btn studio-btn-ghost">
-                See how the Digital Twin works
+              <a href="#expect" className="studio-btn studio-btn-ghost">
+                See what to expect
               </a>
             </div>
-            <p className="mt-6 text-sm studio-fade studio-fade-4" style={{ color: "rgba(8,54,48,0.6)" }}>
+            <p
+              className="mt-6 text-sm studio-fade studio-fade-4"
+              style={{ color: "rgba(8,54,48,0.6)" }}
+            >
               {brand.reassurance}
             </p>
           </div>
@@ -104,13 +102,13 @@ export default function Home() {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/assets/hero.png"
-              alt="Mindspan neurology care team with patient"
+              alt="A Mindspan neurologist meeting with a patient and family member"
               className="w-full rounded-[2rem] shadow-[0_30px_60px_-30px_rgba(8,54,48,0.45)]"
             />
             <div className="hidden md:flex absolute -left-6 bottom-8 items-center gap-3 rounded-full bg-white/95 backdrop-blur px-4 py-3 shadow-[0_12px_30px_-12px_rgba(0,0,0,0.25)]">
               <span className="h-2.5 w-2.5 rounded-full" style={{ background: "#22c55e" }} />
               <span className="text-sm font-medium" style={{ color: GREEN }}>
-                Consultations open this week
+                Appointments open this week
               </span>
             </div>
           </div>
@@ -121,9 +119,18 @@ export default function Home() {
       <section className="py-6 md:py-8" style={{ background: GREEN }}>
         <div className="studio-container grid sm:grid-cols-3 gap-6 text-white/90 text-sm">
           {[
-            { k: "Clinical identity", v: "Board-certified neurologists \u2014 not a wellness brand" },
-            { k: "Access", v: "In-person clinics in MA & CA, and virtual care anywhere" },
-            { k: "Coverage", v: "We bill insurance. Consultations are a path, not a sales call." },
+            {
+              k: "Real neurologists",
+              v: "Board-certified doctors who specialize in cognition and memory",
+            },
+            {
+              k: "In clinic or from home",
+              v: "Visit one of our clinics, or see us on video from anywhere in MA or CA",
+            },
+            {
+              k: "Covered by insurance",
+              v: "Most of our visits are billed through insurance, just like your PCP",
+            },
           ].map((item) => (
             <div key={item.k} className="flex items-start gap-3">
               <span className="mt-1 h-1.5 w-1.5 rounded-full" style={{ background: ORANGE }} />
@@ -136,23 +143,37 @@ export default function Home() {
         </div>
       </section>
 
-      {/* EMPATHY BAND */}
+      {/* LETTER TO THE READER */}
       <section className="studio-section" style={{ background: SAND }}>
-        <div className="studio-container grid lg:grid-cols-12 gap-10 items-center">
-          <div className="lg:col-span-8">
-            <p className="studio-eyebrow" style={{ color: ORANGE }}>
-              A message to caregivers
+        <div className="studio-container max-w-3xl">
+          <p className="studio-eyebrow" style={{ color: ORANGE }}>
+            A note from our team
+          </p>
+          <h2 className="studio-h2 mt-5" style={{ color: GREEN }}>
+            If you’re here because you’re worried about someone — or yourself — we want you to know
+            something first.
+          </h2>
+          <div className="mt-8 space-y-5 text-[17px] leading-[1.65]" style={{ color: "rgba(8,54,48,0.8)" }}>
+            <p>
+              You are not overreacting. You are not being dramatic. Noticing changes in memory,
+              word-finding, attention, or mood is worth paying attention to — and worth talking to
+              someone about. Early is better. Clarity is better. You are doing the right thing by
+              being here.
             </p>
-            <h2 className="studio-h2 mt-4" style={{ color: GREEN }}>
-              Supporting someone through cognitive change is exhausting. The system rarely meets you
-              halfway. <span style={{ color: ORANGE }}>We do.</span>
-            </h2>
-            <p className="studio-lead mt-6" style={{ color: "rgba(8,54,48,0.75)" }}>
-              Clear answers. A real plan. A team that stays with you and your loved one \u2014 in clinic
-              or wherever you are.
+            <p>
+              We built Mindspan because cognitive care in most places is painfully hard to get.
+              Months-long waitlists. Fifteen-minute appointments with a doctor who doesn’t have the
+              full picture. Generic advice. A diagnosis handed over, and then… silence. That isn’t
+              care. That’s paperwork.
+            </p>
+            <p>
+              We do it differently. Our team takes time. We include your family if you want them
+              there. We talk to your primary care doctor. We explain what we see in language that
+              actually helps. And we stay with you after the first visit — because that’s when the
+              real questions usually show up.
             </p>
           </div>
-          <div className="lg:col-span-4 flex lg:justify-end">
+          <div className="mt-10">
             <a
               href={brand.primaryCtaHref}
               target="_blank"
@@ -166,41 +187,29 @@ export default function Home() {
         </div>
       </section>
 
-      {/* FOUR PROOF POINT PILLARS */}
-      <section className="studio-section">
+      {/* WHAT TO EXPECT — reframed from "pillars" */}
+      <section id="expect" className="studio-section">
         <div className="studio-container">
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
-            <div>
-              <p className="studio-eyebrow" style={{ color: ORANGE }}>
-                Why Mindspan
-              </p>
-              <h2 className="studio-h2 mt-4 max-w-2xl" style={{ color: GREEN }}>
-                Four things we do that the system doesn\u2019t.
-              </h2>
-            </div>
-            <p className="studio-lead" style={{ color: "rgba(8,54,48,0.7)" }}>
-              We don\u2019t replace the healthcare system. We strengthen it, connect it, and move it
-              faster \u2014 with neurologists, not chatbots.
+          <div className="max-w-3xl">
+            <p className="studio-eyebrow" style={{ color: ORANGE }}>
+              What to expect when you come to us
             </p>
+            <h2 className="studio-h2 mt-4" style={{ color: GREEN }}>
+              The questions families ask us first — answered honestly.
+            </h2>
           </div>
 
-          <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6">
-            {pillars.map((p, i) => (
-              <article key={p.title} className="studio-card flex flex-col">
-                <span
-                  className="h-9 w-9 rounded-full flex items-center justify-center text-xs font-semibold"
-                  style={{ background: CREAM, color: ORANGE }}
-                >
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <p className="studio-eyebrow mt-6" style={{ color: ORANGE }}>
-                  {p.kicker}
+          <div className="mt-12 grid md:grid-cols-2 gap-6 md:gap-8">
+            {expectations.map((e) => (
+              <article key={e.title} className="studio-card">
+                <p className="studio-eyebrow" style={{ color: ORANGE }}>
+                  {e.kicker}
                 </p>
-                <h3 className="studio-h3 mt-2" style={{ color: GREEN }}>
-                  {p.title}
+                <h3 className="studio-h3 mt-3" style={{ color: GREEN }}>
+                  {e.title}
                 </h3>
                 <p className="studio-prose mt-3" style={{ color: "rgba(8,54,48,0.7)" }}>
-                  {p.body}
+                  {e.body}
                 </p>
               </article>
             ))}
@@ -208,40 +217,56 @@ export default function Home() {
         </div>
       </section>
 
-      {/* COGNITIVE DIGITAL TWIN */}
-      <section id="digital-twin" className="studio-section text-white" style={{ background: GREEN }}>
+      {/* HOW WE THINK ABOUT YOUR CARE — replaces product-like "Digital Twin" pitch */}
+      <section
+        id="how-we-think"
+        className="studio-section text-white"
+        style={{ background: GREEN }}
+      >
         <div className="studio-container grid lg:grid-cols-12 gap-10 lg:gap-16 items-center">
           <div className="lg:col-span-6 order-2 lg:order-1">
             <p className="studio-eyebrow" style={{ color: ORANGE }}>
-              The Cognitive Digital Twin
+              How we think about your care
             </p>
             <h2 className="studio-h2 mt-4">
-              A living, personalized model of your brain health.
+              Your brain is yours. Your care should be, too.
             </h2>
-            <p className="studio-lead mt-5 text-white/80">
-              For the millions of families navigating Alzheimer\u2019s and dementia, most guidance is
-              generic at best. Our Cognitive Digital Twin changes that. It integrates your medical
-              history, EHR, labs, imaging, genetics, and cognitive assessments into a living model of
-              your brain health \u2014 one that evolves as new clinical data and research emerge.
-            </p>
-            <p className="studio-lead mt-5 text-white/80">
-              The result: a projection of which interventions are actually likely to work for{" "}
-              <em>you</em>, and by how much. For some patients, the model shows the potential to slow
-              cognitive decline by six to eighteen months. That\u2019s not a guarantee \u2014 it\u2019s
-              a prediction grounded in real science. Every recommendation a Mindspan provider makes is
-              traceable back to the evidence and to your specific biology.
-            </p>
-            <ul className="mt-8 space-y-3">
-              {digitalTwinBullets.map((b) => (
-                <li key={b} className="flex items-start gap-3 text-white/85 text-[15px]">
-                  <span
-                    className="mt-2 h-1.5 w-1.5 rounded-full flex-shrink-0"
-                    style={{ background: ORANGE }}
-                  />
-                  <span>{b}</span>
-                </li>
-              ))}
-            </ul>
+            <div className="mt-6 space-y-5 text-white/80 text-[17px] leading-[1.65]">
+              <p>
+                Most advice about memory loss is general: eat better, sleep more, stay social. None
+                of that is wrong. But none of it is about <em>you</em>. Two people sitting in the
+                same waiting room can have very different reasons their memory is slipping, and very
+                different things that will actually help.
+              </p>
+              <p>
+                At Mindspan, we take the time to understand your specific story — your health
+                history, the tests you’ve had, how you’re doing right now, what matters most to you.
+                Then we draw on what researchers have learned from tens of thousands of other
+                patients to figure out what is most likely to help <em>your</em> brain, not an
+                average one.
+              </p>
+              <p>
+                For some of the people we see, that careful, personalized approach can meaningfully
+                slow changes and protect things that matter — independence, memory, time with family.
+                We can’t promise a specific outcome. What we can promise is that we’ll treat you like
+                a person, and that every recommendation we make will be something we can explain.
+              </p>
+            </div>
+
+            <div className="mt-10 rounded-2xl p-6" style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.12)" }}>
+              <p className="studio-eyebrow" style={{ color: ORANGE }}>
+                What your neurologist actually looks at
+              </p>
+              <ul className="mt-4 grid sm:grid-cols-2 gap-x-6 gap-y-2 text-[15px] text-white/85">
+                {whatWeLookAt.map((w) => (
+                  <li key={w} className="flex items-start gap-2">
+                    <span className="mt-2 h-1.5 w-1.5 rounded-full flex-shrink-0" style={{ background: ORANGE }} />
+                    <span>{w}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
             <div className="mt-9 flex flex-wrap gap-3">
               <a
                 href={brand.primaryCtaHref}
@@ -252,25 +277,15 @@ export default function Home() {
                 {brand.primaryCta}
                 <Arrow />
               </a>
-              <a
-                href="/technology"
-                className="studio-btn"
-                style={{
-                  background: "transparent",
-                  color: "#fff",
-                  border: "1px solid rgba(255,255,255,0.35)",
-                }}
-              >
-                Explore the research
-              </a>
             </div>
           </div>
+
           <div className="lg:col-span-6 order-1 lg:order-2">
             <div className="relative">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/assets/digital-brain.jpg"
-                alt="Cognitive Digital Twin \u2014 a personalized model of brain health"
+                alt="A personalized view of a patient’s brain health"
                 className="w-full rounded-[2rem] shadow-[0_40px_80px_-30px_rgba(0,0,0,0.7)]"
               />
             </div>
@@ -278,35 +293,38 @@ export default function Home() {
         </div>
       </section>
 
-      {/* HOW IT WORKS */}
-      <section className="studio-section" style={{ background: "#fff" }}>
+      {/* HOW IT WORKS — the visit, as a story */}
+      <section id="visit" className="studio-section" style={{ background: "#fff" }}>
         <div className="studio-container">
           <div className="max-w-3xl">
             <p className="studio-eyebrow" style={{ color: ORANGE }}>
-              The path
+              What the first visit actually looks like
             </p>
             <h2 className="studio-h2 mt-4" style={{ color: GREEN }}>
-              From consultation to a plan that\u2019s actually yours.
+              From first call to a plan that fits your life.
             </h2>
             <p className="studio-lead mt-5" style={{ color: "rgba(8,54,48,0.7)" }}>
-              No waitlists. No gatekeeping. Clinical care built around your life \u2014 and refined as
-              the science evolves.
+              We don’t believe in surprise. Here is exactly what happens when you reach out — step by
+              step.
             </p>
           </div>
 
-          <ol className="mt-14 grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <ol className="mt-14 grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {howItWorks.map((s, i) => (
               <li key={s.title} className="relative">
                 <div className="flex items-baseline gap-4">
                   <span className="studio-eyebrow" style={{ color: ORANGE, fontSize: "0.75rem" }}>
                     Step {String(i + 1).padStart(2, "0")}
                   </span>
-                  <span className="flex-1 h-px" style={{ background: "rgba(8,54,48,0.15)" }} />
+                  <span
+                    className="flex-1 h-px"
+                    style={{ background: "rgba(8,54,48,0.15)" }}
+                  />
                 </div>
                 <h3 className="studio-h3 mt-4" style={{ color: GREEN }}>
                   {s.title}
                 </h3>
-                <p className="studio-prose mt-3" style={{ color: "rgba(8,54,48,0.7)" }}>
+                <p className="studio-prose mt-3" style={{ color: "rgba(8,54,48,0.75)" }}>
                   {s.body}
                 </p>
               </li>
@@ -315,32 +333,36 @@ export default function Home() {
         </div>
       </section>
 
-      {/* AUDIENCE SPLIT */}
-      <section className="studio-section" style={{ background: SAND }}>
+      {/* AUDIENCE SPLIT — written TO each reader */}
+      <section id="families" className="studio-section" style={{ background: SAND }}>
         <div className="studio-container">
           <div className="max-w-3xl">
             <p className="studio-eyebrow" style={{ color: ORANGE }}>
-              Find your starting point
+              Who we see
             </p>
             <h2 className="studio-h2 mt-4" style={{ color: GREEN }}>
-              Built for everyone in the room.
+              Wherever you’re coming from, you’re in the right place.
             </h2>
             <p className="studio-lead mt-5" style={{ color: "rgba(8,54,48,0.7)" }}>
-              Whether you\u2019re supporting a loved one, experiencing changes yourself, or referring a
-              patient \u2014 there\u2019s a clear next step.
+              A short note — directly to you.
             </p>
           </div>
 
           <div className="mt-12 grid md:grid-cols-3 gap-5 md:gap-6">
             {audiences.map((a) => (
-              <a key={a.title} href={a.href} className="studio-card flex flex-col">
+              <a
+                key={a.id}
+                id={a.id === "doctors" ? "doctors" : undefined}
+                href={a.href}
+                className="studio-card flex flex-col"
+              >
                 <p className="studio-eyebrow" style={{ color: ORANGE }}>
                   {a.kicker}
                 </p>
                 <h3 className="studio-h3 mt-3" style={{ color: GREEN }}>
                   {a.title}
                 </h3>
-                <p className="studio-prose mt-4 flex-1" style={{ color: "rgba(8,54,48,0.7)" }}>
+                <p className="studio-prose mt-4 flex-1" style={{ color: "rgba(8,54,48,0.75)" }}>
                   {a.body}
                 </p>
                 <p
@@ -362,15 +384,15 @@ export default function Home() {
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
             <div>
               <p className="studio-eyebrow" style={{ color: ORANGE }}>
-                In person or virtually anywhere
+                Where we see patients
               </p>
               <h2 className="studio-h2 mt-4" style={{ color: GREEN }}>
-                Clinics where we are. Care where you are.
+                Come see us. Or let us come to you, on video.
               </h2>
             </div>
             <p className="studio-lead" style={{ color: "rgba(8,54,48,0.7)" }}>
-              Seeing patients across Massachusetts and California \u2014 and virtually, wherever you
-              live.
+              We have clinics in Massachusetts and California, and we see patients on video anywhere
+              in those two states.
             </p>
           </div>
 
@@ -392,13 +414,16 @@ export default function Home() {
                 <div className="relative">
                   <span className="inline-flex items-center gap-2 text-xs font-medium">
                     <span className="h-2 w-2 rounded-full" style={{ background: "#22c55e" }} />
-                    Consultations open
+                    Appointments open
                   </span>
                 </div>
                 <div className="relative">
                   <h3
                     className="studio-h3 !text-[1.75rem]"
-                    style={{ color: "#fff", fontFamily: "var(--font-pt-serif), Georgia, serif" }}
+                    style={{
+                      color: "#fff",
+                      fontFamily: "var(--font-pt-serif), Georgia, serif",
+                    }}
                   >
                     {l.city}
                   </h3>
@@ -416,16 +441,17 @@ export default function Home() {
 
       {/* FOOTER CTA */}
       <section className="studio-section text-white" style={{ background: GREEN }}>
-        <div className="studio-container text-center">
+        <div className="studio-container text-center max-w-3xl">
           <p className="studio-eyebrow" style={{ color: ORANGE }}>
-            Start here
+            When you’re ready
           </p>
-          <h2 className="studio-h2 mt-5 mx-auto max-w-3xl">
-            Understand what\u2019s actually happening \u2014 and what can be done about it.
+          <h2 className="studio-h2 mt-5">
+            The first step is a conversation. That’s all.
           </h2>
-          <p className="studio-lead mt-5 mx-auto text-white/75">
-            A Mindspan consultation is a path to understanding, not a sales call. We\u2019re
-            neurologists. We bill insurance. We see you in clinic or virtually \u2014 wherever you are.
+          <p className="studio-lead mt-5 mx-auto text-white/80">
+            A Mindspan consultation is a phone call with someone on our team. No commitment, no
+            pressure. Tell us what’s going on, and we’ll help you figure out what to do next — even
+            if it turns out that “next” isn’t with us.
           </p>
           <div className="mt-10 flex flex-wrap justify-center gap-3">
             <a
@@ -438,7 +464,7 @@ export default function Home() {
               <Arrow />
             </a>
             <a
-              href="/about/how-it-works"
+              href="#expect"
               className="studio-btn"
               style={{
                 background: "transparent",
@@ -446,7 +472,7 @@ export default function Home() {
                 border: "1px solid rgba(255,255,255,0.35)",
               }}
             >
-              How it works
+              What to expect
             </a>
           </div>
         </div>
@@ -462,30 +488,30 @@ export default function Home() {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/assets/logo-white.png" alt="Mindspan" className="h-10 w-auto" />
             <p className="mt-6 text-sm max-w-sm leading-relaxed">
-              Clinical-grade cognitive care, powered by the Cognitive Digital Twin. Neurologists in
-              Massachusetts and California \u2014 and virtually, anywhere.
+              Neurologists who take the time. Clinics in Massachusetts and California, plus video
+              visits. We bill insurance.
             </p>
           </div>
           {[
             {
-              title: "Care",
+              title: "Getting started",
               links: [
-                ["How it works", "/about/how-it-works"],
                 ["Schedule a consultation", "https://assessment.mindspan.co/"],
-                ["Digital Twin", "#digital-twin"],
+                ["What to expect", "#expect"],
+                ["How we think about care", "#how-we-think"],
               ],
             },
             {
               title: "For families",
               links: [
-                ["Caregiver support", "/family"],
-                ["Introduce a loved one", "/family/assist"],
+                ["If you’re caring for someone", "#families"],
+                ["Locations", "#locations"],
               ],
             },
             {
-              title: "For providers",
+              title: "For doctors",
               links: [
-                ["Referral pathway", "/providers"],
+                ["Refer a patient", "#doctors"],
                 ["About Mindspan", "/about"],
                 ["Contact", "/contact"],
               ],
@@ -509,7 +535,7 @@ export default function Home() {
           className="studio-container mt-16 pt-8 flex flex-wrap gap-4 justify-between text-xs"
           style={{ borderTop: "1px solid rgba(255,255,255,0.1)" }}
         >
-          <p>&copy; 2026 Mindspan</p>
+          <p>© 2026 Mindspan</p>
           <div className="flex gap-6">
             <a href="/legal/terms" className="hover:text-white">
               Terms
