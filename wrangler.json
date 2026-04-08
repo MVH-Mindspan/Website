@@ -1,0 +1,9 @@
+{
+  "name": "mindspan-web",
+  "main": "worker.ts",
+  "compatibility_date": "2025-03-27",
+  "assets": {
+    "directory": "./out",
+    "binding": "ASSETS"
+  }
+}
