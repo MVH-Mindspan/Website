@@ -137,20 +137,48 @@ h1, h2, h3 {
   font-weight: 600;
   font-size: 0.9375rem;
   letter-spacing: -0.005em;
-  transition: transform 0.25s cubic-bezier(0.22, 0.61, 0.36, 1),
+  transition: transform 0.2s cubic-bezier(0.22, 0.61, 0.36, 1),
               background 0.25s ease,
               border-color 0.25s ease,
               color 0.25s ease,
-              box-shadow 0.25s ease;
+              box-shadow 0.25s cubic-bezier(0.22, 0.61, 0.36, 1);
   white-space: nowrap;
+  /* Solid 3D lift: subtle inner top highlight + layered drop shadow */
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.18),
+    0 1px 2px rgba(8, 54, 48, 0.08),
+    0 4px 10px -2px rgba(8, 54, 48, 0.18);
 }
 .studio-btn svg {
   transition: transform 0.3s cubic-bezier(0.22, 0.61, 0.36, 1);
 }
+.studio-btn:hover {
+  transform: translateY(-1px);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.22),
+    0 2px 4px rgba(8, 54, 48, 0.1),
+    0 10px 22px -6px rgba(8, 54, 48, 0.28);
+}
 .studio-btn:hover svg {
   transform: translateX(3px);
 }
-.studio-btn:active { transform: scale(0.97); }
+.studio-btn:active {
+  transform: translateY(1px);
+  box-shadow:
+    inset 0 2px 4px rgba(0, 0, 0, 0.1),
+    0 1px 2px rgba(8, 54, 48, 0.12);
+}
+
+/* Ghost variant: transparent, so it gets a lighter lift */
+.studio-btn-ghost {
+  box-shadow: none;
+}
+.studio-btn-ghost:hover {
+  box-shadow: 0 6px 16px -6px rgba(8, 54, 48, 0.2);
+}
+.studio-btn-ghost:active {
+  box-shadow: none;
+}
 .studio-btn-primary { background: #083630; color: #fff; }
 .studio-btn-primary:hover { background: #1f514a; }
 .studio-btn-accent { background: #fb4d17; color: #fff; }
