@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import VersionToggle from '../components/VersionToggle.astro';
 
 interface Props {
   title?: string;
@@ -34,5 +35,6 @@ const {
   </head>
   <body>
     <slot />
+    <VersionToggle />
   </body>
 </html>

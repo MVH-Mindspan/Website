@@ -1,0 +1,24 @@
+---
+const path = Astro.url.pathname;
+const isAirbnb = path.startsWith('/airbnb');
+---
+<div class="fixed bottom-5 left-1/2 -translate-x-1/2 z-[100] bg-white/95 backdrop-blur border border-black/10 shadow-[0_4px_12px_rgba(0,0,0,0.08)] rounded-full p-1 flex text-xs font-medium">
+  <a
+    href="/"
+    class:list={[
+      'px-4 py-2 rounded-full transition-colors',
+      !isAirbnb ? 'bg-[#083630] text-white' : 'text-[#222] hover:bg-black/5'
+    ]}
+  >
+    Mindspan
+  </a>
+  <a
+    href="/airbnb"
+    class:list={[
+      'px-4 py-2 rounded-full transition-colors',
+      isAirbnb ? 'bg-[#ff385c] text-white' : 'text-[#222] hover:bg-black/5'
+    ]}
+  >
+    Airbnb style
+  </a>
+</div>

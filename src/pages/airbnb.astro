@@ -1,0 +1,260 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const nav = [
+  { label: 'Stays', href: '#' },
+  { label: 'Experiences', href: '#' },
+  { label: 'Services', href: '#' },
+];
+
+const categories = [
+  'In weeks', 'Early diagnosis', 'Family care', 'Telehealth MA', 'Telehealth CA',
+  'In-person Danvers', 'In-person Irvine', 'Bay Area', 'CMS GUIDE', 'Digital twin',
+  'Caregiver support', 'Provider partnerships',
+];
+
+const listings = [
+  {
+    image: '/assets/clinic-consultation.png',
+    tag: 'Appointments open',
+    title: 'Danvers, Massachusetts',
+    subtitle: 'In-person neurology clinic',
+    meta: 'Weeks, not months',
+    price: 'Book a visit',
+  },
+  {
+    image: '/assets/hero.png',
+    tag: 'Guest favorite',
+    title: 'Irvine, California',
+    subtitle: 'In-person cognitive care',
+    meta: 'Weeks, not months',
+    price: 'Book a visit',
+  },
+  {
+    image: '/assets/clinic-interior.jpg',
+    tag: 'New',
+    title: 'Bay Area, California',
+    subtitle: 'In-person cognitive care',
+    meta: 'Weeks, not months',
+    price: 'Book a visit',
+  },
+  {
+    image: '/assets/digital-brain.jpg',
+    tag: 'Innovative',
+    title: 'Digital twin program',
+    subtitle: 'Personalized brain model',
+    meta: 'AI-powered',
+    price: 'Learn more',
+  },
+  {
+    image: '/assets/clinic-consultation.png',
+    tag: 'Telehealth',
+    title: 'Telehealth, Massachusetts',
+    subtitle: 'From the comfort of home',
+    meta: '30-minute screening',
+    price: 'Start today',
+  },
+  {
+    image: '/assets/hero.png',
+    tag: 'Telehealth',
+    title: 'Telehealth, California',
+    subtitle: 'From the comfort of home',
+    meta: '30-minute screening',
+    price: 'Start today',
+  },
+  {
+    image: '/assets/clinic-interior.jpg',
+    tag: 'CMS GUIDE',
+    title: 'Medicare-covered dementia care',
+    subtitle: '$0 copays, 24/7 access',
+    meta: 'Up to $2,500 respite',
+    price: 'Check eligibility',
+  },
+  {
+    image: '/assets/digital-brain.jpg',
+    tag: 'For providers',
+    title: 'Provider partnerships',
+    subtitle: 'Fewer admin burdens',
+    meta: 'Clinical leadership',
+    price: 'Partner with us',
+  },
+];
+
+const startingPoints = [
+  {
+    kicker: 'I\u2019m a',
+    title: 'Patient',
+    body: 'Noticing changes in memory or thinking? Get clear answers without the long wait.',
+    cta: 'See how it works',
+    href: '/about/how-it-works',
+  },
+  {
+    kicker: 'I\u2019m a',
+    title: 'Caregiver',
+    body: 'Supporting a loved one? Navigate care, find resources, and know you\u2019re not alone.',
+    cta: 'Assist a loved one',
+    href: '/family/assist',
+  },
+  {
+    kicker: 'I\u2019m a',
+    title: 'Provider',
+    body: 'Need a cognitive care partner who communicates clearly and moves fast?',
+    cta: 'For providers',
+    href: '/providers',
+  },
+];
+---
+
+<Layout title="Mindspan \u2014 Airbnb style preview">
+  <div class="font-[Circular,-apple-system,system-ui,Roboto,'Helvetica_Neue',sans-serif] bg-white text-[#222222]">
+    <!-- HEADER -->
+    <header class="sticky top-0 z-40 bg-white border-b border-black/5">
+      <div class="max-w-[1760px] mx-auto px-6 lg:px-10 py-5 flex items-center justify-between gap-6">
+        <a href="/airbnb" class="text-[#ff385c] font-bold text-2xl tracking-tight flex items-center gap-2">
+          <svg viewBox="0 0 32 32" class="h-8 w-8 fill-current" aria-hidden="true"><path d="M16 1c2.008 0 3.463.963 4.751 3.269l.533 1.025c1.954 3.83 6.114 12.54 7.1 14.836l.145.353c.667 1.591.91 2.472.96 3.396l.01.415.001.228c0 4.062-2.877 6.478-6.357 6.478-2.224 0-4.556-1.258-6.709-3.386l-.257-.26-.172-.179h-.011c-2.253 2.304-4.707 3.825-7.185 3.825-3.48 0-6.357-2.416-6.357-6.478l.004-.393c.035-.923.288-1.813.992-3.443l.33-.766c.683-1.51 2.087-4.514 4.093-8.632l1.9-3.93C10.054 3.996 11.84 2 14.001 2 14.927 2 15.5 1.33 16 1z"/></svg>
+          airbnb
+        </a>
+        <div class="hidden lg:flex items-center gap-2 bg-white border border-black/10 rounded-full shadow-[rgba(0,0,0,0.02)_0px_0px_0px_1px,rgba(0,0,0,0.04)_0px_2px_6px,rgba(0,0,0,0.1)_0px_4px_8px] px-2 py-2 min-w-[520px]">
+          <button class="px-5 py-2 font-semibold text-sm hover:bg-black/5 rounded-full">Location</button>
+          <span class="w-px h-6 bg-black/10"></span>
+          <button class="px-5 py-2 font-semibold text-sm hover:bg-black/5 rounded-full">Any week</button>
+          <span class="w-px h-6 bg-black/10"></span>
+          <button class="px-5 py-2 text-sm text-[#6a6a6a] hover:bg-black/5 rounded-full flex-1 text-left">Add concerns</button>
+          <button class="h-10 w-10 rounded-full bg-[#ff385c] text-white flex items-center justify-center hover:shadow-[rgba(0,0,0,0.08)_0px_4px_12px]" aria-label="Search">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" class="h-4 w-4"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+          </button>
+        </div>
+        <div class="flex items-center gap-2">
+          <a href="#" class="hidden md:inline-block text-sm font-semibold px-4 py-3 rounded-full hover:bg-black/5">Become a provider</a>
+          <button class="flex items-center gap-2 border border-black/10 rounded-full p-1 pl-3 hover:shadow-[rgba(0,0,0,0.08)_0px_4px_12px]" aria-label="Menu">
+            <svg viewBox="0 0 16 16" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 4h12M2 8h12M2 12h12"/></svg>
+            <div class="h-8 w-8 rounded-full bg-[#222222] text-white flex items-center justify-center text-xs font-semibold">M</div>
+          </button>
+        </div>
+      </div>
+
+      <!-- CATEGORY PILLS -->
+      <div class="max-w-[1760px] mx-auto px-6 lg:px-10 pb-5">
+        <div class="flex gap-8 overflow-x-auto no-scrollbar text-[#6a6a6a] text-xs font-semibold">
+          {categories.map((c, i) => (
+            <button class:list={[
+              'flex flex-col items-center gap-2 py-2 whitespace-nowrap hover:text-[#222] transition-colors border-b-2',
+              i === 0 ? 'text-[#222] border-[#222]' : 'border-transparent hover:border-black/20'
+            ]}>
+              <div class="h-6 w-6 rounded-full bg-[#f2f2f2] flex items-center justify-center text-[10px]">•</div>
+              {c}
+            </button>
+          ))}
+        </div>
+      </div>
+    </header>
+
+    <!-- HERO BAR -->
+    <section class="max-w-[1760px] mx-auto px-6 lg:px-10 pt-10">
+      <h1 class="text-[32px] font-bold tracking-[-0.44px] leading-[1.18]">Expert cognitive care, without the wait</h1>
+      <p class="mt-2 text-[14px] text-[#6a6a6a]">See a neurologist in weeks, not months. Book across Massachusetts & California.</p>
+    </section>
+
+    <!-- LISTING GRID -->
+    <section class="max-w-[1760px] mx-auto px-6 lg:px-10 py-10">
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 gap-y-10">
+        {listings.map((l) => (
+          <a href="#" class="group">
+            <div class="relative aspect-[10/11] overflow-hidden rounded-[20px] bg-[#f2f2f2]">
+              <img src={l.image} alt={l.title} class="absolute inset-0 h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]" />
+              <span class="absolute top-3 left-3 bg-white text-[#222] text-[11px] font-semibold px-3 py-1.5 rounded-[14px] shadow-[rgba(0,0,0,0.02)_0px_0px_0px_1px,rgba(0,0,0,0.04)_0px_2px_6px,rgba(0,0,0,0.1)_0px_4px_8px]">{l.tag}</span>
+              <button class="absolute top-3 right-3 h-8 w-8 rounded-full flex items-center justify-center text-white hover:scale-110 transition-transform" aria-label="Save">
+                <svg viewBox="0 0 32 32" class="h-6 w-6 fill-black/40 stroke-white" stroke-width="2"><path d="M16 28c7-4.73 14-10 14-17a6.98 6.98 0 0 0-7-7c-1.8 0-3.58.68-4.95 2.05L16 8.1l-2.05-2.05a6.98 6.98 0 0 0-9.9 0A6.98 6.98 0 0 0 2 11c0 7 7 12.27 14 17z"/></svg>
+              </button>
+            </div>
+            <div class="mt-3 flex items-start justify-between gap-2">
+              <div class="min-w-0">
+                <h3 class="text-[15px] font-semibold text-[#222] tracking-[-0.18px] truncate">{l.title}</h3>
+                <p class="text-[14px] text-[#6a6a6a] truncate">{l.subtitle}</p>
+                <p class="text-[14px] text-[#6a6a6a]">{l.meta}</p>
+              </div>
+            </div>
+            <p class="mt-1 text-[14px] text-[#222]"><span class="font-semibold underline">{l.price}</span></p>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <!-- FEATURE ROW -->
+    <section class="max-w-[1760px] mx-auto px-6 lg:px-10 py-16">
+      <h2 class="text-[28px] font-bold tracking-[-0.44px]">Find your starting point</h2>
+      <p class="mt-2 text-[14px] text-[#6a6a6a]">Pick the option that sounds like you. We\u2019ll point you in the right direction.</p>
+      <div class="mt-8 grid md:grid-cols-3 gap-6">
+        {startingPoints.map((s) => (
+          <a href={s.href} class="bg-white rounded-[20px] p-6 shadow-[rgba(0,0,0,0.02)_0px_0px_0px_1px,rgba(0,0,0,0.04)_0px_2px_6px,rgba(0,0,0,0.1)_0px_4px_8px] hover:shadow-[rgba(0,0,0,0.08)_0px_4px_12px] transition-shadow flex flex-col">
+            <p class="text-[13px] text-[#6a6a6a]">{s.kicker}</p>
+            <h3 class="mt-1 text-[22px] font-semibold text-[#222] tracking-[-0.44px] leading-[1.18]">{s.title}</h3>
+            <p class="mt-3 text-[14px] text-[#6a6a6a] leading-[1.43] flex-1">{s.body}</p>
+            <button class="mt-6 self-start bg-[#222] text-white text-[16px] font-medium px-6 py-3 rounded-[8px] hover:bg-[#ff385c] transition-colors">{s.cta}</button>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <!-- DIGITAL TWIN FEATURE -->
+    <section class="max-w-[1760px] mx-auto px-6 lg:px-10 py-16">
+      <div class="rounded-[32px] overflow-hidden bg-[#f2f2f2] grid lg:grid-cols-2">
+        <div class="p-10 lg:p-16 flex flex-col justify-center">
+          <p class="text-[8px] uppercase tracking-[0.32px] font-bold text-[#ff385c]">The future of cognitive health</p>
+          <h2 class="mt-3 text-[28px] font-bold tracking-[-0.44px] leading-[1.18]">Your own digital twin</h2>
+          <p class="mt-4 text-[14px] text-[#6a6a6a] leading-[1.43] max-w-md">
+            A personal digital version of your brain. Trained on real-patient data from over 70,000 Alzheimer\u2019s patients and 20 years of studies to pinpoint strengths, challenges, and tailor your care.
+          </p>
+          <button class="mt-8 self-start bg-[#ff385c] text-white text-[16px] font-medium px-6 py-3 rounded-[8px] hover:bg-[#e00b41] transition-colors">Explore the program</button>
+        </div>
+        <img src="/assets/digital-brain.jpg" alt="Digital brain twin" class="h-full w-full object-cover min-h-[320px]" />
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-black/10 mt-10">
+      <div class="max-w-[1760px] mx-auto px-6 lg:px-10 py-10 grid md:grid-cols-4 gap-8 text-[14px]">
+        <div>
+          <p class="font-semibold mb-3">Support</p>
+          <ul class="space-y-2 text-[#6a6a6a]">
+            <li><a href="#" class="hover:underline">Help center</a></li>
+            <li><a href="#" class="hover:underline">Get in touch</a></li>
+            <li><a href="#" class="hover:underline">Accessibility</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="font-semibold mb-3">Patients</p>
+          <ul class="space-y-2 text-[#6a6a6a]">
+            <li><a href="#" class="hover:underline">How it works</a></li>
+            <li><a href="#" class="hover:underline">Free assessment</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="font-semibold mb-3">Family</p>
+          <ul class="space-y-2 text-[#6a6a6a]">
+            <li><a href="#" class="hover:underline">For families</a></li>
+            <li><a href="#" class="hover:underline">Introduce a loved one</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="font-semibold mb-3">About</p>
+          <ul class="space-y-2 text-[#6a6a6a]">
+            <li><a href="#" class="hover:underline">About Mindspan</a></li>
+            <li><a href="#" class="hover:underline">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="border-t border-black/10">
+        <div class="max-w-[1760px] mx-auto px-6 lg:px-10 py-6 text-[13px] text-[#6a6a6a] flex flex-wrap gap-3 justify-between">
+          <p>&copy; 2026 Mindspan, Inc. \u00b7 Privacy \u00b7 Terms \u00b7 Sitemap</p>
+          <p>English (US) \u00b7 USD</p>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <style>
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { scrollbar-width: none; }
+  </style>
+</Layout>
