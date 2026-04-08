@@ -1,3 +1,6 @@
+"use client";
+
+import { motion, type Variants } from "framer-motion";
 import {
   brand,
   nav,
@@ -11,6 +14,29 @@ const GREEN = "#083630";
 const ORANGE = "#fb4d17";
 const CREAM = "#efeeeb";
 const SAND = "#dad6c9";
+
+const EASE = [0.22, 0.61, 0.36, 1] as const;
+
+const fadeUp: Variants = {
+  hidden: { opacity: 0, y: 24 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.7, ease: EASE },
+  },
+};
+
+const staggerContainer: Variants = {
+  hidden: {},
+  show: {
+    transition: {
+      staggerChildren: 0.08,
+      delayChildren: 0.05,
+    },
+  },
+};
+
+const VIEWPORT = { once: true, margin: "-80px" } as const;
 
 const Arrow = ({ className = "h-4 w-4" }: { className?: string }) => (
   <svg
@@ -43,19 +69,25 @@ function SectionHeader({
   const color = tone === "light" ? "#fff" : GREEN;
   const leadColor = tone === "light" ? "rgba(255,255,255,0.72)" : "rgba(8,54,48,0.7)";
   return (
-    <div className={`max-w-3xl ${alignCls} ${className}`}>
-      <p className="studio-eyebrow" style={{ color: ORANGE }}>
+    <motion.div
+      className={`max-w-3xl ${alignCls} ${className}`}
+      initial="hidden"
+      whileInView="show"
+      viewport={VIEWPORT}
+      variants={staggerContainer}
+    >
+      <motion.p className="studio-eyebrow" style={{ color: ORANGE }} variants={fadeUp}>
         {eyebrow}
-      </p>
-      <h2 className="studio-h2 mt-4" style={{ color }}>
+      </motion.p>
+      <motion.h2 className="studio-h2 mt-4" style={{ color }} variants={fadeUp}>
         {title}
-      </h2>
+      </motion.h2>
       {lead && (
-        <p className="studio-lead mt-5" style={{ color: leadColor }}>
+        <motion.p className="studio-lead mt-5" style={{ color: leadColor }} variants={fadeUp}>
           {lead}
-        </p>
+        </motion.p>
       )}
-    </div>
+    </motion.div>
   );
 }
 
@@ -175,7 +207,13 @@ export default function Home() {
 
       {/* REASSURANCE BAR */}
       <section className="py-10 md:py-12" style={{ background: GREEN }}>
-        <div className="studio-container grid sm:grid-cols-3 gap-8 text-white">
+        <motion.div
+          className="studio-container grid sm:grid-cols-3 gap-8 text-white"
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="show"
+          viewport={VIEWPORT}
+        >
           {[
             {
               k: "Seen in weeks, not months",
@@ -190,7 +228,7 @@ export default function Home() {
               v: "We bill insurance, just like your primary care doctor.",
             },
           ].map((item) => (
-            <div key={item.k} className="flex items-start gap-4">
+            <motion.div key={item.k} className="flex items-start gap-4" variants={fadeUp}>
               <span
                 className="mt-1.5 h-2 w-2 rounded-full flex-shrink-0"
                 style={{ background: ORANGE }}
@@ -199,29 +237,36 @@ export default function Home() {
                 <p className="font-semibold text-[15px] text-white">{item.k}</p>
                 <p className="text-[14px] text-white/70 mt-1 leading-[1.5]">{item.v}</p>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </section>
 
       {/* EMPATHY LETTER */}
       <section className="studio-section" style={{ background: SAND }}>
-        <div className="studio-container max-w-3xl text-center">
-          <p className="studio-eyebrow" style={{ color: ORANGE }}>
+        <motion.div
+          className="studio-container max-w-3xl text-center"
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="show"
+          viewport={VIEWPORT}
+        >
+          <motion.p className="studio-eyebrow" style={{ color: ORANGE }} variants={fadeUp}>
             A note from our team
-          </p>
-          <h2 className="studio-h2 mt-5" style={{ color: GREEN }}>
+          </motion.p>
+          <motion.h2 className="studio-h2 mt-5" style={{ color: GREEN }} variants={fadeUp}>
             You are not overreacting. You are in the right place.
-          </h2>
-          <p
+          </motion.h2>
+          <motion.p
             className="studio-lead mt-6 mx-auto"
             style={{ color: "rgba(8,54,48,0.8)" }}
+            variants={fadeUp}
           >
             If you have noticed changes in memory, attention, or mood, whether for yourself or
             someone you love, it is worth taking seriously. Early matters. Clarity matters. We are
             here when you are ready to talk.
-          </p>
-          <div className="mt-9 flex justify-center">
+          </motion.p>
+          <motion.div className="mt-9 flex justify-center" variants={fadeUp}>
             <a
               href={brand.primaryCtaHref}
               target="_blank"
@@ -231,8 +276,8 @@ export default function Home() {
               {brand.primaryCta}
               <Arrow />
             </a>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </section>
 
       {/* FREE ONLINE ASSESSMENT — low-friction first step */}
@@ -244,8 +289,14 @@ export default function Home() {
             lead="Ten minutes. No cost. No clinic visit required. Answer a few honest questions about memory, thinking, and daily life, and we'll give you clear feedback right away. If our team thinks a visit with a neurologist would help, we'll connect you with one of our clinics. If not, you will still walk away with something useful."
           />
 
-          <div className="mt-14 grid md:grid-cols-2 gap-6 md:gap-8">
-            <article className="studio-card flex flex-col">
+          <motion.div
+            className="mt-14 grid md:grid-cols-2 gap-6 md:gap-8"
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="show"
+            viewport={VIEWPORT}
+          >
+            <motion.article className="studio-card flex flex-col" variants={fadeUp}>
               <p className="studio-eyebrow" style={{ color: ORANGE }}>
                 For yourself
               </p>
@@ -268,9 +319,9 @@ export default function Home() {
                   <Arrow />
                 </a>
               </div>
-            </article>
+            </motion.article>
 
-            <article className="studio-card flex flex-col">
+            <motion.article className="studio-card flex flex-col" variants={fadeUp}>
               <p className="studio-eyebrow" style={{ color: ORANGE }}>
                 For someone you love
               </p>
@@ -294,8 +345,8 @@ export default function Home() {
                   <Arrow />
                 </a>
               </div>
-            </article>
-          </div>
+            </motion.article>
+          </motion.div>
 
           <p
             className="mt-10 text-center text-sm"
@@ -315,9 +366,15 @@ export default function Home() {
             title="The questions families ask us first, answered honestly."
           />
 
-          <div className="mt-14 grid md:grid-cols-2 gap-6 md:gap-8">
+          <motion.div
+            className="mt-14 grid md:grid-cols-2 gap-6 md:gap-8"
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="show"
+            viewport={VIEWPORT}
+          >
             {expectations.map((e) => (
-              <article key={e.title} className="studio-card">
+              <motion.article key={e.title} className="studio-card" variants={fadeUp}>
                 <p className="studio-eyebrow" style={{ color: ORANGE }}>
                   {e.kicker}
                 </p>
@@ -327,9 +384,9 @@ export default function Home() {
                 <p className="studio-prose mt-3" style={{ color: "rgba(8,54,48,0.72)" }}>
                   {e.body}
                 </p>
-              </article>
+              </motion.article>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -342,9 +399,15 @@ export default function Home() {
             lead="Here is exactly what happens when you reach out. Step by step, no surprises."
           />
 
-          <ol className="mt-14 grid sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-6">
+          <motion.ol
+            className="mt-14 grid sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-6"
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="show"
+            viewport={VIEWPORT}
+          >
             {howItWorks.map((s, i) => (
-              <li key={s.title} className="relative">
+              <motion.li key={s.title} className="relative" variants={fadeUp}>
                 <div className="flex items-center gap-4">
                   <span
                     className="flex items-center justify-center h-10 w-10 rounded-full text-sm font-semibold flex-shrink-0"
@@ -367,9 +430,9 @@ export default function Home() {
                 <p className="studio-prose mt-3" style={{ color: "rgba(8,54,48,0.72)" }}>
                   {s.body}
                 </p>
-              </li>
+              </motion.li>
             ))}
-          </ol>
+          </motion.ol>
         </div>
       </section>
 
@@ -383,13 +446,20 @@ export default function Home() {
           />
 
           {/* Protocol comparison */}
-          <div className="mt-14 grid lg:grid-cols-2 gap-6 md:gap-8">
-            <article
+          <motion.div
+            className="mt-14 grid lg:grid-cols-2 gap-6 md:gap-8"
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="show"
+            viewport={VIEWPORT}
+          >
+            <motion.article
               className="rounded-[1.5rem] p-8 md:p-10"
               style={{
                 background: "#fff",
                 border: "1px solid rgba(8,54,48,0.1)",
               }}
+              variants={fadeUp}
             >
               <p className="studio-eyebrow" style={{ color: "rgba(8,54,48,0.6)" }}>
                 The Core Protocol
@@ -419,14 +489,15 @@ export default function Home() {
                   </li>
                 ))}
               </ul>
-            </article>
+            </motion.article>
 
-            <article
+            <motion.article
               className="rounded-[1.5rem] p-8 md:p-10 relative overflow-hidden"
               style={{
                 background: GREEN,
                 color: "#fff",
               }}
+              variants={fadeUp}
             >
               <div
                 className="absolute inset-0 opacity-60 pointer-events-none"
@@ -468,8 +539,8 @@ export default function Home() {
                   ))}
                 </ul>
               </div>
-            </article>
-          </div>
+            </motion.article>
+          </motion.div>
 
           {/* Technology sub-section */}
           <div
@@ -489,8 +560,14 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="mt-12 grid md:grid-cols-3 gap-5 md:gap-6">
-              <article className="studio-card">
+            <motion.div
+              className="mt-12 grid md:grid-cols-3 gap-5 md:gap-6"
+              variants={staggerContainer}
+              initial="hidden"
+              whileInView="show"
+              viewport={VIEWPORT}
+            >
+              <motion.article className="studio-card" variants={fadeUp}>
                 <p className="studio-eyebrow" style={{ color: ORANGE }}>
                   Cognitive Digital Twin
                 </p>
@@ -503,9 +580,9 @@ export default function Home() {
                   neurologist uses it to show you where you are biologically, where you might be
                   heading, and which changes could actually shift that trajectory for <em>you</em>.
                 </p>
-              </article>
+              </motion.article>
 
-              <article className="studio-card">
+              <motion.article className="studio-card" variants={fadeUp}>
                 <p className="studio-eyebrow" style={{ color: ORANGE }}>
                   Care Orchestration Engine
                 </p>
@@ -519,9 +596,9 @@ export default function Home() {
                   routes straight to your care team. Protocol without memorization. Safety without
                   gaps.
                 </p>
-              </article>
+              </motion.article>
 
-              <article className="studio-card">
+              <motion.article className="studio-card" variants={fadeUp}>
                 <p className="studio-eyebrow" style={{ color: ORANGE }}>
                   Mindy, your care companion
                 </p>
@@ -534,8 +611,8 @@ export default function Home() {
                   your clinical team when something needs real attention. A friendly, always-on
                   helper that never forgets you.
                 </p>
-              </article>
-            </div>
+              </motion.article>
+            </motion.div>
 
             <div className="mt-12 flex flex-wrap gap-3">
               <a
@@ -564,13 +641,20 @@ export default function Home() {
             lead="A short note, directly to you."
           />
 
-          <div className="mt-14 grid md:grid-cols-3 gap-5 md:gap-6">
+          <motion.div
+            className="mt-14 grid md:grid-cols-3 gap-5 md:gap-6"
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="show"
+            viewport={VIEWPORT}
+          >
             {audiences.map((a) => (
-              <a
+              <motion.a
                 key={a.id}
                 id={a.id === "doctors" ? "doctors" : undefined}
                 href={a.href}
-                className="studio-card flex flex-col"
+                className="studio-card flex flex-col group"
+                variants={fadeUp}
               >
                 <p className="studio-eyebrow" style={{ color: ORANGE }}>
                   {a.kicker}
@@ -585,15 +669,15 @@ export default function Home() {
                   {a.body}
                 </p>
                 <p
-                  className="mt-8 font-semibold text-sm flex items-center gap-2"
+                  className="mt-8 font-semibold text-sm flex items-center gap-2 transition-all group-hover:gap-3"
                   style={{ color: ORANGE }}
                 >
                   {a.cta}
                   <Arrow />
                 </p>
-              </a>
+              </motion.a>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -606,12 +690,18 @@ export default function Home() {
             lead="Clinics in Massachusetts and California, plus video visits anywhere in those two states."
           />
 
-          <div className="mt-14 grid sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6">
+          <motion.div
+            className="mt-14 grid sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6"
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="show"
+            viewport={VIEWPORT}
+          >
             {locations.map((l) => {
               const mapSrc = `https://www.openstreetmap.org/export/embed.html?bbox=${l.bbox}&layer=mapnik&marker=${l.marker}`;
               const isTelehealth = l.kind === "telehealth";
               return (
-                <a
+                <motion.a
                   key={l.city + l.state}
                   href={l.href}
                   className="group relative overflow-hidden rounded-[1.5rem] flex flex-col transition-transform hover:-translate-y-1 hover:shadow-[0_20px_40px_-20px_rgba(8,54,48,0.35)]"
@@ -619,6 +709,7 @@ export default function Home() {
                     background: "#fff",
                     border: "1px solid rgba(8,54,48,0.1)",
                   }}
+                  variants={fadeUp}
                 >
                   {/* Map teaser */}
                   <div
@@ -690,27 +781,33 @@ export default function Home() {
                       <Arrow />
                     </p>
                   </div>
-                </a>
+                </motion.a>
               );
             })}
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* FINAL CTA */}
       <section className="studio-section text-white" style={{ background: GREEN }}>
-        <div className="studio-container max-w-3xl text-center">
-          <p className="studio-eyebrow" style={{ color: ORANGE }}>
+        <motion.div
+          className="studio-container max-w-3xl text-center"
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="show"
+          viewport={VIEWPORT}
+        >
+          <motion.p className="studio-eyebrow" style={{ color: ORANGE }} variants={fadeUp}>
             When you are ready
-          </p>
-          <h2 className="studio-h2 mt-5">
+          </motion.p>
+          <motion.h2 className="studio-h2 mt-5" variants={fadeUp}>
             The first step is a conversation. That is all.
-          </h2>
-          <p className="studio-lead mt-6 mx-auto text-white/80">
+          </motion.h2>
+          <motion.p className="studio-lead mt-6 mx-auto text-white/80" variants={fadeUp}>
             No commitment. No pressure. Tell us what is going on, and we will help you figure out
             what comes next, even if it turns out that next isn’t with us.
-          </p>
-          <div className="mt-10 flex flex-wrap justify-center gap-3">
+          </motion.p>
+          <motion.div className="mt-10 flex flex-wrap justify-center gap-3" variants={fadeUp}>
             <a
               href={brand.primaryCtaHref}
               target="_blank"
@@ -731,8 +828,8 @@ export default function Home() {
             >
               {brand.secondaryCta}
             </a>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </section>
 
       {/* FOOTER */}

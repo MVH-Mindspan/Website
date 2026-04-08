@@ -134,10 +134,20 @@ h1, h2, h3 {
   font-weight: 600;
   font-size: 0.9375rem;
   letter-spacing: -0.005em;
-  transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  transition: transform 0.25s cubic-bezier(0.22, 0.61, 0.36, 1),
+              background 0.25s ease,
+              border-color 0.25s ease,
+              color 0.25s ease,
+              box-shadow 0.25s ease;
   white-space: nowrap;
 }
-.studio-btn:hover { transform: scale(0.975); }
+.studio-btn svg {
+  transition: transform 0.3s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+.studio-btn:hover svg {
+  transform: translateX(3px);
+}
+.studio-btn:active { transform: scale(0.97); }
 .studio-btn-primary { background: #083630; color: #fff; }
 .studio-btn-primary:hover { background: #1f514a; }
 .studio-btn-accent { background: #fb4d17; color: #fff; }
@@ -159,11 +169,14 @@ h1, h2, h3 {
   border: 1px solid rgba(8, 54, 48, 0.08);
   border-radius: 1.5rem;
   padding: clamp(1.5rem, 2vw, 2.25rem);
-  transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+  transition: border-color 0.35s cubic-bezier(0.22, 0.61, 0.36, 1),
+              transform 0.35s cubic-bezier(0.22, 0.61, 0.36, 1),
+              box-shadow 0.35s cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 .studio-card:hover {
   border-color: rgba(8, 54, 48, 0.2);
-  box-shadow: 0 18px 40px -24px rgba(8, 54, 48, 0.25);
+  box-shadow: 0 24px 48px -24px rgba(8, 54, 48, 0.22);
+  transform: translateY(-3px);
 }
 
 /* Animated fade-up used by studio */
