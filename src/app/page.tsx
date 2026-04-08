@@ -420,13 +420,37 @@ export default function Home() {
             </motion.article>
           </motion.div>
 
-          <p
-            className="mt-10 text-center text-sm"
-            style={{ color: "rgba(8,54,48,0.6)" }}
-          >
-            The easiest, worry-free way to get started with Mindspan. No credit card. No account
-            required. Nothing scheduled unless you want it to be.
-          </p>
+          <div className="mt-12 flex flex-col items-center gap-5 text-center">
+            <p className="text-sm font-semibold" style={{ color: GREEN }}>
+              The easiest, worry-free way to get started with Mindspan.
+            </p>
+            <ul
+              className="flex flex-wrap items-center justify-center gap-x-7 gap-y-3 text-[13px]"
+              style={{ color: "rgba(8,54,48,0.65)" }}
+            >
+              {[
+                "No credit card",
+                "No account required",
+                "Nothing scheduled unless you want it",
+              ].map((item) => (
+                <li key={item} className="inline-flex items-center gap-2">
+                  <svg
+                    className="h-4 w-4 flex-shrink-0"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke={ORANGE}
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    aria-hidden
+                  >
+                    <path d="M20 6 9 17l-5-5" />
+                  </svg>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </section>
 
