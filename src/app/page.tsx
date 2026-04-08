@@ -14,6 +14,8 @@ const GREEN = "#083630";
 const ORANGE = "#fb4d17";
 const CREAM = "#efeeeb";
 const SAND = "#dad6c9";
+const SKY = "#bdd8f5";
+const SKY_SOFT = "#d9e6f3";
 
 const EASE = [0.22, 0.61, 0.36, 1] as const;
 
@@ -50,35 +52,6 @@ const Arrow = ({ className = "h-4 w-4" }: { className?: string }) => (
   </svg>
 );
 
-function Highlight({
-  children,
-  delay = 0.35,
-}: {
-  children: React.ReactNode;
-  delay?: number;
-}) {
-  return (
-    <span className="relative inline-block">
-      <motion.span
-        aria-hidden
-        className="absolute rounded-[2px] pointer-events-none"
-        style={{
-          background: "#bdd8f5",
-          left: "-0.12em",
-          right: "-0.12em",
-          top: "0.28em",
-          bottom: "0.04em",
-          transformOrigin: "left center",
-        }}
-        initial={{ scaleX: 0 }}
-        whileInView={{ scaleX: 1 }}
-        viewport={VIEWPORT}
-        transition={{ duration: 0.9, delay, ease: EASE }}
-      />
-      <span className="relative">{children}</span>
-    </span>
-  );
-}
 
 function SectionHeader({
   eyebrow,
@@ -173,8 +146,7 @@ export default function Home() {
               className="studio-display mt-5 studio-fade studio-fade-2"
               style={{ color: GREEN }}
             >
-              When memory starts to change, you shouldn’t have to{" "}
-              <Highlight delay={0.7}>wait</Highlight>.
+              {brand.headline}
             </h1>
             <p
               className="studio-lead mt-6 studio-fade studio-fade-3 max-w-xl"
@@ -222,7 +194,7 @@ export default function Home() {
               <div
                 className="absolute -inset-4 rounded-[2.5rem] -z-10"
                 style={{
-                  background: `radial-gradient(120% 80% at 50% 20%, ${SAND} 0%, transparent 70%)`,
+                  background: `radial-gradient(120% 80% at 50% 20%, ${SKY} 0%, transparent 70%)`,
                 }}
               />
               {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -312,7 +284,7 @@ export default function Home() {
       </section>
 
       {/* FREE ONLINE ASSESSMENT — low-friction first step */}
-      <section className="studio-section" style={{ background: "#fff" }}>
+      <section className="studio-section" style={{ background: SKY_SOFT }}>
         <div className="studio-container">
           <SectionHeader
             eyebrow="A no-pressure first step"
@@ -820,7 +792,7 @@ export default function Home() {
       </section>
 
       {/* FOR PROVIDERS */}
-      <section id="for-providers" className="studio-section" style={{ background: "#fff" }}>
+      <section id="for-providers" className="studio-section" style={{ background: SKY_SOFT }}>
         <div className="studio-container">
           <SectionHeader
             eyebrow="For providers"
