@@ -20,6 +20,9 @@
   --color-near-black: #222222;
   --color-airbnb-gray: #6a6a6a;
   --color-airbnb-surface: #f2f2f2;
+
+  /* Soft editorial highlight — pairs with brand green + orange */
+  --color-highlight: #bdd8f5;
 }
 
 :root {

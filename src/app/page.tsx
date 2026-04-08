@@ -50,6 +50,36 @@ const Arrow = ({ className = "h-4 w-4" }: { className?: string }) => (
   </svg>
 );
 
+function Highlight({
+  children,
+  delay = 0.35,
+}: {
+  children: React.ReactNode;
+  delay?: number;
+}) {
+  return (
+    <span className="relative inline-block">
+      <motion.span
+        aria-hidden
+        className="absolute rounded-[2px] pointer-events-none"
+        style={{
+          background: "#bdd8f5",
+          left: "-0.12em",
+          right: "-0.12em",
+          top: "0.28em",
+          bottom: "0.04em",
+          transformOrigin: "left center",
+        }}
+        initial={{ scaleX: 0 }}
+        whileInView={{ scaleX: 1 }}
+        viewport={VIEWPORT}
+        transition={{ duration: 0.9, delay, ease: EASE }}
+      />
+      <span className="relative">{children}</span>
+    </span>
+  );
+}
+
 function SectionHeader({
   eyebrow,
   title,
@@ -143,7 +173,8 @@ export default function Home() {
               className="studio-display mt-5 studio-fade studio-fade-2"
               style={{ color: GREEN }}
             >
-              {brand.headline}
+              When memory starts to change,{" "}
+              <Highlight delay={0.6}>you shouldn’t have to wait.</Highlight>
             </h1>
             <p
               className="studio-lead mt-6 studio-fade studio-fade-3 max-w-xl"
@@ -255,7 +286,8 @@ export default function Home() {
             A note from our team
           </motion.p>
           <motion.h2 className="studio-h2 mt-5" style={{ color: GREEN }} variants={fadeUp}>
-            You are not overreacting. You are in the right place.
+            You are not overreacting. You are in{" "}
+            <Highlight delay={0.5}>the right place</Highlight>.
           </motion.h2>
           <motion.p
             className="studio-lead mt-6 mx-auto"
@@ -953,7 +985,11 @@ export default function Home() {
             When you are ready
           </motion.p>
           <motion.h2 className="studio-h2 mt-5" variants={fadeUp}>
-            The first step is a conversation. That is all.
+            The first step is{" "}
+            <Highlight delay={0.5}>
+              <span style={{ color: GREEN }}>a conversation</span>
+            </Highlight>
+            . That is all.
           </motion.h2>
           <motion.p className="studio-lead mt-6 mx-auto text-white/80" variants={fadeUp}>
             No commitment. No pressure. Tell us what is going on, and we will help you figure out
