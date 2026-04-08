@@ -171,45 +171,34 @@ export default function Home() {
                 {brand.secondaryCta}
               </a>
             </div>
-            <a
-              href="https://assessment.mindspan.co/"
-              target="_blank"
-              rel="noopener"
-              className="mt-10 inline-flex items-center gap-4 rounded-2xl px-4 py-3 pr-5 studio-fade studio-fade-4 transition-all hover:-translate-y-0.5 hover:shadow-[0_18px_40px_-24px_rgba(8,54,48,0.25)] group"
-              style={{
-                background: SKY_SOFT,
-                border: "1px solid rgba(189,216,245,0.9)",
-              }}
+            <div
+              className="mt-7 flex items-center gap-3 text-sm studio-fade studio-fade-4"
+              style={{ color: "rgba(8,54,48,0.7)" }}
             >
               <span
-                className="h-11 w-11 rounded-xl flex items-center justify-center flex-shrink-0"
+                className="h-7 w-7 rounded-lg flex items-center justify-center flex-shrink-0"
                 style={{ background: SKY, color: GREEN }}
                 aria-hidden
               >
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="h-5 w-5">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-4 w-4">
                   <circle cx="12" cy="12" r="9" />
                   <path d="M12 7v5l3 2" />
                 </svg>
               </span>
-              <span className="flex flex-col leading-tight">
-                <span className="text-[15px] font-semibold" style={{ color: GREEN }}>
-                  Not sure yet? Start with a free assessment.
-                </span>
-                <span className="text-[13px] mt-1" style={{ color: "rgba(8,54,48,0.6)" }}>
-                  10 minutes · online · no commitment
-                </span>
+              <span>
+                Not ready for a visit?{" "}
+                <a
+                  href="https://assessment.mindspan.co/"
+                  target="_blank"
+                  rel="noopener"
+                  className="font-semibold underline underline-offset-4 decoration-1 hover:decoration-2 transition-all"
+                  style={{ color: GREEN }}
+                >
+                  Take a free online assessment
+                </a>{" "}
+                in 10 minutes.
               </span>
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                className="h-4 w-4 ml-1 transition-transform group-hover:translate-x-1 flex-shrink-0"
-                style={{ color: GREEN }}
-              >
-                <path d="M5 12h14M13 5l7 7-7 7" />
-              </svg>
-            </a>
+            </div>
           </div>
 
           <div className="lg:col-span-5 studio-fade studio-fade-3">
