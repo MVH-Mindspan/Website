@@ -116,7 +116,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* WHAT WE HELP WITH — anchor chips */}
+      {/* WHAT WE HELP WITH, anchor chips */}
       <section className="pt-4 md:pt-2 pb-2">
         <div className="studio-container">
           <p className="studio-eyebrow mb-4" style={{ color: "rgba(8,54,48,0.55)" }}>
@@ -180,7 +180,7 @@ export default function Home() {
           </h2>
           <div className="mt-8 space-y-5 text-[17px] leading-[1.65]" style={{ color: "rgba(8,54,48,0.8)" }}>
             <p>
-              Whatever brought you here, you are in the right place — and you are not overreacting.
+              Whatever brought you here, you are in the right place, and you are not overreacting.
               Changes in memory, word-finding, mood, or day-to-day judgment are worth taking
               seriously. Early matters. Clarity matters. Just being here is the right first step.
             </p>
@@ -195,7 +195,7 @@ export default function Home() {
               We do it differently. Our team specializes in Alzheimer’s, dementia, and cognitive
               change. We take time. We include your family if you want them there. We talk to your
               primary care doctor. We explain what we see in plain language. And we stay with you
-              after the first visit — because that’s usually when the real questions start.
+              after the first visit, because that’s usually when the real questions start.
             </p>
           </div>
           <div className="mt-10">
@@ -212,7 +212,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* WHAT TO EXPECT — reframed from "pillars" */}
+      {/* WHAT TO EXPECT, reframed from "pillars" */}
       <section id="expect" className="studio-section">
         <div className="studio-container">
           <div className="max-w-3xl">
@@ -220,7 +220,7 @@ export default function Home() {
               What to expect when you come to us
             </p>
             <h2 className="studio-h2 mt-4" style={{ color: GREEN }}>
-              The questions families ask us first — answered honestly.
+              The questions families ask us first, answered honestly.
             </h2>
           </div>
 
@@ -242,7 +242,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* HOW WE THINK ABOUT YOUR CARE — replaces product-like "Digital Twin" pitch */}
+      {/* HOW WE THINK ABOUT YOUR CARE, replaces product-like "Digital Twin" pitch */}
       <section
         id="how-we-think"
         className="studio-section text-white"
@@ -264,7 +264,7 @@ export default function Home() {
                 different things that will actually help.
               </p>
               <p>
-                At Mindspan, we take the time to understand your specific story — your health
+                At Mindspan, we take the time to understand your specific story, your health
                 history, the tests you’ve had, how you’re doing right now, what matters most to you.
                 Then we draw on what researchers have learned from tens of thousands of other
                 patients to figure out what is most likely to help <em>your</em> brain, not an
@@ -272,7 +272,7 @@ export default function Home() {
               </p>
               <p>
                 For some of the people we see, that careful, personalized approach can meaningfully
-                slow changes and protect things that matter — independence, memory, time with family.
+                slow changes and protect things that matter, independence, memory, time with family.
                 We can’t promise a specific outcome. What we can promise is that we’ll treat you like
                 a person, and that every recommendation we make will be something we can explain.
               </p>
@@ -318,7 +318,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* HOW IT WORKS — the visit, as a story */}
+      {/* HOW IT WORKS, the visit, as a story */}
       <section id="visit" className="studio-section" style={{ background: "#fff" }}>
         <div className="studio-container">
           <div className="max-w-3xl">
@@ -329,7 +329,7 @@ export default function Home() {
               From first call to a plan that fits your life.
             </h2>
             <p className="studio-lead mt-5" style={{ color: "rgba(8,54,48,0.7)" }}>
-              We don’t believe in surprise. Here is exactly what happens when you reach out — step by
+              We don’t believe in surprise. Here is exactly what happens when you reach out, step by
               step.
             </p>
           </div>
@@ -358,7 +358,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* AUDIENCE SPLIT — written TO each reader */}
+      {/* AUDIENCE SPLIT, written TO each reader */}
       <section id="families" className="studio-section" style={{ background: SAND }}>
         <div className="studio-container">
           <div className="max-w-3xl">
@@ -369,7 +369,7 @@ export default function Home() {
               Wherever you’re coming from, you’re in the right place.
             </h2>
             <p className="studio-lead mt-5" style={{ color: "rgba(8,54,48,0.7)" }}>
-              A short note — directly to you.
+              A short note, directly to you.
             </p>
           </div>
 
@@ -472,11 +472,11 @@ export default function Home() {
               Why care at Mindspan is different
             </p>
             <h2 className="studio-h2 mt-4" style={{ color: GREEN }}>
-              Neurologists who take the time — with the tools to back it up.
+              Neurologists who take the time, with the tools to back it up.
             </h2>
             <p className="studio-lead mt-5" style={{ color: "rgba(8,54,48,0.7)" }}>
               A lot of the technology in healthcare is invisible to patients. At Mindspan, we want
-              you to see what’s under the hood — because it’s part of what makes your care feel
+              you to see what’s under the hood, because it’s part of what makes your care feel
               different.
             </p>
           </div>
@@ -492,7 +492,7 @@ export default function Home() {
               <p className="studio-prose mt-4" style={{ color: "rgba(8,54,48,0.75)" }}>
                 You’ll have a neurologist and a care partner who know your name, your history, and
                 what matters most to you. They talk to each other. They talk to your primary care
-                doctor. And they talk to your family — because cognitive care affects everyone in
+                doctor. And they talk to your family, because cognitive care affects everyone in
                 the house, not just the patient.
               </p>
             </article>
@@ -505,7 +505,7 @@ export default function Home() {
                 A personalized model of your brain.
               </h3>
               <p className="studio-prose mt-4" style={{ color: "rgba(8,54,48,0.75)" }}>
-                Behind the scenes, our team builds something we call your Cognitive Digital Twin —
+                Behind the scenes, our team builds something we call your Cognitive Digital Twin ,
                 a personalized picture of your brain health, put together from your medical
                 history, labs, imaging, and cognitive assessments. It helps your neurologist see
                 what’s most likely going on and what’s most likely to help <em>you</em>, drawing on
@@ -524,7 +524,7 @@ export default function Home() {
               <p className="studio-prose mt-4" style={{ color: "rgba(8,54,48,0.75)" }}>
                 Cognitive medicine is moving fast. New drugs, new diagnostics, new understanding of
                 how the brain ages. Our Care Orchestration Engine quietly tracks that research and
-                pairs it with your twin — so your neurologist can see which of today’s options are
+                pairs it with your twin, so your neurologist can see which of today’s options are
                 actually worth considering for your situation. You get the benefit of tomorrow’s
                 neurology, explained in plain language today.
               </p>
@@ -539,7 +539,7 @@ export default function Home() {
               </h3>
               <p className="studio-prose mt-4" style={{ color: "rgba(8,54,48,0.75)" }}>
                 Whether you want to sit across from a neurologist in one of our clinics, or join
-                from your living room with a family member on the couch beside you — we make it
+                from your living room with a family member on the couch beside you, we make it
                 work. Video visits are full visits, not a check-in. And we bill insurance either
                 way.
               </p>
@@ -574,7 +574,7 @@ export default function Home() {
           </h2>
           <p className="studio-lead mt-5 mx-auto text-white/80">
             A Mindspan consultation is a phone call with someone on our team. No commitment, no
-            pressure. Tell us what’s going on, and we’ll help you figure out what to do next — even
+            pressure. Tell us what’s going on, and we’ll help you figure out what to do next, even
             if it turns out that “next” isn’t with us.
           </p>
           <div className="mt-10 flex flex-wrap justify-center gap-3">

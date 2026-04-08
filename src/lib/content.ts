@@ -6,7 +6,7 @@
 export const brand = {
   headline: "When memory starts to change, you shouldn’t have to wait.",
   subhead:
-    "Mindspan is a team of neurologists and care partners who specialize in Alzheimer’s, dementia, and other cognitive conditions. We help families get real answers — in weeks, not months — and walk with you through what comes next.",
+    "Mindspan is a team of neurologists and care partners who specialize in Alzheimer’s, dementia, and other cognitive conditions. We help families get real answers, in weeks, not months, and walk with you through what comes next.",
   subTagline: "Specialist cognitive care for families",
   reassurance:
     "Board-certified neurologists. In-clinic and video visits. Covered by insurance.",
@@ -16,7 +16,7 @@ export const brand = {
   secondaryCtaHref: "#locations",
 };
 
-// What we actually help with — short list used under the hero to anchor the reader.
+// What we actually help with, short list used under the hero to anchor the reader.
 export const weHelpWith = [
   "Alzheimer’s disease",
   "Mild cognitive impairment (MCI)",
@@ -53,7 +53,7 @@ export const expectations = [
     kicker: "What will we actually do?",
     title: "A thoughtful look at the whole picture.",
     body:
-      "We go through your history, any tests you’ve had, and what you’re experiencing right now. Then we explain what we think is going on — in plain language, not medical jargon.",
+      "We go through your history, any tests you’ve had, and what you’re experiencing right now. Then we explain what we think is going on, in plain language, not medical jargon.",
   },
   {
     kicker: "And then what?",
@@ -73,12 +73,12 @@ export const howItWorks = [
   {
     title: "Meeting your neurologist",
     body:
-      "An unhurried visit — in one of our clinics or on video — where a Mindspan neurologist goes through your history, any recent tests, and where you are today. You’ll leave knowing what they’re seeing and why.",
+      "An unhurried visit, in one of our clinics or on video, where a Mindspan neurologist goes through your history, any recent tests, and where you are today. You’ll leave knowing what they’re seeing and why.",
   },
   {
     title: "Looking at it together",
     body:
-      "We combine what we’ve learned about you with decades of research from patients who’ve been where you are now. It helps us see which treatments and changes are most likely to help — specifically for you.",
+      "We combine what we’ve learned about you with decades of research from patients who’ve been where you are now. It helps us see which treatments and changes are most likely to help, specifically for you.",
   },
   {
     title: "Ongoing partnership",
@@ -101,7 +101,7 @@ export const audiences = [
     kicker: "If you’re caring for a parent or spouse",
     title: "You don’t have to keep figuring this out alone.",
     body:
-      "You’ve probably spent months — maybe years — noticing changes, making calls, and being told to wait and see. We know that’s exhausting, and we know it’s lonely. You can bring your loved one to us, and we’ll take it from here together.",
+      "You’ve probably spent months, maybe years, noticing changes, making calls, and being told to wait and see. We know that’s exhausting, and we know it’s lonely. You can bring your loved one to us, and we’ll take it from here together.",
     cta: "Book a visit",
     href: "https://assessment.mindspan.co/",
   },
@@ -110,7 +110,7 @@ export const audiences = [
     kicker: "If you’ve noticed changes in yourself",
     title: "You deserve to be taken seriously.",
     body:
-      "Maybe a word slipped that used to come easily. Maybe you walked into a room and forgot why. It might be nothing — it might be something. Either way, you deserve a neurologist who sits with you, explains what’s happening, and tells you what to do next.",
+      "Maybe a word slipped that used to come easily. Maybe you walked into a room and forgot why. It might be nothing, it might be something. Either way, you deserve a neurologist who sits with you, explains what’s happening, and tells you what to do next.",
     cta: "Book a visit",
     href: "https://assessment.mindspan.co/",
   },
@@ -119,17 +119,17 @@ export const audiences = [
     kicker: "If you’re a primary care physician",
     title: "A neurology partner who makes your life easier.",
     body:
-      "Your patients with cognitive concerns need more time than a 15-minute visit allows. We can see them quickly, communicate clearly, and send clean notes back to you. You stay their trusted doctor — we handle the cognitive specialty piece.",
+      "Your patients with cognitive concerns need more time than a 15-minute visit allows. We can see them quickly, communicate clearly, and send clean notes back to you. You stay their trusted doctor, we handle the cognitive specialty piece.",
     cta: "Learn about referrals",
     href: "/providers",
   },
 ];
 
-// What we actually look at during an assessment — written like a real doctor talking, not a spec sheet.
+// What we actually look at during an assessment, written like a real doctor talking, not a spec sheet.
 export const whatWeLookAt = [
   "Your medical history, and what’s changed recently",
   "Any labs, imaging, or cognitive tests you’ve already had",
-  "How you’re doing day to day — at home, at work, with family",
+  "How you’re doing day to day, at home, at work, with family",
   "Lifestyle factors that quietly shape brain health",
   "Medications that might be helping or hurting",
   "What matters most to you, and what you’re hoping for",
