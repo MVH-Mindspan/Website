@@ -99,36 +99,42 @@ export default function Home() {
     <div style={{ background: CREAM, color: GREEN }}>
       {/* ANNOUNCEMENT BANNER — non-sticky, scrolls away with content */}
       <div
-        className="text-[13px] md:text-sm"
-        style={{ background: SKY, color: GREEN }}
+        className="text-[13px] md:text-sm border-b"
+        style={{
+          background: SKY,
+          color: GREEN,
+          borderColor: "rgba(8,54,48,0.1)",
+        }}
       >
-        <div className="studio-container flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-5 py-3 text-center sm:text-left">
-          <span className="inline-flex items-center gap-2 font-semibold">
-            <span className="relative flex h-2 w-2" aria-hidden>
-              <span
-                className="absolute inline-flex h-full w-full rounded-full opacity-70 animate-ping"
-                style={{ background: "#22c55e" }}
-              />
-              <span
-                className="relative inline-flex rounded-full h-2 w-2"
-                style={{ background: "#22c55e" }}
-              />
+        <div className="studio-container flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-6 py-3.5 text-center sm:text-left">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:gap-5 gap-2">
+            <span className="inline-flex items-center justify-center sm:justify-start gap-2.5 font-semibold">
+              <span className="relative flex h-2 w-2" aria-hidden>
+                <span
+                  className="absolute inline-flex h-full w-full rounded-full opacity-70 animate-ping"
+                  style={{ background: "#22c55e" }}
+                />
+                <span
+                  className="relative inline-flex rounded-full h-2 w-2"
+                  style={{ background: "#22c55e" }}
+                />
+              </span>
+              Appointments open this week
             </span>
-            Appointments open this week
-          </span>
-          <span
-            className="hidden sm:inline h-1 w-1 rounded-full"
-            style={{ background: "rgba(8,54,48,0.35)" }}
-            aria-hidden
-          />
-          <span style={{ color: "rgba(8,54,48,0.78)" }}>
-            Danvers, Irvine, Bay Area &amp; telehealth across MA and CA
-          </span>
+            <span
+              className="hidden sm:inline-block h-1 w-1 rounded-full flex-shrink-0"
+              style={{ background: "rgba(8,54,48,0.35)" }}
+              aria-hidden
+            />
+            <span style={{ color: "rgba(8,54,48,0.72)" }}>
+              Danvers, Irvine, Bay Area &amp; telehealth across MA and CA
+            </span>
+          </div>
           <a
             href={brand.primaryCtaHref}
             target="_blank"
             rel="noopener"
-            className="inline-flex items-center gap-1.5 font-semibold underline underline-offset-4 decoration-1 hover:decoration-2 transition-all"
+            className="inline-flex items-center justify-center sm:justify-start gap-1.5 font-semibold underline underline-offset-4 decoration-1 hover:decoration-2 transition-all flex-shrink-0"
             style={{ color: GREEN }}
           >
             Book today
@@ -144,7 +150,7 @@ export default function Home() {
         className="sticky top-0 z-50 backdrop-blur-md"
         style={{ background: "rgba(239,238,235,0.82)" }}
       >
-        <div className="studio-container flex items-center justify-between py-4 md:py-5">
+        <div className="studio-container flex items-center justify-between pt-6 md:pt-8 pb-4 md:pb-5">
           <a href="/" className="flex items-center gap-3">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/assets/logo-green.png" alt="Mindspan" className="h-7 md:h-8 w-auto" />
