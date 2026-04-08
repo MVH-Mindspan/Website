@@ -284,7 +284,7 @@ export default function Home() {
       </section>
 
       {/* FREE ONLINE ASSESSMENT — low-friction first step */}
-      <section className="studio-section" style={{ background: SKY_SOFT }}>
+      <section className="studio-section" style={{ background: "#fff" }}>
         <div className="studio-container">
           <SectionHeader
             eyebrow="A no-pressure first step"
@@ -300,7 +300,17 @@ export default function Home() {
             viewport={VIEWPORT}
           >
             <motion.article className="studio-card flex flex-col" variants={fadeUp}>
-              <p className="studio-eyebrow" style={{ color: ORANGE }}>
+              <div
+                className="h-12 w-12 rounded-2xl flex items-center justify-center"
+                style={{ background: SKY, color: GREEN }}
+                aria-hidden
+              >
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="h-6 w-6">
+                  <circle cx="12" cy="12" r="9" />
+                  <path d="M12 7v5l3 2" />
+                </svg>
+              </div>
+              <p className="studio-eyebrow mt-6" style={{ color: ORANGE }}>
                 For yourself
               </p>
               <h3 className="studio-h3 mt-3" style={{ color: GREEN }}>
@@ -325,7 +335,19 @@ export default function Home() {
             </motion.article>
 
             <motion.article className="studio-card flex flex-col" variants={fadeUp}>
-              <p className="studio-eyebrow" style={{ color: ORANGE }}>
+              <div
+                className="h-12 w-12 rounded-2xl flex items-center justify-center"
+                style={{ background: SKY, color: GREEN }}
+                aria-hidden
+              >
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="h-6 w-6">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2" />
+                  <circle cx="10" cy="8" r="4" />
+                  <path d="M21 21v-2a4 4 0 0 0-3-3.87" />
+                  <path d="M17 4a4 4 0 0 1 0 7.75" />
+                </svg>
+              </div>
+              <p className="studio-eyebrow mt-6" style={{ color: ORANGE }}>
                 For someone you love
               </p>
               <h3 className="studio-h3 mt-3" style={{ color: GREEN }}>
@@ -415,9 +437,8 @@ export default function Home() {
                   <span
                     className="flex items-center justify-center h-10 w-10 rounded-full text-sm font-semibold flex-shrink-0"
                     style={{
-                      background: CREAM,
-                      color: ORANGE,
-                      border: `1px solid rgba(251,77,23,0.3)`,
+                      background: SKY,
+                      color: GREEN,
                     }}
                   >
                     {String(i + 1).padStart(2, "0")}
@@ -459,8 +480,8 @@ export default function Home() {
             <motion.article
               className="rounded-[1.5rem] p-8 md:p-10"
               style={{
-                background: "#fff",
-                border: "1px solid rgba(8,54,48,0.1)",
+                background: SKY_SOFT,
+                border: "1px solid rgba(8,54,48,0.08)",
               }}
               variants={fadeUp}
             >
@@ -792,7 +813,7 @@ export default function Home() {
       </section>
 
       {/* FOR PROVIDERS */}
-      <section id="for-providers" className="studio-section" style={{ background: SKY_SOFT }}>
+      <section id="for-providers" className="studio-section" style={{ background: "#fff" }}>
         <div className="studio-container">
           <SectionHeader
             eyebrow="For providers"
