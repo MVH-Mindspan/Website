@@ -80,8 +80,8 @@ export default function Home() {
                 {brand.primaryCta}
                 <Arrow />
               </a>
-              <a href="#expect" className="studio-btn studio-btn-ghost">
-                See what to expect
+              <a href={brand.secondaryCtaHref} className="studio-btn studio-btn-ghost">
+                {brand.secondaryCta}
               </a>
             </div>
             <p
@@ -464,7 +464,7 @@ export default function Home() {
               <Arrow />
             </a>
             <a
-              href="#expect"
+              href={brand.secondaryCtaHref}
               className="studio-btn"
               style={{
                 background: "transparent",
@@ -472,7 +472,7 @@ export default function Home() {
                 border: "1px solid rgba(255,255,255,0.35)",
               }}
             >
-              What to expect
+              {brand.secondaryCta}
             </a>
           </div>
         </div>
