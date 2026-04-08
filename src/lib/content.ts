@@ -6,7 +6,7 @@
 export const brand = {
   headline: "When memory starts to change, you shouldn’t have to wait.",
   subhead:
-    "Mindspan is a team of neurologists and care partners who specialize in Alzheimer’s, dementia, and other cognitive conditions. We help families get real answers, in weeks, not months, and walk with you through what comes next.",
+    "Specialist neurologists for Alzheimer’s, dementia, and cognitive change. Real answers, in weeks, not months.",
   subTagline: "Specialist cognitive care for families",
   reassurance:
     "Board-certified neurologists. In-clinic and video visits. Covered by insurance.",
