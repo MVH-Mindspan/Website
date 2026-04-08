@@ -4,17 +4,27 @@
 // Aligned with the Mindspan Content & PR Posture Guide (Apr 2026).
 
 export const brand = {
-  headline: "Memory is precious. So is your time.",
+  headline: "When memory starts to change, you shouldn’t have to wait.",
   subhead:
-    "Mindspan is a team of neurologists and care partners who help families get real answers about memory and thinking — without the months of waiting.",
-  subTagline: "Neurology care, the way it should feel.",
+    "Mindspan is a team of neurologists and care partners who specialize in Alzheimer’s, dementia, and other cognitive conditions. We help families get real answers — in weeks, not months — and walk with you through what comes next.",
+  subTagline: "Specialist cognitive care for families",
   reassurance:
-    "We’re neurologists. We see patients in clinic and on video. We bill insurance.",
+    "Board-certified neurologists. In-clinic and video visits. Covered by insurance.",
   primaryCta: "Book a visit",
   primaryCtaHref: "https://assessment.mindspan.co/",
   secondaryCta: "Find a clinic",
   secondaryCtaHref: "#locations",
 };
+
+// What we actually help with — short list used under the hero to anchor the reader.
+export const weHelpWith = [
+  "Alzheimer’s disease",
+  "Mild cognitive impairment (MCI)",
+  "Dementia (all types)",
+  "Memory loss",
+  "Changes in thinking or attention",
+  "Family planning after a diagnosis",
+];
 
 export const nav = [
   { label: "What to expect", href: "#expect" },

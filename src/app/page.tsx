@@ -6,6 +6,7 @@ import {
   locations,
   audiences,
   whatWeLookAt,
+  weHelpWith,
 } from "@/lib/content";
 
 const GREEN = "#083630";
@@ -115,6 +116,30 @@ export default function Home() {
         </div>
       </section>
 
+      {/* WHAT WE HELP WITH — anchor chips */}
+      <section className="pt-4 md:pt-2 pb-2">
+        <div className="studio-container">
+          <p className="studio-eyebrow mb-4" style={{ color: "rgba(8,54,48,0.55)" }}>
+            We specialize in
+          </p>
+          <div className="flex flex-wrap gap-2">
+            {weHelpWith.map((w) => (
+              <span
+                key={w}
+                className="inline-flex items-center rounded-full px-4 py-2 text-sm font-medium"
+                style={{
+                  background: "rgba(8,54,48,0.06)",
+                  color: GREEN,
+                  border: "1px solid rgba(8,54,48,0.12)",
+                }}
+              >
+                {w}
+              </span>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* REASSURANCE BAR */}
       <section className="py-6 md:py-8" style={{ background: GREEN }}>
         <div className="studio-container grid sm:grid-cols-3 gap-6 text-white/90 text-sm">
@@ -150,27 +175,27 @@ export default function Home() {
             A note from our team
           </p>
           <h2 className="studio-h2 mt-5" style={{ color: GREEN }}>
-            If you’re here because you’re worried about someone — or yourself — we want you to know
-            something first.
+            Maybe your mom has started repeating the same story. Maybe your husband got lost on the
+            way home. Maybe you forgot a name at work and it rattled you more than it should have.
           </h2>
           <div className="mt-8 space-y-5 text-[17px] leading-[1.65]" style={{ color: "rgba(8,54,48,0.8)" }}>
             <p>
-              You are not overreacting. You are not being dramatic. Noticing changes in memory,
-              word-finding, attention, or mood is worth paying attention to — and worth talking to
-              someone about. Early is better. Clarity is better. You are doing the right thing by
-              being here.
+              Whatever brought you here, you are in the right place — and you are not overreacting.
+              Changes in memory, word-finding, mood, or day-to-day judgment are worth taking
+              seriously. Early matters. Clarity matters. Just being here is the right first step.
             </p>
             <p>
-              We built Mindspan because cognitive care in most places is painfully hard to get.
-              Months-long waitlists. Fifteen-minute appointments with a doctor who doesn’t have the
-              full picture. Generic advice. A diagnosis handed over, and then… silence. That isn’t
-              care. That’s paperwork.
+              Mindspan exists because cognitive care is painfully hard to access almost everywhere
+              else. Waitlists of six months or more to see a neurologist. Fifteen-minute
+              appointments with a doctor who doesn’t have the full picture. A diagnosis of
+              Alzheimer’s or dementia handed over, and then… silence. That isn’t care. That’s
+              paperwork.
             </p>
             <p>
-              We do it differently. Our team takes time. We include your family if you want them
-              there. We talk to your primary care doctor. We explain what we see in language that
-              actually helps. And we stay with you after the first visit — because that’s when the
-              real questions usually show up.
+              We do it differently. Our team specializes in Alzheimer’s, dementia, and cognitive
+              change. We take time. We include your family if you want them there. We talk to your
+              primary care doctor. We explain what we see in plain language. And we stay with you
+              after the first visit — because that’s usually when the real questions start.
             </p>
           </div>
           <div className="mt-10">
