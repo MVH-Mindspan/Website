@@ -168,7 +168,7 @@ export default function Home() {
       </header>
 
       {/* HERO */}
-      <section className="pt-12 md:pt-20 pb-20 md:pb-28">
+      <section className="pt-12 md:pt-20 pb-20 md:pb-28" style={{ background: "#fff" }}>
         <div className="studio-container grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           <div className="lg:col-span-7">
             <p
