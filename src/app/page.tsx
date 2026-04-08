@@ -121,7 +121,7 @@ export default function Home() {
                 style={{ background: "#22c55e" }}
               />
             </span>
-            Appointments open this week
+            Appointments open this month
           </span>
           <span
             className="transition-colors"
