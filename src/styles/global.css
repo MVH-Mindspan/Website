@@ -1,1 +1,40 @@
 @import "tailwindcss";
+
+@theme {
+  /* Brand palette (from migration/brand/design.md) */
+  --color-brand-green: #083630;
+  --color-brand-green-light: #1f514a;
+  --color-brand-orange: #fb4d17;
+  --color-ink: #111111;
+  --color-cream: #efeeeb;
+  --color-sand: #dad6c9;
+  --color-border-soft: #efeff2;
+
+  /* Typography */
+  --font-serif: "PT Serif", Georgia, serif;
+  --font-accent: "Bitter", Georgia, serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  /* Radii */
+  --radius-pill: 99rem;
+  --radius-card: 1.25rem;
+  --radius-lg: 20px;
+}
+
+html {
+  font-family: var(--font-sans);
+  color: var(--color-ink);
+  background: var(--color-cream);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  font-size: 1.0625rem;
+  line-height: 1.47;
+}
+
+h1, h2, h3, .font-serif {
+  font-family: var(--font-serif);
+  letter-spacing: -0.03em;
+}
