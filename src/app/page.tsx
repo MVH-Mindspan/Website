@@ -136,6 +136,22 @@ export default function Home() {
                 {brand.secondaryCta}
               </a>
             </div>
+            <p
+              className="mt-5 text-sm studio-fade studio-fade-4"
+              style={{ color: "rgba(8,54,48,0.6)" }}
+            >
+              Not ready for a visit?{" "}
+              <a
+                href="https://assessment.mindspan.co/"
+                target="_blank"
+                rel="noopener"
+                className="underline underline-offset-4 font-semibold"
+                style={{ color: ORANGE }}
+              >
+                Take a free online assessment
+              </a>{" "}
+              in 10 minutes.
+            </p>
           </div>
 
           <div className="lg:col-span-5 studio-fade studio-fade-3">
@@ -216,6 +232,78 @@ export default function Home() {
               <Arrow />
             </a>
           </div>
+        </div>
+      </section>
+
+      {/* FREE ONLINE ASSESSMENT — low-friction first step */}
+      <section className="studio-section" style={{ background: "#fff" }}>
+        <div className="studio-container">
+          <SectionHeader
+            eyebrow="A no-pressure first step"
+            title="Not ready to book? Start with a free online assessment."
+            lead="Ten minutes. No cost. No clinic visit required. Answer a few honest questions about memory, thinking, and daily life, and we'll give you clear feedback right away. If our team thinks a visit with a neurologist would help, we'll connect you with one of our clinics. If not, you will still walk away with something useful."
+          />
+
+          <div className="mt-14 grid md:grid-cols-2 gap-6 md:gap-8">
+            <article className="studio-card flex flex-col">
+              <p className="studio-eyebrow" style={{ color: ORANGE }}>
+                For yourself
+              </p>
+              <h3 className="studio-h3 mt-3" style={{ color: GREEN }}>
+                Check in on your own brain health.
+              </h3>
+              <p className="studio-prose mt-4 flex-1" style={{ color: "rgba(8,54,48,0.72)" }}>
+                Completely private. Take it at your kitchen table, on your phone, whenever you have
+                ten quiet minutes. Honest feedback, plus a clear view of whether talking to one of
+                our neurologists makes sense for you.
+              </p>
+              <div className="mt-8">
+                <a
+                  href="https://assessment.mindspan.co/"
+                  target="_blank"
+                  rel="noopener"
+                  className="studio-btn studio-btn-primary"
+                >
+                  Take the assessment
+                  <Arrow />
+                </a>
+              </div>
+            </article>
+
+            <article className="studio-card flex flex-col">
+              <p className="studio-eyebrow" style={{ color: ORANGE }}>
+                For someone you love
+              </p>
+              <h3 className="studio-h3 mt-3" style={{ color: GREEN }}>
+                Do it together, in person or over video.
+              </h3>
+              <p className="studio-prose mt-4 flex-1" style={{ color: "rgba(8,54,48,0.72)" }}>
+                Our assessment is built to be done with a helper. Sit next to them at the kitchen
+                table, or screen-share over a video call from across the country. You guide the
+                conversation. They stay comfortable. And at the end, you both know what a good
+                next step looks like.
+              </p>
+              <div className="mt-8">
+                <a
+                  href="https://assessment.mindspan.co/"
+                  target="_blank"
+                  rel="noopener"
+                  className="studio-btn studio-btn-primary"
+                >
+                  Start one together
+                  <Arrow />
+                </a>
+              </div>
+            </article>
+          </div>
+
+          <p
+            className="mt-10 text-center text-sm"
+            style={{ color: "rgba(8,54,48,0.6)" }}
+          >
+            The easiest, worry-free way to get started with Mindspan. No credit card. No account
+            required. Nothing scheduled unless you want it to be.
+          </p>
         </div>
       </section>
 
