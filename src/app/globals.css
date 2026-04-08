@@ -107,10 +107,11 @@ h1, h2, h3 {
   letter-spacing: -0.02em;
 }
 .studio-eyebrow {
-  font-family: var(--font-bitter), Georgia, serif;
-  font-style: italic;
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-style: normal;
+  font-weight: 600;
   font-size: 0.8125rem;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
 }
 .studio-lead {
