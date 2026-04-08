@@ -679,8 +679,8 @@ export default function Home() {
                   aria-hidden
                 >
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
-                    <path d="M12 4a4 4 0 0 0-4 4v.3A3 3 0 0 0 5.5 11a3 3 0 0 0 1 5 3 3 0 0 0 5.5 2 3 3 0 0 0 5.5-2 3 3 0 0 0 1-5A3 3 0 0 0 16 8.3V8a4 4 0 0 0-4-4Z" />
-                    <path d="M12 9v7" />
+                    <path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2Z" />
+                    <path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2Z" />
                   </svg>
                 </div>
                 <p className="studio-eyebrow mt-6" style={{ color: ORANGE }}>
@@ -704,13 +704,9 @@ export default function Home() {
                   aria-hidden
                 >
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
-                    <circle cx="12" cy="5" r="2" />
-                    <circle cx="5" cy="19" r="2" />
-                    <circle cx="19" cy="19" r="2" />
-                    <circle cx="12" cy="12" r="2" />
-                    <path d="M12 7v3" />
-                    <path d="m10.6 13.4-4 4.2" />
-                    <path d="m13.4 13.4 4 4.2" />
+                    <rect width="8" height="8" x="3" y="3" rx="2" />
+                    <path d="M7 11v4a2 2 0 0 0 2 2h4" />
+                    <rect width="8" height="8" x="13" y="13" rx="2" />
                   </svg>
                 </div>
                 <p className="studio-eyebrow mt-6" style={{ color: ORANGE }}>
@@ -735,7 +731,7 @@ export default function Home() {
                   aria-hidden
                 >
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
-                    <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8Z" />
+                    <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" />
                   </svg>
                 </div>
                 <p className="studio-eyebrow mt-6" style={{ color: ORANGE }}>
