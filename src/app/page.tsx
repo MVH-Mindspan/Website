@@ -5,7 +5,6 @@ import {
   howItWorks,
   locations,
   audiences,
-  weHelpWith,
 } from "@/lib/content";
 
 const GREEN = "#083630";
@@ -153,38 +152,6 @@ export default function Home() {
                 alt="A Mindspan neurologist meeting with a patient and family member"
                 className="w-full rounded-[2rem] shadow-[0_30px_60px_-30px_rgba(8,54,48,0.45)]"
               />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* SPECIALTY CHIPS */}
-      <section className="pb-14 md:pb-20">
-        <div className="studio-container">
-          <div
-            className="flex flex-col md:flex-row md:items-center gap-4 md:gap-6 pt-8 border-t"
-            style={{ borderColor: "rgba(8,54,48,0.12)" }}
-          >
-            <p
-              className="studio-eyebrow md:flex-shrink-0"
-              style={{ color: "rgba(8,54,48,0.55)" }}
-            >
-              We specialize in
-            </p>
-            <div className="flex flex-wrap gap-2">
-              {weHelpWith.map((w) => (
-                <span
-                  key={w}
-                  className="inline-flex items-center rounded-full px-3.5 py-1.5 text-[13px] font-medium"
-                  style={{
-                    background: "rgba(8,54,48,0.05)",
-                    color: GREEN,
-                    border: "1px solid rgba(8,54,48,0.1)",
-                  }}
-                >
-                  {w}
-                </span>
-              ))}
             </div>
           </div>
         </div>
