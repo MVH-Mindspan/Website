@@ -305,8 +305,8 @@ export default function Home() {
                 style={{ background: ORANGE }}
               />
               <div>
-                <p className="font-semibold text-[15px] text-white">{item.k}</p>
-                <p className="text-[14px] text-white/70 mt-1 leading-[1.5]">{item.v}</p>
+                <p className="font-semibold text-base text-white">{item.k}</p>
+                <p className="text-sm text-white/70 mt-1 leading-relaxed">{item.v}</p>
               </div>
             </motion.div>
           ))}
@@ -621,7 +621,7 @@ export default function Home() {
                 Everything a great neurology clinic should offer. No waiting. No rushed visits.
                 Every patient is treated like the complex person they are.
               </p>
-              <ul className="mt-6 space-y-2.5 text-[15px]" style={{ color: "rgba(8,54,48,0.82)" }}>
+              <ul className="mt-6 space-y-2.5 text-base" style={{ color: "rgba(8,54,48,0.82)" }}>
                 {[
                   "Unhurried time with a board-certified neurologist",
                   "Comprehensive cognitive testing and functional assessment",
@@ -662,7 +662,7 @@ export default function Home() {
                 </p>
                 <h3
                   className="studio-h3 mt-3"
-                  style={{ color: "#fff", fontFamily: "var(--font-pt-serif), Georgia, serif" }}
+                  style={{ color: "#fff" }}
                 >
                   Precision medicine, layered on top.
                 </h3>
@@ -1012,7 +1012,7 @@ export default function Home() {
                   notes back in your chart. Nothing slips. Nothing gets handed off and forgotten.
                 </p>
 
-                <ul className="mt-6 space-y-2.5 text-[15px]" style={{ color: "rgba(8,54,48,0.82)" }}>
+                <ul className="mt-6 space-y-2.5 text-base" style={{ color: "rgba(8,54,48,0.82)" }}>
                   {[
                     "First appointment typically within two to three weeks",
                     "Integrated with Athena and most referral workflows",
@@ -1062,10 +1062,7 @@ export default function Home() {
                 </p>
                 <h3
                   className="studio-h3 mt-3"
-                  style={{
-                    color: "#fff",
-                    fontFamily: "var(--font-pt-serif), Georgia, serif",
-                  }}
+                  style={{ color: "#fff" }}
                 >
                   Practice the medicine you wanted to when you trained.
                 </h3>
