@@ -221,5 +221,30 @@ h1, h2, h3 {
 .studio-fade-3 { animation-delay: 0.25s; }
 .studio-fade-4 { animation-delay: 0.35s; }
 
+/* === Final CTA ambient atmosphere === */
+@keyframes final-glow-warm {
+  0%, 100% { opacity: 0.55; transform: translate3d(0, 0, 0) scale(1); }
+  50%      { opacity: 0.95; transform: translate3d(-32px, 18px, 0) scale(1.08); }
+}
+@keyframes final-glow-cool {
+  0%, 100% { opacity: 0.45; transform: translate3d(0, 0, 0) scale(0.95); }
+  50%      { opacity: 0.85; transform: translate3d(24px, -22px, 0) scale(1.06); }
+}
+.final-glow--warm { animation: final-glow-warm 16s ease-in-out infinite; }
+.final-glow--cool { animation: final-glow-cool 19s ease-in-out infinite -3s; }
+
+/* Orange halo on accent buttons when hovered — additive to the 3D lift */
+.studio-btn-accent:hover {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.22),
+    0 2px 4px rgba(8, 54, 48, 0.1),
+    0 10px 22px -6px rgba(8, 54, 48, 0.28),
+    0 0 48px -4px rgba(251, 77, 23, 0.45);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .final-glow--warm, .final-glow--cool { animation: none; }
+}
+
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }

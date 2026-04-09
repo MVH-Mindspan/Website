@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import { motion, type Variants } from "framer-motion";
 import {
   brand,
@@ -95,6 +96,26 @@ function SectionHeader({
 }
 
 export default function Home() {
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    console.log(
+      "%cmindspan",
+      "color:#083630; font-family:'PT Serif',Georgia,serif; font-size:22px; font-weight:700; letter-spacing:-0.02em;"
+    );
+    console.log(
+      "%cThanks for looking under the hood.",
+      "color:#083630; font-family:'PT Serif',Georgia,serif; font-size:14px;"
+    );
+    console.log(
+      "%cIf you or someone you love is worried about memory, we are here.\nWith care, the Mindspan team.",
+      "color:rgba(8,54,48,0.7); font-family:'Bitter',Georgia,serif; font-style:italic; font-size:12px;"
+    );
+    console.log(
+      "%c\u2192 https://mindspan.co",
+      "color:#fb4d17; font-size:12px;"
+    );
+  }, []);
+
   return (
     <div style={{ background: CREAM, color: GREEN }}>
       {/* ANNOUNCEMENT BANNER — non-sticky, scrolls away with content */}
@@ -1100,9 +1121,33 @@ export default function Home() {
       </section>
 
       {/* FINAL CTA */}
-      <section className="studio-section text-white" style={{ background: GREEN }}>
+      <section
+        className="studio-section text-white relative overflow-hidden"
+        style={{ background: GREEN }}
+      >
+        {/* Ambient living atmosphere — slow counterphase glows */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          aria-hidden
+        >
+          <div
+            className="absolute -top-40 -right-40 w-[640px] h-[640px] rounded-full blur-3xl final-glow--warm"
+            style={{
+              background:
+                "radial-gradient(circle, rgba(251,77,23,0.22) 0%, transparent 62%)",
+            }}
+          />
+          <div
+            className="absolute -bottom-40 -left-40 w-[560px] h-[560px] rounded-full blur-3xl final-glow--cool"
+            style={{
+              background:
+                "radial-gradient(circle, rgba(189,216,245,0.18) 0%, transparent 62%)",
+            }}
+          />
+        </div>
+
         <motion.div
-          className="studio-container max-w-3xl text-center"
+          className="studio-container max-w-3xl text-center relative"
           variants={staggerContainer}
           initial="hidden"
           whileInView="show"
@@ -1112,7 +1157,32 @@ export default function Home() {
             When you are ready
           </motion.p>
           <motion.h2 className="studio-h2 mt-5" variants={fadeUp}>
-            The first step is a conversation. That is all.
+            The first step is a conversation. That is all
+            <span
+              className="relative inline-flex items-baseline align-baseline ml-[0.15em]"
+              aria-hidden
+            >
+              <span
+                className="absolute inline-flex rounded-full opacity-75 animate-ping"
+                style={{
+                  background: "#22c55e",
+                  width: "0.42em",
+                  height: "0.42em",
+                  bottom: "0.08em",
+                  left: 0,
+                }}
+              />
+              <span
+                className="relative inline-block rounded-full"
+                style={{
+                  background: "#22c55e",
+                  width: "0.42em",
+                  height: "0.42em",
+                  transform: "translateY(0.08em)",
+                }}
+              />
+            </span>
+            <span className="sr-only">.</span>
           </motion.h2>
           <motion.p className="studio-lead mt-6 mx-auto text-white/80" variants={fadeUp}>
             No commitment. No pressure. Tell us what is going on, and we will help you figure out
@@ -1140,6 +1210,18 @@ export default function Home() {
               {brand.secondaryCta}
             </a>
           </motion.div>
+          <motion.p
+            className="mt-10 text-[15px]"
+            style={{
+              color: "rgba(255,255,255,0.52)",
+              fontFamily: "var(--font-bitter), Georgia, serif",
+              fontStyle: "italic",
+              letterSpacing: "0.01em",
+            }}
+            variants={fadeUp}
+          >
+            With care, the Mindspan team
+          </motion.p>
         </motion.div>
       </section>
 
