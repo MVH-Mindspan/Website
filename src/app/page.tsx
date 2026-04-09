@@ -1157,32 +1157,7 @@ export default function Home() {
             When you are ready
           </motion.p>
           <motion.h2 className="studio-h2 mt-5" variants={fadeUp}>
-            The first step is a conversation. That is all
-            <span
-              className="relative inline-flex items-baseline align-baseline ml-[0.15em]"
-              aria-hidden
-            >
-              <span
-                className="absolute inline-flex rounded-full opacity-75 animate-ping"
-                style={{
-                  background: "#22c55e",
-                  width: "0.42em",
-                  height: "0.42em",
-                  bottom: "0.08em",
-                  left: 0,
-                }}
-              />
-              <span
-                className="relative inline-block rounded-full"
-                style={{
-                  background: "#22c55e",
-                  width: "0.42em",
-                  height: "0.42em",
-                  transform: "translateY(0.08em)",
-                }}
-              />
-            </span>
-            <span className="sr-only">.</span>
+            The first step is a conversation. That is all.
           </motion.h2>
           <motion.p className="studio-lead mt-6 mx-auto text-white/80" variants={fadeUp}>
             No commitment. No pressure. Tell us what is going on, and we will help you figure out
