@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { motion, type Variants } from "framer-motion";
+import { motion, useReducedMotion, type Variants } from "framer-motion";
 import {
   brand,
   nav,
@@ -29,12 +29,48 @@ const fadeUp: Variants = {
   },
 };
 
+const fadeIn: Variants = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: { duration: 0.9, ease: EASE },
+  },
+};
+
+const fadeUpSoft: Variants = {
+  hidden: { opacity: 0, y: 12 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.9, ease: EASE },
+  },
+};
+
+const scaleReveal: Variants = {
+  hidden: { opacity: 0, scale: 0.97 },
+  show: {
+    opacity: 1,
+    scale: 1,
+    transition: { duration: 1.1, ease: EASE },
+  },
+};
+
 const staggerContainer: Variants = {
   hidden: {},
   show: {
     transition: {
       staggerChildren: 0.08,
       delayChildren: 0.05,
+    },
+  },
+};
+
+const staggerSequential: Variants = {
+  hidden: {},
+  show: {
+    transition: {
+      staggerChildren: 0.14,
+      delayChildren: 0.1,
     },
   },
 };
@@ -69,13 +105,14 @@ function SectionHeader({
   tone?: "dark" | "light";
   className?: string;
 }) {
+  const reducedMotion = useReducedMotion();
   const alignCls = align === "center" ? "mx-auto text-center" : "";
   const color = tone === "light" ? "#fff" : GREEN;
   const leadColor = tone === "light" ? "rgba(255,255,255,0.72)" : "rgba(8,54,48,0.7)";
   return (
     <motion.div
       className={`max-w-3xl ${alignCls} ${className}`}
-      initial="hidden"
+      initial={reducedMotion ? false : "hidden"}
       whileInView="show"
       viewport={VIEWPORT}
       variants={staggerContainer}
@@ -96,6 +133,8 @@ function SectionHeader({
 }
 
 export default function Home() {
+  const reducedMotion = useReducedMotion();
+
   useEffect(() => {
     if (typeof window === "undefined") return;
     console.log(
@@ -257,20 +296,29 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="lg:col-span-5 studio-fade studio-fade-3">
+          <div className="lg:col-span-5">
             <div className="relative mx-auto max-w-md lg:max-w-none">
-              <div
+              <motion.div
                 className="absolute -inset-4 rounded-[2.5rem] -z-10"
                 style={{
                   background: `radial-gradient(120% 80% at 50% 20%, ${SKY} 0%, transparent 70%)`,
                 }}
+                initial={reducedMotion ? false : { opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 1.4, delay: 0.5, ease: EASE }}
               />
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/assets/hero.png"
-                alt="A Mindspan neurologist meeting with a patient and family member"
-                className="w-full aspect-[4/5] object-cover rounded-[2rem] shadow-[0_30px_60px_-30px_rgba(8,54,48,0.45)]"
-              />
+              <motion.div
+                initial={reducedMotion ? false : { opacity: 0, scale: 0.97 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 1.1, delay: 0.3, ease: EASE }}
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/assets/hero.png"
+                  alt="A Mindspan neurologist meeting with a patient and family member"
+                  className="w-full aspect-[4/5] object-cover rounded-[2rem] shadow-[0_30px_60px_-30px_rgba(8,54,48,0.45)]"
+                />
+              </motion.div>
             </div>
           </div>
         </div>
@@ -281,7 +329,7 @@ export default function Home() {
         <motion.div
           className="studio-container grid sm:grid-cols-3 gap-6 md:gap-10 text-white"
           variants={staggerContainer}
-          initial="hidden"
+          initial={reducedMotion ? false : "hidden"}
           whileInView="show"
           viewport={VIEWPORT}
         >
@@ -299,7 +347,7 @@ export default function Home() {
               v: "We bill insurance, just like your primary care doctor.",
             },
           ].map((item) => (
-            <motion.div key={item.k} className="flex items-start gap-4" variants={fadeUp}>
+            <motion.div key={item.k} className="flex items-start gap-4" variants={fadeUpSoft}>
               <span
                 className="mt-1.5 h-2 w-2 rounded-full flex-shrink-0"
                 style={{ background: ORANGE }}
@@ -318,26 +366,26 @@ export default function Home() {
         <motion.div
           className="studio-container max-w-3xl text-center"
           variants={staggerContainer}
-          initial="hidden"
+          initial={reducedMotion ? false : "hidden"}
           whileInView="show"
           viewport={VIEWPORT}
         >
-          <motion.p className="studio-eyebrow" style={{ color: ORANGE }} variants={fadeUp}>
+          <motion.p className="studio-eyebrow" style={{ color: ORANGE }} variants={fadeIn}>
             A note from our team
           </motion.p>
-          <motion.h2 className="studio-h2 mt-5" style={{ color: GREEN }} variants={fadeUp}>
+          <motion.h2 className="studio-h2 mt-5" style={{ color: GREEN }} variants={fadeIn}>
             You are not overreacting. You are in the right place.
           </motion.h2>
           <motion.p
             className="studio-lead mt-6 mx-auto"
             style={{ color: "rgba(8,54,48,0.8)" }}
-            variants={fadeUp}
+            variants={fadeIn}
           >
             If you have noticed changes in memory, attention, or mood, whether for yourself or
             someone you love, it is worth taking seriously. Early matters. Clarity matters. We are
             here when you are ready to talk.
           </motion.p>
-          <motion.div className="mt-9 flex justify-center" variants={fadeUp}>
+          <motion.div className="mt-9 flex justify-center" variants={fadeIn}>
             <a
               href={brand.primaryCtaHref}
               target="_blank"
@@ -363,7 +411,7 @@ export default function Home() {
           <motion.div
             className="mt-14 grid md:grid-cols-2 gap-6 md:gap-8"
             variants={staggerContainer}
-            initial="hidden"
+            initial={reducedMotion ? false : "hidden"}
             whileInView="show"
             viewport={VIEWPORT}
           >
@@ -486,7 +534,7 @@ export default function Home() {
           <motion.div
             className="mt-10 grid md:grid-cols-2 gap-6 md:gap-8"
             variants={staggerContainer}
-            initial="hidden"
+            initial={reducedMotion ? false : "hidden"}
             whileInView="show"
             viewport={VIEWPORT}
           >
@@ -552,8 +600,8 @@ export default function Home() {
 
           <motion.ol
             className="mt-14 grid sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-6"
-            variants={staggerContainer}
-            initial="hidden"
+            variants={staggerSequential}
+            initial={reducedMotion ? false : "hidden"}
             whileInView="show"
             viewport={VIEWPORT}
           >
@@ -599,7 +647,7 @@ export default function Home() {
           <motion.div
             className="mt-16 grid lg:grid-cols-2 gap-6 md:gap-8"
             variants={staggerContainer}
-            initial="hidden"
+            initial={reducedMotion ? false : "hidden"}
             whileInView="show"
             viewport={VIEWPORT}
           >
@@ -713,7 +761,7 @@ export default function Home() {
             <motion.div
               className="mt-12 grid md:grid-cols-3 gap-5 md:gap-6"
               variants={staggerContainer}
-              initial="hidden"
+              initial={reducedMotion ? false : "hidden"}
               whileInView="show"
               viewport={VIEWPORT}
             >
@@ -824,7 +872,7 @@ export default function Home() {
           <motion.div
             className="mt-12 grid md:grid-cols-3 gap-5 md:gap-6"
             variants={staggerContainer}
-            initial="hidden"
+            initial={reducedMotion ? false : "hidden"}
             whileInView="show"
             viewport={VIEWPORT}
           >
@@ -873,7 +921,7 @@ export default function Home() {
           <motion.div
             className="mt-14 grid sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6"
             variants={staggerContainer}
-            initial="hidden"
+            initial={reducedMotion ? false : "hidden"}
             whileInView="show"
             viewport={VIEWPORT}
           >
@@ -980,7 +1028,7 @@ export default function Home() {
           <motion.div
             className="mt-16 grid md:grid-cols-2 gap-6 md:gap-8"
             variants={staggerContainer}
-            initial="hidden"
+            initial={reducedMotion ? false : "hidden"}
             whileInView="show"
             viewport={VIEWPORT}
           >
@@ -1146,21 +1194,21 @@ export default function Home() {
         <motion.div
           className="studio-container max-w-3xl text-center relative"
           variants={staggerContainer}
-          initial="hidden"
+          initial={reducedMotion ? false : "hidden"}
           whileInView="show"
           viewport={VIEWPORT}
         >
-          <motion.p className="studio-eyebrow" style={{ color: ORANGE }} variants={fadeUp}>
+          <motion.p className="studio-eyebrow" style={{ color: ORANGE }} variants={fadeIn}>
             When you are ready
           </motion.p>
-          <motion.h2 className="studio-h2 mt-6" variants={fadeUp}>
+          <motion.h2 className="studio-h2 mt-6" variants={fadeIn}>
             The first step is a conversation. That is all.
           </motion.h2>
-          <motion.p className="studio-lead mt-6 mx-auto text-white/80" variants={fadeUp}>
+          <motion.p className="studio-lead mt-6 mx-auto text-white/80" variants={fadeIn}>
             No commitment. No pressure. Tell us what is going on, and we will help you figure out
             what comes next, even if it turns out that next isn’t with us.
           </motion.p>
-          <motion.div className="mt-10 flex flex-wrap justify-center gap-3" variants={fadeUp}>
+          <motion.div className="mt-10 flex flex-wrap justify-center gap-3" variants={fadeIn}>
             <a
               href={brand.primaryCtaHref}
               target="_blank"
@@ -1190,7 +1238,7 @@ export default function Home() {
               fontStyle: "italic",
               letterSpacing: "0.01em",
             }}
-            variants={fadeUp}
+            variants={fadeIn}
           >
             With care, the Mindspan team
           </motion.p>

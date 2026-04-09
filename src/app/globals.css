@@ -245,6 +245,10 @@ h1, h2, h3 {
 
 @media (prefers-reduced-motion: reduce) {
   .final-glow--warm, .final-glow--cool { animation: none; }
+  .studio-fade { animation: none !important; opacity: 1 !important; transform: none !important; }
+  .studio-card:hover { transform: none; }
+  .studio-btn:hover, .studio-btn:active { transform: none; }
+  .animate-ping { animation: none; }
 }
 
 .no-scrollbar::-webkit-scrollbar { display: none; }
