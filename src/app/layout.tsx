@@ -11,14 +11,14 @@ const ptSerif = PT_Serif({
 
 const bitter = Bitter({
   variable: "--font-bitter",
-  weight: ["400", "700"],
-  style: ["normal", "italic"],
+  weight: ["400"],
+  style: ["italic"],
   subsets: ["latin"],
 });
 
 const inter = Inter({
   variable: "--font-inter",
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["400", "500", "600", "700"],
   subsets: ["latin"],
 });
 
