@@ -279,7 +279,7 @@ export default function Home() {
       {/* REASSURANCE BAR */}
       <section className="py-10 md:py-12" style={{ background: GREEN }}>
         <motion.div
-          className="studio-container grid sm:grid-cols-3 gap-8 text-white"
+          className="studio-container grid sm:grid-cols-3 gap-6 md:gap-10 text-white"
           variants={staggerContainer}
           initial="hidden"
           whileInView="show"
@@ -441,7 +441,7 @@ export default function Home() {
             </motion.article>
           </motion.div>
 
-          <div className="mt-12 flex flex-col items-center gap-5 text-center">
+          <div className="mt-10 flex flex-col items-center gap-4 text-center">
             <p className="text-sm font-semibold" style={{ color: GREEN }}>
               The easiest, worry-free way to get started with Mindspan.
             </p>
@@ -484,7 +484,7 @@ export default function Home() {
           />
 
           <motion.div
-            className="mt-14 grid md:grid-cols-2 gap-6 md:gap-8"
+            className="mt-10 grid md:grid-cols-2 gap-6 md:gap-8"
             variants={staggerContainer}
             initial="hidden"
             whileInView="show"
@@ -597,7 +597,7 @@ export default function Home() {
 
           {/* Protocol comparison */}
           <motion.div
-            className="mt-14 grid lg:grid-cols-2 gap-6 md:gap-8"
+            className="mt-16 grid lg:grid-cols-2 gap-6 md:gap-8"
             variants={staggerContainer}
             initial="hidden"
             whileInView="show"
@@ -794,7 +794,7 @@ export default function Home() {
               </motion.article>
             </motion.div>
 
-            <div className="mt-12 flex flex-wrap gap-3">
+            <div className="mt-10 flex flex-wrap gap-3">
               <a
                 href={brand.primaryCtaHref}
                 target="_blank"
@@ -822,7 +822,7 @@ export default function Home() {
           />
 
           <motion.div
-            className="mt-14 grid md:grid-cols-3 gap-5 md:gap-6"
+            className="mt-12 grid md:grid-cols-3 gap-5 md:gap-6"
             variants={staggerContainer}
             initial="hidden"
             whileInView="show"
@@ -978,7 +978,7 @@ export default function Home() {
           />
 
           <motion.div
-            className="mt-14 grid md:grid-cols-2 gap-6 md:gap-8"
+            className="mt-16 grid md:grid-cols-2 gap-6 md:gap-8"
             variants={staggerContainer}
             initial="hidden"
             whileInView="show"
@@ -1156,7 +1156,7 @@ export default function Home() {
           <motion.p className="studio-eyebrow" style={{ color: ORANGE }} variants={fadeUp}>
             When you are ready
           </motion.p>
-          <motion.h2 className="studio-h2 mt-5" variants={fadeUp}>
+          <motion.h2 className="studio-h2 mt-6" variants={fadeUp}>
             The first step is a conversation. That is all.
           </motion.h2>
           <motion.p className="studio-lead mt-6 mx-auto text-white/80" variants={fadeUp}>
