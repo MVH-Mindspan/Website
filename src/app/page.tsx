@@ -283,7 +283,7 @@ export default function Home() {
               <span>
                 Not ready for a visit?{" "}
                 <a
-                  href="https://assessment.mindspan.co/"
+                  href="/book-a-visit"
                   target="_blank"
                   rel="noopener"
                   className="font-semibold underline underline-offset-4 decoration-1 hover:decoration-2 transition-all"
@@ -439,7 +439,7 @@ export default function Home() {
               </p>
               <div className="mt-8">
                 <a
-                  href="https://assessment.mindspan.co/"
+                  href="/book-a-visit"
                   target="_blank"
                   rel="noopener"
                   className="studio-btn studio-btn-primary"
@@ -477,7 +477,7 @@ export default function Home() {
               </p>
               <div className="mt-8">
                 <a
-                  href="https://assessment.mindspan.co/"
+                  href="/book-a-visit"
                   target="_blank"
                   rel="noopener"
                   className="studio-btn studio-btn-primary"
@@ -1263,7 +1263,7 @@ export default function Home() {
             {
               title: "Getting started",
               links: [
-                ["Book a visit", "https://assessment.mindspan.co/"],
+                ["Book a visit", "/book-a-visit"],
                 ["Find a clinic", "#locations"],
                 ["What to expect", "#expect"],
               ],
