@@ -414,7 +414,8 @@ export function ArrivalPage() {
               gap: 6,
             }}
           >
-            Appointments available this month <Arrow size={14} />
+
+            <span style={{ background: alpha(c.accent, 0.1), padding: "4px 12px", borderRadius: "10rem" }}>Appointments available this month</span> <Arrow size={14} />
           </p>
         </div>
       </a>
@@ -456,7 +457,7 @@ export function ArrivalPage() {
                     height: 36,
                     border: `1.5px solid ${c.brandGreen}`,
                     color: c.brandGreen,
-                    background: alpha(c.brandGreen, 0.06),
+                    background: c.skySoft,
                   }}
                 >
                   {String(i + 1).padStart(2, "0")}
@@ -466,7 +467,7 @@ export function ArrivalPage() {
                     className="flex-1"
                     style={{
                       width: 1,
-                      background: alpha(c.brandGreen, 0.2),
+                      background: `linear-gradient(to bottom, ${alpha(c.brandGreen, 0.25)}, ${alpha(c.sky, 0.4)})`,
                       marginTop: 12,
                     }}
                   />
@@ -564,9 +565,8 @@ export function ArrivalPage() {
           ============================================ */}
       <section
         style={{
-          background: c.cream,
+          background: c.sand,
           padding: "64px 0",
-          borderBottom: `1px solid ${c.sand}`,
         }}
       >
         <div
@@ -616,7 +616,7 @@ export function ArrivalPage() {
           </div>
 
           <div className="mt-12 grid lg:grid-cols-2 gap-6 md:gap-8">
-            <div className="arrival-rv rounded-[2rem] p-8 md:p-10" style={{ background: c.sand, border: `1px solid ${alpha(c.ink, 0.06)}` }}>
+            <div className="arrival-rv rounded-[2rem] p-8 md:p-10" style={{ background: c.skySoft, border: `1px solid ${alpha(c.ink, 0.06)}` }}>
               <p className="arrival-eyebrow" style={{ color: alpha(c.ink, 0.6) }}>The Core Protocol</p>
               <h3 className="mt-3" style={{ fontFamily: theme.fonts.heading, fontSize: "clamp(1.375rem, 0.8vw + 1rem, 1.75rem)", lineHeight: 1.18, color: c.ink }}>
                 The full standard of care, delivered without compromise.
@@ -681,7 +681,7 @@ export function ArrivalPage() {
               { eyebrow: "Mindy, your care companion", title: "A familiar voice between visits.", body: "Mindy is our AI care companion for the weeks and months between appointments. She helps track symptoms, supports adherence, answers common questions, and pages your clinical team when something needs real attention.", icon: "chat" },
             ].map((card, i) => (
               <div key={card.eyebrow} className="arrival-rv rounded-[2rem] p-6 md:p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_24px_48px_-16px_rgba(0,0,0,0.4)]" style={{ background: c.primaryLight, animationDelay: `${i * 80}ms` }}>
-                <div className="h-12 w-12 rounded-2xl flex items-center justify-center" style={{ background: c.brandGreen, color: "#fff" }}>
+                <div className="h-12 w-12 rounded-2xl flex items-center justify-center" style={{ background: c.sky, color: c.brandGreen }}>
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
                     {card.icon === "brain" && <><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2Z" /><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2Z" /></>}
                     {card.icon === "grid" && <><rect width="8" height="8" x="3" y="3" rx="2" /><path d="M7 11v4a2 2 0 0 0 2 2h4" /><rect width="8" height="8" x="13" y="13" rx="2" /></>}
@@ -733,7 +733,7 @@ export function ArrivalPage() {
 
           <div className="mt-12 grid md:grid-cols-3 gap-5 md:gap-6">
             {audiences.map((a, i) => (
-              <a key={a.id} href={a.href} className="arrival-rv rounded-[2rem] p-6 md:p-8 flex flex-col group transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_24px_48px_-16px_rgba(32,30,23,0.18)]" style={{ background: "#FFFDF9", border: `1px solid ${alpha(c.ink, 0.06)}`, animationDelay: `${i * 80}ms` }}>
+              <a key={a.id} href={a.href} className="arrival-rv rounded-[2rem] p-6 md:p-8 flex flex-col group transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_24px_48px_-16px_rgba(32,30,23,0.18)]" style={{ background: c.skySoft, border: `1px solid ${alpha(c.ink, 0.06)}`, animationDelay: `${i * 80}ms` }}>
                 <p className="arrival-eyebrow" style={{ color: c.accent }}>{a.kicker}</p>
                 <h3 className="mt-3" style={{ fontFamily: theme.fonts.heading, fontSize: "clamp(1.375rem, 0.8vw + 1rem, 1.75rem)", lineHeight: 1.18, color: c.ink }}>{a.title}</h3>
                 <p className="mt-4 flex-1" style={{ fontFamily: theme.fonts.body, fontSize: "1rem", lineHeight: 1.6, color: alpha(c.ink, 0.72) }}>{a.body}</p>
@@ -771,7 +771,7 @@ export function ArrivalPage() {
                     <iframe src={mapSrc} className="absolute left-0 right-0 top-0 w-full border-0 pointer-events-none transition-transform duration-500 group-hover:scale-[1.05]" style={{ height: "calc(100% + 60px)" }} loading="lazy" title={`Map of ${l.city}, ${l.state}`} aria-hidden="true" />
                     {isTelehealth && (
                       <div className="absolute inset-0 flex items-center justify-center">
-                        <span className="rounded-full px-4 py-2 text-xs font-semibold backdrop-blur" style={{ background: alpha(c.brandGreen, 0.9), color: "#fff" }}>Video visits statewide</span>
+                        <span className="rounded-full px-4 py-2 text-xs font-semibold backdrop-blur" style={{ background: alpha(c.sky, 0.92), color: c.brandGreen }}>Video visits statewide</span>
                       </div>
                     )}
                     <div className="absolute top-3 left-3 flex items-center gap-2 rounded-full backdrop-blur px-3 py-1.5 text-[11px] font-semibold" style={{ background: c.brandGreen, color: "#fff" }}>
