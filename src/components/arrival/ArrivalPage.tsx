@@ -243,14 +243,13 @@ export function ArrivalPage() {
             alignItems: "center",
           }}
         >
-          {/* Empty cell matching the number column below */}
-          <div />
           <h2
             style={{
               fontFamily: theme.fonts.heading,
               fontSize: "clamp(2rem, 1.4rem + 2vw, 3.4rem)",
               fontWeight: 400,
               lineHeight: 1.15,
+              gridColumn: "1 / 3",
             }}
           >
             The cognitive care clinic of the future.
@@ -291,7 +290,6 @@ export function ArrivalPage() {
             alignItems: "center",
           }}
         >
-          <div />
           <p
             style={{
               fontFamily: theme.fonts.body,
@@ -299,6 +297,7 @@ export function ArrivalPage() {
               fontWeight: 600,
               color: c.ink,
               margin: 0,
+              gridColumn: "1 / 3",
             }}
           >
             Now seeing patients in Danvers, Irvine, Bay Area &amp; MA
