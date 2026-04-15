@@ -876,7 +876,7 @@ export function ArrivalPage() {
                   ))}
                 </ul>
                 <div className="mt-8 flex flex-wrap gap-3">
-                  <a href="/careers" className="inline-flex items-center gap-2 font-semibold transition-all hover:-translate-y-0.5" style={{ fontFamily: theme.fonts.body, padding: "14px 28px", background: c.accent, color: "#fff", borderRadius: "10rem", fontSize: "0.9375rem" }}>See open roles <Arrow /></a>
+                  <a href="/careers" className="inline-flex items-center gap-2 font-semibold transition-all hover:-translate-y-0.5" style={{ fontFamily: theme.fonts.body, padding: "14px 28px", background: "#bdd8f5", color: c.brandGreen, borderRadius: "10rem", fontSize: "0.9375rem" }}>See open roles <Arrow /></a>
                   <a href="mailto:clinicians@mindspan.co" className="inline-flex items-center gap-2 font-medium transition-all" style={{ fontFamily: theme.fonts.body, padding: "14px 28px", color: "#fff", border: "1px solid rgba(255,255,255,0.35)", borderRadius: "10rem", fontSize: "0.9375rem" }}>Talk to our team</a>
                 </div>
               </div>
