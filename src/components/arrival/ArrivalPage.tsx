@@ -229,7 +229,7 @@ export function ArrivalPage() {
         style={{
           background: "#201E17",
           color: c.cream,
-          padding: "96px 0 64px",
+          padding: "56px 0",
         }}
       >
         <div
@@ -240,7 +240,7 @@ export function ArrivalPage() {
             display: "grid",
             gridTemplateColumns: "1fr 1fr",
             gap: 64,
-            alignItems: "end",
+            alignItems: "center",
           }}
         >
           <h2
