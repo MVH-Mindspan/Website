@@ -118,8 +118,6 @@ export function StyleSwitcher() {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [handleKeyDown]);
 
-  // Only render in development
-  if (process.env.NODE_ENV !== "development") return null;
   if (!mounted) return null;
 
   return (
