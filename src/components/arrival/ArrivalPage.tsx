@@ -233,7 +233,7 @@ export function ArrivalPage() {
         }}
       >
         <div
-          className="arrival-rv"
+          className="arrival-rv arrival-grid-header"
           style={{
             maxWidth: "min(1320px, 92vw)",
             marginInline: "auto",
@@ -281,6 +281,7 @@ export function ArrivalPage() {
         onMouseLeave={(e) => (e.currentTarget.style.background = c.sand)}
       >
         <div
+          className="arrival-grid-banner"
           style={{
             maxWidth: "min(1320px, 92vw)",
             marginInline: "auto",
@@ -445,8 +446,8 @@ export function ArrivalPage() {
                 )}
               </div>
 
-              {/* Proof column — editorial image */}
-              <div className="flex flex-col justify-center">
+              {/* Proof column — editorial image (hidden on mobile) */}
+              <div className="flex flex-col justify-center arrival-step-image">
                 <img
                   src={i === 0 ? "/assets/get-assessed.png" : i === 3 ? "/assets/ongoing-partnership.png" : i % 2 === 0 ? "/assets/consultation-1.png" : "/assets/consultation-2.png"}
                   alt=""
