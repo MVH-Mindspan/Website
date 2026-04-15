@@ -238,11 +238,13 @@ export function ArrivalPage() {
             maxWidth: "min(1320px, 92vw)",
             marginInline: "auto",
             display: "grid",
-            gridTemplateColumns: "1fr 1fr",
-            gap: 64,
+            gridTemplateColumns: "80px 1fr 1fr",
+            gap: "0 32px",
             alignItems: "center",
           }}
         >
+          {/* Empty cell matching the number column below */}
+          <div />
           <h2
             style={{
               fontFamily: theme.fonts.heading,
