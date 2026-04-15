@@ -546,6 +546,22 @@ export function ArrivalPage() {
                     View our clinic locations <Arrow />
                   </a>
                 )}
+                {i === 2 && (
+                  <a
+                    href="#technology"
+                    className="inline-flex items-center gap-2 font-semibold transition-all hover:-translate-y-0.5 mt-6"
+                    style={{
+                      fontFamily: theme.fonts.body,
+                      fontSize: "clamp(0.82rem, 0.78rem + 0.2vw, 0.92rem)",
+                      padding: "12px 24px",
+                      background: c.brandGreen,
+                      color: "#fff",
+                      borderRadius: "10rem",
+                    }}
+                  >
+                    See the technology behind your care <Arrow />
+                  </a>
+                )}
               </div>
 
               {/* Proof column — editorial image (hidden on mobile) */}
@@ -678,7 +694,7 @@ export function ArrivalPage() {
       {/* ============================================
           TECHNOLOGY — Dark section for visual rhythm
           ============================================ */}
-      <section style={{ background: c.primary, color: c.cream, padding: "96px 0", borderRadius: "2.2rem 2.2rem 0 0" }}>
+      <section id="technology" style={{ background: c.primary, color: c.cream, padding: "96px 0", borderRadius: "2.2rem 2.2rem 0 0" }}>
         <div style={{ maxWidth: "min(1320px, 92vw)", marginInline: "auto" }}>
           <div className="arrival-rv max-w-3xl">
             <p className="arrival-eyebrow" style={{ color: c.accent }}>The technology behind your care</p>
