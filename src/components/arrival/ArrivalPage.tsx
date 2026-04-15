@@ -272,6 +272,65 @@ export function ArrivalPage() {
       </section>
 
       {/* ============================================
+          LOCATIONS TEASER BANNER
+          ============================================ */}
+      <a
+        href="#locations"
+        className="block transition-colors"
+        style={{ background: c.sand, padding: "20px 0" }}
+        onMouseEnter={(e) => (e.currentTarget.style.background = alpha(c.sand, 0.7))}
+        onMouseLeave={(e) => (e.currentTarget.style.background = c.sand)}
+      >
+        <div
+          style={{
+            maxWidth: "min(1320px, 92vw)",
+            marginInline: "auto",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: 24,
+            flexWrap: "wrap",
+          }}
+        >
+          <p
+            style={{
+              fontFamily: theme.fonts.body,
+              fontSize: "clamp(0.82rem, 0.78rem + 0.2vw, 0.92rem)",
+              fontWeight: 600,
+              color: c.ink,
+              margin: 0,
+            }}
+          >
+            Now seeing patients in Danvers, Irvine, Bay Area &amp; Telehealth
+          </p>
+          <span
+            style={{
+              fontFamily: theme.fonts.body,
+              fontSize: "0.8rem",
+              color: alpha(c.ink, 0.5),
+              margin: 0,
+            }}
+          >
+            ·
+          </span>
+          <p
+            style={{
+              fontFamily: theme.fonts.body,
+              fontSize: "clamp(0.82rem, 0.78rem + 0.2vw, 0.92rem)",
+              color: c.accent,
+              fontWeight: 600,
+              margin: 0,
+              display: "flex",
+              alignItems: "center",
+              gap: 6,
+            }}
+          >
+            Appointments available this month <Arrow size={14} />
+          </p>
+        </div>
+      </a>
+
+      {/* ============================================
           STAGES — Editorial rows on sand
           ============================================ */}
       <section style={{ background: c.cream, color: c.ink, paddingBottom: 48 }}>
