@@ -662,14 +662,14 @@ export function ArrivalPage() {
             <div className="arrival-rv rounded-[2rem] p-8 md:p-10 relative overflow-hidden" style={{ background: c.brandGreen, color: "#fff" }}>
               <div className="absolute inset-0 opacity-60 pointer-events-none" style={{ background: `radial-gradient(120% 100% at 100% 0%, ${alpha(c.accent, 0.18)} 0%, transparent 55%)` }} />
               <div className="relative">
-                <div className="h-12 w-12 rounded-2xl flex items-center justify-center mb-5" style={{ background: alpha(c.cream, 0.12), color: c.accent }}>
+                <div className="h-12 w-12 rounded-2xl flex items-center justify-center mb-5" style={{ background: alpha("#bdd8f5", 0.15), color: "#bdd8f5" }}>
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
                     <circle cx="12" cy="12" r="10" />
                     <circle cx="12" cy="12" r="6" />
                     <circle cx="12" cy="12" r="2" />
                   </svg>
                 </div>
-                <p className="arrival-eyebrow" style={{ color: c.accent }}>The Edge Protocol</p>
+                <p className="arrival-eyebrow" style={{ color: "#bdd8f5" }}>The Edge Protocol</p>
                 <h3 className="mt-3" style={{ fontFamily: theme.fonts.heading, fontSize: "clamp(1.375rem, 0.8vw + 1rem, 1.75rem)", lineHeight: 1.18 }}>
                   Precision medicine, built into every visit.
                 </h3>
@@ -697,7 +697,7 @@ export function ArrivalPage() {
       <section id="technology" style={{ background: c.primary, color: c.cream, padding: "96px 0", borderRadius: "2.2rem 2.2rem 0 0" }}>
         <div style={{ maxWidth: "min(1320px, 92vw)", marginInline: "auto" }}>
           <div className="arrival-rv max-w-3xl">
-            <p className="arrival-eyebrow" style={{ color: c.accent }}>The technology behind your care</p>
+            <p className="arrival-eyebrow" style={{ color: "#bdd8f5" }}>The technology behind your care</p>
             <h3 className="mt-4" style={{ fontFamily: theme.fonts.heading, fontSize: "clamp(2rem, 1.4rem + 2vw, 3.4rem)", lineHeight: 1.08 }}>
               Three quiet systems that make all of this possible.
             </h3>
@@ -813,7 +813,7 @@ export function ArrivalPage() {
                   <div className="flex flex-col flex-1 p-6">
                     <h3 className="!text-[1.65rem] leading-[1.05]" style={{ color: c.cream, fontFamily: theme.fonts.heading, letterSpacing: "-0.02em" }}>{l.city}</h3>
                     <p className="mt-1 text-sm" style={{ color: alpha(c.cream, 0.5) }}>{l.state}</p>
-                    <p className="mt-5 text-sm font-semibold flex items-center gap-2 group-hover:gap-3 transition-all" style={{ color: c.accent }}>{isTelehealth ? "Book a video visit" : "Visit clinic"} <Arrow /></p>
+                    <p className="mt-5 text-sm font-semibold flex items-center gap-2 group-hover:gap-3 transition-all" style={{ color: "#bdd8f5" }}>{isTelehealth ? "Book a video visit" : "Visit clinic"} <Arrow /></p>
                   </div>
                 </a>
               );
@@ -865,7 +865,7 @@ export function ArrivalPage() {
             <div className="arrival-rv rounded-[2rem] p-8 md:p-10 relative overflow-hidden group text-white" style={{ background: c.primary }}>
               <div className="absolute inset-0 pointer-events-none" style={{ background: `radial-gradient(120% 100% at 100% 0%, ${alpha(c.accent, 0.18)} 0%, transparent 55%)` }} />
               <div className="relative">
-                <p className="arrival-eyebrow" style={{ color: c.accent }}>Join Mindspan</p>
+                <p className="arrival-eyebrow" style={{ color: "#bdd8f5" }}>Join Mindspan</p>
                 <h3 className="mt-3" style={{ fontFamily: theme.fonts.heading, fontSize: "clamp(1.375rem, 0.8vw + 1rem, 1.75rem)", lineHeight: 1.18 }}>Practice the medicine you wanted to when you trained.</h3>
                 <p className="mt-4 text-white/80" style={{ fontFamily: theme.fonts.body, fontSize: "1rem", lineHeight: 1.6 }}>
                   If you are a neurologist, a clinical psychologist, a nurse practitioner, or a care partner who is tired of fifteen-minute visits and broken handoffs, come talk to us.
@@ -894,7 +894,7 @@ export function ArrivalPage() {
           <div className="absolute -bottom-40 -left-40 w-[560px] h-[560px] rounded-full blur-3xl final-glow--cool" style={{ background: `radial-gradient(circle, ${alpha(c.sky, 0.18)} 0%, transparent 62%)` }} />
         </div>
         <div className="arrival-rv relative" style={{ maxWidth: "min(760px, 92vw)", marginInline: "auto", textAlign: "center" }}>
-          <p className="arrival-eyebrow" style={{ color: c.accent }}>When you are ready</p>
+          <p className="arrival-eyebrow" style={{ color: "#bdd8f5" }}>When you are ready</p>
           <h2 className="mt-6" style={{ fontFamily: theme.fonts.heading, fontSize: "clamp(2rem, 1.4rem + 2vw, 3.4rem)", lineHeight: 1.08 }}>The first step is a conversation. That is all.</h2>
           <p className="mt-6 mx-auto text-white/80" style={{ fontFamily: theme.fonts.body, fontSize: "clamp(1rem, 0.4vw + 0.95rem, 1.25rem)", lineHeight: 1.55, maxWidth: "62ch" }}>
             No commitment. No pressure. Tell us what is going on, and we will help you figure out what comes next, even if it turns out that next isn&apos;t with us.
