@@ -292,7 +292,6 @@ export function ArrivalPage() {
           }}
         >
           <div />
-          <div style={{ display: "flex", alignItems: "center", gap: 24, flexWrap: "wrap", gridColumn: "2 / -1" }}>
           <p
             style={{
               fontFamily: theme.fonts.body,
@@ -302,18 +301,8 @@ export function ArrivalPage() {
               margin: 0,
             }}
           >
-            Now seeing patients in Danvers, Irvine, Bay Area &amp; Telehealth
+            Now seeing patients in Danvers, Irvine, Bay Area &amp; MA
           </p>
-          <span
-            style={{
-              fontFamily: theme.fonts.body,
-              fontSize: "0.8rem",
-              color: alpha(c.ink, 0.5),
-              margin: 0,
-            }}
-          >
-            ·
-          </span>
           <p
             style={{
               fontFamily: theme.fonts.body,
@@ -323,12 +312,12 @@ export function ArrivalPage() {
               margin: 0,
               display: "flex",
               alignItems: "center",
+              justifyContent: "flex-end",
               gap: 6,
             }}
           >
             Appointments available this month <Arrow size={14} />
           </p>
-          </div>
         </div>
       </a>
 
