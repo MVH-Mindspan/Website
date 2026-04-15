@@ -430,7 +430,8 @@ export function ArrivalPage() {
             const step = i === 0
               ? {
                   title: "Get assessed",
-                  body: "A free 10-minute online assessment you can take from your kitchen table. No account, no cost, no clinic visit. Answer a few honest questions and get clear feedback on whether a neurologist visit makes sense. The easiest first step in healthcare.",
+                  body: "A free 10-minute online assessment you can take from your kitchen table. No account, no cost, no clinic visit. Answer a few honest questions and get clear feedback on whether a neurologist visit makes sense.",
+                  kicker: "Where to start",
                 }
               : rawStep;
             return (
@@ -487,7 +488,7 @@ export function ArrivalPage() {
                     marginBottom: 12,
                   }}
                 >
-                  {expectations[i]?.kicker || `Step ${i + 1}`}
+                  {(step as { kicker?: string }).kicker || expectations[i]?.kicker || `Step ${i + 1}`}
                 </p>
                 <h3
                   style={{
@@ -622,7 +623,7 @@ export function ArrivalPage() {
                 The full standard of care, delivered without compromise.
               </h3>
               <p className="mt-4" style={{ fontFamily: theme.fonts.body, fontSize: "1rem", lineHeight: 1.6, color: alpha(c.ink, 0.72) }}>
-                Everything a great neurology clinic should offer. No waiting. No rushed visits. Every patient is treated like the complex person they are.
+                Everything a great neurology clinic should offer. No waiting. No rushed visits. Every patient is treated as a whole person, not a chart number.
               </p>
               <ul className="mt-6 space-y-2.5 text-base" style={{ color: alpha(c.ink, 0.82) }}>
                 {["Unhurried time with a board-certified neurologist", "Comprehensive cognitive testing and functional assessment", "MRI, PET imaging, and full dementia lab panel when indicated", "FDA-approved anti-amyloid therapies (Leqembi, Kisunla) for eligible patients", "Caregiver included. Your primary care doctor kept in the loop.", "Billed through insurance, just like any other specialist visit"].map((item) => (
@@ -639,13 +640,13 @@ export function ArrivalPage() {
               <div className="relative">
                 <p className="arrival-eyebrow" style={{ color: c.accent }}>The Edge Protocol</p>
                 <h3 className="mt-3" style={{ fontFamily: theme.fonts.heading, fontSize: "clamp(1.375rem, 0.8vw + 1rem, 1.75rem)", lineHeight: 1.18 }}>
-                  Precision medicine, layered on top.
+                  Precision medicine, built into every visit.
                 </h3>
                 <p className="mt-4 text-white/80" style={{ fontFamily: theme.fonts.body, fontSize: "1rem", lineHeight: 1.6 }}>
-                  The breakthroughs that move the needle, delivered to you as part of normal care. Not clinical trial, not concierge, just better medicine.
+                  The breakthroughs that change outcomes, delivered as part of normal care. Not clinical trial, not concierge, just better medicine.
                 </p>
                 <ul className="mt-6 space-y-2.5 text-[15px] text-white/85">
-                  {["Blood biomarker panel that can confirm amyloid status without needing a PET scan", "Genetic testing (APOE) for personalized risk and safer treatment decisions", "2024 biological disease staging framework (A/T/N)", "Your own Cognitive Digital Twin, built and updated visit by visit", "Structured plan across 9 lifestyle factors with actual targets, not generic advice", "Both anti-amyloid therapies, with genotype-informed safety planning"].map((item) => (
+                  {["Blood biomarker panel that can confirm amyloid status without needing a PET scan", "Genetic testing (APOE) for personalized risk and safer treatment decisions", "Biological disease staging so your neurologist knows exactly where things stand", "Your own Cognitive Digital Twin, built and updated visit by visit", "Structured plan across 9 lifestyle factors with actual targets, not generic advice", "Both anti-amyloid therapies, with genotype-informed safety planning"].map((item) => (
                     <li key={item} className="flex items-start gap-3">
                       <span className="mt-2 h-1.5 w-1.5 rounded-full flex-shrink-0" style={{ background: c.accent }} />
                       <span>{item}</span>
@@ -678,7 +679,7 @@ export function ArrivalPage() {
             {[
               { eyebrow: "Cognitive Digital Twin", title: "A model of your brain, built from your own data.", body: "We bring together your history, labs, imaging, biomarkers, genetics, and cognitive testing into a personalized model of your brain health. Your neurologist uses it to show you where you are biologically, where you might be heading, and which changes could actually shift that trajectory for you.", icon: "brain" },
               { eyebrow: "Care Orchestration Engine", title: "Nothing falls through the cracks.", body: "Our operational brain quietly tracks every safety checkpoint, every required MRI, every follow-up, every medication decision. If a scan is due before your next infusion, it is already scheduled. Protocol without memorization. Safety without gaps.", icon: "grid" },
-              { eyebrow: "Mindy, your care companion", title: "A familiar voice between visits.", body: "Mindy is our AI care companion for the weeks and months between appointments. She helps track symptoms, supports adherence, answers common questions, and pages your clinical team when something needs real attention.", icon: "chat" },
+              { eyebrow: "Mindy, your care companion", title: "A familiar voice between visits.", body: "Mindy is our AI care companion for the weeks and months between appointments. She helps track symptoms, keeps you on track with your plan, answers common questions, and pages your clinical team when something needs real attention.", icon: "chat" },
             ].map((card, i) => (
               <div key={card.eyebrow} className="arrival-rv rounded-[2rem] p-6 md:p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_24px_48px_-16px_rgba(0,0,0,0.4)]" style={{ background: c.primaryLight, animationDelay: `${i * 80}ms` }}>
                 <div className="h-12 w-12 rounded-2xl flex items-center justify-center" style={{ background: c.sky, color: c.brandGreen }}>

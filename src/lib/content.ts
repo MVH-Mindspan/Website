@@ -78,7 +78,7 @@ export const howItWorks = [
   {
     title: "The latest science, pointed at you",
     body:
-      "This is where Mindspan’s real edge shows up. Your neurologist brings together decades of research, the newest peer-reviewed findings, and advanced diagnostics, then matches it all to everything we know about you. You get the benefit of tomorrow’s neurology, aimed directly at the outcomes that matter in your life and your family’s.",
+      "This is where Mindspan’s real edge shows up. Your neurologist brings together the newest peer-reviewed findings, advanced diagnostics, and your full medical picture, then builds a plan matched to your specific biology. Not generic advice, a plan built from your data.",
   },
   {
     title: "Ongoing partnership",
