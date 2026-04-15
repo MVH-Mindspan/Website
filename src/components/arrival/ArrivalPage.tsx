@@ -679,7 +679,7 @@ export function ArrivalPage() {
                 <ul className="mt-6 space-y-2.5 text-[15px] text-white/85">
                   {["Blood biomarker panel that can confirm amyloid status without needing a PET scan", "Genetic testing (APOE) for personalized risk and safer treatment decisions", "Biological disease staging so your neurologist knows exactly where things stand", "Your own Cognitive Digital Twin, built and updated visit by visit", "Structured plan across 9 lifestyle factors with actual targets, not generic advice", "Both anti-amyloid therapies, with genotype-informed safety planning"].map((item) => (
                     <li key={item} className="flex items-start gap-3">
-                      <span className="mt-2 h-1.5 w-1.5 rounded-full flex-shrink-0" style={{ background: c.accent }} />
+                      <span className="mt-2 h-1.5 w-1.5 rounded-full flex-shrink-0" style={{ background: "#bdd8f5" }} />
                       <span>{item}</span>
                     </li>
                   ))}
@@ -872,7 +872,7 @@ export function ArrivalPage() {
                 </p>
                 <ul className="mt-6 space-y-2.5 text-[15px] text-white/85">
                   {["Unhurried visits, structured around the patient, not the clock", "Real tools that make your clinical work safer and more precise", "A care orchestration engine that handles protocol compliance for you", "A team culture that respects craft and rewards seniority", "Competitive compensation, meaningful equity, and real work-life balance"].map((item) => (
-                    <li key={item} className="flex items-start gap-3"><span className="mt-2 h-1.5 w-1.5 rounded-full flex-shrink-0" style={{ background: c.accent }} /><span>{item}</span></li>
+                    <li key={item} className="flex items-start gap-3"><span className="mt-2 h-1.5 w-1.5 rounded-full flex-shrink-0" style={{ background: "#bdd8f5" }} /><span>{item}</span></li>
                   ))}
                 </ul>
                 <div className="mt-8 flex flex-wrap gap-3">
