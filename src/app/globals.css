@@ -315,14 +315,42 @@ h1, h2, h3 {
 /* Responsive overrides for arrival layout */
 @media (max-width: 768px) {
   .arrival-scope .fixed { width: 96vw !important; }
+
+  /* Journey header + banner: stack to single column */
+  .arrival-scope .arrival-grid-header {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 16px !important;
+  }
+
+  /* Journey step rows: number + content, hide image */
   .arrival-scope [style*="grid-template-columns: 80px"] {
     grid-template-columns: 48px 1fr !important;
   }
-  .arrival-scope [style*="grid-template-columns: 1fr 1.1fr"],
-  .arrival-scope [style*="grid-template-columns: 1fr 1fr"],
-  .arrival-scope [style*="grid-template-columns: repeat(3"],
+  .arrival-scope .arrival-step-image {
+    display: none !important;
+  }
+
+  /* Banner: stack and left-align */
+  .arrival-scope .arrival-grid-banner {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+  }
+  .arrival-scope .arrival-grid-banner p {
+    justify-content: flex-start !important;
+  }
+
+  /* Stats band */
   .arrival-scope [style*="grid-template-columns: repeat(4"],
   .arrival-scope [style*="grid-template-columns: 2fr 1fr 1fr 1fr"] {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 24px !important;
+  }
+
+  .arrival-scope [style*="grid-template-columns: 1fr 1.1fr"],
+  .arrival-scope [style*="grid-template-columns: 1fr 1fr"],
+  .arrival-scope [style*="grid-template-columns: repeat(3"] {
     grid-template-columns: 1fr !important;
   }
 }
