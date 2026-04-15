@@ -141,7 +141,7 @@ export const audiences = [
     title: "You don’t have to keep figuring this out alone.",
     body:
       "You’ve probably spent months, maybe years, noticing changes, making calls, and being told to wait and see. We know that’s exhausting, and we know it’s lonely. You can bring your loved one to us, and we’ll take it from here together.",
-    cta: "Book a visit",
+    cta: "Start a free assessment",
     href: "/book-a-visit",
   },
   {
@@ -150,7 +150,7 @@ export const audiences = [
     title: "You deserve to be taken seriously.",
     body:
       "Maybe a word slipped that used to come easily. Maybe you walked into a room and forgot why. It might be nothing, it might be something. Either way, you deserve a neurologist who sits with you, explains what’s happening, and tells you what to do next.",
-    cta: "Book a visit",
+    cta: "Start a free assessment",
     href: "/book-a-visit",
   },
   {
