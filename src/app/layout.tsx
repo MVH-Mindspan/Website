@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { PT_Serif, Bitter, Inter } from "next/font/google";
+import { PT_Serif, Bitter, Inter, EB_Garamond, Figtree } from "next/font/google";
+import { ThemeProvider } from "@/lib/theme-context";
 import "./globals.css";
 
 const ptSerif = PT_Serif({
@@ -22,6 +23,19 @@ const inter = Inter({
   subsets: ["latin"],
 });
 
+const ebGaramond = EB_Garamond({
+  variable: "--font-eb-garamond",
+  weight: ["400", "500", "600", "700"],
+  style: ["normal", "italic"],
+  subsets: ["latin"],
+});
+
+const figtree = Figtree({
+  variable: "--font-figtree",
+  weight: ["300", "400", "500", "600", "700"],
+  subsets: ["latin"],
+});
+
 export const metadata: Metadata = {
   title: "Cognitive Care & Dementia Specialists | Mindspan",
   description:
@@ -34,9 +48,11 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${ptSerif.variable} ${bitter.variable} ${inter.variable} antialiased`}
+      className={`${ptSerif.variable} ${bitter.variable} ${inter.variable} ${ebGaramond.variable} ${figtree.variable} antialiased`}
     >
-      <body>{children}</body>
+      <body>
+        <ThemeProvider>{children}</ThemeProvider>
+      </body>
     </html>
   );
 }
