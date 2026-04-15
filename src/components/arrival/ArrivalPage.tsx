@@ -50,7 +50,7 @@ function AnimatedStat({ value, label }: { value: string; label: string }) {
       const prefix = value.slice(0, match.index);
       const suffix = value.slice((match.index ?? 0) + match[1].length);
       const isDecimal = match[1].includes(".");
-      const duration = 800;
+      const duration = 1200;
       const start = performance.now();
 
       const tick = (now: number) => {
@@ -62,7 +62,7 @@ function AnimatedStat({ value, label }: { value: string; label: string }) {
         else setDisplayed(value);
       };
       requestAnimationFrame(tick);
-    }, { threshold: 0.3 });
+    }, { threshold: 0.5 });
     obs.observe(ref.current);
     return () => obs.disconnect();
   }, [value]);
@@ -135,7 +135,7 @@ export function ArrivalPage() {
           }
         });
       },
-      { threshold: 0.1, rootMargin: "0px 0px -30px 0px" }
+      { threshold: 0.15, rootMargin: "0px 0px -120px 0px" }
     );
     document.querySelectorAll(".arrival-rv").forEach((el) => obs.observe(el));
 
@@ -323,12 +323,14 @@ export function ArrivalPage() {
           JOURNEY HEADER — Dark intro
           ============================================ */}
       <section
+        className="relative"
         style={{
           background: "#201E17",
           color: c.cream,
           padding: "56px 0",
         }}
       >
+        <div className="absolute inset-x-0 bottom-0 h-20 pointer-events-none" style={{ background: "linear-gradient(to bottom, transparent, rgba(0,0,0,0.18))" }} />
         <div
           className="arrival-rv arrival-grid-header"
           style={{
@@ -414,7 +416,8 @@ export function ArrivalPage() {
               gap: 6,
             }}
           >
-            Appointments available this month <Arrow size={14} />
+
+            <span style={{ background: alpha(c.accent, 0.1), padding: "4px 12px", borderRadius: "10rem" }}>Appointments available this month</span> <Arrow size={14} />
           </p>
         </div>
       </a>
@@ -429,7 +432,8 @@ export function ArrivalPage() {
             const step = i === 0
               ? {
                   title: "Get assessed",
-                  body: "A free 10-minute online assessment you can take from your kitchen table. No account, no cost, no clinic visit. Answer a few honest questions and get clear feedback on whether a neurologist visit makes sense. The easiest first step in healthcare.",
+                  body: "A free 10-minute online assessment you can take from your kitchen table. No account, no cost, no clinic visit. Answer a few honest questions and get clear feedback on whether a neurologist visit makes sense.",
+                  kicker: "Where to start",
                 }
               : rawStep;
             return (
@@ -456,7 +460,7 @@ export function ArrivalPage() {
                     height: 36,
                     border: `1.5px solid ${c.brandGreen}`,
                     color: c.brandGreen,
-                    background: alpha(c.brandGreen, 0.06),
+                    background: c.skySoft,
                   }}
                 >
                   {String(i + 1).padStart(2, "0")}
@@ -466,7 +470,7 @@ export function ArrivalPage() {
                     className="flex-1"
                     style={{
                       width: 1,
-                      background: alpha(c.brandGreen, 0.2),
+                      background: `linear-gradient(to bottom, ${alpha(c.brandGreen, 0.25)}, ${alpha(c.sky, 0.4)})`,
                       marginTop: 12,
                     }}
                   />
@@ -486,7 +490,7 @@ export function ArrivalPage() {
                     marginBottom: 12,
                   }}
                 >
-                  {expectations[i]?.kicker || `Step ${i + 1}`}
+                  {(step as { kicker?: string }).kicker || expectations[i]?.kicker || `Step ${i + 1}`}
                 </p>
                 <h3
                   style={{
@@ -542,6 +546,22 @@ export function ArrivalPage() {
                     View our clinic locations <Arrow />
                   </a>
                 )}
+                {i === 2 && (
+                  <a
+                    href="#technology"
+                    className="inline-flex items-center gap-2 font-semibold transition-all hover:-translate-y-0.5 mt-6"
+                    style={{
+                      fontFamily: theme.fonts.body,
+                      fontSize: "clamp(0.82rem, 0.78rem + 0.2vw, 0.92rem)",
+                      padding: "12px 24px",
+                      background: c.brandGreen,
+                      color: "#fff",
+                      borderRadius: "10rem",
+                    }}
+                  >
+                    See the technology behind your care <Arrow />
+                  </a>
+                )}
               </div>
 
               {/* Proof column — editorial image (hidden on mobile) */}
@@ -564,9 +584,8 @@ export function ArrivalPage() {
           ============================================ */}
       <section
         style={{
-          background: c.cream,
+          background: c.sand,
           padding: "64px 0",
-          borderBottom: `1px solid ${c.sand}`,
         }}
       >
         <div
@@ -616,13 +635,19 @@ export function ArrivalPage() {
           </div>
 
           <div className="mt-12 grid lg:grid-cols-2 gap-6 md:gap-8">
-            <div className="arrival-rv rounded-[2rem] p-8 md:p-10" style={{ background: c.sand, border: `1px solid ${alpha(c.ink, 0.06)}` }}>
+            <div className="arrival-rv rounded-[2rem] p-8 md:p-10" style={{ background: c.skySoft, border: `1px solid ${alpha(c.ink, 0.06)}` }}>
+              <div className="h-12 w-12 rounded-2xl flex items-center justify-center mb-5" style={{ background: c.sky, color: c.brandGreen }}>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                  <path d="m9 12 2 2 4-4" />
+                </svg>
+              </div>
               <p className="arrival-eyebrow" style={{ color: alpha(c.ink, 0.6) }}>The Core Protocol</p>
               <h3 className="mt-3" style={{ fontFamily: theme.fonts.heading, fontSize: "clamp(1.375rem, 0.8vw + 1rem, 1.75rem)", lineHeight: 1.18, color: c.ink }}>
                 The full standard of care, delivered without compromise.
               </h3>
               <p className="mt-4" style={{ fontFamily: theme.fonts.body, fontSize: "1rem", lineHeight: 1.6, color: alpha(c.ink, 0.72) }}>
-                Everything a great neurology clinic should offer. No waiting. No rushed visits. Every patient is treated like the complex person they are.
+                Everything a great neurology clinic should offer. No waiting. No rushed visits. Every patient is treated as a whole person, not a chart number.
               </p>
               <ul className="mt-6 space-y-2.5 text-base" style={{ color: alpha(c.ink, 0.82) }}>
                 {["Unhurried time with a board-certified neurologist", "Comprehensive cognitive testing and functional assessment", "MRI, PET imaging, and full dementia lab panel when indicated", "FDA-approved anti-amyloid therapies (Leqembi, Kisunla) for eligible patients", "Caregiver included. Your primary care doctor kept in the loop.", "Billed through insurance, just like any other specialist visit"].map((item) => (
@@ -637,15 +662,22 @@ export function ArrivalPage() {
             <div className="arrival-rv rounded-[2rem] p-8 md:p-10 relative overflow-hidden" style={{ background: c.brandGreen, color: "#fff" }}>
               <div className="absolute inset-0 opacity-60 pointer-events-none" style={{ background: `radial-gradient(120% 100% at 100% 0%, ${alpha(c.accent, 0.18)} 0%, transparent 55%)` }} />
               <div className="relative">
-                <p className="arrival-eyebrow" style={{ color: c.accent }}>The Edge Protocol</p>
+                <div className="h-12 w-12 rounded-2xl flex items-center justify-center mb-5" style={{ background: alpha("#bdd8f5", 0.15), color: "#bdd8f5" }}>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
+                    <circle cx="12" cy="12" r="10" />
+                    <circle cx="12" cy="12" r="6" />
+                    <circle cx="12" cy="12" r="2" />
+                  </svg>
+                </div>
+                <p className="arrival-eyebrow" style={{ color: "#bdd8f5" }}>The Edge Protocol</p>
                 <h3 className="mt-3" style={{ fontFamily: theme.fonts.heading, fontSize: "clamp(1.375rem, 0.8vw + 1rem, 1.75rem)", lineHeight: 1.18 }}>
-                  Precision medicine, layered on top.
+                  Precision medicine, built into every visit.
                 </h3>
                 <p className="mt-4 text-white/80" style={{ fontFamily: theme.fonts.body, fontSize: "1rem", lineHeight: 1.6 }}>
-                  The breakthroughs that move the needle, delivered to you as part of normal care. Not clinical trial, not concierge, just better medicine.
+                  The breakthroughs that change outcomes, delivered as part of normal care. Not clinical trial, not concierge, just better medicine.
                 </p>
                 <ul className="mt-6 space-y-2.5 text-[15px] text-white/85">
-                  {["Blood biomarker panel that can confirm amyloid status without needing a PET scan", "Genetic testing (APOE) for personalized risk and safer treatment decisions", "2024 biological disease staging framework (A/T/N)", "Your own Cognitive Digital Twin, built and updated visit by visit", "Structured plan across 9 lifestyle factors with actual targets, not generic advice", "Both anti-amyloid therapies, with genotype-informed safety planning"].map((item) => (
+                  {["Blood biomarker panel that can confirm amyloid status without needing a PET scan", "Genetic testing (APOE) for personalized risk and safer treatment decisions", "Biological disease staging so your neurologist knows exactly where things stand", "Your own Cognitive Digital Twin, built and updated visit by visit", "Structured plan across 9 lifestyle factors with actual targets, not generic advice", "Both anti-amyloid therapies, with genotype-informed safety planning"].map((item) => (
                     <li key={item} className="flex items-start gap-3">
                       <span className="mt-2 h-1.5 w-1.5 rounded-full flex-shrink-0" style={{ background: c.accent }} />
                       <span>{item}</span>
@@ -662,10 +694,10 @@ export function ArrivalPage() {
       {/* ============================================
           TECHNOLOGY — Dark section for visual rhythm
           ============================================ */}
-      <section style={{ background: c.primary, color: c.cream, padding: "96px 0", borderRadius: "2.2rem 2.2rem 0 0" }}>
+      <section id="technology" style={{ background: c.primary, color: c.cream, padding: "96px 0", borderRadius: "2.2rem 2.2rem 0 0" }}>
         <div style={{ maxWidth: "min(1320px, 92vw)", marginInline: "auto" }}>
           <div className="arrival-rv max-w-3xl">
-            <p className="arrival-eyebrow" style={{ color: c.accent }}>The technology behind your care</p>
+            <p className="arrival-eyebrow" style={{ color: "#bdd8f5" }}>The technology behind your care</p>
             <h3 className="mt-4" style={{ fontFamily: theme.fonts.heading, fontSize: "clamp(2rem, 1.4rem + 2vw, 3.4rem)", lineHeight: 1.08 }}>
               Three quiet systems that make all of this possible.
             </h3>
@@ -678,10 +710,10 @@ export function ArrivalPage() {
             {[
               { eyebrow: "Cognitive Digital Twin", title: "A model of your brain, built from your own data.", body: "We bring together your history, labs, imaging, biomarkers, genetics, and cognitive testing into a personalized model of your brain health. Your neurologist uses it to show you where you are biologically, where you might be heading, and which changes could actually shift that trajectory for you.", icon: "brain" },
               { eyebrow: "Care Orchestration Engine", title: "Nothing falls through the cracks.", body: "Our operational brain quietly tracks every safety checkpoint, every required MRI, every follow-up, every medication decision. If a scan is due before your next infusion, it is already scheduled. Protocol without memorization. Safety without gaps.", icon: "grid" },
-              { eyebrow: "Mindy, your care companion", title: "A familiar voice between visits.", body: "Mindy is our AI care companion for the weeks and months between appointments. She helps track symptoms, supports adherence, answers common questions, and pages your clinical team when something needs real attention.", icon: "chat" },
+              { eyebrow: "Mindy, your care companion", title: "A familiar voice between visits.", body: "Mindy is our AI care companion for the weeks and months between appointments. She helps track symptoms, keeps you on track with your plan, answers common questions, and pages your clinical team when something needs real attention.", icon: "chat" },
             ].map((card, i) => (
               <div key={card.eyebrow} className="arrival-rv rounded-[2rem] p-6 md:p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_24px_48px_-16px_rgba(0,0,0,0.4)]" style={{ background: c.primaryLight, animationDelay: `${i * 80}ms` }}>
-                <div className="h-12 w-12 rounded-2xl flex items-center justify-center" style={{ background: c.brandGreen, color: "#fff" }}>
+                <div className="h-12 w-12 rounded-2xl flex items-center justify-center" style={{ background: c.sky, color: c.brandGreen }}>
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
                     {card.icon === "brain" && <><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2Z" /><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2Z" /></>}
                     {card.icon === "grid" && <><rect width="8" height="8" x="3" y="3" rx="2" /><path d="M7 11v4a2 2 0 0 0 2 2h4" /><rect width="8" height="8" x="13" y="13" rx="2" /></>}
@@ -733,7 +765,7 @@ export function ArrivalPage() {
 
           <div className="mt-12 grid md:grid-cols-3 gap-5 md:gap-6">
             {audiences.map((a, i) => (
-              <a key={a.id} href={a.href} className="arrival-rv rounded-[2rem] p-6 md:p-8 flex flex-col group transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_24px_48px_-16px_rgba(32,30,23,0.18)]" style={{ background: "#FFFDF9", border: `1px solid ${alpha(c.ink, 0.06)}`, animationDelay: `${i * 80}ms` }}>
+              <a key={a.id} href={a.href} className="arrival-rv rounded-[2rem] p-6 md:p-8 flex flex-col group transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_24px_48px_-16px_rgba(32,30,23,0.18)]" style={{ background: c.skySoft, border: `1px solid ${alpha(c.ink, 0.06)}`, animationDelay: `${i * 80}ms` }}>
                 <p className="arrival-eyebrow" style={{ color: c.accent }}>{a.kicker}</p>
                 <h3 className="mt-3" style={{ fontFamily: theme.fonts.heading, fontSize: "clamp(1.375rem, 0.8vw + 1rem, 1.75rem)", lineHeight: 1.18, color: c.ink }}>{a.title}</h3>
                 <p className="mt-4 flex-1" style={{ fontFamily: theme.fonts.body, fontSize: "1rem", lineHeight: 1.6, color: alpha(c.ink, 0.72) }}>{a.body}</p>
@@ -771,7 +803,7 @@ export function ArrivalPage() {
                     <iframe src={mapSrc} className="absolute left-0 right-0 top-0 w-full border-0 pointer-events-none transition-transform duration-500 group-hover:scale-[1.05]" style={{ height: "calc(100% + 60px)" }} loading="lazy" title={`Map of ${l.city}, ${l.state}`} aria-hidden="true" />
                     {isTelehealth && (
                       <div className="absolute inset-0 flex items-center justify-center">
-                        <span className="rounded-full px-4 py-2 text-xs font-semibold backdrop-blur" style={{ background: alpha(c.brandGreen, 0.9), color: "#fff" }}>Video visits statewide</span>
+                        <span className="rounded-full px-4 py-2 text-xs font-semibold backdrop-blur" style={{ background: alpha(c.sky, 0.92), color: c.brandGreen }}>Video visits statewide</span>
                       </div>
                     )}
                     <div className="absolute top-3 left-3 flex items-center gap-2 rounded-full backdrop-blur px-3 py-1.5 text-[11px] font-semibold" style={{ background: c.brandGreen, color: "#fff" }}>
@@ -781,7 +813,7 @@ export function ArrivalPage() {
                   <div className="flex flex-col flex-1 p-6">
                     <h3 className="!text-[1.65rem] leading-[1.05]" style={{ color: c.cream, fontFamily: theme.fonts.heading, letterSpacing: "-0.02em" }}>{l.city}</h3>
                     <p className="mt-1 text-sm" style={{ color: alpha(c.cream, 0.5) }}>{l.state}</p>
-                    <p className="mt-5 text-sm font-semibold flex items-center gap-2 group-hover:gap-3 transition-all" style={{ color: c.accent }}>{isTelehealth ? "Book a video visit" : "Visit clinic"} <Arrow /></p>
+                    <p className="mt-5 text-sm font-semibold flex items-center gap-2 group-hover:gap-3 transition-all" style={{ color: "#bdd8f5" }}>{isTelehealth ? "Book a video visit" : "Visit clinic"} <Arrow /></p>
                   </div>
                 </a>
               );
@@ -833,7 +865,7 @@ export function ArrivalPage() {
             <div className="arrival-rv rounded-[2rem] p-8 md:p-10 relative overflow-hidden group text-white" style={{ background: c.primary }}>
               <div className="absolute inset-0 pointer-events-none" style={{ background: `radial-gradient(120% 100% at 100% 0%, ${alpha(c.accent, 0.18)} 0%, transparent 55%)` }} />
               <div className="relative">
-                <p className="arrival-eyebrow" style={{ color: c.accent }}>Join Mindspan</p>
+                <p className="arrival-eyebrow" style={{ color: "#bdd8f5" }}>Join Mindspan</p>
                 <h3 className="mt-3" style={{ fontFamily: theme.fonts.heading, fontSize: "clamp(1.375rem, 0.8vw + 1rem, 1.75rem)", lineHeight: 1.18 }}>Practice the medicine you wanted to when you trained.</h3>
                 <p className="mt-4 text-white/80" style={{ fontFamily: theme.fonts.body, fontSize: "1rem", lineHeight: 1.6 }}>
                   If you are a neurologist, a clinical psychologist, a nurse practitioner, or a care partner who is tired of fifteen-minute visits and broken handoffs, come talk to us.
@@ -844,7 +876,7 @@ export function ArrivalPage() {
                   ))}
                 </ul>
                 <div className="mt-8 flex flex-wrap gap-3">
-                  <a href="/careers" className="inline-flex items-center gap-2 font-semibold transition-all hover:-translate-y-0.5" style={{ fontFamily: theme.fonts.body, padding: "14px 28px", background: c.accent, color: "#fff", borderRadius: "10rem", fontSize: "0.9375rem" }}>See open roles <Arrow /></a>
+                  <a href="/careers" className="inline-flex items-center gap-2 font-semibold transition-all hover:-translate-y-0.5" style={{ fontFamily: theme.fonts.body, padding: "14px 28px", background: "#bdd8f5", color: c.brandGreen, borderRadius: "10rem", fontSize: "0.9375rem" }}>See open roles <Arrow /></a>
                   <a href="mailto:clinicians@mindspan.co" className="inline-flex items-center gap-2 font-medium transition-all" style={{ fontFamily: theme.fonts.body, padding: "14px 28px", color: "#fff", border: "1px solid rgba(255,255,255,0.35)", borderRadius: "10rem", fontSize: "0.9375rem" }}>Talk to our team</a>
                 </div>
               </div>
@@ -862,7 +894,7 @@ export function ArrivalPage() {
           <div className="absolute -bottom-40 -left-40 w-[560px] h-[560px] rounded-full blur-3xl final-glow--cool" style={{ background: `radial-gradient(circle, ${alpha(c.sky, 0.18)} 0%, transparent 62%)` }} />
         </div>
         <div className="arrival-rv relative" style={{ maxWidth: "min(760px, 92vw)", marginInline: "auto", textAlign: "center" }}>
-          <p className="arrival-eyebrow" style={{ color: c.accent }}>When you are ready</p>
+          <p className="arrival-eyebrow" style={{ color: "#bdd8f5" }}>When you are ready</p>
           <h2 className="mt-6" style={{ fontFamily: theme.fonts.heading, fontSize: "clamp(2rem, 1.4rem + 2vw, 3.4rem)", lineHeight: 1.08 }}>The first step is a conversation. That is all.</h2>
           <p className="mt-6 mx-auto text-white/80" style={{ fontFamily: theme.fonts.body, fontSize: "clamp(1rem, 0.4vw + 0.95rem, 1.25rem)", lineHeight: 1.55, maxWidth: "62ch" }}>
             No commitment. No pressure. Tell us what is going on, and we will help you figure out what comes next, even if it turns out that next isn&apos;t with us.
