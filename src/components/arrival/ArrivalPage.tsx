@@ -285,13 +285,14 @@ export function ArrivalPage() {
           style={{
             maxWidth: "min(1320px, 92vw)",
             marginInline: "auto",
-            display: "flex",
+            display: "grid",
+            gridTemplateColumns: "80px 1fr 1fr",
+            gap: "0 32px",
             alignItems: "center",
-            justifyContent: "center",
-            gap: 24,
-            flexWrap: "wrap",
           }}
         >
+          <div />
+          <div style={{ display: "flex", alignItems: "center", gap: 24, flexWrap: "wrap", gridColumn: "2 / -1" }}>
           <p
             style={{
               fontFamily: theme.fonts.body,
@@ -327,6 +328,7 @@ export function ArrivalPage() {
           >
             Appointments available this month <Arrow size={14} />
           </p>
+          </div>
         </div>
       </a>
 
