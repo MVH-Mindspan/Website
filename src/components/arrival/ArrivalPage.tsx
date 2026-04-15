@@ -300,7 +300,7 @@ export function ArrivalPage() {
               gridColumn: "1 / 3",
             }}
           >
-            Now seeing patients in Danvers, Irvine, Bay Area &amp; Massachusetts
+            Now seeing patients in Danvers, Irvine, Bay Area &amp; Massachusetts statewide via Telehealth
           </p>
           <p
             style={{
