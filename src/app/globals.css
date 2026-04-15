@@ -308,8 +308,25 @@ h1, h2, h3 {
 .arrival-rv-d3 { transition-delay: 240ms; }
 .arrival-rv-d4 { transition-delay: 320ms; }
 
+/* CTA button press feedback */
+.arrival-scope a[style*="border-radius: 10rem"]:active {
+  transform: scale(0.97) !important;
+  transition: transform 0.1s ease !important;
+}
+
+/* Number column pulse on reveal */
+.arrival-scope .arrival-rv.on .arrival-num {
+  animation: arrival-num-pop 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both;
+}
+@keyframes arrival-num-pop {
+  0% { transform: scale(0.8); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .arrival-rv { opacity: 1; transform: none; transition: none; }
+  .arrival-scope a[style*="border-radius: 10rem"]:active { transform: none !important; }
+  .arrival-scope .arrival-rv.on .arrival-num { animation: none; opacity: 1; }
 }
 
 /* Responsive overrides for arrival layout */
