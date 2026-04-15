@@ -323,12 +323,14 @@ export function ArrivalPage() {
           JOURNEY HEADER — Dark intro
           ============================================ */}
       <section
+        className="relative"
         style={{
           background: "#201E17",
           color: c.cream,
           padding: "56px 0",
         }}
       >
+        <div className="absolute inset-x-0 bottom-0 h-20 pointer-events-none" style={{ background: "linear-gradient(to bottom, transparent, rgba(0,0,0,0.18))" }} />
         <div
           className="arrival-rv arrival-grid-header"
           style={{
