@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import { useTheme } from "@/lib/theme-context";
 import { alpha } from "@/lib/themes";
 import {
@@ -26,9 +26,96 @@ const Arrow = ({ size = 16 }: { size?: number }) => (
   </svg>
 );
 
+// Animated counter for stats
+function AnimatedStat({ value, label }: { value: string; label: string }) {
+  const ref = useRef<HTMLParagraphElement>(null);
+  const [displayed, setDisplayed] = useState(value);
+  const hasAnimated = useRef(false);
+  const { theme } = useTheme();
+
+  useEffect(() => {
+    if (!ref.current || hasAnimated.current) return;
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReduced) { hasAnimated.current = true; return; }
+
+    const obs = new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting || hasAnimated.current) return;
+      hasAnimated.current = true;
+      obs.disconnect();
+
+      // Extract numeric part
+      const match = value.match(/^([\d.]+)/);
+      if (!match) return;
+      const target = parseFloat(match[1]);
+      const suffix = value.slice(match[1].length);
+      const isDecimal = match[1].includes(".");
+      const duration = 800;
+      const start = performance.now();
+
+      const tick = (now: number) => {
+        const t = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - t, 4); // ease-out-quart
+        const current = target * eased;
+        setDisplayed((isDecimal ? current.toFixed(1) : Math.round(current).toString()) + suffix);
+        if (t < 1) requestAnimationFrame(tick);
+        else setDisplayed(value);
+      };
+      requestAnimationFrame(tick);
+    }, { threshold: 0.3 });
+    obs.observe(ref.current);
+    return () => obs.disconnect();
+  }, [value]);
+
+  return (
+    <div>
+      <p
+        ref={ref}
+        style={{
+          fontFamily: theme.fonts.heading,
+          fontSize: "clamp(2rem, 1.4rem + 2vw, 3.4rem)",
+          fontWeight: 500,
+          lineHeight: 1,
+          marginBottom: 8,
+          color: theme.colors.brandGreen,
+        }}
+      >
+        {displayed}
+      </p>
+      <p
+        style={{
+          fontFamily: theme.fonts.body,
+          fontSize: "clamp(0.82rem, 0.78rem + 0.2vw, 0.92rem)",
+          color: alpha(theme.colors.ink, 0.6),
+          lineHeight: 1.4,
+        }}
+      >
+        {label}
+      </p>
+    </div>
+  );
+}
+
 export function ArrivalPage() {
   const { theme } = useTheme();
   const c = theme.colors;
+  const [navScrolled, setNavScrolled] = useState(false);
+  const [heroLoaded, setHeroLoaded] = useState(false);
+
+  // Nav scroll-aware state
+  const handleScroll = useCallback(() => {
+    setNavScrolled(window.scrollY > window.innerHeight * 0.6);
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [handleScroll]);
+
+  // Hero stagger entrance
+  useEffect(() => {
+    const timer = setTimeout(() => setHeroLoaded(true), 200);
+    return () => clearTimeout(timer);
+  }, []);
 
   // Scroll-reveal: IntersectionObserver for .arrival-rv elements
   useEffect(() => {
@@ -79,11 +166,13 @@ export function ArrivalPage() {
         className="fixed top-4 left-1/2 -translate-x-1/2 z-[999] flex items-center justify-between"
         style={{
           width: "min(1280px, 94vw)",
-          background: alpha("#201E17", 0.88),
+          background: navScrolled ? alpha("#201E17", 0.96) : alpha("#201E17", 0.88),
           backdropFilter: "blur(16px)",
           WebkitBackdropFilter: "blur(16px)",
           borderRadius: "10rem",
-          padding: "12px 12px 12px 24px",
+          padding: navScrolled ? "8px 12px 8px 24px" : "12px 12px 12px 24px",
+          boxShadow: navScrolled ? "0 8px 32px -8px rgba(0,0,0,0.3)" : "none",
+          transition: "padding 0.4s cubic-bezier(0.22, 1, 0.36, 1), background 0.4s ease, box-shadow 0.4s ease",
         }}
       >
         <a
@@ -182,7 +271,6 @@ export function ArrivalPage() {
           style={{ padding: "64px clamp(24px, 5vw, 80px)" }}
         >
           <h1
-            className="arrival-rv on"
             style={{
               fontFamily: theme.fonts.heading,
               fontSize: "clamp(3rem, 1.8rem + 5vw, 7rem)",
@@ -191,11 +279,19 @@ export function ArrivalPage() {
               letterSpacing: "-0.02em",
               lineHeight: 0.98,
               maxWidth: "12ch",
+              opacity: heroLoaded ? 1 : 0,
+              transform: heroLoaded ? "none" : "translateY(24px)",
+              transition: "opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1)",
             }}
           >
             {brand.headline}
           </h1>
-          <div className="arrival-rv on arrival-rv-d1" style={{ maxWidth: 400 }}>
+          <div style={{
+            maxWidth: 400,
+            opacity: heroLoaded ? 1 : 0,
+            transform: heroLoaded ? "none" : "translateY(18px)",
+            transition: "opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.2s, transform 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.2s",
+          }}>
             <p
               className="font-semibold"
               style={{
@@ -351,7 +447,7 @@ export function ArrivalPage() {
               {/* Number column */}
               <div className="flex flex-col items-center" style={{ paddingTop: 8 }}>
                 <div
-                  className="flex items-center justify-center rounded-full text-xs font-semibold flex-shrink-0 transition-all duration-300"
+                  className="arrival-num flex items-center justify-center rounded-full text-xs font-semibold flex-shrink-0 transition-all duration-300"
                   style={{
                     fontFamily: theme.fonts.body,
                     width: 36,
@@ -483,37 +579,11 @@ export function ArrivalPage() {
         >
           {[
             { num: "2\u20133 wks", label: "Average time to see a neurologist" },
-            {
-              num: "9",
-              label: "Lifestyle factors tracked in your personal plan",
-            },
+            { num: "9", label: "Lifestyle factors tracked in your personal plan" },
             { num: "100%", label: "Of visits billed through insurance" },
             { num: "10 min", label: "Free online assessment, no account needed" },
-          ].map((stat, i) => (
-            <div key={stat.label} style={{ animationDelay: `${i * 80}ms` }}>
-              <p
-                style={{
-                  fontFamily: theme.fonts.heading,
-                  fontSize: "clamp(2rem, 1.4rem + 2vw, 3.4rem)",
-                  fontWeight: 500,
-                  lineHeight: 1,
-                  marginBottom: 8,
-                  color: c.brandGreen,
-                }}
-              >
-                {stat.num}
-              </p>
-              <p
-                style={{
-                  fontFamily: theme.fonts.body,
-                  fontSize: "clamp(0.82rem, 0.78rem + 0.2vw, 0.92rem)",
-                  color: alpha(c.ink, 0.6),
-                  lineHeight: 1.4,
-                }}
-              >
-                {stat.label}
-              </p>
-            </div>
+          ].map((stat) => (
+            <AnimatedStat key={stat.label} value={stat.num} label={stat.label} />
           ))}
         </div>
       </section>
