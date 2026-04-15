@@ -10,13 +10,10 @@ import {
   locations,
   audiences,
 } from "@/lib/content";
-
-const GREEN = "#083630";
-const ORANGE = "#fb4d17";
-const CREAM = "#efeeeb";
-const SAND = "#dad6c9";
-const SKY = "#bdd8f5";
-const SKY_SOFT = "#d9e6f3";
+import { useTheme } from "@/lib/theme-context";
+import { alpha } from "@/lib/themes";
+import { StyleSwitcher } from "@/components/dev/StyleSwitcher";
+import { ArrivalPage } from "@/components/arrival/ArrivalPage";
 
 const EASE = [0.22, 0.61, 0.36, 1] as const;
 
@@ -106,9 +103,11 @@ function SectionHeader({
   className?: string;
 }) {
   const reducedMotion = useReducedMotion();
+  const { theme } = useTheme();
+  const { primary, accent } = theme.colors;
   const alignCls = align === "center" ? "mx-auto text-center" : "";
-  const color = tone === "light" ? "#fff" : GREEN;
-  const leadColor = tone === "light" ? "rgba(255,255,255,0.72)" : "rgba(8,54,48,0.7)";
+  const color = tone === "light" ? "#fff" : primary;
+  const leadColor = tone === "light" ? "rgba(255,255,255,0.72)" : alpha(primary, 0.7);
   return (
     <motion.div
       className={`max-w-3xl ${alignCls} ${className}`}
@@ -117,7 +116,7 @@ function SectionHeader({
       viewport={VIEWPORT}
       variants={staggerContainer}
     >
-      <motion.p className="studio-eyebrow" style={{ color: ORANGE }} variants={fadeUp}>
+      <motion.p className="studio-eyebrow" style={{ color: accent }} variants={fadeUp}>
         {eyebrow}
       </motion.p>
       <motion.h2 className="studio-h2 mt-4" style={{ color }} variants={fadeUp}>
@@ -134,6 +133,8 @@ function SectionHeader({
 
 export default function Home() {
   const reducedMotion = useReducedMotion();
+  const { theme } = useTheme();
+  const { primary, primaryLight, accent, cream, sand, sky, skySoft } = theme.colors;
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -155,8 +156,13 @@ export default function Home() {
     );
   }, []);
 
+  // Full structure swap — render entirely different page
+  if (theme.structure === "arrival") {
+    return <ArrivalPage />;
+  }
+
   return (
-    <div style={{ background: CREAM, color: GREEN }}>
+    <div style={{ background: cream, color: primary }}>
       {/* ANNOUNCEMENT BANNER — non-sticky, scrolls away with content */}
       <a
         href={brand.primaryCtaHref}
@@ -164,9 +170,9 @@ export default function Home() {
         rel="noopener"
         className="block text-[13px] md:text-sm border-b transition-colors group"
         style={{
-          background: SKY,
-          color: GREEN,
-          borderColor: "rgba(8,54,48,0.1)",
+          background: sky,
+          color: primary,
+          borderColor: alpha(primary, 0.1),
         }}
       >
         <div className="studio-container flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-6 py-3.5 text-center sm:text-left">
@@ -185,7 +191,7 @@ export default function Home() {
           </span>
           <span
             className="transition-colors"
-            style={{ color: "rgba(8,54,48,0.72)" }}
+            style={{ color: alpha(primary, 0.72) }}
           >
             Danvers, Irvine, Bay Area &amp; telehealth across MA and CA
           </span>
@@ -195,7 +201,7 @@ export default function Home() {
       {/* NAV */}
       <header
         className="sticky top-0 z-50 backdrop-blur-md"
-        style={{ background: "rgba(239,238,235,0.82)" }}
+        style={{ background: alpha(cream, 0.82) }}
       >
         <div className="studio-container flex items-center justify-between pt-6 md:pt-8 pb-4 md:pb-5">
           <a href="/" className="flex items-center gap-3">
@@ -204,7 +210,7 @@ export default function Home() {
           </a>
           <nav
             className="hidden lg:flex items-center gap-9 text-sm"
-            style={{ color: GREEN }}
+            style={{ color: primary }}
           >
             {nav.map((n) => (
               <a
@@ -233,19 +239,19 @@ export default function Home() {
           <div className="lg:col-span-7">
             <p
               className="studio-eyebrow studio-fade studio-fade-1"
-              style={{ color: ORANGE }}
+              style={{ color: accent }}
             >
               {brand.subTagline}
             </p>
             <h1
               className="studio-display mt-5 studio-fade studio-fade-2"
-              style={{ color: GREEN }}
+              style={{ color: primary }}
             >
               {brand.headline}
             </h1>
             <p
               className="studio-lead mt-6 studio-fade studio-fade-3 max-w-xl"
-              style={{ color: "rgba(8,54,48,0.78)" }}
+              style={{ color: alpha(primary, 0.78) }}
             >
               {brand.subhead}
             </p>
@@ -268,11 +274,11 @@ export default function Home() {
             </div>
             <div
               className="mt-7 flex items-center gap-3 text-sm studio-fade studio-fade-4"
-              style={{ color: "rgba(8,54,48,0.7)" }}
+              style={{ color: alpha(primary, 0.7) }}
             >
               <span
                 className="h-7 w-7 rounded-lg flex items-center justify-center flex-shrink-0"
-                style={{ background: SKY, color: GREEN }}
+                style={{ background: sky, color: primary }}
                 aria-hidden
               >
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-4 w-4">
@@ -287,7 +293,7 @@ export default function Home() {
                   target="_blank"
                   rel="noopener"
                   className="font-semibold underline underline-offset-4 decoration-1 hover:decoration-2 transition-all"
-                  style={{ color: GREEN }}
+                  style={{ color: primary }}
                 >
                   Take a free online assessment
                 </a>{" "}
@@ -301,7 +307,7 @@ export default function Home() {
               <motion.div
                 className="absolute -inset-4 rounded-[2.5rem] -z-10"
                 style={{
-                  background: `radial-gradient(120% 80% at 50% 20%, ${SKY} 0%, transparent 70%)`,
+                  background: `radial-gradient(120% 80% at 50% 20%, ${sky} 0%, transparent 70%)`,
                 }}
                 initial={reducedMotion ? false : { opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -325,7 +331,7 @@ export default function Home() {
       </section>
 
       {/* REASSURANCE BAR */}
-      <section className="py-10 md:py-12" style={{ background: GREEN }}>
+      <section className="py-10 md:py-12" style={{ background: primary }}>
         <motion.div
           className="studio-container grid sm:grid-cols-3 gap-6 md:gap-10 text-white"
           variants={staggerContainer}
@@ -350,7 +356,7 @@ export default function Home() {
             <motion.div key={item.k} className="flex items-start gap-4" variants={fadeUpSoft}>
               <span
                 className="mt-1.5 h-2 w-2 rounded-full flex-shrink-0"
-                style={{ background: ORANGE }}
+                style={{ background: accent }}
               />
               <div>
                 <p className="font-semibold text-base text-white">{item.k}</p>
@@ -362,7 +368,7 @@ export default function Home() {
       </section>
 
       {/* EMPATHY LETTER */}
-      <section className="studio-section" style={{ background: SAND }}>
+      <section className="studio-section" style={{ background: sand }}>
         <motion.div
           className="studio-container max-w-3xl text-center"
           variants={staggerContainer}
@@ -370,15 +376,15 @@ export default function Home() {
           whileInView="show"
           viewport={VIEWPORT}
         >
-          <motion.p className="studio-eyebrow" style={{ color: ORANGE }} variants={fadeIn}>
+          <motion.p className="studio-eyebrow" style={{ color: accent }} variants={fadeIn}>
             A note from our team
           </motion.p>
-          <motion.h2 className="studio-h2 mt-5" style={{ color: GREEN }} variants={fadeIn}>
+          <motion.h2 className="studio-h2 mt-5" style={{ color: primary }} variants={fadeIn}>
             You are not overreacting. You are in the right place.
           </motion.h2>
           <motion.p
             className="studio-lead mt-6 mx-auto"
-            style={{ color: "rgba(8,54,48,0.8)" }}
+            style={{ color: alpha(primary, 0.8) }}
             variants={fadeIn}
           >
             If you have noticed changes in memory, attention, or mood, whether for yourself or
@@ -418,7 +424,7 @@ export default function Home() {
             <motion.article className="studio-card flex flex-col" variants={fadeUp}>
               <div
                 className="h-12 w-12 rounded-2xl flex items-center justify-center"
-                style={{ background: SKY, color: GREEN }}
+                style={{ background: sky, color: primary }}
                 aria-hidden
               >
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
@@ -426,13 +432,13 @@ export default function Home() {
                   <path d="M12 7v5l3 2" />
                 </svg>
               </div>
-              <p className="studio-eyebrow mt-6" style={{ color: ORANGE }}>
+              <p className="studio-eyebrow mt-6" style={{ color: accent }}>
                 For yourself
               </p>
-              <h3 className="studio-h3 mt-3" style={{ color: GREEN }}>
+              <h3 className="studio-h3 mt-3" style={{ color: primary }}>
                 Check in on your own brain health.
               </h3>
-              <p className="studio-prose mt-4 flex-1" style={{ color: "rgba(8,54,48,0.72)" }}>
+              <p className="studio-prose mt-4 flex-1" style={{ color: alpha(primary, 0.72) }}>
                 Completely private. Take it at your kitchen table, on your phone, whenever you have
                 ten quiet minutes. Honest feedback, plus a clear view of whether talking to one of
                 our neurologists makes sense for you.
@@ -453,7 +459,7 @@ export default function Home() {
             <motion.article className="studio-card flex flex-col" variants={fadeUp}>
               <div
                 className="h-12 w-12 rounded-2xl flex items-center justify-center"
-                style={{ background: SKY, color: GREEN }}
+                style={{ background: sky, color: primary }}
                 aria-hidden
               >
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
@@ -463,13 +469,13 @@ export default function Home() {
                   <path d="M17 4a4 4 0 0 1 0 7.75" />
                 </svg>
               </div>
-              <p className="studio-eyebrow mt-6" style={{ color: ORANGE }}>
+              <p className="studio-eyebrow mt-6" style={{ color: accent }}>
                 For someone you love
               </p>
-              <h3 className="studio-h3 mt-3" style={{ color: GREEN }}>
+              <h3 className="studio-h3 mt-3" style={{ color: primary }}>
                 Do it together, in person or over video.
               </h3>
-              <p className="studio-prose mt-4 flex-1" style={{ color: "rgba(8,54,48,0.72)" }}>
+              <p className="studio-prose mt-4 flex-1" style={{ color: alpha(primary, 0.72) }}>
                 Our assessment is built to be done with a helper. Sit next to them at the kitchen
                 table, or screen-share over a video call from across the country. You guide the
                 conversation. They stay comfortable. And at the end, you both know what a good
@@ -490,12 +496,12 @@ export default function Home() {
           </motion.div>
 
           <div className="mt-10 flex flex-col items-center gap-4 text-center">
-            <p className="text-sm font-semibold" style={{ color: GREEN }}>
+            <p className="text-sm font-semibold" style={{ color: primary }}>
               The easiest, worry-free way to get started with Mindspan.
             </p>
             <ul
               className="flex flex-wrap items-center justify-center gap-x-7 gap-y-3 text-[13px]"
-              style={{ color: "rgba(8,54,48,0.65)" }}
+              style={{ color: alpha(primary, 0.65) }}
             >
               {[
                 "No credit card",
@@ -507,7 +513,7 @@ export default function Home() {
                     className="h-4 w-4 flex-shrink-0"
                     viewBox="0 0 24 24"
                     fill="none"
-                    stroke={ORANGE}
+                    stroke={accent}
                     strokeWidth="2.5"
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -568,18 +574,18 @@ export default function Home() {
                 <motion.article key={e.title} className="studio-card" variants={fadeUp}>
                   <div
                     className="h-12 w-12 rounded-2xl flex items-center justify-center"
-                    style={{ background: SKY, color: GREEN }}
+                    style={{ background: sky, color: primary }}
                     aria-hidden
                   >
                     {icons[i]}
                   </div>
-                  <p className="studio-eyebrow mt-6" style={{ color: ORANGE }}>
+                  <p className="studio-eyebrow mt-6" style={{ color: accent }}>
                     {e.kicker}
                   </p>
-                  <h3 className="studio-h3 mt-3" style={{ color: GREEN }}>
+                  <h3 className="studio-h3 mt-3" style={{ color: primary }}>
                     {e.title}
                   </h3>
-                  <p className="studio-prose mt-3" style={{ color: "rgba(8,54,48,0.72)" }}>
+                  <p className="studio-prose mt-3" style={{ color: alpha(primary, 0.72) }}>
                     {e.body}
                   </p>
                 </motion.article>
@@ -611,21 +617,21 @@ export default function Home() {
                   <span
                     className="flex items-center justify-center h-10 w-10 rounded-full text-sm font-semibold flex-shrink-0"
                     style={{
-                      background: SKY,
-                      color: GREEN,
+                      background: sky,
+                      color: primary,
                     }}
                   >
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   <span
                     className="flex-1 h-px"
-                    style={{ background: "rgba(8,54,48,0.15)" }}
+                    style={{ background: alpha(primary, 0.15) }}
                   />
                 </div>
-                <h3 className="studio-h3 mt-5" style={{ color: GREEN }}>
+                <h3 className="studio-h3 mt-5" style={{ color: primary }}>
                   {s.title}
                 </h3>
-                <p className="studio-prose mt-3" style={{ color: "rgba(8,54,48,0.72)" }}>
+                <p className="studio-prose mt-3" style={{ color: alpha(primary, 0.72) }}>
                   {s.body}
                 </p>
               </motion.li>
@@ -654,22 +660,22 @@ export default function Home() {
             <motion.article
               className="rounded-[1.5rem] p-8 md:p-10"
               style={{
-                background: SKY_SOFT,
-                border: "1px solid rgba(8,54,48,0.08)",
+                background: skySoft,
+                border: `1px solid ${alpha(primary, 0.08)}`,
               }}
               variants={fadeUp}
             >
-              <p className="studio-eyebrow" style={{ color: "rgba(8,54,48,0.6)" }}>
+              <p className="studio-eyebrow" style={{ color: alpha(primary, 0.6) }}>
                 The Core Protocol
               </p>
-              <h3 className="studio-h3 mt-3" style={{ color: GREEN }}>
+              <h3 className="studio-h3 mt-3" style={{ color: primary }}>
                 The full standard of care, delivered without compromise.
               </h3>
-              <p className="studio-prose mt-4" style={{ color: "rgba(8,54,48,0.72)" }}>
+              <p className="studio-prose mt-4" style={{ color: alpha(primary, 0.72) }}>
                 Everything a great neurology clinic should offer. No waiting. No rushed visits.
                 Every patient is treated like the complex person they are.
               </p>
-              <ul className="mt-6 space-y-2.5 text-base" style={{ color: "rgba(8,54,48,0.82)" }}>
+              <ul className="mt-6 space-y-2.5 text-base" style={{ color: alpha(primary, 0.82) }}>
                 {[
                   "Unhurried time with a board-certified neurologist",
                   "Comprehensive cognitive testing and functional assessment",
@@ -681,7 +687,7 @@ export default function Home() {
                   <li key={item} className="flex items-start gap-3">
                     <span
                       className="mt-2 h-1.5 w-1.5 rounded-full flex-shrink-0"
-                      style={{ background: "rgba(8,54,48,0.5)" }}
+                      style={{ background: alpha(primary, 0.5) }}
                     />
                     <span>{item}</span>
                   </li>
@@ -692,7 +698,7 @@ export default function Home() {
             <motion.article
               className="rounded-[1.5rem] p-8 md:p-10 relative overflow-hidden"
               style={{
-                background: GREEN,
+                background: primary,
                 color: "#fff",
               }}
               variants={fadeUp}
@@ -705,7 +711,7 @@ export default function Home() {
                 }}
               />
               <div className="relative">
-                <p className="studio-eyebrow" style={{ color: ORANGE }}>
+                <p className="studio-eyebrow" style={{ color: accent }}>
                   The Edge Protocol
                 </p>
                 <h3
@@ -730,7 +736,7 @@ export default function Home() {
                     <li key={item} className="flex items-start gap-3">
                       <span
                         className="mt-2 h-1.5 w-1.5 rounded-full flex-shrink-0"
-                        style={{ background: ORANGE }}
+                        style={{ background: accent }}
                       />
                       <span>{item}</span>
                     </li>
@@ -743,16 +749,16 @@ export default function Home() {
           {/* Technology sub-section */}
           <div
             className="mt-20 pt-16 border-t"
-            style={{ borderColor: "rgba(8,54,48,0.1)" }}
+            style={{ borderColor: alpha(primary, 0.1) }}
           >
             <div className="max-w-3xl">
-              <p className="studio-eyebrow" style={{ color: ORANGE }}>
+              <p className="studio-eyebrow" style={{ color: accent }}>
                 The technology behind your care
               </p>
-              <h3 className="studio-h2 mt-4" style={{ color: GREEN }}>
+              <h3 className="studio-h2 mt-4" style={{ color: primary }}>
                 Three quiet systems that make all of this possible.
               </h3>
-              <p className="studio-lead mt-5" style={{ color: "rgba(8,54,48,0.7)" }}>
+              <p className="studio-lead mt-5" style={{ color: alpha(primary, 0.7) }}>
                 You will never have to learn how any of this works. Your neurologist uses it so
                 your experience with us feels unhurried, personal, and safe.
               </p>
@@ -768,7 +774,7 @@ export default function Home() {
               <motion.article className="studio-card" variants={fadeUp}>
                 <div
                   className="h-12 w-12 rounded-2xl flex items-center justify-center"
-                  style={{ background: SKY, color: GREEN }}
+                  style={{ background: sky, color: primary }}
                   aria-hidden
                 >
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
@@ -776,13 +782,13 @@ export default function Home() {
                     <path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2Z" />
                   </svg>
                 </div>
-                <p className="studio-eyebrow mt-6" style={{ color: ORANGE }}>
+                <p className="studio-eyebrow mt-6" style={{ color: accent }}>
                   Cognitive Digital Twin
                 </p>
-                <h4 className="studio-h3 mt-3" style={{ color: GREEN }}>
+                <h4 className="studio-h3 mt-3" style={{ color: primary }}>
                   A model of your brain, built from your own data.
                 </h4>
-                <p className="studio-prose mt-4" style={{ color: "rgba(8,54,48,0.72)" }}>
+                <p className="studio-prose mt-4" style={{ color: alpha(primary, 0.72) }}>
                   We bring together your history, labs, imaging, biomarkers, genetics, and
                   cognitive testing into a personalized model of your brain health. Your
                   neurologist uses it to show you where you are biologically, where you might be
@@ -793,7 +799,7 @@ export default function Home() {
               <motion.article className="studio-card" variants={fadeUp}>
                 <div
                   className="h-12 w-12 rounded-2xl flex items-center justify-center"
-                  style={{ background: SKY, color: GREEN }}
+                  style={{ background: sky, color: primary }}
                   aria-hidden
                 >
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
@@ -802,13 +808,13 @@ export default function Home() {
                     <rect width="8" height="8" x="13" y="13" rx="2" />
                   </svg>
                 </div>
-                <p className="studio-eyebrow mt-6" style={{ color: ORANGE }}>
+                <p className="studio-eyebrow mt-6" style={{ color: accent }}>
                   Care Orchestration Engine
                 </p>
-                <h4 className="studio-h3 mt-3" style={{ color: GREEN }}>
+                <h4 className="studio-h3 mt-3" style={{ color: primary }}>
                   Nothing falls through the cracks.
                 </h4>
-                <p className="studio-prose mt-4" style={{ color: "rgba(8,54,48,0.72)" }}>
+                <p className="studio-prose mt-4" style={{ color: alpha(primary, 0.72) }}>
                   Our operational brain quietly tracks every safety checkpoint, every required MRI,
                   every follow-up, every medication decision. If a scan is due before your next
                   infusion, it is already scheduled. If a symptom could signal something urgent, it
@@ -820,20 +826,20 @@ export default function Home() {
               <motion.article className="studio-card" variants={fadeUp}>
                 <div
                   className="h-12 w-12 rounded-2xl flex items-center justify-center"
-                  style={{ background: SKY, color: GREEN }}
+                  style={{ background: sky, color: primary }}
                   aria-hidden
                 >
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
                     <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" />
                   </svg>
                 </div>
-                <p className="studio-eyebrow mt-6" style={{ color: ORANGE }}>
+                <p className="studio-eyebrow mt-6" style={{ color: accent }}>
                   Mindy, your care companion
                 </p>
-                <h4 className="studio-h3 mt-3" style={{ color: GREEN }}>
+                <h4 className="studio-h3 mt-3" style={{ color: primary }}>
                   A familiar voice between visits.
                 </h4>
-                <p className="studio-prose mt-4" style={{ color: "rgba(8,54,48,0.72)" }}>
+                <p className="studio-prose mt-4" style={{ color: alpha(primary, 0.72) }}>
                   Mindy is our AI care companion for the weeks and months between appointments.
                   She helps track symptoms, supports adherence, answers common questions, and pages
                   your clinical team when something needs real attention. A friendly, always-on
@@ -861,7 +867,7 @@ export default function Home() {
       </section>
 
       {/* WHO WE SEE — audience split */}
-      <section id="families" className="studio-section" style={{ background: SAND }}>
+      <section id="families" className="studio-section" style={{ background: sand }}>
         <div className="studio-container">
           <SectionHeader
             eyebrow="Who we see"
@@ -884,21 +890,21 @@ export default function Home() {
                 className="studio-card flex flex-col group"
                 variants={fadeUp}
               >
-                <p className="studio-eyebrow" style={{ color: ORANGE }}>
+                <p className="studio-eyebrow" style={{ color: accent }}>
                   {a.kicker}
                 </p>
-                <h3 className="studio-h3 mt-3" style={{ color: GREEN }}>
+                <h3 className="studio-h3 mt-3" style={{ color: primary }}>
                   {a.title}
                 </h3>
                 <p
                   className="studio-prose mt-4 flex-1"
-                  style={{ color: "rgba(8,54,48,0.72)" }}
+                  style={{ color: alpha(primary, 0.72) }}
                 >
                   {a.body}
                 </p>
                 <p
                   className="mt-8 font-semibold text-sm flex items-center gap-2 transition-all group-hover:gap-3"
-                  style={{ color: ORANGE }}
+                  style={{ color: accent }}
                 >
                   {a.cta}
                   <Arrow />
@@ -935,14 +941,14 @@ export default function Home() {
                   className="group relative overflow-hidden rounded-[1.5rem] flex flex-col transition-transform hover:-translate-y-1 hover:shadow-[0_20px_40px_-20px_rgba(8,54,48,0.35)]"
                   style={{
                     background: "#fff",
-                    border: "1px solid rgba(8,54,48,0.1)",
+                    border: `1px solid ${alpha(primary, 0.1)}`,
                   }}
                   variants={fadeUp}
                 >
                   {/* Map teaser */}
                   <div
                     className="relative overflow-hidden h-40"
-                    style={{ background: CREAM }}
+                    style={{ background: cream }}
                   >
                     <iframe
                       src={mapSrc}
@@ -957,7 +963,7 @@ export default function Home() {
                       className="absolute inset-0"
                       style={{
                         background:
-                          "linear-gradient(180deg, rgba(8,54,48,0.0) 0%, rgba(8,54,48,0.08) 60%, rgba(8,54,48,0.2) 100%)",
+                          `linear-gradient(180deg, ${alpha(primary, 0)} 0%, ${alpha(primary, 0.08)} 60%, ${alpha(primary, 0.2)} 100%)`,
                       }}
                     />
                     {isTelehealth && (
@@ -966,15 +972,15 @@ export default function Home() {
                           className="rounded-full px-4 py-2 text-xs font-semibold backdrop-blur"
                           style={{
                             background: "rgba(255,255,255,0.92)",
-                            color: GREEN,
-                            border: "1px solid rgba(8,54,48,0.1)",
+                            color: primary,
+                            border: `1px solid ${alpha(primary, 0.1)}`,
                           }}
                         >
                           Video visits statewide
                         </span>
                       </div>
                     )}
-                    <div className="absolute top-3 left-3 flex items-center gap-2 rounded-full bg-white/95 backdrop-blur px-3 py-1.5 text-[11px] font-semibold shadow-sm" style={{ color: GREEN }}>
+                    <div className="absolute top-3 left-3 flex items-center gap-2 rounded-full bg-white/95 backdrop-blur px-3 py-1.5 text-[11px] font-semibold shadow-sm" style={{ color: primary }}>
                       <span
                         className="h-2 w-2 rounded-full"
                         style={{ background: "#22c55e" }}
@@ -988,8 +994,8 @@ export default function Home() {
                     <h3
                       className="!text-[1.65rem] leading-[1.05]"
                       style={{
-                        color: GREEN,
-                        fontFamily: "var(--font-pt-serif), Georgia, serif",
+                        color: primary,
+                        fontFamily: theme.fonts.heading,
                         letterSpacing: "-0.02em",
                       }}
                     >
@@ -997,13 +1003,13 @@ export default function Home() {
                     </h3>
                     <p
                       className="mt-1 text-sm"
-                      style={{ color: "rgba(8,54,48,0.6)" }}
+                      style={{ color: alpha(primary, 0.6) }}
                     >
                       {l.state}
                     </p>
                     <p
                       className="mt-5 text-sm font-semibold flex items-center gap-2 group-hover:gap-3 transition-all"
-                      style={{ color: ORANGE }}
+                      style={{ color: accent }}
                     >
                       {isTelehealth ? "Book a video visit" : "Visit clinic"}
                       <Arrow />
@@ -1035,8 +1041,8 @@ export default function Home() {
             <motion.article
               className="rounded-[1.5rem] p-8 md:p-10 relative overflow-hidden group"
               style={{
-                background: CREAM,
-                border: "1px solid rgba(8,54,48,0.1)",
+                background: cream,
+                border: `1px solid ${alpha(primary, 0.1)}`,
               }}
               variants={fadeUp}
             >
@@ -1048,19 +1054,19 @@ export default function Home() {
                 }}
               />
               <div className="relative">
-                <p className="studio-eyebrow" style={{ color: ORANGE }}>
+                <p className="studio-eyebrow" style={{ color: accent }}>
                   Refer a patient
                 </p>
-                <h3 className="studio-h3 mt-3" style={{ color: GREEN }}>
+                <h3 className="studio-h3 mt-3" style={{ color: primary }}>
                   Get your patient seen by a neurologist in weeks.
                 </h3>
-                <p className="studio-prose mt-4" style={{ color: "rgba(8,54,48,0.72)" }}>
+                <p className="studio-prose mt-4" style={{ color: alpha(primary, 0.72) }}>
                   You are already the trusted doctor. We are the specialist partner who makes that
                   job easier. Fast access for your patient, a thoughtful assessment, and clean
                   notes back in your chart. Nothing slips. Nothing gets handed off and forgotten.
                 </p>
 
-                <ul className="mt-6 space-y-2.5 text-base" style={{ color: "rgba(8,54,48,0.82)" }}>
+                <ul className="mt-6 space-y-2.5 text-base" style={{ color: alpha(primary, 0.82) }}>
                   {[
                     "First appointment typically within two to three weeks",
                     "Integrated with Athena and most referral workflows",
@@ -1071,7 +1077,7 @@ export default function Home() {
                     <li key={item} className="flex items-start gap-3">
                       <span
                         className="mt-2 h-1.5 w-1.5 rounded-full flex-shrink-0"
-                        style={{ background: ORANGE }}
+                        style={{ background: accent }}
                       />
                       <span>{item}</span>
                     </li>
@@ -1093,7 +1099,7 @@ export default function Home() {
             <motion.article
               className="rounded-[1.5rem] p-8 md:p-10 relative overflow-hidden group text-white"
               style={{
-                background: GREEN,
+                background: primary,
               }}
               variants={fadeUp}
             >
@@ -1105,7 +1111,7 @@ export default function Home() {
                 }}
               />
               <div className="relative">
-                <p className="studio-eyebrow" style={{ color: ORANGE }}>
+                <p className="studio-eyebrow" style={{ color: accent }}>
                   Join Mindspan
                 </p>
                 <h3
@@ -1132,7 +1138,7 @@ export default function Home() {
                     <li key={item} className="flex items-start gap-3">
                       <span
                         className="mt-2 h-1.5 w-1.5 rounded-full flex-shrink-0"
-                        style={{ background: ORANGE }}
+                        style={{ background: accent }}
                       />
                       <span>{item}</span>
                     </li>
@@ -1168,7 +1174,7 @@ export default function Home() {
       {/* FINAL CTA */}
       <section
         className="studio-section text-white relative overflow-hidden"
-        style={{ background: GREEN }}
+        style={{ background: primary }}
       >
         {/* Ambient living atmosphere — slow counterphase glows */}
         <div
@@ -1198,7 +1204,7 @@ export default function Home() {
           whileInView="show"
           viewport={VIEWPORT}
         >
-          <motion.p className="studio-eyebrow" style={{ color: ORANGE }} variants={fadeIn}>
+          <motion.p className="studio-eyebrow" style={{ color: accent }} variants={fadeIn}>
             When you are ready
           </motion.p>
           <motion.h2 className="studio-h2 mt-6" variants={fadeIn}>
@@ -1248,7 +1254,7 @@ export default function Home() {
       {/* FOOTER */}
       <footer
         className="pt-20 pb-12 text-white/75"
-        style={{ background: GREEN, borderTop: "1px solid rgba(255,255,255,0.08)" }}
+        style={{ background: primary, borderTop: "1px solid rgba(255,255,255,0.08)" }}
       >
         <div className="studio-container grid md:grid-cols-2 lg:grid-cols-5 gap-10">
           <div className="lg:col-span-2">
@@ -1313,6 +1319,8 @@ export default function Home() {
           </div>
         </div>
       </footer>
+
+      <StyleSwitcher />
     </div>
   );
 }
