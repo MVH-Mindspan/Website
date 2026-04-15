@@ -449,7 +449,7 @@ export function ArrivalPage() {
               {/* Proof column — editorial image */}
               <div className="flex flex-col justify-center">
                 <img
-                  src={i === 0 ? "/assets/get-assessed.png" : i % 2 === 0 ? "/assets/consultation-1.png" : "/assets/consultation-2.png"}
+                  src={i === 0 ? "/assets/get-assessed.png" : i === 3 ? "/assets/ongoing-partnership.png" : i % 2 === 0 ? "/assets/consultation-1.png" : "/assets/consultation-2.png"}
                   alt=""
                   className="rounded-2xl w-full object-cover"
                   style={{ aspectRatio: "16/10" }}
