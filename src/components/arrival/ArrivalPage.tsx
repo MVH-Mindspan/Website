@@ -618,6 +618,12 @@ export function ArrivalPage() {
 
           <div className="mt-12 grid lg:grid-cols-2 gap-6 md:gap-8">
             <div className="arrival-rv rounded-[2rem] p-8 md:p-10" style={{ background: c.skySoft, border: `1px solid ${alpha(c.ink, 0.06)}` }}>
+              <div className="h-12 w-12 rounded-2xl flex items-center justify-center mb-5" style={{ background: c.sky, color: c.brandGreen }}>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                  <path d="m9 12 2 2 4-4" />
+                </svg>
+              </div>
               <p className="arrival-eyebrow" style={{ color: alpha(c.ink, 0.6) }}>The Core Protocol</p>
               <h3 className="mt-3" style={{ fontFamily: theme.fonts.heading, fontSize: "clamp(1.375rem, 0.8vw + 1rem, 1.75rem)", lineHeight: 1.18, color: c.ink }}>
                 The full standard of care, delivered without compromise.
@@ -638,6 +644,13 @@ export function ArrivalPage() {
             <div className="arrival-rv rounded-[2rem] p-8 md:p-10 relative overflow-hidden" style={{ background: c.brandGreen, color: "#fff" }}>
               <div className="absolute inset-0 opacity-60 pointer-events-none" style={{ background: `radial-gradient(120% 100% at 100% 0%, ${alpha(c.accent, 0.18)} 0%, transparent 55%)` }} />
               <div className="relative">
+                <div className="h-12 w-12 rounded-2xl flex items-center justify-center mb-5" style={{ background: alpha(c.cream, 0.12), color: c.accent }}>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
+                    <circle cx="12" cy="12" r="10" />
+                    <circle cx="12" cy="12" r="6" />
+                    <circle cx="12" cy="12" r="2" />
+                  </svg>
+                </div>
                 <p className="arrival-eyebrow" style={{ color: c.accent }}>The Edge Protocol</p>
                 <h3 className="mt-3" style={{ fontFamily: theme.fonts.heading, fontSize: "clamp(1.375rem, 0.8vw + 1rem, 1.75rem)", lineHeight: 1.18 }}>
                   Precision medicine, built into every visit.
