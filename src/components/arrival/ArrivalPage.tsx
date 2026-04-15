@@ -241,7 +241,7 @@ export function ArrivalPage() {
           ============================================ */}
       <section
         className="relative w-full overflow-hidden"
-        style={{ height: "100vh", minHeight: 600 }}
+        style={{ height: "100vh", minHeight: 600, background: "#201E17" }}
       >
         {/* Full-bleed background video */}
         {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
