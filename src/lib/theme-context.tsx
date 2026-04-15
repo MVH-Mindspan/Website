@@ -46,16 +46,33 @@ function applyThemeCSSVars(theme: ThemeConfig) {
 export function ThemeProvider({ children }: { children: ReactNode }) {
   const [theme, setThemeState] = useState<ThemeConfig>(mindspanTheme);
 
-  // Read persisted theme on mount
+  // Read theme from URL param, then localStorage, then default
   useEffect(() => {
+    const url = new URL(window.location.href);
+    const paramTheme = url.searchParams.get("theme");
+
+    // URL param takes priority
+    if (paramTheme) {
+      const found = themes.find((t) => t.id === paramTheme);
+      if (found) {
+        setThemeState(found);
+        applyThemeCSSVars(found);
+        localStorage.setItem(STORAGE_KEY, paramTheme);
+        return;
+      }
+    }
+
+    // Then localStorage
     const stored = localStorage.getItem(STORAGE_KEY);
     if (stored) {
       const found = themes.find((t) => t.id === stored);
       if (found) {
         setThemeState(found);
         applyThemeCSSVars(found);
+        return;
       }
     }
+
     // Apply default on first load
     applyThemeCSSVars(theme);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -70,6 +87,11 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     setThemeState(found);
     applyThemeCSSVars(found);
     localStorage.setItem(STORAGE_KEY, id);
+
+    // Update URL so the link is shareable
+    const url = new URL(window.location.href);
+    url.searchParams.set("theme", id);
+    window.history.replaceState({}, "", url.toString());
 
     setTimeout(() => {
       document.documentElement.classList.remove("theme-transitioning");
