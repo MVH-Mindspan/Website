@@ -314,9 +314,17 @@ h1, h2, h3 {
 
 /* Responsive overrides for arrival layout */
 @media (max-width: 768px) {
+  /* Nav pill */
   .arrival-scope .fixed { width: 96vw !important; }
 
-  /* Journey header + banner: stack to single column */
+  /* Hero content: stack vertically */
+  .arrival-hero-content {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 24px !important;
+  }
+
+  /* Journey header: stack to single column */
   .arrival-scope .arrival-grid-header {
     display: flex !important;
     flex-direction: column !important;
@@ -341,17 +349,48 @@ h1, h2, h3 {
     justify-content: flex-start !important;
   }
 
-  /* Stats band */
-  .arrival-scope [style*="grid-template-columns: repeat(4"],
-  .arrival-scope [style*="grid-template-columns: 2fr 1fr 1fr 1fr"] {
+  /* Stats band: 2-up on mobile */
+  .arrival-scope [style*="grid-template-columns: repeat(4"] {
     grid-template-columns: 1fr 1fr !important;
     gap: 24px !important;
   }
 
+  /* Generic multi-column to single column */
   .arrival-scope [style*="grid-template-columns: 1fr 1.1fr"],
   .arrival-scope [style*="grid-template-columns: 1fr 1fr"],
-  .arrival-scope [style*="grid-template-columns: repeat(3"] {
+  .arrival-scope [style*="grid-template-columns: repeat(3"],
+  .arrival-scope [style*="grid-template-columns: 2fr 1fr 1fr 1fr"] {
     grid-template-columns: 1fr !important;
+  }
+
+  /* Reduce section padding on mobile */
+  .arrival-scope section {
+    padding-top: clamp(48px, 8vw, 96px) !important;
+    padding-bottom: clamp(48px, 8vw, 96px) !important;
+  }
+
+  /* For providers section less extreme */
+  .arrival-scope .arrival-providers {
+    padding-top: 64px !important;
+    padding-bottom: 64px !important;
+  }
+
+  /* Touch targets: ensure minimum 44px */
+  .arrival-scope a[style*="border-radius: 10rem"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* Extra-small screens (320px) */
+@media (max-width: 420px) {
+  .arrival-scope [style*="grid-template-columns: repeat(4"],
+  .arrival-scope [style*="grid-template-columns: 1fr 1fr"] {
+    grid-template-columns: 1fr !important;
+  }
+  .arrival-scope .arrival-grid-header h2,
+  .arrival-scope .arrival-grid-banner p {
+    font-size: 0.85rem !important;
   }
 }
 
