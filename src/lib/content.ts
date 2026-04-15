@@ -141,7 +141,7 @@ export const audiences = [
     title: "You don’t have to keep figuring this out alone.",
     body:
       "You’ve probably spent months, maybe years, noticing changes, making calls, and being told to wait and see. We know that’s exhausting, and we know it’s lonely. You can bring your loved one to us, and we’ll take it from here together.",
-    cta: "Start a free assessment",
+    cta: "Book a visit",
     href: "/book-a-visit",
   },
   {
