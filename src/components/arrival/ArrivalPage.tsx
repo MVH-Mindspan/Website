@@ -43,11 +43,12 @@ function AnimatedStat({ value, label }: { value: string; label: string }) {
       hasAnimated.current = true;
       obs.disconnect();
 
-      // Extract numeric part
-      const match = value.match(/^([\d.]+)/);
-      if (!match) return;
+      // Extract first numeric part for animation
+      const match = value.match(/([\d.]+)/);
+      if (!match) { setDisplayed(value); return; }
       const target = parseFloat(match[1]);
-      const suffix = value.slice(match[1].length);
+      const prefix = value.slice(0, match.index);
+      const suffix = value.slice((match.index ?? 0) + match[1].length);
       const isDecimal = match[1].includes(".");
       const duration = 800;
       const start = performance.now();
@@ -56,7 +57,7 @@ function AnimatedStat({ value, label }: { value: string; label: string }) {
         const t = Math.min((now - start) / duration, 1);
         const eased = 1 - Math.pow(1 - t, 4); // ease-out-quart
         const current = target * eased;
-        setDisplayed((isDecimal ? current.toFixed(1) : Math.round(current).toString()) + suffix);
+        setDisplayed(prefix + (isDecimal ? current.toFixed(1) : Math.round(current).toString()) + suffix);
         if (t < 1) requestAnimationFrame(tick);
         else setDisplayed(value);
       };
@@ -371,6 +372,7 @@ export function ArrivalPage() {
           ============================================ */}
       <a
         href="#locations"
+        aria-label="View clinic locations — appointments available this month"
         className="block transition-colors"
         style={{ background: c.sand, padding: "20px 0" }}
         onMouseEnter={(e) => (e.currentTarget.style.background = alpha(c.sand, 0.7))}
@@ -420,7 +422,7 @@ export function ArrivalPage() {
       {/* ============================================
           STAGES — Editorial rows on sand
           ============================================ */}
-      <section style={{ background: c.cream, color: c.ink, paddingBottom: 48 }}>
+      <section style={{ background: c.cream, color: c.ink, padding: "48px 0" }}>
         <div style={{ maxWidth: "min(1320px, 92vw)", marginInline: "auto" }}>
           {howItWorks.map((rawStep, i) => {
             // Override first step for Arrival layout
@@ -439,7 +441,7 @@ export function ArrivalPage() {
                 gridTemplateColumns: "80px 1fr 1fr",
                 gap: "0 32px",
                 padding: "48px 0",
-                borderBottom: `1px solid ${c.sand}`,
+                borderBottom: i < howItWorks.length - 1 ? `1px solid ${c.sand}` : "none",
                 position: "relative",
                 animationDelay: `${i * 80}ms`,
               }}

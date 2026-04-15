@@ -285,6 +285,22 @@ h1, h2, h3 {
   overflow-x: hidden;
 }
 
+/* Focus-visible for keyboard navigation */
+.arrival-scope a:focus-visible,
+.arrival-scope button:focus-visible {
+  outline: 2px solid var(--theme-accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+.arrival-scope a[style*="border-radius: 10rem"]:focus-visible {
+  border-radius: 10rem;
+}
+
+/* Nav link transition */
+.arrival-scope nav a {
+  transition: color 0.2s ease, background 0.2s ease;
+}
+
 .arrival-eyebrow {
   font-style: normal;
   font-weight: 600;
