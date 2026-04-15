@@ -396,26 +396,15 @@ export function ArrivalPage() {
                 )}
               </div>
 
-              {/* Proof column — placeholder */}
+              {/* Proof column — editorial image */}
               <div className="flex flex-col justify-center">
-                <div
-                  className="rounded-2xl"
-                  style={{
-                    aspectRatio: "16/7",
-                    background: alpha(c.primary, 0.06),
-                    border: `1px solid ${c.sand}`,
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  <span
-                    className="text-xs font-semibold uppercase tracking-wide"
-                    style={{ color: alpha(c.ink, 0.3) }}
-                  >
-                    Visual placeholder
-                  </span>
-                </div>
+                <img
+                  src={i % 2 === 0 ? "/assets/consultation-1.png" : "/assets/consultation-2.png"}
+                  alt=""
+                  className="rounded-2xl w-full object-cover"
+                  style={{ aspectRatio: "16/10" }}
+                  loading="lazy"
+                />
               </div>
             </div>
           ); })}
@@ -494,7 +483,17 @@ export function ArrivalPage() {
             </p>
           </div>
 
-          <div className="mt-16 grid lg:grid-cols-2 gap-6 md:gap-8">
+          <div className="arrival-rv mt-12 overflow-hidden rounded-[2rem]">
+            <img
+              src="/assets/consultation-2.png"
+              alt="A patient and neurologist in conversation"
+              className="w-full object-cover"
+              style={{ maxHeight: 420 }}
+              loading="lazy"
+            />
+          </div>
+
+          <div className="mt-12 grid lg:grid-cols-2 gap-6 md:gap-8">
             <div className="arrival-rv rounded-[2rem] p-8 md:p-10" style={{ background: c.sand, border: `1px solid ${alpha(c.ink, 0.06)}` }}>
               <p className="arrival-eyebrow" style={{ color: alpha(c.ink, 0.6) }}>The Core Protocol</p>
               <h3 className="mt-3" style={{ fontFamily: theme.fonts.heading, fontSize: "clamp(1.375rem, 0.8vw + 1rem, 1.75rem)", lineHeight: 1.18, color: c.ink }}>
@@ -598,6 +597,16 @@ export function ArrivalPage() {
             <p className="mt-5" style={{ fontFamily: theme.fonts.body, fontSize: "clamp(1rem, 0.4vw + 0.95rem, 1.25rem)", lineHeight: 1.55, color: alpha(c.ink, 0.7) }}>
               A short note, directly to you.
             </p>
+          </div>
+
+          <div className="arrival-rv mt-12 overflow-hidden rounded-[2rem]">
+            <img
+              src="/assets/consultation-1.png"
+              alt="A consultation in a sunlit room"
+              className="w-full object-cover"
+              style={{ maxHeight: 400 }}
+              loading="lazy"
+            />
           </div>
 
           <div className="mt-12 grid md:grid-cols-3 gap-5 md:gap-6">
