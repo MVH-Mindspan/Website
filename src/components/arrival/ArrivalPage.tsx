@@ -178,7 +178,7 @@ export function ArrivalPage() {
         />
         {/* Content at bottom */}
         <div
-          className="absolute bottom-0 left-0 right-0 flex items-end justify-between gap-16"
+          className="absolute bottom-0 left-0 right-0 flex items-end justify-between gap-16 arrival-hero-content"
           style={{ padding: "64px clamp(24px, 5vw, 80px)" }}
         >
           <h1
@@ -721,7 +721,7 @@ export function ArrivalPage() {
       {/* ============================================
           FOR PROVIDERS — Distinct section with sand surface
           ============================================ */}
-      <section style={{ background: c.sand, padding: "112px 0" }}>
+      <section className="arrival-providers" style={{ background: c.sand, padding: "112px 0" }}>
         <div style={{ maxWidth: "min(1320px, 92vw)", marginInline: "auto" }}>
           {/* Editorial intro with rule */}
           <div style={{ maxWidth: "min(900px, 100%)", marginInline: "auto", textAlign: "center" }}>
