@@ -311,18 +311,18 @@ h1, h2, h3 {
 
 .arrival-rv {
   opacity: 0;
-  transform: translateY(18px);
-  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateY(32px);
+  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .arrival-rv.on {
   opacity: 1;
   transform: none;
 }
-.arrival-rv-d1 { transition-delay: 80ms; }
-.arrival-rv-d2 { transition-delay: 160ms; }
-.arrival-rv-d3 { transition-delay: 240ms; }
-.arrival-rv-d4 { transition-delay: 320ms; }
+.arrival-rv-d1 { transition-delay: 120ms; }
+.arrival-rv-d2 { transition-delay: 240ms; }
+.arrival-rv-d3 { transition-delay: 360ms; }
+.arrival-rv-d4 { transition-delay: 480ms; }
 
 /* CTA button press feedback */
 .arrival-scope a[style*="border-radius: 10rem"]:active {
@@ -332,7 +332,7 @@ h1, h2, h3 {
 
 /* Number column pulse on reveal */
 .arrival-scope .arrival-rv.on .arrival-num {
-  animation: arrival-num-pop 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both;
+  animation: arrival-num-pop 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.2s both;
 }
 @keyframes arrival-num-pop {
   0% { transform: scale(0.8); opacity: 0; }

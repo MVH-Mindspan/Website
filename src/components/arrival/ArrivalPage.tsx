@@ -50,7 +50,7 @@ function AnimatedStat({ value, label }: { value: string; label: string }) {
       const prefix = value.slice(0, match.index);
       const suffix = value.slice((match.index ?? 0) + match[1].length);
       const isDecimal = match[1].includes(".");
-      const duration = 800;
+      const duration = 1200;
       const start = performance.now();
 
       const tick = (now: number) => {
@@ -62,7 +62,7 @@ function AnimatedStat({ value, label }: { value: string; label: string }) {
         else setDisplayed(value);
       };
       requestAnimationFrame(tick);
-    }, { threshold: 0.3 });
+    }, { threshold: 0.5 });
     obs.observe(ref.current);
     return () => obs.disconnect();
   }, [value]);
@@ -135,7 +135,7 @@ export function ArrivalPage() {
           }
         });
       },
-      { threshold: 0.1, rootMargin: "0px 0px -30px 0px" }
+      { threshold: 0.15, rootMargin: "0px 0px -120px 0px" }
     );
     document.querySelectorAll(".arrival-rv").forEach((el) => obs.observe(el));
 
