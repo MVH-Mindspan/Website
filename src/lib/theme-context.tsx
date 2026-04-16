@@ -8,7 +8,7 @@ import {
   useCallback,
   type ReactNode,
 } from "react";
-import { themes, mindspanTheme, type ThemeConfig } from "./themes";
+import { themes, defaultTheme, type ThemeConfig } from "./themes";
 
 interface ThemeContextValue {
   theme: ThemeConfig;
@@ -17,7 +17,7 @@ interface ThemeContextValue {
 }
 
 const ThemeContext = createContext<ThemeContextValue>({
-  theme: mindspanTheme,
+  theme: defaultTheme,
   setTheme: () => {},
   themes,
 });
@@ -44,7 +44,7 @@ function applyThemeCSSVars(theme: ThemeConfig) {
 }
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setThemeState] = useState<ThemeConfig>(mindspanTheme);
+  const [theme, setThemeState] = useState<ThemeConfig>(defaultTheme);
 
   // Read theme from URL param, then localStorage, then default
   useEffect(() => {

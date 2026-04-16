@@ -248,6 +248,14 @@ h1, h2, h3 {
 .final-glow--warm { animation: final-glow-warm 16s ease-in-out infinite; }
 .final-glow--cool { animation: final-glow-cool 19s ease-in-out infinite -3s; }
 
+@keyframes pulseDot {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50%      { transform: scale(1.25); opacity: 0.75; }
+}
+@media (prefers-reduced-motion: reduce) {
+  [style*="pulseDot"] { animation: none !important; }
+}
+
 /* Orange halo on accent buttons when hovered — additive to the 3D lift */
 .studio-btn-accent:hover {
   box-shadow:
@@ -280,150 +288,94 @@ h1, h2, h3 {
   }
 }
 
-/* === Arrival scope — scroll-reveal animations === */
-.arrival-scope {
-  overflow-x: hidden;
-}
-
-/* Focus-visible for keyboard navigation */
-.arrival-scope a:focus-visible,
-.arrival-scope button:focus-visible {
-  outline: 2px solid var(--theme-accent);
-  outline-offset: 3px;
-  border-radius: 4px;
-}
-.arrival-scope a[style*="border-radius: 10rem"]:focus-visible {
-  border-radius: 10rem;
-}
-
-/* Nav link transition */
-.arrival-scope nav a {
-  transition: color 0.2s ease, background 0.2s ease;
-}
-
-.arrival-eyebrow {
-  font-style: normal;
-  font-weight: 600;
-  font-size: 0.8125rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-}
-
-.arrival-rv {
+/* === Scroll-reveal (consumed by <Reveal>) === */
+.reveal {
   opacity: 0;
   transform: translateY(32px);
   transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
               transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.arrival-rv.on {
-  opacity: 1;
-  transform: none;
+.reveal.on { opacity: 1; transform: none; }
+.reveal-d1 { transition-delay: 120ms; }
+.reveal-d2 { transition-delay: 240ms; }
+.reveal-d3 { transition-delay: 360ms; }
+.reveal-d4 { transition-delay: 480ms; }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
 }
-.arrival-rv-d1 { transition-delay: 120ms; }
-.arrival-rv-d2 { transition-delay: 240ms; }
-.arrival-rv-d3 { transition-delay: 360ms; }
-.arrival-rv-d4 { transition-delay: 480ms; }
+
+/* === Marketing (v2) scope === */
+.v2-scope {
+  overflow-x: hidden;
+}
+
+/* Focus-visible for keyboard navigation */
+.v2-scope a:focus-visible,
+.v2-scope button:focus-visible {
+  outline: 2px solid var(--theme-accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+.v2-scope a[style*="border-radius: 10rem"]:focus-visible {
+  border-radius: 10rem;
+}
+
+/* Nav link transition */
+.v2-scope nav a {
+  transition: color 0.2s ease, background 0.2s ease;
+}
 
 /* CTA button press feedback */
-.arrival-scope a[style*="border-radius: 10rem"]:active {
+.v2-scope a[style*="border-radius: 10rem"]:active {
   transform: scale(0.97) !important;
   transition: transform 0.1s ease !important;
 }
 
-/* Number column pulse on reveal */
-.arrival-scope .arrival-rv.on .arrival-num {
-  animation: arrival-num-pop 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.2s both;
-}
-@keyframes arrival-num-pop {
-  0% { transform: scale(0.8); opacity: 0; }
-  100% { transform: scale(1); opacity: 1; }
-}
-
 @media (prefers-reduced-motion: reduce) {
-  .arrival-rv { opacity: 1; transform: none; transition: none; }
-  .arrival-scope a[style*="border-radius: 10rem"]:active { transform: none !important; }
-  .arrival-scope .arrival-rv.on .arrival-num { animation: none; opacity: 1; }
+  .v2-scope a[style*="border-radius: 10rem"]:active { transform: none !important; }
 }
 
-/* Responsive overrides for arrival layout */
+/* Responsive overrides for v2 layout */
 @media (max-width: 768px) {
-  /* Nav pill */
-  .arrival-scope .fixed { width: 96vw !important; }
-
   /* Hero content: stack vertically */
-  .arrival-hero-content {
+  .v2-scope .hero-content {
     flex-direction: column !important;
     align-items: flex-start !important;
     gap: 24px !important;
   }
 
-  /* Journey header: stack to single column */
-  .arrival-scope .arrival-grid-header {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 16px !important;
-  }
-
-  /* Journey step rows: number + content, hide image */
-  .arrival-scope [style*="grid-template-columns: 80px"] {
+  /* Three-column 80px grids collapse to number + content */
+  .v2-scope .editorial-grid,
+  .v2-scope .teaser-banner-grid,
+  .v2-scope .stage-row {
     grid-template-columns: 48px 1fr !important;
   }
-  .arrival-scope .arrival-step-image {
+  .v2-scope .stage-image {
     display: none !important;
   }
 
-  /* Banner: stack and left-align */
-  .arrival-scope .arrival-grid-banner {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 8px !important;
-  }
-  .arrival-scope .arrival-grid-banner p {
+  /* Banner text alignment on mobile */
+  .v2-scope .teaser-banner-grid > p:last-child {
     justify-content: flex-start !important;
   }
 
   /* Stats band: 2-up on mobile */
-  .arrival-scope [style*="grid-template-columns: repeat(4"] {
+  .v2-scope .stats-grid {
     grid-template-columns: 1fr 1fr !important;
     gap: 24px !important;
   }
 
-  /* Generic multi-column to single column */
-  .arrival-scope [style*="grid-template-columns: 1fr 1.1fr"],
-  .arrival-scope [style*="grid-template-columns: 1fr 1fr"],
-  .arrival-scope [style*="grid-template-columns: repeat(3"],
-  .arrival-scope [style*="grid-template-columns: 2fr 1fr 1fr 1fr"] {
-    grid-template-columns: 1fr !important;
-  }
-
-  /* Reduce section padding on mobile */
-  .arrival-scope section {
-    padding-top: clamp(48px, 8vw, 96px) !important;
-    padding-bottom: clamp(48px, 8vw, 96px) !important;
-  }
-
-  /* For providers section less extreme */
-  .arrival-scope .arrival-providers {
-    padding-top: 64px !important;
-    padding-bottom: 64px !important;
-  }
-
   /* Touch targets: ensure minimum 44px */
-  .arrival-scope a[style*="border-radius: 10rem"] {
+  .v2-scope a[style*="border-radius: 10rem"] {
     min-height: 44px;
     min-width: 44px;
   }
 }
 
-/* Extra-small screens (320px) */
 @media (max-width: 420px) {
-  .arrival-scope [style*="grid-template-columns: repeat(4"],
-  .arrival-scope [style*="grid-template-columns: 1fr 1fr"] {
+  .v2-scope .stats-grid {
     grid-template-columns: 1fr !important;
-  }
-  .arrival-scope .arrival-grid-header h2,
-  .arrival-scope .arrival-grid-banner p {
-    font-size: 0.85rem !important;
   }
 }
 
