@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion, type Variants } from "framer-motion";
-import { locations } from "@/lib/content";
+import { locations } from "@/content";
 
 const EASE = [0.22, 0.61, 0.36, 1] as const;
 const GREEN = "#083630";

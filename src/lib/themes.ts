@@ -14,7 +14,7 @@ export interface ThemeColors {
   brandGreenLight: string;
 }
 
-export type ThemeStructure = "mindspan" | "arrival";
+export type ThemeStructure = "v1" | "v2";
 
 export interface ThemeConfig {
   id: string;
@@ -37,11 +37,11 @@ export function alpha(hex: string, opacity: number): string {
   return `rgba(${r}, ${g}, ${b}, ${opacity})`;
 }
 
-export const mindspanTheme: ThemeConfig = {
-  id: "mindspan",
-  name: "Mindspan",
-  description: "Green & orange healthcare — current brand",
-  structure: "mindspan",
+export const brandV1Theme: ThemeConfig = {
+  id: "mindspan-v1",
+  name: "Mindspan Brand v1",
+  description: "Original green & orange homepage — frozen, reachable via dev switcher",
+  structure: "v1",
   colors: {
     primary: "#083630",
     primaryLight: "#1f514a",
@@ -63,11 +63,11 @@ export const mindspanTheme: ThemeConfig = {
   },
 };
 
-export const arrivalTheme: ThemeConfig = {
-  id: "arrival",
-  name: "Video Hero",
-  description: "Warm sand editorial — full page structure swap",
-  structure: "arrival",
+export const brandV2Theme: ThemeConfig = {
+  id: "mindspan-v2",
+  name: "Mindspan Brand v2",
+  description: "Warm sand editorial — the canonical site brand",
+  structure: "v2",
   colors: {
     primary: "#083630",
     primaryLight: "#1f514a",
@@ -89,4 +89,5 @@ export const arrivalTheme: ThemeConfig = {
   },
 };
 
-export const themes: ThemeConfig[] = [mindspanTheme, arrivalTheme];
+export const themes: ThemeConfig[] = [brandV2Theme, brandV1Theme];
+export const defaultTheme = brandV2Theme;

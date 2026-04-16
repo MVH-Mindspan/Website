@@ -12,8 +12,6 @@ import {
 } from "@/lib/content";
 import { useTheme } from "@/lib/theme-context";
 import { alpha } from "@/lib/themes";
-import { StyleSwitcher } from "@/components/dev/StyleSwitcher";
-import { ArrivalPage } from "@/components/arrival/ArrivalPage";
 
 const EASE = [0.22, 0.61, 0.36, 1] as const;
 
@@ -131,7 +129,7 @@ function SectionHeader({
   );
 }
 
-export default function Home() {
+export function MindspanHome() {
   const reducedMotion = useReducedMotion();
   const { theme } = useTheme();
   const { primary, primaryLight, accent, cream, sand, sky, skySoft } = theme.colors;
@@ -155,11 +153,6 @@ export default function Home() {
       "color:#fb4d17; font-size:12px;"
     );
   }, []);
-
-  // Full structure swap — render entirely different page
-  if (theme.structure === "arrival") {
-    return <ArrivalPage />;
-  }
 
   return (
     <div style={{ background: cream, color: primary }}>
@@ -1319,8 +1312,6 @@ export default function Home() {
           </div>
         </div>
       </footer>
-
-      <StyleSwitcher />
     </div>
   );
 }
