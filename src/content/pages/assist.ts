@@ -1,5 +1,6 @@
 import { buildMetadata } from "@/lib/seo";
 import type { JourneyStage } from "../journey";
+import type { Protocol } from "../protocols";
 import type { TechCard } from "../technology";
 
 const BOOKING_HREF = "/book-a-visit";
@@ -61,6 +62,37 @@ const paths: TechCard[] = [
     icon: "brain",
   },
 ];
+
+const assessmentModes: { inPerson: Protocol; remote: Protocol } = {
+  inPerson: {
+    id: "in-person",
+    eyebrow: "In person",
+    title: "Sit beside them, at home or in clinic.",
+    body:
+      "Many families find it easier to start the assessment in the same room \u2014 offering reassurance, reading prompts out loud, and keeping the environment calm. Our care team guides you through each step so nothing feels unfamiliar.",
+    bullets: [
+      "Complete the assessment at home on a tablet or laptop",
+      "Or visit a Mindspan clinic for an in-person first session",
+      "Caregiver-friendly prompts, built for non-clinical helpers",
+      "Results reviewed by our care team and shared with you",
+    ],
+    icon: "shield",
+  },
+  remote: {
+    id: "remote",
+    eyebrow: "Remote",
+    title: "Support them from anywhere, together.",
+    body:
+      "If you live far away or can\u2019t always be there in person, you can still assist. Join a video call, share encouragement in real time, and guide your loved one through the assessment without having to travel.",
+    bullets: [
+      "Assist over video from anywhere in the country",
+      "Share instructions and encouragement in real time",
+      "No travel required for you or your loved one",
+      "Our care team is on call if you need help mid-assessment",
+    ],
+    icon: "bullseye",
+  },
+};
 
 const howToStart: JourneyStage[] = [
   {
@@ -137,6 +169,23 @@ export const assistPage = {
         "Whether you\u2019re looking for specialist care for a loved one, a proactive baseline, or a quick private assessment from home \u2014 each path uses the same Mindspan care team and tools.",
     },
     cards: paths,
+  },
+
+  assessment: {
+    intro: {
+      eyebrow: "Caregiver-assisted assessment",
+      title: "Start their assessment together, wherever you are.",
+      lead:
+        "You can begin your loved one\u2019s cognitive assessment from home or in person \u2014 and stay by their side to help them through it. Either way uses the same validated tools, reviewed by our care team within days.",
+    },
+    inPerson: assessmentModes.inPerson,
+    remote: assessmentModes.remote,
+    closing:
+      "The assessment is free and takes about 30 minutes. If it indicates further evaluation would help, we\u2019ll schedule a specialist visit within weeks, not months.",
+    cta: {
+      label: "Start a caregiver-assisted free assessment",
+      href: BOOKING_HREF,
+    },
   },
 
   howToStart: {

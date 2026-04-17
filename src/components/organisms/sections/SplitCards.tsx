@@ -24,6 +24,7 @@ export function SplitCards({
   closing,
   cta,
   footnote,
+  tone = "default",
 }: {
   intro: {
     eyebrow: string;
@@ -37,12 +38,14 @@ export function SplitCards({
   closing?: string;
   cta?: { label: string; href: string };
   footnote?: string;
+  tone?: "default" | "sand";
 }) {
   const { theme } = useTheme();
   const c = theme.colors;
+  const background = tone === "sand" ? c.sand : undefined;
 
   return (
-    <section style={{ padding: "96px 0" }}>
+    <section style={{ padding: "96px 0", background }}>
       <Container>
         <SectionHeader
           eyebrow={intro.eyebrow}
@@ -66,7 +69,7 @@ export function SplitCards({
           <Reveal
             className="rounded-[2rem] p-8 md:p-10"
             style={{
-              background: c.skySoft,
+              background: tone === "sand" ? c.cream : c.skySoft,
               border: `1px solid ${alpha(c.ink, 0.06)}`,
             }}
           >
