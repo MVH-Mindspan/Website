@@ -3,6 +3,7 @@ export { PageHero } from "./PageHero";
 export { EditorialIntro } from "./EditorialIntro";
 export { TeaserBanner } from "./TeaserBanner";
 export { EditorialStages } from "./EditorialStages";
+export { EditorialPillars } from "./EditorialPillars";
 export { StatsBand } from "./StatsBand";
 export { SplitCards } from "./SplitCards";
 export { FeatureCardGrid } from "./FeatureCardGrid";
