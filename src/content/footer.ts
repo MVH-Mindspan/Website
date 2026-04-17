@@ -14,7 +14,7 @@ export const footer = {
     {
       title: "For families",
       links: [
-        { label: "If you are caring for someone", href: "#families" },
+        { label: "Assist a loved one", href: "/family/assist" },
         { label: "How it works", href: "#visit" },
       ],
     },
