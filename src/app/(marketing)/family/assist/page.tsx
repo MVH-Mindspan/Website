@@ -4,6 +4,7 @@ import {
   EditorialPillars,
   EditorialStages,
   FeatureCardGrid,
+  SplitCards,
   FinalCTA,
 } from "@/components/organisms/sections";
 import { assistPage } from "@/content/pages/assist";
@@ -31,6 +32,14 @@ export default function AssistPage() {
         id="paths"
         intro={assistPage.paths.intro}
         cards={assistPage.paths.cards}
+      />
+      <SplitCards
+        tone="sand"
+        intro={assistPage.assessment.intro}
+        core={assistPage.assessment.inPerson}
+        edge={assistPage.assessment.remote}
+        closing={assistPage.assessment.closing}
+        cta={assistPage.assessment.cta}
       />
       <EditorialStages
         intro={assistPage.howToStart.intro}
