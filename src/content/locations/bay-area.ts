@@ -76,18 +76,21 @@ export const bayAreaDetail: LocationDetail = {
         title: "Normal cognition",
         body:
           "No memory or thinking concerns. Regular screening helps establish a baseline for future comparison.",
+        image: "/assets/get-assessed.png",
       },
       {
         kicker: "Stage 1\u20132",
         title: "Early memory changes",
         body:
           "Noticeable changes in memory or thinking that go beyond what\u2019s typical. Often manageable, and treatable when caught early.",
+        image: "/assets/consultation-2.png",
       },
       {
         kicker: "Stage 3+",
         title: "Dementia",
         body:
           "A progressive decline affecting daily function. Mindspan Bay Area provides advanced therapies, ongoing clinical care, and access to the latest science for all stages.",
+        image: "/assets/consultation-1.png",
       },
     ],
   },
@@ -98,6 +101,9 @@ export const bayAreaDetail: LocationDetail = {
       title: "Why choose a specialized memory center in the Bay Area?",
       lead:
         "General neurologists see patients with dozens of conditions. At Mindspan Bay Area, our team specializes exclusively in memory and cognitive disorders, giving you access to advanced diagnostics, FDA-approved therapies, clinical trials, and a clinical care team that stays with you from first assessment through ongoing treatment.",
+      image: "/assets/digital-brain.jpg",
+      imageAlt:
+        "Advanced brain imaging used for early-stage cognitive diagnostics at Mindspan Bay Area",
     },
     core: {
       id: "subspecialty",
@@ -181,6 +187,9 @@ export const bayAreaDetail: LocationDetail = {
       title: "Also available \u2014 dementia care covered by Medicare, at no cost to you.",
       lead:
         "The CMS GUIDE Model provides coordinated, team-based care for people living with dementia, plus practical support for caregivers. $0 copays, 24/7 access, and up to $2,500 in annual respite benefits.",
+      image: "/assets/ongoing-partnership.png",
+      imageAlt:
+        "A Mindspan care team supporting a family navigating dementia care together",
     },
     core: {
       id: "guide-program",

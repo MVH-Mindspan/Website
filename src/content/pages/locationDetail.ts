@@ -53,7 +53,13 @@ export type LocationDetail = {
     items: readonly JourneyStage[];
   };
   whyChoose?: {
-    intro: { eyebrow: string; title: string; lead: string };
+    intro: {
+      eyebrow: string;
+      title: string;
+      lead: string;
+      image?: string;
+      imageAlt?: string;
+    };
     core: Protocol;
     edge: Protocol;
     closing?: string;
@@ -66,7 +72,13 @@ export type LocationDetail = {
     items: readonly Audience[];
   };
   guide?: {
-    intro: { eyebrow: string; title: string; lead: string };
+    intro: {
+      eyebrow: string;
+      title: string;
+      lead: string;
+      image?: string;
+      imageAlt?: string;
+    };
     core: Protocol;
     edge: Protocol;
     footnote?: string;
