@@ -43,6 +43,7 @@ export default function HomePage() {
     <>
       <VideoHero
         video={homeHero.video}
+        poster={homeHero.poster}
         headline={homeHero.headline}
         subTagline={homeHero.subTagline}
         subhead={homeHero.subhead}

@@ -7,11 +7,13 @@ import { ease, type as typeScale } from "@/lib/tokens";
 
 export function VideoHero({
   video,
+  poster,
   headline,
   subTagline,
   subhead,
 }: {
   video: string;
+  poster?: string;
   headline: string;
   subTagline: string;
   subhead: string;
@@ -37,6 +39,8 @@ export function VideoHero({
         muted
         loop
         playsInline
+        poster={poster}
+        preload="auto"
       >
         <source src={video} type="video/mp4" />
       </video>
