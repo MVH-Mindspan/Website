@@ -4,6 +4,10 @@ export { EditorialIntro } from "./EditorialIntro";
 export { TeaserBanner } from "./TeaserBanner";
 export { EditorialStages } from "./EditorialStages";
 export { EditorialPillars } from "./EditorialPillars";
+export {
+  EditorialPillarsIllustrated,
+  type IllustratedPillar,
+} from "./EditorialPillarsIllustrated";
 export { StatsBand } from "./StatsBand";
 export { SplitCards } from "./SplitCards";
 export { FeatureCardGrid } from "./FeatureCardGrid";

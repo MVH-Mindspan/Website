@@ -8,14 +8,14 @@ export const footer = {
       links: [
         { label: "Book a visit", href: "/book-a-visit" },
         { label: "Find a clinic", href: "#locations" },
-        { label: "What to expect", href: "#expect" },
+        { label: "What to expect", href: "/about/how-it-works" },
       ],
     },
     {
       title: "For families",
       links: [
         { label: "Assist a loved one", href: "/family/assist" },
-        { label: "How it works", href: "#visit" },
+        { label: "How it works", href: "/about/how-it-works" },
       ],
     },
     {

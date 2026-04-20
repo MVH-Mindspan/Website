@@ -1,0 +1,56 @@
+import {
+  PageHero,
+  SplitCards,
+  EditorialPillarsIllustrated,
+  StatsBand,
+  FeatureCardGrid,
+  EditorialStages,
+  FinalCTA,
+} from "@/components/organisms/sections";
+import { howItWorksPage } from "@/content/pages/howItWorks";
+
+export const metadata = howItWorksPage.metadata;
+
+export default function HowItWorksPage() {
+  return (
+    <>
+      <PageHero {...howItWorksPage.hero} />
+
+      <SplitCards
+        tone="sand"
+        intro={howItWorksPage.comparison.intro}
+        core={howItWorksPage.comparison.problem}
+        edge={howItWorksPage.comparison.solution}
+        closing={howItWorksPage.comparison.closing}
+        cta={howItWorksPage.comparison.cta}
+      />
+
+      <EditorialPillarsIllustrated
+        intro={howItWorksPage.journey.intro}
+        pillars={howItWorksPage.journey.items}
+      />
+
+      <StatsBand stats={howItWorksPage.stats} />
+
+      <FeatureCardGrid
+        id="difference"
+        intro={howItWorksPage.difference.intro}
+        cards={howItWorksPage.difference.cards}
+        columns={4}
+      />
+
+      <EditorialStages
+        intro={howItWorksPage.howToStart.intro}
+        stages={howItWorksPage.howToStart.items}
+      />
+
+      <FinalCTA
+        eyebrow={howItWorksPage.finalCta.eyebrow}
+        title={howItWorksPage.finalCta.title}
+        lead={howItWorksPage.finalCta.lead}
+        primary={howItWorksPage.finalCta.primary}
+        secondary={howItWorksPage.finalCta.secondary}
+      />
+    </>
+  );
+}
