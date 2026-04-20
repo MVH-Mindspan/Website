@@ -256,6 +256,101 @@ h1, h2, h3 {
   [style*="pulseDot"] { animation: none !important; }
 }
 
+/* === Journey illustrations (used on /about/how-it-works) === */
+@keyframes illust-pulse {
+  0%, 100% { transform: scale(1); opacity: 0.85; }
+  50%      { transform: scale(1.18); opacity: 1; }
+}
+@keyframes illust-line-pulse {
+  0%, 100% { opacity: 0.3; }
+  50%      { opacity: 1; }
+}
+.illust-pulse        { animation: illust-pulse 3.2s ease-in-out infinite; transform-origin: center; transform-box: fill-box; }
+.illust-line-pulse   { animation: illust-line-pulse 2.6s ease-in-out infinite; }
+
+/* Assess illustration — moving "selected" indicator + stepped progress */
+@keyframes assess-select {
+  0%, 100% { opacity: 0; }
+  3%, 31%  { opacity: 1; }
+  34%      { opacity: 0; }
+}
+@keyframes assess-progress {
+  0%   { transform: scaleX(0);    opacity: 1; }
+  3%   { transform: scaleX(0.04); }
+  31%  { transform: scaleX(0.34); }
+  34%  { transform: scaleX(0.34); }
+  64%  { transform: scaleX(0.67); }
+  67%  { transform: scaleX(0.67); }
+  95%  { transform: scaleX(1);    opacity: 1; }
+  98%  { transform: scaleX(1);    opacity: 0; }
+  100% { transform: scaleX(0);    opacity: 0; }
+}
+.assess-select   { animation: assess-select 9s cubic-bezier(0.4, 0, 0.2, 1) infinite both; opacity: 0; }
+.assess-progress { animation: assess-progress 9s cubic-bezier(0.4, 0, 0.2, 1) infinite both; transform-origin: left center; transform-box: fill-box; }
+
+/* Report illustration — line draws in once per long cycle, area + dot stay synced */
+@keyframes report-draw {
+  0%   { stroke-dashoffset: var(--illust-dash, 420); opacity: 1; }
+  6%   { stroke-dashoffset: var(--illust-dash, 420); opacity: 1; }
+  18%  { stroke-dashoffset: 0;                       opacity: 1; }
+  95%  { stroke-dashoffset: 0;                       opacity: 1; }
+  97%  { stroke-dashoffset: 0;                       opacity: 0; }
+  100% { stroke-dashoffset: var(--illust-dash, 420); opacity: 0; }
+}
+@keyframes report-area {
+  0%, 6%   { transform: scaleX(0); opacity: 1; }
+  18%, 95% { transform: scaleX(1); opacity: 1; }
+  97%      { transform: scaleX(1); opacity: 0; }
+  100%     { transform: scaleX(0); opacity: 0; }
+}
+@keyframes report-dot {
+  0%, 16%   { opacity: 0; }
+  19%, 95%  { opacity: 1; }
+  97%, 100% { opacity: 0; }
+}
+.report-draw {
+  stroke-dasharray: var(--illust-dash, 420);
+  animation: report-draw 12s cubic-bezier(0.16, 1, 0.3, 1) infinite both;
+}
+.report-area {
+  animation: report-area 12s cubic-bezier(0.16, 1, 0.3, 1) infinite both;
+  transform-origin: left center;
+  transform-box: fill-box;
+}
+.report-dot {
+  animation: report-dot 12s linear infinite both;
+}
+
+/* Protocol illustration — "today" highlight slides Mon→Sun then resets unseen */
+@keyframes protocol-today-slide {
+  0%   { transform: translateX(0);    opacity: 0; }
+  4%   { opacity: 1; }
+  88%  { transform: translateX(204px); opacity: 1; }
+  94%  { transform: translateX(204px); opacity: 0; }
+  100% { transform: translateX(0);    opacity: 0; }
+}
+.protocol-today-slide {
+  animation: protocol-today-slide 11s cubic-bezier(0.4, 0, 0.2, 1) infinite both;
+  transform-box: fill-box;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .illust-pulse,
+  .illust-line-pulse,
+  .assess-select,
+  .assess-progress,
+  .report-draw,
+  .report-area,
+  .report-dot,
+  .protocol-today-slide { animation: none !important; }
+  .assess-progress      { transform: scaleX(1) !important; opacity: 1 !important; }
+  .assess-select        { opacity: 0 !important; }
+  .report-draw          { stroke-dashoffset: 0 !important; opacity: 1 !important; }
+  .report-area          { transform: scaleX(1) !important; opacity: 1 !important; }
+  .report-dot           { opacity: 1 !important; }
+  .protocol-today-slide { opacity: 0 !important; }
+}
+
 /* Orange halo on accent buttons when hovered — additive to the 3D lift */
 .studio-btn-accent:hover {
   box-shadow:
