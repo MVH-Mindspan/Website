@@ -30,14 +30,14 @@ export default function HowItWorksPage() {
         pillars={howItWorksPage.journey.items}
       />
 
-      <StatsBand stats={howItWorksPage.stats} />
-
       <FeatureCardGrid
         id="difference"
         intro={howItWorksPage.difference.intro}
         cards={howItWorksPage.difference.cards}
         columns={4}
       />
+
+      <StatsBand stats={howItWorksPage.stats} />
 
       <EditorialStages
         intro={howItWorksPage.howToStart.intro}
