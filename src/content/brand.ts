@@ -2,12 +2,14 @@ export const brand = {
   name: "Mindspan",
   headline: "When memory starts to change, you shouldn\u2019t have to wait.",
   subhead:
-    "Expert care for memory loss, Alzheimer\u2019s, and dementia \u2014 in person or by video. Medicare accepted.",
+    "Expert care for memory loss, Alzheimer\u2019s, and dementia \u2014 in person or by video.",
   subTagline: "Seen in weeks, not months.",
   reassurance:
     "Board-certified neurologists. In-clinic and video visits. Covered by insurance.",
   primaryCta: "Book a visit",
   primaryCtaHref: "/book-a-visit",
+  phone: "(617) 420-9000",
+  phoneHref: "tel:+16174209000",
   secondaryCta: "Find a clinic",
   secondaryCtaHref: "#locations",
   footerTagline:

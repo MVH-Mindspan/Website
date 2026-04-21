@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useTheme } from "@/lib/theme-context";
 import { alpha } from "@/lib/themes";
 import { ease, type as typeScale } from "@/lib/tokens";
+import { brand } from "@/content/brand";
 
 export function VideoHero({
   video,
@@ -12,6 +13,7 @@ export function VideoHero({
   subTagline,
   subhead,
   cta,
+  coverage,
 }: {
   video: string;
   poster?: string;
@@ -19,6 +21,7 @@ export function VideoHero({
   subTagline: string;
   subhead: string;
   cta?: { label: string; href: string };
+  coverage?: string;
 }) {
   const { theme } = useTheme();
   const c = theme.colors;
@@ -102,31 +105,100 @@ export function VideoHero({
               fontSize: typeScale.bodySm,
               color: alpha(c.cream, 0.7),
               lineHeight: 1.55,
-              marginBottom: cta ? 24 : 0,
+              marginBottom: coverage || cta ? 20 : 0,
             }}
           >
             {subhead}
           </p>
-          {cta && (
-            <a
-              href={cta.href}
+          {coverage && (
+            <div
               style={{
-                display: "inline-block",
-                fontFamily: theme.fonts.body,
-                fontSize: typeScale.bodySm,
-                fontWeight: 600,
-                color: c.brandGreen,
-                background: "#fff",
-                padding: "14px 28px",
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+                marginBottom: cta ? 20 : 0,
+                padding: "8px 16px",
+                background: alpha("#ffffff", 0.15),
+                border: `1px solid ${alpha("#ffffff", 0.3)}`,
                 borderRadius: "10rem",
-                textDecoration: "none",
-                transition: `background 0.2s ease`,
+                backdropFilter: "blur(8px)",
+                WebkitBackdropFilter: "blur(8px)",
               }}
-              onMouseEnter={(e) => (e.currentTarget.style.background = c.cream)}
-              onMouseLeave={(e) => (e.currentTarget.style.background = "#fff")}
             >
-              {cta.label}
-            </a>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden>
+                <path
+                  d="M20 6L9 17l-5-5"
+                  stroke={c.cream}
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+              <span
+                style={{
+                  fontFamily: theme.fonts.body,
+                  fontSize: typeScale.bodySm,
+                  fontWeight: 600,
+                  color: c.cream,
+                  letterSpacing: "0.01em",
+                }}
+              >
+                {coverage}
+              </span>
+            </div>
+          )}
+          {cta && (
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 12, alignItems: "center" }}>
+              <a
+                href={cta.href}
+                style={{
+                  display: "inline-block",
+                  fontFamily: theme.fonts.body,
+                  fontSize: typeScale.bodySm,
+                  fontWeight: 600,
+                  color: c.brandGreen,
+                  background: "#fff",
+                  padding: "14px 28px",
+                  borderRadius: "10rem",
+                  textDecoration: "none",
+                  transition: `background 0.2s ease`,
+                }}
+                onMouseEnter={(e) => (e.currentTarget.style.background = c.cream)}
+                onMouseLeave={(e) => (e.currentTarget.style.background = "#fff")}
+              >
+                {cta.label}
+              </a>
+              <a
+                href={brand.phoneHref}
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 8,
+                  fontFamily: theme.fonts.body,
+                  fontSize: typeScale.bodySm,
+                  fontWeight: 600,
+                  color: c.cream,
+                  padding: "14px 22px",
+                  border: `1px solid ${alpha("#ffffff", 0.35)}`,
+                  borderRadius: "10rem",
+                  textDecoration: "none",
+                  background: alpha("#ffffff", 0.08),
+                  backdropFilter: "blur(8px)",
+                  WebkitBackdropFilter: "blur(8px)",
+                }}
+              >
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden>
+                  <path
+                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+                Talk to us: {brand.phone}
+              </a>
+            </div>
           )}
         </div>
       </div>
