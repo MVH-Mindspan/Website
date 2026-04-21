@@ -2,6 +2,7 @@ import {
   PageHero,
   SplitCards,
   StatsBand,
+  GuideBenefit,
   FinalCTA,
 } from "@/components/organisms/sections";
 import { coveragePage } from "@/content/pages/coverage";
@@ -16,8 +17,9 @@ export default function CoveragePage() {
       <SplitCards
         intro={coveragePage.howItWorks.intro}
         core={coveragePage.howItWorks.insurance}
-        edge={coveragePage.howItWorks.guide}
       />
+
+      <GuideBenefit {...coveragePage.guideBenefit} />
 
       <StatsBand stats={coveragePage.stats} />
 

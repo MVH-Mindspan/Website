@@ -41,21 +41,28 @@ export const coveragePage = {
       ],
       icon: "shield",
     } satisfies Protocol,
-    guide: {
-      id: "guide",
-      eyebrow: "The GUIDE program",
-      title: "Structured support for dementia care, through Medicare.",
-      body: "Mindspan participates in the GUIDE program \u2014 a Medicare-supported initiative that provides coordinated care, caregiver support, and a dedicated care team for people living with dementia. If you or your loved one qualifies, your care coordinator will walk you through what\u2019s included.",
-      bullets: [
-        "Coordinated care for people living with dementia",
-        "Caregiver education and support built in",
-        "A dedicated care coordinator who stays connected between visits",
-        "Available to Medicare beneficiaries who qualify",
-        "Covered at no additional cost to you",
-        "We handle the enrollment \u2014 just let us know you\u2019re interested",
-      ],
-      icon: "bullseye",
-    } satisfies Protocol,
+  },
+
+  guideBenefit: {
+    eyebrow: "If you have Original Medicare",
+    title: "An additional benefit for families navigating dementia.",
+    lead:
+      "If your loved one has a dementia diagnosis and is enrolled in Original Medicare, there may be more support available to you at no additional cost \u2014 coordinated through a Medicare-supported care model called GUIDE. It is not something you have to apply for on your own. If you qualify, we handle enrollment.",
+    bullets: [
+      "$0 copays for covered Mindspan visits",
+      "24/7 specialist-staffed access for questions and concerns",
+      "Up to $2,500 per year in respite benefits for the primary caregiver",
+      "A dedicated care coordinator who stays connected between visits",
+    ],
+    eligibilityTitle: "Who typically qualifies",
+    eligibility: [
+      "A dementia diagnosis (Alzheimer\u2019s, Lewy Body, vascular, or other)",
+      "Enrolled in Original Medicare (not Medicare Advantage)",
+      "A caregiver involved in day-to-day support",
+      "Located in Massachusetts or California (our current service areas for this program)",
+    ],
+    footnote:
+      "GUIDE is a CMS (Medicare) care model. Eligibility is determined during onboarding \u2014 there is nothing to sign up for in advance.",
   },
 
   stats: [

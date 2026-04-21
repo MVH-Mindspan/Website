@@ -20,4 +20,5 @@ export { FinalCTA } from "./FinalCTA";
 export { Testimonials } from "./Testimonials";
 export { ProvidersPreview } from "./ProvidersPreview";
 export { FAQ } from "./FAQ";
+export { GuideBenefit } from "./GuideBenefit";
 export { SectionIcon } from "./icons";
