@@ -183,44 +183,44 @@ export const bayAreaDetail: LocationDetail = {
 
   guide: {
     intro: {
-      eyebrow: "Medicare program",
-      title: "Also available \u2014 dementia care covered by Medicare, at no cost to you.",
+      eyebrow: "If you have Original Medicare",
+      title: "An additional benefit for families navigating dementia.",
       lead:
-        "The CMS GUIDE Model provides coordinated, team-based care for people living with dementia, plus practical support for caregivers. $0 copays, 24/7 access, and up to $2,500 in annual respite benefits.",
+        "If your loved one has a dementia diagnosis and is enrolled in Original Medicare, there may be more support available to you at no additional cost \u2014 coordinated through a Medicare-supported care model called GUIDE. We handle eligibility and enrollment during onboarding; there is nothing to apply for in advance.",
       image: "/assets/ongoing-partnership.png",
       imageAlt:
         "A Mindspan care team supporting a family navigating dementia care together",
     },
     core: {
       id: "guide-program",
-      eyebrow: "What GUIDE includes",
-      title: "Dementia care, covered by Medicare.",
+      eyebrow: "What you may be eligible for",
+      title: "Concrete support for the caregiver and the patient.",
       body:
-        "A coordinated, team-based program built around the person with dementia and the family caring for them. Low or no out-of-pocket cost, plus real, practical caregiver support.",
+        "If you qualify, we coordinate these benefits for you as part of ongoing care \u2014 they are not a separate program you manage yourself.",
       bullets: [
         "$0 copays for covered Mindspan visits",
-        "24/7 specialist-staffed access",
-        "Annual respite benefit up to $2,500",
-        "Learn more about GUIDE \u2192",
+        "24/7 specialist-staffed access for questions and concerns",
+        "Up to $2,500 per year in respite benefits for the primary caregiver",
+        "A dedicated care coordinator between visits",
       ],
       icon: "shield",
     },
     edge: {
       id: "guide-qualify",
-      eyebrow: "Who qualifies",
-      title: "Who qualifies for GUIDE?",
+      eyebrow: "Who typically qualifies",
+      title: "Three things have to be true.",
       body:
-        "If any of the following describes your situation, reach out to our team and we\u2019ll confirm eligibility during onboarding.",
+        "We confirm eligibility during onboarding. If you are not sure, just tell us and we will figure it out together.",
       bullets: [
-        "Has a dementia diagnosis (Alzheimer\u2019s, Lewy Body, vascular, or other)",
-        "Enrolled in Medicare Part B (Original Medicare or supported Advantage plans)",
-        "Has a caregiver involved in day-to-day support",
-        "Lives in Massachusetts or California (our current GUIDE service areas)",
+        "A dementia diagnosis (Alzheimer\u2019s, Lewy Body, vascular, or other)",
+        "Enrolled in Original Medicare (not Medicare Advantage)",
+        "A caregiver involved in day-to-day support",
+        "Located in Massachusetts or California",
       ],
       icon: "bullseye",
     },
     footnote:
-      "Coverage and eligibility vary by region and payer. We verify benefits and educate families during onboarding.",
+      "GUIDE is a CMS (Medicare) care model. Coverage and eligibility vary by region and payer. We verify benefits and walk families through what applies during onboarding.",
   },
 
   finalCta: {

@@ -5,6 +5,7 @@ import {
   EditorialStages,
   FeatureCardGrid,
   SplitCards,
+  GuideBenefit,
   FinalCTA,
 } from "@/components/organisms/sections";
 import { assistPage } from "@/content/pages/assist";
@@ -45,6 +46,7 @@ export default function AssistPage() {
         intro={assistPage.howToStart.intro}
         stages={assistPage.howToStart.items}
       />
+      <GuideBenefit {...assistPage.guideBenefit} />
       <FinalCTA
         eyebrow={assistPage.finalCta.eyebrow}
         title={assistPage.finalCta.title}

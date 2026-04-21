@@ -198,6 +198,28 @@ export const assistPage = {
     items: howToStart,
   },
 
+  guideBenefit: {
+    eyebrow: "If your loved one has Original Medicare",
+    title: "Real support for the caregiver, too.",
+    lead:
+      "If your loved one has a dementia diagnosis and is enrolled in Original Medicare, a Medicare-supported care model (GUIDE) can add concrete support for you as the caregiver \u2014 at no additional cost. If you qualify, we handle enrollment as part of ongoing care.",
+    bullets: [
+      "Up to $2,500 per year in respite benefits for the primary caregiver",
+      "24/7 specialist-staffed access for questions and concerns",
+      "$0 copays for covered Mindspan visits",
+      "A dedicated care coordinator who stays connected between visits",
+    ],
+    eligibilityTitle: "Typically available if",
+    eligibility: [
+      "Your loved one has a dementia diagnosis",
+      "They are enrolled in Original Medicare (not Medicare Advantage)",
+      "They live in Massachusetts or California",
+      "You are involved in their day-to-day support",
+    ],
+    footnote:
+      "GUIDE is a CMS (Medicare) care model. Eligibility is determined during onboarding \u2014 there is nothing to sign up for in advance.",
+  },
+
   finalCta: {
     eyebrow: "When you are ready",
     title: "See a specialist in weeks, not months or years.",
