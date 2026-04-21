@@ -17,4 +17,7 @@ export { ProvidersSection } from "./ProvidersSection";
 export { ProviderProfile } from "./ProviderProfile";
 export { ClinicContact } from "./ClinicContact";
 export { FinalCTA } from "./FinalCTA";
+export { Testimonials } from "./Testimonials";
+export { ProvidersPreview } from "./ProvidersPreview";
+export { FAQ } from "./FAQ";
 export { SectionIcon } from "./icons";
