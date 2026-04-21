@@ -63,6 +63,7 @@ export const coveragePage = {
     ],
     footnote:
       "GUIDE is a CMS (Medicare) care model. Eligibility is determined during onboarding \u2014 there is nothing to sign up for in advance.",
+    cta: { label: "Learn more about GUIDE", href: "/guide" },
   },
 
   stats: [

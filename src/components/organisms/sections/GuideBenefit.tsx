@@ -7,6 +7,7 @@ import { Container } from "@/components/atoms/Container";
 import { Eyebrow } from "@/components/atoms/Eyebrow";
 import { Heading } from "@/components/atoms/Heading";
 import { Reveal } from "@/components/molecules/Reveal";
+import { Button } from "@/components/atoms/Button";
 
 export function GuideBenefit({
   eyebrow,
@@ -16,6 +17,7 @@ export function GuideBenefit({
   eligibilityTitle,
   eligibility,
   footnote,
+  cta,
 }: {
   eyebrow: string;
   title: string;
@@ -24,6 +26,7 @@ export function GuideBenefit({
   eligibilityTitle: string;
   eligibility: readonly string[];
   footnote?: string;
+  cta?: { label: string; href: string };
 }) {
   const { theme } = useTheme();
   const c = theme.colors;
@@ -105,6 +108,13 @@ export function GuideBenefit({
                   </li>
                 ))}
               </ul>
+              {cta && (
+                <div className="mt-8">
+                  <Button href={cta.href} variant="primary">
+                    {cta.label}
+                  </Button>
+                </div>
+              )}
             </div>
             <div
               style={{
