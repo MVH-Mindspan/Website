@@ -11,12 +11,14 @@ export function VideoHero({
   headline,
   subTagline,
   subhead,
+  cta,
 }: {
   video: string;
   poster?: string;
   headline: string;
   subTagline: string;
   subhead: string;
+  cta?: { label: string; href: string };
 }) {
   const { theme } = useTheme();
   const c = theme.colors;
@@ -76,7 +78,7 @@ export function VideoHero({
         </h1>
         <div
           style={{
-            maxWidth: 400,
+            maxWidth: 420,
             opacity: loaded ? 1 : 0,
             transform: loaded ? "none" : "translateY(18px)",
             transition: `opacity 0.8s ${ease.expressive} 0.2s, transform 0.8s ${ease.expressive} 0.2s`,
@@ -100,10 +102,32 @@ export function VideoHero({
               fontSize: typeScale.bodySm,
               color: alpha(c.cream, 0.7),
               lineHeight: 1.55,
+              marginBottom: cta ? 24 : 0,
             }}
           >
             {subhead}
           </p>
+          {cta && (
+            <a
+              href={cta.href}
+              style={{
+                display: "inline-block",
+                fontFamily: theme.fonts.body,
+                fontSize: typeScale.bodySm,
+                fontWeight: 600,
+                color: c.brandGreen,
+                background: "#fff",
+                padding: "14px 28px",
+                borderRadius: "10rem",
+                textDecoration: "none",
+                transition: `background 0.2s ease`,
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.background = c.cream)}
+              onMouseLeave={(e) => (e.currentTarget.style.background = "#fff")}
+            >
+              {cta.label}
+            </a>
+          )}
         </div>
       </div>
     </section>

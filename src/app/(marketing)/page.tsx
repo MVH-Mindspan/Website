@@ -11,7 +11,6 @@ import { SplitCards } from "@/components/organisms/sections/SplitCards";
 import { FeatureCardGrid } from "@/components/organisms/sections/FeatureCardGrid";
 import { AudienceCards } from "@/components/organisms/sections/AudienceCards";
 import { LocationCards } from "@/components/organisms/sections/LocationCards";
-import { ProvidersSection } from "@/components/organisms/sections/ProvidersSection";
 import { FinalCTA } from "@/components/organisms/sections/FinalCTA";
 import {
   homeHero,
@@ -27,10 +26,9 @@ import {
   audiencesIntro,
   locations,
   locationsIntro,
-  providers,
-  providersIntro,
   finalCta,
 } from "@/content";
+import { flags } from "@/lib/featureFlags";
 
 export default function HomePage() {
   const { theme } = useTheme();
@@ -38,6 +36,10 @@ export default function HomePage() {
   if (theme.structure === "v1") {
     return <MindspanHome />;
   }
+
+  const visibleTechCards = technology.filter(
+    (c) => c.id !== "mindy" || flags.showMindy
+  );
 
   return (
     <>
@@ -47,8 +49,8 @@ export default function HomePage() {
         headline={homeHero.headline}
         subTagline={homeHero.subTagline}
         subhead={homeHero.subhead}
+        cta={homeHero.cta}
       />
-      <EditorialIntro title={journeyIntro.title} lead={journeyIntro.lead} />
       <TeaserBanner
         href={announcement.href}
         ariaLabel={announcement.ariaLabel}
@@ -60,21 +62,16 @@ export default function HomePage() {
       <SplitCards
         intro={protocolsIntro}
         core={protocols.core}
-        edge={protocols.edge}
+        edge={flags.showEdgeProtocol ? protocols.edge : undefined}
       />
       <FeatureCardGrid
         id="technology"
         intro={technologyIntro}
-        cards={technology}
+        cards={visibleTechCards}
+        columns={visibleTechCards.length === 2 ? 2 : 3}
       />
       <AudienceCards intro={audiencesIntro} audiences={audiences} />
       <LocationCards id="locations" intro={locationsIntro} locations={locations} />
-      <ProvidersSection
-        id="providers"
-        intro={providersIntro}
-        refer={providers.refer}
-        join={providers.join}
-      />
       <FinalCTA
         eyebrow={finalCta.eyebrow}
         title={finalCta.title}

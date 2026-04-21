@@ -2,8 +2,8 @@ export const brand = {
   name: "Mindspan",
   headline: "When memory starts to change, you shouldn\u2019t have to wait.",
   subhead:
-    "Specialist neurologists for Alzheimer\u2019s, dementia, and cognitive change. Real answers, in weeks, not months.",
-  subTagline: "Specialist cognitive care for families",
+    "Expert care for memory loss, Alzheimer\u2019s, and dementia \u2014 in person or by video. Medicare accepted.",
+  subTagline: "Seen in weeks, not months.",
   reassurance:
     "Board-certified neurologists. In-clinic and video visits. Covered by insurance.",
   primaryCta: "Book a visit",

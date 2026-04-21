@@ -34,7 +34,7 @@ export function SplitCards({
     imageAlt?: string;
   };
   core: Protocol;
-  edge: Protocol;
+  edge?: Protocol;
   closing?: string;
   cta?: { label: string; href: string };
   footnote?: string;
@@ -65,7 +65,7 @@ export function SplitCards({
           </Reveal>
         )}
 
-        <div className="mt-12 grid lg:grid-cols-2 gap-6 md:gap-8">
+        <div className={`mt-12 grid gap-6 md:gap-8 ${edge ? "lg:grid-cols-2" : ""}`}>
           <Reveal
             className="rounded-[2rem] p-8 md:p-10"
             style={{
@@ -105,49 +105,51 @@ export function SplitCards({
             />
           </Reveal>
 
-          <Reveal
-            className="rounded-[2rem] p-8 md:p-10 relative overflow-hidden text-white"
-            style={{ background: c.brandGreen }}
-          >
-            <div
-              className="absolute inset-0 opacity-60 pointer-events-none"
-              style={{
-                background: `radial-gradient(120% 100% at 100% 0%, ${alpha(
-                  c.accent,
-                  0.18
-                )} 0%, transparent 55%)`,
-              }}
-            />
-            <div className="relative">
-              <IconBadge background={alpha("#bdd8f5", 0.15)} color="#bdd8f5">
-                <SectionIcon name={edge.icon} />
-              </IconBadge>
-              <Eyebrow color="#bdd8f5" className="mt-5">
-                {edge.eyebrow}
-              </Eyebrow>
-              <Heading
-                as="h3"
-                variant="h4"
-                fontFamily={theme.fonts.heading}
-                className="mt-3"
-              >
-                {edge.title}
-              </Heading>
-              <Lead
-                size="md"
-                maxWidth={false}
-                className="mt-4 text-white/80"
-                style={{ fontSize: typeScale.body, lineHeight: 1.6 }}
-              >
-                {edge.body}
-              </Lead>
-              <BulletList
-                items={edge.bullets}
-                bulletColor="#bdd8f5"
-                className="mt-6 text-[15px] text-white/85"
+          {edge && (
+            <Reveal
+              className="rounded-[2rem] p-8 md:p-10 relative overflow-hidden text-white"
+              style={{ background: c.brandGreen }}
+            >
+              <div
+                className="absolute inset-0 opacity-60 pointer-events-none"
+                style={{
+                  background: `radial-gradient(120% 100% at 100% 0%, ${alpha(
+                    c.accent,
+                    0.18
+                  )} 0%, transparent 55%)`,
+                }}
               />
-            </div>
-          </Reveal>
+              <div className="relative">
+                <IconBadge background={alpha("#bdd8f5", 0.15)} color="#bdd8f5">
+                  <SectionIcon name={edge.icon} />
+                </IconBadge>
+                <Eyebrow color="#bdd8f5" className="mt-5">
+                  {edge.eyebrow}
+                </Eyebrow>
+                <Heading
+                  as="h3"
+                  variant="h4"
+                  fontFamily={theme.fonts.heading}
+                  className="mt-3"
+                >
+                  {edge.title}
+                </Heading>
+                <Lead
+                  size="md"
+                  maxWidth={false}
+                  className="mt-4 text-white/80"
+                  style={{ fontSize: typeScale.body, lineHeight: 1.6 }}
+                >
+                  {edge.body}
+                </Lead>
+                <BulletList
+                  items={edge.bullets}
+                  bulletColor="#bdd8f5"
+                  className="mt-6 text-[15px] text-white/85"
+                />
+              </div>
+            </Reveal>
+          )}
         </div>
 
         {(closing || cta) && (

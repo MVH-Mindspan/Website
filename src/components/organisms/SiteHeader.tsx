@@ -5,7 +5,7 @@ import { useTheme } from "@/lib/theme-context";
 import { alpha } from "@/lib/themes";
 import { ease, type as typeScale } from "@/lib/tokens";
 import { brand } from "@/content/brand";
-import { nav } from "@/content/nav";
+import { nav, audienceNav } from "@/content/nav";
 
 export function SiteHeader() {
   const { theme } = useTheme();
@@ -48,6 +48,7 @@ export function SiteHeader() {
       >
         {brand.name}
       </a>
+
       <ul className="hidden md:flex items-center gap-8">
         {nav.map((n) => (
           <li key={n.label}>
@@ -69,7 +70,41 @@ export function SiteHeader() {
             </a>
           </li>
         ))}
+
+        <li
+          aria-hidden
+          style={{
+            width: 1,
+            height: 16,
+            background: alpha(c.cream, 0.2),
+            margin: "0 4px",
+          }}
+        />
+
+        {[audienceNav.providers].map((n) => (
+          <li key={n.label}>
+            <a
+              href={n.href}
+              className="transition-colors"
+              style={{
+                fontFamily: theme.fonts.body,
+                fontSize: typeScale.bodySm,
+                fontWeight: 450,
+                color: alpha(c.cream, 0.45),
+              }}
+              onMouseEnter={(e) =>
+                (e.currentTarget.style.color = alpha(c.cream, 0.8))
+              }
+              onMouseLeave={(e) =>
+                (e.currentTarget.style.color = alpha(c.cream, 0.45))
+              }
+            >
+              {n.label}
+            </a>
+          </li>
+        ))}
       </ul>
+
       <div className="flex items-center gap-2">
         <a
           href={brand.primaryCtaHref}
@@ -85,7 +120,7 @@ export function SiteHeader() {
           onMouseEnter={(e) => (e.currentTarget.style.background = c.cream)}
           onMouseLeave={(e) => (e.currentTarget.style.background = "#fff")}
         >
-          {brand.primaryCta}
+          Book an appointment
         </a>
       </div>
     </nav>

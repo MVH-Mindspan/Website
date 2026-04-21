@@ -4,26 +4,29 @@ export type FooterColumn = { title: string; links: FooterLink[] };
 export const footer = {
   columns: [
     {
-      title: "Getting started",
+      title: "For patients & families",
       links: [
-        { label: "Book a visit", href: "/book-a-visit" },
-        { label: "Find a clinic", href: "#locations" },
-        { label: "What to expect", href: "/about/how-it-works" },
-      ],
-    },
-    {
-      title: "For families",
-      links: [
-        { label: "Assist a loved one", href: "/family/assist" },
+        { label: "Book an appointment", href: "/book-a-visit" },
         { label: "How it works", href: "/about/how-it-works" },
+        { label: "What we treat", href: "/what-we-treat" },
+        { label: "Coverage & cost", href: "/coverage" },
+        { label: "Assist a loved one", href: "/family/assist" },
       ],
     },
     {
-      title: "For doctors",
+      title: "For providers",
       links: [
         { label: "Refer a patient", href: "/providers/refer" },
+        { label: "For PCP groups", href: "/providers/refer" },
         { label: "About Mindspan", href: "/about" },
-        { label: "Contact", href: "/contact" },
+      ],
+    },
+    {
+      title: "Clinic locations",
+      links: [
+        { label: "Massachusetts", href: "/locations/danvers-ma" },
+        { label: "California", href: "/locations/san-jose-ca" },
+        { label: "Virtual visits", href: "/book-a-visit" },
       ],
     },
   ] satisfies FooterColumn[],
