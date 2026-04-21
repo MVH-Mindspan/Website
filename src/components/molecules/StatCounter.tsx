@@ -77,9 +77,9 @@ export function StatCounter({ value, label }: { value: string; label: string }) 
       <p
         style={{
           fontFamily: theme.fonts.body,
-          fontSize: type.bodySm,
-          color: alpha(theme.colors.ink, 0.6),
-          lineHeight: lineHeight.eyebrow,
+          fontSize: type.body,
+          color: alpha(theme.colors.ink, 0.72),
+          lineHeight: 1.4,
         }}
       >
         {label}

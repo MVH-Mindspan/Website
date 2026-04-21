@@ -12,11 +12,11 @@ export const type = {
   h2: "clamp(2rem, 1.4rem + 2vw, 3.4rem)",
   h3: "clamp(1.5rem, 1.15rem + 1.2vw, 2.2rem)",
   h4: "clamp(1.375rem, 0.8vw + 1rem, 1.75rem)",
-  leadLg: "clamp(1rem, 0.4vw + 0.95rem, 1.25rem)",
-  leadMd: "clamp(0.95rem, 0.9rem + 0.2vw, 1.08rem)",
-  body: "1rem",
-  bodySm: "clamp(0.82rem, 0.78rem + 0.2vw, 0.92rem)",
-  micro: "clamp(0.7rem, 0.65rem + 0.2vw, 0.8rem)",
+  leadLg: "clamp(1.2rem, 0.4vw + 1.1rem, 1.45rem)",
+  leadMd: "clamp(1.1rem, 1rem + 0.25vw, 1.25rem)",
+  body: "1.125rem",
+  bodySm: "clamp(1rem, 0.95rem + 0.2vw, 1.1rem)",
+  micro: "clamp(0.8rem, 0.75rem + 0.2vw, 0.9rem)",
 } as const;
 
 export const lineHeight = {
