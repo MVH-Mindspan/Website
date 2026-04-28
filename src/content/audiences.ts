@@ -22,7 +22,7 @@ export const audiences: Audience[] = [
     kicker: "If you\u2019re caring for a parent or spouse",
     title: "You don\u2019t have to keep figuring this out alone.",
     body:
-      "You\u2019ve probably spent months, maybe years, noticing changes, making calls, and being told to wait and see. We know that\u2019s exhausting, and we know it\u2019s lonely. You can bring your loved one to us, and we\u2019ll take it from here together.",
+      "You\u2019ve been noticing changes, making calls, and being told to wait. Bring your loved one to us. We\u2019ll take it from here together.",
     cta: "Book a visit",
     href: "/book-a-visit",
   },
@@ -31,7 +31,7 @@ export const audiences: Audience[] = [
     kicker: "If you\u2019ve noticed changes in yourself",
     title: "You deserve to be taken seriously.",
     body:
-      "Maybe a word slipped that used to come easily. Maybe you walked into a room and forgot why. It might be nothing, it might be something. Either way, you deserve a neurologist who sits with you, explains what\u2019s happening, and tells you what to do next.",
+      "Maybe a word slipped. Maybe you walked into a room and forgot why. It might be nothing, but you deserve to know either way.",
     cta: "Start a free assessment",
     href: "/book-a-visit",
   },
@@ -40,7 +40,7 @@ export const audiences: Audience[] = [
     kicker: "If you\u2019re a primary care physician",
     title: "A neurology partner who makes your life easier.",
     body:
-      "Your patients with cognitive concerns need more time than a 15-minute visit allows. We can see them quickly, communicate clearly, and send clean notes back to you. You stay their trusted doctor, we handle the cognitive specialty piece.",
+      "Your patients with cognitive concerns need more time than a 15-minute visit allows. We see them quickly and send clean notes back. You stay their doctor, we handle the specialty piece.",
     cta: "Learn about referrals",
     href: "/providers",
   },

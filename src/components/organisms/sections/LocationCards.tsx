@@ -36,7 +36,7 @@ export function LocationCards({
         >
           {locations.map((l, i) => {
             const mapSrc = `https://www.openstreetmap.org/export/embed.html?bbox=${l.bbox}&layer=mapnik&marker=${l.marker}`;
-            const isTelehealth = l.kind === "telehealth";
+            const isVideo = l.kind === "video";
             return (
               <Reveal
                 key={l.city + l.state}
@@ -59,7 +59,7 @@ export function LocationCards({
                       title={`Map of ${l.city}, ${l.state}`}
                       aria-hidden="true"
                     />
-                    {isTelehealth && (
+                    {isVideo && (
                       <div className="absolute inset-0 flex items-center justify-center">
                         <span
                           className="rounded-full px-4 py-2 text-xs font-semibold backdrop-blur"
@@ -77,7 +77,7 @@ export function LocationCards({
                         className="h-2 w-2 rounded-full"
                         style={{ background: "#22c55e" }}
                       />
-                      {isTelehealth ? "Video" : "Open"}
+                      {isVideo ? "Video" : "Open"}
                     </div>
                   </div>
                   <div className="flex flex-col flex-1 p-6">
@@ -101,7 +101,7 @@ export function LocationCards({
                       className="mt-5 text-sm font-semibold flex items-center gap-2 group-hover:gap-3 transition-all"
                       style={{ color: "#bdd8f5" }}
                     >
-                      {isTelehealth ? "Book a video visit" : "Visit clinic"}{" "}
+                      {isVideo ? "Book a video visit" : "Visit clinic"}{" "}
                       <ArrowIcon />
                     </p>
                   </div>

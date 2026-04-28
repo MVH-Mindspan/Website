@@ -33,7 +33,7 @@ export function ProviderProfile(props: ProviderProfileType) {
           </Reveal>
 
           <Reveal>
-            <Eyebrow color={c.accent}>{props.eyebrow}</Eyebrow>
+            <Eyebrow color={c.accentText}>{props.eyebrow}</Eyebrow>
             <Heading
               as="h2"
               variant="h2"

@@ -17,7 +17,7 @@ export function Eyebrow({
       className={className}
       style={{
         fontWeight: 600,
-        fontSize: "0.8125rem",
+        fontSize: "0.9375rem",
         letterSpacing: tracking.eyebrow,
         textTransform: "uppercase",
         color,

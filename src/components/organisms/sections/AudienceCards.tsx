@@ -17,6 +17,7 @@ import type { Audience } from "@/content/audiences";
 export function AudienceCards({
   intro,
   audiences,
+  tone = "sand",
 }: {
   intro: {
     eyebrow: string;
@@ -26,12 +27,14 @@ export function AudienceCards({
     imageAlt?: string;
   };
   audiences: readonly Audience[];
+  tone?: "sand" | "cream";
 }) {
   const { theme } = useTheme();
   const c = theme.colors;
+  const bg = tone === "cream" ? c.cream : c.sand;
 
   return (
-    <section id="families" style={{ background: c.sand, padding: "96px 0" }}>
+    <section id="families" style={{ background: bg, padding: "96px 0" }}>
       <Container>
         <SectionHeader
           eyebrow={intro.eyebrow}
@@ -51,7 +54,15 @@ export function AudienceCards({
           </Reveal>
         )}
 
-        <div className="mt-12 grid md:grid-cols-3 gap-5 md:gap-6">
+        <div
+          className={`mt-12 grid gap-5 md:gap-6 ${
+            audiences.length === 2
+              ? "md:grid-cols-2"
+              : audiences.length === 1
+              ? "md:grid-cols-1"
+              : "md:grid-cols-3"
+          }`}
+        >
           {audiences.map((a, i) => (
             <Reveal
               key={a.id}
@@ -64,7 +75,7 @@ export function AudienceCards({
               }}
             >
               <a href={a.href} className="flex flex-col flex-1">
-                <Eyebrow color={c.accent}>{a.kicker}</Eyebrow>
+                <Eyebrow color={c.accentText}>{a.kicker}</Eyebrow>
                 <Heading
                   as="h3"
                   variant="h4"

@@ -15,5 +15,11 @@ export {
   type LocationKind,
 } from "./locations";
 export { providers, providersIntro, type ProviderCard } from "./providers";
+export {
+  providersPreview,
+  providersPreviewIntro,
+  type ProviderPreview,
+} from "./providersPreview";
+export { testimonials, testimonialsIntro, type Testimonial } from "./testimonials";
 export { finalCta } from "./finalCta";
 export { homeHero } from "./hero";

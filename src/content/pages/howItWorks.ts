@@ -26,7 +26,7 @@ const journeyStages: IllustratedPillar[] = [
     kicker: "See a specialist",
     title: "Meet a board-certified neurologist within weeks.",
     body:
-      "If your report suggests further evaluation, we connect you with a board-certified neurologist within weeks \u2014 not 18 months. Visits happen in our clinics or on video, and your insurance is billed like any other specialist appointment.",
+      "If your report suggests further evaluation, we connect you with a board-certified neurologist within weeks, not 18 months. Visits happen in our clinics or on video, and your insurance is billed like any other specialist appointment.",
     illustration: "meet",
   },
   {
@@ -44,7 +44,7 @@ const comparison: { problem: Protocol; solution: Protocol } = {
     eyebrow: "The typical wait",
     title: "Eighteen months before anyone can tell you what\u2019s going on.",
     body:
-      "In most of the country, a worried family books a primary-care visit, gets referred to a neurologist, and then waits. The average wait for a specialist cognitive assessment is twelve to eighteen months \u2014 the most precious window of all.",
+      "In most of the country, a worried family books a primary-care visit, gets referred to a neurologist, and then waits. The average wait for a specialist cognitive assessment is twelve to eighteen months, the most precious window of all.",
     bullets: [
       "Months of uncertainty between first worry and first answer",
       "Multiple referrals before anyone with the right training is in the room",
@@ -90,13 +90,13 @@ const difference: TechCard[] = [
     eyebrow: "Immediate answers",
     title: "No months of uncertainty.",
     body:
-      "Skip the agonizing waitlist. The screening starts today, the report arrives the same day, and our care team helps you decide what comes next \u2014 even if that\u2019s simply peace of mind.",
+      "Skip the agonizing waitlist. The screening starts today, the report arrives the same day, and our care team helps you decide what comes next, even if that\u2019s simply peace of mind.",
     icon: "bullseye",
   },
   {
     id: "plan",
     eyebrow: "A plan that empowers",
-    title: "More than a diagnosis \u2014 a way forward.",
+    title: "More than a diagnosis, a way forward.",
     body:
       "We deliver a comprehensive plan, not just a label. Tangible steps across nine lifestyle factors, advanced therapies when indicated, and check-ins that keep the plan honest as your life changes.",
     icon: "shield",
@@ -106,7 +106,7 @@ const difference: TechCard[] = [
     eyebrow: "Built for families",
     title: "Everyone has a seat at the table.",
     body:
-      "Mindspan was designed as a collaborative platform from the start. Share insights with siblings, coordinate with our care team, and navigate your loved one\u2019s cognitive health together \u2014 in person or from anywhere.",
+      "Mindspan was designed as a collaborative platform from the start. Share insights with siblings, coordinate with our care team, and navigate your loved one\u2019s cognitive health together, in person or from anywhere.",
     icon: "chat",
   },
 ];
@@ -129,7 +129,7 @@ const howToStart: JourneyStage[] = [
     kicker: "Step 03",
     title: "Begin coordinated care",
     body:
-      "Your neurologist puts a plan in place \u2014 advanced diagnostics where useful, therapies when indicated, and lifestyle targets tailored to you. Your primary care doctor is kept in the loop.",
+      "Your neurologist puts a plan in place, advanced diagnostics where useful, therapies when indicated, and lifestyle targets tailored to you. Your primary care doctor is kept in the loop.",
   },
   {
     kicker: "Step 04",
@@ -143,7 +143,7 @@ export const howItWorksPage = {
   metadata: buildMetadata({
     title: "What to Expect | Mindspan",
     description:
-      "From a free at-home cognitive screening to a neurologist visit within weeks. See exactly how Mindspan works \u2014 step by step, with no surprises.",
+      "From a free at-home cognitive screening to a neurologist visit within weeks. See exactly how Mindspan works, step by step, with no surprises.",
     canonical: "/about/how-it-works",
   }),
 
@@ -151,7 +151,7 @@ export const howItWorksPage = {
     eyebrow: "What to expect",
     title: "A simple, continuous path through cognitive care.",
     lead:
-      "From a free at-home screening to ongoing care guided by a board-certified neurologist \u2014 here\u2019s exactly what your Mindspan journey looks like.",
+      "From a free at-home screening to ongoing care guided by a board-certified neurologist, here\u2019s exactly what your Mindspan journey looks like.",
     image: "/assets/what-to-expect-hero.jpg",
     imageAlt:
       "A patient and a Mindspan team member sitting in patterned cardigans, talking in a warm, light-filled clinic.",
@@ -167,7 +167,7 @@ export const howItWorksPage = {
     problem: comparison.problem,
     solution: comparison.solution,
     closing:
-      "Every Mindspan patient receives the full standard of neurological care \u2014 plus the precision tools and the coordinated team that make a difference at the start of the journey.",
+      "Every Mindspan patient receives the full standard of neurological care, plus the precision tools and the coordinated team that make a difference at the start of the journey.",
     cta: {
       label: "See if you\u2019d benefit from a screening",
       href: BOOKING_HREF,
@@ -191,7 +191,7 @@ export const howItWorksPage = {
       eyebrow: "What makes Mindspan different",
       title: "Four quiet advantages built into every visit.",
       lead:
-        "You won\u2019t have to learn how any of this works. We use them so your experience with us feels unhurried, personal, and safe \u2014 and so the science stays current with the people doing the research.",
+        "You won\u2019t have to learn how any of this works. We use them so your experience with us feels unhurried, personal, and safe, and so the science stays current with the people doing the research.",
     },
     cards: difference,
   },
@@ -201,7 +201,7 @@ export const howItWorksPage = {
       eyebrow: "How to get started",
       title: "Starting is simple. You can do it from home.",
       lead:
-        "Complete the quick sign-up process, and we\u2019ll take care of coordinating specialists, next steps, and ongoing care \u2014 guiding you the whole way.",
+        "Complete the quick sign-up process, and we\u2019ll take care of coordinating specialists, next steps, and ongoing care, guiding you the whole way.",
     },
     items: howToStart,
   },
@@ -210,7 +210,7 @@ export const howItWorksPage = {
     eyebrow: "When you are ready",
     title: "See a specialist in weeks, not months or years.",
     lead:
-      "Early answers mean better outcomes \u2014 and more time with the people who matter most.",
+      "Early answers mean better outcomes, and more time with the people who matter most.",
     primary: { label: "Start a free screening", href: BOOKING_HREF },
     secondary: { label: "Talk to our care team", href: BOOKING_HREF },
   },

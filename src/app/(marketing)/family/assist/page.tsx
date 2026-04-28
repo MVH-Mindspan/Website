@@ -5,9 +5,11 @@ import {
   EditorialStages,
   FeatureCardGrid,
   SplitCards,
+  GuideBenefit,
   FinalCTA,
 } from "@/components/organisms/sections";
 import { assistPage } from "@/content/pages/assist";
+import { coveragePage } from "@/content/pages/coverage";
 
 export const metadata = assistPage.metadata;
 
@@ -45,6 +47,11 @@ export default function AssistPage() {
         intro={assistPage.howToStart.intro}
         stages={assistPage.howToStart.items}
       />
+      <SplitCards
+        intro={coveragePage.howItWorks.intro}
+        core={coveragePage.howItWorks.insurance}
+      />
+      <GuideBenefit {...assistPage.guideBenefit} />
       <FinalCTA
         eyebrow={assistPage.finalCta.eyebrow}
         title={assistPage.finalCta.title}

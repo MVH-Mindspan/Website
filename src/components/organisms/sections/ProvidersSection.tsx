@@ -39,7 +39,7 @@ function ProviderBlock({ card }: { card: ProviderCard }) {
         />
       )}
       <div className="relative">
-        <Eyebrow color={dark ? "#bdd8f5" : c.accent}>{card.eyebrow}</Eyebrow>
+        <Eyebrow color={dark ? "#bdd8f5" : c.accentText}>{card.eyebrow}</Eyebrow>
         <Heading
           as="h3"
           variant="h4"
