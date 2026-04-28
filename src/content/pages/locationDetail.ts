@@ -102,12 +102,12 @@ const detailMap: Record<string, LocationDetail> = {
         "Our Danvers clinic sees patients from across Essex County and greater Boston. Unhurried visits with a board-certified neurologist, billed through insurance.",
     },
   },
-  "telehealth-ma": {
+  "video-ma": {
     hero: {
-      eyebrow: "Telehealth \u2014 Massachusetts",
-      title: "See a neurologist from anywhere in Massachusetts.",
+      eyebrow: "Video visits \u2014 Massachusetts",
+      title: "See your neurologist from home, anywhere in Massachusetts.",
       lead:
-        "Video visits available statewide. Same neurologists, same unhurried visits, from your kitchen table.",
+        "On your phone, tablet, or computer \u2014 no driving, no waiting room. Same neurologists, same unhurried visits, from wherever you're most comfortable.",
     },
   },
   irvine: {

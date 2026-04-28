@@ -163,7 +163,7 @@ export const bayAreaDetail: LocationDetail = {
       "Board Certified in Vascular Neurology",
     ],
     affiliations: "Good Samaritan Hospital \u2014 San Jose, El Camino Health",
-    availability: "Accepting new patients. Telehealth appointments available.",
+    availability: "Accepting new patients. Video visits also available.",
     cta: { label: "Book a visit with Dr. Sachdev", href: BOOKING_HREF },
   },
 
