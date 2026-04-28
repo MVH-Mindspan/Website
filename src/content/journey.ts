@@ -27,7 +27,7 @@ export const journey: JourneyStage[] = [
     body:
       "An unhurried visit, in one of our clinics or on video, where a Mindspan neurologist goes through your history, any recent tests, and where you are today. You\u2019ll leave knowing what they\u2019re seeing and why.",
     cta: { label: "View our clinic locations", href: "#locations" },
-    image: "/assets/consultation-2.png",
+    image: "/assets/meet-neuro.png",
   },
   {
     kicker: "What will we actually do?",
@@ -35,7 +35,7 @@ export const journey: JourneyStage[] = [
     body:
       "This is where Mindspan\u2019s real edge shows up. Your neurologist brings together the newest peer-reviewed findings, advanced diagnostics, and your full medical picture, then builds a plan matched to your specific biology. Not generic advice, a plan built from your data.",
     cta: { label: "See the technology behind your care", href: "#technology" },
-    image: "/assets/consultation-1.png",
+    image: "/assets/latest-science.png",
   },
   {
     kicker: "And then what?",
