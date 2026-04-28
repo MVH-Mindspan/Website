@@ -24,14 +24,14 @@ const stages: JourneyStage[] = [
     kicker: "Join",
     title: "A seat at the table from day one.",
     body:
-      "Traditional healthcare often leaves families on the sidelines. At Mindspan, we welcome you as part of the care team from the very beginning \u2014 practical, respectful, and sustainable involvement built around your life.",
+      "Traditional healthcare often leaves families on the sidelines. At Mindspan, we welcome you as part of the care team from the very beginning, practical, respectful, and sustainable involvement built around your life.",
     image: "/assets/consultation-1.png",
   },
   {
     kicker: "Empower",
     title: "Stay informed, in person or remotely.",
     body:
-      "Whether you attend visits in person or join remotely, you remain informed and supported at every stage. Clear updates, guidance on next steps, and ongoing access to our care team \u2014 so you can focus on your loved one without feeling lost or alone.",
+      "Whether you attend visits in person or join remotely, you remain informed and supported at every stage. Clear updates, guidance on next steps, and ongoing access to our care team, so you can focus on your loved one without feeling lost or alone.",
     image: "/assets/ongoing-partnership.png",
   },
 ];
@@ -42,7 +42,7 @@ const paths: TechCard[] = [
     eyebrow: "Introduce a loved one",
     title: "We support the whole family.",
     body:
-      "Caregiver resources, medication management, and ongoing access to our care team. Getting started is easy \u2014 we can enroll your loved one with your assistance right away.",
+      "Caregiver resources, medication management, and ongoing access to our care team. Getting started is easy, we can enroll your loved one with your assistance right away.",
     icon: "chat",
   },
   {
@@ -69,7 +69,7 @@ const assessmentModes: { inPerson: Protocol; remote: Protocol } = {
     eyebrow: "In person",
     title: "Sit beside them, at home or in clinic.",
     body:
-      "Many families find it easier to start the assessment in the same room \u2014 offering reassurance, reading prompts out loud, and keeping the environment calm. Our care team guides you through each step so nothing feels unfamiliar.",
+      "Many families find it easier to start the assessment in the same room, offering reassurance, reading prompts out loud, and keeping the environment calm. Our care team guides you through each step so nothing feels unfamiliar.",
     bullets: [
       "Complete the assessment at home on a tablet or laptop",
       "Or visit a Mindspan clinic for an in-person first session",
@@ -124,7 +124,7 @@ const howToStart: JourneyStage[] = [
     kicker: "Step 05",
     title: "Digital twin",
     body:
-      "A personalized digital model of your loved one\u2019s brain helps our care team understand and support their cognitive health \u2014 tailoring care and strategies specifically to their needs.",
+      "A personalized digital model of your loved one\u2019s brain helps our care team understand and support their cognitive health, tailoring care and strategies specifically to their needs.",
   },
 ];
 
@@ -142,7 +142,7 @@ export const assistPage = {
     subTagline:
       "Fast access to specialists, advanced diagnostics, and a care team that keeps everyone connected.",
     subhead:
-      "Mindspan connects your loved one to specialist cognitive care within days or weeks, not months \u2014 guiding you through every step, whether you are nearby or supporting from afar.",
+      "Mindspan connects your loved one to specialist cognitive care within days or weeks, not months, guiding you through every step, whether you are nearby or supporting from afar.",
   },
 
   intro: {
@@ -156,7 +156,7 @@ export const assistPage = {
       eyebrow: "How we walk beside you",
       title: "One coordinated solution, from first worry to ongoing care.",
       lead:
-        "We understand that starting this conversation is hard. Our care team helps your loved one through each step of assessment and care, while keeping you informed \u2014 so you can stay involved emotionally, practically, and medically.",
+        "We understand that starting this conversation is hard. Our care team helps your loved one through each step of assessment and care, while keeping you informed, so you can stay involved emotionally, practically, and medically.",
     },
     items: stages,
   },
@@ -166,7 +166,7 @@ export const assistPage = {
       eyebrow: "The future of cognitive care",
       title: "Pick the path that fits your family today.",
       lead:
-        "Whether you\u2019re looking for specialist care for a loved one, a proactive baseline, or a quick private assessment from home \u2014 each path uses the same Mindspan care team and tools.",
+        "Whether you\u2019re looking for specialist care for a loved one, a proactive baseline, or a quick private assessment from home, each path uses the same Mindspan care team and tools.",
     },
     cards: paths,
   },
@@ -176,7 +176,7 @@ export const assistPage = {
       eyebrow: "Caregiver-assisted assessment",
       title: "Start their assessment together, wherever you are.",
       lead:
-        "You can begin your loved one\u2019s cognitive assessment from home or in person \u2014 and stay by their side to help them through it. Either way uses the same validated tools, reviewed by our care team within days.",
+        "You can begin your loved one\u2019s cognitive assessment from home or in person, and stay by their side to help them through it. Either way uses the same validated tools, reviewed by our care team within days.",
     },
     inPerson: assessmentModes.inPerson,
     remote: assessmentModes.remote,
@@ -193,7 +193,7 @@ export const assistPage = {
       eyebrow: "How it works",
       title: "How to get started.",
       lead:
-        "Getting started is straightforward and private. Complete a brief assessment from home, and we\u2019ll take care of coordinating specialists, next steps, and ongoing care \u2014 guiding you the whole way.",
+        "Getting started is straightforward and private. Complete a brief assessment from home, and we\u2019ll take care of coordinating specialists, next steps, and ongoing care, guiding you the whole way.",
     },
     items: howToStart,
   },
@@ -202,7 +202,7 @@ export const assistPage = {
     eyebrow: "If your loved one has Original Medicare",
     title: "Real support for the caregiver, too.",
     lead:
-      "If your loved one has a dementia diagnosis and is enrolled in Original Medicare, a Medicare-supported care model (GUIDE) can add concrete support for you as the caregiver \u2014 at no additional cost. If you qualify, we handle enrollment as part of ongoing care.",
+      "If your loved one has a dementia diagnosis and is enrolled in Original Medicare, a Medicare-supported care model (GUIDE) can add concrete support for you as the caregiver, at no additional cost. If you qualify, we handle enrollment as part of ongoing care.",
     bullets: [
       "Up to $2,500 per year in respite benefits for the primary caregiver",
       "24/7 specialist-staffed access for questions and concerns",
@@ -217,7 +217,7 @@ export const assistPage = {
       "You are involved in their day-to-day support",
     ],
     footnote:
-      "GUIDE is a CMS (Medicare) care model. Eligibility is determined during onboarding \u2014 there is nothing to sign up for in advance.",
+      "GUIDE is a CMS (Medicare) care model. Eligibility is determined during onboarding, there is nothing to sign up for in advance.",
     cta: { label: "Learn more about GUIDE", href: "/guide" },
   },
 
@@ -225,7 +225,7 @@ export const assistPage = {
     eyebrow: "When you are ready",
     title: "See a specialist in weeks, not months or years.",
     lead:
-      "Early diagnosis means better outcomes \u2014 and more time with the people who matter most.",
+      "Early diagnosis means better outcomes, and more time with the people who matter most.",
     primary: { label: "Introduce a loved one", href: BOOKING_HREF },
     secondary: { label: "Start a free assessment", href: BOOKING_HREF },
   },

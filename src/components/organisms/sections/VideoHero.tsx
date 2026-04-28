@@ -26,29 +26,66 @@ export function VideoHero({
   const { theme } = useTheme();
   const c = theme.colors;
   const [loaded, setLoaded] = useState(false);
+  const [showVideo, setShowVideo] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => setLoaded(true), 200);
     return () => clearTimeout(timer);
   }, []);
 
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const reducedData = (
+      window.matchMedia("(prefers-reduced-data: reduce)") as MediaQueryList | undefined
+    )?.matches;
+    const slow = (navigator as Navigator & { connection?: { saveData?: boolean; effectiveType?: string } })
+      .connection;
+    const isSlow = slow?.saveData === true || slow?.effectiveType === "slow-2g" || slow?.effectiveType === "2g";
+    if (reducedMotion || reducedData || isSlow) return;
+    const idle = (window as Window & { requestIdleCallback?: (cb: () => void) => number })
+      .requestIdleCallback ?? ((cb: () => void) => window.setTimeout(cb, 1));
+    const handle = idle(() => setShowVideo(true));
+    return () => {
+      const cancel = (window as Window & { cancelIdleCallback?: (h: number) => void })
+        .cancelIdleCallback;
+      if (cancel) cancel(handle as number);
+    };
+  }, []);
+
   return (
     <section
-      className="relative w-full overflow-hidden"
-      style={{ height: "100vh", minHeight: 600, background: "#201E17" }}
+      className="relative w-full overflow-hidden hero-section"
+      style={{
+        height: "min(100vh, 820px)",
+        minHeight: 560,
+        background: "#201E17",
+      }}
     >
-      {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
-      <video
-        className="absolute inset-0 w-full h-full object-cover"
-        autoPlay
-        muted
-        loop
-        playsInline
-        poster={poster}
-        preload="auto"
-      >
-        <source src={video} type="video/mp4" />
-      </video>
+      {showVideo && (
+        // eslint-disable-next-line jsx-a11y/media-has-caption
+        <video
+          className="absolute inset-0 w-full h-full object-cover"
+          autoPlay
+          muted
+          loop
+          playsInline
+          poster={poster}
+          preload="none"
+          aria-hidden
+        >
+          <source src={video} type="video/mp4" />
+        </video>
+      )}
+      {!showVideo && poster && (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src={poster}
+          alt=""
+          className="absolute inset-0 w-full h-full object-cover"
+          loading="eager"
+        />
+      )}
       <div className="absolute inset-0" style={{ background: alpha("#201E17", 0.2) }} />
       <div
         className="absolute inset-0"
@@ -60,7 +97,7 @@ export function VideoHero({
         }}
       />
       <div
-        className="absolute bottom-0 left-0 right-0 flex items-end justify-between gap-16 hero-content"
+        className="absolute bottom-0 left-0 right-0 flex flex-col md:flex-row md:items-end md:justify-between gap-6 md:gap-16 hero-content"
         style={{ padding: "64px clamp(24px, 5vw, 80px)" }}
       >
         <h1
@@ -81,7 +118,7 @@ export function VideoHero({
         </h1>
         <div
           style={{
-            maxWidth: 420,
+            maxWidth: 520,
             opacity: loaded ? 1 : 0,
             transform: loaded ? "none" : "translateY(18px)",
             transition: `opacity 0.8s ${ease.expressive} 0.2s, transform 0.8s ${ease.expressive} 0.2s`,
@@ -103,7 +140,7 @@ export function VideoHero({
             style={{
               fontFamily: theme.fonts.body,
               fontSize: typeScale.bodySm,
-              color: alpha(c.cream, 0.7),
+              color: alpha(c.cream, 0.78),
               lineHeight: 1.55,
               marginBottom: coverage || cta ? 20 : 0,
             }}
@@ -118,11 +155,9 @@ export function VideoHero({
                 gap: 8,
                 marginBottom: cta ? 20 : 0,
                 padding: "8px 16px",
-                background: alpha("#ffffff", 0.15),
-                border: `1px solid ${alpha("#ffffff", 0.3)}`,
+                background: c.brandGreen,
+                border: `1px solid ${alpha(c.cream, 0.18)}`,
                 borderRadius: "10rem",
-                backdropFilter: "blur(8px)",
-                WebkitBackdropFilter: "blur(8px)",
               }}
             >
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden>
@@ -148,9 +183,10 @@ export function VideoHero({
             </div>
           )}
           {cta && (
-            <div style={{ display: "flex", flexWrap: "wrap", gap: 12, alignItems: "center" }}>
+            <div className="hero-ctas">
               <a
                 href={cta.href}
+                className="hero-cta-primary"
                 style={{
                   display: "inline-block",
                   fontFamily: theme.fonts.body,
@@ -170,6 +206,7 @@ export function VideoHero({
               </a>
               <a
                 href={brand.phoneHref}
+                className="hero-cta-secondary"
                 style={{
                   display: "inline-flex",
                   alignItems: "center",
@@ -179,12 +216,10 @@ export function VideoHero({
                   fontWeight: 600,
                   color: c.cream,
                   padding: "14px 22px",
-                  border: `1px solid ${alpha("#ffffff", 0.35)}`,
+                  border: `1px solid ${alpha(c.cream, 0.45)}`,
                   borderRadius: "10rem",
                   textDecoration: "none",
-                  background: alpha("#ffffff", 0.08),
-                  backdropFilter: "blur(8px)",
-                  WebkitBackdropFilter: "blur(8px)",
+                  background: "transparent",
                 }}
               >
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden>
@@ -202,6 +237,27 @@ export function VideoHero({
           )}
         </div>
       </div>
+      <style jsx>{`
+        .hero-ctas {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 12px;
+          align-items: center;
+        }
+        @media (min-width: 768px) {
+          .hero-ctas {
+            flex-wrap: nowrap;
+          }
+        }
+        @media (max-width: 480px) {
+          .hero-cta-primary,
+          .hero-cta-secondary {
+            width: 100%;
+            justify-content: center;
+            text-align: center;
+          }
+        }
+      `}</style>
     </section>
   );
 }

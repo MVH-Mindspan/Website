@@ -27,13 +27,13 @@ export function SiteHeader() {
       className="fixed top-4 left-1/2 -translate-x-1/2 z-[999] flex items-center justify-between"
       style={{
         width: "min(1320px, 92vw)",
-        background: scrolled ? alpha("#201E17", 0.96) : alpha("#201E17", 0.88),
-        backdropFilter: "blur(16px)",
-        WebkitBackdropFilter: "blur(16px)",
+        background: "#201E17",
         borderRadius: "10rem",
         padding: scrolled ? "8px 12px 8px 24px" : "12px 12px 12px 24px",
-        boxShadow: scrolled ? "0 8px 32px -8px rgba(0,0,0,0.3)" : "none",
-        transition: `padding 0.4s ${ease.expressive}, background 0.4s ease, box-shadow 0.4s ease`,
+        boxShadow: scrolled
+          ? "0 8px 32px -8px rgba(0,0,0,0.3)"
+          : "0 4px 16px -8px rgba(0,0,0,0.2)",
+        transition: `padding 0.4s ${ease.expressive}, box-shadow 0.4s ease`,
       }}
     >
       <a
@@ -71,16 +71,6 @@ export function SiteHeader() {
           </li>
         ))}
 
-        <li
-          aria-hidden
-          style={{
-            width: 1,
-            height: 16,
-            background: alpha(c.cream, 0.2),
-            margin: "0 4px",
-          }}
-        />
-
         {[audienceNav.providers].map((n) => (
           <li key={n.label}>
             <a
@@ -90,13 +80,11 @@ export function SiteHeader() {
                 fontFamily: theme.fonts.body,
                 fontSize: typeScale.bodySm,
                 fontWeight: 450,
-                color: alpha(c.cream, 0.45),
+                color: alpha(c.cream, 0.7),
               }}
-              onMouseEnter={(e) =>
-                (e.currentTarget.style.color = alpha(c.cream, 0.8))
-              }
+              onMouseEnter={(e) => (e.currentTarget.style.color = c.cream)}
               onMouseLeave={(e) =>
-                (e.currentTarget.style.color = alpha(c.cream, 0.45))
+                (e.currentTarget.style.color = alpha(c.cream, 0.7))
               }
             >
               {n.label}

@@ -43,7 +43,7 @@ const careOptionsByState: Record<"MA" | "CA", CareOption[]> = {
       id: "video-ma",
       city: "Video visit",
       state: "From anywhere in Massachusetts",
-      description: "See your provider on your phone or computer — no driving, no waiting room",
+      description: "See your provider on your phone or computer, no driving, no waiting room",
       kind: "video",
     },
   ],
@@ -70,7 +70,7 @@ const careOptionsByState: Record<"MA" | "CA", CareOption[]> = {
       id: "video-ca",
       city: "Video visit",
       state: "From anywhere in California",
-      description: "See your provider on your phone or computer — no driving, no waiting room",
+      description: "See your provider on your phone or computer, no driving, no waiting room",
       kind: "video",
     },
   ],
@@ -102,7 +102,7 @@ export default function StepCareOption({
         How would you like to be seen?
       </h2>
       <p className="studio-lead mt-3" style={{ color: "rgba(8,54,48,0.7)" }}>
-        Visit one of our clinics, or see your provider over video — whatever
+        Visit one of our clinics, or see your provider over video, whatever
         works best for you.
       </p>
 

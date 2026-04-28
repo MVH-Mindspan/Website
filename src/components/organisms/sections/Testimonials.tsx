@@ -11,15 +11,18 @@ import type { Testimonial } from "@/content/testimonials";
 export function Testimonials({
   intro,
   quotes,
+  tone = "cream",
 }: {
   intro: { eyebrow: string; title: string };
   quotes: readonly Testimonial[];
+  tone?: "sand" | "cream";
 }) {
   const { theme } = useTheme();
   const c = theme.colors;
+  const bg = tone === "sand" ? c.sand : c.cream;
 
   return (
-    <section style={{ background: c.cream, padding: "96px 0" }}>
+    <section style={{ background: bg, padding: "96px 0" }}>
       <Container>
         <SectionHeader eyebrow={intro.eyebrow} title={intro.title} />
         <div className="mt-12 grid md:grid-cols-3 gap-5 md:gap-6">

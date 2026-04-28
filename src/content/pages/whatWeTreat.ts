@@ -14,13 +14,13 @@ export const whatWeTreatPage = {
   hero: {
     eyebrow: "What we treat",
     title: "Whatever is changing, you deserve answers.",
-    lead: "Memory loss, cognitive change, a recent diagnosis — or simply wanting to understand your brain health before symptoms appear. Mindspan specializes in all of it.",
+    lead: "Memory loss, cognitive change, a recent diagnosis, or simply wanting to understand your brain health before symptoms appear. Mindspan specializes in all of it.",
   },
 
   conditions: {
     eyebrow: "Conditions we see",
     title: "You don\u2019t need a diagnosis to come to us.",
-    lead: "We see patients at every stage \u2014 from a first worry to a recent diagnosis. If something feels different, that\u2019s reason enough to reach out.",
+    lead: "We see patients at every stage, from a first worry to a recent diagnosis. If something feels different, that\u2019s reason enough to reach out.",
   } as const,
 
   conditionCards: [
@@ -34,7 +34,7 @@ export const whatWeTreatPage = {
     {
       id: "mci",
       eyebrow: "Mild Cognitive Impairment",
-      title: "MCI \u2014 the stage before a diagnosis",
+      title: "MCI, the stage before a diagnosis",
       body: "MCI means memory or thinking skills have declined more than expected for your age, but not enough to interfere significantly with daily life. Early attention here makes the biggest difference.",
       icon: "bullseye",
     },
@@ -42,7 +42,7 @@ export const whatWeTreatPage = {
       id: "alzheimers",
       eyebrow: "Alzheimer\u2019s disease",
       title: "The most common cause of dementia",
-      body: "Mindspan neurologists are experienced in Alzheimer\u2019s evaluation, staging, and treatment \u2014 including the newest FDA-approved therapies for eligible patients.",
+      body: "Mindspan neurologists are experienced in Alzheimer\u2019s evaluation, staging, and treatment, including the newest FDA-approved therapies for eligible patients.",
       icon: "shield",
     },
     {
@@ -56,14 +56,14 @@ export const whatWeTreatPage = {
       id: "proactive",
       eyebrow: "Proactive brain health",
       title: "Understanding your brain before symptoms appear",
-      body: "Family history, early risk factors, or simply wanting to stay ahead \u2014 Mindspan offers comprehensive cognitive assessments for people who want to understand and protect their brain health proactively.",
+      body: "Family history, early risk factors, or simply wanting to stay ahead, Mindspan offers comprehensive cognitive assessments for people who want to understand and protect their brain health proactively.",
       icon: "brain",
     },
     {
       id: "caregiver",
       eyebrow: "For caregivers",
       title: "If you\u2019re caring for someone else",
-      body: "Caregivers are not bystanders \u2014 they\u2019re part of the care team. We work with families to understand what\u2019s happening, what to expect, and how to get the right support in place.",
+      body: "Caregivers are not bystanders, they\u2019re part of the care team. We work with families to understand what\u2019s happening, what to expect, and how to get the right support in place.",
       icon: "chat",
     },
   ] satisfies TechCard[],

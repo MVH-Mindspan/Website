@@ -6,7 +6,6 @@ import { VideoHero } from "@/components/organisms/sections/VideoHero";
 import { TeaserBanner } from "@/components/organisms/sections/TeaserBanner";
 import { EditorialStages } from "@/components/organisms/sections/EditorialStages";
 import { StatsBand } from "@/components/organisms/sections/StatsBand";
-import { SplitCards } from "@/components/organisms/sections/SplitCards";
 import { AudienceCards } from "@/components/organisms/sections/AudienceCards";
 import { Testimonials } from "@/components/organisms/sections/Testimonials";
 import { ProvidersPreview } from "@/components/organisms/sections/ProvidersPreview";
@@ -17,8 +16,6 @@ import {
   announcement,
   journey,
   stats,
-  protocols,
-  protocolsIntro,
   audiences,
   audiencesIntro,
   locations,
@@ -29,7 +26,6 @@ import {
   providersPreview,
   providersPreviewIntro,
 } from "@/content";
-import { flags } from "@/lib/featureFlags";
 
 export default function HomePage() {
   const { theme } = useTheme();
@@ -55,16 +51,19 @@ export default function HomePage() {
         primary={announcement.primary}
         badge={announcement.badge}
       />
-      <EditorialStages stages={journey} />
-      <StatsBand stats={stats} />
-      <AudienceCards intro={audiencesIntro} audiences={audiences} />
-      <Testimonials intro={testimonialsIntro} quotes={testimonials} />
-      <SplitCards
-        intro={protocolsIntro}
-        core={protocols.core}
-        edge={flags.showEdgeProtocol ? protocols.edge : undefined}
+      <StatsBand stats={stats} tone="cream" />
+      <AudienceCards
+        intro={audiencesIntro}
+        audiences={audiences.filter((a) => a.id !== "doctors")}
+        tone="sand"
       />
-      <ProvidersPreview intro={providersPreviewIntro} providers={providersPreview} />
+      <ProvidersPreview
+        intro={providersPreviewIntro}
+        providers={providersPreview}
+        tone="cream"
+      />
+      <EditorialStages stages={journey} tone="sand" />
+      <Testimonials intro={testimonialsIntro} quotes={testimonials} tone="cream" />
       <LocationCards id="locations" intro={locationsIntro} locations={locations} />
       <FinalCTA
         eyebrow={finalCta.eyebrow}

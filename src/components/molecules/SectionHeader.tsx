@@ -40,7 +40,7 @@ export function SectionHeader({
   const titleColor = tone === "light" ? c.cream : c.ink;
   const leadColor =
     tone === "light" ? alpha(c.cream, 0.65) : alpha(c.ink, 0.7);
-  const resolvedEyebrowColor = eyebrowColor ?? c.accent;
+  const resolvedEyebrowColor = eyebrowColor ?? c.accentText;
   const alignClass = align === "center" ? "mx-auto text-center" : "";
 
   const header = (

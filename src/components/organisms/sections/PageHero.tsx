@@ -52,7 +52,7 @@ function EditorialHero({
           {availability && (
             <AvailabilityPill availability={availability} tone="dark" />
           )}
-          <Eyebrow color={c.accent}>{eyebrow}</Eyebrow>
+          <Eyebrow color={c.accentText}>{eyebrow}</Eyebrow>
           {location && <LocationLine text={location} color={c.brandGreen} textColor={alpha(c.ink, 0.7)} />}
           <Heading
             as="h1"

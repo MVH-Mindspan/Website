@@ -27,7 +27,7 @@ export const technology: TechCard[] = [
     eyebrow: "Coordinated care",
     title: "Nothing falls through the cracks.",
     body:
-      "Our care team quietly tracks every safety checkpoint, every required MRI, every follow-up, every medication decision. If a scan is due before your next visit, it is already scheduled. You focus on your health — we handle the coordination.",
+      "Our care team quietly tracks every safety checkpoint, every required MRI, every follow-up, every medication decision. If a scan is due before your next visit, it is already scheduled. You focus on your health, we handle the coordination.",
     icon: "grid",
   },
   {

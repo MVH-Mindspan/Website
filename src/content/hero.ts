@@ -7,5 +7,5 @@ export const homeHero = {
   subTagline: brand.subTagline,
   subhead: brand.subhead,
   cta: { label: "Book an appointment", href: "/book-a-visit" },
-  coverage: "Covered by Medicare and most major plans",
+  coverage: "Covered by Medicare and Medicare Advantage",
 } as const;

@@ -31,7 +31,7 @@ export const audiences: Audience[] = [
     kicker: "If you\u2019ve noticed changes in yourself",
     title: "You deserve to be taken seriously.",
     body:
-      "Maybe a word slipped. Maybe you walked into a room and forgot why. It might be nothing \u2014 but you deserve to know either way.",
+      "Maybe a word slipped. Maybe you walked into a room and forgot why. It might be nothing, but you deserve to know either way.",
     cta: "Start a free assessment",
     href: "/book-a-visit",
   },
@@ -40,7 +40,7 @@ export const audiences: Audience[] = [
     kicker: "If you\u2019re a primary care physician",
     title: "A neurology partner who makes your life easier.",
     body:
-      "Your patients with cognitive concerns need more time than a 15-minute visit allows. We see them quickly and send clean notes back. You stay their doctor \u2014 we handle the specialty piece.",
+      "Your patients with cognitive concerns need more time than a 15-minute visit allows. We see them quickly and send clean notes back. You stay their doctor, we handle the specialty piece.",
     cta: "Learn about referrals",
     href: "/providers",
   },

@@ -81,7 +81,7 @@ async function submitForm(endpoint: string, payload: unknown): Promise<void> {
       body: JSON.stringify(payload),
     });
     if (!res.ok) {
-      // Dummy endpoint may 404 in pure-static dev — log and continue.
+      // Dummy endpoint may 404 in pure-static dev, log and continue.
       console.warn(`[booking] ${endpoint} returned ${res.status}`);
     }
   } catch (err) {

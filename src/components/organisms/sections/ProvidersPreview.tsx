@@ -12,15 +12,18 @@ import type { ProviderPreview } from "@/content/providersPreview";
 export function ProvidersPreview({
   intro,
   providers,
+  tone = "sand",
 }: {
   intro: { eyebrow: string; title: string; lead: string };
   providers: readonly ProviderPreview[];
+  tone?: "sand" | "cream";
 }) {
   const { theme } = useTheme();
   const c = theme.colors;
+  const bg = tone === "cream" ? c.cream : c.sand;
 
   return (
-    <section style={{ background: c.sand, padding: "96px 0" }}>
+    <section style={{ background: bg, padding: "96px 0" }}>
       <Container>
         <SectionHeader
           eyebrow={intro.eyebrow}

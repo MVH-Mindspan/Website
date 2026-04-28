@@ -16,7 +16,7 @@ export const faq: FAQItem[] = [
     id: "medicare",
     question: "Do you accept Medicare and insurance?",
     answer:
-      "Yes. We bill Medicare and most major commercial plans. If your loved one has a dementia diagnosis and is on Original Medicare (not Medicare Advantage), there may be additional Medicare-supported benefits available \u2014 we confirm eligibility during onboarding.",
+      "Yes. We bill Medicare and most major commercial plans. If your loved one has a dementia diagnosis and is on Original Medicare (not Medicare Advantage), there may be additional Medicare-supported benefits available, we confirm eligibility during onboarding.",
   },
   {
     id: "video",

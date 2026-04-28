@@ -22,7 +22,7 @@ export const coveragePage = {
     intro: {
       eyebrow: "How coverage works",
       title: "Billed like any other specialist visit.",
-      lead: "Mindspan is an in-network specialist for most major plans. Your visit is billed the same way a visit to any neurologist or specialist would be \u2014 through your insurance.",
+      lead: "Mindspan is an in-network specialist for most major plans. Your visit is billed the same way a visit to any neurologist or specialist would be, through your insurance.",
       image: "/assets/consultation-2.png",
       imageAlt: "A member of the Mindspan care team",
     },
@@ -36,7 +36,7 @@ export const coveragePage = {
         "Blue Cross Blue Shield",
         "Aetna, Cigna, United Healthcare, and other major plans",
         "We verify your coverage before your first visit",
-        "No surprise bills \u2014 we\u2019ll tell you what to expect upfront",
+        "No surprise bills, we\u2019ll tell you what to expect upfront",
         "Our team handles prior authorizations and paperwork",
       ],
       icon: "shield",
@@ -47,7 +47,7 @@ export const coveragePage = {
     eyebrow: "If you have Original Medicare",
     title: "An additional benefit for families navigating dementia.",
     lead:
-      "If your loved one has a dementia diagnosis and is enrolled in Original Medicare, there may be more support available to you at no additional cost \u2014 coordinated through a Medicare-supported care model called GUIDE. It is not something you have to apply for on your own. If you qualify, we handle enrollment.",
+      "If your loved one has a dementia diagnosis and is enrolled in Original Medicare, there may be more support available to you at no additional cost, coordinated through a Medicare-supported care model called GUIDE. It is not something you have to apply for on your own. If you qualify, we handle enrollment.",
     bullets: [
       "$0 copays for covered Mindspan visits",
       "24/7 specialist-staffed access for questions and concerns",
@@ -62,7 +62,7 @@ export const coveragePage = {
       "Located in Massachusetts or California (our current service areas for this program)",
     ],
     footnote:
-      "GUIDE is a CMS (Medicare) care model. Eligibility is determined during onboarding \u2014 there is nothing to sign up for in advance.",
+      "GUIDE is a CMS (Medicare) care model. Eligibility is determined during onboarding, there is nothing to sign up for in advance.",
     cta: { label: "Learn more about GUIDE", href: "/guide" },
   },
 
@@ -70,7 +70,7 @@ export const coveragePage = {
     { value: "100%", label: "Of visits billed through insurance" },
     { value: "Medicare", label: "Most major plans accepted" },
     { value: "2\u20133 wks", label: "Average time to see a neurologist" },
-    { value: "0", label: "Out-of-pocket surprises \u2014 we tell you upfront" },
+    { value: "0", label: "Out-of-pocket surprises, we tell you upfront" },
   ] satisfies Stat[],
 
   notSure: {

@@ -8,10 +8,8 @@ export const footer = {
       links: [
         { label: "Book an appointment", href: "/book-a-visit" },
         { label: "How it works", href: "/about/how-it-works" },
-        { label: "What we treat", href: "/what-we-treat" },
         { label: "GUIDE Program", href: "/guide" },
-        { label: "Coverage & cost", href: "/coverage" },
-        { label: "Assist a loved one", href: "/family/assist" },
+        { label: "For caregivers", href: "/family/assist" },
       ],
     },
     {

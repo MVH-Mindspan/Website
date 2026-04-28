@@ -9,6 +9,7 @@ import {
   FinalCTA,
 } from "@/components/organisms/sections";
 import { howItWorksPage } from "@/content/pages/howItWorks";
+import { whatWeTreatPage } from "@/content/pages/whatWeTreat";
 import { faq, faqIntro } from "@/content/faq";
 
 export const metadata = howItWorksPage.metadata;
@@ -30,6 +31,13 @@ export default function HowItWorksPage() {
       <EditorialPillarsIllustrated
         intro={howItWorksPage.journey.intro}
         pillars={howItWorksPage.journey.items}
+      />
+
+      <FeatureCardGrid
+        id="what-we-treat"
+        intro={whatWeTreatPage.conditions}
+        cards={whatWeTreatPage.conditionCards}
+        columns={3}
       />
 
       <FeatureCardGrid

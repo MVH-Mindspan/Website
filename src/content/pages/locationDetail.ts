@@ -104,10 +104,10 @@ const detailMap: Record<string, LocationDetail> = {
   },
   "video-ma": {
     hero: {
-      eyebrow: "Video visits \u2014 Massachusetts",
+      eyebrow: "Video visits, Massachusetts",
       title: "See your neurologist from home, anywhere in Massachusetts.",
       lead:
-        "On your phone, tablet, or computer \u2014 no driving, no waiting room. Same neurologists, same unhurried visits, from wherever you're most comfortable.",
+        "On your phone, tablet, or computer, no driving, no waiting room. Same neurologists, same unhurried visits, from wherever you're most comfortable.",
     },
   },
   irvine: {
@@ -136,7 +136,7 @@ export function getLocationPage(location: Location) {
       detail ?? {
         hero: {
           eyebrow: `${location.city}, ${location.state}`,
-          title: `Mindspan \u2014 ${location.city}`,
+          title: `Mindspan, ${location.city}`,
           lead: "Cognitive care and dementia specialists.",
         },
       },

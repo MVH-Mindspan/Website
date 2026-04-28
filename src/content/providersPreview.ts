@@ -10,7 +10,7 @@ export const providersPreviewIntro = {
   eyebrow: "Meet your care team",
   title: "Board-certified neurologists who specialize in memory.",
   lead:
-    "Every visit is with a specialist \u2014 not a triage line. You will know exactly who you are seeing before you walk in.",
+    "Every visit is with a specialist, not a triage line. You will know exactly who you are seeing before you walk in.",
 } as const;
 
 export const providersPreview: ProviderPreview[] = [

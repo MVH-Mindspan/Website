@@ -9,7 +9,7 @@ export const bayAreaDetail: LocationDetail = {
     title:
       "Alzheimer\u2019s & dementia care in the San Jose / Bay Area. Act early. Preserve what matters most.",
     lead:
-      "Alzheimer\u2019s care reimagined. At Mindspan, we are a new kind of cognitive care organization \u2014 focused exclusively on providing the highest quality care for patients with Alzheimer\u2019s disease and dementia. We offer the latest in treatments and diagnostics, participation in clinical trials, all to keep us at the forefront of diagnosis and therapeutics for our patients.",
+      "Alzheimer\u2019s care reimagined. At Mindspan, we are a new kind of cognitive care organization, focused exclusively on providing the highest quality care for patients with Alzheimer\u2019s disease and dementia. We offer the latest in treatments and diagnostics, participation in clinical trials, all to keep us at the forefront of diagnosis and therapeutics for our patients.",
     location: "2520 Samaritan Dr, Suite 201B \u00b7 San Jose, CA 95124",
     availability: {
       text: "Appointments available this month",
@@ -140,9 +140,9 @@ export const bayAreaDetail: LocationDetail = {
   provider: {
     name: "Noor Sachdev, MD",
     role: "Lead Neurologist",
-    eyebrow: "Neurologist \u2014 Mindspan Bay Area",
+    eyebrow: "Neurologist, Mindspan Bay Area",
     image: "/assets/noor-sachdev.webp",
-    imageAlt: "Dr. Noor Sachdev, MD \u2014 Lead Neurologist at Mindspan Bay Area",
+    imageAlt: "Dr. Noor Sachdev, MD, Lead Neurologist at Mindspan Bay Area",
     bio:
       "Dr. Noor Sachdev is a board-certified neurologist in San Jose, California, with expertise in Alzheimer\u2019s disease and dementia. He is at the forefront of cutting-edge diagnostics and therapeutics, participating in multiple clinical trials and collaborating with cognitive clinics at Stanford, UCSF, ALZ-NET and Sutter Health.",
     specialties: [
@@ -154,15 +154,15 @@ export const bayAreaDetail: LocationDetail = {
       "Neuromuscular disorders",
     ],
     education: [
-      "MD \u2014 University of Southern California School of Medicine",
-      "Residency \u2014 Baylor College of Medicine (Neurology)",
-      "Fellowship \u2014 Columbia University (Clinical Neurophysiology)",
+      "MD, University of Southern California School of Medicine",
+      "Residency, Baylor College of Medicine (Neurology)",
+      "Fellowship, Columbia University (Clinical Neurophysiology)",
     ],
     certifications: [
       "Board Certified in Neurology",
       "Board Certified in Vascular Neurology",
     ],
-    affiliations: "Good Samaritan Hospital \u2014 San Jose, El Camino Health",
+    affiliations: "Good Samaritan Hospital, San Jose, El Camino Health",
     availability: "Accepting new patients. Video visits also available.",
     cta: { label: "Book a visit with Dr. Sachdev", href: BOOKING_HREF },
   },
@@ -186,7 +186,7 @@ export const bayAreaDetail: LocationDetail = {
       eyebrow: "If you have Original Medicare",
       title: "An additional benefit for families navigating dementia.",
       lead:
-        "If your loved one has a dementia diagnosis and is enrolled in Original Medicare, there may be more support available to you at no additional cost \u2014 coordinated through a Medicare-supported care model called GUIDE. We handle eligibility and enrollment during onboarding; there is nothing to apply for in advance.",
+        "If your loved one has a dementia diagnosis and is enrolled in Original Medicare, there may be more support available to you at no additional cost, coordinated through a Medicare-supported care model called GUIDE. We handle eligibility and enrollment during onboarding; there is nothing to apply for in advance.",
       image: "/assets/ongoing-partnership.png",
       imageAlt:
         "A Mindspan care team supporting a family navigating dementia care together",
@@ -196,7 +196,7 @@ export const bayAreaDetail: LocationDetail = {
       eyebrow: "What you may be eligible for",
       title: "Concrete support for the caregiver and the patient.",
       body:
-        "If you qualify, we coordinate these benefits for you as part of ongoing care \u2014 they are not a separate program you manage yourself.",
+        "If you qualify, we coordinate these benefits for you as part of ongoing care, they are not a separate program you manage yourself.",
       bullets: [
         "$0 copays for covered Mindspan visits",
         "24/7 specialist-staffed access for questions and concerns",

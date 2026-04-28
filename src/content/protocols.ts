@@ -43,7 +43,7 @@ export const protocols: { core: Protocol; edge: Protocol } = {
       "Blood biomarker panel that can confirm amyloid status without needing a PET scan",
       "Genetic testing (APOE) for personalized risk and safer treatment decisions",
       "Biological disease staging so your neurologist knows exactly where things stand",
-      "A complete, living picture of your brain health — updated at every visit",
+      "A complete, living picture of your brain health, updated at every visit",
       "Structured plan across 9 lifestyle factors with actual targets, not generic advice",
       "Both anti-amyloid therapies, with genotype-informed safety planning",
     ],

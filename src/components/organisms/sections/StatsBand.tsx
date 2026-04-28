@@ -7,14 +7,22 @@ import { StatCounter } from "@/components/molecules/StatCounter";
 import { Reveal } from "@/components/molecules/Reveal";
 import type { Stat } from "@/content/stats";
 
-export function StatsBand({ stats }: { stats: readonly Stat[] }) {
+export function StatsBand({
+  stats,
+  tone = "sand",
+}: {
+  stats: readonly Stat[];
+  tone?: "sand" | "cream";
+}) {
   const { theme } = useTheme();
   const c = theme.colors;
 
   const [first, second, ...rest] = stats;
+  const bg = tone === "cream" ? c.cream : c.sand;
+  const cardBg = tone === "cream" ? c.sand : c.cream;
 
   return (
-    <section style={{ background: c.sand, padding: "72px 0" }}>
+    <section style={{ background: bg, padding: "72px 0" }}>
       <div
         style={{
           maxWidth: "min(1320px, 92vw)",
@@ -31,7 +39,7 @@ export function StatsBand({ stats }: { stats: readonly Stat[] }) {
               gridTemplateColumns: "1fr auto 1fr",
               alignItems: "center",
               gap: 0,
-              background: c.cream,
+              background: cardBg,
               borderRadius: "1.5rem",
               padding: "40px 48px",
               border: `1px solid ${alpha(c.ink, 0.07)}`,
