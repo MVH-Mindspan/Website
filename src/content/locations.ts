@@ -54,6 +54,15 @@ export const locations: Location[] = [
     marker: "37.775,-122.418",
     kind: "clinic",
   },
+  {
+    slug: "video-ca",
+    city: "Video visits",
+    state: "California",
+    href: "/book-a-visit",
+    bbox: "-124.41,32.53,-114.13,42.01",
+    marker: "37.0,-119.4",
+    kind: "video",
+  },
 ];
 
 export function getLocation(slug: string): Location | undefined {

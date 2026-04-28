@@ -145,7 +145,7 @@ export function SplitCards({
                 <BulletList
                   items={edge.bullets}
                   bulletColor="#bdd8f5"
-                  className="mt-6 text-[15px] text-white/85"
+                  className="mt-6 text-base text-white/85"
                 />
               </div>
             </Reveal>

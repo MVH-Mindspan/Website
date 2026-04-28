@@ -43,7 +43,6 @@ export default function HomePage() {
         subTagline={homeHero.subTagline}
         subhead={homeHero.subhead}
         cta={homeHero.cta}
-        coverage={homeHero.coverage}
       />
       <TeaserBanner
         href={announcement.href}
@@ -64,7 +63,13 @@ export default function HomePage() {
       />
       <EditorialStages stages={journey} tone="sand" />
       <Testimonials intro={testimonialsIntro} quotes={testimonials} tone="cream" />
-      <LocationCards id="locations" intro={locationsIntro} locations={locations} />
+      <LocationCards
+        id="locations"
+        intro={locationsIntro}
+        locations={locations}
+        groupByKind
+        tone="sand"
+      />
       <FinalCTA
         eyebrow={finalCta.eyebrow}
         title={finalCta.title}

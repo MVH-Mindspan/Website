@@ -99,7 +99,7 @@ export function AudienceCards({
                     items={a.bullets}
                     bulletColor={c.brandGreen}
                     color={alpha(c.ink, 0.78)}
-                    className="mt-5 text-[14.5px] flex-1"
+                    className="mt-5 text-base flex-1"
                   />
                 )}
                 <div className="mt-8">
