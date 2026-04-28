@@ -69,7 +69,7 @@ export function ProviderProfile(props: ProviderProfileType) {
                   items={props.specialties}
                   bulletColor={c.brandGreen}
                   color={alpha(c.ink, 0.78)}
-                  className="text-[15px]"
+                  className="text-base"
                 />
               </ProviderBlock>
 
@@ -78,7 +78,7 @@ export function ProviderProfile(props: ProviderProfileType) {
                   items={props.certifications}
                   bulletColor={c.brandGreen}
                   color={alpha(c.ink, 0.78)}
-                  className="text-[15px]"
+                  className="text-base"
                 />
               </ProviderBlock>
 
@@ -87,7 +87,7 @@ export function ProviderProfile(props: ProviderProfileType) {
                   items={props.education}
                   bulletColor={c.brandGreen}
                   color={alpha(c.ink, 0.78)}
-                  className="text-[15px]"
+                  className="text-base"
                 />
               </ProviderBlock>
 

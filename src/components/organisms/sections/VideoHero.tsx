@@ -13,7 +13,6 @@ export function VideoHero({
   subTagline,
   subhead,
   cta,
-  coverage,
 }: {
   video: string;
   poster?: string;
@@ -21,7 +20,6 @@ export function VideoHero({
   subTagline: string;
   subhead: string;
   cta?: { label: string; href: string };
-  coverage?: string;
 }) {
   const { theme } = useTheme();
   const c = theme.colors;
@@ -57,8 +55,8 @@ export function VideoHero({
     <section
       className="relative w-full overflow-hidden hero-section"
       style={{
-        height: "min(100vh, 820px)",
-        minHeight: 560,
+        height: "100vh",
+        minHeight: 600,
         background: "#201E17",
       }}
     >
@@ -100,22 +98,27 @@ export function VideoHero({
         className="absolute bottom-0 left-0 right-0 flex flex-col md:flex-row md:items-end md:justify-between gap-6 md:gap-16 hero-content"
         style={{ padding: "64px clamp(24px, 5vw, 80px)" }}
       >
-        <h1
+        <div
           style={{
-            fontFamily: theme.fonts.heading,
-            fontSize: typeScale.display,
-            fontWeight: 400,
-            color: c.cream,
-            letterSpacing: "-0.02em",
-            lineHeight: 0.98,
-            maxWidth: "12ch",
             opacity: loaded ? 1 : 0,
             transform: loaded ? "none" : "translateY(24px)",
             transition: `opacity 0.8s ${ease.expressive}, transform 0.8s ${ease.expressive}`,
           }}
         >
-          {headline}
-        </h1>
+          <h1
+            style={{
+              fontFamily: theme.fonts.heading,
+              fontSize: typeScale.display,
+              fontWeight: 400,
+              color: c.cream,
+              letterSpacing: "-0.02em",
+              lineHeight: 0.98,
+              maxWidth: "16ch",
+            }}
+          >
+            {headline}
+          </h1>
+        </div>
         <div
           style={{
             maxWidth: 520,
@@ -142,46 +145,11 @@ export function VideoHero({
               fontSize: typeScale.bodySm,
               color: alpha(c.cream, 0.78),
               lineHeight: 1.55,
-              marginBottom: coverage || cta ? 20 : 0,
+              marginBottom: cta ? 20 : 0,
             }}
           >
             {subhead}
           </p>
-          {coverage && (
-            <div
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: 8,
-                marginBottom: cta ? 20 : 0,
-                padding: "8px 16px",
-                background: c.brandGreen,
-                border: `1px solid ${alpha(c.cream, 0.18)}`,
-                borderRadius: "10rem",
-              }}
-            >
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden>
-                <path
-                  d="M20 6L9 17l-5-5"
-                  stroke={c.cream}
-                  strokeWidth="2.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-              <span
-                style={{
-                  fontFamily: theme.fonts.body,
-                  fontSize: typeScale.bodySm,
-                  fontWeight: 600,
-                  color: c.cream,
-                  letterSpacing: "0.01em",
-                }}
-              >
-                {coverage}
-              </span>
-            </div>
-          )}
           {cta && (
             <div className="hero-ctas">
               <a

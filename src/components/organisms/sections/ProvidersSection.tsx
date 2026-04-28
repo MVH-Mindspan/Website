@@ -62,7 +62,7 @@ function ProviderBlock({ card }: { card: ProviderCard }) {
           items={card.bullets}
           bulletColor={dark ? "#bdd8f5" : c.accent}
           color={dark ? undefined : alpha(c.ink, 0.82)}
-          className={`mt-6 ${dark ? "text-[15px] text-white/85" : "text-base"}`.trim()}
+          className={`mt-6 ${dark ? "text-base text-white/85" : "text-base"}`.trim()}
         />
         <div className="mt-8 flex flex-wrap gap-3">
           <a

@@ -260,7 +260,8 @@ export default function BookingWizard() {
         <div className="studio-container flex items-center justify-between">
           <a href="/" className="flex items-center gap-3 group">
             <img
-              src="/assets/Logo green@2x.png"
+              src="/assets/mindspan-logo-horizontal-dark.png"
+              srcSet="/assets/mindspan-logo-horizontal-dark.png 1x, /assets/mindspan-logo-horizontal-dark@2x.png 2x, /assets/mindspan-logo-horizontal-dark@3x.png 3x"
               alt="Mindspan"
               className="h-8 w-auto"
             />

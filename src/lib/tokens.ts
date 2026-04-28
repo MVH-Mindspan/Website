@@ -7,7 +7,7 @@ export const ease = {
 export const easeArray = [0.22, 0.61, 0.36, 1] as const;
 
 export const type = {
-  display: "clamp(3rem, 1.8rem + 5vw, 7rem)",
+  display: "clamp(2.5rem, 1.6rem + 3.5vw, 5.25rem)",
   h1: "clamp(2.5rem, 5.5vw + 1rem, 5.5rem)",
   h2: "clamp(2rem, 1.4rem + 2vw, 3.4rem)",
   h3: "clamp(1.5rem, 1.15rem + 1.2vw, 2.2rem)",
