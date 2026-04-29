@@ -3,6 +3,7 @@
 import { useCallback } from "react";
 import { motion, useReducedMotion, type Variants } from "framer-motion";
 import FormField from "./FormField";
+import SubmitErrorBlock from "./SubmitErrorBlock";
 
 const EASE = [0.22, 0.61, 0.36, 1] as const;
 const GREEN = "#083630";
@@ -36,6 +37,7 @@ type StepWaitlistProps = {
   onSubmit: () => void;
   submitting: boolean;
   submitted: boolean;
+  submitError?: string;
 };
 
 export default function StepWaitlist({
@@ -45,6 +47,7 @@ export default function StepWaitlist({
   onSubmit,
   submitting,
   submitted,
+  submitError,
 }: StepWaitlistProps) {
   const reducedMotion = useReducedMotion();
 
@@ -127,6 +130,8 @@ export default function StepWaitlist({
             value={data.firstName}
             onChange={(v) => onChange("firstName", v)}
             error={errors.firstName}
+            maxLength={120}
+            autoComplete="given-name"
           />
         </motion.div>
 
@@ -140,6 +145,9 @@ export default function StepWaitlist({
             value={data.email}
             onChange={(v) => onChange("email", v)}
             error={errors.email}
+            maxLength={255}
+            autoComplete="email"
+            inputMode="email"
           />
         </motion.div>
 
@@ -153,8 +161,17 @@ export default function StepWaitlist({
             value={formatPhone(data.phone)}
             onChange={handlePhoneChange}
             error={errors.phone}
+            maxLength={20}
+            autoComplete="tel-national"
+            inputMode="tel"
           />
         </motion.div>
+
+        {submitError && (
+          <motion.div variants={fadeUp}>
+            <SubmitErrorBlock message={submitError} onRetry={onSubmit} disabled={submitting} />
+          </motion.div>
+        )}
 
         <motion.div variants={fadeUp} className="pt-4">
           <button

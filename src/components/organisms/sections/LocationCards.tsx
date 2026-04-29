@@ -28,6 +28,8 @@ export function LocationCards({
   const video = locations.filter((l) => l.kind === "video");
   const bg = tone === "sand" ? c.sand : tone === "cream" ? c.cream : undefined;
 
+  if (locations.length === 0 && !intro) return null;
+
   return (
     <section id={id} style={{ padding: "96px 0", background: bg }}>
       <Container>
@@ -106,7 +108,10 @@ function LocationCard({
 }) {
   const { theme } = useTheme();
   const c = theme.colors;
-  const mapSrc = `https://www.openstreetmap.org/export/embed.html?bbox=${l.bbox}&layer=mapnik&marker=${l.marker}`;
+  const hasMap = Boolean(l.bbox && l.marker);
+  const mapSrc = hasMap
+    ? `https://www.openstreetmap.org/export/embed.html?bbox=${l.bbox}&layer=mapnik&marker=${l.marker}`
+    : null;
   const isVideo = l.kind === "video";
 
   return (
@@ -122,14 +127,27 @@ function LocationCard({
           className="relative overflow-hidden h-40"
           style={{ background: c.primaryLight }}
         >
-          <iframe
-            src={mapSrc}
-            className="absolute left-0 right-0 top-0 w-full border-0 pointer-events-none transition-transform duration-500 group-hover:scale-[1.05]"
-            style={{ height: "calc(100% + 60px)" }}
-            loading="lazy"
-            title={`Map of ${l.city}, ${l.state}`}
-            aria-hidden="true"
-          />
+          {mapSrc ? (
+            <iframe
+              src={mapSrc}
+              className="absolute left-0 right-0 top-0 w-full border-0 pointer-events-none transition-transform duration-500 group-hover:scale-[1.05]"
+              style={{ height: "calc(100% + 60px)" }}
+              loading="lazy"
+              title={`Map of ${l.city}, ${l.state}`}
+              aria-hidden="true"
+            />
+          ) : (
+            <div
+              aria-hidden="true"
+              className="absolute inset-0"
+              style={{
+                background: `linear-gradient(135deg, ${alpha(
+                  c.primaryLight,
+                  1
+                )} 0%, ${alpha(c.primary, 1)} 100%)`,
+              }}
+            />
+          )}
           {isVideo && (
             <div className="absolute inset-0 flex items-center justify-center">
               <span
@@ -145,7 +163,7 @@ function LocationCard({
             </div>
           )}
           <div
-            className="absolute top-3 left-3 flex items-center gap-2 rounded-full px-3 py-1.5 font-semibold"
+            className="absolute top-3 start-3 flex items-center gap-2 rounded-full px-3 py-1.5 font-semibold"
             style={{
               background: c.brandGreen,
               color: "#fff",

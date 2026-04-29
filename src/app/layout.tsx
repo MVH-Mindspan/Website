@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { PT_Serif, Bitter, Inter, EB_Garamond, Figtree } from "next/font/google";
 import { ThemeProvider } from "@/lib/theme-context";
+import { SITE_URL } from "@/lib/seo";
 import "./globals.css";
 
 const ptSerif = PT_Serif({
@@ -37,6 +38,7 @@ const figtree = Figtree({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: "Cognitive Care & Dementia Specialists | Mindspan",
   description:
     "See a neurologist in weeks, not months. Expert Alzheimer\u2019s and dementia assessments, personalized care plans, and family support. Book a visit in MA or CA.",

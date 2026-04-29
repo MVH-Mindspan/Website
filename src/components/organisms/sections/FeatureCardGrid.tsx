@@ -35,6 +35,8 @@ export function FeatureCardGrid({
   const { theme } = useTheme();
   const c = theme.colors;
 
+  if (cards.length === 0) return null;
+
   const gridColsClass =
     columns === 4
       ? "md:grid-cols-2 lg:grid-cols-4"

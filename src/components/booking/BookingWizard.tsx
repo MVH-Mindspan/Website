@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import ProgressBar from "./ProgressBar";
 import StepState, { type StateChoice } from "./StepState";
@@ -10,6 +10,8 @@ import StepReview from "./StepReview";
 import StepWaitlist from "./StepWaitlist";
 
 const EASE = [0.22, 0.61, 0.36, 1] as const;
+const STORAGE_KEY = "mindspan:booking:v1";
+const SUBMIT_TIMEOUT_MS = 15000;
 
 type FormData = {
   state: StateChoice | "";
@@ -61,6 +63,17 @@ function validateWaitlist(data: FormData): StepErrors {
   return errors;
 }
 
+function hasFormProgress(data: FormData): boolean {
+  return Boolean(
+    data.state ||
+      data.careOption ||
+      data.firstName.trim() ||
+      data.lastName.trim() ||
+      data.email.trim() ||
+      data.phone.trim()
+  );
+}
+
 const slideVariants = {
   enter: (direction: number) => ({
     x: direction > 0 ? 80 : -80,
@@ -73,19 +86,38 @@ const slideVariants = {
   }),
 };
 
-async function submitForm(endpoint: string, payload: unknown): Promise<void> {
+type SubmitResult = { ok: true } | { ok: false; error: string };
+
+async function submitForm(
+  endpoint: string,
+  payload: unknown,
+  signal: AbortSignal
+): Promise<SubmitResult> {
   try {
     const res = await fetch(endpoint, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),
+      signal,
     });
     if (!res.ok) {
-      // Dummy endpoint may 404 in pure-static dev, log and continue.
-      console.warn(`[booking] ${endpoint} returned ${res.status}`);
+      return {
+        ok: false,
+        error: `Our system returned an error (${res.status}). Please try again or email us.`,
+      };
     }
+    return { ok: true };
   } catch (err) {
-    console.warn(`[booking] ${endpoint} failed`, err);
+    if ((err as Error)?.name === "AbortError") {
+      return {
+        ok: false,
+        error: "The request took too long. Please check your connection and try again.",
+      };
+    }
+    return {
+      ok: false,
+      error: "We couldn't reach our servers. Please check your connection and try again.",
+    };
   }
 }
 
@@ -97,6 +129,58 @@ export default function BookingWizard() {
   const [errors, setErrors] = useState<StepErrors>({});
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState<string | undefined>(undefined);
+  const [hydrated, setHydrated] = useState(false);
+
+  // Hydrate from sessionStorage after mount (avoid SSR mismatch).
+  useEffect(() => {
+    setHydrated(true);
+    try {
+      const raw = sessionStorage.getItem(STORAGE_KEY);
+      if (!raw) return;
+      const parsed = JSON.parse(raw) as { formData?: FormData; stepId?: StepId };
+      if (parsed.formData) {
+        setFormData({ ...initialFormData, ...parsed.formData });
+      }
+      if (parsed.stepId) {
+        setStepId(parsed.stepId);
+      }
+    } catch {
+      // Corrupt storage — ignore and start fresh.
+    }
+  }, []);
+
+  // Persist formData + stepId until submitted. Clear on success.
+  useEffect(() => {
+    if (!hydrated) return;
+    try {
+      if (submitted) {
+        sessionStorage.removeItem(STORAGE_KEY);
+        return;
+      }
+      if (hasFormProgress(formData)) {
+        sessionStorage.setItem(
+          STORAGE_KEY,
+          JSON.stringify({ formData, stepId })
+        );
+      }
+    } catch {
+      // Storage unavailable (e.g. private mode quota) — silently degrade.
+    }
+  }, [formData, stepId, submitted, hydrated]);
+
+  // Warn on accidental tab close / refresh while form has unsaved data.
+  useEffect(() => {
+    if (submitted) return;
+    const dirty = hasFormProgress(formData);
+    if (!dirty) return;
+    const handler = (e: BeforeUnloadEvent) => {
+      e.preventDefault();
+      e.returnValue = "";
+    };
+    window.addEventListener("beforeunload", handler);
+    return () => window.removeEventListener("beforeunload", handler);
+  }, [formData, submitted]);
 
   const updateField = useCallback((field: string, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
@@ -114,6 +198,7 @@ export default function BookingWizard() {
     (target: StepId, dir: 1 | -1 = 1) => {
       setDirection(dir);
       setErrors({});
+      setSubmitError(undefined);
       setStepId(target);
       window.scrollTo({ top: 0, behavior: reducedMotion ? "instant" : "smooth" });
     },
@@ -154,35 +239,69 @@ export default function BookingWizard() {
   }, [formData, goTo]);
 
   const handleWaitlistSubmit = useCallback(async () => {
+    if (submitting || submitted) return;
     const stepErrors = validateWaitlist(formData);
     if (Object.keys(stepErrors).length > 0) {
       setErrors(stepErrors);
       return;
     }
+    setSubmitError(undefined);
     setSubmitting(true);
-    await submitForm("/api/waitlist", {
-      firstName: formData.firstName,
-      email: formData.email,
-      phone: formData.phone,
-      state: formData.state,
-    });
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), SUBMIT_TIMEOUT_MS);
+    const result = await submitForm(
+      "/api/waitlist",
+      {
+        firstName: formData.firstName,
+        email: formData.email,
+        phone: formData.phone,
+        state: formData.state,
+      },
+      controller.signal
+    );
+    clearTimeout(timeout);
     setSubmitting(false);
-    setSubmitted(true);
-  }, [formData]);
+    if (result.ok) {
+      setSubmitted(true);
+    } else {
+      setSubmitError(result.error);
+    }
+  }, [formData, submitting, submitted]);
 
   const handleBookingSubmit = useCallback(async () => {
+    if (submitting || submitted) return;
+    // Re-validate to catch any state cleared by rapid back-navigation.
+    const detailErrors = validateDetails(formData);
+    if (Object.keys(detailErrors).length > 0 || !formData.state || !formData.careOption) {
+      setSubmitError(
+        "Some required information is missing. Please go back and complete every step."
+      );
+      return;
+    }
+    setSubmitError(undefined);
     setSubmitting(true);
-    await submitForm("/api/book", {
-      state: formData.state,
-      careOption: formData.careOption,
-      firstName: formData.firstName,
-      lastName: formData.lastName,
-      email: formData.email,
-      phone: formData.phone,
-    });
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), SUBMIT_TIMEOUT_MS);
+    const result = await submitForm(
+      "/api/book",
+      {
+        state: formData.state,
+        careOption: formData.careOption,
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        email: formData.email,
+        phone: formData.phone,
+      },
+      controller.signal
+    );
+    clearTimeout(timeout);
     setSubmitting(false);
-    setSubmitted(true);
-  }, [formData]);
+    if (result.ok) {
+      setSubmitted(true);
+    } else {
+      setSubmitError(result.error);
+    }
+  }, [formData, submitting, submitted]);
 
   const back = useCallback(() => {
     if (stepId === "care") goTo("state", -1);
@@ -205,6 +324,26 @@ export default function BookingWizard() {
     [progressIndex, goTo]
   );
 
+  const handleExitClick = useCallback(
+    (e: React.MouseEvent<HTMLAnchorElement>) => {
+      if (submitted) return;
+      if (!hasFormProgress(formData)) return;
+      const confirmed = window.confirm(
+        "Leave booking? Your progress so far will be cleared."
+      );
+      if (!confirmed) {
+        e.preventDefault();
+        return;
+      }
+      try {
+        sessionStorage.removeItem(STORAGE_KEY);
+      } catch {
+        // ignore
+      }
+    },
+    [formData, submitted]
+  );
+
   const renderStep = () => {
     switch (stepId) {
       case "state":
@@ -220,6 +359,7 @@ export default function BookingWizard() {
             onSubmit={handleWaitlistSubmit}
             submitting={submitting}
             submitted={submitted}
+            submitError={submitError}
           />
         );
       case "care":
@@ -247,6 +387,7 @@ export default function BookingWizard() {
             onSubmit={handleBookingSubmit}
             submitting={submitting}
             submitted={submitted}
+            submitError={submitError}
           />
         );
       default:
@@ -258,7 +399,11 @@ export default function BookingWizard() {
     <div className="min-h-screen" style={{ background: "#efeeeb" }}>
       <header className="py-6">
         <div className="studio-container flex items-center justify-between">
-          <a href="/" className="flex items-center gap-3 group">
+          <a
+            href="/"
+            onClick={handleExitClick}
+            className="flex items-center gap-3 group"
+          >
             <img
               src="/assets/mindspan-logo-horizontal-dark.png"
               srcSet="/assets/mindspan-logo-horizontal-dark.png 1x, /assets/mindspan-logo-horizontal-dark@2x.png 2x, /assets/mindspan-logo-horizontal-dark@3x.png 3x"
@@ -268,6 +413,7 @@ export default function BookingWizard() {
           </a>
           <a
             href="/"
+            onClick={handleExitClick}
             className="text-sm font-medium flex items-center gap-1.5 transition-colors"
             style={{ color: "rgba(8,54,48,0.5)" }}
           >

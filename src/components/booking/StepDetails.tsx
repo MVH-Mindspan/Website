@@ -75,6 +75,8 @@ export default function StepDetails({ data, onChange, errors }: StepDetailsProps
             value={data.firstName}
             onChange={(v) => onChange("firstName", v)}
             error={errors.firstName}
+            maxLength={120}
+            autoComplete="given-name"
           />
           <FormField
             label="Last name"
@@ -84,6 +86,8 @@ export default function StepDetails({ data, onChange, errors }: StepDetailsProps
             value={data.lastName}
             onChange={(v) => onChange("lastName", v)}
             error={errors.lastName}
+            maxLength={120}
+            autoComplete="family-name"
           />
         </motion.div>
 
@@ -96,6 +100,9 @@ export default function StepDetails({ data, onChange, errors }: StepDetailsProps
             value={data.email}
             onChange={(v) => onChange("email", v)}
             error={errors.email}
+            maxLength={255}
+            autoComplete="email"
+            inputMode="email"
           />
         </motion.div>
 
@@ -109,6 +116,9 @@ export default function StepDetails({ data, onChange, errors }: StepDetailsProps
             value={formatPhone(data.phone)}
             onChange={handlePhoneChange}
             error={errors.phone}
+            maxLength={20}
+            autoComplete="tel-national"
+            inputMode="tel"
           />
         </motion.div>
       </motion.div>

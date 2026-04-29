@@ -126,6 +126,12 @@ export default function StepCareOption({
               key={opt.id}
               type="button"
               onClick={() => onChange(opt.id)}
+              aria-pressed={isSelected}
+              aria-label={
+                opt.kind === "video"
+                  ? `Video visit with ${opt.city} (${opt.state}) team`
+                  : `In-person visit at ${opt.city}, ${opt.state}`
+              }
               variants={fadeUp}
               whileHover={reducedMotion ? {} : { y: -3 }}
               whileTap={reducedMotion ? {} : { scale: 0.98 }}

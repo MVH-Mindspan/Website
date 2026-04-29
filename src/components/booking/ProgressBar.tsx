@@ -45,6 +45,10 @@ export default function ProgressBar({ steps, currentStep, onStepClick }: Progres
                 type="button"
                 onClick={() => isClickable && onStepClick(i)}
                 disabled={!isClickable}
+                aria-label={`Step ${i + 1} of ${steps.length}: ${label}${
+                  isCompleted ? " (completed)" : isCurrent ? " (current)" : ""
+                }`}
+                aria-current={isCurrent ? "step" : undefined}
                 className={`
                   flex items-center justify-center h-8 w-8 rounded-full text-xs font-semibold
                   transition-all duration-300
@@ -56,7 +60,6 @@ export default function ProgressBar({ steps, currentStep, onStepClick }: Progres
                       : "bg-white border-2 border-[rgba(8,54,48,0.15)] text-[rgba(8,54,48,0.35)]"
                   }
                 `}
-                aria-current={isCurrent ? "step" : undefined}
               >
                 {isCompleted ? (
                   <svg viewBox="0 0 12 12" className="h-3.5 w-3.5">

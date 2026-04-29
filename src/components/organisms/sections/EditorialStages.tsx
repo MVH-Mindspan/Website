@@ -22,6 +22,8 @@ export function EditorialStages({
   const c = theme.colors;
   const bg = tone === "sand" ? c.sand : c.cream;
 
+  if (stages.length === 0 && !intro) return null;
+
   return (
     <section style={{ background: bg, color: c.ink, padding: "48px 0" }}>
       <div style={{ maxWidth: "min(1320px, 92vw)", marginInline: "auto" }}>
@@ -139,7 +141,7 @@ export function EditorialStages({
               {step.image && (
                 <img
                   src={step.image}
-                  alt=""
+                  alt={step.imageAlt ?? step.title}
                   className="rounded-2xl w-full object-cover"
                   style={{ aspectRatio: "16/10" }}
                   loading="lazy"
