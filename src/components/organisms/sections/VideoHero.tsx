@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useTheme } from "@/lib/theme-context";
 import { alpha } from "@/lib/themes";
 import { ease, type as typeScale } from "@/lib/tokens";
@@ -27,6 +27,8 @@ export function VideoHero({
   const c = theme.colors;
   const [loaded, setLoaded] = useState(false);
   const [showVideo, setShowVideo] = useState(false);
+  const [ended, setEnded] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     const timer = setTimeout(() => setLoaded(true), 200);
@@ -53,6 +55,46 @@ export function VideoHero({
     };
   }, []);
 
+  useEffect(() => {
+    if (!showVideo) return;
+    const v = videoRef.current;
+    if (!v) return;
+
+    // Velocity ease-out: ramp playbackRate down over the final ~1.6s
+    // so the clip glides to a stop rather than slamming into one.
+    const RAMP_DURATION = 1.6;
+    const MIN_RATE = 0.15;
+    const baseRate = playbackRate;
+
+    const applyBaseRate = () => {
+      v.playbackRate = baseRate;
+    };
+
+    const handleTimeUpdate = () => {
+      const dur = v.duration;
+      if (!isFinite(dur) || dur <= 0) return;
+      const remaining = dur - v.currentTime;
+      if (remaining > RAMP_DURATION || remaining <= 0) return;
+      const t = 1 - remaining / RAMP_DURATION; // 0 → 1 across the ramp
+      const eased = t * t; // ease-in quad: gentle, then graceful arrival
+      const next = baseRate - (baseRate - MIN_RATE) * eased;
+      v.playbackRate = Math.max(MIN_RATE, next);
+    };
+
+    const handleEnded = () => setEnded(true);
+
+    v.addEventListener("loadedmetadata", applyBaseRate);
+    v.addEventListener("timeupdate", handleTimeUpdate);
+    v.addEventListener("ended", handleEnded);
+    if (v.readyState >= 1) applyBaseRate();
+
+    return () => {
+      v.removeEventListener("loadedmetadata", applyBaseRate);
+      v.removeEventListener("timeupdate", handleTimeUpdate);
+      v.removeEventListener("ended", handleEnded);
+    };
+  }, [showVideo, playbackRate]);
+
   return (
     <section
       className="relative w-full overflow-hidden hero-section"
@@ -65,6 +107,7 @@ export function VideoHero({
       {showVideo && (
         // eslint-disable-next-line jsx-a11y/media-has-caption
         <video
+          ref={videoRef}
           className="absolute inset-0 w-full h-full object-cover"
           autoPlay
           muted
@@ -72,8 +115,11 @@ export function VideoHero({
           poster={poster}
           preload="none"
           aria-hidden
-          onLoadedMetadata={(e) => {
-            if (playbackRate !== 1) e.currentTarget.playbackRate = playbackRate;
+          style={{
+            transform: ended ? "scale(1.045)" : "scale(1)",
+            transition: "transform 28s linear",
+            transformOrigin: "center center",
+            willChange: ended ? "transform" : "auto",
           }}
         >
           <source src={video} type="video/mp4" />
