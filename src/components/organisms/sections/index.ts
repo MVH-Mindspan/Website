@@ -1,7 +1,7 @@
 export { VideoHero } from "./VideoHero";
 export { PageHero } from "./PageHero";
 export { EditorialIntro } from "./EditorialIntro";
-export { TeaserBanner } from "./TeaserBanner";
+export { CoverageBand } from "./CoverageBand";
 export { EditorialStages } from "./EditorialStages";
 export { EditorialPillars } from "./EditorialPillars";
 export {
