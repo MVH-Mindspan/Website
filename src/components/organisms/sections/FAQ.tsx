@@ -20,14 +20,16 @@ export function FAQ({
   const [openId, setOpenId] = useState<string | null>(items[0]?.id ?? null);
 
   return (
-    <section style={{ background: c.cream, padding: "96px 0" }}>
+    <section style={{ background: c.sand, padding: "96px 0" }}>
       <Container>
-        <SectionHeader eyebrow={intro.eyebrow} title={intro.title} />
-        <div
-          className="mt-12 mx-auto"
-          style={{ maxWidth: 820, display: "flex", flexDirection: "column", gap: 12 }}
-        >
-          {items.map((it) => {
+        <div className="grid grid-cols-1 lg:grid-cols-[minmax(280px,360px)_1fr] gap-10 lg:gap-16 items-start">
+          <div className="lg:sticky lg:top-24">
+            <SectionHeader eyebrow={intro.eyebrow} title={intro.title} />
+          </div>
+          <div
+            style={{ display: "flex", flexDirection: "column", gap: 12 }}
+          >
+            {items.map((it) => {
             const isOpen = openId === it.id;
             return (
               <div
@@ -93,6 +95,7 @@ export function FAQ({
               </div>
             );
           })}
+          </div>
         </div>
       </Container>
     </section>

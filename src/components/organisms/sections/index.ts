@@ -3,6 +3,7 @@ export { PageHero } from "./PageHero";
 export { EditorialIntro } from "./EditorialIntro";
 export { CoverageBand } from "./CoverageBand";
 export { EditorialStages } from "./EditorialStages";
+export { SimpleSteps } from "./SimpleSteps";
 export { EditorialPillars } from "./EditorialPillars";
 export {
   EditorialPillarsIllustrated,
