@@ -1,16 +1,20 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useTheme } from "@/lib/theme-context";
 import { alpha } from "@/lib/themes";
 import { ease, type as typeScale } from "@/lib/tokens";
 import { brand } from "@/content/brand";
-import { nav, audienceNav } from "@/content/nav";
+import { audienceNav, nav } from "@/content/nav";
 
 export function SiteHeader() {
   const { theme } = useTheme();
   const c = theme.colors;
+  const reduceMotion = useReducedMotion();
   const [scrolled, setScrolled] = useState(false);
+  const [open, setOpen] = useState(false);
+  const hamburgerRef = useRef<HTMLButtonElement>(null);
 
   const handleScroll = useCallback(() => {
     setScrolled(window.scrollY > window.innerHeight * 0.6);
@@ -22,99 +26,394 @@ export function SiteHeader() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [handleScroll]);
 
+  // Close menu on Escape
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open]);
+
+  // Close menu when viewport crosses md (768px)
+  useEffect(() => {
+    if (!open) return;
+    const mql = window.matchMedia("(min-width: 768px)");
+    const onChange = (e: MediaQueryListEvent) => {
+      if (e.matches) setOpen(false);
+    };
+    mql.addEventListener("change", onChange);
+    return () => mql.removeEventListener("change", onChange);
+  }, [open]);
+
+  // Body scroll lock (iOS-safe: pin via position fixed and restore)
+  useEffect(() => {
+    if (!open) return;
+    const scrollY = window.scrollY;
+    const body = document.body;
+    body.style.position = "fixed";
+    body.style.top = `-${scrollY}px`;
+    body.style.left = "0";
+    body.style.right = "0";
+    return () => {
+      body.style.position = "";
+      body.style.top = "";
+      body.style.left = "";
+      body.style.right = "";
+      window.scrollTo(0, scrollY);
+    };
+  }, [open]);
+
+  // Restore focus to hamburger on close
+  const closeMenu = useCallback(() => {
+    setOpen(false);
+    hamburgerRef.current?.focus();
+  }, []);
+
+  const linkBase = {
+    fontFamily: theme.fonts.body,
+    fontSize: typeScale.bodySm,
+    fontWeight: 450,
+    color: alpha(c.cream, 0.7),
+  } as const;
+
+  const panelInitial = reduceMotion
+    ? { opacity: 0 }
+    : { opacity: 0, y: -8, scaleY: 0.96 };
+  const panelAnimate = reduceMotion
+    ? { opacity: 1 }
+    : { opacity: 1, y: 0, scaleY: 1 };
+  const panelExit = reduceMotion
+    ? { opacity: 0 }
+    : { opacity: 0, y: -6, scaleY: 0.98 };
+
   return (
-    <nav
-      className="fixed top-4 left-1/2 -translate-x-1/2 z-[999] flex items-center justify-between"
-      style={{
-        width: "min(1320px, 92vw)",
-        background: "#201E17",
-        borderRadius: "10rem",
-        padding: scrolled ? "8px 12px 8px 24px" : "12px 12px 12px 24px",
-        boxShadow: scrolled
-          ? "0 8px 32px -8px rgba(0,0,0,0.3)"
-          : "0 4px 16px -8px rgba(0,0,0,0.2)",
-        transition: `padding 0.4s ${ease.expressive}, box-shadow 0.4s ease`,
-      }}
-    >
-      <a href="/" className="inline-flex items-center" aria-label={brand.name}>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/assets/mindspan-wordmark-white.png"
-          srcSet="/assets/mindspan-wordmark-white.png 1x, /assets/mindspan-wordmark-white@2x.png 2x"
-          alt={brand.name}
-          width={175}
-          height={28}
-          style={{
-            height: 28,
-            width: "auto",
-            aspectRatio: "850 / 136",
-            display: "block",
-          }}
-        />
-      </a>
+    <>
+      {/* Scrim — mobile only, behind the panel */}
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            aria-hidden="true"
+            onClick={closeMenu}
+            className="fixed inset-0 z-[998] md:hidden"
+            style={{ background: "rgba(32,30,23,0.45)" }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.18, ease: ease.expressive }}
+          />
+        )}
+      </AnimatePresence>
 
-      <ul className="hidden md:flex items-center gap-8">
-        {nav.map((n) => (
-          <li key={n.label}>
-            <a
-              href={n.href}
-              className="transition-colors"
-              style={{
-                fontFamily: theme.fonts.body,
-                fontSize: typeScale.bodySm,
-                fontWeight: 450,
-                color: alpha(c.cream, 0.7),
-              }}
-              onMouseEnter={(e) => (e.currentTarget.style.color = c.cream)}
-              onMouseLeave={(e) =>
-                (e.currentTarget.style.color = alpha(c.cream, 0.7))
-              }
-            >
-              {n.label}
-            </a>
-          </li>
-        ))}
-
-        {[audienceNav.providers].map((n) => (
-          <li key={n.label}>
-            <a
-              href={n.href}
-              className="transition-colors"
-              style={{
-                fontFamily: theme.fonts.body,
-                fontSize: typeScale.bodySm,
-                fontWeight: 450,
-                color: alpha(c.cream, 0.7),
-              }}
-              onMouseEnter={(e) => (e.currentTarget.style.color = c.cream)}
-              onMouseLeave={(e) =>
-                (e.currentTarget.style.color = alpha(c.cream, 0.7))
-              }
-            >
-              {n.label}
-            </a>
-          </li>
-        ))}
-      </ul>
-
-      <div className="flex items-center gap-4">
-        <a
-          href={brand.primaryCtaHref}
-          className="font-semibold transition-all"
-          style={{
-            fontFamily: theme.fonts.body,
-            fontSize: typeScale.bodySm,
-            color: c.brandGreen,
-            background: "#fff",
-            padding: "12px 24px",
-            borderRadius: "10rem",
-          }}
-          onMouseEnter={(e) => (e.currentTarget.style.background = c.cream)}
-          onMouseLeave={(e) => (e.currentTarget.style.background = "#fff")}
-        >
-          Book an appointment
+      <nav
+        className="fixed top-4 left-1/2 -translate-x-1/2 z-[999] flex items-center justify-between"
+        style={{
+          width: "min(1320px, 92vw)",
+          background: "#201E17",
+          borderRadius: "10rem",
+          padding: scrolled ? "8px 12px 8px 24px" : "12px 12px 12px 24px",
+          boxShadow: scrolled
+            ? "0 8px 32px -8px rgba(0,0,0,0.3)"
+            : "0 4px 16px -8px rgba(0,0,0,0.2)",
+          transition: `padding 0.4s ${ease.expressive}, box-shadow 0.4s ease`,
+        }}
+      >
+        <a href="/" className="inline-flex items-center" aria-label={brand.name}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/assets/mindspan-wordmark-white.png"
+            srcSet="/assets/mindspan-wordmark-white.png 1x, /assets/mindspan-wordmark-white@2x.png 2x"
+            alt={brand.name}
+            width={175}
+            height={28}
+            style={{
+              height: 28,
+              width: "auto",
+              maxWidth: "min(175px, 38vw)",
+              aspectRatio: "850 / 136",
+              display: "block",
+            }}
+          />
         </a>
-      </div>
-    </nav>
+
+        <ul className="hidden md:flex items-center gap-8">
+          {nav.map((n) => (
+            <li key={n.label}>
+              <a
+                href={n.href}
+                className="transition-colors"
+                style={linkBase}
+                onMouseEnter={(e) => (e.currentTarget.style.color = c.cream)}
+                onMouseLeave={(e) =>
+                  (e.currentTarget.style.color = alpha(c.cream, 0.7))
+                }
+              >
+                {n.label}
+              </a>
+            </li>
+          ))}
+          <li key={audienceNav.providers.label}>
+            <a
+              href={audienceNav.providers.href}
+              className="transition-colors"
+              style={linkBase}
+              onMouseEnter={(e) => (e.currentTarget.style.color = c.cream)}
+              onMouseLeave={(e) =>
+                (e.currentTarget.style.color = alpha(c.cream, 0.7))
+              }
+            >
+              {audienceNav.providers.label}
+            </a>
+          </li>
+        </ul>
+
+        <div className="flex items-center gap-2 md:gap-4">
+          <a
+            href={brand.primaryCtaHref}
+            className="font-semibold transition-all px-4 md:px-6 py-2 md:py-3"
+            style={{
+              fontFamily: theme.fonts.body,
+              fontSize: typeScale.bodySm,
+              color: c.brandGreen,
+              background: "#fff",
+              borderRadius: "10rem",
+              whiteSpace: "nowrap",
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.background = c.cream)}
+            onMouseLeave={(e) => (e.currentTarget.style.background = "#fff")}
+          >
+            <span className="md:hidden">{brand.primaryCta}</span>
+            <span className="hidden md:inline">Book an appointment</span>
+          </a>
+
+          <button
+            ref={hamburgerRef}
+            type="button"
+            onClick={() => setOpen((v) => !v)}
+            aria-expanded={open}
+            aria-controls="site-mobile-menu"
+            aria-label={open ? "Close menu" : "Open menu"}
+            className="md:hidden inline-flex items-center justify-center"
+            style={{
+              width: 44,
+              height: 44,
+              borderRadius: "9999px",
+              color: alpha(c.cream, 0.85),
+              background: "transparent",
+              border: "none",
+              cursor: "pointer",
+            }}
+          >
+            <span
+              aria-hidden="true"
+              style={{
+                position: "relative",
+                width: 20,
+                height: 14,
+                display: "block",
+              }}
+            >
+              <motion.span
+                style={{
+                  position: "absolute",
+                  left: 0,
+                  right: 0,
+                  top: 6,
+                  height: 2,
+                  borderRadius: 2,
+                  background: "currentColor",
+                  transformOrigin: "center",
+                }}
+                initial={false}
+                animate={{
+                  y: open ? 0 : -5,
+                  rotate: open ? 45 : 0,
+                }}
+                transition={{
+                  duration: reduceMotion ? 0 : 0.2,
+                  ease: ease.expressive,
+                }}
+              />
+              <motion.span
+                style={{
+                  position: "absolute",
+                  left: 0,
+                  right: 0,
+                  top: 6,
+                  height: 2,
+                  borderRadius: 2,
+                  background: "currentColor",
+                  transformOrigin: "center",
+                }}
+                initial={false}
+                animate={{
+                  y: open ? 0 : 5,
+                  rotate: open ? -45 : 0,
+                }}
+                transition={{
+                  duration: reduceMotion ? 0 : 0.2,
+                  ease: ease.expressive,
+                }}
+              />
+            </span>
+          </button>
+        </div>
+
+        {/* Mobile drop-down panel */}
+        <AnimatePresence>
+          {open && (
+            <motion.div
+              id="site-mobile-menu"
+              role="menu"
+              className="md:hidden absolute left-0 right-0"
+              style={{
+                top: "100%",
+                marginTop: 8,
+                background: "#201E17",
+                borderRadius: "2rem",
+                padding: "12px",
+                boxShadow: "0 16px 40px -12px rgba(0,0,0,0.45)",
+                transformOrigin: "top center",
+              }}
+              initial={panelInitial}
+              animate={panelAnimate}
+              exit={panelExit}
+              transition={{ duration: reduceMotion ? 0.12 : 0.22, ease: ease.expressive }}
+            >
+              <div className="flex flex-col">
+                {[...nav, audienceNav.providers].map((n, i, arr) => (
+                  <a
+                    key={n.label}
+                    href={n.href}
+                    role="menuitem"
+                    onClick={() => setOpen(false)}
+                    style={{
+                      fontFamily: theme.fonts.heading,
+                      fontSize: "1.5rem",
+                      lineHeight: 1.15,
+                      color: c.cream,
+                      padding: "14px 16px",
+                      display: "flex",
+                      alignItems: "center",
+                      minHeight: 48,
+                      borderBottom:
+                        i < arr.length - 1
+                          ? `1px solid ${alpha(c.cream, 0.08)}`
+                          : "none",
+                      textDecoration: "none",
+                    }}
+                  >
+                    {n.label}
+                  </a>
+                ))}
+              </div>
+
+              <div
+                aria-hidden="true"
+                style={{
+                  height: 1,
+                  background: alpha(c.cream, 0.12),
+                  margin: "8px 4px",
+                }}
+              />
+
+              <div className="flex flex-col">
+                <a
+                  href={brand.phoneHref}
+                  onClick={() => setOpen(false)}
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: 12,
+                    color: alpha(c.cream, 0.8),
+                    fontFamily: theme.fonts.body,
+                    fontSize: typeScale.bodySm,
+                    padding: "12px 16px",
+                    minHeight: 48,
+                    textDecoration: "none",
+                  }}
+                >
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 16 16"
+                    fill="none"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M3 2.5h2.4l1.2 3-1.6 1a8 8 0 0 0 4.5 4.5l1-1.6 3 1.2V13a.5.5 0 0 1-.5.5A11 11 0 0 1 2.5 3a.5.5 0 0 1 .5-.5Z"
+                      stroke="currentColor"
+                      strokeWidth="1.4"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                  {brand.phone}
+                </a>
+                <a
+                  href="/locations"
+                  onClick={() => setOpen(false)}
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: 12,
+                    color: alpha(c.cream, 0.8),
+                    fontFamily: theme.fonts.body,
+                    fontSize: typeScale.bodySm,
+                    padding: "12px 16px",
+                    minHeight: 48,
+                    textDecoration: "none",
+                  }}
+                >
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 16 16"
+                    fill="none"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M8 14s5-4.5 5-8.5a5 5 0 0 0-10 0C3 9.5 8 14 8 14Z"
+                      stroke="currentColor"
+                      strokeWidth="1.4"
+                      strokeLinejoin="round"
+                    />
+                    <circle
+                      cx="8"
+                      cy="5.5"
+                      r="1.6"
+                      stroke="currentColor"
+                      strokeWidth="1.4"
+                    />
+                  </svg>
+                  {brand.secondaryCta}
+                </a>
+              </div>
+
+              <a
+                href={brand.primaryCtaHref}
+                onClick={() => setOpen(false)}
+                style={{
+                  display: "block",
+                  textAlign: "center",
+                  fontFamily: theme.fonts.body,
+                  fontWeight: 600,
+                  fontSize: typeScale.bodySm,
+                  color: c.brandGreen,
+                  background: "#fff",
+                  padding: "14px 24px",
+                  borderRadius: "10rem",
+                  marginTop: 12,
+                  marginInline: 4,
+                  textDecoration: "none",
+                }}
+              >
+                {brand.primaryCta}
+              </a>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </nav>
+    </>
   );
 }
