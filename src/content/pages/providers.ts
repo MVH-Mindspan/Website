@@ -12,5 +12,8 @@ export const providersPage = {
     title: "Two ways to work with Mindspan.",
     lead:
       "Whether you are referring a patient you already care about or looking for a place to practice this kind of medicine yourself, we would love to hear from you.",
+    image: "/assets/providers-hero.webp",
+    imageAlt:
+      "A Mindspan neurologist in conversation with a patient across a desk in a sunlit consultation room",
   },
 } as const;
