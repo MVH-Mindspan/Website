@@ -4,7 +4,7 @@ import {
   EditorialPillarsIllustrated,
   StatsBand,
   FeatureCardGrid,
-  EditorialStages,
+  SimpleSteps,
   FAQ,
   FinalCTA,
 } from "@/components/organisms/sections";
@@ -50,7 +50,7 @@ export default function HowItWorksPage() {
 
       <StatsBand stats={howItWorksPage.stats} />
 
-      <EditorialStages
+      <SimpleSteps
         intro={howItWorksPage.howToStart.intro}
         stages={howItWorksPage.howToStart.items}
       />
