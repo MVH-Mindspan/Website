@@ -43,7 +43,6 @@ export default function HomePage() {
         subTagline={homeHero.subTagline}
         subhead={homeHero.subhead}
         cta={homeHero.cta}
-        playbackRate={homeHero.playbackRate}
       />
       <CoverageBand appointments={announcement} />
       <StatsBand stats={stats} tone="cream" />

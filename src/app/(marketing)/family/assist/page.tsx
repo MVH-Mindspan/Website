@@ -18,6 +18,7 @@ export default function AssistPage() {
     <>
       <VideoHero
         video={assistPage.hero.video}
+        poster={assistPage.hero.poster}
         headline={assistPage.hero.headline}
         subTagline={assistPage.hero.subTagline}
         subhead={assistPage.hero.subhead}

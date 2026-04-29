@@ -138,6 +138,7 @@ export const assistPage = {
 
   hero: {
     video: "/assets/assist-hero-video.mp4",
+    poster: "/assets/assist-hero-poster.png",
     headline: "Assist a loved one to get cognitive care.",
     subTagline:
       "Fast access to specialists, advanced diagnostics, and a care team that keeps everyone connected.",
