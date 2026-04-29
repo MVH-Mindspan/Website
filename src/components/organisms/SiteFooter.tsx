@@ -22,7 +22,14 @@ export function SiteFooter() {
         <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-10">
           <div className="lg:col-span-2">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/assets/logo-white.png" alt={brand.name} className="h-10 w-auto" />
+            <img
+              src="/assets/logo-white.png"
+              alt={brand.name}
+              width={160}
+              height={40}
+              className="h-10 w-auto"
+              style={{ aspectRatio: "160 / 40" }}
+            />
             <p className="mt-6 text-sm max-w-sm leading-relaxed">
               {brand.footerTagline}
             </p>

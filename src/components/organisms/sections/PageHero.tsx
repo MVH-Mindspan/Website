@@ -99,10 +99,11 @@ function ImageHero({
     >
       <img
         src={image}
-        alt={imageAlt ?? ""}
+        alt={imageAlt ?? title}
         className="absolute inset-0 w-full h-full object-cover"
         style={{ display: "block" }}
         loading="eager"
+        fetchPriority="high"
       />
 
       {/* Base darken for overall contrast */}

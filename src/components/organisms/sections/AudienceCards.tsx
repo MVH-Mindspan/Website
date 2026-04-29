@@ -33,6 +33,8 @@ export function AudienceCards({
   const c = theme.colors;
   const bg = tone === "cream" ? c.cream : c.sand;
 
+  if (audiences.length === 0) return null;
+
   return (
     <section id="families" style={{ background: bg, padding: "96px 0" }}>
       <Container>
@@ -47,8 +49,10 @@ export function AudienceCards({
             <img
               src={intro.image}
               alt={intro.imageAlt ?? ""}
+              width={1600}
+              height={800}
               className="w-full object-cover"
-              style={{ maxHeight: 400 }}
+              style={{ maxHeight: 400, aspectRatio: "1600 / 800" }}
               loading="lazy"
             />
           </Reveal>

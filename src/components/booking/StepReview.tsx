@@ -2,6 +2,7 @@
 
 import { motion, useReducedMotion, type Variants } from "framer-motion";
 import { getCareOption } from "./StepCareOption";
+import SubmitErrorBlock from "./SubmitErrorBlock";
 
 const EASE = [0.22, 0.61, 0.36, 1] as const;
 const GREEN = "#083630";
@@ -48,6 +49,7 @@ type StepReviewProps = {
   onSubmit: () => void;
   submitting: boolean;
   submitted: boolean;
+  submitError?: string;
 };
 
 function ReviewSection({
@@ -119,6 +121,7 @@ export default function StepReview({
   onSubmit,
   submitting,
   submitted,
+  submitError,
 }: StepReviewProps) {
   const reducedMotion = useReducedMotion();
 
@@ -203,6 +206,12 @@ export default function StepReview({
             </dl>
           </ReviewSection>
         </motion.div>
+
+        {submitError && (
+          <motion.div variants={fadeUp}>
+            <SubmitErrorBlock message={submitError} onRetry={onSubmit} disabled={submitting} />
+          </motion.div>
+        )}
 
         <motion.div variants={fadeUp} className="pt-6 flex flex-col items-center">
           <button

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 const SITE_NAME = "Mindspan";
-const SITE_URL = "https://mindspan.co";
+export const SITE_URL = "https://mindspan.co";
 const DEFAULT_OG_IMAGE = "/assets/logo-green.png";
 
 export function buildMetadata(opts: {

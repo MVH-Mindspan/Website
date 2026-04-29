@@ -21,6 +21,8 @@ export function StatsBand({
   const bg = tone === "cream" ? c.cream : c.sand;
   const cardBg = tone === "cream" ? c.sand : c.cream;
 
+  if (stats.length === 0) return null;
+
   return (
     <section style={{ background: bg, padding: "72px 0" }}>
       <div

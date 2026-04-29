@@ -42,7 +42,14 @@ export function SiteHeader() {
           src="/assets/mindspan-logo-with-slogan-white.png"
           srcSet="/assets/mindspan-logo-with-slogan-white.png 1x, /assets/mindspan-logo-with-slogan-white@2x.png 2x"
           alt={brand.name}
-          style={{ height: scrolled ? 28 : 32, width: "auto", display: "block" }}
+          width={140}
+          height={32}
+          style={{
+            height: scrolled ? 28 : 32,
+            width: "auto",
+            aspectRatio: "140 / 32",
+            display: "block",
+          }}
         />
       </a>
 

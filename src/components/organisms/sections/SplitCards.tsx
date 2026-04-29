@@ -58,8 +58,10 @@ export function SplitCards({
             <img
               src={intro.image}
               alt={intro.imageAlt ?? ""}
+              width={1600}
+              height={840}
               className="w-full object-cover"
-              style={{ maxHeight: 420 }}
+              style={{ maxHeight: 420, aspectRatio: "1600 / 840" }}
               loading="lazy"
             />
           </Reveal>

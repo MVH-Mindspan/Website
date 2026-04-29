@@ -19,8 +19,8 @@ export function BulletList({
       className={`space-y-2.5 ${className ?? ""}`.trim()}
       style={{ color, ...style }}
     >
-      {items.map((item) => (
-        <li key={item} className="flex items-start gap-3">
+      {items.map((item, i) => (
+        <li key={`${i}-${item.slice(0, 32)}`} className="flex items-start gap-3">
           <Bullet color={bulletColor} />
           <span>{item}</span>
         </li>

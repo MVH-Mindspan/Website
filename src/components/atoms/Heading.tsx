@@ -57,7 +57,14 @@ export function Heading({
   return (
     <Tag
       className={className}
-      style={{ ...variantStyles[variant], color, fontFamily, ...style }}
+      style={{
+        ...variantStyles[variant],
+        minWidth: 0,
+        overflowWrap: "break-word",
+        color,
+        fontFamily,
+        ...style,
+      }}
     >
       {children}
     </Tag>
