@@ -21,6 +21,10 @@ type HeroProps = {
   image?: string;
   imageAlt?: string;
   children?: ReactNode;
+  subTagline?: string;
+  subhead?: string;
+  primaryCta?: { label: string; href: string };
+  secondaryCta?: { label: string; href: string };
 };
 
 export function PageHero(props: HeroProps) {
@@ -84,9 +88,15 @@ function ImageHero({
   image,
   imageAlt,
   children,
+  subTagline,
+  subhead,
+  primaryCta,
+  secondaryCta,
 }: HeroProps) {
   const { theme } = useTheme();
   const c = theme.colors;
+  const hasAside =
+    Boolean(subTagline) || Boolean(subhead) || Boolean(primaryCta) || Boolean(secondaryCta);
 
   return (
     <section
@@ -151,39 +161,166 @@ function ImageHero({
             {availability && (
               <AvailabilityPill availability={availability} tone="light" />
             )}
-            <Eyebrow color={alpha(c.cream, 0.85)}>{eyebrow}</Eyebrow>
-            {location && (
-              <LocationLine
-                text={location}
-                color={alpha(c.cream, 0.9)}
-                textColor={alpha(c.cream, 0.85)}
-              />
-            )}
-            <Heading
-              as="h1"
-              variant="h1"
-              fontFamily={theme.fonts.heading}
-              color={c.cream}
-              className="mt-4"
-              style={{ maxWidth: "18ch" }}
+            <div
+              className={
+                hasAside
+                  ? "flex flex-col md:flex-row md:items-end md:justify-between gap-8 md:gap-16"
+                  : ""
+              }
             >
-              {title}
-            </Heading>
-            {lead && (
-              <Lead
-                size="lg"
-                color={alpha(c.cream, 0.85)}
-                className="mt-5"
-                maxWidth="58ch"
-              >
-                {lead}
-              </Lead>
-            )}
+              <div className={hasAside ? "md:max-w-[16ch]" : ""}>
+                <Eyebrow color={alpha(c.cream, 0.85)}>{eyebrow}</Eyebrow>
+                {location && (
+                  <LocationLine
+                    text={location}
+                    color={alpha(c.cream, 0.9)}
+                    textColor={alpha(c.cream, 0.85)}
+                  />
+                )}
+                <Heading
+                  as="h1"
+                  variant="h1"
+                  fontFamily={theme.fonts.heading}
+                  color={c.cream}
+                  className="mt-4"
+                  style={{ maxWidth: hasAside ? undefined : "18ch" }}
+                >
+                  {title}
+                </Heading>
+                {!hasAside && lead && (
+                  <Lead
+                    size="lg"
+                    color={alpha(c.cream, 0.85)}
+                    className="mt-5"
+                    maxWidth="58ch"
+                  >
+                    {lead}
+                  </Lead>
+                )}
+              </div>
+              {hasAside && (
+                <HeroAside
+                  lead={lead}
+                  subTagline={subTagline}
+                  subhead={subhead}
+                  primaryCta={primaryCta}
+                  secondaryCta={secondaryCta}
+                />
+              )}
+            </div>
             {children && <div className="mt-8">{children}</div>}
           </Reveal>
         </Container>
       </div>
     </section>
+  );
+}
+
+function HeroAside({
+  lead,
+  subTagline,
+  subhead,
+  primaryCta,
+  secondaryCta,
+}: {
+  lead?: string;
+  subTagline?: string;
+  subhead?: string;
+  primaryCta?: { label: string; href: string };
+  secondaryCta?: { label: string; href: string };
+}) {
+  const { theme } = useTheme();
+  const c = theme.colors;
+
+  return (
+    <div className="md:max-w-[480px] md:flex-shrink-0">
+      {subTagline && (
+        <p
+          className="font-semibold"
+          style={{
+            fontFamily: theme.fonts.body,
+            fontSize: typeScale.leadMd,
+            color: c.cream,
+            lineHeight: 1.4,
+            marginBottom: 8,
+          }}
+        >
+          {subTagline}
+        </p>
+      )}
+      {(subhead || lead) && (
+        <p
+          style={{
+            fontFamily: theme.fonts.body,
+            fontSize: typeScale.bodySm,
+            color: alpha(c.cream, 0.78),
+            lineHeight: 1.55,
+            marginBottom: primaryCta || secondaryCta ? 20 : 0,
+          }}
+        >
+          {subhead ?? lead}
+        </p>
+      )}
+      {(primaryCta || secondaryCta) && (
+        <div className="flex flex-wrap items-center gap-3 hero-aside-ctas">
+          {primaryCta && (
+            <a
+              href={primaryCta.href}
+              className="hero-aside-primary"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+                fontFamily: theme.fonts.body,
+                fontSize: typeScale.bodySm,
+                fontWeight: 600,
+                color: c.brandGreen,
+                background: "#fff",
+                padding: "14px 28px",
+                borderRadius: "10rem",
+                textDecoration: "none",
+                transition: "background 0.2s ease",
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.background = c.cream)}
+              onMouseLeave={(e) => (e.currentTarget.style.background = "#fff")}
+            >
+              {primaryCta.label} <ArrowIcon />
+            </a>
+          )}
+          {secondaryCta && (
+            <a
+              href={secondaryCta.href}
+              className="hero-aside-secondary"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+                fontFamily: theme.fonts.body,
+                fontSize: typeScale.bodySm,
+                fontWeight: 600,
+                color: c.cream,
+                padding: "14px 22px",
+                border: `1px solid ${alpha(c.cream, 0.45)}`,
+                borderRadius: "10rem",
+                textDecoration: "none",
+                background: "transparent",
+              }}
+            >
+              {secondaryCta.label}
+            </a>
+          )}
+        </div>
+      )}
+      <style jsx>{`
+        @media (max-width: 480px) {
+          .hero-aside-primary,
+          .hero-aside-secondary {
+            width: 100%;
+            justify-content: center;
+          }
+        }
+      `}</style>
+    </div>
   );
 }
 
