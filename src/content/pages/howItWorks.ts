@@ -148,13 +148,14 @@ export const howItWorksPage = {
   }),
 
   hero: {
-    eyebrow: "What to expect",
-    title: "A simple, continuous path through cognitive care.",
-    lead:
+    video: "/assets/what-to-expect-video.mp4",
+    poster: "/assets/what-to-expect-hero.jpg",
+    headline: "A simple, continuous path through cognitive care.",
+    subTagline: "What to expect",
+    subhead:
       "From a free at-home screening to ongoing care guided by a board-certified neurologist, here\u2019s exactly what your Mindspan journey looks like.",
-    image: "/assets/what-to-expect-hero.jpg",
-    imageAlt:
-      "A patient and a Mindspan team member sitting in patterned cardigans, talking in a warm, light-filled clinic.",
+    cta: { label: "Start a free screening", href: BOOKING_HREF },
+    playbackRate: 0.9,
   },
 
   comparison: {
