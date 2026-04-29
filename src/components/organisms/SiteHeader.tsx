@@ -39,15 +39,15 @@ export function SiteHeader() {
       <a href="/" className="inline-flex items-center" aria-label={brand.name}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="/assets/mindspan-logo-with-slogan-white.png"
-          srcSet="/assets/mindspan-logo-with-slogan-white.png 1x, /assets/mindspan-logo-with-slogan-white@2x.png 2x"
+          src="/assets/mindspan-wordmark-white.png"
+          srcSet="/assets/mindspan-wordmark-white.png 1x, /assets/mindspan-wordmark-white@2x.png 2x"
           alt={brand.name}
-          width={140}
-          height={32}
+          width={175}
+          height={28}
           style={{
-            height: scrolled ? 28 : 32,
+            height: 28,
             width: "auto",
-            aspectRatio: "140 / 32",
+            aspectRatio: "850 / 136",
             display: "block",
           }}
         />
