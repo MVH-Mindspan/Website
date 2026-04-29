@@ -67,10 +67,14 @@ export function FeatureCardGrid({
           {cards.map((card, i) => (
             <Reveal
               key={card.id}
-              className="rounded-[2rem] p-6 md:p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_24px_48px_-16px_rgba(0,0,0,0.4)]"
+              className="group rounded-[2rem] p-6 md:p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_24px_48px_-16px_rgba(0,0,0,0.4)]"
               style={{ background: c.primaryLight, animationDelay: `${i * 80}ms` }}
             >
-              <IconBadge background={c.sky} color={c.brandGreen}>
+              <IconBadge
+                background={c.sky}
+                color={c.brandGreen}
+                className="transition-transform duration-500 ease-out group-hover:scale-[1.06]"
+              >
                 <SectionIcon name={card.icon} />
               </IconBadge>
               <Eyebrow color={alpha(c.cream, 0.6)} className="mt-6">

@@ -142,7 +142,7 @@ export function SiteHeader() {
             <li key={n.label}>
               <a
                 href={n.href}
-                className="transition-colors"
+                className="v2-link transition-colors"
                 style={linkBase}
                 onMouseEnter={(e) => (e.currentTarget.style.color = c.cream)}
                 onMouseLeave={(e) =>
@@ -156,7 +156,7 @@ export function SiteHeader() {
           <li key={audienceNav.providers.label}>
             <a
               href={audienceNav.providers.href}
-              className="transition-colors"
+              className="v2-link transition-colors"
               style={linkBase}
               onMouseEnter={(e) => (e.currentTarget.style.color = c.cream)}
               onMouseLeave={(e) =>

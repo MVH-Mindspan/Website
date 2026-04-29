@@ -52,6 +52,17 @@ html {
   text-rendering: optimizeLegibility;
 }
 
+/* Brand-tinted text selection — warm orange highlighter that works on
+   both cream and dark-green backgrounds. Text color is preserved. */
+::selection {
+  background-color: rgba(251, 77, 23, 0.28);
+  color: inherit;
+}
+::-moz-selection {
+  background-color: rgba(251, 77, 23, 0.28);
+  color: inherit;
+}
+
 body {
   background: var(--theme-cream);
   color: var(--theme-ink);
@@ -419,6 +430,36 @@ h1, h2, h3 {
 /* Nav link transition */
 .v2-scope nav a {
   transition: color 0.2s ease, background 0.2s ease;
+}
+
+/* Editorial link underline — 1px line draws in from left on hover/focus.
+   Used on nav + footer links for a magazine-quality detail. */
+.v2-link {
+  position: relative;
+  display: inline-block;
+  text-decoration: none;
+}
+.v2-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -3px;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.45s cubic-bezier(0.22, 0.61, 0.36, 1);
+  pointer-events: none;
+}
+.v2-link:hover::after,
+.v2-link:focus-visible::after {
+  transform: scaleX(1);
+}
+@media (prefers-reduced-motion: reduce) {
+  .v2-link::after {
+    transition: none;
+  }
 }
 
 /* CTA button press feedback */

@@ -172,7 +172,11 @@ function LocationCard({
           >
             <span
               className="h-2 w-2 rounded-full"
-              style={{ background: "#22c55e" }}
+              style={{
+                background: "#22c55e",
+                boxShadow: `0 0 0 3px ${alpha("#22c55e", 0.22)}`,
+                animation: "pulseDot 2.4s ease-in-out infinite",
+              }}
             />
             {isVideo ? "Video" : "Open"}
           </div>

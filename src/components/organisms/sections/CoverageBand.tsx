@@ -129,7 +129,27 @@ export function CoverageBand({ appointments }: { appointments?: Appointments }) 
               onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.75")}
               onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
             >
-              <span style={{ color: c.ink, fontWeight: 500 }}>
+              <span
+                style={{
+                  color: c.ink,
+                  fontWeight: 500,
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 8,
+                }}
+              >
+                <span
+                  aria-hidden="true"
+                  style={{
+                    width: 8,
+                    height: 8,
+                    borderRadius: "50%",
+                    background: "#22c55e",
+                    boxShadow: `0 0 0 4px ${alpha("#22c55e", 0.2)}`,
+                    animation: "pulseDot 2.4s ease-in-out infinite",
+                    flexShrink: 0,
+                  }}
+                />
                 {appointments.primary}
               </span>
               <span
