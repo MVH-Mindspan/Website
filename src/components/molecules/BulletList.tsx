@@ -16,7 +16,7 @@ export function BulletList({
 }) {
   return (
     <ul
-      className={`space-y-2.5 ${className ?? ""}`.trim()}
+      className={`space-y-4 ${className ?? ""}`.trim()}
       style={{ color, ...style }}
     >
       {items.map((item, i) => (

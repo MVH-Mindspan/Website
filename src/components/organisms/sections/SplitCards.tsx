@@ -89,16 +89,15 @@ export function SplitCards({
               variant="h4"
               color={c.ink}
               fontFamily={theme.fonts.heading}
-              className="mt-3"
+              className="mt-4"
             >
               {core.title}
             </Heading>
             <Lead
-              size="md"
+              size="bodyCard"
               color={alpha(c.ink, 0.72)}
               maxWidth={false}
-              className="mt-4"
-              style={{ fontSize: typeScale.body, lineHeight: 1.6 }}
+              className="mt-5"
             >
               {core.body}
             </Lead>
@@ -106,7 +105,7 @@ export function SplitCards({
               items={core.bullets}
               bulletColor={c.brandGreen}
               color={alpha(c.ink, 0.82)}
-              className="mt-6 text-base"
+              className="mt-8 text-base"
             />
           </Reveal>
 
@@ -135,22 +134,21 @@ export function SplitCards({
                   as="h3"
                   variant="h4"
                   fontFamily={theme.fonts.heading}
-                  className="mt-3"
+                  className="mt-4"
                 >
                   {edge.title}
                 </Heading>
                 <Lead
-                  size="md"
+                  size="bodyCard"
                   maxWidth={false}
-                  className="mt-4 text-white/80"
-                  style={{ fontSize: typeScale.body, lineHeight: 1.6 }}
+                  className="mt-5 text-white/80"
                 >
                   {edge.body}
                 </Lead>
                 <BulletList
                   items={edge.bullets}
                   bulletColor="#bdd8f5"
-                  className="mt-6 text-base text-white/85"
+                  className="mt-8 text-base text-white/85"
                 />
               </div>
             </Reveal>
@@ -161,10 +159,9 @@ export function SplitCards({
           <Reveal className="mt-12 max-w-3xl">
             {closing && (
               <Lead
-                size="md"
+                size="bodyCard"
                 maxWidth={false}
                 color={alpha(c.ink, 0.72)}
-                style={{ fontSize: typeScale.body, lineHeight: 1.65 }}
               >
                 {closing}
               </Lead>

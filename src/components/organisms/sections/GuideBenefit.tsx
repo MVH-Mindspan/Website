@@ -6,6 +6,7 @@ import { type as typeScale } from "@/lib/tokens";
 import { Container } from "@/components/atoms/Container";
 import { Eyebrow } from "@/components/atoms/Eyebrow";
 import { Heading } from "@/components/atoms/Heading";
+import { Lead } from "@/components/atoms/Lead";
 import { Reveal } from "@/components/molecules/Reveal";
 import { Button } from "@/components/atoms/Button";
 
@@ -55,18 +56,15 @@ export function GuideBenefit({
               >
                 {title}
               </Heading>
-              <p
+              <Lead
+                size="bodyCard"
+                maxWidth={false}
+                color={alpha(c.ink, 0.78)}
                 className="mt-5"
-                style={{
-                  fontFamily: theme.fonts.body,
-                  fontSize: typeScale.body,
-                  color: alpha(c.ink, 0.78),
-                  lineHeight: 1.6,
-                }}
               >
                 {lead}
-              </p>
-              <ul className="mt-6 space-y-3">
+              </Lead>
+              <ul className="mt-8 space-y-4">
                 {bullets.map((b) => (
                   <li
                     key={b}
@@ -74,7 +72,7 @@ export function GuideBenefit({
                       fontFamily: theme.fonts.body,
                       fontSize: typeScale.body,
                       color: c.ink,
-                      lineHeight: 1.5,
+                      lineHeight: 1.6,
                       paddingLeft: 28,
                       position: "relative",
                     }}
@@ -137,7 +135,7 @@ export function GuideBenefit({
               >
                 {eligibilityTitle}
               </div>
-              <ul className="space-y-3">
+              <ul className="space-y-4">
                 {eligibility.map((b) => (
                   <li
                     key={b}
@@ -145,7 +143,7 @@ export function GuideBenefit({
                       fontFamily: theme.fonts.body,
                       fontSize: typeScale.bodySm,
                       color: alpha(c.ink, 0.78),
-                      lineHeight: 1.5,
+                      lineHeight: 1.6,
                       paddingLeft: 22,
                       position: "relative",
                     }}
