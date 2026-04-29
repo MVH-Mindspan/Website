@@ -1,5 +1,5 @@
 import {
-  PageHero,
+  VideoHero,
   SplitCards,
   EditorialPillarsIllustrated,
   StatsBand,
@@ -17,7 +17,7 @@ export const metadata = howItWorksPage.metadata;
 export default function HowItWorksPage() {
   return (
     <>
-      <PageHero {...howItWorksPage.hero} />
+      <VideoHero {...howItWorksPage.hero} />
 
       <SplitCards
         tone="sand"

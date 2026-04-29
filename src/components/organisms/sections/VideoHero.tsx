@@ -13,6 +13,7 @@ export function VideoHero({
   subTagline,
   subhead,
   cta,
+  playbackRate = 1,
 }: {
   video: string;
   poster?: string;
@@ -20,6 +21,7 @@ export function VideoHero({
   subTagline: string;
   subhead: string;
   cta?: { label: string; href: string };
+  playbackRate?: number;
 }) {
   const { theme } = useTheme();
   const c = theme.colors;
@@ -71,6 +73,9 @@ export function VideoHero({
           poster={poster}
           preload="none"
           aria-hidden
+          onLoadedMetadata={(e) => {
+            if (playbackRate !== 1) e.currentTarget.playbackRate = playbackRate;
+          }}
         >
           <source src={video} type="video/mp4" />
         </video>
@@ -206,16 +211,15 @@ export function VideoHero({
         </div>
       </div>
       <style jsx>{`
+        .hero-cta-primary,
+        .hero-cta-secondary {
+          white-space: nowrap;
+        }
         .hero-ctas {
           display: flex;
           flex-wrap: wrap;
           gap: 12px;
           align-items: center;
-        }
-        @media (min-width: 768px) {
-          .hero-ctas {
-            flex-wrap: nowrap;
-          }
         }
         @media (max-width: 480px) {
           .hero-cta-primary,
