@@ -2,13 +2,11 @@ import { PageHero } from "@/components/organisms/sections/PageHero";
 import { ProvidersSection } from "@/components/organisms/sections/ProvidersSection";
 import { SimpleSteps } from "@/components/organisms/sections/SimpleSteps";
 import { SplitCards } from "@/components/organisms/sections/SplitCards";
-import { StatsBand } from "@/components/organisms/sections/StatsBand";
 import { FinalCTA } from "@/components/organisms/sections/FinalCTA";
 import { providersPage } from "@/content/pages/providers";
 import {
   providers,
   providersIntro,
-  providerStats,
   coManagement,
   coManagementIntro,
   coManagementClosing,
@@ -22,7 +20,6 @@ export default function ProvidersPage() {
   return (
     <>
       <PageHero {...providersPage.hero} />
-      <StatsBand stats={providerStats} tone="cream" />
       <SplitCards
         intro={coManagementIntro}
         core={coManagement.core}

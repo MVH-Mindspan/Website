@@ -17,7 +17,6 @@ export {
 export {
   providers,
   providersIntro,
-  providerStats,
   coManagement,
   coManagementIntro,
   coManagementClosing,
