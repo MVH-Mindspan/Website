@@ -1,4 +1,3 @@
-import type { Stat } from "./stats";
 import type { Protocol } from "./protocols";
 import type { JourneyStage } from "./journey";
 
@@ -55,13 +54,6 @@ export const providers: { refer: ProviderCard; join: ProviderCard } = {
     tone: "dark",
   },
 };
-
-export const providerStats: Stat[] = [
-  { value: "12–18 mo", label: "Typical wait to see a memory specialist" },
-  { value: "2–3 wks", label: "First Mindspan visit, neurologist-led" },
-  { value: "48 hrs", label: "Outreach to your patient after referral" },
-  { value: "$0", label: "Copays for GUIDE-eligible families" },
-];
 
 export const coManagementIntro = {
   eyebrow: "How we work together",
