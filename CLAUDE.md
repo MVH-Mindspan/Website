@@ -54,6 +54,7 @@ src/
 - Tokens in `src/lib/tokens.ts` and CSS `@theme` in `globals.css` — edit in one place.
 - Section spacing/layout uses the `.v2-scope` wrapper class (added in `(marketing)/layout.tsx`).
 - Use atoms/molecules before reaching for inline styles; prefer `<Container>`, `<Heading>`, `<Lead>`, `<Button>`.
+- Wrap every content image (photos, illustrations) in `<ImageFrame>` for the canonical 3D border treatment. Pass `radius` to match the section's rounding (default `2rem`). Do NOT frame logos, icons, hero backgrounds, or video posters.
 - Do not reintroduce `studio-*` classes; those are kept only for the frozen v1 homepage + booking.
 
 ## How to add a new page
