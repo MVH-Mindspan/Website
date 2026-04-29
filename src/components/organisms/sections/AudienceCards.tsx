@@ -3,7 +3,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { useTheme } from "@/lib/theme-context";
 import { alpha } from "@/lib/themes";
-import { type as typeScale } from "@/lib/tokens";
 import { Container } from "@/components/atoms/Container";
 import { Eyebrow } from "@/components/atoms/Eyebrow";
 import { Heading } from "@/components/atoms/Heading";
@@ -88,16 +87,15 @@ export function AudienceCards({
                   variant="h4"
                   color={c.ink}
                   fontFamily={theme.fonts.heading}
-                  className="mt-3"
+                  className="mt-4"
                 >
                   {a.title}
                 </Heading>
                 <Lead
-                  size="md"
+                  size="bodyCard"
                   maxWidth={false}
                   color={alpha(c.ink, 0.72)}
-                  className={a.bullets && a.bullets.length > 0 ? "mt-4" : "mt-4 flex-1"}
-                  style={{ fontSize: typeScale.body, lineHeight: 1.6 }}
+                  className={a.bullets && a.bullets.length > 0 ? "mt-5" : "mt-5 flex-1"}
                 >
                   {a.body}
                 </Lead>
@@ -106,7 +104,7 @@ export function AudienceCards({
                     items={a.bullets}
                     bulletColor={c.brandGreen}
                     color={alpha(c.ink, 0.78)}
-                    className="mt-5 text-base flex-1"
+                    className="mt-8 text-base flex-1"
                   />
                 )}
                 <div className="mt-8">

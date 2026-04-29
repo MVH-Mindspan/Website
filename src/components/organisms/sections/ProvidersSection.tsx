@@ -2,7 +2,6 @@
 
 import { useTheme } from "@/lib/theme-context";
 import { alpha } from "@/lib/themes";
-import { type as typeScale } from "@/lib/tokens";
 import { Container } from "@/components/atoms/Container";
 import { Eyebrow } from "@/components/atoms/Eyebrow";
 import { Heading } from "@/components/atoms/Heading";
@@ -45,16 +44,15 @@ function ProviderBlock({ card }: { card: ProviderCard }) {
           variant="h4"
           color={dark ? "#fff" : c.ink}
           fontFamily={theme.fonts.heading}
-          className="mt-3"
+          className="mt-4"
         >
           {card.title}
         </Heading>
         <Lead
-          size="md"
+          size="bodyCard"
           maxWidth={false}
           color={dark ? undefined : alpha(c.ink, 0.72)}
-          className={`mt-4 ${dark ? "text-white/80" : ""}`.trim()}
-          style={{ fontSize: typeScale.body, lineHeight: 1.6 }}
+          className={`mt-5 ${dark ? "text-white/80" : ""}`.trim()}
         >
           {card.body}
         </Lead>
@@ -62,7 +60,7 @@ function ProviderBlock({ card }: { card: ProviderCard }) {
           items={card.bullets}
           bulletColor={dark ? "#bdd8f5" : c.accent}
           color={dark ? undefined : alpha(c.ink, 0.82)}
-          className={`mt-6 ${dark ? "text-base text-white/85" : "text-base"}`.trim()}
+          className={`mt-8 ${dark ? "text-base text-white/85" : "text-base"}`.trim()}
         />
         <div className="mt-8 flex flex-wrap gap-3">
           <a

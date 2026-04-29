@@ -57,11 +57,10 @@ export function ProviderProfile(props: ProviderProfileType) {
               {props.role}
             </p>
             <Lead
-              size="md"
+              size="bodyCard"
               color={alpha(c.ink, 0.75)}
               maxWidth={false}
               className="mt-6"
-              style={{ fontSize: typeScale.body, lineHeight: 1.65 }}
             >
               {props.bio}
             </Lead>

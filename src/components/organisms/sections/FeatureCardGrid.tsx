@@ -2,7 +2,6 @@
 
 import { useTheme } from "@/lib/theme-context";
 import { alpha } from "@/lib/themes";
-import { type as typeScale } from "@/lib/tokens";
 import { Container } from "@/components/atoms/Container";
 import { Eyebrow } from "@/components/atoms/Eyebrow";
 import { Heading } from "@/components/atoms/Heading";
@@ -84,16 +83,15 @@ export function FeatureCardGrid({
                 as="h4"
                 variant="h4"
                 fontFamily={theme.fonts.heading}
-                className="mt-3"
+                className="mt-4"
               >
                 {card.title}
               </Heading>
               <Lead
-                size="md"
+                size="bodyCard"
                 maxWidth={false}
                 color={alpha(c.cream, 0.65)}
-                className="mt-4"
-                style={{ fontSize: typeScale.body, lineHeight: 1.6 }}
+                className="mt-5"
               >
                 {card.body}
               </Lead>
