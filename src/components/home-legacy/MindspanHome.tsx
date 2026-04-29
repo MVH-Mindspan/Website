@@ -1306,9 +1306,10 @@ export function MindspanHome() {
         >
           <p>© 2026 Mindspan</p>
           <div className="flex gap-6">
-            <a href="/legal/terms" className="hover:text-white">Terms</a>
-            <a href="/legal/privacy" className="hover:text-white">Privacy</a>
-            <a href="/legal/consent" className="hover:text-white">Informed consent</a>
+            <a href="/tos" className="hover:text-white">Terms</a>
+            <a href="/privacy-notice" className="hover:text-white">Privacy</a>
+            <a href="/informed-consent" className="hover:text-white">Informed consent</a>
+            <a href="/affiliates" className="hover:text-white">Affiliates</a>
           </div>
         </div>
       </footer>

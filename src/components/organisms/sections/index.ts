@@ -21,5 +21,12 @@ export { FinalCTA } from "./FinalCTA";
 export { Testimonials } from "./Testimonials";
 export { ProvidersPreview } from "./ProvidersPreview";
 export { FAQ } from "./FAQ";
+export {
+  LegalDocument,
+  type LegalBlock,
+  type LegalSection,
+  type LegalSubsection,
+  type LegalDocumentContent,
+} from "./LegalDocument";
 export { GuideBenefit } from "./GuideBenefit";
 export { SectionIcon } from "./icons";

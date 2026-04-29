@@ -30,9 +30,10 @@ export const footer = {
     },
   ] satisfies FooterColumn[],
   legal: [
-    { label: "Terms", href: "/legal/terms" },
-    { label: "Privacy", href: "/legal/privacy" },
-    { label: "Informed consent", href: "/legal/consent" },
+    { label: "Terms", href: "/tos" },
+    { label: "Privacy", href: "/privacy-notice" },
+    { label: "Informed consent", href: "/informed-consent" },
+    { label: "Affiliates", href: "/affiliates" },
   ] satisfies FooterLink[],
   copyright: "\u00a9 2026 Mindspan",
 } as const;
