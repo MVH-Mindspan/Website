@@ -1,32 +1,43 @@
 import { PageHero } from "@/components/organisms/sections/PageHero";
 import { ProvidersSection } from "@/components/organisms/sections/ProvidersSection";
-import { AudienceCards } from "@/components/organisms/sections/AudienceCards";
+import { SimpleSteps } from "@/components/organisms/sections/SimpleSteps";
+import { SplitCards } from "@/components/organisms/sections/SplitCards";
+import { StatsBand } from "@/components/organisms/sections/StatsBand";
 import { FinalCTA } from "@/components/organisms/sections/FinalCTA";
 import { providersPage } from "@/content/pages/providers";
-import { providers, providersIntro, audiences, finalCta } from "@/content";
+import {
+  providers,
+  providersIntro,
+  providerStats,
+  coManagement,
+  coManagementIntro,
+  coManagementClosing,
+  referralPathway,
+  referralPathwayIntro,
+} from "@/content";
 
 export const metadata = providersPage.metadata;
-
-const pcpAudiences = audiences.filter((a) => a.id === "doctors");
 
 export default function ProvidersPage() {
   return (
     <>
       <PageHero {...providersPage.hero} />
-      <AudienceCards
-        intro={{
-          eyebrow: "Primary care",
-          title: "A neurology partner who makes your life easier.",
-          lead: "For PCPs, geriatricians, and care teams referring patients with cognitive concerns.",
-        }}
-        audiences={pcpAudiences}
+      <StatsBand stats={providerStats} tone="cream" />
+      <SplitCards
+        intro={coManagementIntro}
+        core={coManagement.core}
+        edge={coManagement.edge}
+        closing={coManagementClosing}
+        cta={{ label: "Start a referral", href: "/providers/refer" }}
+        tone="sand"
       />
+      <SimpleSteps intro={referralPathwayIntro} stages={referralPathway} />
       <ProvidersSection
         intro={providersIntro}
         refer={providers.refer}
         join={providers.join}
       />
-      <FinalCTA {...finalCta} />
+      <FinalCTA {...providersPage.finalCta} />
     </>
   );
 }

@@ -14,7 +14,17 @@ export {
   type Location,
   type LocationKind,
 } from "./locations";
-export { providers, providersIntro, type ProviderCard } from "./providers";
+export {
+  providers,
+  providersIntro,
+  providerStats,
+  coManagement,
+  coManagementIntro,
+  coManagementClosing,
+  referralPathway,
+  referralPathwayIntro,
+  type ProviderCard,
+} from "./providers";
 export {
   providersPreview,
   providersPreviewIntro,
