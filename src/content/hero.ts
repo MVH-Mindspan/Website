@@ -8,5 +8,4 @@ export const homeHero = {
   subhead: brand.subhead,
   cta: { label: "Book an appointment", href: "/book-a-visit" },
   coverage: "Covered by Medicare and Medicare Advantage",
-  playbackRate: 0.9,
 } as const;
