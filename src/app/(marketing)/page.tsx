@@ -3,7 +3,7 @@
 import { useTheme } from "@/lib/theme-context";
 import { MindspanHome } from "@/components/home-legacy/MindspanHome";
 import { VideoHero } from "@/components/organisms/sections/VideoHero";
-import { TeaserBanner } from "@/components/organisms/sections/TeaserBanner";
+import { CoverageBand } from "@/components/organisms/sections/CoverageBand";
 import { EditorialStages } from "@/components/organisms/sections/EditorialStages";
 import { StatsBand } from "@/components/organisms/sections/StatsBand";
 import { AudienceCards } from "@/components/organisms/sections/AudienceCards";
@@ -44,12 +44,7 @@ export default function HomePage() {
         subhead={homeHero.subhead}
         cta={homeHero.cta}
       />
-      <TeaserBanner
-        href={announcement.href}
-        ariaLabel={announcement.ariaLabel}
-        primary={announcement.primary}
-        badge={announcement.badge}
-      />
+      <CoverageBand appointments={announcement} />
       <StatsBand stats={stats} tone="cream" />
       <AudienceCards
         intro={audiencesIntro}

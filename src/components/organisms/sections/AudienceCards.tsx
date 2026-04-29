@@ -45,7 +45,17 @@ export function AudienceCards({
         />
 
         {intro.image && (
-          <Reveal className="mt-12 overflow-hidden rounded-[2rem]">
+          <Reveal
+            className="mt-12 overflow-hidden rounded-[2rem]"
+            style={{
+              border: `1px solid ${alpha(c.ink, 0.08)}`,
+              boxShadow: [
+                `inset 0 1px 0 ${alpha("#ffffff", 0.45)}`,
+                `0 1px 2px ${alpha(c.ink, 0.06)}`,
+                `0 18px 40px -16px ${alpha(c.ink, 0.22)}`,
+              ].join(", "),
+            }}
+          >
             <img
               src={intro.image}
               alt={intro.imageAlt ?? ""}
@@ -71,10 +81,10 @@ export function AudienceCards({
             <Reveal
               key={a.id}
               as="article"
-              className="rounded-[2rem] p-6 md:p-8 flex flex-col group transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_24px_48px_-16px_rgba(32,30,23,0.18)]"
+              className="rounded-[2rem] p-6 md:p-8 flex flex-col group transition-all duration-300 hover:-translate-y-1 shadow-[inset_0_1px_0_rgba(255,255,255,0.45),0_1px_2px_rgba(32,30,23,0.06),0_10px_24px_-12px_rgba(32,30,23,0.18)] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.5),0_2px_4px_rgba(32,30,23,0.08),0_24px_48px_-16px_rgba(32,30,23,0.24)]"
               style={{
                 background: c.skySoft,
-                border: `1px solid ${alpha(c.ink, 0.06)}`,
+                border: `1px solid ${alpha(c.ink, 0.08)}`,
                 animationDelay: `${i * 80}ms`,
               }}
             >

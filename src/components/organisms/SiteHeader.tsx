@@ -24,7 +24,7 @@ export function SiteHeader() {
 
   return (
     <nav
-      className="fixed top-[52px] left-1/2 -translate-x-1/2 z-[999] flex items-center justify-between"
+      className="fixed top-4 left-1/2 -translate-x-1/2 z-[999] flex items-center justify-between"
       style={{
         width: "min(1320px, 92vw)",
         background: "#201E17",
