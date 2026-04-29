@@ -7,6 +7,7 @@ import { type as typeScale } from "@/lib/tokens";
 import { Container } from "@/components/atoms/Container";
 import { Eyebrow } from "@/components/atoms/Eyebrow";
 import { Heading } from "@/components/atoms/Heading";
+import { ImageFrame } from "@/components/atoms/ImageFrame";
 import { Lead } from "@/components/atoms/Lead";
 import { ArrowIcon } from "@/components/atoms/ArrowIcon";
 import { BulletList } from "@/components/molecules/BulletList";
@@ -45,26 +46,18 @@ export function AudienceCards({
         />
 
         {intro.image && (
-          <Reveal
-            className="mt-12 overflow-hidden rounded-[2rem]"
-            style={{
-              border: `1px solid ${alpha(c.ink, 0.08)}`,
-              boxShadow: [
-                `inset 0 1px 0 ${alpha("#ffffff", 0.45)}`,
-                `0 1px 2px ${alpha(c.ink, 0.06)}`,
-                `0 18px 40px -16px ${alpha(c.ink, 0.22)}`,
-              ].join(", "),
-            }}
-          >
-            <img
-              src={intro.image}
-              alt={intro.imageAlt ?? ""}
-              width={1600}
-              height={800}
-              className="w-full object-cover"
-              style={{ maxHeight: 400, aspectRatio: "1600 / 800" }}
-              loading="lazy"
-            />
+          <Reveal className="mt-12">
+            <ImageFrame>
+              <img
+                src={intro.image}
+                alt={intro.imageAlt ?? ""}
+                width={1600}
+                height={800}
+                className="w-full object-cover"
+                style={{ maxHeight: 400, aspectRatio: "1600 / 800" }}
+                loading="lazy"
+              />
+            </ImageFrame>
           </Reveal>
         )}
 

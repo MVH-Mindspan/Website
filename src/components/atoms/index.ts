@@ -5,5 +5,6 @@ export { Container } from "./Container";
 export { Eyebrow } from "./Eyebrow";
 export { Heading } from "./Heading";
 export { IconBadge } from "./IconBadge";
+export { ImageFrame } from "./ImageFrame";
 export { Lead } from "./Lead";
 export { Pill } from "./Pill";

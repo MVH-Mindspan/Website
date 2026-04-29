@@ -5,6 +5,7 @@ import { useTheme } from "@/lib/theme-context";
 import { alpha } from "@/lib/themes";
 import { type as typeScale } from "@/lib/tokens";
 import { ArrowIcon } from "@/components/atoms/ArrowIcon";
+import { ImageFrame } from "@/components/atoms/ImageFrame";
 import { Reveal } from "@/components/molecules/Reveal";
 import { SectionHeader } from "@/components/molecules/SectionHeader";
 import type { JourneyStage } from "@/content/journey";
@@ -139,13 +140,15 @@ export function EditorialStages({
 
             <div className="flex flex-col justify-center stage-image">
               {step.image && (
-                <img
-                  src={step.image}
-                  alt={step.imageAlt ?? step.title}
-                  className="rounded-2xl w-full object-cover"
-                  style={{ aspectRatio: "16/10" }}
-                  loading="lazy"
-                />
+                <ImageFrame radius="1rem">
+                  <img
+                    src={step.image}
+                    alt={step.imageAlt ?? step.title}
+                    className="w-full object-cover"
+                    style={{ aspectRatio: "16/10" }}
+                    loading="lazy"
+                  />
+                </ImageFrame>
               )}
             </div>
           </Reveal>

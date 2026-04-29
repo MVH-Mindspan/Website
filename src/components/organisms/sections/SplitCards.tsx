@@ -7,6 +7,7 @@ import { type as typeScale } from "@/lib/tokens";
 import { Container } from "@/components/atoms/Container";
 import { Eyebrow } from "@/components/atoms/Eyebrow";
 import { Heading } from "@/components/atoms/Heading";
+import { ImageFrame } from "@/components/atoms/ImageFrame";
 import { Lead } from "@/components/atoms/Lead";
 import { BulletList } from "@/components/molecules/BulletList";
 import { Reveal } from "@/components/molecules/Reveal";
@@ -54,16 +55,18 @@ export function SplitCards({
         />
 
         {intro.image && (
-          <Reveal className="mt-12 overflow-hidden rounded-[2rem]">
-            <img
-              src={intro.image}
-              alt={intro.imageAlt ?? ""}
-              width={1600}
-              height={840}
-              className="w-full object-cover"
-              style={{ maxHeight: 420, aspectRatio: "1600 / 840" }}
-              loading="lazy"
-            />
+          <Reveal className="mt-12">
+            <ImageFrame>
+              <img
+                src={intro.image}
+                alt={intro.imageAlt ?? ""}
+                width={1600}
+                height={840}
+                className="w-full object-cover"
+                style={{ maxHeight: 420, aspectRatio: "1600 / 840" }}
+                loading="lazy"
+              />
+            </ImageFrame>
           </Reveal>
         )}
 
