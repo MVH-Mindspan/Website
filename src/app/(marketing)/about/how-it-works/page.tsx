@@ -45,6 +45,7 @@ export default function HowItWorksPage() {
         intro={howItWorksPage.difference.intro}
         cards={howItWorksPage.difference.cards}
         columns={4}
+        rounded={false}
       />
 
       <StatsBand stats={howItWorksPage.stats} />

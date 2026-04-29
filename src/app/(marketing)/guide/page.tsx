@@ -25,6 +25,7 @@ export default function GuidePage() {
         intro={guidePage.benefitsIntro}
         cards={guidePage.benefits}
         columns={3}
+        rounded={false}
       />
 
       <EditorialStages
