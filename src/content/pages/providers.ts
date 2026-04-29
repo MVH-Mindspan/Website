@@ -11,8 +11,6 @@ export const providersPage = {
   hero: {
     eyebrow: "For referring clinicians",
     title: "Cognitive care without the eighteen-month wait.",
-    lead:
-      "Refer a patient with memory or cognitive concerns and we see them in two to three weeks. We take the dementia-specific work off your desk, workup, biomarkers, anti-amyloid eligibility, behavioral pharmacology, GUIDE coordination, and send a structured note back to your chart. You stay their doctor.",
     availability: {
       text: "Seeing referrals this month",
       cta: { label: "Start a referral", href: "/providers/refer" },
@@ -20,6 +18,11 @@ export const providersPage = {
     image: "/assets/providers-hero.webp",
     imageAlt:
       "A Mindspan neurologist in conversation with a patient across a desk in a sunlit consultation room",
+    subTagline: "Refer in under five minutes.",
+    subhead:
+      "In-person clinics in Danvers (MA), Irvine (CA), and San Jose (CA), and video visits across Massachusetts and California. We see your patient in two to three weeks and send a structured note back to your chart.",
+    primaryCta: { label: "Start a referral", href: "/providers/refer" },
+    secondaryCta: { label: "See locations", href: "/locations" },
   },
   finalCta: {
     eyebrow: "When you are ready",
