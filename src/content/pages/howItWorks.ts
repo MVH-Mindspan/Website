@@ -164,6 +164,9 @@ export const howItWorksPage = {
       title: "Cognitive care, without the wait.",
       lead:
         "Most families spend the most precious months in limbo. We rebuilt the path so that the time between worry and a real answer is measured in weeks, not years.",
+      image: "/assets/what-to-expect-conversation.jpg",
+      imageAlt:
+        "Two people sitting across a table in a sunlit Mindspan clinic, mid-conversation with olive trees outside.",
     },
     problem: comparison.problem,
     solution: comparison.solution,
@@ -203,6 +206,9 @@ export const howItWorksPage = {
       title: "Starting is simple. You can do it from home.",
       lead:
         "Complete the quick sign-up process, and we\u2019ll take care of coordinating specialists, next steps, and ongoing care, guiding you the whole way.",
+      image: "/assets/what-to-expect-consultation.jpg",
+      imageAlt:
+        "A Mindspan neurologist reviewing a brain scan on a monitor with two patients in a sunlit clinic room.",
     },
     items: howToStart,
   },

@@ -1,10 +1,12 @@
 "use client";
 
+/* eslint-disable @next/next/no-img-element */
 import { useTheme } from "@/lib/theme-context";
 import { alpha } from "@/lib/themes";
 import { type as typeScale } from "@/lib/tokens";
 import { Container } from "@/components/atoms/Container";
 import { ArrowIcon } from "@/components/atoms/ArrowIcon";
+import { ImageFrame } from "@/components/atoms/ImageFrame";
 import { Reveal } from "@/components/molecules/Reveal";
 import { SectionHeader } from "@/components/molecules/SectionHeader";
 import type { JourneyStage } from "@/content/journey";
@@ -14,7 +16,13 @@ export function SimpleSteps({
   intro,
 }: {
   stages: readonly JourneyStage[];
-  intro?: { eyebrow: string; title: string; lead: string };
+  intro?: {
+    eyebrow: string;
+    title: string;
+    lead: string;
+    image?: string;
+    imageAlt?: string;
+  };
 }) {
   const { theme } = useTheme();
   const c = theme.colors;
@@ -31,6 +39,22 @@ export function SimpleSteps({
             title={intro.title}
             lead={intro.lead}
           />
+        )}
+
+        {intro?.image && (
+          <Reveal className="mt-12">
+            <ImageFrame>
+              <img
+                src={intro.image}
+                alt={intro.imageAlt ?? ""}
+                width={1920}
+                height={1072}
+                className="w-full object-cover"
+                style={{ maxHeight: 460, aspectRatio: "1920 / 1072" }}
+                loading="lazy"
+              />
+            </ImageFrame>
+          </Reveal>
         )}
 
         <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6">
