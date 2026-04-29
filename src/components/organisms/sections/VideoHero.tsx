@@ -60,10 +60,11 @@ export function VideoHero({
     const v = videoRef.current;
     if (!v) return;
 
-    // Velocity ease-out: ramp playbackRate down over the final ~1.6s
-    // so the clip glides to a stop rather than slamming into one.
-    const RAMP_DURATION = 1.6;
-    const MIN_RATE = 0.15;
+    // Velocity ease-out: ramp playbackRate down over the final ~1.4s
+    // so the clip glides toward a stop rather than slamming into one.
+    // Floor is 0.5x — below that, individual frames start showing.
+    const RAMP_DURATION = 1.4;
+    const MIN_RATE = 0.5;
     const baseRate = playbackRate;
 
     const applyBaseRate = () => {
@@ -116,8 +117,8 @@ export function VideoHero({
           preload="none"
           aria-hidden
           style={{
-            transform: ended ? "scale(1.045)" : "scale(1)",
-            transition: "transform 28s linear",
+            transform: ended ? "scale(1.1)" : "scale(1)",
+            transition: "transform 16s linear",
             transformOrigin: "center center",
             willChange: ended ? "transform" : "auto",
           }}
