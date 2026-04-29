@@ -5,9 +5,12 @@ import {
   StatsBand,
   FeatureCardGrid,
   EditorialStages,
+  FAQ,
   FinalCTA,
 } from "@/components/organisms/sections";
 import { howItWorksPage } from "@/content/pages/howItWorks";
+import { whatWeTreatPage } from "@/content/pages/whatWeTreat";
+import { faq, faqIntro } from "@/content/faq";
 
 export const metadata = howItWorksPage.metadata;
 
@@ -31,6 +34,13 @@ export default function HowItWorksPage() {
       />
 
       <FeatureCardGrid
+        id="what-we-treat"
+        intro={whatWeTreatPage.conditions}
+        cards={whatWeTreatPage.conditionCards}
+        columns={3}
+      />
+
+      <FeatureCardGrid
         id="difference"
         intro={howItWorksPage.difference.intro}
         cards={howItWorksPage.difference.cards}
@@ -43,6 +53,8 @@ export default function HowItWorksPage() {
         intro={howItWorksPage.howToStart.intro}
         stages={howItWorksPage.howToStart.items}
       />
+
+      <FAQ intro={faqIntro} items={faq} />
 
       <FinalCTA
         eyebrow={howItWorksPage.finalCta.eyebrow}

@@ -5,7 +5,7 @@ import { useTheme } from "@/lib/theme-context";
 import { alpha } from "@/lib/themes";
 import { ease, type as typeScale } from "@/lib/tokens";
 import { brand } from "@/content/brand";
-import { nav } from "@/content/nav";
+import { nav, audienceNav } from "@/content/nav";
 
 export function SiteHeader() {
   const { theme } = useTheme();
@@ -24,30 +24,28 @@ export function SiteHeader() {
 
   return (
     <nav
-      className="fixed top-4 left-1/2 -translate-x-1/2 z-[999] flex items-center justify-between"
+      className="fixed top-[52px] left-1/2 -translate-x-1/2 z-[999] flex items-center justify-between"
       style={{
         width: "min(1320px, 92vw)",
-        background: scrolled ? alpha("#201E17", 0.96) : alpha("#201E17", 0.88),
-        backdropFilter: "blur(16px)",
-        WebkitBackdropFilter: "blur(16px)",
+        background: "#201E17",
         borderRadius: "10rem",
         padding: scrolled ? "8px 12px 8px 24px" : "12px 12px 12px 24px",
-        boxShadow: scrolled ? "0 8px 32px -8px rgba(0,0,0,0.3)" : "none",
-        transition: `padding 0.4s ${ease.expressive}, background 0.4s ease, box-shadow 0.4s ease`,
+        boxShadow: scrolled
+          ? "0 8px 32px -8px rgba(0,0,0,0.3)"
+          : "0 4px 16px -8px rgba(0,0,0,0.2)",
+        transition: `padding 0.4s ${ease.expressive}, box-shadow 0.4s ease`,
       }}
     >
-      <a
-        href="/"
-        className="font-extrabold uppercase tracking-tight"
-        style={{
-          fontFamily: theme.fonts.body,
-          fontSize: "clamp(1.2rem, 1.05rem + 0.5vw, 1.5rem)",
-          color: c.cream,
-          letterSpacing: "-0.01em",
-        }}
-      >
-        {brand.name}
+      <a href="/" className="inline-flex items-center" aria-label={brand.name}>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/assets/mindspan-logo-with-slogan-white.png"
+          srcSet="/assets/mindspan-logo-with-slogan-white.png 1x, /assets/mindspan-logo-with-slogan-white@2x.png 2x"
+          alt={brand.name}
+          style={{ height: scrolled ? 28 : 32, width: "auto", display: "block" }}
+        />
       </a>
+
       <ul className="hidden md:flex items-center gap-8">
         {nav.map((n) => (
           <li key={n.label}>
@@ -69,8 +67,30 @@ export function SiteHeader() {
             </a>
           </li>
         ))}
+
+        {[audienceNav.providers].map((n) => (
+          <li key={n.label}>
+            <a
+              href={n.href}
+              className="transition-colors"
+              style={{
+                fontFamily: theme.fonts.body,
+                fontSize: typeScale.bodySm,
+                fontWeight: 450,
+                color: alpha(c.cream, 0.7),
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = c.cream)}
+              onMouseLeave={(e) =>
+                (e.currentTarget.style.color = alpha(c.cream, 0.7))
+              }
+            >
+              {n.label}
+            </a>
+          </li>
+        ))}
       </ul>
-      <div className="flex items-center gap-2">
+
+      <div className="flex items-center gap-4">
         <a
           href={brand.primaryCtaHref}
           className="font-semibold transition-all"
@@ -85,7 +105,7 @@ export function SiteHeader() {
           onMouseEnter={(e) => (e.currentTarget.style.background = c.cream)}
           onMouseLeave={(e) => (e.currentTarget.style.background = "#fff")}
         >
-          {brand.primaryCta}
+          Book an appointment
         </a>
       </div>
     </nav>

@@ -49,7 +49,7 @@ export function FinalCTA({
       <Reveal
         className="relative"
         style={{
-          maxWidth: "min(760px, 92vw)",
+          maxWidth: "min(880px, 92vw)",
           marginInline: "auto",
           textAlign: "center",
         }}
@@ -59,64 +59,81 @@ export function FinalCTA({
           as="h2"
           variant="h2"
           fontFamily={theme.fonts.heading}
-          className="mt-6"
+          className="mt-6 final-cta-title"
         >
           {title}
         </Heading>
         <Lead
           size="lg"
-          maxWidth="62ch"
-          className="mt-6 mx-auto text-white/80"
-          style={{ marginInline: "auto" }}
+          maxWidth="58ch"
+          className="mt-6 mx-auto text-white/85"
+          style={{
+            marginInline: "auto",
+            fontSize: typeScale.leadLg,
+            textWrap: "pretty",
+          }}
         >
           {lead}
         </Lead>
         <div className="mt-10 flex flex-wrap justify-center gap-3">
-          <a
-            href={primary.href}
-            className="inline-flex items-center gap-2 font-semibold transition-all hover:-translate-y-0.5"
-            style={{
-              fontFamily: theme.fonts.body,
-              padding: "16px 32px",
-              background: c.brandGreen,
-              color: "#fff",
-              borderRadius: "10rem",
-              fontSize: typeScale.bodySm,
-            }}
-          >
-            {primary.label} <ArrowIcon />
-          </a>
           {secondary && (
             <a
               href={secondary.href}
-              className="inline-flex items-center gap-2 font-medium transition-all"
+              className="inline-flex items-center gap-2 font-semibold transition-all"
               style={{
                 fontFamily: theme.fonts.body,
                 padding: "16px 32px",
                 color: "#fff",
-                border: "1px solid rgba(255,255,255,0.35)",
+                border: "1px solid rgba(255,255,255,0.45)",
+                background: "transparent",
                 borderRadius: "10rem",
-                fontSize: typeScale.bodySm,
+                fontSize: typeScale.body,
               }}
             >
               {secondary.label}
             </a>
           )}
+          <a
+            href={primary.href}
+            className="inline-flex items-center gap-2 font-semibold transition-all hover:-translate-y-0.5 hover:shadow-[0_12px_32px_-8px_rgba(0,0,0,0.4)]"
+            style={{
+              fontFamily: theme.fonts.body,
+              padding: "16px 32px",
+              background: "#fff",
+              color: c.brandGreen,
+              borderRadius: "10rem",
+              fontSize: typeScale.body,
+              boxShadow: "0 4px 16px -4px rgba(0,0,0,0.25)",
+            }}
+          >
+            {primary.label} <ArrowIcon />
+          </a>
         </div>
         {signature && (
           <p
-            className="mt-10 text-[15px]"
+            className="mt-10"
             style={{
-              color: "rgba(255,255,255,0.52)",
+              color: "rgba(255,255,255,0.7)",
               fontFamily: theme.fonts.accent,
               fontStyle: "italic",
               letterSpacing: "0.01em",
+              fontSize: typeScale.leadMd,
             }}
           >
             {signature}
           </p>
         )}
       </Reveal>
+      <style jsx>{`
+        :global(.final-cta-title) {
+          text-wrap: balance;
+        }
+        @media (min-width: 900px) {
+          :global(.final-cta-title) {
+            white-space: nowrap;
+          }
+        }
+      `}</style>
     </section>
   );
 }

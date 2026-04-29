@@ -4,20 +4,13 @@ import { motion, useReducedMotion } from "framer-motion";
 
 const EASE = [0.22, 0.61, 0.36, 1] as const;
 
-const STEPS = [
-  { label: "Location" },
-  { label: "Visit type" },
-  { label: "Details" },
-  { label: "Address" },
-  { label: "Review" },
-];
-
 type ProgressBarProps = {
+  steps: string[];
   currentStep: number; // 0-indexed
   onStepClick?: (step: number) => void;
 };
 
-export default function ProgressBar({ currentStep, onStepClick }: ProgressBarProps) {
+export default function ProgressBar({ steps, currentStep, onStepClick }: ProgressBarProps) {
   const reducedMotion = useReducedMotion();
 
   return (
@@ -34,22 +27,20 @@ export default function ProgressBar({ currentStep, onStepClick }: ProgressBarPro
           style={{ background: "#083630" }}
           initial={false}
           animate={{
-            width: `${(currentStep / (STEPS.length - 1)) * 100}%`,
+            width: `${(currentStep / Math.max(steps.length - 1, 1)) * 100}%`,
           }}
           transition={
-            reducedMotion
-              ? { duration: 0 }
-              : { duration: 0.5, ease: EASE }
+            reducedMotion ? { duration: 0 } : { duration: 0.5, ease: EASE }
           }
         />
 
-        {STEPS.map((step, i) => {
+        {steps.map((label, i) => {
           const isCompleted = i < currentStep;
           const isCurrent = i === currentStep;
           const isClickable = i < currentStep && onStepClick;
 
           return (
-            <li key={step.label} className="relative z-10 flex flex-col items-center">
+            <li key={label} className="relative z-10 flex flex-col items-center">
               <button
                 type="button"
                 onClick={() => isClickable && onStepClick(i)}
@@ -92,7 +83,7 @@ export default function ProgressBar({ currentStep, onStepClick }: ProgressBarPro
                   }
                 `}
               >
-                {step.label}
+                {label}
               </span>
             </li>
           );

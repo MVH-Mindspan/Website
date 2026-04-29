@@ -46,7 +46,7 @@ export function SiteFooter() {
           ))}
         </div>
         <div
-          className="mt-16 pt-8 flex flex-wrap gap-4 justify-between text-xs"
+          className="mt-16 pt-8 flex flex-wrap gap-4 justify-between text-sm"
           style={{ borderTop: "1px solid rgba(255,255,255,0.1)" }}
         >
           <p>{footer.copyright}</p>

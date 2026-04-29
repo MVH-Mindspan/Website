@@ -12,15 +12,18 @@ import type { JourneyStage } from "@/content/journey";
 export function EditorialStages({
   stages,
   intro,
+  tone = "cream",
 }: {
   stages: readonly JourneyStage[];
   intro?: { eyebrow: string; title: string; lead: string };
+  tone?: "sand" | "cream";
 }) {
   const { theme } = useTheme();
   const c = theme.colors;
+  const bg = tone === "sand" ? c.sand : c.cream;
 
   return (
-    <section style={{ background: c.cream, color: c.ink, padding: "48px 0" }}>
+    <section style={{ background: bg, color: c.ink, padding: "48px 0" }}>
       <div style={{ maxWidth: "min(1320px, 92vw)", marginInline: "auto" }}>
         {intro && (
           <div style={{ padding: "48px 0 24px" }}>
@@ -86,7 +89,7 @@ export function EditorialStages({
                   fontWeight: 600,
                   textTransform: "uppercase",
                   letterSpacing: "0.08em",
-                  color: c.accent,
+                  color: c.accentText,
                   marginBottom: 12,
                 }}
               >

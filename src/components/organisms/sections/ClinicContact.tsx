@@ -40,7 +40,7 @@ export function ClinicContact(props: ClinicContactType) {
               border: `1px solid ${alpha(c.ink, 0.06)}`,
             }}
           >
-            <Eyebrow color={c.accent}>Visit us</Eyebrow>
+            <Eyebrow color={c.accentText}>Visit us</Eyebrow>
             <Heading
               as="h2"
               variant="h3"

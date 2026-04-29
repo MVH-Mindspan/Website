@@ -2,6 +2,7 @@ export interface ThemeColors {
   primary: string;
   primaryLight: string;
   accent: string;
+  accentText: string;
   accentHover: string;
   cream: string;
   sand: string;
@@ -46,6 +47,7 @@ export const brandV1Theme: ThemeConfig = {
     primary: "#083630",
     primaryLight: "#1f514a",
     accent: "#fb4d17",
+    accentText: "#c93a0e",
     accentHover: "#e23d08",
     cream: "#efeeeb",
     sand: "#dad6c9",
@@ -72,6 +74,7 @@ export const brandV2Theme: ThemeConfig = {
     primary: "#083630",
     primaryLight: "#1f514a",
     accent: "#fb4d17",
+    accentText: "#c93a0e",
     accentHover: "#e23d08",
     cream: "#FBF7F0",
     sand: "#E9DECB",

@@ -92,7 +92,7 @@ export function EditorialPillarsIllustrated({
                         background: alpha(c.ink, 0.2),
                       }}
                     />
-                    <Eyebrow color={c.accent} style={{ margin: 0 }}>
+                    <Eyebrow color={c.accentText} style={{ margin: 0 }}>
                       {p.kicker}
                     </Eyebrow>
                   </div>

@@ -1,4 +1,4 @@
-export type LocationKind = "clinic" | "telehealth";
+export type LocationKind = "clinic" | "video";
 
 export type Location = {
   slug: string;
@@ -12,7 +12,7 @@ export type Location = {
 
 export const locationsIntro = {
   eyebrow: "Where we see patients",
-  title: "Come see us. Or let us come to you, on video.",
+  title: "Visit a clinic, or see your provider on video.",
   lead:
     "Clinics in Massachusetts and California, plus video visits anywhere in those two states.",
 } as const;
@@ -28,13 +28,13 @@ export const locations: Location[] = [
     kind: "clinic",
   },
   {
-    slug: "telehealth-ma",
-    city: "Telehealth",
+    slug: "video-ma",
+    city: "Video visits",
     state: "Massachusetts",
-    href: "/locations/telehealth-ma",
+    href: "/locations/video-ma",
     bbox: "-73.51,41.24,-69.93,42.89",
     marker: "42.36,-71.06",
-    kind: "telehealth",
+    kind: "video",
   },
   {
     slug: "irvine",
@@ -53,6 +53,15 @@ export const locations: Location[] = [
     bbox: "-122.52,37.70,-122.35,37.82",
     marker: "37.775,-122.418",
     kind: "clinic",
+  },
+  {
+    slug: "video-ca",
+    city: "Video visits",
+    state: "California",
+    href: "/book-a-visit",
+    bbox: "-124.41,32.53,-114.13,42.01",
+    marker: "37.0,-119.4",
+    kind: "video",
   },
 ];
 

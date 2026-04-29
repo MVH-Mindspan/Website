@@ -1,0 +1,100 @@
+"use client";
+
+import { useState } from "react";
+import { useTheme } from "@/lib/theme-context";
+import { alpha } from "@/lib/themes";
+import { type as typeScale, ease } from "@/lib/tokens";
+import { Container } from "@/components/atoms/Container";
+import { SectionHeader } from "@/components/molecules/SectionHeader";
+import type { FAQItem } from "@/content/faq";
+
+export function FAQ({
+  intro,
+  items,
+}: {
+  intro: { eyebrow: string; title: string };
+  items: readonly FAQItem[];
+}) {
+  const { theme } = useTheme();
+  const c = theme.colors;
+  const [openId, setOpenId] = useState<string | null>(items[0]?.id ?? null);
+
+  return (
+    <section style={{ background: c.cream, padding: "96px 0" }}>
+      <Container>
+        <SectionHeader eyebrow={intro.eyebrow} title={intro.title} />
+        <div
+          className="mt-12 mx-auto"
+          style={{ maxWidth: 820, display: "flex", flexDirection: "column", gap: 12 }}
+        >
+          {items.map((it) => {
+            const isOpen = openId === it.id;
+            return (
+              <div
+                key={it.id}
+                style={{
+                  background: "#fff",
+                  border: `1px solid ${alpha(c.ink, 0.1)}`,
+                  borderRadius: "1.5rem",
+                  overflow: "hidden",
+                }}
+              >
+                <button
+                  type="button"
+                  onClick={() => setOpenId(isOpen ? null : it.id)}
+                  aria-expanded={isOpen}
+                  className="w-full text-left flex items-center justify-between gap-6"
+                  style={{
+                    padding: "22px 28px",
+                    fontFamily: theme.fonts.heading,
+                    fontSize: typeScale.leadMd,
+                    color: c.ink,
+                    lineHeight: 1.3,
+                    background: "transparent",
+                    border: 0,
+                    cursor: "pointer",
+                  }}
+                >
+                  <span>{it.question}</span>
+                  <span
+                    aria-hidden
+                    style={{
+                      flexShrink: 0,
+                      width: 32,
+                      height: 32,
+                      borderRadius: "50%",
+                      background: isOpen ? c.brandGreen : alpha(c.ink, 0.06),
+                      color: isOpen ? "#fff" : c.ink,
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      transition: `background 0.2s ease, transform 0.3s ${ease.expressive}`,
+                      transform: isOpen ? "rotate(45deg)" : "rotate(0deg)",
+                      fontSize: "1.25rem",
+                      lineHeight: 1,
+                    }}
+                  >
+                    +
+                  </span>
+                </button>
+                {isOpen && (
+                  <div
+                    style={{
+                      padding: "0 28px 24px",
+                      fontFamily: theme.fonts.body,
+                      fontSize: typeScale.body,
+                      color: alpha(c.ink, 0.75),
+                      lineHeight: 1.6,
+                    }}
+                  >
+                    {it.answer}
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      </Container>
+    </section>
+  );
+}
