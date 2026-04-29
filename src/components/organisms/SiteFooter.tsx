@@ -42,7 +42,7 @@ export function SiteFooter() {
                   <li key={link.label}>
                     <a
                       href={link.href}
-                      className="hover:text-white transition-colors"
+                      className="v2-link hover:text-white transition-colors"
                     >
                       {link.label}
                     </a>
@@ -59,7 +59,11 @@ export function SiteFooter() {
           <p>{footer.copyright}</p>
           <div className="flex gap-6">
             {footer.legal.map((l) => (
-              <a key={l.label} href={l.href} className="hover:text-white">
+              <a
+                key={l.label}
+                href={l.href}
+                className="v2-link hover:text-white"
+              >
                 {l.label}
               </a>
             ))}

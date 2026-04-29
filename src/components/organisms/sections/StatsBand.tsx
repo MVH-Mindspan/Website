@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
 import { useTheme } from "@/lib/theme-context";
 import { alpha } from "@/lib/themes";
 import { type as typeScale } from "@/lib/tokens";
@@ -119,9 +120,87 @@ function ComparisonStat({
   const c = theme.colors;
   const isRight = align === "right";
 
+  const ref = useRef<HTMLParagraphElement>(null);
+  const [displayed, setDisplayed] = useState(stat.value);
+  const hasAnimated = useRef(false);
+
+  useEffect(() => {
+    if (!ref.current || hasAnimated.current) return;
+    const prefersReduced = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+    if (prefersReduced) {
+      hasAnimated.current = true;
+      return;
+    }
+
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting || hasAnimated.current) return;
+        hasAnimated.current = true;
+        obs.disconnect();
+
+        const duration = 1400;
+        const start = performance.now();
+
+        // Range pattern: "2–3 wks", "1-5 days" (handles en-dash, em-dash, hyphen)
+        const rangeMatch = stat.value.match(
+          /^(.*?)(\d[\d.]*)(\s*[–—-]\s*)(\d[\d.]*)(.*)$/
+        );
+        if (rangeMatch) {
+          const [, prefix, n1Str, sep, n2Str, suffix] = rangeMatch;
+          const n1 = parseFloat(n1Str);
+          const n2 = parseFloat(n2Str);
+          const isDec = n1Str.includes(".") || n2Str.includes(".");
+          const fmt = (n: number) =>
+            isDec ? n.toFixed(1) : Math.round(n).toString();
+          const tick = (now: number) => {
+            const t = Math.min((now - start) / duration, 1);
+            const e = 1 - Math.pow(1 - t, 4);
+            setDisplayed(prefix + fmt(n1 * e) + sep + fmt(n2 * e) + suffix);
+            if (t < 1) requestAnimationFrame(tick);
+            else setDisplayed(stat.value);
+          };
+          requestAnimationFrame(tick);
+          return;
+        }
+
+        // Single-number pattern: "12+ months", "98%", "1,200 patients"
+        const numMatch = stat.value.match(/(\d[\d.]*)/);
+        if (!numMatch) {
+          setDisplayed(stat.value);
+          return;
+        }
+        const target = parseFloat(numMatch[1]);
+        const prefix = stat.value.slice(0, numMatch.index);
+        const suffix = stat.value.slice(
+          (numMatch.index ?? 0) + numMatch[1].length
+        );
+        const isDec = numMatch[1].includes(".");
+        const tick = (now: number) => {
+          const t = Math.min((now - start) / duration, 1);
+          const e = 1 - Math.pow(1 - t, 4);
+          const cur = target * e;
+          setDisplayed(
+            prefix +
+              (isDec ? cur.toFixed(1) : Math.round(cur).toString()) +
+              suffix
+          );
+          if (t < 1) requestAnimationFrame(tick);
+          else setDisplayed(stat.value);
+        };
+        requestAnimationFrame(tick);
+      },
+      { threshold: 0.5 }
+    );
+    obs.observe(ref.current);
+    return () => obs.disconnect();
+  }, [stat.value]);
+
   return (
     <div style={{ textAlign: align }}>
       <p
+        ref={ref}
         style={{
           fontFamily: theme.fonts.heading,
           fontSize: typeScale.h1,
@@ -129,9 +208,10 @@ function ComparisonStat({
           lineHeight: 1,
           color: highlight ? c.brandGreen : alpha(c.ink, 0.35),
           marginBottom: 12,
+          fontVariantNumeric: "tabular-nums",
         }}
       >
-        {stat.value}
+        {displayed}
       </p>
       <p
         style={{
