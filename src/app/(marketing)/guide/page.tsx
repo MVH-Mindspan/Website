@@ -1,6 +1,5 @@
 import {
   PageHero,
-  EditorialIntro,
   FeatureCardGrid,
   EditorialStages,
   FAQ,
@@ -15,18 +14,12 @@ export default function GuidePage() {
     <>
       <PageHero {...guidePage.hero} />
 
-      <EditorialIntro
-        id="what-is-guide"
-        title={guidePage.whatItIs.title}
-        lead={guidePage.whatItIs.lead}
-      />
-
       <FeatureCardGrid
         id="benefits"
         intro={guidePage.benefitsIntro}
         cards={guidePage.benefits}
         columns={3}
-        rounded={false}
+        rounded
       />
 
       <EditorialStages
