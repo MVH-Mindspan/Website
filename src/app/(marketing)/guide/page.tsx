@@ -2,7 +2,7 @@ import {
   PageHero,
   FeatureCardGrid,
   FeatureSpotlight,
-  EditorialStages,
+  SimpleSteps,
   FAQ,
   FinalCTA,
 } from "@/components/organisms/sections";
@@ -26,13 +26,13 @@ export default function GuidePage() {
 
       <FeatureSpotlight {...guidePage.support247} />
 
-      <EditorialStages
+      <SimpleSteps
         intro={guidePage.eligibilityIntro}
         stages={guidePage.eligibilityItems}
         tone="sand"
       />
 
-      <EditorialStages
+      <SimpleSteps
         intro={guidePage.howEnrollmentIntro}
         stages={guidePage.howEnrollmentSteps}
       />
