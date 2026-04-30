@@ -128,11 +128,6 @@ export function FinalCTA({
         :global(.final-cta-title) {
           text-wrap: balance;
         }
-        @media (min-width: 900px) {
-          :global(.final-cta-title) {
-            white-space: nowrap;
-          }
-        }
       `}</style>
     </section>
   );
