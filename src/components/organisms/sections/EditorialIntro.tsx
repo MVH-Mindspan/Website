@@ -8,20 +8,24 @@ import { Reveal } from "@/components/molecules/Reveal";
 export function EditorialIntro({
   title,
   lead,
+  id,
 }: {
   title: string;
   lead: string;
+  id?: string;
 }) {
   const { theme } = useTheme();
   const c = theme.colors;
 
   return (
     <section
+      id={id}
       className="relative"
       style={{
         background: "#201E17",
         color: c.cream,
         padding: "56px 0",
+        scrollMarginTop: "96px",
       }}
     >
       <div
