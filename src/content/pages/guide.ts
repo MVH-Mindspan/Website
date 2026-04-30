@@ -20,15 +20,8 @@ export const guidePage = {
     subTagline: "What is GUIDE?",
     subhead:
       "Medicare\u2019s coordinated dementia care model. 24/7 specialist access, $0 copays for covered visits, and up to $2,500 a year in caregiver respite. If you qualify, Mindspan handles enrollment.",
-    primaryCta: { label: "Learn about GUIDE", href: "#what-is-guide" },
-    secondaryCta: { label: "See the benefits", href: "#benefits" },
-  },
-
-  whatItIs: {
-    eyebrow: "What GUIDE is",
-    title: "Not a separate program you have to manage. Part of your care.",
-    lead:
-      "GUIDE stands for Guiding an Improved Dementia Experience. It is a Medicare (CMS) care model that pays providers like Mindspan to deliver coordinated, team-based dementia care, and to support the caregiver, not just the patient. For you, that means you do not sign up for anything separately. If you qualify, we enroll you as part of ongoing care, and the benefits below become available to your family.",
+    primaryCta: { label: "See the benefits", href: "#benefits" },
+    secondaryCta: { label: "Talk to us: (617) 420-9000", href: "tel:+16174209000" },
   },
 
   benefitsIntro: {
