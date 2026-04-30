@@ -12,6 +12,7 @@ export {
 export { StatsBand } from "./StatsBand";
 export { SplitCards } from "./SplitCards";
 export { FeatureCardGrid } from "./FeatureCardGrid";
+export { FeatureSpotlight } from "./FeatureSpotlight";
 export { AudienceCards } from "./AudienceCards";
 export { LocationCards } from "./LocationCards";
 export { ProvidersSection } from "./ProvidersSection";

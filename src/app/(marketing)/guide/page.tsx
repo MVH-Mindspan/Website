@@ -1,6 +1,7 @@
 import {
   PageHero,
   FeatureCardGrid,
+  FeatureSpotlight,
   EditorialStages,
   FAQ,
   FinalCTA,
@@ -21,6 +22,8 @@ export default function GuidePage() {
         columns={3}
         rounded
       />
+
+      <FeatureSpotlight {...guidePage.support247} />
 
       <EditorialStages
         intro={guidePage.eligibilityIntro}
