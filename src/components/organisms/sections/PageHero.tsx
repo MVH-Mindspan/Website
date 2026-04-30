@@ -168,7 +168,7 @@ function ImageHero({
                   : ""
               }
             >
-              <div className={hasAside ? "md:max-w-[16ch]" : ""}>
+              <div>
                 <Eyebrow color={alpha(c.cream, 0.85)}>{eyebrow}</Eyebrow>
                 {location && (
                   <LocationLine
@@ -183,7 +183,7 @@ function ImageHero({
                   fontFamily={theme.fonts.heading}
                   color={c.cream}
                   className="mt-4"
-                  style={{ maxWidth: hasAside ? undefined : "18ch" }}
+                  style={{ maxWidth: hasAside ? "16ch" : "18ch" }}
                 >
                   {title}
                 </Heading>
