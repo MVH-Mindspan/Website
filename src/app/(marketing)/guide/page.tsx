@@ -20,7 +20,8 @@ export default function GuidePage() {
         intro={guidePage.benefitsIntro}
         cards={guidePage.benefits}
         columns={3}
-        rounded
+        rounded={false}
+        tone="sand"
       />
 
       <FeatureSpotlight {...guidePage.support247} />
@@ -28,6 +29,7 @@ export default function GuidePage() {
       <EditorialStages
         intro={guidePage.eligibilityIntro}
         stages={guidePage.eligibilityItems}
+        tone="sand"
       />
 
       <EditorialStages

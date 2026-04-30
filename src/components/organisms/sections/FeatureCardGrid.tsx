@@ -20,6 +20,7 @@ export function FeatureCardGrid({
   cards,
   columns = 3,
   rounded = true,
+  tone = "primary",
   primary,
   secondary,
 }: {
@@ -28,6 +29,7 @@ export function FeatureCardGrid({
   cards: readonly TechCard[];
   columns?: 2 | 3 | 4;
   rounded?: boolean;
+  tone?: "primary" | "sand";
   primary?: { label: string; href: string };
   secondary?: { label: string; href: string };
 }) {
@@ -43,12 +45,23 @@ export function FeatureCardGrid({
       ? "md:grid-cols-2"
       : "md:grid-cols-3";
 
+  const isSand = tone === "sand";
+  const sectionBg = isSand ? c.sand : c.primary;
+  const sectionText = isSand ? c.ink : c.cream;
+  const cardBg = isSand ? c.cream : c.primaryLight;
+  const cardBorder = isSand ? `1px solid ${alpha(c.ink, 0.06)}` : undefined;
+  const cardShadow = isSand
+    ? "0 18px 36px -18px rgba(0,0,0,0.18)"
+    : "0 24px 48px -16px rgba(0,0,0,0.4)";
+  const eyebrowColor = isSand ? alpha(c.ink, 0.6) : alpha(c.cream, 0.6);
+  const bodyColor = isSand ? alpha(c.ink, 0.7) : alpha(c.cream, 0.65);
+
   return (
     <section
       id={id}
       style={{
-        background: c.primary,
-        color: c.cream,
+        background: sectionBg,
+        color: sectionText,
         padding: "96px 0",
         borderRadius: rounded ? "2.2rem 2.2rem 0 0" : undefined,
         scrollMarginTop: "96px",
@@ -59,16 +72,20 @@ export function FeatureCardGrid({
           eyebrow={intro.eyebrow}
           title={intro.title}
           lead={intro.lead}
-          tone="light"
-          eyebrowColor="#bdd8f5"
+          tone={isSand ? "dark" : "light"}
+          eyebrowColor={isSand ? undefined : "#bdd8f5"}
         />
 
         <div className={`mt-12 grid ${gridColsClass} gap-5 md:gap-6`}>
           {cards.map((card, i) => (
             <Reveal
               key={card.id}
-              className="group rounded-[2rem] p-6 md:p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_24px_48px_-16px_rgba(0,0,0,0.4)]"
-              style={{ background: c.primaryLight, animationDelay: `${i * 80}ms` }}
+              className={`group rounded-[2rem] p-6 md:p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-[${cardShadow}]`}
+              style={{
+                background: cardBg,
+                border: cardBorder,
+                animationDelay: `${i * 80}ms`,
+              }}
             >
               <IconBadge
                 background={c.sky}
@@ -77,12 +94,13 @@ export function FeatureCardGrid({
               >
                 <SectionIcon name={card.icon} />
               </IconBadge>
-              <Eyebrow color={alpha(c.cream, 0.6)} className="mt-6">
+              <Eyebrow color={eyebrowColor} className="mt-6">
                 {card.eyebrow}
               </Eyebrow>
               <Heading
                 as="h4"
                 variant="h4"
+                color={sectionText}
                 fontFamily={theme.fonts.heading}
                 className="mt-4"
               >
@@ -91,7 +109,7 @@ export function FeatureCardGrid({
               <Lead
                 size="bodyCard"
                 maxWidth={false}
-                color={alpha(c.cream, 0.65)}
+                color={bodyColor}
                 className="mt-5"
               >
                 {card.body}
