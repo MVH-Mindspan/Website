@@ -82,6 +82,16 @@ export const guidePage = {
     },
   ],
 
+  support247: {
+    eyebrow: "24/7 specialist access",
+    title: "Someone to call, day or night.",
+    body:
+      "A medical question at 10pm. A scary change on a Saturday. The Mindspan specialist line is staffed around the clock for GUIDE families, so you are not alone with the hard moments. One number, day or night, answered by someone who knows dementia care.",
+    image: "/assets/guide-247.webp",
+    imageAlt:
+      "A Mindspan specialist on a video visit at her desk in the evening.",
+  },
+
   eligibilityIntro: {
     eyebrow: "Who qualifies",
     title: "Four things have to be true.",
@@ -129,6 +139,9 @@ export const guidePage = {
       title: "Book a visit or call us",
       body:
         "Start the same way any new patient does. We do not ask about GUIDE up front, we focus on the medical situation first.",
+      image: "/assets/guide-life.webp",
+      imageAlt:
+        "A patient at home with a cup of coffee, reflecting in a sunlit kitchen.",
     },
     {
       kicker: "Step 02",
