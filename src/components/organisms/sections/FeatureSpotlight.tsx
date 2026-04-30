@@ -3,11 +3,12 @@
 /* eslint-disable @next/next/no-img-element */
 import { useTheme } from "@/lib/theme-context";
 import { alpha } from "@/lib/themes";
-import { type as typeScale } from "@/lib/tokens";
 import { Container } from "@/components/atoms/Container";
 import { Eyebrow } from "@/components/atoms/Eyebrow";
 import { Heading } from "@/components/atoms/Heading";
 import { Lead } from "@/components/atoms/Lead";
+import { Button } from "@/components/atoms/Button";
+import { ArrowIcon } from "@/components/atoms/ArrowIcon";
 import { ImageFrame } from "@/components/atoms/ImageFrame";
 import { Reveal } from "@/components/molecules/Reveal";
 
@@ -22,6 +23,8 @@ export function FeatureSpotlight({
   imageAlt,
   imagePosition = "right",
   tone = "cream",
+  primary,
+  secondary,
 }: {
   id?: string;
   eyebrow: string;
@@ -31,6 +34,8 @@ export function FeatureSpotlight({
   imageAlt: string;
   imagePosition?: "left" | "right";
   tone?: Tone;
+  primary?: { label: string; href: string };
+  secondary?: { label: string; href: string };
 }) {
   const { theme } = useTheme();
   const c = theme.colors;
@@ -56,6 +61,20 @@ export function FeatureSpotlight({
       >
         {body}
       </Lead>
+      {(primary || secondary) && (
+        <div className="mt-8 flex flex-wrap items-center gap-3">
+          {primary && (
+            <Button href={primary.href} variant="primary" iconRight={<ArrowIcon />}>
+              {primary.label}
+            </Button>
+          )}
+          {secondary && (
+            <Button href={secondary.href} variant="ghostDark">
+              {secondary.label}
+            </Button>
+          )}
+        </div>
+      )}
     </div>
   );
 

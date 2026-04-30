@@ -6,6 +6,7 @@ import { alpha } from "@/lib/themes";
 import { type as typeScale } from "@/lib/tokens";
 import { Container } from "@/components/atoms/Container";
 import { ArrowIcon } from "@/components/atoms/ArrowIcon";
+import { Button } from "@/components/atoms/Button";
 import { ImageFrame } from "@/components/atoms/ImageFrame";
 import { Reveal } from "@/components/molecules/Reveal";
 import { SectionHeader } from "@/components/molecules/SectionHeader";
@@ -15,6 +16,8 @@ export function SimpleSteps({
   stages,
   intro,
   tone = "cream",
+  primary,
+  secondary,
 }: {
   stages: readonly JourneyStage[];
   intro?: {
@@ -25,6 +28,8 @@ export function SimpleSteps({
     imageAlt?: string;
   };
   tone?: "cream" | "sand";
+  primary?: { label: string; href: string };
+  secondary?: { label: string; href: string };
 }) {
   const { theme } = useTheme();
   const c = theme.colors;
@@ -141,6 +146,21 @@ export function SimpleSteps({
             </Reveal>
           ))}
         </div>
+
+        {(primary || secondary) && (
+          <div className="mt-12 flex flex-wrap items-center justify-center gap-3">
+            {primary && (
+              <Button href={primary.href} variant="primary" size="lg" iconRight={<ArrowIcon />}>
+                {primary.label}
+              </Button>
+            )}
+            {secondary && (
+              <Button href={secondary.href} variant="ghostDark" size="lg">
+                {secondary.label}
+              </Button>
+            )}
+          </div>
+        )}
       </Container>
     </section>
   );
