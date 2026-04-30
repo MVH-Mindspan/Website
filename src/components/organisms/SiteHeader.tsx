@@ -1,6 +1,7 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useTheme } from "@/lib/theme-context";
 import { alpha } from "@/lib/themes";
@@ -11,10 +12,20 @@ import { audienceNav, nav } from "@/content/nav";
 export function SiteHeader() {
   const { theme } = useTheme();
   const c = theme.colors;
+  const pathname = usePathname();
   const reduceMotion = useReducedMotion();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const hamburgerRef = useRef<HTMLButtonElement>(null);
+
+  const isActive = useCallback(
+    (href: string) => {
+      if (!pathname) return false;
+      if (pathname === href) return true;
+      return pathname.startsWith(href + "/");
+    },
+    [pathname]
+  );
 
   const handleScroll = useCallback(() => {
     setScrolled(window.scrollY > window.innerHeight * 0.6);
@@ -75,8 +86,27 @@ export function SiteHeader() {
     fontFamily: theme.fonts.body,
     fontSize: typeScale.bodySm,
     fontWeight: 450,
-    color: alpha(c.cream, 0.7),
   } as const;
+
+  const navStyle = useMemo<React.CSSProperties>(() => {
+    const baseShadow =
+      "inset 0 1px 0 rgba(255,255,255,0.06), 0 4px 16px -8px rgba(0,0,0,0.22), 0 1px 3px -1px rgba(0,0,0,0.12)";
+    const scrolledShadow =
+      "inset 0 1px 0 rgba(255,255,255,0.08), 0 8px 32px -8px rgba(0,0,0,0.35), 0 2px 8px -2px rgba(0,0,0,0.18)";
+    return {
+      width: "min(1320px, 92vw)",
+      background: "rgba(32,30,23,0.85)",
+      backdropFilter: "blur(20px) saturate(140%)",
+      WebkitBackdropFilter: "blur(20px) saturate(140%)",
+      borderRadius: "10rem",
+      padding: scrolled ? "8px 12px 8px 24px" : "12px 12px 12px 24px",
+      boxShadow: scrolled ? scrolledShadow : baseShadow,
+      transition: `padding 0.4s ${ease.expressive}, box-shadow 0.4s ease`,
+      ["--nav-fg" as string]: alpha(c.cream, 0.7),
+      ["--nav-fg-strong" as string]: c.cream,
+      ["--cta-hover-bg" as string]: c.cream,
+    } as React.CSSProperties;
+  }, [c.cream, scrolled]);
 
   const panelInitial = reduceMotion
     ? { opacity: 0 }
@@ -108,16 +138,7 @@ export function SiteHeader() {
 
       <nav
         className="fixed top-4 left-1/2 -translate-x-1/2 z-[999] flex items-center justify-between"
-        style={{
-          width: "min(1320px, 92vw)",
-          background: "#201E17",
-          borderRadius: "10rem",
-          padding: scrolled ? "8px 12px 8px 24px" : "12px 12px 12px 24px",
-          boxShadow: scrolled
-            ? "0 8px 32px -8px rgba(0,0,0,0.3)"
-            : "0 4px 16px -8px rgba(0,0,0,0.2)",
-          transition: `padding 0.4s ${ease.expressive}, box-shadow 0.4s ease`,
-        }}
+        style={navStyle}
       >
         <a href="/" className="inline-flex items-center" aria-label={brand.name}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -138,40 +159,28 @@ export function SiteHeader() {
         </a>
 
         <ul className="hidden md:flex items-center gap-8">
-          {nav.map((n) => (
-            <li key={n.label}>
-              <a
-                href={n.href}
-                className="v2-link transition-colors"
-                style={linkBase}
-                onMouseEnter={(e) => (e.currentTarget.style.color = c.cream)}
-                onMouseLeave={(e) =>
-                  (e.currentTarget.style.color = alpha(c.cream, 0.7))
-                }
-              >
-                {n.label}
-              </a>
-            </li>
-          ))}
-          <li key={audienceNav.providers.label}>
-            <a
-              href={audienceNav.providers.href}
-              className="v2-link transition-colors"
-              style={linkBase}
-              onMouseEnter={(e) => (e.currentTarget.style.color = c.cream)}
-              onMouseLeave={(e) =>
-                (e.currentTarget.style.color = alpha(c.cream, 0.7))
-              }
-            >
-              {audienceNav.providers.label}
-            </a>
-          </li>
+          {[...nav, audienceNav.providers].map((n) => {
+            const active = isActive(n.href);
+            return (
+              <li key={n.label}>
+                <a
+                  href={n.href}
+                  className="v2-header-link"
+                  data-active={active ? "true" : undefined}
+                  aria-current={active ? "page" : undefined}
+                  style={linkBase}
+                >
+                  {n.label}
+                </a>
+              </li>
+            );
+          })}
         </ul>
 
         <div className="flex items-center gap-2 md:gap-4">
           <a
             href={brand.primaryCtaHref}
-            className="font-semibold transition-all px-4 md:px-6 py-2 md:py-3"
+            className="v2-header-cta font-semibold px-4 md:px-6 py-2 md:py-3"
             style={{
               fontFamily: theme.fonts.body,
               fontSize: typeScale.bodySm,
@@ -180,11 +189,27 @@ export function SiteHeader() {
               borderRadius: "10rem",
               whiteSpace: "nowrap",
             }}
-            onMouseEnter={(e) => (e.currentTarget.style.background = c.cream)}
-            onMouseLeave={(e) => (e.currentTarget.style.background = "#fff")}
           >
             <span className="md:hidden">{brand.primaryCta}</span>
-            <span className="hidden md:inline">Book an appointment</span>
+            <span className="hidden md:inline-flex md:items-center md:gap-2">
+              Book an appointment
+              <svg
+                className="v2-header-cta-arrow"
+                width="10"
+                height="10"
+                viewBox="0 0 10 10"
+                fill="none"
+                aria-hidden="true"
+              >
+                <path
+                  d="M1 5h8m0 0L5.5 1.5M9 5 5.5 8.5"
+                  stroke="currentColor"
+                  strokeWidth="1.6"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </span>
           </a>
 
           <button
@@ -270,10 +295,13 @@ export function SiteHeader() {
               style={{
                 top: "100%",
                 marginTop: 8,
-                background: "#201E17",
+                background: "rgba(32,30,23,0.92)",
+                backdropFilter: "blur(24px) saturate(140%)",
+                WebkitBackdropFilter: "blur(24px) saturate(140%)",
                 borderRadius: "2rem",
                 padding: "12px",
-                boxShadow: "0 16px 40px -12px rgba(0,0,0,0.45)",
+                boxShadow:
+                  "inset 0 1px 0 rgba(255,255,255,0.08), 0 16px 40px -12px rgba(0,0,0,0.45)",
                 transformOrigin: "top center",
               }}
               initial={panelInitial}
@@ -282,31 +310,37 @@ export function SiteHeader() {
               transition={{ duration: reduceMotion ? 0.12 : 0.22, ease: ease.expressive }}
             >
               <div className="flex flex-col">
-                {[...nav, audienceNav.providers].map((n, i, arr) => (
-                  <a
-                    key={n.label}
-                    href={n.href}
-                    role="menuitem"
-                    onClick={() => setOpen(false)}
-                    style={{
-                      fontFamily: theme.fonts.heading,
-                      fontSize: "1.5rem",
-                      lineHeight: 1.15,
-                      color: c.cream,
-                      padding: "14px 16px",
-                      display: "flex",
-                      alignItems: "center",
-                      minHeight: 48,
-                      borderBottom:
-                        i < arr.length - 1
-                          ? `1px solid ${alpha(c.cream, 0.08)}`
-                          : "none",
-                      textDecoration: "none",
-                    }}
-                  >
-                    {n.label}
-                  </a>
-                ))}
+                {[...nav, audienceNav.providers].map((n, i, arr) => {
+                  const active = isActive(n.href);
+                  return (
+                    <a
+                      key={n.label}
+                      href={n.href}
+                      role="menuitem"
+                      className="v2-header-mobile-link"
+                      data-active={active ? "true" : undefined}
+                      aria-current={active ? "page" : undefined}
+                      onClick={() => setOpen(false)}
+                      style={{
+                        fontFamily: theme.fonts.heading,
+                        fontSize: "1.5rem",
+                        lineHeight: 1.15,
+                        color: c.cream,
+                        padding: "14px 16px",
+                        display: "flex",
+                        alignItems: "center",
+                        minHeight: 48,
+                        borderBottom:
+                          i < arr.length - 1
+                            ? `1px solid ${alpha(c.cream, 0.08)}`
+                            : "none",
+                        textDecoration: "none",
+                      }}
+                    >
+                      {n.label}
+                    </a>
+                  );
+                })}
               </div>
 
               <div
