@@ -16,6 +16,7 @@ export default function GuidePage() {
       <PageHero {...guidePage.hero} />
 
       <EditorialIntro
+        id="what-is-guide"
         title={guidePage.whatItIs.title}
         lead={guidePage.whatItIs.lead}
       />

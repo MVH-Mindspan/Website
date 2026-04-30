@@ -14,8 +14,14 @@ export const guidePage = {
   hero: {
     eyebrow: "Medicare\u2019s dementia care benefit",
     title: "A Medicare program built for families living with dementia.",
-    lead:
-      "GUIDE is a Medicare-supported care model for people with a dementia diagnosis and the families caring for them. If you qualify, it adds concrete support, 24/7 specialist access, respite dollars for the caregiver, $0 copays, at no additional cost. Mindspan is a GUIDE participant in Massachusetts and California, and we handle enrollment for you.",
+    image: "/assets/guide-hero.webp",
+    imageAlt:
+      "A Mindspan clinician meeting with a patient and family members in a sunlit consultation room.",
+    subTagline: "What is GUIDE?",
+    subhead:
+      "Medicare\u2019s coordinated dementia care model. 24/7 specialist access, $0 copays for covered visits, and up to $2,500 a year in caregiver respite. If you qualify, Mindspan handles enrollment.",
+    primaryCta: { label: "Learn about GUIDE", href: "#what-is-guide" },
+    secondaryCta: { label: "See the benefits", href: "#benefits" },
   },
 
   whatItIs: {

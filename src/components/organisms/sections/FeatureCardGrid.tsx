@@ -51,6 +51,7 @@ export function FeatureCardGrid({
         color: c.cream,
         padding: "96px 0",
         borderRadius: rounded ? "2.2rem 2.2rem 0 0" : undefined,
+        scrollMarginTop: "96px",
       }}
     >
       <Container>
