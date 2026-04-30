@@ -472,6 +472,114 @@ h1, h2, h3 {
   .v2-scope a[style*="border-radius: 10rem"]:active { transform: none !important; }
 }
 
+/* ─── Site header polish ──────────────────────────────────────────────
+   Desktop nav links: dimmed cream that lifts to full cream on hover/focus
+   and on the active route. A 1px line draws in from the left on hover and
+   sits permanently (lower opacity) under the active route. Colors are
+   passed in as CSS variables from SiteHeader so theme switching just works. */
+.v2-header-link {
+  position: relative;
+  display: inline-block;
+  text-decoration: none;
+  color: var(--nav-fg);
+  transition: color 0.25s ease;
+}
+.v2-header-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -3px;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.45s cubic-bezier(0.22, 0.61, 0.36, 1), opacity 0.25s ease;
+  opacity: 0.55;
+  pointer-events: none;
+}
+.v2-header-link:hover,
+.v2-header-link:focus-visible {
+  color: var(--nav-fg-strong);
+}
+.v2-header-link:hover::after,
+.v2-header-link:focus-visible::after {
+  transform: scaleX(1);
+}
+.v2-header-link[data-active] {
+  color: var(--nav-fg-strong);
+}
+.v2-header-link[data-active]::after {
+  transform: scaleX(1);
+  opacity: 0.4;
+}
+@media (prefers-reduced-motion: reduce) {
+  .v2-header-link,
+  .v2-header-link::after {
+    transition: none;
+  }
+}
+
+/* Primary CTA in the header: white pill with a 1px top inset, soft
+   layered shadow, micro-lift on hover, and a chevron that nudges right. */
+.v2-header-cta {
+  position: relative;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.95),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.04),
+    0 1px 2px rgba(0, 0, 0, 0.06),
+    0 4px 12px -4px rgba(0, 0, 0, 0.18);
+  transition:
+    transform 0.25s cubic-bezier(0.22, 0.61, 0.36, 1),
+    box-shadow 0.25s cubic-bezier(0.22, 0.61, 0.36, 1),
+    background 0.2s ease;
+}
+@media (hover: hover) {
+  .v2-header-cta:hover {
+    background: var(--cta-hover-bg);
+    transform: translateY(-1px);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.95),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.04),
+      0 2px 4px rgba(0, 0, 0, 0.08),
+      0 10px 24px -6px rgba(0, 0, 0, 0.25);
+  }
+}
+.v2-header-cta-arrow {
+  display: inline-block;
+  transition: transform 0.25s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+@media (hover: hover) {
+  .v2-header-cta:hover .v2-header-cta-arrow {
+    transform: translateX(3px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .v2-header-cta,
+  .v2-header-cta-arrow {
+    transition: none !important;
+  }
+  .v2-header-cta:hover {
+    transform: none;
+  }
+}
+
+/* Mobile menu links: thin accent bar on the left for the active route. */
+.v2-header-mobile-link {
+  position: relative;
+}
+.v2-header-mobile-link[data-active]::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 14px;
+  bottom: 14px;
+  width: 2px;
+  border-radius: 1px;
+  background: currentColor;
+  opacity: 0.7;
+}
+
 /* Responsive overrides for v2 layout */
 @media (max-width: 768px) {
   /* Hero content: stack vertically */
