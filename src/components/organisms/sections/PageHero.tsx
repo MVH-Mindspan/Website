@@ -233,7 +233,7 @@ function HeroAside({
   const c = theme.colors;
 
   return (
-    <div className="md:max-w-[480px] md:flex-shrink-0">
+    <div className="md:max-w-[480px] w-full">
       {subTagline && (
         <p
           className="font-semibold"
