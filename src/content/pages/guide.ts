@@ -101,26 +101,26 @@ export const guidePage = {
 
   eligibilityItems: [
     {
-      kicker: "01",
+      kicker: "Diagnosis",
       title: "A dementia diagnosis",
       body:
         "Alzheimer\u2019s, Lewy Body, vascular dementia, frontotemporal, or another form of dementia. A clinical diagnosis is required. If your loved one has not yet been formally diagnosed, we can help with that first.",
     },
     {
-      kicker: "02",
+      kicker: "Coverage",
       title: "Enrolled in Original Medicare",
       body:
         "GUIDE is available to people on Original Medicare (Medicare Part A and Part B). It is not currently available to people on Medicare Advantage plans. We can help you confirm which you have.",
     },
     {
-      kicker: "03",
-      title: "A caregiver involved in day-to-day support",
+      kicker: "Caregiver",
+      title: "A family member in day-to-day support",
       body:
         "A spouse, adult child, or other family member who is involved in daily care. GUIDE is built around the partnership between the patient and that caregiver.",
     },
     {
-      kicker: "04",
-      title: "Located in Massachusetts or California",
+      kicker: "Location",
+      title: "In Massachusetts or California",
       body:
         "Our current GUIDE service areas. If you are in MA or CA, or you have a loved one who is, we can work with you.",
     },
@@ -131,6 +131,9 @@ export const guidePage = {
     title: "We do the paperwork. You do not.",
     lead:
       "You do not apply to GUIDE directly, your care provider does. If you come to Mindspan and you qualify, we enroll you as part of starting care.",
+    image: "/assets/guide-life.webp",
+    imageAlt:
+      "A patient at home with a cup of coffee, reflecting in a sunlit kitchen.",
   },
 
   howEnrollmentSteps: [
@@ -139,9 +142,6 @@ export const guidePage = {
       title: "Book a visit or call us",
       body:
         "Start the same way any new patient does. We do not ask about GUIDE up front, we focus on the medical situation first.",
-      image: "/assets/guide-life.webp",
-      imageAlt:
-        "A patient at home with a cup of coffee, reflecting in a sunlit kitchen.",
     },
     {
       kicker: "Step 02",

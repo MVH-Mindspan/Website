@@ -14,6 +14,7 @@ import type { JourneyStage } from "@/content/journey";
 export function SimpleSteps({
   stages,
   intro,
+  tone = "cream",
 }: {
   stages: readonly JourneyStage[];
   intro?: {
@@ -23,14 +24,18 @@ export function SimpleSteps({
     image?: string;
     imageAlt?: string;
   };
+  tone?: "cream" | "sand";
 }) {
   const { theme } = useTheme();
   const c = theme.colors;
+  const isSand = tone === "sand";
+  const sectionBg = isSand ? c.sand : c.cream;
+  const cardBg = isSand ? c.cream : c.sand;
 
   if (stages.length === 0) return null;
 
   return (
-    <section style={{ background: c.cream, color: c.ink, padding: "96px 0" }}>
+    <section style={{ background: sectionBg, color: c.ink, padding: "96px 0" }}>
       <Container>
         {intro && (
           <SectionHeader
@@ -63,7 +68,7 @@ export function SimpleSteps({
               key={step.title}
               className="flex flex-col rounded-[1.5rem] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_36px_-18px_rgba(0,0,0,0.18)]"
               style={{
-                background: c.sand,
+                background: cardBg,
                 padding: "28px",
                 animationDelay: `${i * 80}ms`,
               }}
