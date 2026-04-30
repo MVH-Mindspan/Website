@@ -156,15 +156,16 @@ function ImageHero({
           paddingBottom: "88px",
         }}
       >
-        <Container>
-          <Reveal>
+        <div style={{ width: "100%" }}>
+          <Container>
+            <Reveal>
             {availability && (
               <AvailabilityPill availability={availability} tone="light" />
             )}
             <div
               className={
                 hasAside
-                  ? "flex flex-col md:flex-row md:items-end md:justify-between gap-8 md:gap-16"
+                  ? "flex flex-col md:flex-row md:items-end md:justify-between gap-6 md:gap-16"
                   : ""
               }
             >
@@ -177,16 +178,20 @@ function ImageHero({
                     textColor={alpha(c.cream, 0.85)}
                   />
                 )}
-                <Heading
-                  as="h1"
-                  variant="h1"
-                  fontFamily={theme.fonts.heading}
-                  color={c.cream}
+                <h1
                   className="mt-4"
-                  style={{ maxWidth: hasAside ? "16ch" : "18ch" }}
+                  style={{
+                    fontFamily: theme.fonts.heading,
+                    fontSize: typeScale.display,
+                    fontWeight: 400,
+                    color: c.cream,
+                    letterSpacing: "-0.02em",
+                    lineHeight: 0.98,
+                    maxWidth: hasAside ? "16ch" : "18ch",
+                  }}
                 >
                   {title}
-                </Heading>
+                </h1>
                 {!hasAside && lead && (
                   <Lead
                     size="lg"
@@ -208,9 +213,10 @@ function ImageHero({
                 />
               )}
             </div>
-            {children && <div className="mt-8">{children}</div>}
-          </Reveal>
-        </Container>
+              {children && <div className="mt-8">{children}</div>}
+            </Reveal>
+          </Container>
+        </div>
       </div>
     </section>
   );
@@ -233,7 +239,7 @@ function HeroAside({
   const c = theme.colors;
 
   return (
-    <div className="md:max-w-[480px] w-full">
+    <div className="w-full md:w-auto" style={{ maxWidth: 520 }}>
       {subTagline && (
         <p
           className="font-semibold"
