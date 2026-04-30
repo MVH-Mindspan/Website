@@ -22,9 +22,14 @@ export default function GuidePage() {
         columns={3}
         rounded={false}
         tone="sand"
+        primary={{ label: "Book a visit", href: "/book-a-visit" }}
+        secondary={{ label: "Talk to us: (617) 420-9000", href: "tel:+16174209000" }}
       />
 
-      <FeatureSpotlight {...guidePage.support247} />
+      <FeatureSpotlight
+        {...guidePage.support247}
+        secondary={{ label: "Talk to us: (617) 420-9000", href: "tel:+16174209000" }}
+      />
 
       <SimpleSteps
         intro={guidePage.eligibilityIntro}
@@ -35,6 +40,8 @@ export default function GuidePage() {
       <SimpleSteps
         intro={guidePage.howEnrollmentIntro}
         stages={guidePage.howEnrollmentSteps}
+        primary={{ label: "Book a visit", href: "/book-a-visit" }}
+        secondary={{ label: "Talk to us: (617) 420-9000", href: "tel:+16174209000" }}
       />
 
       <FAQ
