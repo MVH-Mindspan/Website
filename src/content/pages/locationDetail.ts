@@ -105,8 +105,8 @@ const detailMap: Record<string, LocationDetail> = {
     },
     provider: {
       name: "Timothy R. Kelliher, MD",
-      role: "Neurologist",
-      eyebrow: "Neurologist, Mindspan Danvers",
+      role: "Founding Neurologist",
+      eyebrow: "Founding Neurologist, Mindspan Danvers",
       image: "/assets/tim-kelliher.webp",
       imageAlt:
         "Dr. Timothy R. Kelliher, MD, Neurologist at Mindspan Danvers",
