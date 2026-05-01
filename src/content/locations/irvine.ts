@@ -189,6 +189,7 @@ export const irvineDetail: LocationDetail = {
       ],
       icon: "bullseye",
     },
+    cta: { label: "Learn more about the GUIDE program", href: "/guide" },
     footnote:
       "GUIDE is a CMS (Medicare) care model. Coverage and eligibility vary by region and payer. We verify benefits and walk families through what applies during onboarding.",
   },
