@@ -124,14 +124,18 @@ function LocationCard({
     >
       <a href={l.href} className="flex flex-col flex-1">
         <div
-          className="relative overflow-hidden h-40"
+          className="relative overflow-hidden h-40 rounded-t-[2rem]"
           style={{ background: c.primaryLight }}
         >
           {mapSrc ? (
             <iframe
               src={mapSrc}
               className="absolute left-0 right-0 top-0 w-full border-0 pointer-events-none transition-transform duration-500 group-hover:scale-[1.05]"
-              style={{ height: "calc(100% + 60px)" }}
+              style={{
+                height: "calc(100% + 60px)",
+                borderTopLeftRadius: "2rem",
+                borderTopRightRadius: "2rem",
+              }}
               loading="lazy"
               title={`Map of ${l.city}, ${l.state}`}
               aria-hidden="true"
