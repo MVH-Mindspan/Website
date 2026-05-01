@@ -14,8 +14,8 @@ export const videoMassachusettsDetail: LocationDetail = {
       text: "Video appointments available this month",
       cta: { label: "Book a video visit", href: BOOKING_HREF },
     },
-    video: "/assets/hero-video.mp4",
-    poster: "/assets/hero-poster.png",
+    video: "/assets/video-visit-video.mp4",
+    poster: "/assets/video-visit-poster.jpg",
     primaryCta: { label: "Book a video visit", href: BOOKING_HREF },
   },
 
