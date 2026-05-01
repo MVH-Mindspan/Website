@@ -1,5 +1,6 @@
 "use client";
 
+/* eslint-disable @next/next/no-img-element */
 import { useTheme } from "@/lib/theme-context";
 import { alpha } from "@/lib/themes";
 import { type as typeScale } from "@/lib/tokens";
@@ -42,26 +43,45 @@ export function ProvidersPreview({
                 animationDelay: `${i * 80}ms`,
               }}
             >
-              <div
-                aria-hidden
-                style={{
-                  width: 96,
-                  height: 96,
-                  borderRadius: "50%",
-                  background: c.brandGreen,
-                  color: "#fff",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  fontFamily: theme.fonts.heading,
-                  fontSize: "2rem",
-                  fontWeight: 500,
-                  letterSpacing: "0.02em",
-                  marginBottom: 20,
-                }}
-              >
-                {p.initials}
-              </div>
+              {p.image ? (
+                <img
+                  src={p.image}
+                  alt={p.imageAlt ?? p.name}
+                  width={96}
+                  height={96}
+                  loading="lazy"
+                  style={{
+                    width: 96,
+                    height: 96,
+                    borderRadius: "50%",
+                    objectFit: "cover",
+                    objectPosition: "center top",
+                    marginBottom: 20,
+                    border: `1px solid ${alpha(c.ink, 0.08)}`,
+                  }}
+                />
+              ) : (
+                <div
+                  aria-hidden
+                  style={{
+                    width: 96,
+                    height: 96,
+                    borderRadius: "50%",
+                    background: c.brandGreen,
+                    color: "#fff",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    fontFamily: theme.fonts.heading,
+                    fontSize: "2rem",
+                    fontWeight: 500,
+                    letterSpacing: "0.02em",
+                    marginBottom: 20,
+                  }}
+                >
+                  {p.initials}
+                </div>
+              )}
               <div
                 style={{
                   fontFamily: theme.fonts.heading,

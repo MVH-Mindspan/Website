@@ -6,6 +6,8 @@ import type { Audience } from "../audiences";
 import type { Protocol } from "../protocols";
 import { bayAreaDetail } from "../locations/bay-area";
 
+const BOOKING_HREF = "https://hipaa.jotform.com/form/252121360919856";
+
 export type ClinicContact = {
   address: string;
   mapEmbedSrc: string;
@@ -100,6 +102,37 @@ const detailMap: Record<string, LocationDetail> = {
       title: "Cognitive care on Boston\u2019s North Shore.",
       lead:
         "Our Danvers clinic sees patients from across Essex County and greater Boston. Unhurried visits with a board-certified neurologist, billed through insurance.",
+    },
+    provider: {
+      name: "Timothy R. Kelliher, MD",
+      role: "Neurologist",
+      eyebrow: "Neurologist, Mindspan Danvers",
+      image: "/assets/tim-kelliher.webp",
+      imageAlt:
+        "Dr. Timothy R. Kelliher, MD, Neurologist at Mindspan Danvers",
+      bio:
+        "Dr. Timothy Kelliher is a board-certified neurologist on Boston\u2019s North Shore with more than three decades of clinical experience. He completed his neurology residency at Boston City Hospital (now Boston Medical Center) and a fellowship in EMG and peripheral nerve disease at Massachusetts General Hospital. He has practiced at Beverly and Addison Gilbert Hospitals since 1997, with subspecialty interests in headache and neuropathy.",
+      specialties: [
+        "Memory & cognitive disorders",
+        "Headache",
+        "Neuropathy",
+        "EMG & peripheral nerve disease",
+        "General neurology",
+      ],
+      education: [
+        "BA, Boston University (Biology, English minor)",
+        "MD, Boston University Chobanian & Avedisian School of Medicine",
+        "Internship, Carney Hospital (Internal Medicine)",
+        "Residency, Boston City Hospital / Boston Medical Center (Neurology)",
+        "Fellowship, Massachusetts General Hospital (EMG & peripheral nerve disease)",
+      ],
+      certifications: [
+        "Board Certified in Neurology, American Board of Psychiatry and Neurology",
+        "Board Eligible in Electrodiagnostic Medicine",
+      ],
+      affiliations: "Beverly Hospital \u00b7 Addison Gilbert Hospital",
+      availability: "Accepting new patients. Video visits also available.",
+      cta: { label: "Book a visit with Dr. Kelliher", href: BOOKING_HREF },
     },
   },
   "video-ma": {
