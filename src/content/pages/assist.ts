@@ -120,12 +120,6 @@ const howToStart: JourneyStage[] = [
     body:
       "At any time, you can begin your own proactive cognitive health journey at no cost. Regular assessments help track your cognitive health, and if early intervention could help, our care team will be ready.",
   },
-  {
-    kicker: "Step 05",
-    title: "Digital twin",
-    body:
-      "A personalized digital model of your loved one\u2019s brain helps our care team understand and support their cognitive health, tailoring care and strategies specifically to their needs.",
-  },
 ];
 
 export const assistPage = {

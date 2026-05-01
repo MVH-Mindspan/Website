@@ -2,8 +2,8 @@ import {
   VideoHero,
   EditorialIntro,
   EditorialPillars,
-  EditorialStages,
   FeatureCardGrid,
+  SimpleSteps,
   SplitCards,
   GuideBenefit,
   FinalCTA,
@@ -44,7 +44,7 @@ export default function AssistPage() {
         closing={assistPage.assessment.closing}
         cta={assistPage.assessment.cta}
       />
-      <EditorialStages
+      <SimpleSteps
         intro={assistPage.howToStart.intro}
         stages={assistPage.howToStart.items}
       />
