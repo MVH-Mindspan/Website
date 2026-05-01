@@ -5,7 +5,6 @@ import { useTheme } from "@/lib/theme-context";
 import { alpha } from "@/lib/themes";
 import { type as typeScale } from "@/lib/tokens";
 import { Container } from "@/components/atoms/Container";
-import { ArrowIcon } from "@/components/atoms/ArrowIcon";
 import { Reveal } from "@/components/molecules/Reveal";
 import { SectionHeader } from "@/components/molecules/SectionHeader";
 import type { ProviderPreview } from "@/content/providersPreview";
@@ -116,24 +115,6 @@ export function ProvidersPreview({
               </p>
             </Reveal>
           ))}
-        </div>
-        <div className="mt-10 flex justify-center">
-          <a
-            href="/providers"
-            className="inline-flex items-center gap-2 font-semibold transition-all hover:-translate-y-0.5"
-            style={{
-              fontFamily: theme.fonts.body,
-              fontSize: typeScale.body,
-              color: c.ink,
-              padding: "14px 28px",
-              background: "#fff",
-              border: `1px solid ${alpha(c.ink, 0.12)}`,
-              borderRadius: "10rem",
-              textDecoration: "none",
-            }}
-          >
-            Meet the full team <ArrowIcon />
-          </a>
         </div>
       </Container>
     </section>
