@@ -15,7 +15,7 @@ export const danversDetail: LocationDetail = {
       text: "Appointments available this month",
       cta: { label: "Book now", href: BOOKING_HREF },
     },
-    image: "/assets/bay-area-clinic.webp",
+    image: "/assets/danvers-clinic.webp",
     imageAlt: "Mindspan Danvers clinic on Boston’s North Shore",
     primaryCta: { label: "Book a visit at our Danvers clinic", href: BOOKING_HREF },
   },
