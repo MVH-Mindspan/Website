@@ -1,7 +1,3 @@
-"use client";
-
-import { useTheme } from "@/lib/theme-context";
-import { MindspanHome } from "@/components/home-legacy/MindspanHome";
 import { VideoHero } from "@/components/organisms/sections/VideoHero";
 import { CoverageBand } from "@/components/organisms/sections/CoverageBand";
 import { EditorialStages } from "@/components/organisms/sections/EditorialStages";
@@ -28,12 +24,6 @@ import {
 } from "@/content";
 
 export default function HomePage() {
-  const { theme } = useTheme();
-
-  if (theme.structure === "v1") {
-    return <MindspanHome />;
-  }
-
   return (
     <>
       <VideoHero

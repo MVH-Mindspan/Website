@@ -5,7 +5,7 @@
   --color-foreground: var(--text-primary);
   --font-sans: var(--font-inter);
   --font-serif: var(--font-pt-serif);
-  --font-accent: var(--font-bitter);
+  --font-accent: var(--font-eb-garamond);
 
   --color-brand-green: #083630;
   --color-brand-green-light: #1f514a;
@@ -43,7 +43,7 @@
   --theme-ink: #111111;
   --theme-font-heading: var(--font-pt-serif), Georgia, serif;
   --theme-font-body: var(--font-inter), system-ui, sans-serif;
-  --theme-font-accent: var(--font-bitter), Georgia, serif;
+  --theme-font-accent: var(--font-eb-garamond), Georgia, serif;
 }
 
 html {
@@ -371,27 +371,12 @@ h1, h2, h3 {
     0 0 48px -4px rgba(251, 77, 23, 0.45);
 }
 
-/* Theme transition crossfade */
-.theme-transitioning,
-.theme-transitioning *,
-.theme-transitioning *::before,
-.theme-transitioning *::after {
-  transition: color 0.4s ease, background-color 0.4s ease, background 0.4s ease,
-              border-color 0.4s ease, fill 0.4s ease, stroke 0.4s ease !important;
-}
-
 @media (prefers-reduced-motion: reduce) {
   .final-glow--warm, .final-glow--cool { animation: none; }
   .studio-fade { animation: none !important; opacity: 1 !important; transform: none !important; }
   .studio-card:hover { transform: none; }
   .studio-btn:hover, .studio-btn:active { transform: none; }
   .animate-ping { animation: none; }
-  .theme-transitioning,
-  .theme-transitioning *,
-  .theme-transitioning *::before,
-  .theme-transitioning *::after {
-    transition: none !important;
-  }
 }
 
 /* === Scroll-reveal (consumed by <Reveal>) === */
