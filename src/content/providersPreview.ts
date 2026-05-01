@@ -26,7 +26,7 @@ export const providersPreview: ProviderPreview[] = [
   {
     id: "tk",
     name: "Dr. Timothy Kelliher, MD",
-    role: "Neurologist",
+    role: "Founding Neurologist",
     bio:
       "Board-certified neurologist with EMG and peripheral nerve fellowship training at Mass General. Sees patients on Boston’s North Shore.",
     initials: "TK",
@@ -36,7 +36,7 @@ export const providersPreview: ProviderPreview[] = [
   {
     id: "nr",
     name: "Dr. Naveen Reddy, MD",
-    role: "Memory Specialist",
+    role: "Clinical Director",
     bio:
       "Neurologist and implementation scientist focused on Alzheimer’s diagnostics and anti-amyloid therapies. Trained at UC San Diego and UCSF.",
     initials: "NR",
