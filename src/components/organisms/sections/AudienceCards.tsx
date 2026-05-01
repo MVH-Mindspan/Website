@@ -12,6 +12,7 @@ import { ArrowIcon } from "@/components/atoms/ArrowIcon";
 import { BulletList } from "@/components/molecules/BulletList";
 import { Reveal } from "@/components/molecules/Reveal";
 import { SectionHeader } from "@/components/molecules/SectionHeader";
+import { externalLinkProps } from "@/lib/links";
 import type { Audience } from "@/content/audiences";
 
 export function AudienceCards({
@@ -80,7 +81,7 @@ export function AudienceCards({
                 animationDelay: `${i * 80}ms`,
               }}
             >
-              <a href={a.href} className="flex flex-col flex-1">
+              <a href={a.href} {...externalLinkProps(a.href)} className="flex flex-col flex-1">
                 <Eyebrow color={c.accentText}>{a.kicker}</Eyebrow>
                 <Heading
                   as="h3"
