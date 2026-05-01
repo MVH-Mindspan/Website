@@ -1,10 +1,16 @@
 "use client";
 
+/* eslint-disable @next/next/no-img-element */
 import { useTheme } from "@/lib/theme-context";
 import { alpha } from "@/lib/themes";
 import { type as typeScale } from "@/lib/tokens";
 import { Container } from "@/components/atoms/Container";
+import { Heading } from "@/components/atoms/Heading";
+import { Eyebrow } from "@/components/atoms/Eyebrow";
+import { Lead } from "@/components/atoms/Lead";
+import { Button } from "@/components/atoms/Button";
 import { ArrowIcon } from "@/components/atoms/ArrowIcon";
+import { ImageFrame } from "@/components/atoms/ImageFrame";
 import { Reveal } from "@/components/molecules/Reveal";
 import { SectionHeader } from "@/components/molecules/SectionHeader";
 import type { Location } from "@/content/locations";
@@ -42,7 +48,7 @@ export function LocationCards({
         )}
 
         {groupByKind ? (
-          <div className={intro ? "mt-14 flex flex-col gap-14" : "flex flex-col gap-14"}>
+          <div className={intro ? "mt-14 flex flex-col gap-16" : "flex flex-col gap-16"}>
             {inPerson.length > 0 && (
               <LocationGroup heading="In-person clinics" locations={inPerson} />
             )}
@@ -52,10 +58,10 @@ export function LocationCards({
           </div>
         ) : (
           <div
-            className={`grid sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6${intro ? " mt-14" : ""}`}
+            className={`grid sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12${intro ? " mt-14" : ""}`}
           >
             {locations.map((l, i) => (
-              <LocationCard key={l.city + l.state} location={l} index={i} />
+              <LocationCard key={l.slug} location={l} index={i} />
             ))}
           </div>
         )}
@@ -78,7 +84,7 @@ function LocationGroup({
   return (
     <div>
       <h3
-        className="mb-6"
+        className="mb-8"
         style={{
           fontFamily: theme.fonts.body,
           fontSize: typeScale.bodySm,
@@ -90,9 +96,9 @@ function LocationGroup({
       >
         {heading}
       </h3>
-      <div className={`grid sm:grid-cols-2 ${cols} gap-5 md:gap-6`}>
+      <div className={`grid sm:grid-cols-2 ${cols} gap-x-8 gap-y-12`}>
         {locations.map((l, i) => (
-          <LocationCard key={l.city + l.state} location={l} index={i} />
+          <LocationCard key={l.slug} location={l} index={i} />
         ))}
       </div>
     </div>
@@ -108,113 +114,54 @@ function LocationCard({
 }) {
   const { theme } = useTheme();
   const c = theme.colors;
-  const hasMap = Boolean(l.bbox && l.marker);
-  const mapSrc = hasMap
-    ? `https://www.openstreetmap.org/export/embed.html?bbox=${l.bbox}&layer=mapnik&marker=${l.marker}`
-    : null;
-  const isVideo = l.kind === "video";
 
   return (
     <Reveal
-      className="group relative overflow-hidden rounded-[2rem] flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_48px_-12px_rgba(0,0,0,0.4)]"
-      style={{
-        background: c.primary,
-        animationDelay: `${i * 80}ms`,
-      }}
+      className="group flex flex-col"
+      style={{ animationDelay: `${i * 80}ms` }}
     >
-      <a href={l.href} className="flex flex-col flex-1">
-        <div
-          className="relative overflow-hidden h-40 rounded-t-[2rem]"
-          style={{ background: c.primaryLight }}
+      {l.image && (
+        <ImageFrame radius="1.5rem">
+          <img
+            src={l.image}
+            alt={l.imageAlt ?? ""}
+            className="block w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+            style={{ aspectRatio: "16 / 10" }}
+            loading="lazy"
+          />
+        </ImageFrame>
+      )}
+      <div className={`flex flex-col flex-1${l.image ? " mt-6" : ""}`}>
+        <Eyebrow color={c.accentText}>{l.eyebrow}</Eyebrow>
+        <Heading
+          as="h4"
+          variant="h4"
+          color={c.ink}
+          fontFamily={theme.fonts.heading}
+          className="mt-3"
+          style={{ letterSpacing: "-0.01em" }}
         >
-          {mapSrc ? (
-            <iframe
-              src={mapSrc}
-              className="absolute left-0 right-0 top-0 w-full border-0 pointer-events-none transition-transform duration-500 group-hover:scale-[1.05]"
-              style={{
-                height: "calc(100% + 60px)",
-                borderTopLeftRadius: "2rem",
-                borderTopRightRadius: "2rem",
-              }}
-              loading="lazy"
-              title={`Map of ${l.city}, ${l.state}`}
-              aria-hidden="true"
-            />
-          ) : (
-            <div
-              aria-hidden="true"
-              className="absolute inset-0"
-              style={{
-                background: `linear-gradient(135deg, ${alpha(
-                  c.primaryLight,
-                  1
-                )} 0%, ${alpha(c.primary, 1)} 100%)`,
-              }}
-            />
-          )}
-          {isVideo && (
-            <div className="absolute inset-0 flex items-center justify-center">
-              <span
-                className="rounded-full px-4 py-2 font-semibold"
-                style={{
-                  background: c.sky,
-                  color: c.brandGreen,
-                  fontSize: typeScale.bodySm,
-                }}
-              >
-                Video visits, {l.state}
-              </span>
-            </div>
-          )}
-          <div
-            className="absolute top-3 start-3 flex items-center gap-2 rounded-full px-3 py-1.5 font-semibold"
-            style={{
-              background: c.brandGreen,
-              color: "#fff",
-              fontSize: typeScale.bodySm,
-            }}
+          {l.headline}
+        </Heading>
+        <Lead
+          size="bodyCard"
+          color={alpha(c.ink, 0.7)}
+          maxWidth="52ch"
+          className="mt-3"
+        >
+          {l.summary}
+        </Lead>
+        <div className="mt-6">
+          <Button
+            href={l.href}
+            variant="ghostDark"
+            size="sm"
+            iconRight={<ArrowIcon />}
           >
-            <span
-              className="h-2 w-2 rounded-full"
-              style={{
-                background: "#22c55e",
-                boxShadow: `0 0 0 3px ${alpha("#22c55e", 0.22)}`,
-                animation: "pulseDot 2.4s ease-in-out infinite",
-              }}
-            />
-            {isVideo ? "Video" : "Open"}
-          </div>
+            {l.ctaLabel}
+          </Button>
         </div>
-        <div className="flex flex-col flex-1 p-6">
-          <h3
-            className="!text-[1.65rem] leading-[1.05]"
-            style={{
-              color: c.cream,
-              fontFamily: theme.fonts.heading,
-              letterSpacing: "-0.02em",
-            }}
-          >
-            {l.city}
-          </h3>
-          <p
-            className="mt-2"
-            style={{
-              color: alpha(c.cream, 0.85),
-              fontSize: typeScale.body,
-              fontWeight: 500,
-            }}
-          >
-            {l.state}
-          </p>
-          <p
-            className="mt-5 font-semibold flex items-center gap-2 group-hover:gap-3 transition-all"
-            style={{ color: "#bdd8f5", fontSize: typeScale.body }}
-          >
-            {isVideo ? "Book a video visit" : "Visit clinic"}{" "}
-            <ArrowIcon />
-          </p>
-        </div>
-      </a>
+      </div>
     </Reveal>
   );
 }
