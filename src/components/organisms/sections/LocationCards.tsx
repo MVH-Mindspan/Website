@@ -117,11 +117,15 @@ function LocationCard({
 
   return (
     <Reveal
-      className="group flex flex-col"
-      style={{ animationDelay: `${i * 80}ms` }}
+      className="group flex flex-col rounded-[2rem] overflow-hidden"
+      style={{
+        background: c.cream,
+        border: `1px solid ${alpha(c.ink, 0.06)}`,
+        animationDelay: `${i * 80}ms`,
+      }}
     >
       {l.image && (
-        <ImageFrame radius="1.5rem">
+        <ImageFrame radius="1.25rem" className="m-3 mb-0">
           <img
             src={l.image}
             alt={l.imageAlt ?? ""}
@@ -131,7 +135,7 @@ function LocationCard({
           />
         </ImageFrame>
       )}
-      <div className={`flex flex-col flex-1${l.image ? " mt-6" : ""}`}>
+      <div className="p-6 md:p-7 flex flex-col flex-1">
         <Eyebrow color={c.accentText}>{l.eyebrow}</Eyebrow>
         <Heading
           as="h4"
@@ -146,12 +150,12 @@ function LocationCard({
         <Lead
           size="bodyCard"
           color={alpha(c.ink, 0.7)}
-          maxWidth="52ch"
+          maxWidth={false}
           className="mt-3"
         >
           {l.summary}
         </Lead>
-        <div className="mt-6">
+        <div className="mt-6 pt-2 mt-auto">
           <Button
             href={l.href}
             variant="ghostDark"
