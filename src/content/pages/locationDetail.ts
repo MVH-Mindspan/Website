@@ -66,6 +66,8 @@ export type LocationDetail = {
     availability?: { text: string; cta: { label: string; href: string } };
     image?: string;
     imageAlt?: string;
+    video?: string;
+    poster?: string;
     primaryCta?: { label: string; href: string };
   };
   services?: {

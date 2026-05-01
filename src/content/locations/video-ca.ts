@@ -13,6 +13,8 @@ export const videoCaliforniaDetail: LocationDetail = {
       text: "Video appointments available this month",
       cta: { label: "Book a video visit", href: BOOKING_HREF },
     },
+    video: "/assets/assist-hero-video.mp4",
+    poster: "/assets/assist-hero-poster.png",
     primaryCta: { label: "Book a video visit", href: BOOKING_HREF },
   },
 
