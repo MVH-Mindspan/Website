@@ -21,11 +21,13 @@ export const footer = {
       ],
     },
     {
-      title: "Clinic locations",
+      title: "Locations",
       links: [
-        { label: "Massachusetts", href: "/locations/danvers-ma" },
-        { label: "California", href: "/locations/san-jose-ca" },
-        { label: "Virtual visits", href: "/book-a-visit" },
+        { label: "Danvers, MA", href: "/locations/danvers" },
+        { label: "Bay Area, CA", href: "/locations/bay-area" },
+        { label: "Irvine, CA", href: "/locations/irvine" },
+        { label: "Video visits, MA", href: "/locations/video-ma" },
+        { label: "Video visits, CA", href: "/locations/video-ca" },
       ],
     },
   ] satisfies FooterColumn[],
