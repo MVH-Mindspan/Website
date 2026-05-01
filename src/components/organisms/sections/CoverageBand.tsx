@@ -143,8 +143,8 @@ export function CoverageBand({ appointments }: { appointments?: Appointments }) 
           .coverage-band-grid {
             display: flex !important;
             flex-direction: column;
-            align-items: stretch;
-            gap: 14px;
+            align-items: stretch !important;
+            gap: 14px !important;
           }
           .coverage-band-divider {
             width: 100% !important;
