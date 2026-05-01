@@ -10,6 +10,7 @@ import { Button } from "@/components/atoms/Button";
 import { ImageFrame } from "@/components/atoms/ImageFrame";
 import { Reveal } from "@/components/molecules/Reveal";
 import { SectionHeader } from "@/components/molecules/SectionHeader";
+import { externalLinkProps } from "@/lib/links";
 import type { JourneyStage } from "@/content/journey";
 
 export function SimpleSteps({
@@ -129,6 +130,7 @@ export function SimpleSteps({
               {step.cta && (
                 <a
                   href={step.cta.href}
+                  {...externalLinkProps(step.cta.href)}
                   className="inline-flex items-center gap-2 font-semibold transition-all hover:-translate-y-0.5 self-start"
                   style={{
                     fontFamily: theme.fonts.body,

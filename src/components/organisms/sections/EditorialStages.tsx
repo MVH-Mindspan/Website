@@ -8,6 +8,7 @@ import { ArrowIcon } from "@/components/atoms/ArrowIcon";
 import { ImageFrame } from "@/components/atoms/ImageFrame";
 import { Reveal } from "@/components/molecules/Reveal";
 import { SectionHeader } from "@/components/molecules/SectionHeader";
+import { externalLinkProps } from "@/lib/links";
 import type { JourneyStage } from "@/content/journey";
 
 export function EditorialStages({
@@ -123,6 +124,7 @@ export function EditorialStages({
               {step.cta && (
                 <a
                   href={step.cta.href}
+                  {...externalLinkProps(step.cta.href)}
                   className="inline-flex items-center gap-2 font-semibold transition-all hover:-translate-y-0.5 mt-6"
                   style={{
                     fontFamily: theme.fonts.body,

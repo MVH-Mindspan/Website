@@ -117,7 +117,7 @@ const howToStart: JourneyStage[] = [
     title: "Sign up in minutes",
     body:
       "Tell us a little about you. The screening opens immediately and our care team is on call if any question feels unclear. There\u2019s no cost and no commitment.",
-    cta: { label: "Start a free screening", href: BOOKING_HREF },
+    cta: { label: "Start a free screening", href: "https://assessment.mindspan.co/" },
   },
   {
     kicker: "Step 02",
@@ -154,7 +154,7 @@ export const howItWorksPage = {
     subTagline: "What to expect",
     subhead:
       "From a free at-home screening to ongoing care guided by a board-certified neurologist, here\u2019s exactly what your Mindspan journey looks like.",
-    cta: { label: "Start a free screening", href: BOOKING_HREF },
+    cta: { label: "Start a free screening", href: "https://assessment.mindspan.co/" },
     playbackRate: 0.9,
   },
 
@@ -174,7 +174,7 @@ export const howItWorksPage = {
       "Every Mindspan patient receives the full standard of neurological care, plus the precision tools and the coordinated team that make a difference at the start of the journey.",
     cta: {
       label: "See if you\u2019d benefit from a screening",
-      href: BOOKING_HREF,
+      href: "https://assessment.mindspan.co/",
     },
   },
 
@@ -218,7 +218,7 @@ export const howItWorksPage = {
     title: "See a specialist in weeks, not months or years.",
     lead:
       "Early answers mean better outcomes, and more time with the people who matter most.",
-    primary: { label: "Start a free screening", href: BOOKING_HREF },
+    primary: { label: "Start a free screening", href: "https://assessment.mindspan.co/" },
     secondary: { label: "Talk to our care team", href: BOOKING_HREF },
   },
 } as const;
