@@ -104,6 +104,7 @@ export default async function LocationDetailPage({ params }: Params) {
           intro={detail.guide.intro}
           core={detail.guide.core}
           edge={detail.guide.edge}
+          cta={detail.guide.cta}
           footnote={detail.guide.footnote}
         />
       )}

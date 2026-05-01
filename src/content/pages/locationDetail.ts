@@ -83,6 +83,7 @@ export type LocationDetail = {
     };
     core: Protocol;
     edge: Protocol;
+    cta?: { label: string; href: string };
     footnote?: string;
   };
   finalCta?: {
