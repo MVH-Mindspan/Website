@@ -27,6 +27,7 @@ export {
 export {
   providersPreview,
   providersPreviewIntro,
+  providersPreviewClinicianIntro,
   type ProviderPreview,
 } from "./providersPreview";
 export { testimonials, testimonialsIntro, type Testimonial } from "./testimonials";

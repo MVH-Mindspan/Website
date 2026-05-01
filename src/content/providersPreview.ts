@@ -4,6 +4,8 @@ export type ProviderPreview = {
   role: string;
   bio: string;
   initials: string;
+  image?: string;
+  imageAlt?: string;
 };
 
 export const providersPreviewIntro = {
@@ -13,26 +15,42 @@ export const providersPreviewIntro = {
     "Every visit is with a specialist, not a triage line. You will know exactly who you are seeing before you walk in.",
 } as const;
 
+export const providersPreviewClinicianIntro = {
+  eyebrow: "Meet our clinicians",
+  title: "Specialists who own the dementia work-up.",
+  lead:
+    "Board-certified neurologists with subspecialty depth in memory and cognitive care. Your patient sees the same clinician across visits, with a structured note back to your chart after every encounter.",
+} as const;
+
 export const providersPreview: ProviderPreview[] = [
   {
-    id: "kl",
-    name: "Dr. Karen Li, MD",
-    role: "Behavioral Neurologist",
-    bio: "Fellowship-trained in cognitive disorders. Sees patients in Newton.",
-    initials: "KL",
-  },
-  {
-    id: "mw",
-    name: "Dr. Marcus Weiss, MD",
+    id: "tk",
+    name: "Dr. Timothy Kelliher, MD",
     role: "Neurologist",
-    bio: "Focused on early detection and longitudinal care for families.",
-    initials: "MW",
+    bio:
+      "Board-certified neurologist with EMG and peripheral nerve fellowship training at Mass General. Sees patients on Boston’s North Shore.",
+    initials: "TK",
+    image: "/assets/tim-kelliher.webp",
+    imageAlt: "Dr. Timothy Kelliher, MD",
   },
   {
-    id: "sc",
-    name: "Dr. Sofia Chen, MD, PhD",
+    id: "nr",
+    name: "Dr. Naveen Reddy, MD",
     role: "Memory Specialist",
-    bio: "Works with caregivers alongside patients. Sees patients by video and in Palo Alto.",
-    initials: "SC",
+    bio:
+      "Neurologist and implementation scientist focused on Alzheimer’s diagnostics and anti-amyloid therapies. Trained at UC San Diego and UCSF.",
+    initials: "NR",
+    image: "/assets/naveen-reddy.webp",
+    imageAlt: "Dr. Naveen Reddy, MD",
+  },
+  {
+    id: "ns",
+    name: "Dr. Noor Sachdev, MD",
+    role: "Lead Neurologist",
+    bio:
+      "Board-certified in neurology and vascular neurology. Columbia-trained in clinical neurophysiology. Sees patients in San Jose.",
+    initials: "NS",
+    image: "/assets/noor-sachdev.webp",
+    imageAlt: "Dr. Noor Sachdev, MD",
   },
 ];
