@@ -94,6 +94,7 @@ export function CoverageBand({ appointments }: { appointments?: Appointments }) 
               onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
             >
               <span
+                className="coverage-band-appointment-line"
                 style={{
                   color: c.ink,
                   fontWeight: 500,
@@ -117,6 +118,7 @@ export function CoverageBand({ appointments }: { appointments?: Appointments }) 
                 {appointments.primary}
               </span>
               <span
+                className="coverage-band-book"
                 style={{
                   background: c.brandGreen,
                   color: c.cream,
@@ -138,18 +140,33 @@ export function CoverageBand({ appointments }: { appointments?: Appointments }) 
       <style jsx>{`
         @media (max-width: 900px) {
           .coverage-band-grid {
-            grid-template-columns: 1fr !important;
-            text-align: center;
+            display: flex !important;
+            flex-direction: column;
+            align-items: stretch;
+            gap: 14px;
           }
           .coverage-band-divider {
-            display: none;
+            width: 100% !important;
+            height: 1px !important;
+            background: ${alpha(c.ink, 0.1)} !important;
           }
           .coverage-band-coverage {
-            justify-content: center !important;
+            justify-content: flex-start !important;
           }
           .coverage-band-appointments {
-            justify-content: center !important;
+            display: flex !important;
+            align-items: center;
+            gap: 12px;
+            justify-content: space-between !important;
             flex-wrap: wrap;
+          }
+          .coverage-band-appointment-line {
+            flex: 1 1 0 !important;
+            min-width: 0 !important;
+          }
+          .coverage-band-book {
+            padding: 10px 20px !important;
+            min-height: 40px;
           }
         }
       `}</style>
