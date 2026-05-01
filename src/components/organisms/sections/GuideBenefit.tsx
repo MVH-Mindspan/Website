@@ -36,9 +36,8 @@ export function GuideBenefit({
     <section style={{ background: c.cream, padding: "80px 0" }}>
       <Container>
         <Reveal
-          className="mx-auto rounded-[2rem]"
+          className="rounded-[2rem]"
           style={{
-            maxWidth: 1040,
             background: c.sand,
             border: `1px solid ${alpha(c.ink, 0.08)}`,
             padding: "clamp(32px, 5vw, 56px)",
