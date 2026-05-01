@@ -5,6 +5,7 @@ import type { ReactNode } from "react";
 import { useTheme } from "@/lib/theme-context";
 import { alpha } from "@/lib/themes";
 import { type as typeScale } from "@/lib/tokens";
+import { useHeroVideo } from "@/lib/use-hero-video";
 import { Container } from "@/components/atoms/Container";
 import { Eyebrow } from "@/components/atoms/Eyebrow";
 import { Heading } from "@/components/atoms/Heading";
@@ -20,6 +21,9 @@ type HeroProps = {
   availability?: { text: string; cta: { label: string; href: string } };
   image?: string;
   imageAlt?: string;
+  video?: string;
+  poster?: string;
+  playbackRate?: number;
   children?: ReactNode;
   subTagline?: string;
   subhead?: string;
@@ -28,7 +32,11 @@ type HeroProps = {
 };
 
 export function PageHero(props: HeroProps) {
-  return props.image ? <ImageHero {...props} /> : <EditorialHero {...props} />;
+  return props.video || props.image ? (
+    <MediaHero {...props} />
+  ) : (
+    <EditorialHero {...props} />
+  );
 }
 
 function EditorialHero({
@@ -79,7 +87,7 @@ function EditorialHero({
   );
 }
 
-function ImageHero({
+function MediaHero({
   eyebrow,
   title,
   lead,
@@ -87,6 +95,9 @@ function ImageHero({
   availability,
   image,
   imageAlt,
+  video,
+  poster,
+  playbackRate = 1,
   children,
   subTagline,
   subhead,
@@ -97,6 +108,8 @@ function ImageHero({
   const c = theme.colors;
   const hasAside =
     Boolean(subTagline) || Boolean(subhead) || Boolean(primaryCta) || Boolean(secondaryCta);
+  const { videoRef, showVideo } = useHeroVideo({ playbackRate });
+  const fallbackImage = poster ?? image;
 
   return (
     <section
@@ -107,14 +120,30 @@ function ImageHero({
         color: c.cream,
       }}
     >
-      <img
-        src={image}
-        alt={imageAlt ?? title}
-        className="absolute inset-0 w-full h-full object-cover"
-        style={{ display: "block" }}
-        loading="eager"
-        fetchPriority="high"
-      />
+      {video && showVideo ? (
+        // eslint-disable-next-line jsx-a11y/media-has-caption
+        <video
+          ref={videoRef}
+          className="absolute inset-0 w-full h-full object-cover"
+          autoPlay
+          muted
+          playsInline
+          poster={poster}
+          preload="none"
+          aria-hidden
+        >
+          <source src={video} type="video/mp4" />
+        </video>
+      ) : fallbackImage ? (
+        <img
+          src={fallbackImage}
+          alt={imageAlt ?? title}
+          className="absolute inset-0 w-full h-full object-cover"
+          style={{ display: "block" }}
+          loading="eager"
+          fetchPriority="high"
+        />
+      ) : null}
 
       {/* Base darken for overall contrast */}
       <div

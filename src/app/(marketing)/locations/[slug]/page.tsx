@@ -50,6 +50,8 @@ export default async function LocationDetailPage({ params }: Params) {
         availability={detail.hero.availability}
         image={detail.hero.image}
         imageAlt={detail.hero.imageAlt}
+        video={detail.hero.video}
+        poster={detail.hero.poster}
       >
         {detail.hero.primaryCta && (
           <Button

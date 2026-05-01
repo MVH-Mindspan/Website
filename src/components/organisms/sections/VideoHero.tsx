@@ -1,10 +1,11 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useTheme } from "@/lib/theme-context";
 import { alpha } from "@/lib/themes";
 import { ease, type as typeScale } from "@/lib/tokens";
 import { externalLinkProps } from "@/lib/links";
+import { useHeroVideo } from "@/lib/use-hero-video";
 import { brand } from "@/content/brand";
 
 export function VideoHero({
@@ -27,75 +28,12 @@ export function VideoHero({
   const { theme } = useTheme();
   const c = theme.colors;
   const [loaded, setLoaded] = useState(false);
-  const [showVideo, setShowVideo] = useState(false);
-  const [ended, setEnded] = useState(false);
-  const videoRef = useRef<HTMLVideoElement>(null);
+  const { videoRef, showVideo, ended } = useHeroVideo({ playbackRate });
 
   useEffect(() => {
     const timer = setTimeout(() => setLoaded(true), 200);
     return () => clearTimeout(timer);
   }, []);
-
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const reducedData = (
-      window.matchMedia("(prefers-reduced-data: reduce)") as MediaQueryList | undefined
-    )?.matches;
-    const slow = (navigator as Navigator & { connection?: { saveData?: boolean; effectiveType?: string } })
-      .connection;
-    const isSlow = slow?.saveData === true || slow?.effectiveType === "slow-2g" || slow?.effectiveType === "2g";
-    if (reducedMotion || reducedData || isSlow) return;
-    const idle = (window as Window & { requestIdleCallback?: (cb: () => void) => number })
-      .requestIdleCallback ?? ((cb: () => void) => window.setTimeout(cb, 1));
-    const handle = idle(() => setShowVideo(true));
-    return () => {
-      const cancel = (window as Window & { cancelIdleCallback?: (h: number) => void })
-        .cancelIdleCallback;
-      if (cancel) cancel(handle as number);
-    };
-  }, []);
-
-  useEffect(() => {
-    if (!showVideo) return;
-    const v = videoRef.current;
-    if (!v) return;
-
-    // Velocity ease-out: ramp playbackRate down over the final ~1.4s
-    // so the clip glides toward a stop rather than slamming into one.
-    // Floor is 0.5x — below that, individual frames start showing.
-    const RAMP_DURATION = 1.4;
-    const MIN_RATE = 0.5;
-    const baseRate = playbackRate;
-
-    const applyBaseRate = () => {
-      v.playbackRate = baseRate;
-    };
-
-    const handleTimeUpdate = () => {
-      const dur = v.duration;
-      if (!isFinite(dur) || dur <= 0) return;
-      const remaining = dur - v.currentTime;
-      if (remaining > RAMP_DURATION || remaining <= 0) return;
-      const t = 1 - remaining / RAMP_DURATION; // 0 → 1 across the ramp
-      const eased = t * t; // ease-in quad: gentle, then graceful arrival
-      const next = baseRate - (baseRate - MIN_RATE) * eased;
-      v.playbackRate = Math.max(MIN_RATE, next);
-    };
-
-    const handleEnded = () => setEnded(true);
-
-    v.addEventListener("loadedmetadata", applyBaseRate);
-    v.addEventListener("timeupdate", handleTimeUpdate);
-    v.addEventListener("ended", handleEnded);
-    if (v.readyState >= 1) applyBaseRate();
-
-    return () => {
-      v.removeEventListener("loadedmetadata", applyBaseRate);
-      v.removeEventListener("timeupdate", handleTimeUpdate);
-      v.removeEventListener("ended", handleEnded);
-    };
-  }, [showVideo, playbackRate]);
 
   return (
     <section
