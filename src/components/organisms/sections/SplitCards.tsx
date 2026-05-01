@@ -125,10 +125,10 @@ export function SplitCards({
                 }}
               />
               <div className="relative">
-                <IconBadge background={alpha("#bdd8f5", 0.15)} color="#bdd8f5">
+                <IconBadge background={alpha("#A8D2FB", 0.15)} color="#A8D2FB">
                   <SectionIcon name={edge.icon} />
                 </IconBadge>
-                <Eyebrow color="#bdd8f5" className="mt-5">
+                <Eyebrow color="#A8D2FB" className="mt-5">
                   {edge.eyebrow}
                 </Eyebrow>
                 <Heading
@@ -148,7 +148,7 @@ export function SplitCards({
                 </Lead>
                 <BulletList
                   items={edge.bullets}
-                  bulletColor="#bdd8f5"
+                  bulletColor="#A8D2FB"
                   className="mt-8 text-base text-white/85"
                 />
               </div>

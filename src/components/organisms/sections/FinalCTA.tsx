@@ -55,7 +55,7 @@ export function FinalCTA({
           textAlign: "center",
         }}
       >
-        <Eyebrow color="#bdd8f5">{eyebrow}</Eyebrow>
+        <Eyebrow color="#A8D2FB">{eyebrow}</Eyebrow>
         <Heading
           as="h2"
           variant="h2"

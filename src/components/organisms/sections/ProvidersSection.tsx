@@ -38,7 +38,7 @@ function ProviderBlock({ card }: { card: ProviderCard }) {
         />
       )}
       <div className="relative">
-        <Eyebrow color={dark ? "#bdd8f5" : c.accentText}>{card.eyebrow}</Eyebrow>
+        <Eyebrow color={dark ? "#A8D2FB" : c.accentText}>{card.eyebrow}</Eyebrow>
         <Heading
           as="h3"
           variant="h4"
@@ -58,7 +58,7 @@ function ProviderBlock({ card }: { card: ProviderCard }) {
         </Lead>
         <BulletList
           items={card.bullets}
-          bulletColor={dark ? "#bdd8f5" : c.accent}
+          bulletColor={dark ? "#A8D2FB" : c.accent}
           color={dark ? undefined : alpha(c.ink, 0.82)}
           className={`mt-8 ${dark ? "text-base text-white/85" : "text-base"}`.trim()}
         />
@@ -69,7 +69,7 @@ function ProviderBlock({ card }: { card: ProviderCard }) {
             style={{
               fontFamily: theme.fonts.body,
               padding: "14px 28px",
-              background: dark ? "#bdd8f5" : c.brandGreen,
+              background: dark ? "#A8D2FB" : c.brandGreen,
               color: dark ? c.brandGreen : "#fff",
               borderRadius: "10rem",
               fontSize: "0.9375rem",
