@@ -105,6 +105,7 @@ export function CoverageBand({ appointments }: { appointments?: Appointments }) 
               >
                 <span
                   aria-hidden="true"
+                  className="coverage-band-dot"
                   style={{
                     width: 8,
                     height: 8,
@@ -163,6 +164,10 @@ export function CoverageBand({ appointments }: { appointments?: Appointments }) 
           .coverage-band-appointment-line {
             flex: 1 1 0 !important;
             min-width: 0 !important;
+            align-items: flex-start !important;
+          }
+          .coverage-band-dot {
+            margin-top: 5px;
           }
           .coverage-band-book {
             padding: 10px 20px !important;
