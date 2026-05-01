@@ -15,6 +15,7 @@ import { SectionHeader } from "@/components/molecules/SectionHeader";
 import { IconBadge } from "@/components/atoms/IconBadge";
 import { Button } from "@/components/atoms/Button";
 import { ArrowIcon } from "@/components/atoms/ArrowIcon";
+import { externalLinkProps } from "@/lib/links";
 import type { Protocol } from "@/content/protocols";
 import { SectionIcon } from "./icons";
 
@@ -170,6 +171,7 @@ export function SplitCards({
               <div className="mt-6">
                 <Button
                   href={cta.href}
+                  {...externalLinkProps(cta.href)}
                   variant="primary"
                   size="lg"
                   iconRight={<ArrowIcon />}

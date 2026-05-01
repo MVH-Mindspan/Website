@@ -7,7 +7,6 @@ import { type as typeScale } from "@/lib/tokens";
 import { Container } from "@/components/atoms/Container";
 import { Eyebrow } from "@/components/atoms/Eyebrow";
 import { Heading } from "@/components/atoms/Heading";
-import { ImageFrame } from "@/components/atoms/ImageFrame";
 import { Lead } from "@/components/atoms/Lead";
 import { Button } from "@/components/atoms/Button";
 import { ArrowIcon } from "@/components/atoms/ArrowIcon";
@@ -24,15 +23,17 @@ export function ProviderProfile(props: ProviderProfileType) {
       <Container>
         <div className="grid lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] gap-10 md:gap-14 items-start">
           <Reveal>
-            <ImageFrame>
-              <img
-                src={props.image}
-                alt={props.imageAlt}
-                className="w-full object-cover"
-                style={{ aspectRatio: "1/1", objectPosition: "center top" }}
-                loading="lazy"
-              />
-            </ImageFrame>
+            <img
+              src={props.image}
+              alt={props.imageAlt}
+              className="w-full object-cover"
+              style={{
+                aspectRatio: "1/1",
+                objectPosition: "center top",
+                borderRadius: "1.25rem",
+              }}
+              loading="lazy"
+            />
           </Reveal>
 
           <Reveal>

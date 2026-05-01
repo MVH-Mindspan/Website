@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { useTheme } from "@/lib/theme-context";
 import { alpha } from "@/lib/themes";
 import { ease, type as typeScale } from "@/lib/tokens";
+import { externalLinkProps } from "@/lib/links";
 import { brand } from "@/content/brand";
 
 export function VideoHero({
@@ -205,6 +206,7 @@ export function VideoHero({
             <div className="hero-ctas">
               <a
                 href={cta.href}
+                {...externalLinkProps(cta.href)}
                 className="hero-cta-primary"
                 style={{
                   display: "inline-block",

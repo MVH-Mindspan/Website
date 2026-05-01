@@ -8,6 +8,7 @@ import { Heading } from "@/components/atoms/Heading";
 import { Lead } from "@/components/atoms/Lead";
 import { ArrowIcon } from "@/components/atoms/ArrowIcon";
 import { Reveal } from "@/components/molecules/Reveal";
+import { externalLinkProps } from "@/lib/links";
 
 export function FinalCTA({
   eyebrow,
@@ -79,6 +80,7 @@ export function FinalCTA({
           {secondary && (
             <a
               href={secondary.href}
+              {...externalLinkProps(secondary.href)}
               className="inline-flex items-center gap-2 font-semibold transition-all"
               style={{
                 fontFamily: theme.fonts.body,
@@ -95,6 +97,7 @@ export function FinalCTA({
           )}
           <a
             href={primary.href}
+            {...externalLinkProps(primary.href)}
             className="inline-flex items-center gap-2 font-semibold transition-all hover:-translate-y-0.5 hover:shadow-[0_12px_32px_-8px_rgba(0,0,0,0.4)]"
             style={{
               fontFamily: theme.fonts.body,
