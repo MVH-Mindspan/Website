@@ -58,7 +58,7 @@ export const locations: Location[] = [
     slug: "video-ca",
     city: "Video visits",
     state: "California",
-    href: "/book-a-visit",
+    href: "/locations/video-ca",
     bbox: "-124.41,32.53,-114.13,42.01",
     marker: "37.0,-119.4",
     kind: "video",

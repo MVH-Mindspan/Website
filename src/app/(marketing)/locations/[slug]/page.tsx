@@ -9,6 +9,8 @@ import {
   FeatureCardGrid,
   AudienceCards,
   ProviderProfile,
+  CareTeamGrid,
+  InPersonClinicsBand,
   ClinicContact,
   FinalCTA,
 } from "@/components/organisms/sections";
@@ -88,9 +90,34 @@ export default async function LocationDetailPage({ params }: Params) {
         />
       )}
 
+      {detail.howItWorks && (
+        <FeatureCardGrid
+          id="how-it-works"
+          intro={detail.howItWorks.intro}
+          cards={detail.howItWorks.cards}
+          columns={4}
+          rounded={false}
+          tone="sand"
+        />
+      )}
+
       {detail.provider && <ProviderProfile {...detail.provider} />}
 
+      {detail.careTeam && (
+        <CareTeamGrid
+          intro={detail.careTeam.intro}
+          providers={detail.careTeam.providers}
+        />
+      )}
+
       {detail.contact && <ClinicContact {...detail.contact} />}
+
+      {detail.inPersonClinics && (
+        <InPersonClinicsBand
+          intro={detail.inPersonClinics.intro}
+          clinics={detail.inPersonClinics.clinics}
+        />
+      )}
 
       {detail.audiences && (
         <AudienceCards

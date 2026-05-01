@@ -7,6 +7,8 @@ import type { Protocol } from "../protocols";
 import { bayAreaDetail } from "../locations/bay-area";
 import { danversDetail } from "../locations/danvers";
 import { irvineDetail } from "../locations/irvine";
+import { videoMassachusettsDetail } from "../locations/video-ma";
+import { videoCaliforniaDetail } from "../locations/video-ca";
 
 export type ClinicContact = {
   address: string;
@@ -32,6 +34,26 @@ export type ProviderProfile = {
   certifications: readonly string[];
   affiliations: string;
   availability: string;
+  cta: { label: string; href: string };
+};
+
+export type CareTeamMember = {
+  name: string;
+  role: string;
+  image: string;
+  imageAlt: string;
+  specialties: readonly string[];
+  cta: { label: string; href: string };
+  profileHref?: string;
+};
+
+export type ClinicPromotion = {
+  city: string;
+  state: string;
+  address: string;
+  image: string;
+  imageAlt: string;
+  blurb: string;
   cta: { label: string; href: string };
 };
 
@@ -69,6 +91,18 @@ export type LocationDetail = {
   };
   provider?: ProviderProfile;
   contact?: ClinicContact;
+  howItWorks?: {
+    intro: { eyebrow: string; title: string; lead: string };
+    cards: readonly TechCard[];
+  };
+  careTeam?: {
+    intro: { eyebrow: string; title: string; lead: string };
+    providers: readonly CareTeamMember[];
+  };
+  inPersonClinics?: {
+    intro: { eyebrow: string; title: string; lead: string };
+    clinics: readonly ClinicPromotion[];
+  };
   audiences?: {
     intro: { eyebrow: string; title: string; lead: string };
     items: readonly Audience[];
@@ -97,16 +131,10 @@ export type LocationDetail = {
 
 const detailMap: Record<string, LocationDetail> = {
   danvers: danversDetail,
-  "video-ma": {
-    hero: {
-      eyebrow: "Video visits, Massachusetts",
-      title: "See your neurologist from home, anywhere in Massachusetts.",
-      lead:
-        "On your phone, tablet, or computer, no driving, no waiting room. Same neurologists, same unhurried visits, from wherever you're most comfortable.",
-    },
-  },
+  "video-ma": videoMassachusettsDetail,
   irvine: irvineDetail,
   "bay-area": bayAreaDetail,
+  "video-ca": videoCaliforniaDetail,
 };
 
 export function getLocationPage(location: Location) {

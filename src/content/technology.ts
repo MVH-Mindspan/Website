@@ -3,7 +3,16 @@ export type TechCard = {
   eyebrow: string;
   title: string;
   body: string;
-  icon: "brain" | "grid" | "chat" | "bullseye" | "shield";
+  icon:
+    | "brain"
+    | "grid"
+    | "chat"
+    | "bullseye"
+    | "shield"
+    | "calendar"
+    | "home"
+    | "video"
+    | "refresh";
 };
 
 export const technologyIntro = {

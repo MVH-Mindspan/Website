@@ -17,6 +17,8 @@ export { AudienceCards } from "./AudienceCards";
 export { LocationCards } from "./LocationCards";
 export { ProvidersSection } from "./ProvidersSection";
 export { ProviderProfile } from "./ProviderProfile";
+export { CareTeamGrid } from "./CareTeamGrid";
+export { InPersonClinicsBand } from "./InPersonClinicsBand";
 export { ClinicContact } from "./ClinicContact";
 export { FinalCTA } from "./FinalCTA";
 export { Testimonials } from "./Testimonials";
