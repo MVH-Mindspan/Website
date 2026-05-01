@@ -1,8 +1,6 @@
 import { buildMetadata } from "@/lib/seo";
 import type { FAQItem } from "../faq";
 
-const BOOKING_HREF = "/book-a-visit";
-
 export const guidePage = {
   metadata: buildMetadata({
     title: "The GUIDE Program | Mindspan",
@@ -139,7 +137,7 @@ export const guidePage = {
   howEnrollmentSteps: [
     {
       kicker: "Step 01",
-      title: "Book a visit or call us",
+      title: "Call us",
       body:
         "Start the same way any new patient does. We do not ask about GUIDE up front, we focus on the medical situation first.",
     },
@@ -213,8 +211,7 @@ export const guidePage = {
     title: "Start with a conversation. We will figure out what applies.",
     lead:
       "You do not need to know whether you qualify for GUIDE before you reach out. Come talk to us, we sort out coverage, eligibility, and next steps together.",
-    primary: { label: "Book a visit", href: BOOKING_HREF },
-    secondary: { label: "Talk to us", href: "tel:+16174209000" },
+    primary: { label: "Talk to us: (617) 420-9000", href: "tel:+16174209000" },
     signature: "With care, the Mindspan team",
   },
 } as const;
