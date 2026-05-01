@@ -73,7 +73,7 @@ export function FeatureCardGrid({
           title={intro.title}
           lead={intro.lead}
           tone={isSand ? "dark" : "light"}
-          eyebrowColor={isSand ? undefined : "#bdd8f5"}
+          eyebrowColor={isSand ? undefined : "#A8D2FB"}
         />
 
         <div className={`mt-12 grid ${gridColsClass} gap-5 md:gap-6`}>
