@@ -15,7 +15,7 @@ export const irvineDetail: LocationDetail = {
       text: "Appointments available this month",
       cta: { label: "Book now", href: BOOKING_HREF },
     },
-    image: "/assets/bay-area-clinic.webp",
+    image: "/assets/irvine-clinic.webp",
     imageAlt: "Mindspan Irvine clinic in Orange County, California",
     primaryCta: { label: "Book a visit at our Irvine clinic", href: BOOKING_HREF },
   },
