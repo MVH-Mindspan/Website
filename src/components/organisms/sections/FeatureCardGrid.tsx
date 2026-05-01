@@ -131,7 +131,11 @@ export function FeatureCardGrid({
               </Button>
             )}
             {secondary && (
-              <Button href={secondary.href} variant="ghostLight" size="lg">
+              <Button
+                href={secondary.href}
+                variant={isSand ? "ghostDark" : "ghostLight"}
+                size="lg"
+              >
                 {secondary.label}
               </Button>
             )}
