@@ -22,9 +22,29 @@ function jsonResponse(body: unknown, init: ResponseInit = {}): Response {
   });
 }
 
+const POSTHOG_API_HOST = "https://us.i.posthog.com";
+const POSTHOG_ASSETS_HOST = "https://us-assets.i.posthog.com";
+
+async function proxyPostHog(request: Request, url: URL): Promise<Response> {
+  const isStatic = url.pathname.startsWith("/ingest/static/");
+  const targetBase = isStatic ? POSTHOG_ASSETS_HOST : POSTHOG_API_HOST;
+  const targetPath = isStatic
+    ? url.pathname.replace("/ingest/static/", "/static/")
+    : url.pathname.replace(/^\/ingest/, "");
+  const target = `${targetBase}${targetPath}${url.search}`;
+
+  const upstream = new Request(target, request);
+  upstream.headers.delete("cookie");
+  return fetch(upstream);
+}
+
 export default {
   async fetch(request: Request, env: Env): Promise<Response> {
     const url = new URL(request.url);
+
+    if (url.pathname.startsWith("/ingest/")) {
+      return proxyPostHog(request, url);
+    }
 
     if (url.pathname === "/api/book" || url.pathname === "/api/waitlist") {
       if (request.method === "OPTIONS") {
