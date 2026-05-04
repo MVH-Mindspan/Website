@@ -21,10 +21,25 @@ const staggerContainer: Variants = {
 type FormData = {
   state: "MA" | "CA" | "Other" | "";
   careOption: string;
+  bookingFor: "self" | "loved-one" | "";
   firstName: string;
   lastName: string;
   email: string;
   phone: string;
+  patientFirstName: string;
+  patientLastName: string;
+  relationship: string;
+};
+
+const RELATIONSHIP_LABELS: Record<string, string> = {
+  "spouse-partner": "Spouse or partner",
+  parent: "Parent",
+  "adult-child": "Adult child",
+  sibling: "Sibling",
+  "other-family": "Other family member",
+  friend: "Friend",
+  "professional-caregiver": "Professional caregiver",
+  other: "Other",
 };
 
 function formatPhone(digits: string): string {
@@ -194,8 +209,28 @@ export default function StepReview({
           </ReviewSection>
         </motion.div>
 
+        {data.bookingFor === "loved-one" && (
+          <motion.div variants={fadeUp}>
+            <ReviewSection title="Patient" onEdit={onEditDetails}>
+              <dl className="space-y-0.5">
+                <ReviewRow
+                  label="Name"
+                  value={`${data.patientFirstName} ${data.patientLastName}`.trim()}
+                />
+                <ReviewRow
+                  label="Relationship"
+                  value={RELATIONSHIP_LABELS[data.relationship] || data.relationship}
+                />
+              </dl>
+            </ReviewSection>
+          </motion.div>
+        )}
+
         <motion.div variants={fadeUp}>
-          <ReviewSection title="Your details" onEdit={onEditDetails}>
+          <ReviewSection
+            title={data.bookingFor === "loved-one" ? "Your contact info" : "Your details"}
+            onEdit={onEditDetails}
+          >
             <dl className="space-y-0.5">
               <ReviewRow
                 label="Name"

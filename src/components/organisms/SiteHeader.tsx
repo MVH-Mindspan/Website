@@ -178,7 +178,23 @@ export function SiteHeader() {
           })}
         </ul>
 
-        <div className="flex items-center gap-2 md:gap-4">
+        <div className="flex items-center gap-2 md:gap-3">
+          <a
+            href={audienceNav.refer.href}
+            className="hidden md:inline-flex v2-header-refer items-center gap-2 font-medium px-5 py-3"
+            style={{
+              fontFamily: theme.fonts.body,
+              fontSize: typeScale.bodySm,
+              color: c.cream,
+              background: "transparent",
+              border: `1px solid ${alpha(c.cream, 0.32)}`,
+              borderRadius: "10rem",
+              whiteSpace: "nowrap",
+              textDecoration: "none",
+            }}
+          >
+            {audienceNav.refer.label}
+          </a>
           <a
             href={brand.primaryCtaHref}
             onClick={() =>
@@ -440,6 +456,27 @@ export function SiteHeader() {
               </div>
 
               <a
+                href={audienceNav.refer.href}
+                onClick={() => setOpen(false)}
+                style={{
+                  display: "block",
+                  textAlign: "center",
+                  fontFamily: theme.fonts.body,
+                  fontWeight: 500,
+                  fontSize: typeScale.bodySm,
+                  color: c.cream,
+                  background: "transparent",
+                  border: `1px solid ${alpha(c.cream, 0.32)}`,
+                  padding: "13px 24px",
+                  borderRadius: "10rem",
+                  marginTop: 12,
+                  marginInline: 4,
+                  textDecoration: "none",
+                }}
+              >
+                {audienceNav.refer.label}
+              </a>
+              <a
                 href={brand.primaryCtaHref}
                 onClick={() => {
                   track(ANALYTICS_EVENTS.ctaClicked, {
@@ -459,7 +496,7 @@ export function SiteHeader() {
                   background: "#fff",
                   padding: "14px 24px",
                   borderRadius: "10rem",
-                  marginTop: 12,
+                  marginTop: 8,
                   marginInline: 4,
                   textDecoration: "none",
                 }}

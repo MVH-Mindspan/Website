@@ -46,7 +46,11 @@ export default {
       return proxyPostHog(request, url);
     }
 
-    if (url.pathname === "/api/book" || url.pathname === "/api/waitlist") {
+    if (
+      url.pathname === "/api/book" ||
+      url.pathname === "/api/waitlist" ||
+      url.pathname === "/api/refer"
+    ) {
       if (request.method === "OPTIONS") {
         return new Response(null, { status: 204, headers: CORS_HEADERS });
       }
