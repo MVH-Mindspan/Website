@@ -20,8 +20,8 @@ export const journey: JourneyStage[] = [
     body:
       "Start with a short online screening from home, no account, no cost, no clinic visit. You\u2019ll get clear feedback on whether a neurologist visit makes sense.",
     cta: { label: "Start a free assessment", href: "https://assessment.mindspan.co/" },
-    image: "/assets/get-assessed.png",
-    imageAlt: "Hands holding a phone showing the Mindspan online screening",
+    image: "/assets/get-assessed.jpg",
+    imageAlt: "A Mindspan clinician reviewing assessment results on a tablet with a patient",
   },
   {
     kicker: "Who\u2019s in the room?",
@@ -29,8 +29,8 @@ export const journey: JourneyStage[] = [
     body:
       "An unhurried visit, in clinic or by video. Your neurologist goes through your history and where you are today. You\u2019ll leave with real answers.",
     cta: { label: "View our clinic locations", href: "#locations" },
-    image: "/assets/meet-neuro.png",
-    imageAlt: "A Mindspan neurologist consulting with a patient",
+    image: "/assets/meet-neuro.webp",
+    imageAlt: "A Mindspan neurologist consulting with a patient and their partner",
   },
   {
     kicker: "What will we actually do?",
@@ -47,6 +47,6 @@ export const journey: JourneyStage[] = [
     body:
       "Your Mindspan team stays with you by video, by phone, and in clinic. Things change; we adjust. You\u2019re not doing this alone.",
     image: "/assets/ongoing-partnership.png",
-    imageAlt: "A patient and clinician in ongoing conversation over time",
+    imageAlt: "A patient on a video visit with their Mindspan care team",
   },
 ];
