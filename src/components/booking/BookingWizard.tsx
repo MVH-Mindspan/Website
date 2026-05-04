@@ -13,22 +13,32 @@ const EASE = [0.22, 0.61, 0.36, 1] as const;
 const STORAGE_KEY = "mindspan:booking:v1";
 const SUBMIT_TIMEOUT_MS = 15000;
 
+type BookingFor = "self" | "loved-one" | "";
+
 type FormData = {
   state: StateChoice | "";
   careOption: string;
+  bookingFor: BookingFor;
   firstName: string;
   lastName: string;
   email: string;
   phone: string;
+  patientFirstName: string;
+  patientLastName: string;
+  relationship: string;
 };
 
 const initialFormData: FormData = {
   state: "",
   careOption: "",
+  bookingFor: "",
   firstName: "",
   lastName: "",
   email: "",
   phone: "",
+  patientFirstName: "",
+  patientLastName: "",
+  relationship: "",
 };
 
 type StepId = "state" | "waitlist" | "care" | "details" | "review";
@@ -44,12 +54,21 @@ type StepErrors = Record<string, string>;
 
 function validateDetails(data: FormData): StepErrors {
   const errors: StepErrors = {};
+  if (!data.bookingFor) errors.bookingFor = "Please select who this visit is for";
   if (!data.firstName.trim()) errors.firstName = "First name is required";
   if (!data.lastName.trim()) errors.lastName = "Last name is required";
   if (!data.email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email))
     errors.email = "Please enter a valid email";
   if (!data.phone.trim() || data.phone.replace(/\D/g, "").length < 10)
     errors.phone = "Please enter a valid phone number";
+  if (data.bookingFor === "loved-one") {
+    if (!data.patientFirstName.trim())
+      errors.patientFirstName = "Patient's first name is required";
+    if (!data.patientLastName.trim())
+      errors.patientLastName = "Patient's last name is required";
+    if (!data.relationship.trim())
+      errors.relationship = "Please tell us your relationship";
+  }
   return errors;
 }
 
@@ -67,10 +86,14 @@ function hasFormProgress(data: FormData): boolean {
   return Boolean(
     data.state ||
       data.careOption ||
+      data.bookingFor ||
       data.firstName.trim() ||
       data.lastName.trim() ||
       data.email.trim() ||
-      data.phone.trim()
+      data.phone.trim() ||
+      data.patientFirstName.trim() ||
+      data.patientLastName.trim() ||
+      data.relationship.trim()
   );
 }
 
@@ -287,10 +310,16 @@ export default function BookingWizard() {
       {
         state: formData.state,
         careOption: formData.careOption,
+        bookingFor: formData.bookingFor,
         firstName: formData.firstName,
         lastName: formData.lastName,
         email: formData.email,
         phone: formData.phone,
+        ...(formData.bookingFor === "loved-one" && {
+          patientFirstName: formData.patientFirstName,
+          patientLastName: formData.patientLastName,
+          relationship: formData.relationship,
+        }),
       },
       controller.signal
     );
