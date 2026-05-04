@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { PT_Serif, Inter, EB_Garamond, Figtree } from "next/font/google";
 import { ThemeProvider } from "@/lib/theme-context";
+import { PostHogProvider } from "@/components/PostHogProvider";
 import { SITE_URL } from "@/lib/seo";
 import "./globals.css";
 
@@ -46,7 +47,9 @@ export default function RootLayout({
       className={`${ptSerif.variable} ${inter.variable} ${ebGaramond.variable} ${figtree.variable} antialiased`}
     >
       <body>
-        <ThemeProvider>{children}</ThemeProvider>
+        <PostHogProvider>
+          <ThemeProvider>{children}</ThemeProvider>
+        </PostHogProvider>
       </body>
     </html>
   );

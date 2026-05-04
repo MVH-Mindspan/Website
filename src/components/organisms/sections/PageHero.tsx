@@ -12,6 +12,7 @@ import { Heading } from "@/components/atoms/Heading";
 import { Lead } from "@/components/atoms/Lead";
 import { ArrowIcon } from "@/components/atoms/ArrowIcon";
 import { Reveal } from "@/components/molecules/Reveal";
+import { ANALYTICS_EVENTS, track } from "@/lib/analytics";
 
 type HeroProps = {
   eyebrow: string;
@@ -301,6 +302,14 @@ function HeroAside({
           {primaryCta && (
             <a
               href={primaryCta.href}
+              onClick={() =>
+                track(ANALYTICS_EVENTS.ctaClicked, {
+                  location: "page_hero_aside",
+                  variant: "primary",
+                  label: primaryCta.label,
+                  href: primaryCta.href,
+                })
+              }
               className="hero-aside-primary"
               style={{
                 display: "inline-flex",
@@ -325,6 +334,14 @@ function HeroAside({
           {secondaryCta && (
             <a
               href={secondaryCta.href}
+              onClick={() =>
+                track(ANALYTICS_EVENTS.ctaClicked, {
+                  location: "page_hero_aside",
+                  variant: "secondary",
+                  label: secondaryCta.label,
+                  href: secondaryCta.href,
+                })
+              }
               className="hero-aside-secondary"
               style={{
                 display: "inline-flex",
@@ -383,6 +400,13 @@ function AvailabilityPill({
   return (
     <a
       href={availability.cta.href}
+      onClick={() =>
+        track(ANALYTICS_EVENTS.ctaClicked, {
+          location: "page_hero_availability",
+          label: availability.cta.label,
+          href: availability.cta.href,
+        })
+      }
       className="inline-flex items-center gap-3 transition-all hover:-translate-y-0.5"
       style={{
         marginBottom: 24,

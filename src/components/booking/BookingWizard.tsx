@@ -8,6 +8,7 @@ import StepCareOption from "./StepCareOption";
 import StepDetails from "./StepDetails";
 import StepReview from "./StepReview";
 import StepWaitlist from "./StepWaitlist";
+import { ANALYTICS_EVENTS, track } from "@/lib/analytics";
 
 const EASE = [0.22, 0.61, 0.36, 1] as const;
 const STORAGE_KEY = "mindspan:booking:v1";
@@ -131,6 +132,16 @@ export default function BookingWizard() {
   const [submitted, setSubmitted] = useState(false);
   const [submitError, setSubmitError] = useState<string | undefined>(undefined);
   const [hydrated, setHydrated] = useState(false);
+
+  // Fire booking_started once per wizard mount.
+  useEffect(() => {
+    track(ANALYTICS_EVENTS.bookingStarted);
+  }, []);
+
+  // Track each step view (including resumed-from-storage step on hydrate).
+  useEffect(() => {
+    track(ANALYTICS_EVENTS.bookingStepViewed, { step: stepId });
+  }, [stepId]);
 
   // Hydrate from sessionStorage after mount (avoid SSR mismatch).
   useEffect(() => {
@@ -263,8 +274,10 @@ export default function BookingWizard() {
     setSubmitting(false);
     if (result.ok) {
       setSubmitted(true);
+      track(ANALYTICS_EVENTS.waitlistSubmitted, { state: formData.state });
     } else {
       setSubmitError(result.error);
+      track(ANALYTICS_EVENTS.waitlistSubmitFailed, { state: formData.state });
     }
   }, [formData, submitting, submitted]);
 
@@ -298,8 +311,16 @@ export default function BookingWizard() {
     setSubmitting(false);
     if (result.ok) {
       setSubmitted(true);
+      track(ANALYTICS_EVENTS.bookingSubmitted, {
+        state: formData.state,
+        careOption: formData.careOption,
+      });
     } else {
       setSubmitError(result.error);
+      track(ANALYTICS_EVENTS.bookingSubmitFailed, {
+        state: formData.state,
+        careOption: formData.careOption,
+      });
     }
   }, [formData, submitting, submitted]);
 
@@ -335,13 +356,14 @@ export default function BookingWizard() {
         e.preventDefault();
         return;
       }
+      track(ANALYTICS_EVENTS.bookingAbandoned, { step: stepId });
       try {
         sessionStorage.removeItem(STORAGE_KEY);
       } catch {
         // ignore
       }
     },
-    [formData, submitted]
+    [formData, submitted, stepId]
   );
 
   const renderStep = () => {

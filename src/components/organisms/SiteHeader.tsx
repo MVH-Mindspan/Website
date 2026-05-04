@@ -8,6 +8,7 @@ import { alpha } from "@/lib/themes";
 import { ease, type as typeScale } from "@/lib/tokens";
 import { brand } from "@/content/brand";
 import { audienceNav, nav } from "@/content/nav";
+import { ANALYTICS_EVENTS, track } from "@/lib/analytics";
 
 export function SiteHeader() {
   const { theme } = useTheme();
@@ -180,6 +181,13 @@ export function SiteHeader() {
         <div className="flex items-center gap-2 md:gap-4">
           <a
             href={brand.primaryCtaHref}
+            onClick={() =>
+              track(ANALYTICS_EVENTS.ctaClicked, {
+                location: "site_header",
+                variant: "primary",
+                href: brand.primaryCtaHref,
+              })
+            }
             className="v2-header-cta font-semibold px-4 md:px-6 py-2 md:py-3"
             style={{
               fontFamily: theme.fonts.body,
@@ -355,7 +363,14 @@ export function SiteHeader() {
               <div className="flex flex-col">
                 <a
                   href={brand.phoneHref}
-                  onClick={() => setOpen(false)}
+                  onClick={() => {
+                    track(ANALYTICS_EVENTS.ctaClicked, {
+                      location: "site_header_mobile",
+                      variant: "phone",
+                      href: brand.phoneHref,
+                    });
+                    setOpen(false);
+                  }}
                   style={{
                     display: "inline-flex",
                     alignItems: "center",
@@ -426,7 +441,14 @@ export function SiteHeader() {
 
               <a
                 href={brand.primaryCtaHref}
-                onClick={() => setOpen(false)}
+                onClick={() => {
+                  track(ANALYTICS_EVENTS.ctaClicked, {
+                    location: "site_header_mobile",
+                    variant: "primary",
+                    href: brand.primaryCtaHref,
+                  });
+                  setOpen(false);
+                }}
                 style={{
                   display: "block",
                   textAlign: "center",
