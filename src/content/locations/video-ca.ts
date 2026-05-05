@@ -74,7 +74,7 @@ export const videoCaliforniaDetail: LocationDetail = {
         title: "Normal cognition",
         body:
           "No memory or thinking concerns. A baseline video visit makes future comparison straightforward.",
-        image: "/assets/get-assessed.png",
+        image: "/assets/get-assessed.jpg",
       },
       {
         kicker: "Stage 1–2",

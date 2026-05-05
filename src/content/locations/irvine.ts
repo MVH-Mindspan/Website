@@ -76,7 +76,7 @@ export const irvineDetail: LocationDetail = {
         title: "Normal cognition",
         body:
           "No memory or thinking concerns. Regular screening helps establish a baseline for future comparison.",
-        image: "/assets/get-assessed.png",
+        image: "/assets/get-assessed.jpg",
       },
       {
         kicker: "Stage 1–2",
