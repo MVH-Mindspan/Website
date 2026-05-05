@@ -9,27 +9,23 @@ export const providersPage = {
     canonical: "/providers",
   }),
   hero: {
-    eyebrow: "For referring clinicians",
-    title: "Cognitive care without the eighteen-month wait.",
-    availability: {
-      text: "Seeing referrals this month",
-      cta: { label: "Start a referral", href: "/providers/refer" },
-    },
+    eyebrow: "For clinical partners",
+    title: "Specialty cognitive care, with you still in the lead.",
     image: "/assets/providers-hero.webp",
     imageAlt:
       "A Mindspan neurologist in conversation with a patient across a desk in a sunlit consultation room",
-    subTagline: "Refer in under five minutes.",
+    subTagline: "True co-management, not a hand-off.",
     subhead:
-      "In-person clinics in Danvers (MA), Irvine (CA), and San Jose (CA), and video visits across Massachusetts and California. We see your patient in two to three weeks and send a structured note back to your chart.",
-    primaryCta: { label: "Start a referral", href: "/providers/refer" },
-    secondaryCta: { label: "See locations", href: "/locations" },
+      "We absorb the dementia-specific work — assessment, biomarkers, infusion oversight, behavioral support — and send a structured note back to your chart after every visit. Your patient stays your patient.",
+    primaryCta: { label: "See how we partner", href: "#how-we-work" },
+    secondaryCta: { label: "Talk to our team", href: "mailto:clinicians@mindspan.co" },
   },
   finalCta: {
-    eyebrow: "When you are ready",
-    title: "Send us your first referral.",
+    eyebrow: "Let's work together",
+    title: "A quiet specialty partner, ready when you are.",
     lead:
-      "We will reach your patient within forty-eight hours and have them in front of a neurologist in two to three weeks. We will keep you in the loop the whole way.",
-    primary: { label: "Start a referral", href: "/providers/refer" },
+      "We accept your existing referral workflow — Athena, fax, or secure email. Your patient is in front of a neurologist in two to three weeks, and a structured note arrives in your chart days later.",
+    primary: { label: "Refer a patient", href: "/providers/refer" },
     secondary: { label: `Call us: ${brand.phone}`, href: brand.phoneHref },
     signature: "With care, the Mindspan team",
   },
