@@ -16,7 +16,7 @@ export const providersPage = {
       "A Mindspan neurologist in conversation with a patient across a desk in a sunlit consultation room",
     subTagline: "True co-management, not a hand-off.",
     subhead:
-      "We absorb the dementia-specific work — assessment, biomarkers, infusion oversight, behavioral support — and send a structured note back to your chart after every visit. Your patient stays your patient.",
+      "We absorb the dementia-specific work, assessment, biomarkers, infusion oversight, behavioral support, and send a structured note back to your chart after every visit. Your patient stays your patient.",
     primaryCta: { label: "See how we partner", href: "#how-we-work" },
     secondaryCta: { label: "Talk to our team", href: "mailto:clinicians@mindspan.co" },
   },
@@ -24,7 +24,7 @@ export const providersPage = {
     eyebrow: "Let's work together",
     title: "A quiet specialty partner, ready when you are.",
     lead:
-      "We accept your existing referral workflow — Athena, fax, or secure email. Your patient is in front of a neurologist in two to three weeks, and a structured note arrives in your chart days later.",
+      "We accept your existing referral workflow, Athena, fax, or secure email. Your patient is in front of a neurologist in two to three weeks, and a structured note arrives in your chart days later.",
     primary: { label: "Refer a patient", href: "/providers/refer" },
     secondary: { label: `Call us: ${brand.phone}`, href: brand.phoneHref },
     signature: "With care, the Mindspan team",
