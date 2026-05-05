@@ -22,6 +22,7 @@ export {
   coManagementClosing,
   referralPathway,
   referralPathwayIntro,
+  referralPathwayCta,
   type ProviderCard,
 } from "./providers";
 export {

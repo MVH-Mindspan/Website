@@ -107,6 +107,10 @@ export const referralPathwayIntro = {
     "A clean handoff, a fast first visit, and structured follow-up so your office is never left wondering what happened next.",
 } as const;
 
+export const referralPathwayCta = {
+  primary: { label: "Refer a patient", href: "/providers/refer" },
+} as const;
+
 export const referralPathway: JourneyStage[] = [
   {
     kicker: "Step 1",

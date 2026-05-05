@@ -15,6 +15,7 @@ import {
   coManagementClosing,
   referralPathway,
   referralPathwayIntro,
+  referralPathwayCta,
 } from "@/content";
 
 export const metadata = providersPage.metadata;
@@ -32,7 +33,11 @@ export default function ProvidersPage() {
           tone="sand"
         />
       </div>
-      <SimpleSteps intro={referralPathwayIntro} stages={referralPathway} />
+      <SimpleSteps
+        intro={referralPathwayIntro}
+        stages={referralPathway}
+        primary={referralPathwayCta.primary}
+      />
       <ProvidersPreview
         intro={providersPreviewClinicianIntro}
         providers={providersPreview}
