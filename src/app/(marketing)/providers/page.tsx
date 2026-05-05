@@ -15,6 +15,7 @@ import {
   coManagementClosing,
   referralPathway,
   referralPathwayIntro,
+  referralPathwayCta,
 } from "@/content";
 
 export const metadata = providersPage.metadata;
@@ -23,19 +24,24 @@ export default function ProvidersPage() {
   return (
     <>
       <PageHero {...providersPage.hero} />
-      <SplitCards
-        intro={coManagementIntro}
-        core={coManagement.core}
-        edge={coManagement.edge}
-        closing={coManagementClosing}
-        cta={{ label: "Start a referral", href: "/providers/refer" }}
-        tone="sand"
+      <div id="how-we-work">
+        <SplitCards
+          intro={coManagementIntro}
+          core={coManagement.core}
+          edge={coManagement.edge}
+          closing={coManagementClosing}
+          tone="sand"
+        />
+      </div>
+      <SimpleSteps
+        intro={referralPathwayIntro}
+        stages={referralPathway}
+        primary={referralPathwayCta.primary}
       />
-      <SimpleSteps intro={referralPathwayIntro} stages={referralPathway} />
       <ProvidersPreview
         intro={providersPreviewClinicianIntro}
         providers={providersPreview}
-        tone="cream"
+        tone="sand"
       />
       <ProvidersSection
         intro={providersIntro}
