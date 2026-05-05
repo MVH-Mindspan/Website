@@ -11,7 +11,7 @@ const stages: JourneyStage[] = [
     title: "Start at home, at your own pace.",
     body:
       "Our screening tools make it easy to get started in an environment where your loved one feels comfortable. You can help administer initial assessments from home, reducing stress while gathering meaningful information early.",
-    image: "/assets/get-assessed.png",
+    image: "/assets/get-assessed.jpg",
   },
   {
     kicker: "Engage",
