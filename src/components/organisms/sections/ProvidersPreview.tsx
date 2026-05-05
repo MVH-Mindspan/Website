@@ -16,29 +16,49 @@ export function ProvidersPreview({
 }: {
   intro: { eyebrow: string; title: string; lead: string };
   providers: readonly ProviderPreview[];
-  tone?: "sand" | "cream";
+  tone?: "sand" | "cream" | "ink";
 }) {
   const { theme } = useTheme();
   const c = theme.colors;
-  const bg = tone === "cream" ? c.cream : c.sand;
+  const isInk = tone === "ink";
+  const bg = isInk ? "#201E17" : tone === "cream" ? c.cream : c.sand;
+
+  const portraitSize = isInk ? 144 : 96;
+  const nameColor = isInk ? c.cream : c.ink;
+  const bioColor = isInk ? alpha(c.cream, 0.7) : alpha(c.ink, 0.72);
+  const dividerColor = alpha(c.cream, 0.12);
 
   return (
-    <section style={{ background: bg, padding: "96px 0" }}>
+    <section style={{ background: bg, padding: isInk ? "120px 0" : "96px 0" }}>
       <Container>
         <SectionHeader
           eyebrow={intro.eyebrow}
           title={intro.title}
           lead={intro.lead}
+          tone={isInk ? "light" : "dark"}
         />
-        <div className="mt-12 grid md:grid-cols-3 gap-5 md:gap-6">
+        <div
+          className="mt-14 grid md:grid-cols-3 gap-5 md:gap-0"
+          style={isInk ? undefined : undefined}
+        >
           {providers.map((p, i) => (
             <Reveal
               key={p.id}
               as="article"
-              className="rounded-[2rem] p-8 flex flex-col items-center text-center"
+              className={
+                isInk
+                  ? "px-8 py-2 flex flex-col items-center text-center"
+                  : "rounded-[2rem] p-8 flex flex-col items-center text-center"
+              }
               style={{
-                background: "#fff",
-                border: `1px solid ${alpha(c.ink, 0.06)}`,
+                background: isInk ? "transparent" : "#fff",
+                border: isInk ? "none" : `1px solid ${alpha(c.ink, 0.06)}`,
+                borderLeft:
+                  isInk && i > 0
+                    ? `1px solid ${dividerColor}`
+                    : isInk
+                    ? "none"
+                    : undefined,
                 animationDelay: `${i * 80}ms`,
               }}
             >
@@ -46,25 +66,27 @@ export function ProvidersPreview({
                 <img
                   src={p.image}
                   alt={p.imageAlt ?? p.name}
-                  width={96}
-                  height={96}
+                  width={portraitSize}
+                  height={portraitSize}
                   loading="lazy"
                   style={{
-                    width: 96,
-                    height: 96,
+                    width: portraitSize,
+                    height: portraitSize,
                     borderRadius: "50%",
                     objectFit: "cover",
                     objectPosition: "center top",
-                    marginBottom: 20,
-                    border: `1px solid ${alpha(c.ink, 0.08)}`,
+                    marginBottom: isInk ? 28 : 20,
+                    border: isInk
+                      ? `1px solid ${alpha(c.cream, 0.18)}`
+                      : `1px solid ${alpha(c.ink, 0.08)}`,
                   }}
                 />
               ) : (
                 <div
                   aria-hidden
                   style={{
-                    width: 96,
-                    height: 96,
+                    width: portraitSize,
+                    height: portraitSize,
                     borderRadius: "50%",
                     background: c.brandGreen,
                     color: "#fff",
@@ -72,10 +94,10 @@ export function ProvidersPreview({
                     alignItems: "center",
                     justifyContent: "center",
                     fontFamily: theme.fonts.heading,
-                    fontSize: "2rem",
+                    fontSize: isInk ? "2.5rem" : "2rem",
                     fontWeight: 500,
                     letterSpacing: "0.02em",
-                    marginBottom: 20,
+                    marginBottom: isInk ? 28 : 20,
                   }}
                 >
                   {p.initials}
@@ -85,7 +107,7 @@ export function ProvidersPreview({
                 style={{
                   fontFamily: theme.fonts.heading,
                   fontSize: typeScale.leadMd,
-                  color: c.ink,
+                  color: nameColor,
                   lineHeight: 1.2,
                 }}
               >
@@ -106,7 +128,7 @@ export function ProvidersPreview({
                 style={{
                   fontFamily: theme.fonts.body,
                   fontSize: typeScale.bodySm,
-                  color: alpha(c.ink, 0.72),
+                  color: bioColor,
                   lineHeight: 1.55,
                   marginTop: 14,
                 }}
