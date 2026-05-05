@@ -41,7 +41,7 @@ export default function ProvidersPage() {
       <ProvidersPreview
         intro={providersPreviewClinicianIntro}
         providers={providersPreview}
-        tone="ink"
+        tone="sand"
       />
       <ProvidersSection
         intro={providersIntro}
