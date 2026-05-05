@@ -8,5 +8,4 @@ export const nav: NavLink[] = [
 
 export const audienceNav = {
   providers: { label: "For providers", href: "/providers" },
-  refer: { label: "Refer a patient", href: "/providers/refer" },
 } as const;
