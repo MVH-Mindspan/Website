@@ -40,6 +40,11 @@ export function SimpleSteps({
 
   if (stages.length === 0) return null;
 
+  const lgColsClass =
+    stages.length <= 2 ? "lg:grid-cols-2" :
+    stages.length === 3 ? "lg:grid-cols-3" :
+    "lg:grid-cols-4";
+
   return (
     <section style={{ background: sectionBg, color: c.ink, padding: "96px 0" }}>
       <Container>
@@ -68,7 +73,7 @@ export function SimpleSteps({
           </Reveal>
         )}
 
-        <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6">
+        <div className={`mt-12 grid grid-cols-1 md:grid-cols-2 ${lgColsClass} gap-5 md:gap-6`}>
           {stages.map((step, i) => (
             <Reveal
               key={step.title}

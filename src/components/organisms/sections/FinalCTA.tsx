@@ -63,7 +63,12 @@ export function FinalCTA({
           fontFamily={theme.fonts.heading}
           className="mt-6 final-cta-title"
         >
-          {title}
+          {title.split("\n").map((line, i, arr) => (
+            <span key={i}>
+              {line}
+              {i < arr.length - 1 && <br />}
+            </span>
+          ))}
         </Heading>
         <Lead
           size="lg"

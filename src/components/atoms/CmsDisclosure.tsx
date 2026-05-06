@@ -17,7 +17,7 @@ export function CmsDisclosure({
   const { theme } = useTheme();
   const c = theme.colors;
   return (
-    <section style={{ background: c.cream, padding: "32px 0 48px" }}>
+    <section style={{ background: c.sand, padding: "8px 0 56px" }}>
       <Container>
         <div
           className="max-w-3xl"
@@ -26,8 +26,8 @@ export function CmsDisclosure({
             fontSize: typeScale.bodySm,
             color: alpha(c.ink, 0.55),
             lineHeight: 1.55,
-            borderTop: `1px solid ${alpha(c.ink, 0.08)}`,
-            paddingTop: 20,
+            borderTop: `1px solid ${alpha(c.ink, 0.12)}`,
+            paddingTop: 24,
           }}
         >
           <p>{CMS_AUTHOR_DISCLAIMER}</p>
