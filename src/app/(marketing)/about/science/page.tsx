@@ -1,4 +1,4 @@
-import { PageHero } from "@/components/organisms/sections/PageHero";
+import { VideoHero } from "@/components/organisms/sections/VideoHero";
 import { SplitCards } from "@/components/organisms/sections/SplitCards";
 import { FeatureCardGrid } from "@/components/organisms/sections/FeatureCardGrid";
 import { VideoFeature } from "@/components/organisms/sections/VideoFeature";
@@ -13,7 +13,7 @@ export const metadata = sciencePage.metadata;
 export default function SciencePage() {
   return (
     <>
-      <PageHero {...sciencePage.hero} />
+      <VideoHero {...sciencePage.hero} />
       <SplitCards
         intro={protocolsIntro}
         core={protocols.core}
