@@ -72,6 +72,8 @@ export default async function LocationDetailPage({ params }: Params) {
           cards={detail.services.cards}
           columns={4}
           rounded={false}
+          primary={detail.services.primary}
+          secondary={detail.services.secondary}
         />
       )}
 
