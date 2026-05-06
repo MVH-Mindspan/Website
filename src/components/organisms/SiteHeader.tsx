@@ -87,6 +87,7 @@ export function SiteHeader() {
     fontFamily: theme.fonts.body,
     fontSize: typeScale.bodySm,
     fontWeight: 450,
+    whiteSpace: "nowrap",
   } as const;
 
   const navStyle = useMemo<React.CSSProperties>(() => {
