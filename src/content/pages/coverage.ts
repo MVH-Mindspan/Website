@@ -1,4 +1,8 @@
 import { buildMetadata } from "@/lib/seo";
+import {
+  CMS_AUTHOR_DISCLAIMER,
+  GUIDE_ELIGIBILITY_FOOTNOTE,
+} from "@/content/guide-disclosures";
 import type { Protocol } from "../protocols";
 import type { Stat } from "../stats";
 
@@ -50,19 +54,17 @@ export const coveragePage = {
       "If your loved one has a dementia diagnosis and is enrolled in Original Medicare, there may be more support available to you at no additional cost, coordinated through a Medicare-supported care model called GUIDE. It is not something you have to apply for on your own. If you qualify, we handle enrollment.",
     bullets: [
       "$0 copays for covered Mindspan visits",
-      "24/7 specialist-staffed access for questions and concerns",
+      "24/7 specialist-staffed access (operated by Ianacare, our GUIDE Partner Organization) for questions and concerns",
       "Up to $2,500 per year in respite benefits for the primary caregiver",
       "A dedicated care coordinator who stays connected between visits",
     ],
     eligibilityTitle: "Who typically qualifies",
     eligibility: [
       "A dementia diagnosis (Alzheimer\u2019s, Lewy Body, vascular, or other)",
-      "Enrolled in Original Medicare (not Medicare Advantage)",
-      "A caregiver involved in day-to-day support",
+      "Enrolled in Original Medicare, Parts A and B (not Medicare Advantage or PACE)",
       "Located in Massachusetts or California (our current service areas for this program)",
     ],
-    footnote:
-      "GUIDE is a CMS (Medicare) care model. Eligibility is determined during onboarding, there is nothing to sign up for in advance.",
+    footnote: [GUIDE_ELIGIBILITY_FOOTNOTE, CMS_AUTHOR_DISCLAIMER],
     cta: { label: "Learn more about GUIDE", href: "/guide" },
   },
 

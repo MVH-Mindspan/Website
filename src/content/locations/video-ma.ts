@@ -1,3 +1,4 @@
+import { CMS_AUTHOR_DISCLAIMER } from "@/content/guide-disclosures";
 import type { LocationDetail } from "../pages/locationDetail";
 
 const BOOKING_HREF = "https://hipaa.jotform.com/form/252121360919856";
@@ -283,7 +284,7 @@ export const videoMassachusettsDetail: LocationDetail = {
         "If you qualify, we coordinate these benefits for you as part of ongoing care, they are not a separate program you manage yourself.",
       bullets: [
         "$0 copays for covered Mindspan visits",
-        "24/7 specialist-staffed access for questions and concerns",
+        "24/7 specialist-staffed access (operated by Ianacare, our GUIDE Partner Organization) for questions and concerns",
         "Up to $2,500 per year in respite benefits for the primary caregiver",
         "A dedicated care coordinator between visits",
       ],
@@ -297,15 +298,16 @@ export const videoMassachusettsDetail: LocationDetail = {
         "We confirm eligibility during onboarding. If you are not sure, just tell us and we will figure it out together.",
       bullets: [
         "A dementia diagnosis (Alzheimer’s, Lewy Body, vascular, or other)",
-        "Enrolled in Original Medicare (not Medicare Advantage)",
-        "A caregiver involved in day-to-day support",
+        "Enrolled in Original Medicare, Parts A and B (not Medicare Advantage or PACE)",
         "Located in Massachusetts or California",
       ],
       icon: "bullseye",
     },
     cta: { label: "Learn more about the GUIDE program", href: "/guide" },
-    footnote:
+    footnote: [
       "GUIDE is a CMS (Medicare) care model. Coverage and eligibility vary by region and payer. We verify benefits and walk families through what applies during onboarding.",
+      CMS_AUTHOR_DISCLAIMER,
+    ],
   },
 
   finalCta: {

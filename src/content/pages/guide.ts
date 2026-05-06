@@ -5,7 +5,7 @@ export const guidePage = {
   metadata: buildMetadata({
     title: "The GUIDE Program | Mindspan",
     description:
-      "Mindspan participates in GUIDE, a Medicare-supported dementia care model that provides $0 copays, 24/7 specialist access, and up to $2,500/year in caregiver respite benefits for qualifying families.",
+      "Mindspan participates in GUIDE, Medicare’s coordinated dementia care model. Around-the-clock specialist support, no out-of-pocket cost for covered visits, and respite for the primary caregiver. We handle enrollment for qualifying families.",
     canonical: "/guide",
   }),
 
@@ -18,7 +18,7 @@ export const guidePage = {
       "A Mindspan clinician meeting with a patient and family members in a sunlit consultation room.",
     subTagline: "What is GUIDE?",
     subhead:
-      "Medicare\u2019s coordinated dementia care model. 24/7 specialist access, $0 copays for covered visits, and up to $2,500 a year in caregiver respite. If you qualify, Mindspan handles enrollment.",
+      "Medicare\u2019s coordinated dementia care model. Around-the-clock specialist support, no out-of-pocket cost for covered visits, and respite for the primary caregiver. If you qualify, Mindspan handles enrollment.",
     primaryCta: { label: "See the benefits", href: "#benefits" },
     secondaryCta: { label: "Talk to us: (617) 420-9000", href: "tel:+16174209000" },
   },
@@ -34,9 +34,9 @@ export const guidePage = {
     {
       id: "respite",
       eyebrow: "Respite for the caregiver",
-      title: "Up to $2,500 per year for a break.",
+      title: "Time away, paid through the program.",
       body:
-        "Caregiving does not stop. GUIDE provides respite dollars so the primary caregiver can take time for themselves, an afternoon, a weekend, or a week, while their loved one is cared for.",
+        "Caregiving does not stop. GUIDE includes respite support (up to $2,500 a year) so the primary caregiver can take time for themselves, an afternoon, a weekend, or a week, while their loved one is cared for.",
       icon: "shield" as const,
     },
     {
@@ -44,12 +44,12 @@ export const guidePage = {
       eyebrow: "24/7 specialist access",
       title: "Someone to call, day or night.",
       body:
-        "A medical question at 10pm. A scary change on a Saturday. GUIDE includes around-the-clock access to a Mindspan specialist-staffed line, so you are not alone with it.",
+        "A medical question at 10pm. A scary change on a Saturday. GUIDE includes around-the-clock access to a specialist-staffed line, so you are not alone with it. The 24/7 line is operated by Ianacare, our GUIDE Partner Organization.",
       icon: "chat" as const,
     },
     {
       id: "cost",
-      eyebrow: "$0 copays",
+      eyebrow: "No out-of-pocket cost",
       title: "No out-of-pocket cost for covered visits.",
       body:
         "Qualifying GUIDE patients pay $0 for covered Mindspan visits. We verify your benefits and tell you exactly what is covered before your first appointment.",
@@ -85,7 +85,7 @@ export const guidePage = {
     eyebrow: "24/7 specialist access",
     title: "Someone to call, day or night.",
     body:
-      "A medical question at 10pm. A scary change on a Saturday. The Mindspan specialist line is staffed around the clock for GUIDE families, so you are not alone with the hard moments. One number, day or night, answered by someone who knows dementia care.",
+      "A medical question at 10pm. A scary change on a Saturday. The specialist line is staffed around the clock for GUIDE families, so you are not alone with the hard moments. One number, day or night, answered by someone who knows dementia care. The line is operated by Ianacare, our GUIDE Partner Organization.",
     image: "/assets/guide-247.webp",
     imageAlt:
       "A Mindspan specialist on a video visit at her desk in the evening.",
@@ -93,9 +93,9 @@ export const guidePage = {
 
   eligibilityIntro: {
     eyebrow: "Who qualifies",
-    title: "Four things have to be true.",
+    title: "Three things have to be true.",
     lead:
-      "If all four apply, you are very likely eligible. We confirm during onboarding, there is nothing to sign up for in advance.",
+      "If all three apply, you are very likely eligible. We confirm during onboarding, there is nothing to sign up for in advance.",
   },
 
   eligibilityItems: [
@@ -109,13 +109,7 @@ export const guidePage = {
       kicker: "Coverage",
       title: "Enrolled in Original Medicare",
       body:
-        "GUIDE is available to people on Original Medicare (Medicare Part A and Part B). It is not currently available to people on Medicare Advantage plans. We can help you confirm which you have.",
-    },
-    {
-      kicker: "Caregiver",
-      title: "A family member in day-to-day support",
-      body:
-        "A spouse, adult child, or other family member who is involved in daily care. GUIDE is built around the partnership between the patient and that caregiver.",
+        "GUIDE is available to people enrolled in Original Medicare (Parts A and B). It is not available to people enrolled in Medicare Advantage or PACE programs. We can help you confirm which you have.",
     },
     {
       kicker: "Location",
@@ -173,7 +167,7 @@ export const guidePage = {
       id: "advantage",
       question: "I have Medicare Advantage, can I still get this?",
       answer:
-        "GUIDE is currently available to people on Original Medicare (Part A and Part B), not Medicare Advantage. If you are on Advantage, you can still be a Mindspan patient, we accept most major plans, but the specific GUIDE benefits described here will not apply.",
+        "GUIDE is currently available to people enrolled in Original Medicare (Parts A and B), not Medicare Advantage or PACE. If you are on Advantage or PACE, you can still be a Mindspan patient, we accept most major plans, but the specific GUIDE benefits described here will not apply.",
     },
     {
       id: "diagnosis",
@@ -183,7 +177,7 @@ export const guidePage = {
     },
     {
       id: "respite",
-      question: "How does the $2,500 respite benefit actually work?",
+      question: "How does the respite benefit actually work?",
       answer:
         "GUIDE provides up to $2,500 per year for respite services, care that temporarily relieves the primary caregiver. That might be adult day services, in-home care, or a short stay in a care facility. Your care coordinator helps you find options and handles the billing.",
     },

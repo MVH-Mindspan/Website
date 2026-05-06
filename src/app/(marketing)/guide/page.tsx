@@ -6,6 +6,7 @@ import {
   FAQ,
   FinalCTA,
 } from "@/components/organisms/sections";
+import { CmsDisclosure } from "@/components/atoms/CmsDisclosure";
 import { guidePage } from "@/content/pages/guide";
 
 export const metadata = guidePage.metadata;
@@ -46,6 +47,8 @@ export default function GuidePage() {
         intro={{ eyebrow: "Common questions", title: "What families ask us about GUIDE." }}
         items={guidePage.faq}
       />
+
+      <CmsDisclosure includePartnerNote />
 
       <FinalCTA
         eyebrow={guidePage.finalCta.eyebrow}

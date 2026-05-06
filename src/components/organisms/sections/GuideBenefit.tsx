@@ -26,9 +26,14 @@ export function GuideBenefit({
   bullets: readonly string[];
   eligibilityTitle: string;
   eligibility: readonly string[];
-  footnote?: string;
+  footnote?: string | readonly string[];
   cta?: { label: string; href: string };
 }) {
+  const footnoteParagraphs = Array.isArray(footnote)
+    ? footnote
+    : footnote
+      ? [footnote]
+      : [];
   const { theme } = useTheme();
   const c = theme.colors;
 
@@ -165,20 +170,29 @@ export function GuideBenefit({
               </ul>
             </div>
           </div>
-          {footnote && (
-            <p
+          {footnoteParagraphs.length > 0 && (
+            <div
               className="mt-10"
               style={{
-                fontFamily: theme.fonts.body,
-                fontSize: typeScale.bodySm,
-                color: alpha(c.ink, 0.55),
-                lineHeight: 1.5,
                 borderTop: `1px solid ${alpha(c.ink, 0.08)}`,
                 paddingTop: 20,
               }}
             >
-              {footnote}
-            </p>
+              {footnoteParagraphs.map((paragraph, index) => (
+                <p
+                  key={paragraph}
+                  className={index === 0 ? undefined : "mt-3"}
+                  style={{
+                    fontFamily: theme.fonts.body,
+                    fontSize: typeScale.bodySm,
+                    color: alpha(c.ink, 0.55),
+                    lineHeight: 1.5,
+                  }}
+                >
+                  {paragraph}
+                </p>
+              ))}
+            </div>
           )}
         </Reveal>
       </Container>
