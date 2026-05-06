@@ -72,11 +72,21 @@ export function FAQ({
                       justifyContent: "center",
                       transition: `background 0.2s ease, transform 0.3s ${ease.expressive}`,
                       transform: isOpen ? "rotate(45deg)" : "rotate(0deg)",
-                      fontSize: "1.25rem",
-                      lineHeight: 1,
                     }}
                   >
-                    +
+                    <svg
+                      width="12"
+                      height="12"
+                      viewBox="0 0 12 12"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.8"
+                      strokeLinecap="round"
+                      aria-hidden
+                    >
+                      <line x1="6" y1="1" x2="6" y2="11" />
+                      <line x1="1" y1="6" x2="11" y2="6" />
+                    </svg>
                   </span>
                 </button>
                 {isOpen && (
