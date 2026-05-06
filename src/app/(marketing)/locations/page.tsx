@@ -10,7 +10,7 @@ export default function LocationsPage() {
   return (
     <>
       <PageHero {...locationsPage.hero} />
-      <LocationCards locations={locations} />
+      <LocationCards locations={locations} groupByKind tone="sand" />
       <FinalCTA {...finalCta} />
     </>
   );

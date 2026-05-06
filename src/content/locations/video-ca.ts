@@ -8,7 +8,7 @@ export const videoCaliforniaDetail: LocationDetail = {
     eyebrow: "Video visits, California",
     title: "See your neurologist from home, anywhere in California.",
     lead:
-      "Specialty memory care, on your phone, tablet, or computer. No driving, no waiting room, no 18-month wait. The same unhurried visits we give patients in our Bay Area and Irvine clinics, from wherever you’re most comfortable in California.",
+      "Specialty memory care, on your phone, tablet, or computer. No driving, no waiting room, no 18-month wait. The same unhurried visits we give patients in our Bay Area clinic, from wherever you’re most comfortable in California.",
     location: "Statewide · California",
     availability: {
       text: "Video appointments available this month",
@@ -183,9 +183,9 @@ export const videoCaliforniaDetail: LocationDetail = {
   careTeam: {
     intro: {
       eyebrow: "Your video care team",
-      title: "California patients see Bay Area and Orange County neurologists.",
+      title: "California patients see a Bay Area neurologist.",
       lead:
-        "The same neurologists who see patients in our San Jose and Irvine clinics see California video patients. No rotating telehealth pool, no anonymous network. We’ll match you with a clinician based on availability and fit.",
+        "The same neurologist who sees patients in our San Jose clinic sees California video patients. No rotating telehealth pool, no anonymous network. You’ll know exactly who you’re seeing before your visit.",
     },
     providers: [
       {
@@ -202,27 +202,15 @@ export const videoCaliforniaDetail: LocationDetail = {
         cta: { label: "Book with Dr. Sachdev", href: BOOKING_HREF },
         profileHref: "/locations/bay-area",
       },
-      {
-        name: "Naveen Reddy, MD",
-        role: "Clinical Director, Mindspan",
-        image: "/assets/naveen-reddy.webp",
-        imageAlt: "Dr. Naveen Reddy, MD, Clinical Director at Mindspan",
-        specialties: [
-          "Alzheimer’s diagnostics",
-          "Anti-amyloid therapies",
-        ],
-        cta: { label: "Book with Dr. Reddy", href: BOOKING_HREF },
-        profileHref: "/locations/irvine",
-      },
     ],
   },
 
   inPersonClinics: {
     intro: {
       eyebrow: "Prefer to come in person?",
-      title: "We have two clinics in California.",
+      title: "We have a clinic in San Jose.",
       lead:
-        "Some visits are easier in person, especially first appointments and certain assessments. If you’re closer to one of our clinics or just prefer face-to-face, both are open and accepting new patients.",
+        "Some visits are easier in person, especially first appointments and certain assessments. If you’re closer to the Bay Area or just prefer face-to-face, our San Jose clinic is open and accepting new patients.",
     },
     clinics: [
       {
@@ -235,16 +223,6 @@ export const videoCaliforniaDetail: LocationDetail = {
         blurb:
           "Specialty memory care in San Jose. Convenient for patients across the South Bay, Peninsula, and East Bay, with rapid access to advanced diagnostics and clinical trials.",
         cta: { label: "Visit our Bay Area clinic", href: "/locations/bay-area" },
-      },
-      {
-        city: "Irvine",
-        state: "California",
-        address: "16100 Sand Canyon Ave, Suite 240, Irvine, CA 92618",
-        image: "/assets/irvine-clinic.webp",
-        imageAlt: "Mindspan Irvine clinic in Orange County, California",
-        blurb:
-          "Specialty memory care in Orange County. Convenient for Greater LA, Inland Empire, and San Diego patients, with the same rapid access and full diagnostic suite.",
-        cta: { label: "Visit our Irvine clinic", href: "/locations/irvine" },
       },
     ],
   },
@@ -335,7 +313,7 @@ export const videoCaliforniaDetail: LocationDetail = {
     eyebrow: "When you are ready",
     title: "Talk with a Mindspan neurologist this month.",
     lead:
-      "See a specialist in weeks, not months or years. By video from your living room, or in person at our Bay Area or Irvine clinic.",
+      "See a specialist in weeks, not months or years. By video from your living room, or in person at our Bay Area clinic.",
     primary: { label: "Book a video visit", href: BOOKING_HREF },
     secondary: { label: "Visit a clinic", href: "/locations" },
     signature: "With care, the Mindspan California team",

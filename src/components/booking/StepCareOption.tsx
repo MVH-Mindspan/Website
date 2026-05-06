@@ -49,15 +49,6 @@ const careOptionsByState: Record<"MA" | "CA", CareOption[]> = {
   ],
   CA: [
     {
-      id: "irvine",
-      city: "Irvine",
-      state: "California",
-      description: "In-person clinic, Orange County",
-      kind: "clinic",
-      bbox: "-117.87,33.65,-117.76,33.72",
-      marker: "33.684,-117.827",
-    },
-    {
       id: "bay-area",
       city: "Bay Area",
       state: "California",

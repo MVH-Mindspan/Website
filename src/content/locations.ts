@@ -55,22 +55,6 @@ export const locations: Location[] = [
     ctaLabel: "Book a video visit",
   },
   {
-    slug: "irvine",
-    city: "Irvine",
-    state: "California",
-    href: "/locations/irvine",
-    bbox: "-117.87,33.65,-117.76,33.72",
-    marker: "33.684,-117.827",
-    kind: "clinic",
-    eyebrow: "Mindspan Irvine",
-    headline: "In-person care in Irvine, California.",
-    summary:
-      "Specialty memory care in Orange County. Convenient for Greater LA, Inland Empire, and San Diego patients, with the same rapid access and full diagnostic suite.",
-    ctaLabel: "Visit our Irvine clinic",
-    image: "/assets/irvine-clinic.webp",
-    imageAlt: "Mindspan Irvine clinic in Orange County, California",
-  },
-  {
     slug: "bay-area",
     city: "Bay Area",
     state: "California",
