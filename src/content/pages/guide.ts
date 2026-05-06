@@ -12,7 +12,8 @@ export const guidePage = {
   hero: {
     eyebrow: "Medicare\u2019s dementia care benefit",
     title: "A Medicare program built for families living with dementia.",
-    image: "/assets/guide-hero.webp",
+    video: "/assets/guide-hero-video.mp4",
+    poster: "/assets/guide-hero.webp",
     imageAlt:
       "A Mindspan clinician meeting with a patient and family members in a sunlit consultation room.",
     subTagline: "What is GUIDE?",
