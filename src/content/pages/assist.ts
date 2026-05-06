@@ -18,14 +18,14 @@ const stages: JourneyStage[] = [
     title: "See a specialist in weeks, not months.",
     body:
       "If screening shows that further evaluation would help, enrollment is simple. Mindspan sees your loved one within weeks, rather than the 18+ month wait most families face for specialist cognitive care.",
-    image: "/assets/consultation-2.png",
+    image: "/assets/assist-specialist.png",
   },
   {
     kicker: "Join",
     title: "A seat at the table from day one.",
     body:
       "Traditional healthcare often leaves families on the sidelines. At Mindspan, we welcome you as part of the care team from the very beginning, practical, respectful, and sustainable involvement built around your life.",
-    image: "/assets/consultation-1.png",
+    image: "/assets/assist-table.png",
   },
   {
     kicker: "Empower",
