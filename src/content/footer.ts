@@ -37,5 +37,6 @@ export const footer = {
     { label: "Informed consent", href: "/informed-consent" },
     { label: "Affiliates", href: "/affiliates" },
   ] satisfies FooterLink[],
+  mailingAddress: ["169 Madison Ave, Suite 90030", "New York, NY 10016"],
   copyright: "\u00a9 2026 Mindspan",
 } as const;
