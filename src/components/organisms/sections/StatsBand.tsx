@@ -125,6 +125,9 @@ export function StatsBand({
             width: 32px !important;
             height: 1px !important;
           }
+          :global(.stats-comparison .comparison-stat) {
+            text-align: center !important;
+          }
           :global(.stats-rest) {
             grid-template-columns: 1fr 1fr !important;
             gap: 24px !important;
@@ -231,7 +234,7 @@ function ComparisonStat({
   }, [stat.value]);
 
   return (
-    <div style={{ textAlign: align }}>
+    <div className="comparison-stat" style={{ textAlign: align }}>
       <p
         ref={ref}
         style={{
