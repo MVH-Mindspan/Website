@@ -1,8 +1,8 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
+import { EASE } from "@/lib/motion";
 
-const EASE = [0.22, 0.61, 0.36, 1] as const;
 
 type ProgressBarProps = {
   steps: string[];
@@ -18,12 +18,12 @@ export default function ProgressBar({ steps, currentStep, onStepClick }: Progres
       <ol className="flex items-center justify-between relative">
         {/* Connecting line background */}
         <div
-          className="absolute top-4 left-0 right-0 h-[2px] mx-8"
+          className="absolute top-[18px] sm:top-4 left-0 right-0 h-[2px] mx-3 sm:mx-6 md:mx-8"
           style={{ background: "rgba(8,54,48,0.08)" }}
         />
         {/* Active line */}
         <motion.div
-          className="absolute top-4 left-0 h-[2px] mx-8"
+          className="absolute top-[18px] sm:top-4 left-0 h-[2px] mx-3 sm:mx-6 md:mx-8"
           style={{ background: "#083630" }}
           initial={false}
           animate={{
@@ -50,14 +50,14 @@ export default function ProgressBar({ steps, currentStep, onStepClick }: Progres
                 }`}
                 aria-current={isCurrent ? "step" : undefined}
                 className={`
-                  flex items-center justify-center h-8 w-8 rounded-full text-xs font-semibold
+                  flex items-center justify-center h-9 w-9 sm:h-8 sm:w-8 rounded-full text-sm sm:text-xs font-semibold
                   transition-all duration-300
                   ${isClickable ? "cursor-pointer" : "cursor-default"}
                   ${isCompleted
                     ? "bg-[#083630] text-white"
                     : isCurrent
                       ? "bg-white border-2 border-[#083630] text-[#083630]"
-                      : "bg-white border-2 border-[rgba(8,54,48,0.15)] text-[rgba(8,54,48,0.35)]"
+                      : "bg-white border-2 border-[rgba(8,54,48,0.25)] text-[rgba(8,54,48,0.55)]"
                   }
                 `}
               >
@@ -82,7 +82,7 @@ export default function ProgressBar({ steps, currentStep, onStepClick }: Progres
                   transition-colors duration-300
                   ${isCurrent || isCompleted
                     ? "text-[#083630]"
-                    : "text-[rgba(8,54,48,0.35)]"
+                    : "text-[rgba(8,54,48,0.55)]"
                   }
                 `}
               >

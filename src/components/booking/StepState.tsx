@@ -1,8 +1,8 @@
 "use client";
 
 import { motion, useReducedMotion, type Variants } from "framer-motion";
+import { EASE } from "@/lib/motion";
 
-const EASE = [0.22, 0.61, 0.36, 1] as const;
 const GREEN = "#083630";
 const CREAM = "#efeeeb";
 
@@ -164,7 +164,7 @@ export default function StepState({ value, onChange }: StepStateProps) {
         <svg
           viewBox="0 0 24 24"
           className="h-5 w-5 mt-0.5 shrink-0"
-          style={{ color: "rgba(8,54,48,0.4)" }}
+          style={{ color: "rgba(8,54,48,0.72)" }}
         >
           <path
             fill="none"

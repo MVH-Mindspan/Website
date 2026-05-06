@@ -20,7 +20,7 @@ type FormFieldProps = {
 };
 
 const inputClasses =
-  "w-full rounded-xl border px-4 py-3 text-[0.9375rem] leading-snug transition-all duration-200 bg-white placeholder:text-[rgba(8,54,48,0.35)]";
+  "w-full rounded-xl border px-4 py-3 text-base sm:text-[0.9375rem] leading-snug transition-all duration-200 bg-white placeholder:text-[rgba(8,54,48,0.6)]";
 const focusClasses =
   "focus:border-[#083630] focus:ring-2 focus:ring-[#083630]/10 focus:outline-none";
 const errorClasses = "border-red-400 focus:border-red-500 focus:ring-red-500/10";
@@ -94,7 +94,7 @@ const FormField = forwardRef<HTMLInputElement | HTMLTextAreaElement | HTMLSelect
             onChange={(e) => onChange(e.target.value)}
             onBlur={onBlur}
             className={`${inputClasses} ${focusClasses} ${borderClass} appearance-none bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2212%22%20height%3D%2212%22%20viewBox%3D%220%200%2012%2012%22%3E%3Cpath%20d%3D%22M6%208L1%203h10z%22%20fill%3D%22%23083630%22%2F%3E%3C%2Fsvg%3E')] bg-[length:12px] bg-[right_16px_center] bg-no-repeat pr-10`}
-            style={{ color: value ? "#111" : "rgba(8,54,48,0.35)" }}
+            style={{ color: value ? "#111" : "rgba(8,54,48,0.6)" }}
             {...ariaProps}
           >
             <option value="" disabled>

@@ -22,7 +22,7 @@ export function Testimonials({
   const bg = tone === "sand" ? c.sand : c.cream;
 
   return (
-    <section style={{ background: bg, padding: "96px 0" }}>
+    <section style={{ background: bg, padding: "clamp(56px, 10vw, 96px) 0" }}>
       <Container>
         <SectionHeader eyebrow={intro.eyebrow} title={intro.title} />
         <div className="mt-12 grid md:grid-cols-3 gap-5 md:gap-6">

@@ -19,7 +19,7 @@ export function ProviderProfile(props: ProviderProfileType) {
   const c = theme.colors;
 
   return (
-    <section style={{ background: c.sand, padding: "96px 0" }}>
+    <section style={{ background: c.sand, padding: "clamp(56px, 10vw, 96px) 0" }}>
       <Container>
         <div className="grid lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] gap-10 md:gap-14 items-start">
           <Reveal>

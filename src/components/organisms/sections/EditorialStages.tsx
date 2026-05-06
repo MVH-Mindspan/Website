@@ -146,8 +146,7 @@ export function EditorialStages({
                   <img
                     src={step.image}
                     alt={step.imageAlt ?? step.title}
-                    className="w-full object-cover"
-                    style={{ aspectRatio: "16/10" }}
+                    className="w-full object-cover aspect-[4/3] sm:aspect-[16/10]"
                     loading="lazy"
                   />
                 </ImageFrame>

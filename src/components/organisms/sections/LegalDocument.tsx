@@ -139,7 +139,7 @@ export function LegalDocument({
 
           <div
             className={tocItems.length > 0 ? "with-toc-body" : undefined}
-            style={{ maxWidth: 760 }}
+            style={{ maxWidth: "min(820px, 92vw)" }}
           >
             {intro && intro.length > 0 && (
               <div style={{ marginBottom: 56 }}>

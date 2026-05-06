@@ -25,7 +25,7 @@ export function StatsBand({
   if (stats.length === 0) return null;
 
   return (
-    <section style={{ background: bg, padding: "72px 0" }}>
+    <section style={{ background: bg, padding: "clamp(48px, 8vw, 72px) 0" }}>
       <div
         style={{
           maxWidth: "min(1320px, 92vw)",
@@ -37,6 +37,7 @@ export function StatsBand({
       >
         {first && second && (
           <Reveal
+            className="stats-comparison"
             style={{
               display: "grid",
               gridTemplateColumns: "1fr auto 1fr",
@@ -44,21 +45,23 @@ export function StatsBand({
               gap: 0,
               background: cardBg,
               borderRadius: "1.5rem",
-              padding: "40px 48px",
+              padding: "clamp(28px, 5vw, 40px) clamp(24px, 5vw, 48px)",
               border: `1px solid ${alpha(c.ink, 0.07)}`,
             }}
           >
             <ComparisonStat stat={first} align="left" highlight />
             <div
+              className="stats-comparison-divider"
               style={{
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
                 gap: 8,
-                padding: "0 40px",
+                padding: "0 clamp(16px, 4vw, 40px)",
               }}
             >
               <div
+                className="stats-comparison-line"
                 style={{
                   width: 1,
                   height: 40,
@@ -70,7 +73,7 @@ export function StatsBand({
                   fontFamily: theme.fonts.body,
                   fontSize: typeScale.bodySm,
                   fontWeight: 700,
-                  color: alpha(c.ink, 0.35),
+                  color: alpha(c.ink, 0.55),
                   letterSpacing: "0.08em",
                   textTransform: "uppercase",
                 }}
@@ -78,6 +81,7 @@ export function StatsBand({
                 vs
               </span>
               <div
+                className="stats-comparison-line"
                 style={{
                   width: 1,
                   height: 40,
@@ -91,6 +95,7 @@ export function StatsBand({
 
         {rest.length > 0 && (
           <Reveal
+            className="stats-rest"
             style={{
               display: "grid",
               gridTemplateColumns: `repeat(${rest.length}, 1fr)`,
@@ -105,6 +110,32 @@ export function StatsBand({
           </Reveal>
         )}
       </div>
+      <style jsx>{`
+        @media (max-width: 640px) {
+          :global(.stats-comparison) {
+            grid-template-columns: 1fr !important;
+            gap: 20px !important;
+          }
+          :global(.stats-comparison-divider) {
+            flex-direction: row !important;
+            padding: 0 !important;
+            gap: 12px !important;
+          }
+          :global(.stats-comparison-line) {
+            width: 32px !important;
+            height: 1px !important;
+          }
+          :global(.stats-rest) {
+            grid-template-columns: 1fr 1fr !important;
+            gap: 24px !important;
+          }
+        }
+        @media (max-width: 380px) {
+          :global(.stats-rest) {
+            grid-template-columns: 1fr !important;
+          }
+        }
+      `}</style>
     </section>
   );
 }

@@ -38,7 +38,7 @@ export function GuideBenefit({
   const c = theme.colors;
 
   return (
-    <section style={{ background: c.cream, padding: "80px 0" }}>
+    <section style={{ background: c.cream, padding: "clamp(48px, 8vw, 80px) 0" }}>
       <Container>
         <Reveal
           className="rounded-[2rem]"

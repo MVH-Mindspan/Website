@@ -9,9 +9,9 @@ type Variant = "primary" | "secondary" | "accent" | "ghostDark" | "ghostLight";
 type Size = "sm" | "md" | "lg";
 
 const sizeStyles: Record<Size, CSSProperties> = {
-  sm: { padding: "10px 20px", fontSize: "0.875rem" },
-  md: { padding: "14px 28px", fontSize: "0.9375rem" },
-  lg: { padding: "16px 32px", fontSize: "1rem" },
+  sm: { padding: "12px 20px", fontSize: "0.875rem", minHeight: 44 },
+  md: { padding: "14px 28px", fontSize: "0.9375rem", minHeight: 44 },
+  lg: { padding: "16px 32px", fontSize: "1rem", minHeight: 48 },
 };
 
 type Props = {
@@ -89,7 +89,7 @@ export function Button({
     </>
   );
 
-  const hoverClass = "hover:-translate-y-0.5";
+  const hoverClass = "hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98]";
   const combined = `${hoverClass} ${className ?? ""}`.trim();
 
   if (href && !disabled) {

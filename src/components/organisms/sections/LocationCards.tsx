@@ -37,7 +37,7 @@ export function LocationCards({
   if (locations.length === 0 && !intro) return null;
 
   return (
-    <section id={id} style={{ padding: "96px 0", background: bg }}>
+    <section id={id} style={{ padding: "clamp(56px, 10vw, 96px) 0", background: bg }}>
       <Container>
         {intro && (
           <SectionHeader
@@ -96,7 +96,7 @@ function LocationGroup({
       >
         {heading}
       </h3>
-      <div className={`grid sm:grid-cols-2 ${cols} gap-x-8 gap-y-12`}>
+      <div className={`grid sm:grid-cols-2 ${cols} gap-x-6 sm:gap-x-8 gap-y-8 sm:gap-y-12`}>
         {locations.map((l, i) => (
           <LocationCard key={l.slug} location={l} index={i} />
         ))}
@@ -129,8 +129,7 @@ function LocationCard({
           <img
             src={l.image}
             alt={l.imageAlt ?? ""}
-            className="block w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-            style={{ aspectRatio: "16 / 10" }}
+            className="block w-full object-cover transition-transform duration-500 group-hover:scale-[1.02] aspect-[4/3] sm:aspect-[16/10]"
             loading="lazy"
           />
         </ImageFrame>

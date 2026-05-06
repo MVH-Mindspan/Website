@@ -33,6 +33,7 @@ export function Reveal({
       return;
     }
 
+    const isNarrow = window.innerWidth < 768;
     const obs = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => {
@@ -42,7 +43,7 @@ export function Reveal({
           }
         });
       },
-      { threshold: 0.15, rootMargin: "0px 0px -120px 0px" }
+      { threshold: 0.15, rootMargin: isNarrow ? "0px 0px -40px 0px" : "0px 0px -120px 0px" }
     );
     obs.observe(node);
     return () => obs.disconnect();

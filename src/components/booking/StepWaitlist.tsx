@@ -2,10 +2,10 @@
 
 import { useCallback } from "react";
 import { motion, useReducedMotion, type Variants } from "framer-motion";
+import { EASE } from "@/lib/motion";
 import FormField from "./FormField";
 import SubmitErrorBlock from "./SubmitErrorBlock";
 
-const EASE = [0.22, 0.61, 0.36, 1] as const;
 const GREEN = "#083630";
 
 const fadeUp: Variants = {
@@ -195,7 +195,7 @@ export default function StepWaitlist({
           </button>
           <p
             className="text-xs mt-3"
-            style={{ color: "rgba(8,54,48,0.4)" }}
+            style={{ color: "rgba(8,54,48,0.72)" }}
           >
             We'll only use your information to let you know when we're available.
           </p>

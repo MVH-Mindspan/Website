@@ -46,7 +46,7 @@ export function SimpleSteps({
     "lg:grid-cols-4";
 
   return (
-    <section style={{ background: sectionBg, color: c.ink, padding: "96px 0" }}>
+    <section style={{ background: sectionBg, color: c.ink, padding: "clamp(56px, 10vw, 96px) 0" }}>
       <Container>
         {intro && (
           <SectionHeader

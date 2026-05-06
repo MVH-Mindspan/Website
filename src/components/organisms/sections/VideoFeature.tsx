@@ -173,7 +173,7 @@ export function VideoFeature({
       style={{
         background,
         color: c.ink,
-        padding: "96px 0",
+        padding: "clamp(56px, 10vw, 96px) 0",
         scrollMarginTop: "96px",
       }}
     >

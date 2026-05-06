@@ -217,7 +217,7 @@ function MediaHero({
                     color: c.cream,
                     letterSpacing: "-0.02em",
                     lineHeight: 0.98,
-                    maxWidth: hasAside ? "16ch" : "18ch",
+                    maxWidth: hasAside ? "clamp(14ch, 26vw, 22ch)" : "clamp(16ch, 32vw, 26ch)",
                   }}
                 >
                   {title}
@@ -364,7 +364,7 @@ function HeroAside({
         </div>
       )}
       <style jsx>{`
-        @media (max-width: 480px) {
+        @media (max-width: 560px) {
           .hero-aside-primary,
           .hero-aside-secondary {
             width: 100%;
@@ -407,16 +407,16 @@ function AvailabilityPill({
           href: availability.cta.href,
         })
       }
-      className="inline-flex items-center gap-3 transition-all hover:-translate-y-0.5"
+      className="inline-flex items-center gap-2 sm:gap-3 transition-all hover:-translate-y-0.5 active:translate-y-0 max-w-full flex-wrap"
       style={{
         marginBottom: 24,
-        padding: "8px 16px 8px 14px",
+        padding: "clamp(6px, 2vw, 8px) clamp(10px, 3vw, 16px) clamp(6px, 2vw, 8px) clamp(10px, 3vw, 14px)",
         background: bg,
         border,
         borderRadius: "10rem",
         color: textColor,
         fontFamily: theme.fonts.body,
-        fontSize: "0.875rem",
+        fontSize: "clamp(0.8125rem, 2.4vw, 0.875rem)",
         fontWeight: 600,
         backdropFilter: isLight ? "blur(8px)" : undefined,
       }}

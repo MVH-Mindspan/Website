@@ -51,7 +51,7 @@ export default function GlobalError({
         >
           An unexpected error interrupted this page. You can try again, or head back home.
           {error.digest && (
-            <span className="block mt-3 text-xs" style={{ color: "rgba(8,54,48,0.45)" }}>
+            <span className="block mt-3 text-xs" style={{ color: "rgba(8,54,48,0.72)" }}>
               Reference: {error.digest}
             </span>
           )}

@@ -36,7 +36,7 @@ export function InPersonClinicsBand({
       : "md:grid-cols-2 lg:grid-cols-3";
 
   return (
-    <section id={id} style={{ padding: "96px 0", background: c.sand }}>
+    <section id={id} style={{ padding: "clamp(56px, 10vw, 96px) 0", background: c.sand }}>
       <Container>
         <SectionHeader
           eyebrow={intro.eyebrow}
@@ -58,8 +58,7 @@ export function InPersonClinicsBand({
                 <img
                   src={clinic.image}
                   alt={clinic.imageAlt}
-                  className="w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-                  style={{ aspectRatio: "16/10" }}
+                  className="w-full object-cover transition-transform duration-500 group-hover:scale-[1.02] aspect-[4/3] sm:aspect-[16/10]"
                   loading="lazy"
                 />
               </ImageFrame>

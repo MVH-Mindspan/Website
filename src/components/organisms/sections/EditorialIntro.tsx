@@ -24,7 +24,7 @@ export function EditorialIntro({
       style={{
         background: "#201E17",
         color: c.cream,
-        padding: "56px 0",
+        padding: "clamp(40px, 7vw, 56px) 0",
         scrollMarginTop: "96px",
       }}
     >

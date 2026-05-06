@@ -5,6 +5,7 @@ import { useTheme } from "@/lib/theme-context";
 import { alpha } from "@/lib/themes";
 import { type as typeScale } from "@/lib/tokens";
 import { Container } from "@/components/atoms/Container";
+import { ImageFrame } from "@/components/atoms/ImageFrame";
 import { Reveal } from "@/components/molecules/Reveal";
 import { SectionHeader } from "@/components/molecules/SectionHeader";
 import type { ProviderPreview } from "@/content/providersPreview";
@@ -23,7 +24,7 @@ export function ProvidersPreview({
   const bg = tone === "cream" ? c.cream : c.sand;
 
   return (
-    <section style={{ background: bg, padding: "96px 0" }}>
+    <section style={{ background: bg, padding: "clamp(56px, 10vw, 96px) 0" }}>
       <Container>
         <SectionHeader
           eyebrow={intro.eyebrow}
@@ -35,7 +36,7 @@ export function ProvidersPreview({
             <Reveal
               key={p.id}
               as="article"
-              className="rounded-[2rem] p-8 flex flex-col items-center text-center"
+              className="rounded-[2rem] p-5 sm:p-6 md:p-8 flex flex-col items-center text-center"
               style={{
                 background: "#fff",
                 border: `1px solid ${alpha(c.ink, 0.06)}`,
@@ -43,22 +44,22 @@ export function ProvidersPreview({
               }}
             >
               {p.image ? (
-                <img
-                  src={p.image}
-                  alt={p.imageAlt ?? p.name}
-                  width={96}
-                  height={96}
-                  loading="lazy"
-                  style={{
-                    width: 96,
-                    height: 96,
-                    borderRadius: "50%",
-                    objectFit: "cover",
-                    objectPosition: "center top",
-                    marginBottom: 20,
-                    border: `1px solid ${alpha(c.ink, 0.08)}`,
-                  }}
-                />
+                <ImageFrame radius="50%" style={{ marginBottom: 20 }}>
+                  <img
+                    src={p.image}
+                    alt={p.imageAlt ?? p.name}
+                    width={96}
+                    height={96}
+                    loading="lazy"
+                    style={{
+                      display: "block",
+                      width: 96,
+                      height: 96,
+                      objectFit: "cover",
+                      objectPosition: "center top",
+                    }}
+                  />
+                </ImageFrame>
               ) : (
                 <div
                   aria-hidden
@@ -87,6 +88,8 @@ export function ProvidersPreview({
                   fontSize: typeScale.leadMd,
                   color: c.ink,
                   lineHeight: 1.2,
+                  maxWidth: "20ch",
+                  wordBreak: "break-word",
                 }}
               >
                 {p.name}

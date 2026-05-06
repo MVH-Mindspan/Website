@@ -162,7 +162,7 @@ export function ReferForm({ copy }: { copy: Copy }) {
           background: "#fff",
           border: `1px solid ${alpha(c.ink, 0.08)}`,
           borderRadius: "1.5rem",
-          padding: "48px 32px",
+          padding: "clamp(32px, 6vw, 48px) clamp(20px, 4vw, 32px)",
           textAlign: "center",
         }}
       >
@@ -479,7 +479,7 @@ function Row({ children }: { children: React.ReactNode }) {
     >
       {children}
       <style jsx>{`
-        @media (max-width: 520px) {
+        @media (max-width: 560px) {
           .refer-row {
             grid-template-columns: 1fr !important;
           }

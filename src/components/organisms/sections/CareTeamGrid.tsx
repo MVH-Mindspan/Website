@@ -36,7 +36,7 @@ export function CareTeamGrid({
       : "md:grid-cols-2 lg:grid-cols-3";
 
   return (
-    <section id={id} style={{ padding: "96px 0", background: c.cream }}>
+    <section id={id} style={{ padding: "clamp(56px, 10vw, 96px) 0", background: c.cream }}>
       <Container>
         <SectionHeader
           eyebrow={intro.eyebrow}
