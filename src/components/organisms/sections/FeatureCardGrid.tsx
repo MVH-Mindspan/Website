@@ -40,10 +40,10 @@ export function FeatureCardGrid({
 
   const gridColsClass =
     columns === 4
-      ? "md:grid-cols-2 lg:grid-cols-4"
+      ? "sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
       : columns === 2
       ? "md:grid-cols-2"
-      : "md:grid-cols-3";
+      : "sm:grid-cols-2 lg:grid-cols-3";
 
   const isSand = tone === "sand";
   const sectionBg = isSand ? c.sand : c.primary;
@@ -62,7 +62,7 @@ export function FeatureCardGrid({
       style={{
         background: sectionBg,
         color: sectionText,
-        padding: "96px 0",
+        padding: "clamp(56px, 10vw, 96px) 0",
         borderRadius: rounded ? "2.2rem 2.2rem 0 0" : undefined,
         scrollMarginTop: "96px",
       }}
@@ -80,7 +80,7 @@ export function FeatureCardGrid({
           {cards.map((card, i) => (
             <Reveal
               key={card.id}
-              className={`group rounded-[2rem] p-6 md:p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-[${cardShadow}]`}
+              className={`group rounded-[2rem] p-5 sm:p-6 md:p-8 transition-all duration-300 hover:-translate-y-1 active:scale-[0.98] hover:shadow-[${cardShadow}]`}
               style={{
                 background: cardBg,
                 border: cardBorder,

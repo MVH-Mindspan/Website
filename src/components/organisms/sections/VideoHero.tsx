@@ -223,12 +223,19 @@ export function VideoHero({
           gap: 12px;
           align-items: center;
         }
-        @media (max-width: 480px) {
+        @media (max-width: 640px) {
+          .hero-ctas {
+            flex-direction: column;
+            align-items: stretch;
+            gap: 10px;
+            width: 100%;
+          }
           .hero-cta-primary,
           .hero-cta-secondary {
             width: 100%;
             justify-content: center;
             text-align: center;
+            white-space: normal;
           }
         }
       `}</style>

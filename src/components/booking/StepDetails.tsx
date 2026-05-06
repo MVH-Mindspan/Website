@@ -2,9 +2,9 @@
 
 import { useCallback } from "react";
 import { motion, useReducedMotion, type Variants } from "framer-motion";
+import { EASE } from "@/lib/motion";
 import FormField from "./FormField";
 
-const EASE = [0.22, 0.61, 0.36, 1] as const;
 const GREEN = "#083630";
 
 const fadeUp: Variants = {

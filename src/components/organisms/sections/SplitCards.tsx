@@ -52,7 +52,7 @@ export function SplitCards({
       : [];
 
   return (
-    <section style={{ padding: "96px 0", background }}>
+    <section style={{ padding: "clamp(56px, 10vw, 96px) 0", background }}>
       <Container>
         <SectionHeader
           eyebrow={intro.eyebrow}
@@ -68,8 +68,8 @@ export function SplitCards({
                 alt={intro.imageAlt ?? ""}
                 width={1600}
                 height={840}
-                className="w-full object-cover"
-                style={{ maxHeight: 420, aspectRatio: "1600 / 840" }}
+                className="w-full object-cover aspect-[3/2] sm:aspect-[1600/840]"
+                style={{ maxHeight: 420 }}
                 loading="lazy"
               />
             </ImageFrame>
@@ -78,7 +78,7 @@ export function SplitCards({
 
         <div className={`mt-12 grid gap-6 md:gap-8 ${edge ? "lg:grid-cols-2" : ""}`}>
           <Reveal
-            className="rounded-[2rem] p-8 md:p-10"
+            className="rounded-[2rem] p-5 sm:p-6 md:p-8 lg:p-10"
             style={{
               background: tone === "sand" ? c.cream : c.skySoft,
               border: `1px solid ${alpha(c.ink, 0.06)}`,

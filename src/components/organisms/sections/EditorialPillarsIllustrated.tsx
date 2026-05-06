@@ -30,7 +30,7 @@ export function EditorialPillarsIllustrated({
   const c = theme.colors;
 
   return (
-    <section style={{ background: c.cream, color: c.ink, padding: "96px 0" }}>
+    <section style={{ background: c.cream, color: c.ink, padding: "clamp(56px, 10vw, 96px) 0" }}>
       <Container>
         {intro && (
           <div className="mb-16 md:mb-24">

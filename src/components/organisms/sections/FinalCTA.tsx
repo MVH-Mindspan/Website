@@ -32,7 +32,7 @@ export function FinalCTA({
   return (
     <section
       className="relative overflow-hidden text-white"
-      style={{ background: c.primary, padding: "96px 0" }}
+      style={{ background: c.primary, padding: "clamp(56px, 10vw, 96px) 0" }}
     >
       <div className="absolute inset-0 pointer-events-none" aria-hidden>
         <div

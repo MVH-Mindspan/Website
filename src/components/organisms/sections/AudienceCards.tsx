@@ -37,7 +37,7 @@ export function AudienceCards({
   if (audiences.length === 0) return null;
 
   return (
-    <section id="families" style={{ background: bg, padding: "96px 0" }}>
+    <section id="families" style={{ background: bg, padding: "clamp(56px, 10vw, 96px) 0" }}>
       <Container>
         <SectionHeader
           eyebrow={intro.eyebrow}
@@ -53,8 +53,8 @@ export function AudienceCards({
                 alt={intro.imageAlt ?? ""}
                 width={1600}
                 height={800}
-                className="w-full object-cover"
-                style={{ maxHeight: 400, aspectRatio: "1600 / 800" }}
+                className="w-full object-cover aspect-[3/2] sm:aspect-[1600/800]"
+                style={{ maxHeight: 400 }}
                 loading="lazy"
               />
             </ImageFrame>
@@ -74,7 +74,7 @@ export function AudienceCards({
             <Reveal
               key={a.id}
               as="article"
-              className="rounded-[2rem] p-6 md:p-8 flex flex-col group transition-all duration-300 hover:-translate-y-1 shadow-[inset_0_1px_0_rgba(255,255,255,0.45),0_1px_2px_rgba(32,30,23,0.06),0_10px_24px_-12px_rgba(32,30,23,0.18)] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.5),0_2px_4px_rgba(32,30,23,0.08),0_24px_48px_-16px_rgba(32,30,23,0.24)]"
+              className="rounded-[2rem] p-5 sm:p-6 md:p-8 flex flex-col group transition-all duration-300 hover:-translate-y-1 active:scale-[0.98] shadow-[inset_0_1px_0_rgba(255,255,255,0.45),0_1px_2px_rgba(32,30,23,0.06),0_10px_24px_-12px_rgba(32,30,23,0.18)] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.5),0_2px_4px_rgba(32,30,23,0.08),0_24px_48px_-16px_rgba(32,30,23,0.24)]"
               style={{
                 background: c.skySoft,
                 border: `1px solid ${alpha(c.ink, 0.08)}`,

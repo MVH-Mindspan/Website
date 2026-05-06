@@ -16,7 +16,7 @@ export function ClinicContact(props: ClinicContactType) {
   const c = theme.colors;
 
   return (
-    <section id="visit" style={{ background: c.cream, padding: "96px 0" }}>
+    <section id="visit" style={{ background: c.cream, padding: "clamp(56px, 10vw, 96px) 0" }}>
       <Container>
         <div className="grid lg:grid-cols-2 gap-8 md:gap-10 items-stretch">
           <Reveal

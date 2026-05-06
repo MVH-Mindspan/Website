@@ -315,10 +315,12 @@ export function SiteHeader() {
             <motion.div
               id="site-mobile-menu"
               role="menu"
-              className="md:hidden absolute left-0 right-0"
+              className="md:hidden absolute inset-x-3"
               style={{
                 top: "100%",
                 marginTop: 8,
+                maxHeight: "calc(100vh - 120px)",
+                overflowY: "auto",
                 background: "rgba(32,30,23,0.92)",
                 backdropFilter: "blur(24px) saturate(140%)",
                 WebkitBackdropFilter: "blur(24px) saturate(140%)",

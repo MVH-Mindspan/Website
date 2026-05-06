@@ -128,6 +128,11 @@ export function ReferSection({ eyebrow, title, lead, form, alt }: Props) {
           gap: 56px;
           align-items: start;
         }
+        @media (max-width: 1024px) {
+          .refer-grid {
+            gap: 40px;
+          }
+        }
         @media (max-width: 960px) {
           .refer-grid {
             grid-template-columns: 1fr;

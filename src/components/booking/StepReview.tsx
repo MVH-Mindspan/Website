@@ -1,10 +1,10 @@
 "use client";
 
 import { motion, useReducedMotion, type Variants } from "framer-motion";
+import { EASE } from "@/lib/motion";
 import { getCareOption } from "./StepCareOption";
 import SubmitErrorBlock from "./SubmitErrorBlock";
 
-const EASE = [0.22, 0.61, 0.36, 1] as const;
 const GREEN = "#083630";
 const ORANGE = "#fb4d17";
 
@@ -88,7 +88,7 @@ function ReviewSection({
         <h3
           className="text-sm font-semibold uppercase tracking-wider"
           style={{
-            color: "rgba(8,54,48,0.45)",
+            color: "rgba(8,54,48,0.72)",
             fontSize: "0.6875rem",
             letterSpacing: "0.12em",
           }}
@@ -277,7 +277,7 @@ export default function StepReview({
           </button>
           <p
             className="text-center text-xs mt-3"
-            style={{ color: "rgba(8,54,48,0.4)" }}
+            style={{ color: "rgba(8,54,48,0.72)" }}
           >
             Your information is secure and only used to schedule your visit.
           </p>

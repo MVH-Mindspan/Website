@@ -1,9 +1,9 @@
 "use client";
 
 import { motion, useReducedMotion, type Variants } from "framer-motion";
+import { EASE } from "@/lib/motion";
 import type { StateChoice } from "./StepState";
 
-const EASE = [0.22, 0.61, 0.36, 1] as const;
 const GREEN = "#083630";
 const ORANGE = "#fb4d17";
 const CREAM = "#efeeeb";
@@ -251,7 +251,7 @@ export default function StepCareOption({
                 </p>
                 <p
                   className="mt-2 text-xs"
-                  style={{ color: "rgba(8,54,48,0.45)" }}
+                  style={{ color: "rgba(8,54,48,0.72)" }}
                 >
                   {opt.description}
                 </p>

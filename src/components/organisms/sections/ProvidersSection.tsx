@@ -19,7 +19,7 @@ function ProviderBlock({ card }: { card: ProviderCard }) {
 
   return (
     <Reveal
-      className="rounded-[2rem] p-8 md:p-10 relative overflow-hidden group"
+      className="rounded-[2rem] p-5 sm:p-6 md:p-8 lg:p-10 relative overflow-hidden group"
       style={{
         background: dark ? c.primary : c.cream,
         color: dark ? "#fff" : undefined,
@@ -115,7 +115,7 @@ export function ProvidersSection({
     <section
       id={id}
       className="providers-section"
-      style={{ background: theme.colors.sand, padding: "112px 0" }}
+      style={{ background: theme.colors.sand, padding: "clamp(64px, 11vw, 112px) 0" }}
     >
       <Container>
         <SectionHeader

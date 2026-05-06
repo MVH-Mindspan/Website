@@ -83,8 +83,7 @@ export function FeatureSpotlight({
       <img
         src={image}
         alt={imageAlt}
-        className="w-full object-cover"
-        style={{ aspectRatio: "16/10", display: "block" }}
+        className="w-full object-cover block aspect-[4/3] sm:aspect-[16/10]"
         loading="lazy"
       />
     </ImageFrame>
@@ -96,7 +95,7 @@ export function FeatureSpotlight({
       style={{
         background,
         color: c.ink,
-        padding: "96px 0",
+        padding: "clamp(56px, 10vw, 96px) 0",
         scrollMarginTop: "96px",
       }}
     >

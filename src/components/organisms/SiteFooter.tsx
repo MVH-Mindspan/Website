@@ -60,11 +60,11 @@ export function SiteFooter() {
           ))}
         </div>
         <div
-          className="mt-16 pt-8 flex flex-wrap gap-4 justify-between text-sm"
+          className="mt-12 sm:mt-16 pt-6 sm:pt-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 sm:gap-6 text-sm"
           style={{ borderTop: "1px solid rgba(255,255,255,0.1)" }}
         >
           <p>{footer.copyright}</p>
-          <div className="flex gap-6">
+          <div className="flex flex-wrap gap-x-5 gap-y-2">
             {footer.legal.map((l) => (
               <a
                 key={l.label}

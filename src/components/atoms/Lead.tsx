@@ -14,7 +14,7 @@ export function Lead({
   children,
   size = "lg",
   color,
-  maxWidth = "62ch",
+  maxWidth = "min(65ch, 90%)",
   className,
   style,
 }: {

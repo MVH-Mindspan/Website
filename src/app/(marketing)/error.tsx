@@ -48,7 +48,7 @@ export default function MarketingError({
         >
           Try reloading this section, or jump to a different page from the menu above.
           {error.digest && (
-            <span className="block mt-3 text-xs" style={{ color: "rgba(8,54,48,0.45)" }}>
+            <span className="block mt-3 text-xs" style={{ color: "rgba(8,54,48,0.72)" }}>
               Reference: {error.digest}
             </span>
           )}

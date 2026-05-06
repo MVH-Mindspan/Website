@@ -2,6 +2,7 @@
 
 import { useState, useCallback, useEffect } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
+import { EASE } from "@/lib/motion";
 import ProgressBar from "./ProgressBar";
 import StepState, { type StateChoice } from "./StepState";
 import StepCareOption from "./StepCareOption";
@@ -10,7 +11,6 @@ import StepReview from "./StepReview";
 import StepWaitlist from "./StepWaitlist";
 import { ANALYTICS_EVENTS, track } from "@/lib/analytics";
 
-const EASE = [0.22, 0.61, 0.36, 1] as const;
 const STORAGE_KEY = "mindspan:booking:v1";
 const SUBMIT_TIMEOUT_MS = 15000;
 
@@ -448,6 +448,12 @@ export default function BookingWizard() {
 
   return (
     <div className="min-h-screen" style={{ background: "#efeeeb" }}>
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[1000] focus:rounded-full focus:bg-[#083630] focus:px-5 focus:py-3 focus:text-sm focus:font-semibold focus:text-white focus:shadow-lg focus:outline-none"
+      >
+        Skip to main content
+      </a>
       <header className="py-6">
         <div className="studio-container flex items-center justify-between">
           <a
@@ -466,7 +472,7 @@ export default function BookingWizard() {
             href="/"
             onClick={handleExitClick}
             className="text-sm font-medium flex items-center gap-1.5 transition-colors"
-            style={{ color: "rgba(8,54,48,0.5)" }}
+            style={{ color: "rgba(8,54,48,0.72)" }}
           >
             <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M19 12H5M12 19l-7-7 7-7" />
@@ -488,9 +494,9 @@ export default function BookingWizard() {
         </div>
       )}
 
-      <main className="studio-container pb-32">
+      <main id="main-content" className="studio-container pb-32">
         <div
-          className="max-w-3xl mx-auto rounded-3xl p-6 sm:p-10 md:p-12"
+          className="max-w-3xl mx-auto rounded-3xl p-4 sm:p-6 md:p-10 lg:p-12"
           style={{
             background: "#fff",
             border: "1px solid rgba(8,54,48,0.06)",

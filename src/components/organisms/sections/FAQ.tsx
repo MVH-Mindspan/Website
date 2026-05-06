@@ -20,7 +20,7 @@ export function FAQ({
   const [openId, setOpenId] = useState<string | null>(items[0]?.id ?? null);
 
   return (
-    <section style={{ background: c.sand, padding: "96px 0" }}>
+    <section style={{ background: c.sand, padding: "clamp(56px, 10vw, 96px) 0" }}>
       <Container>
         <div className="grid grid-cols-1 lg:grid-cols-[minmax(280px,360px)_1fr] gap-10 lg:gap-16 items-start">
           <div className="lg:sticky lg:top-24">
