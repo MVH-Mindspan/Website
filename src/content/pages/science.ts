@@ -113,7 +113,7 @@ export const sciencePage = {
   }),
   hero: {
     video: "/assets/science-hero-video-v2.mp4",
-    poster: "/assets/science-hero-poster.jpg",
+    poster: "/assets/science-hero-poster-v2.jpg",
     playbackRate: 0.9,
     headline: "The science behind every visit, pointed at you.",
     subTagline: "Built around you, every visit.",
