@@ -1,4 +1,4 @@
-import { PageHero } from "@/components/organisms/sections/PageHero";
+import { VideoHero } from "@/components/organisms/sections/VideoHero";
 import { ProvidersSection } from "@/components/organisms/sections/ProvidersSection";
 import { ProvidersPreview } from "@/components/organisms/sections/ProvidersPreview";
 import { SimpleSteps } from "@/components/organisms/sections/SimpleSteps";
@@ -23,7 +23,7 @@ export const metadata = providersPage.metadata;
 export default function ProvidersPage() {
   return (
     <>
-      <PageHero {...providersPage.hero} />
+      <VideoHero {...providersPage.hero} />
       <div id="how-we-work">
         <SplitCards
           intro={coManagementIntro}
