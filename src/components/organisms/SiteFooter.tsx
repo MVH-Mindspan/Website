@@ -33,6 +33,13 @@ export function SiteFooter() {
             <p className="mt-6 text-sm max-w-sm leading-relaxed">
               {brand.footerTagline}
             </p>
+            <address className="mt-3 text-xs text-white/55 leading-relaxed not-italic">
+              {footer.mailingAddress.map((line) => (
+                <span key={line} className="block">
+                  {line}
+                </span>
+              ))}
+            </address>
           </div>
           {footer.columns.map((col) => (
             <div key={col.title}>
