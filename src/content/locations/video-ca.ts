@@ -59,6 +59,7 @@ export const videoCaliforniaDetail: LocationDetail = {
         icon: "chat",
       },
     ],
+    primary: { label: "See the science behind our care", href: "/about/science" },
   },
 
   stages: {

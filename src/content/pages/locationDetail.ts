@@ -73,6 +73,8 @@ export type LocationDetail = {
   services?: {
     intro: { eyebrow: string; title: string; lead: string };
     cards: readonly TechCard[];
+    primary?: { label: string; href: string };
+    secondary?: { label: string; href: string };
   };
   stages?: {
     intro: { eyebrow: string; title: string; lead: string };

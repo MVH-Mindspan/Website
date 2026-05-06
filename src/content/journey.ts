@@ -37,7 +37,7 @@ export const journey: JourneyStage[] = [
     title: "The latest science, pointed at you",
     body:
       "Your neurologist builds a care plan around your specific situation, not a generic protocol. Your history, your biology, your goals.",
-    cta: { label: "See how we personalize your plan", href: "#technology" },
+    cta: { label: "Explore the science behind your plan", href: "/about/science" },
     image: "/assets/latest-science.jpg",
     imageAlt: "A Mindspan neurologist reviewing brain imaging with a couple in clinic",
   },

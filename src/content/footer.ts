@@ -8,6 +8,7 @@ export const footer = {
       links: [
         { label: "Book an appointment", href: "/book-a-visit" },
         { label: "How it works", href: "/about/how-it-works" },
+        { label: "Science & technology", href: "/about/science" },
         { label: "GUIDE Program", href: "/guide" },
         { label: "For caregivers", href: "/family/assist" },
       ],
@@ -17,6 +18,7 @@ export const footer = {
       links: [
         { label: "Refer a patient", href: "/providers/refer" },
         { label: "For PCP groups", href: "/providers/refer" },
+        { label: "Science & technology", href: "/about/science" },
         { label: "About Mindspan", href: "/about" },
       ],
     },

@@ -30,6 +30,7 @@ export default function ProvidersPage() {
           core={coManagement.core}
           edge={coManagement.edge}
           closing={coManagementClosing}
+          cta={{ label: "See the science behind our care", href: "/about/science" }}
           tone="sand"
         />
       </div>
