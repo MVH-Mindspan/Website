@@ -98,7 +98,9 @@ export function StatsBand({
             }}
           >
             {rest.map((s) => (
-              <StatCounter key={s.label} value={s.value} label={s.label} />
+              <div key={s.label} style={{ textAlign: "center" }}>
+                <StatCounter value={s.value} label={s.label} />
+              </div>
             ))}
           </Reveal>
         )}
