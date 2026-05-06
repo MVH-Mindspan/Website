@@ -86,7 +86,7 @@ export function VideoHero({
         }}
       />
       <div
-        className="absolute bottom-0 left-0 right-0 flex flex-col md:flex-row md:items-end md:justify-between gap-6 md:gap-16 hero-content"
+        className="absolute bottom-0 left-0 right-0 flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 lg:gap-16 hero-content"
         style={{ padding: "64px clamp(24px, 5vw, 80px)" }}
       >
         <div
