@@ -48,10 +48,10 @@ export function SiteHeader() {
     return () => window.removeEventListener("keydown", onKey);
   }, [open]);
 
-  // Close menu when viewport crosses md (768px)
+  // Close menu when viewport crosses nav (1200px)
   useEffect(() => {
     if (!open) return;
-    const mql = window.matchMedia("(min-width: 768px)");
+    const mql = window.matchMedia("(min-width: 1200px)");
     const onChange = (e: MediaQueryListEvent) => {
       if (e.matches) setOpen(false);
     };
@@ -127,7 +127,7 @@ export function SiteHeader() {
           <motion.div
             aria-hidden="true"
             onClick={closeMenu}
-            className="fixed inset-0 z-[998] lg:hidden"
+            className="fixed inset-0 z-[998] nav:hidden"
             style={{ background: "rgba(32,30,23,0.45)" }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -159,7 +159,7 @@ export function SiteHeader() {
           />
         </a>
 
-        <ul className="hidden lg:flex items-center gap-8">
+        <ul className="hidden nav:flex items-center gap-8">
           {[...nav, audienceNav.providers].map((n) => {
             const active = isActive(n.href);
             return (
@@ -178,10 +178,10 @@ export function SiteHeader() {
           })}
         </ul>
 
-        <div className="flex items-center gap-2 lg:gap-3">
+        <div className="flex items-center gap-2 nav:gap-3">
           <a
             href={audienceNav.refer.href}
-            className="hidden lg:inline-flex v2-header-refer items-center gap-2 font-medium px-5 py-3"
+            className="hidden nav:inline-flex v2-header-refer items-center gap-2 font-medium px-5 py-3"
             style={{
               fontFamily: theme.fonts.body,
               fontSize: typeScale.bodySm,
@@ -204,7 +204,7 @@ export function SiteHeader() {
                 href: brand.primaryCtaHref,
               })
             }
-            className="v2-header-cta font-semibold px-4 lg:px-6 py-2 lg:py-3"
+            className="v2-header-cta font-semibold px-4 nav:px-6 py-2 nav:py-3"
             style={{
               fontFamily: theme.fonts.body,
               fontSize: typeScale.bodySm,
@@ -214,8 +214,8 @@ export function SiteHeader() {
               whiteSpace: "nowrap",
             }}
           >
-            <span className="lg:hidden">{brand.primaryCta}</span>
-            <span className="hidden lg:inline-flex lg:items-center lg:gap-2">
+            <span className="nav:hidden">{brand.primaryCta}</span>
+            <span className="hidden nav:inline-flex nav:items-center nav:gap-2">
               Book an appointment
               <svg
                 className="v2-header-cta-arrow"
@@ -243,7 +243,7 @@ export function SiteHeader() {
             aria-expanded={open}
             aria-controls="site-mobile-menu"
             aria-label={open ? "Close menu" : "Open menu"}
-            className="lg:hidden inline-flex items-center justify-center"
+            className="nav:hidden inline-flex items-center justify-center"
             style={{
               width: 44,
               height: 44,
@@ -315,7 +315,7 @@ export function SiteHeader() {
             <motion.div
               id="site-mobile-menu"
               role="menu"
-              className="lg:hidden absolute inset-x-3"
+              className="nav:hidden absolute inset-x-3"
               style={{
                 top: "100%",
                 marginTop: 8,
