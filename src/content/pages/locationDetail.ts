@@ -6,7 +6,6 @@ import type { Audience } from "../audiences";
 import type { Protocol } from "../protocols";
 import { bayAreaDetail } from "../locations/bay-area";
 import { danversDetail } from "../locations/danvers";
-import { irvineDetail } from "../locations/irvine";
 import { videoMassachusettsDetail } from "../locations/video-ma";
 import { videoCaliforniaDetail } from "../locations/video-ca";
 
@@ -137,7 +136,6 @@ export type LocationDetail = {
 const detailMap: Record<string, LocationDetail> = {
   danvers: danversDetail,
   "video-ma": videoMassachusettsDetail,
-  irvine: irvineDetail,
   "bay-area": bayAreaDetail,
   "video-ca": videoCaliforniaDetail,
 };
