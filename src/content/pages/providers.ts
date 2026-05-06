@@ -9,16 +9,13 @@ export const providersPage = {
     canonical: "/providers",
   }),
   hero: {
-    eyebrow: "For clinical partners",
-    title: "Specialty cognitive care, with you still in the lead.",
-    image: "/assets/providers-hero.webp",
-    imageAlt:
-      "A Mindspan neurologist in conversation with a patient across a desk in a sunlit consultation room",
+    video: "/assets/providers-hero-video.mp4",
+    poster: "/assets/providers-hero-poster.jpg",
+    headline: "Specialty cognitive care, with you still in the lead.",
     subTagline: "True co-management, not a hand-off.",
     subhead:
       "We absorb the dementia-specific work, assessment, biomarkers, infusion oversight, behavioral support, and send a structured note back to your chart after every visit. Your patient stays your patient.",
-    primaryCta: { label: "See how we partner", href: "#how-we-work" },
-    secondaryCta: { label: "Talk to our team", href: "mailto:clinicians@mindspan.co" },
+    cta: { label: "See how we partner", href: "#how-we-work" },
   },
   finalCta: {
     eyebrow: "Let's work together",
