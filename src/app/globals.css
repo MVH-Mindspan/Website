@@ -591,14 +591,16 @@ h1, h2, h3 {
 }
 
 /* Responsive overrides for v2 layout */
-@media (max-width: 768px) {
-  /* Hero content: stack vertically */
+@media (max-width: 1023.98px) {
+  /* Hero content: stack vertically until lg (matches VideoHero.tsx flex-col lg:flex-row) */
   .v2-scope .hero-content {
     flex-direction: column !important;
     align-items: flex-start !important;
     gap: 24px !important;
   }
+}
 
+@media (max-width: 768px) {
   /* Banner text alignment on mobile */
   .v2-scope .teaser-banner-grid > p:last-child {
     justify-content: flex-start !important;
