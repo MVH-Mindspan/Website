@@ -17,7 +17,7 @@ export const footer = {
       title: "For providers",
       links: [
         { label: "Refer a patient", href: "/providers/refer" },
-        { label: "For PCP groups", href: "/providers/refer" },
+        { label: "Provider information", href: "/providers" },
         { label: "Science & technology", href: "/about/science" },
         { label: "About Mindspan", href: "/about" },
       ],
