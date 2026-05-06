@@ -23,6 +23,8 @@
 
   /* Soft editorial highlight — pairs with brand green + orange */
   --color-highlight: #A8D2FB;
+
+  --breakpoint-nav: 1200px;
 }
 
 :root {
