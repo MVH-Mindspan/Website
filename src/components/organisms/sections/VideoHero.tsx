@@ -7,6 +7,7 @@ import { ease, type as typeScale } from "@/lib/tokens";
 import { externalLinkProps } from "@/lib/links";
 import { useHeroVideo } from "@/lib/use-hero-video";
 import { brand } from "@/content/brand";
+import { ANALYTICS_EVENTS, track } from "@/lib/analytics";
 
 export function VideoHero({
   video,
@@ -145,6 +146,14 @@ export function VideoHero({
               <a
                 href={cta.href}
                 {...externalLinkProps(cta.href)}
+                onClick={() =>
+                  track(ANALYTICS_EVENTS.ctaClicked, {
+                    location: "video_hero",
+                    variant: "primary",
+                    label: cta.label,
+                    href: cta.href,
+                  })
+                }
                 className="hero-cta-primary"
                 style={{
                   display: "inline-block",
@@ -165,6 +174,13 @@ export function VideoHero({
               </a>
               <a
                 href={brand.phoneHref}
+                onClick={() =>
+                  track(ANALYTICS_EVENTS.ctaClicked, {
+                    location: "video_hero",
+                    variant: "phone",
+                    href: brand.phoneHref,
+                  })
+                }
                 className="hero-cta-secondary"
                 style={{
                   display: "inline-flex",
