@@ -112,16 +112,14 @@ export const sciencePage = {
     canonical: "/about/science",
   }),
   hero: {
-    video: "/assets/science-hero-video.mp4",
+    video: "/assets/science-hero-video-v2.mp4",
     poster: "/assets/science-hero-poster.jpg",
     playbackRate: 0.9,
-    eyebrow: "Diagnostics, science & technology",
-    title: "The science behind every visit, pointed at you.",
+    headline: "The science behind every visit, pointed at you.",
     subTagline: "Built around you, every visit.",
-    lead:
+    subhead:
       "Two investments shape how we care for you: the clinical protocols every Mindspan patient receives, and the technology that delivers them faster, safer, and more personal than anywhere else.",
-    primaryCta: { label: "Start a free assessment", href: ASSESSMENT_HREF },
-    secondaryCta: { label: "Talk to our care team", href: BOOKING_HREF },
+    cta: { label: "Start a free assessment", href: ASSESSMENT_HREF },
   },
   technologyIntro,
   technologyCards,
