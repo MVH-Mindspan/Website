@@ -39,12 +39,17 @@ export function SplitCards({
   edge?: Protocol;
   closing?: string;
   cta?: { label: string; href: string };
-  footnote?: string;
+  footnote?: string | readonly string[];
   tone?: "default" | "sand";
 }) {
   const { theme } = useTheme();
   const c = theme.colors;
   const background = tone === "sand" ? c.sand : undefined;
+  const footnoteParagraphs = Array.isArray(footnote)
+    ? footnote
+    : footnote
+      ? [footnote]
+      : [];
 
   return (
     <section style={{ padding: "96px 0", background }}>
@@ -183,17 +188,22 @@ export function SplitCards({
           </Reveal>
         )}
 
-        {footnote && (
-          <Reveal
-            className="mt-8 max-w-3xl"
-            style={{
-              fontFamily: theme.fonts.body,
-              fontSize: typeScale.bodySm,
-              color: alpha(c.ink, 0.55),
-              lineHeight: 1.55,
-            }}
-          >
-            {footnote}
+        {footnoteParagraphs.length > 0 && (
+          <Reveal className="mt-8 max-w-3xl">
+            {footnoteParagraphs.map((paragraph, index) => (
+              <p
+                key={paragraph}
+                className={index === 0 ? undefined : "mt-3"}
+                style={{
+                  fontFamily: theme.fonts.body,
+                  fontSize: typeScale.bodySm,
+                  color: alpha(c.ink, 0.55),
+                  lineHeight: 1.55,
+                }}
+              >
+                {paragraph}
+              </p>
+            ))}
           </Reveal>
         )}
       </Container>
