@@ -61,6 +61,7 @@ export function Heading({
         ...variantStyles[variant],
         minWidth: 0,
         overflowWrap: "break-word",
+        textWrap: "balance",
         color,
         fontFamily,
         ...style,

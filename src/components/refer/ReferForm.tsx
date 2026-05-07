@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { useTheme } from "@/lib/theme-context";
 import { alpha } from "@/lib/themes";
@@ -9,6 +9,30 @@ import { ArrowIcon } from "@/components/atoms/ArrowIcon";
 import { Heading } from "@/components/atoms/Heading";
 
 const SUBMIT_TIMEOUT_MS = 15000;
+
+const FIELD_LABELS: Record<string, string> = {
+  referrerFirstName: "Your first name",
+  referrerLastName: "Your last name",
+  referrerEmail: "Your email",
+  referrerPhone: "Your direct phone",
+  practiceName: "Practice name",
+  patientFirstName: "Patient's first name",
+  patientLastName: "Patient's last name",
+  patientPhone: "Patient phone",
+  notes: "Notes",
+};
+
+const FIELD_ORDER = [
+  "referrerFirstName",
+  "referrerLastName",
+  "referrerEmail",
+  "referrerPhone",
+  "practiceName",
+  "patientFirstName",
+  "patientLastName",
+  "patientPhone",
+  "notes",
+] as const;
 
 type FormData = {
   referrerFirstName: string;
@@ -46,14 +70,22 @@ function formatPhone(raw: string): string {
 
 function validate(data: FormData): Errors {
   const errors: Errors = {};
-  if (!data.referrerFirstName.trim()) errors.referrerFirstName = "Required";
-  if (!data.referrerLastName.trim()) errors.referrerLastName = "Required";
-  if (!data.referrerEmail.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.referrerEmail))
-    errors.referrerEmail = "Enter a valid email";
-  if (!data.patientFirstName.trim()) errors.patientFirstName = "Required";
-  if (!data.patientLastName.trim()) errors.patientLastName = "Required";
+  if (!data.referrerFirstName.trim()) errors.referrerFirstName = "Please enter your first name";
+  if (!data.referrerLastName.trim()) errors.referrerLastName = "Please enter your last name";
+  if (!data.referrerEmail.trim()) {
+    errors.referrerEmail = "Please enter your email";
+  } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.referrerEmail.trim())) {
+    errors.referrerEmail = "Please enter a valid email address";
+  }
+  // Optional referrer phone — only validate when present.
+  const referrerDigits = data.referrerPhone.replace(/\D/g, "");
+  if (referrerDigits.length > 0 && referrerDigits.length < 10) {
+    errors.referrerPhone = "Please enter a 10-digit phone number, or leave it blank";
+  }
+  if (!data.patientFirstName.trim()) errors.patientFirstName = "Please enter the patient's first name";
+  if (!data.patientLastName.trim()) errors.patientLastName = "Please enter the patient's last name";
   if (!data.patientPhone.trim() || data.patientPhone.replace(/\D/g, "").length < 10)
-    errors.patientPhone = "Enter a 10-digit phone number";
+    errors.patientPhone = "Please enter a valid 10-digit phone number";
   return errors;
 }
 
@@ -75,6 +107,26 @@ export function ReferForm({ copy }: { copy: Copy }) {
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [submitError, setSubmitError] = useState<string | undefined>();
+
+  const submitControllerRef = useRef<AbortController | null>(null);
+  const isMountedRef = useRef(true);
+  const errorSummaryRef = useRef<HTMLDivElement | null>(null);
+  const successWrapperRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    isMountedRef.current = true;
+    return () => {
+      isMountedRef.current = false;
+      submitControllerRef.current?.abort();
+    };
+  }, []);
+
+  // Focus the success container after submit so screen readers hear it.
+  useEffect(() => {
+    if (submitted) {
+      successWrapperRef.current?.focus();
+    }
+  }, [submitted]);
 
   const update = useCallback(
     <K extends keyof FormData>(field: K, value: FormData[K]) => {
@@ -98,39 +150,57 @@ export function ReferForm({ copy }: { copy: Copy }) {
       const stepErrors = validate(data);
       if (Object.keys(stepErrors).length > 0) {
         setErrors(stepErrors);
-        const firstKey = Object.keys(stepErrors)[0];
-        const el = document.getElementById(`refer-${firstKey}`);
-        el?.focus();
+        // Focus the error summary so AT users hear the count + list, then
+        // queue moving focus into the first invalid field on the next frame.
+        requestAnimationFrame(() => {
+          errorSummaryRef.current?.focus();
+          const firstKey = FIELD_ORDER.find((k) => stepErrors[k as keyof Errors]);
+          if (!firstKey) return;
+          const el = document.getElementById(`refer-${firstKey}`);
+          if (el && typeof (el as HTMLElement).focus === "function") {
+            // Slight delay so the summary announcement isn't pre-empted.
+            setTimeout(() => {
+              if (!isMountedRef.current) return;
+              (el as HTMLElement).focus();
+              el.scrollIntoView({ block: "center", behavior: reduceMotion ? "auto" : "smooth" });
+            }, 50);
+          }
+        });
         return;
       }
       setSubmitError(undefined);
       setSubmitting(true);
       const controller = new AbortController();
-      const timeout = setTimeout(() => controller.abort(), SUBMIT_TIMEOUT_MS);
+      submitControllerRef.current = controller;
+      const timeout = setTimeout(() => controller.abort("timeout"), SUBMIT_TIMEOUT_MS);
       try {
         const res = await fetch("/api/refer", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             referrer: {
-              firstName: data.referrerFirstName,
-              lastName: data.referrerLastName,
-              email: data.referrerEmail,
+              firstName: data.referrerFirstName.trim(),
+              lastName: data.referrerLastName.trim(),
+              email: data.referrerEmail.trim(),
               phone: data.referrerPhone,
-              practice: data.practiceName,
+              practice: data.practiceName.trim(),
             },
             patient: {
-              firstName: data.patientFirstName,
-              lastName: data.patientLastName,
+              firstName: data.patientFirstName.trim(),
+              lastName: data.patientLastName.trim(),
               phone: data.patientPhone,
             },
-            notes: data.notes,
+            notes: data.notes.trim(),
           }),
           signal: controller.signal,
         });
+        if (!isMountedRef.current) return;
         if (!res.ok) {
+          const isClientError = res.status >= 400 && res.status < 500;
           setSubmitError(
-            `Our system returned an error (${res.status}). Please try again or call us.`
+            isClientError
+              ? "Something in the form didn't come through. Please review and try again, or call us at the number to the right."
+              : "Our system is having a hiccup. Please try again in a moment, or call or fax us using the contact methods to the right."
           );
         } else {
           setSubmitted(true);
@@ -139,14 +209,23 @@ export function ReferForm({ copy }: { copy: Copy }) {
           }
         }
       } catch (err) {
-        if ((err as Error)?.name === "AbortError") {
-          setSubmitError("The request took too long. Please try again or call us.");
+        if (!isMountedRef.current) return;
+        const error = err as { name?: string };
+        if (error?.name === "AbortError") {
+          setSubmitError(
+            "That took longer than expected. Please check your connection and try again, or call us."
+          );
         } else {
-          setSubmitError("We couldn't reach our servers. Please try again or call us.");
+          setSubmitError(
+            "We couldn't reach our servers. Please try again, or call or fax us using the contact methods to the right."
+          );
         }
       } finally {
         clearTimeout(timeout);
-        setSubmitting(false);
+        submitControllerRef.current = null;
+        if (isMountedRef.current) {
+          setSubmitting(false);
+        }
       }
     },
     [data, submitting, submitted, reduceMotion]
@@ -155,6 +234,10 @@ export function ReferForm({ copy }: { copy: Copy }) {
   if (submitted) {
     return (
       <motion.div
+        ref={successWrapperRef}
+        tabIndex={-1}
+        role="status"
+        aria-live="polite"
         initial={reduceMotion ? false : { opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.35, ease: ease.expressive as unknown as number[] }}
@@ -164,6 +247,7 @@ export function ReferForm({ copy }: { copy: Copy }) {
           borderRadius: "1.5rem",
           padding: "clamp(32px, 6vw, 48px) clamp(20px, 4vw, 32px)",
           textAlign: "center",
+          outline: "none",
         }}
       >
         <div
@@ -215,10 +299,16 @@ export function ReferForm({ copy }: { copy: Copy }) {
     );
   }
 
+  const errorEntries = (Object.entries(errors) as [keyof Errors, string | undefined][]).filter(
+    (entry): entry is [keyof Errors, string] => Boolean(entry[1])
+  );
+  const hasErrors = errorEntries.length > 0;
+
   return (
     <form
       onSubmit={handleSubmit}
       noValidate
+      aria-busy={submitting}
       style={{
         background: "#fff",
         border: `1px solid ${alpha(c.ink, 0.08)}`,
@@ -227,6 +317,59 @@ export function ReferForm({ copy }: { copy: Copy }) {
         boxShadow: `0 4px 32px -16px ${alpha(c.ink, 0.18)}`,
       }}
     >
+      {hasErrors && (
+        <div
+          ref={errorSummaryRef}
+          tabIndex={-1}
+          role="alert"
+          aria-live="assertive"
+          style={{
+            marginBottom: 24,
+            padding: "14px 16px",
+            background: alpha(c.accent, 0.08),
+            border: `1px solid ${alpha(c.accent, 0.2)}`,
+            borderRadius: "0.75rem",
+            fontFamily: theme.fonts.body,
+            color: c.accentText,
+            outline: "none",
+          }}
+        >
+          <p style={{ fontSize: typeScale.bodySm, fontWeight: 600 }}>
+            Please fix {errorEntries.length === 1 ? "this" : `these ${errorEntries.length}`}{" "}
+            {errorEntries.length === 1 ? "field" : "fields"}:
+          </p>
+          <ul
+            style={{
+              marginTop: 8,
+              paddingLeft: 20,
+              fontSize: typeScale.micro,
+              listStyle: "disc",
+              display: "flex",
+              flexDirection: "column",
+              gap: 4,
+            }}
+          >
+            {errorEntries.map(([key, msg]) => (
+              <li key={key} style={{ overflowWrap: "anywhere" }}>
+                <a
+                  href={`#refer-${key}`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    const el = document.getElementById(`refer-${key}`);
+                    if (el && typeof (el as HTMLElement).focus === "function") {
+                      (el as HTMLElement).focus();
+                      el.scrollIntoView({ block: "center", behavior: reduceMotion ? "auto" : "smooth" });
+                    }
+                  }}
+                  style={{ color: c.accentText, textDecoration: "underline" }}
+                >
+                  {FIELD_LABELS[key as string] || (key as string)}: {msg}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
       <FieldGroup
         label="Referring provider"
         description="The clinician sending this referral"
@@ -274,7 +417,7 @@ export function ReferForm({ copy }: { copy: Copy }) {
             autoComplete="tel"
             inputMode="tel"
             placeholder="(555) 123-4567"
-            hint="Optional"
+            hint="Optional. US numbers only."
           />
         </Row>
         <Field
@@ -322,6 +465,7 @@ export function ReferForm({ copy }: { copy: Copy }) {
           onChange={(v) => update("patientPhone", v.replace(/\D/g, "").slice(0, 10))}
           inputMode="tel"
           placeholder="(555) 123-4567"
+          hint="US numbers only. We use this to schedule the intake call."
         />
         <Field
           id="refer-notes"
@@ -329,27 +473,32 @@ export function ReferForm({ copy }: { copy: Copy }) {
           as="textarea"
           value={data.notes}
           onChange={(v) => update("notes", v)}
-          hint="Optional. Urgency, language preference, caregiver context, etc. Please skip clinical detail and PHI — we capture that on the intake call."
+          hint="Optional. Urgency, language preference, caregiver context, etc. Please skip clinical detail and PHI, we capture that on the intake call."
           maxLength={600}
         />
       </FieldGroup>
 
       {submitError && (
-        <p
+        <div
           role="alert"
-          aria-live="polite"
+          aria-live="assertive"
           style={{
             marginTop: 20,
-            padding: "12px 14px",
+            padding: "14px 16px",
             background: alpha(c.accent, 0.08),
+            border: `1px solid ${alpha(c.accent, 0.2)}`,
             color: c.accentText,
             borderRadius: "0.75rem",
             fontFamily: theme.fonts.body,
             fontSize: typeScale.bodySm,
+            overflowWrap: "anywhere",
           }}
         >
-          {submitError}
-        </p>
+          <p style={{ fontWeight: 600, marginBottom: 4 }}>
+            We couldn't send this referral.
+          </p>
+          <p>{submitError}</p>
+        </div>
       )}
 
       <div
@@ -363,6 +512,7 @@ export function ReferForm({ copy }: { copy: Copy }) {
         <button
           type="submit"
           disabled={submitting}
+          aria-busy={submitting}
           className="hover:-translate-y-0.5"
           style={{
             display: "inline-flex",
@@ -383,9 +533,36 @@ export function ReferForm({ copy }: { copy: Copy }) {
             boxShadow: `0 4px 16px -4px ${alpha(c.brandGreen, 0.4)}`,
           }}
         >
-          {submitting ? copy.submitting : copy.submit}
-          {!submitting && <ArrowIcon />}
+          {submitting ? (
+            <>
+              <span
+                aria-hidden="true"
+                style={{
+                  width: 14,
+                  height: 14,
+                  border: "2px solid rgba(255,255,255,0.35)",
+                  borderTopColor: "#fff",
+                  borderRadius: "50%",
+                  animation: reduceMotion ? "none" : "refer-spinner 0.8s linear infinite",
+                }}
+              />
+              <span>{copy.submitting}</span>
+              <span className="sr-only">Sending the referral, please wait</span>
+            </>
+          ) : (
+            <>
+              {copy.submit}
+              <ArrowIcon />
+            </>
+          )}
         </button>
+        <style jsx>{`
+          @keyframes refer-spinner {
+            to {
+              transform: rotate(360deg);
+            }
+          }
+        `}</style>
         <p
           style={{
             fontFamily: theme.fonts.body,
@@ -472,7 +649,7 @@ function Row({ children }: { children: React.ReactNode }) {
     <div
       style={{
         display: "grid",
-        gridTemplateColumns: "1fr 1fr",
+        gridTemplateColumns: "minmax(0, 1fr) minmax(0, 1fr)",
         gap: 12,
       }}
       className="refer-row"
@@ -481,7 +658,7 @@ function Row({ children }: { children: React.ReactNode }) {
       <style jsx>{`
         @media (max-width: 560px) {
           .refer-row {
-            grid-template-columns: 1fr !important;
+            grid-template-columns: minmax(0, 1fr) !important;
           }
         }
       `}</style>
@@ -566,7 +743,7 @@ function Field({
   };
 
   return (
-    <div>
+    <div style={{ minWidth: 0 }}>
       <label
         htmlFor={id}
         style={{
@@ -576,13 +753,17 @@ function Field({
           fontWeight: 500,
           color: c.ink,
           marginBottom: 6,
+          overflowWrap: "break-word",
         }}
       >
         {label}
         {required && (
-          <span aria-hidden style={{ color: c.accent, marginLeft: 4 }}>
-            *
-          </span>
+          <>
+            <span aria-hidden style={{ color: c.accent, marginLeft: 4 }}>
+              *
+            </span>
+            <span className="sr-only"> (required)</span>
+          </>
         )}
       </label>
       {as === "textarea" ? (
@@ -594,6 +775,7 @@ function Field({
           onFocus={onFocus}
           onBlur={onBlur}
           required={required}
+          aria-required={required ? true : undefined}
           placeholder={placeholder}
           maxLength={maxLength}
           rows={3}
@@ -611,6 +793,7 @@ function Field({
           onFocus={onFocus}
           onBlur={onBlur}
           required={required}
+          aria-required={required ? true : undefined}
           placeholder={placeholder}
           autoComplete={autoComplete}
           inputMode={inputMode}
@@ -624,12 +807,14 @@ function Field({
         <p
           id={errorId}
           role="alert"
+          aria-live="polite"
           style={{
             marginTop: 6,
             fontFamily: theme.fonts.body,
             fontSize: typeScale.micro,
             color: c.accentText,
             fontWeight: 500,
+            overflowWrap: "anywhere",
           }}
         >
           {error}
@@ -643,6 +828,7 @@ function Field({
             fontSize: typeScale.micro,
             color: alpha(c.ink, 0.55),
             lineHeight: 1.5,
+            overflowWrap: "break-word",
           }}
         >
           {hint}

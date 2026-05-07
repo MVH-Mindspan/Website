@@ -37,14 +37,14 @@ function ProviderBlock({ card }: { card: ProviderCard }) {
           }}
         />
       )}
-      <div className="relative">
+      <div className="relative min-w-0">
         <Eyebrow color={dark ? "#A8D2FB" : c.accentText}>{card.eyebrow}</Eyebrow>
         <Heading
           as="h3"
           variant="h4"
           color={dark ? "#fff" : c.ink}
           fontFamily={theme.fonts.heading}
-          className="mt-4"
+          className="mt-4 break-words"
         >
           {card.title}
         </Heading>
@@ -52,7 +52,7 @@ function ProviderBlock({ card }: { card: ProviderCard }) {
           size="bodyCard"
           maxWidth={false}
           color={dark ? undefined : alpha(c.ink, 0.72)}
-          className={`mt-5 ${dark ? "text-white/80" : ""}`.trim()}
+          className={`mt-5 break-words ${dark ? "text-white/80" : ""}`.trim()}
         >
           {card.body}
         </Lead>

@@ -20,6 +20,8 @@ export function Eyebrow({
         fontSize: "0.9375rem",
         letterSpacing: tracking.eyebrow,
         textTransform: "uppercase",
+        overflowWrap: "break-word",
+        minWidth: 0,
         color,
         ...style,
       }}

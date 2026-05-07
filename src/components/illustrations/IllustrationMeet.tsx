@@ -11,8 +11,8 @@ export function IllustrationMeet() {
     <svg
       viewBox="0 0 500 400"
       preserveAspectRatio="xMidYMid meet"
-      role="img"
-      aria-label="A patient and a Mindspan neurologist on a video call."
+      aria-hidden="true"
+      focusable="false"
       style={{ width: "100%", height: "100%", display: "block" }}
     >
       <defs>

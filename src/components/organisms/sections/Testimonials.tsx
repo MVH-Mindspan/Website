@@ -21,16 +21,18 @@ export function Testimonials({
   const c = theme.colors;
   const bg = tone === "sand" ? c.sand : c.cream;
 
+  if (quotes.length === 0) return null;
+
   return (
     <section style={{ background: bg, padding: "clamp(56px, 10vw, 96px) 0" }}>
       <Container>
         <SectionHeader eyebrow={intro.eyebrow} title={intro.title} />
-        <div className="mt-12 grid md:grid-cols-3 gap-5 md:gap-6">
+        <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 md:gap-6">
           {quotes.map((q, i) => (
             <Reveal
               key={q.id}
               as="article"
-              className="rounded-[2rem] p-8 flex flex-col"
+              className="rounded-[2rem] p-8 flex flex-col min-w-0"
               style={{
                 background: "#fff",
                 border: `1px solid ${alpha(c.ink, 0.08)}`,

@@ -52,23 +52,31 @@ export function SectionHeader({
             alignItems: "center",
             gap: 16,
             marginBottom: 20,
+            // On narrow viewports, allow the eyebrow to wrap onto its own row
+            // rather than crushing the dividers when the label is long.
+            flexWrap: "wrap",
           }}
         >
           <div
             style={{
               height: 1,
               flex: 1,
+              minWidth: 24,
               background:
                 tone === "light" ? alpha(c.cream, 0.18) : alpha(c.ink, 0.15),
             }}
           />
-          <Eyebrow color={resolvedEyebrowColor} style={{ margin: 0 }}>
+          <Eyebrow
+            color={resolvedEyebrowColor}
+            style={{ margin: 0, flexShrink: 0, maxWidth: "100%" }}
+          >
             {eyebrow}
           </Eyebrow>
           <div
             style={{
               height: 1,
               flex: 1,
+              minWidth: 24,
               background:
                 tone === "light" ? alpha(c.cream, 0.18) : alpha(c.ink, 0.15),
             }}
@@ -82,7 +90,7 @@ export function SectionHeader({
         variant="h2"
         color={titleColor}
         fontFamily={theme.fonts.heading}
-        className="mt-4"
+        className="mt-4 text-balance"
       >
         {title}
       </Heading>

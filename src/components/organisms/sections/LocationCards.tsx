@@ -134,14 +134,14 @@ function LocationCard({
           />
         </ImageFrame>
       )}
-      <div className="p-6 md:p-7 flex flex-col flex-1">
+      <div className="p-6 md:p-7 flex flex-col flex-1 min-w-0">
         <Eyebrow color={c.accentText}>{l.eyebrow}</Eyebrow>
         <Heading
           as="h4"
           variant="h4"
           color={c.ink}
           fontFamily={theme.fonts.heading}
-          className="mt-3"
+          className="mt-3 break-words"
           style={{ letterSpacing: "-0.01em" }}
         >
           {l.headline}
@@ -150,11 +150,11 @@ function LocationCard({
           size="bodyCard"
           color={alpha(c.ink, 0.7)}
           maxWidth={false}
-          className="mt-3"
+          className="mt-3 break-words"
         >
           {l.summary}
         </Lead>
-        <div className="mt-6 pt-2 mt-auto">
+        <div className="mt-auto pt-6">
           <Button
             href={l.href}
             variant="ghostDark"

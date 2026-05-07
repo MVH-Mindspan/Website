@@ -36,8 +36,8 @@ export function IllustrationReport() {
     <svg
       viewBox="0 0 500 400"
       preserveAspectRatio="xMidYMid meet"
-      role="img"
-      aria-label="A personalised cognitive report showing a steady upward trajectory."
+      aria-hidden="true"
+      focusable="false"
       style={{ width: "100%", height: "100%", display: "block" }}
     >
       <defs>

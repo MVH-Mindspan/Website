@@ -24,6 +24,8 @@ export function Pill({
         borderRadius: "10rem",
         fontSize: "0.8125rem",
         fontWeight: 600,
+        maxWidth: "100%",
+        overflowWrap: "break-word",
         background,
         color,
         ...style,

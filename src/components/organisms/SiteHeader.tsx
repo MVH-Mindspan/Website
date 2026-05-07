@@ -18,6 +18,7 @@ export function SiteHeader() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const hamburgerRef = useRef<HTMLButtonElement>(null);
+  const panelRef = useRef<HTMLDivElement>(null);
 
   const isActive = useCallback(
     (href: string) => {
@@ -38,20 +39,64 @@ export function SiteHeader() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [handleScroll]);
 
-  // Close menu on Escape
+  // Close menu on Escape, trap Tab focus inside the open panel
   useEffect(() => {
     if (!open) return;
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setOpen(false);
+      if (e.key === "Escape") {
+        e.preventDefault();
+        setOpen(false);
+        hamburgerRef.current?.focus();
+        return;
+      }
+      if (e.key !== "Tab") return;
+
+      const panel = panelRef.current;
+      if (!panel) return;
+      const focusables = panel.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+      );
+      if (focusables.length === 0) return;
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+      const active = document.activeElement as HTMLElement | null;
+
+      // If focus is outside the panel, pull it back in
+      if (!active || !panel.contains(active)) {
+        e.preventDefault();
+        (e.shiftKey ? last : first).focus();
+        return;
+      }
+      if (e.shiftKey && active === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && active === last) {
+        e.preventDefault();
+        first.focus();
+      }
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [open]);
 
-  // Close menu when viewport crosses nav (1200px)
+  // Move initial focus into the panel when it opens
   useEffect(() => {
     if (!open) return;
-    const mql = window.matchMedia("(min-width: 1200px)");
+    const id = window.setTimeout(() => {
+      const panel = panelRef.current;
+      if (!panel) return;
+      const first = panel.querySelector<HTMLElement>(
+        'a[href], button:not([disabled])'
+      );
+      first?.focus();
+    }, 60);
+    return () => window.clearTimeout(id);
+  }, [open]);
+
+  // Close menu when viewport crosses the nav breakpoint (1280px, see --breakpoint-nav)
+  useEffect(() => {
+    if (!open) return;
+    const mql = window.matchMedia("(min-width: 1280px)");
     const onChange = (e: MediaQueryListEvent) => {
       if (e.matches) setOpen(false);
     };
@@ -314,6 +359,7 @@ export function SiteHeader() {
         <AnimatePresence>
           {open && (
             <motion.div
+              ref={panelRef}
               id="site-mobile-menu"
               role="menu"
               className="nav:hidden absolute inset-x-3"

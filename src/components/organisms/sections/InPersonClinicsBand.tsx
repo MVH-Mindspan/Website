@@ -62,9 +62,9 @@ export function InPersonClinicsBand({
                   loading="lazy"
                 />
               </ImageFrame>
-              <div className="p-6 md:p-7 flex flex-col flex-1">
+              <div className="p-6 md:p-7 flex flex-col flex-1 min-w-0">
                 <p
-                  className="font-semibold"
+                  className="font-semibold break-words"
                   style={{
                     fontFamily: theme.fonts.body,
                     fontSize: typeScale.bodySm,
@@ -80,12 +80,12 @@ export function InPersonClinicsBand({
                   variant="h4"
                   color={c.ink}
                   fontFamily={theme.fonts.heading}
-                  className="mt-3"
+                  className="mt-3 break-words"
                 >
                   In-person care in {clinic.city}, {clinic.state}.
                 </Heading>
                 <p
-                  className="mt-3 inline-flex items-center gap-2"
+                  className="mt-3 inline-flex items-start gap-2 break-words"
                   style={{
                     fontFamily: theme.fonts.body,
                     fontSize: typeScale.body,
@@ -100,11 +100,11 @@ export function InPersonClinicsBand({
                   size="bodyCard"
                   color={alpha(c.ink, 0.7)}
                   maxWidth={false}
-                  className="mt-4"
+                  className="mt-4 break-words"
                 >
                   {clinic.blurb}
                 </Lead>
-                <div className="mt-7 pt-2 mt-auto">
+                <div className="mt-auto pt-7">
                   <Button
                     href={clinic.cta.href}
                     variant="primary"

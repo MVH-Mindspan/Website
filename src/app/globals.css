@@ -52,6 +52,29 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+  /* Match body so any flash of unstyled content is on-brand cream, not white. */
+  background: var(--theme-cream, #efeeeb);
+}
+
+/* Global keyboard-focus ring. Brand orange on cream/sand, brand green on
+   primary surfaces. Components can opt out by overriding :focus-visible
+   locally — never blanket-disable focus styles. */
+:focus-visible {
+  outline: 2px solid var(--theme-accent, #fb4d17);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Global reduced-motion guardrail. Keeps the existing component-specific
+   reduced-motion blocks below while making sure no stray transitions or
+   long animations slip through. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 /* Brand-tinted text selection — warm orange highlighter that works on

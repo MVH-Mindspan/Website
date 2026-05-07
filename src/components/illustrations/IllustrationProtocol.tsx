@@ -61,8 +61,8 @@ export function IllustrationProtocol() {
     <svg
       viewBox="0 0 500 400"
       preserveAspectRatio="xMidYMid meet"
-      role="img"
-      aria-label="A weekly Mindspan plan with daily touchpoints across four care domains."
+      aria-hidden="true"
+      focusable="false"
       style={{ width: "100%", height: "100%", display: "block" }}
     >
       <defs>

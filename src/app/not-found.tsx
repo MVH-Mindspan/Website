@@ -1,27 +1,39 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import { Container } from "@/components/atoms/Container";
+import { Heading } from "@/components/atoms/Heading";
+import { Lead } from "@/components/atoms/Lead";
 import { brand } from "@/content/brand";
+import { buildMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildMetadata({
   title: "Page not found | Mindspan",
-  description: "The page you’re looking for doesn’t exist.",
-  robots: { index: false, follow: true },
-};
+  description:
+    "We could not find that page. Head back to the homepage, browse our locations, or book a visit with a Mindspan neurologist.",
+  canonical: "/404",
+  noIndex: true,
+});
 
-const INK = "#111111";
 const GREEN = "#083630";
-const CREAM = "#efeeeb";
+const CREAM = "#FBF7F0";
+const INK_MUTED = "rgba(8,54,48,0.7)";
+const INK_DIM = "rgba(8,54,48,0.55)";
+
+const helpfulLinks = [
+  { label: "Locations", href: "/locations", description: "Clinics in MA and CA" },
+  { label: "Providers", href: "/providers", description: "Meet our neurologists" },
+  { label: "How it works", href: "/about/how-it-works", description: "What to expect" },
+  { label: brand.primaryCta, href: brand.primaryCtaHref, description: "Talk to our care team" },
+] as const;
 
 export default function NotFound() {
   return (
     <main
-      className="min-h-screen flex items-center justify-center px-6"
-      style={{ background: CREAM, color: INK }}
+      role="main"
+      className="min-h-screen flex items-center px-6 py-24"
+      style={{ background: CREAM }}
     >
-      <div
-        className="w-full"
-        style={{ maxWidth: "min(560px, 92vw)" }}
-      >
+      <Container width="narrow">
         <div
           aria-hidden="true"
           style={{
@@ -37,40 +49,33 @@ export default function NotFound() {
             fontFamily: "var(--font-inter), system-ui, sans-serif",
             fontSize: "0.8125rem",
             letterSpacing: "0.18em",
-            color: "rgba(8,54,48,0.55)",
+            color: INK_DIM,
           }}
         >
           404
         </p>
-        <h1
-          className="mt-5"
-          style={{
-            fontFamily: "var(--font-pt-serif), Georgia, serif",
-            fontSize: "clamp(2.25rem, 4vw + 1rem, 3.5rem)",
-            lineHeight: 1.08,
-            letterSpacing: "-0.02em",
-            color: INK,
-          }}
+        <Heading
+          as="h1"
+          variant="h1"
+          color={GREEN}
+          fontFamily="var(--font-eb-garamond), Georgia, serif"
+          style={{ marginTop: "1.25rem" }}
         >
-          We couldn’t find that page.
-        </h1>
-        <p
-          className="mt-5"
-          style={{
-            fontFamily: "var(--font-inter), system-ui, sans-serif",
-            color: "rgba(8,54,48,0.7)",
-            fontSize: "1.0625rem",
-            lineHeight: 1.6,
-            maxWidth: "44ch",
-          }}
+          We could not find that page.
+        </Heading>
+        <Lead
+          color={INK_MUTED}
+          maxWidth="48ch"
+          style={{ marginTop: "1.25rem" }}
         >
           The link may be outdated, or the page has moved. Head back to the
-          homepage, book a visit, or give us a call.
-        </p>
+          homepage, or pick up where you wanted to go below.
+        </Lead>
+
         <div className="mt-10 flex flex-wrap items-center gap-3">
           <Link
             href="/"
-            className="inline-flex items-center font-semibold rounded-full transition-all hover:-translate-y-0.5"
+            className="inline-flex items-center font-semibold rounded-full transition-transform hover:-translate-y-0.5"
             style={{
               fontFamily: "var(--font-inter), system-ui, sans-serif",
               fontSize: "0.9375rem",
@@ -97,8 +102,51 @@ export default function NotFound() {
             {brand.primaryCta}
           </Link>
         </div>
+
+        <nav
+          aria-label="Helpful links"
+          className="mt-12 grid gap-3"
+          style={{
+            gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
+          }}
+        >
+          {helpfulLinks.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className="block rounded-2xl px-5 py-4 transition-colors"
+              style={{
+                background: "rgba(255,255,255,0.6)",
+                border: "1px solid rgba(8,54,48,0.08)",
+                color: GREEN,
+                textDecoration: "none",
+              }}
+            >
+              <span
+                className="block font-semibold"
+                style={{
+                  fontFamily: "var(--font-inter), system-ui, sans-serif",
+                  fontSize: "0.9375rem",
+                }}
+              >
+                {link.label}
+              </span>
+              <span
+                className="mt-1 block"
+                style={{
+                  fontFamily: "var(--font-inter), system-ui, sans-serif",
+                  fontSize: "0.875rem",
+                  color: "rgba(8,54,48,0.65)",
+                }}
+              >
+                {link.description}
+              </span>
+            </Link>
+          ))}
+        </nav>
+
         <p
-          className="mt-8"
+          className="mt-10"
           style={{
             fontFamily: "var(--font-inter), system-ui, sans-serif",
             color: "rgba(8,54,48,0.65)",
@@ -119,7 +167,7 @@ export default function NotFound() {
           </a>
           .
         </p>
-      </div>
+      </Container>
     </main>
   );
 }
