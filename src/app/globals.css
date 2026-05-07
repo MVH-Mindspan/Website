@@ -621,7 +621,13 @@ h1, h2, h3 {
 
 /* Editorial 3-col grids: keep stacked until desktop where image has room */
 @media (max-width: 1023px) {
-  .v2-scope .editorial-grid,
+  .v2-scope .editorial-grid {
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+  }
+  .v2-scope .editorial-grid > h2 {
+    grid-column: auto !important;
+  }
   .v2-scope .teaser-banner-grid,
   .v2-scope .stage-row {
     grid-template-columns: 56px 1fr !important;
@@ -633,7 +639,9 @@ h1, h2, h3 {
 }
 
 @media (max-width: 640px) {
-  .v2-scope .editorial-grid,
+  .v2-scope .editorial-grid {
+    gap: 16px !important;
+  }
   .v2-scope .teaser-banner-grid,
   .v2-scope .stage-row {
     grid-template-columns: 40px 1fr !important;
