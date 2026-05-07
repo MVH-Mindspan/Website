@@ -26,7 +26,12 @@ export function Container({
   return (
     <Tag
       className={className}
-      style={{ maxWidth: widthMap[width], marginInline: "auto", ...style }}
+      style={{
+        maxWidth: widthMap[width],
+        marginInline: "auto",
+        minWidth: 0,
+        ...style,
+      }}
     >
       {children}
     </Tag>

@@ -63,17 +63,18 @@ export function CareTeamGrid({
                   loading="lazy"
                 />
               </ImageFrame>
-              <div className="p-6 md:p-7 flex flex-col flex-1">
+              <div className="p-6 md:p-7 flex flex-col flex-1 min-w-0">
                 <Heading
                   as="h3"
                   variant="h4"
                   color={c.ink}
                   fontFamily={theme.fonts.heading}
+                  className="break-words"
                 >
                   {p.name}
                 </Heading>
                 <p
-                  className="mt-1"
+                  className="mt-1 break-words"
                   style={{
                     fontFamily: theme.fonts.body,
                     fontSize: typeScale.body,
@@ -93,7 +94,7 @@ export function CareTeamGrid({
                     </Pill>
                   ))}
                 </div>
-                <div className="mt-7 flex flex-wrap items-center gap-3 mt-auto pt-7">
+                <div className="flex flex-wrap items-center gap-3 mt-auto pt-7">
                   <Button
                     href={p.cta.href}
                     variant="primary"

@@ -55,7 +55,7 @@ export function EditorialPillars({
                     >
                       <img
                         src={p.image}
-                        alt=""
+                        alt={p.imageAlt ?? ""}
                         className="w-full object-cover"
                         style={{ aspectRatio: "5/4" }}
                         loading="lazy"

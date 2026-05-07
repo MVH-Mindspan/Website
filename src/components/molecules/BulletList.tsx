@@ -14,6 +14,9 @@ export function BulletList({
   className?: string;
   style?: CSSProperties;
 }) {
+  // Empty content should produce nothing, not a stray <ul>.
+  if (!items || items.length === 0) return null;
+
   return (
     <ul
       className={`space-y-4 ${className ?? ""}`.trim()}
@@ -22,7 +25,8 @@ export function BulletList({
       {items.map((item, i) => (
         <li key={`${i}-${item.slice(0, 32)}`} className="flex items-start gap-3">
           <Bullet color={bulletColor} />
-          <span>{item}</span>
+          {/* min-w-0 lets long words/URLs wrap inside narrow grid cells. */}
+          <span className="min-w-0 break-words">{item}</span>
         </li>
       ))}
     </ul>

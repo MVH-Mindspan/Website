@@ -253,17 +253,23 @@ export default function StepReview({
             type="button"
             onClick={onSubmit}
             disabled={submitting}
-            className="studio-btn studio-btn-accent justify-center text-base px-10"
+            aria-busy={submitting}
+            className="studio-btn studio-btn-accent justify-center text-base px-10 disabled:cursor-wait"
           >
             {submitting ? (
               <>
-                <span className="h-4 w-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                Submitting...
+                <span
+                  aria-hidden="true"
+                  className="h-4 w-4 border-2 border-white/30 border-t-white rounded-full animate-spin"
+                />
+                <span>Submitting...</span>
+                <span className="sr-only">Sending your booking request, please wait</span>
               </>
             ) : (
               <>
                 Confirm and submit
                 <svg
+                  aria-hidden="true"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"

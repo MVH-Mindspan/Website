@@ -62,12 +62,12 @@ export function AudienceCards({
         )}
 
         <div
-          className={`mt-12 grid gap-5 md:gap-6 ${
+          className={`mt-12 grid grid-cols-1 gap-5 md:gap-6 ${
             audiences.length === 2
               ? "md:grid-cols-2"
               : audiences.length === 1
               ? "md:grid-cols-1"
-              : "md:grid-cols-3"
+              : "sm:grid-cols-2 md:grid-cols-3"
           }`}
         >
           {audiences.map((a, i) => (
@@ -81,14 +81,14 @@ export function AudienceCards({
                 animationDelay: `${i * 80}ms`,
               }}
             >
-              <a href={a.href} {...externalLinkProps(a.href)} className="flex flex-col flex-1">
+              <a href={a.href} {...externalLinkProps(a.href)} className="flex flex-col flex-1 min-w-0">
                 <Eyebrow color={c.accentText}>{a.kicker}</Eyebrow>
                 <Heading
                   as="h3"
                   variant="h4"
                   color={c.ink}
                   fontFamily={theme.fonts.heading}
-                  className="mt-4"
+                  className="mt-4 break-words"
                 >
                   {a.title}
                 </Heading>
@@ -96,7 +96,7 @@ export function AudienceCards({
                   size="bodyCard"
                   maxWidth={false}
                   color={alpha(c.ink, 0.72)}
-                  className={a.bullets && a.bullets.length > 0 ? "mt-5" : "mt-5 flex-1"}
+                  className={a.bullets && a.bullets.length > 0 ? "mt-5 break-words" : "mt-5 flex-1 break-words"}
                 >
                   {a.body}
                 </Lead>

@@ -50,9 +50,6 @@ export function FeatureCardGrid({
   const sectionText = isSand ? c.ink : c.cream;
   const cardBg = isSand ? c.cream : c.primaryLight;
   const cardBorder = isSand ? `1px solid ${alpha(c.ink, 0.06)}` : undefined;
-  const cardShadow = isSand
-    ? "0 18px 36px -18px rgba(0,0,0,0.18)"
-    : "0 24px 48px -16px rgba(0,0,0,0.4)";
   const eyebrowColor = isSand ? alpha(c.ink, 0.6) : alpha(c.cream, 0.6);
   const bodyColor = isSand ? alpha(c.ink, 0.7) : alpha(c.cream, 0.65);
 
@@ -76,11 +73,11 @@ export function FeatureCardGrid({
           eyebrowColor={isSand ? undefined : "#A8D2FB"}
         />
 
-        <div className={`mt-12 grid ${gridColsClass} gap-5 md:gap-6`}>
+        <div className={`mt-12 grid grid-cols-1 ${gridColsClass} gap-5 md:gap-6`}>
           {cards.map((card, i) => (
             <Reveal
               key={card.id}
-              className={`group rounded-[2rem] p-5 sm:p-6 md:p-8 transition-all duration-300 hover:-translate-y-1 active:scale-[0.98] hover:shadow-[${cardShadow}]`}
+              className="group rounded-[2rem] p-5 sm:p-6 md:p-8 transition-all duration-300 hover:-translate-y-1 active:scale-[0.98] min-w-0"
               style={{
                 background: cardBg,
                 border: cardBorder,
@@ -102,7 +99,7 @@ export function FeatureCardGrid({
                 variant="h4"
                 color={sectionText}
                 fontFamily={theme.fonts.heading}
-                className="mt-4"
+                className="mt-4 break-words"
               >
                 {card.title}
               </Heading>
@@ -110,7 +107,7 @@ export function FeatureCardGrid({
                 size="bodyCard"
                 maxWidth={false}
                 color={bodyColor}
-                className="mt-5"
+                className="mt-5 break-words"
               >
                 {card.body}
               </Lead>

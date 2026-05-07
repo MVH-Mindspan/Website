@@ -30,6 +30,8 @@ export function Lead({
       className={className}
       style={{
         ...sizeStyles[size],
+        minWidth: 0,
+        overflowWrap: "break-word",
         color,
         ...(maxWidth === false ? {} : { maxWidth }),
         ...style,

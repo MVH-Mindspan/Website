@@ -78,7 +78,7 @@ export function SplitCards({
 
         <div className={`mt-12 grid gap-6 md:gap-8 ${edge ? "lg:grid-cols-2" : ""}`}>
           <Reveal
-            className="rounded-[2rem] p-5 sm:p-6 md:p-8 lg:p-10"
+            className="rounded-[2rem] p-5 sm:p-6 md:p-8 lg:p-10 min-w-0"
             style={{
               background: tone === "sand" ? c.cream : c.skySoft,
               border: `1px solid ${alpha(c.ink, 0.06)}`,
@@ -95,7 +95,7 @@ export function SplitCards({
               variant="h4"
               color={c.ink}
               fontFamily={theme.fonts.heading}
-              className="mt-4"
+              className="mt-4 break-words"
             >
               {core.title}
             </Heading>
@@ -103,7 +103,7 @@ export function SplitCards({
               size="bodyCard"
               color={alpha(c.ink, 0.72)}
               maxWidth={false}
-              className="mt-5"
+              className="mt-5 break-words"
             >
               {core.body}
             </Lead>
@@ -117,7 +117,7 @@ export function SplitCards({
 
           {edge && (
             <Reveal
-              className="rounded-[2rem] p-8 md:p-10 relative overflow-hidden text-white"
+              className="rounded-[2rem] p-8 md:p-10 relative overflow-hidden text-white min-w-0"
               style={{ background: c.brandGreen }}
             >
               <div
@@ -129,7 +129,7 @@ export function SplitCards({
                   )} 0%, transparent 55%)`,
                 }}
               />
-              <div className="relative">
+              <div className="relative min-w-0">
                 <IconBadge background={alpha("#A8D2FB", 0.15)} color="#A8D2FB">
                   <SectionIcon name={edge.icon} />
                 </IconBadge>
@@ -140,14 +140,14 @@ export function SplitCards({
                   as="h3"
                   variant="h4"
                   fontFamily={theme.fonts.heading}
-                  className="mt-4"
+                  className="mt-4 break-words"
                 >
                   {edge.title}
                 </Heading>
                 <Lead
                   size="bodyCard"
                   maxWidth={false}
-                  className="mt-5 text-white/80"
+                  className="mt-5 text-white/80 break-words"
                 >
                   {edge.body}
                 </Lead>

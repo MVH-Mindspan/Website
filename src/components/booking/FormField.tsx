@@ -12,6 +12,7 @@ type FormFieldProps = {
   onChange: (value: string) => void;
   onBlur?: () => void;
   error?: string;
+  hint?: string;
   options?: { label: string; value: string }[];
   className?: string;
   maxLength?: number;
@@ -38,6 +39,7 @@ const FormField = forwardRef<HTMLInputElement | HTMLTextAreaElement | HTMLSelect
       onChange,
       onBlur,
       error,
+      hint,
       options,
       className = "",
       maxLength,
@@ -48,22 +50,28 @@ const FormField = forwardRef<HTMLInputElement | HTMLTextAreaElement | HTMLSelect
   ) {
     const id = `field-${name}`;
     const errorId = `${id}-error`;
+    const hintId = `${id}-hint`;
     const borderClass = error ? errorClasses : normalBorder;
+    const describedBy = error ? errorId : hint ? hintId : undefined;
     const ariaProps = {
       "aria-invalid": error ? true : undefined,
-      "aria-describedby": error ? errorId : undefined,
+      "aria-describedby": describedBy,
+      "aria-required": required ? true : undefined,
     } as const;
 
     return (
-      <div className={className}>
+      <div className={`min-w-0 ${className}`}>
         <label
           htmlFor={id}
-          className="block text-sm font-medium mb-1.5"
+          className="block text-sm font-medium mb-1.5 break-words"
           style={{ color: "#083630" }}
         >
           {label}
           {required && (
-            <span className="text-[#fb4d17] ml-0.5">*</span>
+            <span aria-hidden="true" className="text-[#fb4d17] ml-0.5">*</span>
+          )}
+          {required && (
+            <span className="sr-only"> (required)</span>
           )}
         </label>
 
@@ -126,16 +134,23 @@ const FormField = forwardRef<HTMLInputElement | HTMLTextAreaElement | HTMLSelect
           />
         )}
 
-        {error && (
+        {error ? (
           <p
             id={errorId}
             role="alert"
             aria-live="polite"
-            className="mt-1.5 text-xs text-red-500 font-medium"
+            className="mt-1.5 text-xs text-red-500 font-medium break-words"
           >
             {error}
           </p>
-        )}
+        ) : hint ? (
+          <p
+            id={hintId}
+            className="mt-1.5 text-xs font-medium text-[rgba(8,54,48,0.55)] leading-relaxed"
+          >
+            {hint}
+          </p>
+        ) : null}
       </div>
     );
   }
