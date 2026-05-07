@@ -16,7 +16,7 @@ export const videoMassachusettsDetail: LocationDetail = {
       cta: { label: "Book a video visit", href: BOOKING_HREF },
     },
     video: "/assets/video-visit-video.mp4",
-    poster: "/assets/video-visit-poster.jpg",
+    poster: "/assets/video-visit-poster.webp",
     primaryCta: { label: "Book a video visit", href: BOOKING_HREF },
   },
 
@@ -77,21 +77,21 @@ export const videoMassachusettsDetail: LocationDetail = {
         title: "Normal cognition",
         body:
           "No memory or thinking concerns. A baseline video visit makes future comparison straightforward.",
-        image: "/assets/get-assessed.jpg",
+        image: "/assets/get-assessed.webp",
       },
       {
         kicker: "Stage 1–2",
         title: "Mild cognitive impairment (MCI)",
         body:
           "Noticeable memory lapses beyond normal aging. Often manageable, and treatable when caught early. Video makes it easier to involve a spouse or adult child in the visit.",
-        image: "/assets/consultation-2.png",
+        image: "/assets/consultation-2.webp",
       },
       {
         kicker: "Stage 3+",
         title: "Dementia",
         body:
           "A progressive decline affecting daily function. Video visits reduce the burden of getting to and from the clinic, while still giving you full access to advanced therapies and ongoing clinical care.",
-        image: "/assets/consultation-1.png",
+        image: "/assets/consultation-1.webp",
       },
     ],
   },
@@ -102,7 +102,7 @@ export const videoMassachusettsDetail: LocationDetail = {
       title: "Why choose a specialized memory center for video care?",
       lead:
         "General telehealth services see patients with dozens of conditions. At Mindspan, our team specializes exclusively in memory and cognitive disorders, giving you access to deeper expertise, advanced diagnostics, FDA-approved therapies, clinical trials, and a clinical care team that stays with you from first assessment through ongoing treatment.",
-      image: "/assets/digital-brain.jpg",
+      image: "/assets/digital-brain.webp",
       imageAlt:
         "Advanced brain imaging used for early-stage cognitive diagnostics at Mindspan",
     },
@@ -272,7 +272,7 @@ export const videoMassachusettsDetail: LocationDetail = {
       title: "An additional benefit for families navigating dementia.",
       lead:
         "If your loved one has a dementia diagnosis and is enrolled in Original Medicare, there may be more support available to you at no additional cost, coordinated through a Medicare-supported care model called GUIDE. We handle eligibility and enrollment during onboarding; there is nothing to apply for in advance. GUIDE works equally well for video and in-person care.",
-      image: "/assets/ongoing-partnership.png",
+      image: "/assets/ongoing-partnership.webp",
       imageAlt:
         "A Mindspan care team supporting a family navigating dementia care together",
     },

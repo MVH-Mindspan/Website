@@ -54,7 +54,7 @@ export const aboutPage = {
     title: "When memory starts slipping, the wait is part of the problem.",
     body:
       "Most families wait twelve to eighteen months to see a neurologist about a parent's memory. By the time the appointment arrives, the most meaningful interventions are often already out of reach. Mindspan started so that no longer has to be the story. We bring families to a specialist within weeks, treat with the latest science, and stay with them through whatever comes next. We are not replacing the rest of the healthcare system. We are strengthening the parts of it that have not kept up.",
-    image: "/assets/consultation-1.png",
+    image: "/assets/consultation-1.webp",
     imageAlt:
       "A Mindspan clinician sitting with a patient and family member during a consultation",
   },

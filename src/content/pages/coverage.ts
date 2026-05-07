@@ -27,7 +27,7 @@ export const coveragePage = {
       eyebrow: "How coverage works",
       title: "Billed like any other specialist visit.",
       lead: "Mindspan is an in-network specialist for most major plans. Your visit is billed the same way a visit to any neurologist or specialist would be, through your insurance.",
-      image: "/assets/consultation-2.png",
+      image: "/assets/consultation-2.webp",
       imageAlt: "A member of the Mindspan care team",
     },
     insurance: {

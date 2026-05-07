@@ -8,12 +8,23 @@ import {
 } from "@/components/organisms/sections";
 import { CmsDisclosure } from "@/components/atoms/CmsDisclosure";
 import { guidePage } from "@/content/pages/guide";
+import { JsonLd } from "@/lib/json-ld";
+import { buildFaqSchema, buildBreadcrumbSchema } from "@/lib/schema";
+import { SITE_URL } from "@/lib/seo";
 
 export const metadata = guidePage.metadata;
 
 export default function GuidePage() {
   return (
     <>
+      <JsonLd
+        id="ld-breadcrumb"
+        data={buildBreadcrumbSchema([
+          { name: "Home", url: `${SITE_URL}/` },
+          { name: "GUIDE Program", url: `${SITE_URL}/guide` },
+        ])}
+      />
+      <JsonLd id="ld-faq" data={buildFaqSchema(guidePage.faq)} />
       <PageHero {...guidePage.hero} />
 
       <FeatureCardGrid

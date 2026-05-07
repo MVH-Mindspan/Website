@@ -1,0 +1,52 @@
+# Mindspan
+
+> Mindspan is a specialist neurology clinic focused on Alzheimer's disease, dementia, and cognitive decline. Board-certified neurologists see new patients within 2-3 weeks. Covered by Medicare and most major commercial plans. In-person clinics in Danvers, Massachusetts and the San Francisco Bay Area; telehealth available statewide in Massachusetts and California.
+
+## Clinicians
+
+- Dr. Naveen Reddy, MD - Clinical Director, implementation scientist focused on Alzheimer's diagnostics and anti-amyloid therapies, UCSD/UCSF-trained
+- Dr. Timothy R. Kelliher, MD - Board-certified neurologist with 30+ years of experience, Mass General-affiliated, North Shore Boston (Danvers location)
+- Dr. Noor Sachdev, MD - Board-certified neurology and vascular neurology, Columbia fellowship (Bay Area location)
+
+## Key Pages
+
+- [Home](https://mindspan.co/): Brand overview, value proposition, locations, providers
+- [How Mindspan Works](https://mindspan.co/about/how-it-works): Four-phase care journey, wait times, conditions treated, frequently asked questions
+- [Science and Technology](https://mindspan.co/about/science): Clinical protocols, AI-assisted diagnostics, anti-amyloid therapy oversight
+- [About Mindspan](https://mindspan.co/about): Mission, story, team
+- [The GUIDE Program](https://mindspan.co/guide): CMS GUIDE Medicare benefit explainer, eligibility criteria, respite benefit, care coordination
+- [Locations](https://mindspan.co/locations): Service areas across Massachusetts and California
+- [Danvers, MA Clinic](https://mindspan.co/locations/danvers): In-person memory clinic on Boston's North Shore
+- [Bay Area, CA Clinic](https://mindspan.co/locations/bay-area): In-person clinic in the South Bay
+- [Video Visits in Massachusetts](https://mindspan.co/locations/video-ma): Statewide telehealth neurology
+- [Video Visits in California](https://mindspan.co/locations/video-ca): Statewide telehealth neurology
+- [For Providers](https://mindspan.co/providers): Referral workflow, co-management model, EHR integration
+- [Refer a Patient](https://mindspan.co/providers/refer): Provider referral submission
+- [Family Support](https://mindspan.co/family/assist): Caregiver and family-focused resources
+- [Book a Visit](https://mindspan.co/book-a-visit): New patient intake and appointment booking
+- [Careers](https://mindspan.co/careers): Open roles
+
+## Conditions Treated
+
+- Alzheimer's disease
+- Mild cognitive impairment (MCI)
+- Lewy body dementia
+- Vascular dementia
+- Frontotemporal dementia (FTD)
+- Memory loss and cognitive decline
+- Neuropathy and other neurological conditions evaluated as part of the cognitive workup
+
+## Service Area
+
+- In-person: Danvers, Massachusetts (greater Boston / North Shore) and the San Francisco Bay Area (San Jose / South Bay)
+- Telehealth: anywhere in Massachusetts or California
+
+## Insurance
+
+Mindspan accepts Medicare, Medicare Advantage, and most major commercial plans. Patients with qualifying dementia diagnoses on Original Medicare may also be eligible for the CMS GUIDE Model program, which Mindspan participates in.
+
+## Optional
+
+- [Privacy Notice](https://mindspan.co/privacy-notice)
+- [Terms of Service](https://mindspan.co/tos)
+- [Informed Consent](https://mindspan.co/informed-consent)

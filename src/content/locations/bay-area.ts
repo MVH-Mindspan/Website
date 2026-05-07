@@ -78,21 +78,21 @@ export const bayAreaDetail: LocationDetail = {
         title: "Normal cognition",
         body:
           "No memory or thinking concerns. Regular screening helps establish a baseline for future comparison.",
-        image: "/assets/get-assessed.jpg",
+        image: "/assets/get-assessed.webp",
       },
       {
         kicker: "Stage 1\u20132",
         title: "Early memory changes",
         body:
           "Noticeable changes in memory or thinking that go beyond what\u2019s typical. Often manageable, and treatable when caught early.",
-        image: "/assets/consultation-2.png",
+        image: "/assets/consultation-2.webp",
       },
       {
         kicker: "Stage 3+",
         title: "Dementia",
         body:
           "A progressive decline affecting daily function. Mindspan Bay Area provides advanced therapies, ongoing clinical care, and access to the latest science for all stages.",
-        image: "/assets/consultation-1.png",
+        image: "/assets/consultation-1.webp",
       },
     ],
   },
@@ -103,7 +103,7 @@ export const bayAreaDetail: LocationDetail = {
       title: "Why choose a specialized memory center in the Bay Area?",
       lead:
         "General neurologists see patients with dozens of conditions. At Mindspan Bay Area, our team specializes exclusively in memory and cognitive disorders, giving you access to advanced diagnostics, FDA-approved therapies, clinical trials, and a clinical care team that stays with you from first assessment through ongoing treatment.",
-      image: "/assets/digital-brain.jpg",
+      image: "/assets/digital-brain.webp",
       imageAlt:
         "Advanced brain imaging used for early-stage cognitive diagnostics at Mindspan Bay Area",
     },
@@ -191,7 +191,7 @@ export const bayAreaDetail: LocationDetail = {
       title: "An additional benefit for families navigating dementia.",
       lead:
         "If your loved one has a dementia diagnosis and is enrolled in Original Medicare, there may be more support available to you at no additional cost, coordinated through a Medicare-supported care model called GUIDE. We handle eligibility and enrollment during onboarding; there is nothing to apply for in advance.",
-      image: "/assets/ongoing-partnership.png",
+      image: "/assets/ongoing-partnership.webp",
       imageAlt:
         "A Mindspan care team supporting a family navigating dementia care together",
     },

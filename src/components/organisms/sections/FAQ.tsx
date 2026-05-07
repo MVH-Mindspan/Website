@@ -43,8 +43,10 @@ export function FAQ({
               >
                 <button
                   type="button"
+                  id={`faq-question-${it.id}`}
                   onClick={() => setOpenId(isOpen ? null : it.id)}
                   aria-expanded={isOpen}
+                  aria-controls={`faq-answer-${it.id}`}
                   className="w-full text-left flex items-center justify-between gap-6"
                   style={{
                     padding: "22px 28px",
@@ -89,19 +91,21 @@ export function FAQ({
                     </svg>
                   </span>
                 </button>
-                {isOpen && (
-                  <div
-                    style={{
-                      padding: "0 28px 24px",
-                      fontFamily: theme.fonts.body,
-                      fontSize: typeScale.body,
-                      color: alpha(c.ink, 0.75),
-                      lineHeight: 1.6,
-                    }}
-                  >
-                    {it.answer}
-                  </div>
-                )}
+                <div
+                  id={`faq-answer-${it.id}`}
+                  role="region"
+                  aria-labelledby={`faq-question-${it.id}`}
+                  hidden={!isOpen}
+                  style={{
+                    padding: "0 28px 24px",
+                    fontFamily: theme.fonts.body,
+                    fontSize: typeScale.body,
+                    color: alpha(c.ink, 0.75),
+                    lineHeight: 1.6,
+                  }}
+                >
+                  {it.answer}
+                </div>
               </div>
             );
           })}
