@@ -118,6 +118,7 @@ export function StatsBand({
           }
           :global(.stats-comparison-divider) {
             flex-direction: row !important;
+            justify-content: center !important;
             padding: 0 !important;
             gap: 12px !important;
           }
