@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, type CSSProperties, type ReactNode } from "react";
+import { useReducedMotion } from "framer-motion";
 
 type Props = {
   children: ReactNode;
@@ -20,15 +21,14 @@ export function Reveal({
   id,
 }: Props) {
   const ref = useRef<HTMLElement | null>(null);
+  const reduceMotion = useReducedMotion();
 
   useEffect(() => {
     const node = ref.current;
     if (!node) return;
 
-    const prefersReduced = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
-    if (prefersReduced) {
+    if (reduceMotion) {
+      // Render statically. No transition, no observer.
       node.classList.add("on");
       return;
     }
@@ -43,13 +43,16 @@ export function Reveal({
           }
         });
       },
-      { threshold: 0.15, rootMargin: isNarrow ? "0px 0px -40px 0px" : "0px 0px -120px 0px" }
+      {
+        threshold: 0.15,
+        rootMargin: isNarrow ? "0px 0px -40px 0px" : "0px 0px -120px 0px",
+      }
     );
     obs.observe(node);
     return () => obs.disconnect();
-  }, []);
+  }, [reduceMotion]);
 
-  const delayClass = delay > 0 ? ` reveal-d${delay}` : "";
+  const delayClass = delay > 0 && !reduceMotion ? ` reveal-d${delay}` : "";
 
   return (
     <Tag

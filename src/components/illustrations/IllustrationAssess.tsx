@@ -20,8 +20,8 @@ export function IllustrationAssess() {
     <svg
       viewBox="0 0 500 400"
       preserveAspectRatio="xMidYMid meet"
-      role="img"
-      aria-label="A simple cognitive screening on a tablet."
+      aria-hidden="true"
+      focusable="false"
       style={{ width: "100%", height: "100%", display: "block" }}
     >
       <defs>

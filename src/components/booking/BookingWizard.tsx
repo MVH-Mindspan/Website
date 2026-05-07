@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { EASE } from "@/lib/motion";
 import ProgressBar from "./ProgressBar";
@@ -13,6 +13,42 @@ import { ANALYTICS_EVENTS, track } from "@/lib/analytics";
 
 const STORAGE_KEY = "mindspan:booking:v1";
 const SUBMIT_TIMEOUT_MS = 15000;
+
+// Field order on the details step, used to scroll the first invalid field
+// into view when validation fails.
+const DETAILS_FIELD_ORDER = [
+  "bookingFor",
+  "patientFirstName",
+  "patientLastName",
+  "relationship",
+  "firstName",
+  "lastName",
+  "email",
+  "phone",
+] as const;
+
+const WAITLIST_FIELD_ORDER = ["firstName", "email", "phone"] as const;
+
+function focusFirstError(orderedKeys: readonly string[], errors: StepErrors) {
+  if (typeof document === "undefined") return;
+  const firstKey = orderedKeys.find((k) => errors[k]);
+  if (!firstKey) return;
+  // Try the canonical `field-{name}` id first, then fall back to a couple of
+  // sibling ids used for radio groups.
+  const candidates = [
+    `field-${firstKey}`,
+    `field-${firstKey}-self`,
+    `field-${firstKey}-loved-one`,
+  ];
+  for (const id of candidates) {
+    const el = document.getElementById(id);
+    if (el && typeof (el as HTMLElement).focus === "function") {
+      (el as HTMLElement).focus({ preventScroll: false });
+      el.scrollIntoView({ block: "center", behavior: "smooth" });
+      return;
+    }
+  }
+}
 
 type BookingFor = "self" | "loved-one" | "";
 
@@ -53,20 +89,32 @@ const BOOKING_STEPS: { id: StepId; label: string }[] = [
 
 type StepErrors = Record<string, string>;
 
+// Loose, RFC-friendly email shape. Accepts +aliases, dots, and most TLDs.
+// We deliberately don't try to be smarter than the user.
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 function validateDetails(data: FormData): StepErrors {
   const errors: StepErrors = {};
   if (!data.bookingFor) errors.bookingFor = "Please select who this visit is for";
-  if (!data.firstName.trim()) errors.firstName = "First name is required";
-  if (!data.lastName.trim()) errors.lastName = "Last name is required";
-  if (!data.email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email))
-    errors.email = "Please enter a valid email";
-  if (!data.phone.trim() || data.phone.replace(/\D/g, "").length < 10)
-    errors.phone = "Please enter a valid phone number";
+  if (!data.firstName.trim()) errors.firstName = "Please enter your first name";
+  if (!data.lastName.trim()) errors.lastName = "Please enter your last name";
+  const email = data.email.trim();
+  if (!email) {
+    errors.email = "Please enter your email";
+  } else if (!EMAIL_RE.test(email)) {
+    errors.email = "Please enter a valid email address";
+  }
+  const phoneDigits = data.phone.replace(/\D/g, "");
+  if (!phoneDigits) {
+    errors.phone = "Please enter your phone number";
+  } else if (phoneDigits.length < 10) {
+    errors.phone = "Please enter a 10-digit US phone number";
+  }
   if (data.bookingFor === "loved-one") {
     if (!data.patientFirstName.trim())
-      errors.patientFirstName = "Patient's first name is required";
+      errors.patientFirstName = "Please enter the patient's first name";
     if (!data.patientLastName.trim())
-      errors.patientLastName = "Patient's last name is required";
+      errors.patientLastName = "Please enter the patient's last name";
     if (!data.relationship.trim())
       errors.relationship = "Please tell us your relationship";
   }
@@ -75,11 +123,19 @@ function validateDetails(data: FormData): StepErrors {
 
 function validateWaitlist(data: FormData): StepErrors {
   const errors: StepErrors = {};
-  if (!data.firstName.trim()) errors.firstName = "First name is required";
-  if (!data.email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email))
-    errors.email = "Please enter a valid email";
-  if (!data.phone.trim() || data.phone.replace(/\D/g, "").length < 10)
-    errors.phone = "Please enter a valid phone number";
+  if (!data.firstName.trim()) errors.firstName = "Please enter your first name";
+  const email = data.email.trim();
+  if (!email) {
+    errors.email = "Please enter your email";
+  } else if (!EMAIL_RE.test(email)) {
+    errors.email = "Please enter a valid email address";
+  }
+  const phoneDigits = data.phone.replace(/\D/g, "");
+  if (!phoneDigits) {
+    errors.phone = "Please enter your phone number";
+  } else if (phoneDigits.length < 10) {
+    errors.phone = "Please enter a 10-digit US phone number";
+  }
   return errors;
 }
 
@@ -125,22 +181,30 @@ async function submitForm(
       signal,
     });
     if (!res.ok) {
+      // 4xx means we sent something the server rejected; 5xx means our side.
+      // Either way, the caregiver isn't at fault, so we keep the message warm.
+      const isClientError = res.status >= 400 && res.status < 500;
       return {
         ok: false,
-        error: `Our system returned an error (${res.status}). Please try again or email us.`,
+        error: isClientError
+          ? "Something in your information didn't come through. Please double-check and try again, or email us at hello@mindspan.co."
+          : "Our scheduling system is having a hiccup. Please try again in a moment, or email us at hello@mindspan.co.",
       };
     }
     return { ok: true };
   } catch (err) {
-    if ((err as Error)?.name === "AbortError") {
+    const error = err as { name?: string };
+    if (error?.name === "AbortError") {
       return {
         ok: false,
-        error: "The request took too long. Please check your connection and try again.",
+        error:
+          "That took longer than expected. Please check your connection and try again.",
       };
     }
     return {
       ok: false,
-      error: "We couldn't reach our servers. Please check your connection and try again.",
+      error:
+        "We couldn't reach our servers. Please check your connection and try again, or email us at hello@mindspan.co.",
     };
   }
 }
@@ -156,6 +220,25 @@ export default function BookingWizard() {
   const [submitError, setSubmitError] = useState<string | undefined>(undefined);
   const [hydrated, setHydrated] = useState(false);
 
+  const stepHeadingRef = useRef<HTMLDivElement | null>(null);
+  const submitControllerRef = useRef<AbortController | null>(null);
+  const autoAdvanceTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const isMountedRef = useRef(true);
+
+  // Track mount status and tear down any pending work on unmount.
+  useEffect(() => {
+    isMountedRef.current = true;
+    return () => {
+      isMountedRef.current = false;
+      if (autoAdvanceTimeoutRef.current) {
+        clearTimeout(autoAdvanceTimeoutRef.current);
+      }
+      if (submitControllerRef.current) {
+        submitControllerRef.current.abort();
+      }
+    };
+  }, []);
+
   // Fire booking_started once per wizard mount.
   useEffect(() => {
     track(ANALYTICS_EVENTS.bookingStarted);
@@ -165,6 +248,17 @@ export default function BookingWizard() {
   useEffect(() => {
     track(ANALYTICS_EVENTS.bookingStepViewed, { step: stepId });
   }, [stepId]);
+
+  // Move focus to the step heading when the step changes — for screen readers.
+  useEffect(() => {
+    if (!hydrated) return;
+    // Allow AnimatePresence/exit transition to complete before focusing.
+    const t = setTimeout(() => {
+      if (!isMountedRef.current) return;
+      stepHeadingRef.current?.focus();
+    }, reducedMotion ? 0 : 380);
+    return () => clearTimeout(t);
+  }, [stepId, submitted, hydrated, reducedMotion]);
 
   // Hydrate from sessionStorage after mount (avoid SSR mismatch).
   useEffect(() => {
@@ -242,31 +336,42 @@ export default function BookingWizard() {
   const handleStateSelect = useCallback(
     (state: StateChoice) => {
       updateField("state", state);
-      setTimeout(() => {
+      if (autoAdvanceTimeoutRef.current) {
+        clearTimeout(autoAdvanceTimeoutRef.current);
+      }
+      autoAdvanceTimeoutRef.current = setTimeout(() => {
+        if (!isMountedRef.current) return;
         if (state === "Other") {
           goTo("waitlist", 1);
         } else {
           goTo("care", 1);
         }
-      }, 350);
+      }, reducedMotion ? 0 : 350);
     },
-    [updateField, goTo]
+    [updateField, goTo, reducedMotion]
   );
 
   const handleCareSelect = useCallback(
     (id: string) => {
       updateField("careOption", id);
-      setTimeout(() => {
+      if (autoAdvanceTimeoutRef.current) {
+        clearTimeout(autoAdvanceTimeoutRef.current);
+      }
+      autoAdvanceTimeoutRef.current = setTimeout(() => {
+        if (!isMountedRef.current) return;
         goTo("details", 1);
-      }, 350);
+      }, reducedMotion ? 0 : 350);
     },
-    [updateField, goTo]
+    [updateField, goTo, reducedMotion]
   );
 
   const handleDetailsContinue = useCallback(() => {
     const stepErrors = validateDetails(formData);
     if (Object.keys(stepErrors).length > 0) {
       setErrors(stepErrors);
+      // Move keyboard focus to the first invalid field so the user lands
+      // somewhere actionable instead of having to hunt.
+      requestAnimationFrame(() => focusFirstError(DETAILS_FIELD_ORDER, stepErrors));
       return;
     }
     goTo("review", 1);
@@ -277,23 +382,27 @@ export default function BookingWizard() {
     const stepErrors = validateWaitlist(formData);
     if (Object.keys(stepErrors).length > 0) {
       setErrors(stepErrors);
+      requestAnimationFrame(() => focusFirstError(WAITLIST_FIELD_ORDER, stepErrors));
       return;
     }
     setSubmitError(undefined);
     setSubmitting(true);
     const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), SUBMIT_TIMEOUT_MS);
+    submitControllerRef.current = controller;
+    const timeout = setTimeout(() => controller.abort("timeout"), SUBMIT_TIMEOUT_MS);
     const result = await submitForm(
       "/api/waitlist",
       {
-        firstName: formData.firstName,
-        email: formData.email,
+        firstName: formData.firstName.trim(),
+        email: formData.email.trim(),
         phone: formData.phone,
         state: formData.state,
       },
       controller.signal
     );
     clearTimeout(timeout);
+    submitControllerRef.current = null;
+    if (!isMountedRef.current) return;
     setSubmitting(false);
     if (result.ok) {
       setSubmitted(true);
@@ -317,26 +426,29 @@ export default function BookingWizard() {
     setSubmitError(undefined);
     setSubmitting(true);
     const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), SUBMIT_TIMEOUT_MS);
+    submitControllerRef.current = controller;
+    const timeout = setTimeout(() => controller.abort("timeout"), SUBMIT_TIMEOUT_MS);
     const result = await submitForm(
       "/api/book",
       {
         state: formData.state,
         careOption: formData.careOption,
         bookingFor: formData.bookingFor,
-        firstName: formData.firstName,
-        lastName: formData.lastName,
-        email: formData.email,
+        firstName: formData.firstName.trim(),
+        lastName: formData.lastName.trim(),
+        email: formData.email.trim(),
         phone: formData.phone,
         ...(formData.bookingFor === "loved-one" && {
-          patientFirstName: formData.patientFirstName,
-          patientLastName: formData.patientLastName,
+          patientFirstName: formData.patientFirstName.trim(),
+          patientLastName: formData.patientLastName.trim(),
           relationship: formData.relationship,
         }),
       },
       controller.signal
     );
     clearTimeout(timeout);
+    submitControllerRef.current = null;
+    if (!isMountedRef.current) return;
     setSubmitting(false);
     if (result.ok) {
       setSubmitted(true);
@@ -494,9 +606,32 @@ export default function BookingWizard() {
         </div>
       )}
 
-      <main id="main-content" className="studio-container pb-32">
+      <main id="main-content" className="studio-container pb-32" aria-busy={submitting}>
+        {/* Hidden focus target so screen readers land on the step heading
+            on step change. We use this rather than focusing the heading
+            directly to avoid disturbing visual styles. */}
         <div
-          className="max-w-3xl mx-auto rounded-3xl p-4 sm:p-6 md:p-10 lg:p-12"
+          ref={stepHeadingRef}
+          tabIndex={-1}
+          className="sr-only"
+          aria-live="polite"
+        >
+          {submitted
+            ? "Submission complete"
+            : stepId === "state"
+              ? "Step: Where do you live?"
+              : stepId === "care"
+                ? "Step: How would you like to be seen?"
+                : stepId === "details"
+                  ? "Step: Your details"
+                  : stepId === "review"
+                    ? "Step: Review and confirm"
+                    : stepId === "waitlist"
+                      ? "Step: Join the waitlist"
+                      : ""}
+        </div>
+        <div
+          className="max-w-3xl mx-auto rounded-3xl p-4 sm:p-6 md:p-10 lg:p-12 min-w-0"
           style={{
             background: "#fff",
             border: "1px solid rgba(8,54,48,0.06)",
@@ -512,6 +647,7 @@ export default function BookingWizard() {
               animate="center"
               exit="exit"
               transition={{ duration: 0.35, ease: EASE }}
+              className="min-w-0"
             >
               {renderStep()}
             </motion.div>

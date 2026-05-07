@@ -116,10 +116,12 @@ export default function StepWaitlist({
         variants={staggerContainer}
         initial={reducedMotion ? false : "hidden"}
         animate="show"
+        noValidate
         onSubmit={(e) => {
           e.preventDefault();
           onSubmit();
         }}
+        aria-busy={submitting}
       >
         <motion.div variants={fadeUp}>
           <FormField
@@ -177,17 +179,29 @@ export default function StepWaitlist({
           <button
             type="submit"
             disabled={submitting}
-            className="studio-btn studio-btn-accent justify-center text-base px-10 w-full sm:w-auto"
+            aria-busy={submitting}
+            className="studio-btn studio-btn-accent justify-center text-base px-10 w-full sm:w-auto disabled:cursor-wait"
           >
             {submitting ? (
               <>
-                <span className="h-4 w-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                Joining...
+                <span
+                  aria-hidden="true"
+                  className="h-4 w-4 border-2 border-white/30 border-t-white rounded-full animate-spin"
+                />
+                <span>Joining...</span>
+                <span className="sr-only">Submitting your information, please wait</span>
               </>
             ) : (
               <>
                 Join the waitlist
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-4 w-4">
+                <svg
+                  aria-hidden="true"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  className="h-4 w-4"
+                >
                   <path d="M5 12h14M13 5l7 7-7 7" />
                 </svg>
               </>

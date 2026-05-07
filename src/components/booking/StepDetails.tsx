@@ -7,6 +7,17 @@ import FormField from "./FormField";
 
 const GREEN = "#083630";
 
+const FIELD_LABELS: Record<string, string> = {
+  bookingFor: "Who is this visit for",
+  patientFirstName: "Patient's first name",
+  patientLastName: "Patient's last name",
+  relationship: "Your relationship to the patient",
+  firstName: "First name",
+  lastName: "Last name",
+  email: "Email",
+  phone: "Phone number",
+};
+
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 24 },
   show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: EASE } },
@@ -78,6 +89,13 @@ export default function StepDetails({ data, onChange, errors }: StepDetailsProps
     [onChange]
   );
 
+  const errorEntries = Object.entries(errors).filter(([, msg]) => Boolean(msg));
+  const hasErrors = errorEntries.length > 0;
+
+  // The wizard's continue handler moves focus to the first invalid field —
+  // that triggers the most actionable AT cue. The summary block here is a
+  // visual + scroll target only. We do not steal focus here.
+
   const contactHeading = isCaregiver ? "Your contact info" : "Tell us about yourself";
   const contactSubtitle = isCaregiver
     ? "We'll use these details to reach you about their care."
@@ -92,6 +110,52 @@ export default function StepDetails({ data, onChange, errors }: StepDetailsProps
         {contactSubtitle}
       </p>
 
+      {hasErrors && (
+        <div
+          role="alert"
+          aria-live="assertive"
+          className="mt-6 rounded-xl p-4 text-sm"
+          style={{
+            background: "rgba(220,38,38,0.06)",
+            border: "1px solid rgba(220,38,38,0.25)",
+            color: "#7f1d1d",
+          }}
+        >
+          <p className="font-semibold">
+            Please fix {errorEntries.length === 1 ? "this" : `these ${errorEntries.length}`}{" "}
+            {errorEntries.length === 1 ? "field" : "fields"} before continuing:
+          </p>
+          <ul className="mt-2 list-disc pl-5 space-y-0.5">
+            {errorEntries.map(([key, msg]) => (
+              <li key={key} className="break-words">
+                <a
+                  href={`#field-${key}`}
+                  className="underline underline-offset-2 hover:no-underline"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    const candidates = [
+                      `field-${key}`,
+                      `field-${key}-self`,
+                      `field-${key}-loved-one`,
+                    ];
+                    for (const id of candidates) {
+                      const el = document.getElementById(id);
+                      if (el && typeof (el as HTMLElement).focus === "function") {
+                        (el as HTMLElement).focus();
+                        el.scrollIntoView({ block: "center", behavior: "smooth" });
+                        return;
+                      }
+                    }
+                  }}
+                >
+                  {FIELD_LABELS[key] || key}: {msg}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
       <motion.div
         className="mt-10 space-y-8"
         variants={staggerContainer}
@@ -105,27 +169,37 @@ export default function StepDetails({ data, onChange, errors }: StepDetailsProps
               style={{ color: GREEN }}
             >
               Who is this visit for?
-              <span className="text-[#fb4d17] ml-0.5">*</span>
+              <span aria-hidden="true" className="text-[#fb4d17] ml-0.5">*</span>
+              <span className="sr-only"> (required)</span>
             </legend>
-            <div className="grid sm:grid-cols-2 gap-3">
+            <div
+              className="grid sm:grid-cols-2 gap-3"
+              role="radiogroup"
+              aria-required="true"
+              aria-invalid={errors.bookingFor ? true : undefined}
+              aria-describedby={errors.bookingFor ? "field-bookingFor-error" : undefined}
+            >
               {BOOKING_FOR_CHOICES.map((c) => {
                 const selected = data.bookingFor === c.id;
                 return (
                   <button
                     key={c.id}
+                    id={`field-bookingFor-${c.id}`}
                     type="button"
+                    role="radio"
                     onClick={() => onChange("bookingFor", c.id)}
-                    aria-pressed={selected}
+                    aria-checked={selected}
                     className={`
-                      relative text-left rounded-xl px-4 py-4 cursor-pointer
+                      relative text-left rounded-xl px-4 py-4 cursor-pointer min-w-0
                       transition-all duration-200
+                      focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#083630]/30
                       ${selected
                         ? "border-2 border-[#083630] bg-white shadow-[0_8px_24px_-12px_rgba(8,54,48,0.25)]"
                         : "border border-[rgba(8,54,48,0.15)] bg-white hover:border-[rgba(8,54,48,0.35)]"
                       }
                     `}
                   >
-                    <div className="flex items-start gap-3">
+                    <div className="flex items-start gap-3 min-w-0">
                       <span
                         aria-hidden="true"
                         className={`
@@ -150,15 +224,15 @@ export default function StepDetails({ data, onChange, errors }: StepDetailsProps
                           </svg>
                         )}
                       </span>
-                      <span className="flex flex-col">
+                      <span className="flex flex-col min-w-0">
                         <span
-                          className="text-base font-semibold leading-tight"
+                          className="text-base font-semibold leading-tight break-words"
                           style={{ color: GREEN }}
                         >
                           {c.title}
                         </span>
                         <span
-                          className="mt-0.5 text-sm"
+                          className="mt-0.5 text-sm break-words"
                           style={{ color: "rgba(8,54,48,0.6)" }}
                         >
                           {c.subtitle}
@@ -171,6 +245,7 @@ export default function StepDetails({ data, onChange, errors }: StepDetailsProps
             </div>
             {errors.bookingFor && (
               <p
+                id="field-bookingFor-error"
                 role="alert"
                 aria-live="polite"
                 className="mt-2 text-xs text-red-500 font-medium"
@@ -290,6 +365,7 @@ export default function StepDetails({ data, onChange, errors }: StepDetailsProps
             label="Email"
             name="email"
             type="email"
+            required
             placeholder="jane@example.com"
             value={data.email}
             onChange={(v) => onChange("email", v)}
@@ -311,6 +387,7 @@ export default function StepDetails({ data, onChange, errors }: StepDetailsProps
             maxLength={20}
             autoComplete="tel-national"
             inputMode="tel"
+            hint="US numbers only. We use this for scheduling reminders."
           />
         </motion.div>
       </motion.div>

@@ -19,6 +19,8 @@ export function FAQ({
   const c = theme.colors;
   const [openId, setOpenId] = useState<string | null>(items[0]?.id ?? null);
 
+  if (items.length === 0) return null;
+
   return (
     <section style={{ background: c.sand, padding: "clamp(56px, 10vw, 96px) 0" }}>
       <Container>
@@ -31,6 +33,8 @@ export function FAQ({
           >
             {items.map((it) => {
             const isOpen = openId === it.id;
+            const panelId = `faq-panel-${it.id}`;
+            const buttonId = `faq-button-${it.id}`;
             return (
               <div
                 key={it.id}
@@ -43,10 +47,10 @@ export function FAQ({
               >
                 <button
                   type="button"
-                  id={`faq-question-${it.id}`}
+                  id={buttonId}
                   onClick={() => setOpenId(isOpen ? null : it.id)}
                   aria-expanded={isOpen}
-                  aria-controls={`faq-answer-${it.id}`}
+                  aria-controls={panelId}
                   className="w-full text-left flex items-center justify-between gap-6"
                   style={{
                     padding: "22px 28px",
@@ -59,7 +63,7 @@ export function FAQ({
                     cursor: "pointer",
                   }}
                 >
-                  <span>{it.question}</span>
+                  <span className="min-w-0 break-words">{it.question}</span>
                   <span
                     aria-hidden
                     style={{
@@ -92,12 +96,12 @@ export function FAQ({
                   </span>
                 </button>
                 <div
-                  id={`faq-answer-${it.id}`}
+                  id={panelId}
                   role="region"
-                  aria-labelledby={`faq-question-${it.id}`}
+                  aria-labelledby={buttonId}
                   hidden={!isOpen}
                   style={{
-                    padding: "0 28px 24px",
+                    padding: isOpen ? "0 28px 24px" : 0,
                     fontFamily: theme.fonts.body,
                     fontSize: typeScale.body,
                     color: alpha(c.ink, 0.75),

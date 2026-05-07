@@ -89,19 +89,50 @@ export function Button({
     </>
   );
 
-  const hoverClass = "hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98]";
+  const hoverClass = disabled
+    ? ""
+    : "hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98]";
   const combined = `${hoverClass} ${className ?? ""}`.trim();
 
   if (href && !disabled) {
+    // Treat anything that isn't relative, an in-page anchor, or a mindspan.co host as external.
+    const isExternal =
+      /^https?:\/\//i.test(href) && !/^https?:\/\/(www\.)?mindspan\.co(\/|$|\?|#)/i.test(href);
+    const finalTarget = target ?? (isExternal ? "_blank" : undefined);
+    // When opening in a new tab, always set rel for security; preserve any caller-supplied tokens.
+    let finalRel = rel;
+    if (finalTarget === "_blank") {
+      const tokens = new Set((rel ?? "").split(/\s+/).filter(Boolean));
+      tokens.add("noopener");
+      tokens.add("noreferrer");
+      finalRel = Array.from(tokens).join(" ");
+    }
+
     return (
       <a
         href={href}
         onClick={onClick}
-        target={target}
-        rel={rel}
+        target={finalTarget}
+        rel={finalRel}
         aria-label={ariaLabel}
         className={combined}
         style={baseStyle}
+      >
+        {content}
+      </a>
+    );
+  }
+
+  // Disabled link: render as a non-interactive anchor with aria-disabled for AT.
+  if (href && disabled) {
+    return (
+      <a
+        role="link"
+        aria-disabled="true"
+        tabIndex={-1}
+        aria-label={ariaLabel}
+        className={combined}
+        style={{ ...baseStyle, pointerEvents: "none" }}
       >
         {content}
       </a>
@@ -113,6 +144,7 @@ export function Button({
       type={type}
       onClick={onClick}
       disabled={disabled}
+      aria-disabled={disabled || undefined}
       aria-label={ariaLabel}
       className={combined}
       style={baseStyle}

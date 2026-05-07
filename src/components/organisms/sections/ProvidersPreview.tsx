@@ -23,6 +23,8 @@ export function ProvidersPreview({
   const c = theme.colors;
   const bg = tone === "cream" ? c.cream : c.sand;
 
+  if (providers.length === 0) return null;
+
   return (
     <section style={{ background: bg, padding: "clamp(56px, 10vw, 96px) 0" }}>
       <Container>
@@ -31,7 +33,7 @@ export function ProvidersPreview({
           title={intro.title}
           lead={intro.lead}
         />
-        <div className="mt-12 grid md:grid-cols-3 gap-5 md:gap-6">
+        <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 md:gap-6">
           {providers.map((p, i) => (
             <Reveal
               key={p.id}
