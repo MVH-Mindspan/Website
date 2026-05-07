@@ -119,7 +119,7 @@ export function FeatureCardGrid({
         </div>
 
         {(primary || secondary) && (
-          <div className="mt-10 flex flex-wrap gap-3">
+          <div className="mt-10 flex flex-wrap justify-center gap-3">
             {primary && (
               <Button
                 href={primary.href}

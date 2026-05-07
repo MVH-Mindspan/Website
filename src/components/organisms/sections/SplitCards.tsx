@@ -173,7 +173,7 @@ export function SplitCards({
               </Lead>
             )}
             {cta && (
-              <div className="mt-6">
+              <div className="mt-6 flex justify-center">
                 <Button
                   href={cta.href}
                   {...externalLinkProps(cta.href)}
