@@ -12,7 +12,7 @@ export const audiencesIntro = {
   eyebrow: "Who we see",
   title: "Wherever you are coming from, you are in the right place.",
   lead: "A short note, directly to you.",
-  image: "/assets/consultation-1.png",
+  image: "/assets/consultation-1.webp",
   imageAlt: "A consultation in a sunlit room",
 } as const;
 

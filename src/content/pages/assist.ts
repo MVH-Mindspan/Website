@@ -15,28 +15,28 @@ const stages: JourneyStage[] = [
     title: "Start at home, at your own pace.",
     body:
       "Our screening tools make it easy to get started in an environment where your loved one feels comfortable. You can help administer initial assessments from home, reducing stress while gathering meaningful information early.",
-    image: "/assets/get-assessed.jpg",
+    image: "/assets/get-assessed.webp",
   },
   {
     kicker: "Engage",
     title: "See a specialist in weeks, not months.",
     body:
       "If screening shows that further evaluation would help, enrollment is simple. Mindspan sees your loved one within weeks, rather than the 18+ month wait most families face for specialist cognitive care.",
-    image: "/assets/assist-specialist.png",
+    image: "/assets/assist-specialist.webp",
   },
   {
     kicker: "Join",
     title: "A seat at the table from day one.",
     body:
       "Traditional healthcare often leaves families on the sidelines. At Mindspan, we welcome you as part of the care team from the very beginning, practical, respectful, and sustainable involvement built around your life.",
-    image: "/assets/assist-table.png",
+    image: "/assets/assist-table.webp",
   },
   {
     kicker: "Empower",
     title: "Stay informed, in person or remotely.",
     body:
       "Whether you attend visits in person or join remotely, you remain informed and supported at every stage. Clear updates, guidance on next steps, and ongoing access to our care team, so you can focus on your loved one without feeling lost or alone.",
-    image: "/assets/ongoing-partnership.png",
+    image: "/assets/ongoing-partnership.webp",
   },
 ];
 
@@ -136,7 +136,7 @@ export const assistPage = {
 
   hero: {
     video: "/assets/assist-hero-video.mp4",
-    poster: "/assets/assist-hero-poster.png",
+    poster: "/assets/assist-hero-poster.webp",
     headline: "Assist a loved one to get cognitive care.",
     subTagline:
       "Fast access to specialists, advanced diagnostics, and a care team that keeps everyone connected.",

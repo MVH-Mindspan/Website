@@ -3,6 +3,18 @@ import { SITE_URL } from "@/lib/seo";
 
 export const dynamic = "force-static";
 
+const AI_BOTS = [
+  "GPTBot",
+  "ChatGPT-User",
+  "OAI-SearchBot",
+  "PerplexityBot",
+  "Google-Extended",
+  "ClaudeBot",
+  "anthropic-ai",
+  "CCBot",
+  "Applebot-Extended",
+];
+
 /**
  * Cloudflare Pages preview deployments expose `CF_PAGES_BRANCH` and a
  * `pages.dev` host. We block crawl on anything that is not the production
@@ -32,6 +44,11 @@ export default function robots(): MetadataRoute.Robots {
         allow: "/",
         disallow: ["/api/", "/_next/"],
       },
+      ...AI_BOTS.map((userAgent) => ({
+        userAgent,
+        allow: "/",
+        disallow: ["/api/", "/_next/"],
+      })),
     ],
     sitemap: `${SITE_URL}/sitemap.xml`,
     host: SITE_URL,

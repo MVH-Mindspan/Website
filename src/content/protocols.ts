@@ -12,7 +12,7 @@ export const protocolsIntro = {
   title: "Standard of care, made better by precision medicine.",
   lead:
     "Every Mindspan patient gets the full standard of neurological care. And every patient gets access to breakthroughs that were sitting in research papers a year ago, translated into their plan, explained in their language, covered by their insurance.",
-  image: "/assets/consultation-2.png",
+  image: "/assets/consultation-2.webp",
   imageAlt: "A patient and neurologist in conversation",
 } as const;
 

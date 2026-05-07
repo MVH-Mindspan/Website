@@ -4,34 +4,54 @@ import { locations } from "@/content/locations";
 
 export const dynamic = "force-static";
 
+const ROUTE_LAST_MODIFIED: Record<string, string> = {
+  "/": "2026-05-07",
+  "/about": "2026-05-07",
+  "/about/how-it-works": "2026-05-07",
+  "/about/science": "2026-05-07",
+  "/guide": "2026-05-07",
+  "/family/assist": "2026-05-07",
+  "/providers": "2026-05-07",
+  "/providers/refer": "2026-05-07",
+  "/locations": "2026-05-07",
+  "/careers": "2026-05-07",
+  "/book-a-visit": "2026-05-07",
+  "/affiliates": "2026-05-07",
+  "/tos": "2026-05-07",
+  "/privacy-notice": "2026-05-07",
+  "/informed-consent": "2026-05-07",
+};
+
+const STATIC_PATHS: ReadonlyArray<string> = [
+  "/",
+  "/about",
+  "/about/how-it-works",
+  "/about/science",
+  "/guide",
+  "/family/assist",
+  "/providers",
+  "/providers/refer",
+  "/locations",
+  "/careers",
+  "/book-a-visit",
+  "/affiliates",
+  "/tos",
+  "/privacy-notice",
+  "/informed-consent",
+];
+
 export default function sitemap(): MetadataRoute.Sitemap {
-  const now = new Date();
-  const routes: MetadataRoute.Sitemap = [
-    { url: `${SITE_URL}/`, lastModified: now, changeFrequency: "weekly", priority: 1 },
-    { url: `${SITE_URL}/about`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
-    { url: `${SITE_URL}/about/how-it-works`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
-    { url: `${SITE_URL}/about/science`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
-    { url: `${SITE_URL}/guide`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
-    { url: `${SITE_URL}/family/assist`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
-    { url: `${SITE_URL}/providers`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
-    { url: `${SITE_URL}/providers/refer`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
-    { url: `${SITE_URL}/locations`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
-    { url: `${SITE_URL}/careers`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
-    { url: `${SITE_URL}/book-a-visit`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
-    { url: `${SITE_URL}/affiliates`, lastModified: now, changeFrequency: "yearly", priority: 0.4 },
-    { url: `${SITE_URL}/tos`, lastModified: now, changeFrequency: "yearly", priority: 0.3 },
-    { url: `${SITE_URL}/privacy-notice`, lastModified: now, changeFrequency: "yearly", priority: 0.3 },
-    { url: `${SITE_URL}/informed-consent`, lastModified: now, changeFrequency: "yearly", priority: 0.3 },
-  ];
+  const today = new Date().toISOString().slice(0, 10);
 
-  for (const loc of locations) {
-    routes.push({
-      url: `${SITE_URL}/locations/${loc.slug}`,
-      lastModified: now,
-      changeFrequency: "monthly",
-      priority: 0.6,
-    });
-  }
+  const staticEntries: MetadataRoute.Sitemap = STATIC_PATHS.map((path) => ({
+    url: `${SITE_URL}${path === "/" ? "" : path}${path === "/" ? "/" : ""}`,
+    lastModified: ROUTE_LAST_MODIFIED[path] ?? today,
+  }));
 
-  return routes;
+  const locationEntries: MetadataRoute.Sitemap = locations.map((loc) => ({
+    url: `${SITE_URL}/locations/${loc.slug}`,
+    lastModified: ROUTE_LAST_MODIFIED[`/locations/${loc.slug}`] ?? today,
+  }));
+
+  return [...staticEntries, ...locationEntries];
 }

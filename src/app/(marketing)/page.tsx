@@ -22,10 +22,20 @@ import {
   providersPreview,
   providersPreviewIntro,
 } from "@/content";
+import { homePage } from "@/content/pages/home";
+import { JsonLd } from "@/lib/json-ld";
+import {
+  buildMedicalOrganizationSchema,
+  buildWebSiteSchema,
+} from "@/lib/schema";
+
+export const metadata = homePage.metadata;
 
 export default function HomePage() {
   return (
     <>
+      <JsonLd id="ld-organization" data={buildMedicalOrganizationSchema()} />
+      <JsonLd id="ld-website" data={buildWebSiteSchema()} />
       <VideoHero
         video={homeHero.video}
         poster={homeHero.poster}

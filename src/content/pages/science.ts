@@ -65,7 +65,7 @@ const outcomePillars: JourneyStage[] = [
     title: "Confirmed answers in weeks, not months.",
     body:
       "Your at-home screening with Mindy, paired with our blood biomarker panel, can confirm what is going on without waiting on a PET scan or a twelve-month specialist queue. Most families have a real picture in weeks. Less anxiety, more time to act.",
-    image: "/assets/latest-science.jpg",
+    image: "/assets/latest-science.webp",
     imageAlt:
       "A Mindspan neurologist reviewing brain imaging with a couple in clinic",
   },
@@ -74,7 +74,7 @@ const outcomePillars: JourneyStage[] = [
     title: "Treatment that fits your biology.",
     body:
       "APOE genetic testing, biological staging, and the Digital Twin’s trajectory model show your neurologist exactly where you are and where you are heading. Anti-amyloid therapy decisions, lifestyle plans, and risk monitoring are made with your specific picture in view, not a generic protocol.",
-    image: "/assets/digital-brain.jpg",
+    image: "/assets/digital-brain.webp",
     imageAlt: "Advanced brain imaging used in personalized cognitive care",
   },
   {
@@ -82,7 +82,7 @@ const outcomePillars: JourneyStage[] = [
     title: "A team that does not lose the thread.",
     body:
       "Between visits, the orchestration engine tracks every required check, every scan, every medication decision. Cortex answers the questions caregivers actually have, and pages your clinician when something needs real attention. Your primary care doctor stays in the loop, and no one in your family is left alone with this.",
-    image: "/assets/ongoing-partnership.png",
+    image: "/assets/ongoing-partnership.webp",
     imageAlt: "A patient on a video visit with their Mindspan care team",
   },
 ];
@@ -113,7 +113,7 @@ export const sciencePage = {
   }),
   hero: {
     video: "/assets/science-hero-video-v2.mp4",
-    poster: "/assets/science-hero-poster-v2.jpg",
+    poster: "/assets/science-hero-poster-v2.webp",
     playbackRate: 0.9,
     headline: "The science behind every visit, pointed at you.",
     subTagline: "Built around you, every visit.",

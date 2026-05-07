@@ -19,6 +19,14 @@ import {
   getLocationPage,
   allLocationSlugs,
 } from "@/content/pages/locationDetail";
+import { JsonLd } from "@/lib/json-ld";
+import {
+  buildMedicalClinicSchema,
+  buildPhysicianSchema,
+  buildVideoServiceSchema,
+  buildBreadcrumbSchema,
+  locationBreadcrumbItems,
+} from "@/lib/schema";
 
 type Params = { params: Promise<{ slug: string }> };
 
@@ -40,8 +48,23 @@ export default async function LocationDetailPage({ params }: Params) {
 
   const { detail } = getLocationPage(location);
 
+  const clinicSchema =
+    location.kind === "clinic" ? buildMedicalClinicSchema(location, detail) : null;
+  const serviceSchema =
+    location.kind === "video" ? buildVideoServiceSchema(location) : null;
+  const breadcrumb = buildBreadcrumbSchema(locationBreadcrumbItems(location));
+
   return (
     <>
+      <JsonLd id="ld-breadcrumb" data={breadcrumb} />
+      {clinicSchema && <JsonLd id="ld-clinic" data={clinicSchema} />}
+      {serviceSchema && <JsonLd id="ld-service" data={serviceSchema} />}
+      {location.kind === "clinic" && detail.provider && (
+        <JsonLd
+          id="ld-physician"
+          data={buildPhysicianSchema(location, detail.provider)}
+        />
+      )}
       <PageHero
         eyebrow={detail.hero.eyebrow}
         title={detail.hero.title}

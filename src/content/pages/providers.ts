@@ -10,7 +10,7 @@ export const providersPage = {
   }),
   hero: {
     video: "/assets/providers-hero-video.mp4",
-    poster: "/assets/providers-hero-poster.jpg",
+    poster: "/assets/providers-hero-poster.webp",
     headline: "Specialty cognitive care, with you still in the lead.",
     subTagline: "True co-management, not a hand-off.",
     subhead:

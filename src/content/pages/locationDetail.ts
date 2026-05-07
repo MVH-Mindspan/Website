@@ -140,9 +140,17 @@ const detailMap: Record<string, LocationDetail> = {
   "video-ca": videoCaliforniaDetail,
 };
 
+function buildLocationTitle(location: Location): string {
+  const stateAbbrev = location.state === "Massachusetts" ? "MA" : "CA";
+  if (location.kind === "video") {
+    return `Online Dementia Specialist in ${location.state} | Mindspan Video`;
+  }
+  return `Dementia & Alzheimer's Specialist in ${location.city}, ${stateAbbrev} | Mindspan`;
+}
+
 export function getLocationPage(location: Location) {
   const detail = detailMap[location.slug];
-  const title = `${location.city}, ${location.state} | Mindspan`;
+  const title = buildLocationTitle(location);
   return {
     metadata: buildMetadata({
       title,
