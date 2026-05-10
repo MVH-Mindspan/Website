@@ -8,6 +8,8 @@ const FADE_MS = 1500;
 const DEFAULT_LINE1 = "Welcome";
 const DEFAULT_LINE2 = "To your appointment.";
 const LAST_KEY = "mindspan.tv.lastImage";
+const LINE1_KEY = "mindspan.tv.line1";
+const LINE2_KEY = "mindspan.tv.line2";
 
 function pickRandom(exclude: string | null): string {
   let pick = tvImages[Math.floor(Math.random() * tvImages.length)];
@@ -15,6 +17,39 @@ function pickRandom(exclude: string | null): string {
     pick = tvImages[Math.floor(Math.random() * tvImages.length)];
   }
   return pick;
+}
+
+function readParams(): { line1: string | null; line2: string | null } {
+  // Prefer query string (?line1=...&line2=...), fall back to hash
+  // (#line1=...&line2=...) so kiosk browsers that strip the query
+  // — or chained meta-refresh redirects that drop it — still work.
+  const search = new URLSearchParams(window.location.search);
+  const hash = new URLSearchParams(window.location.hash.replace(/^#/, ""));
+  const pick = (key: string) => {
+    const fromSearch = search.get(key);
+    if (fromSearch && fromSearch.trim().length > 0) return fromSearch;
+    const fromHash = hash.get(key);
+    if (fromHash && fromHash.trim().length > 0) return fromHash;
+    return null;
+  };
+  return { line1: pick("line1"), line2: pick("line2") };
+}
+
+function readStored(key: string): string | null {
+  try {
+    const v = window.localStorage.getItem(key);
+    return v && v.trim().length > 0 ? v : null;
+  } catch {
+    return null;
+  }
+}
+
+function writeStored(key: string, value: string): void {
+  try {
+    window.localStorage.setItem(key, value);
+  } catch {
+    // localStorage unavailable (private mode, kiosk lockdown) — proceed without persistence
+  }
 }
 
 export function TvScreen() {
@@ -39,24 +74,17 @@ export function TvScreen() {
   }, [layerB]);
 
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const l1 = params.get("line1");
-    const l2 = params.get("line2");
-    if (l1 && l1.trim().length > 0) setLine1(l1);
-    if (l2 && l2.trim().length > 0) setLine2(l2);
+    const { line1: urlLine1, line2: urlLine2 } = readParams();
+    const resolvedLine1 = urlLine1 ?? readStored(LINE1_KEY) ?? DEFAULT_LINE1;
+    const resolvedLine2 = urlLine2 ?? readStored(LINE2_KEY) ?? DEFAULT_LINE2;
+    if (urlLine1) writeStored(LINE1_KEY, urlLine1);
+    if (urlLine2) writeStored(LINE2_KEY, urlLine2);
+    setLine1(resolvedLine1);
+    setLine2(resolvedLine2);
 
-    let last: string | null = null;
-    try {
-      last = window.localStorage.getItem(LAST_KEY);
-    } catch {
-      last = null;
-    }
+    const last = readStored(LAST_KEY);
     const first = pickRandom(last);
-    try {
-      window.localStorage.setItem(LAST_KEY, first);
-    } catch {
-      // localStorage unavailable (private mode, kiosk lockdown) — proceed without persistence
-    }
+    writeStored(LAST_KEY, first);
     setLayerA(first);
     layerARef.current = first;
     activeRef.current = "a";
@@ -75,11 +103,7 @@ export function TvScreen() {
       preloadImg.current = img;
       img.onload = () => {
         if (preloadImg.current !== img) return;
-        try {
-          window.localStorage.setItem(LAST_KEY, next);
-        } catch {
-          // ignore
-        }
+        writeStored(LAST_KEY, next);
         const incoming: "a" | "b" = activeRef.current === "a" ? "b" : "a";
         if (incoming === "a") setLayerA(next);
         else setLayerB(next);
