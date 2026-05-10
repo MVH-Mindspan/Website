@@ -52,6 +52,14 @@ function writeStored(key: string, value: string): void {
   }
 }
 
+function clearStored(key: string): void {
+  try {
+    window.localStorage.removeItem(key);
+  } catch {
+    // ignore
+  }
+}
+
 export function TvScreen() {
   const [mounted, setMounted] = useState(false);
   const [layerA, setLayerA] = useState<string | null>(null);
@@ -59,6 +67,9 @@ export function TvScreen() {
   const [activeLayer, setActiveLayer] = useState<"a" | "b">("a");
   const [line1, setLine1] = useState(DEFAULT_LINE1);
   const [line2, setLine2] = useState(DEFAULT_LINE2);
+  const [showSettings, setShowSettings] = useState(false);
+  const [draftLine1, setDraftLine1] = useState("");
+  const [draftLine2, setDraftLine2] = useState("");
 
   const activeRef = useRef<"a" | "b">("a");
   const layerARef = useRef<string | null>(null);
@@ -135,6 +146,54 @@ export function TvScreen() {
     };
   }, [mounted]);
 
+  const openSettings = () => {
+    setDraftLine1(line1);
+    setDraftLine2(line2);
+    setShowSettings(true);
+  };
+
+  const closeSettings = () => setShowSettings(false);
+
+  const saveSettings = () => {
+    const next1 = draftLine1.trim();
+    const next2 = draftLine2.trim();
+    const applied1 = next1.length > 0 ? next1 : DEFAULT_LINE1;
+    const applied2 = next2.length > 0 ? next2 : DEFAULT_LINE2;
+    setLine1(applied1);
+    setLine2(applied2);
+    if (next1.length > 0) writeStored(LINE1_KEY, next1);
+    else clearStored(LINE1_KEY);
+    if (next2.length > 0) writeStored(LINE2_KEY, next2);
+    else clearStored(LINE2_KEY);
+    setShowSettings(false);
+  };
+
+  const resetSettings = () => {
+    clearStored(LINE1_KEY);
+    clearStored(LINE2_KEY);
+    setLine1(DEFAULT_LINE1);
+    setLine2(DEFAULT_LINE2);
+    setDraftLine1(DEFAULT_LINE1);
+    setDraftLine2(DEFAULT_LINE2);
+  };
+
+  useEffect(() => {
+    if (!mounted) return;
+    const handler = (e: KeyboardEvent) => {
+      const target = e.target as HTMLElement | null;
+      const inField = target instanceof HTMLInputElement || target instanceof HTMLTextAreaElement;
+      if (!showSettings && !inField && (e.key === "s" || e.key === "S")) {
+        e.preventDefault();
+        openSettings();
+      } else if (showSettings && e.key === "Escape") {
+        e.preventDefault();
+        closeSettings();
+      }
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, [mounted, showSettings, line1, line2]);
+
   if (!mounted) return null;
 
   return (
@@ -168,6 +227,67 @@ export function TvScreen() {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img className="tv-logo" src="/assets/logo-white.png" alt="Mindspan" />
       </div>
+      <button
+        type="button"
+        className="tv-settings-trigger"
+        onClick={openSettings}
+        aria-label="Edit display text"
+      >
+        <span aria-hidden="true">Edit text</span>
+      </button>
+      {showSettings && (
+        <div
+          className="tv-settings-backdrop"
+          onClick={closeSettings}
+          role="presentation"
+        >
+          <div
+            className="tv-settings-panel"
+            role="dialog"
+            aria-label="Edit display text"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <h2 className="tv-settings-title">Display text</h2>
+            <label className="tv-settings-field">
+              <span>Top line</span>
+              <input
+                type="text"
+                value={draftLine1}
+                onChange={(e) => setDraftLine1(e.target.value)}
+                maxLength={80}
+                autoFocus
+                spellCheck={false}
+              />
+            </label>
+            <label className="tv-settings-field">
+              <span>Second line</span>
+              <input
+                type="text"
+                value={draftLine2}
+                onChange={(e) => setDraftLine2(e.target.value)}
+                maxLength={140}
+                spellCheck={false}
+              />
+            </label>
+            <p className="tv-settings-hint">
+              Leave blank to use the default. Saved on this TV until you change it again.
+            </p>
+            <div className="tv-settings-actions">
+              <button type="button" className="tv-btn tv-btn-ghost" onClick={resetSettings}>
+                Reset to default
+              </button>
+              <div className="tv-settings-actions-end">
+                <button type="button" className="tv-btn tv-btn-ghost" onClick={closeSettings}>
+                  Cancel
+                </button>
+                <button type="button" className="tv-btn tv-btn-primary" onClick={saveSettings}>
+                  Save
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 }
