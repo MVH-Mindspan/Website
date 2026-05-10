@@ -1,7 +1,7 @@
 import { CMS_AUTHOR_DISCLAIMER } from "@/content/guide-disclosures";
 import type { LocationDetail } from "../pages/locationDetail";
 
-const BOOKING_HREF = "https://hipaa.jotform.com/form/252121360919856";
+const BOOKING_HREF = "/book-a-visit";
 const EXISTING_HREF = "https://oncehub.com/mindspan_danvers";
 
 export const danversDetail: LocationDetail = {
