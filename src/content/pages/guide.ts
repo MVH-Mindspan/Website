@@ -167,7 +167,7 @@ export const guidePage = {
       id: "advantage",
       question: "I have Medicare Advantage, can I still get this?",
       answer:
-        "GUIDE is currently available to people enrolled in Original Medicare (Parts A and B), not Medicare Advantage or PACE. If you are on Advantage or PACE, you can still be a Mindspan patient, we accept most major plans, but the specific GUIDE benefits described here will not apply.",
+        "GUIDE is currently available to people enrolled in Original Medicare (Parts A and B), not Medicare Advantage or PACE. If you are on Advantage or PACE, you can still be a Mindspan patient, we accept Medicare, Medicaid, and many health plans, but the specific GUIDE benefits described here will not apply.",
     },
     {
       id: "diagnosis",
