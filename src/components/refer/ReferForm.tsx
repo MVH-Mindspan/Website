@@ -6,7 +6,11 @@ import { useTheme } from "@/lib/theme-context";
 import { alpha } from "@/lib/themes";
 import { ease, type as typeScale } from "@/lib/tokens";
 import { ArrowIcon } from "@/components/atoms/ArrowIcon";
+import { Button } from "@/components/atoms/Button";
 import { Heading } from "@/components/atoms/Heading";
+import { Field } from "@/components/molecules/Field";
+import { FormErrorSummary } from "@/components/molecules/FormErrorSummary";
+import { EMAIL_RE, formatPhone, normalizePhone } from "@/lib/forms";
 
 const SUBMIT_TIMEOUT_MS = 15000;
 
@@ -60,21 +64,13 @@ const initial: FormData = {
 
 type Errors = Partial<Record<keyof FormData, string>>;
 
-function formatPhone(raw: string): string {
-  const digits = raw.replace(/\D/g, "").slice(0, 10);
-  if (!digits) return "";
-  if (digits.length <= 3) return `(${digits}`;
-  if (digits.length <= 6) return `(${digits.slice(0, 3)}) ${digits.slice(3)}`;
-  return `(${digits.slice(0, 3)}) ${digits.slice(3, 6)}-${digits.slice(6)}`;
-}
-
 function validate(data: FormData): Errors {
   const errors: Errors = {};
   if (!data.referrerFirstName.trim()) errors.referrerFirstName = "Please enter your first name";
   if (!data.referrerLastName.trim()) errors.referrerLastName = "Please enter your last name";
   if (!data.referrerEmail.trim()) {
     errors.referrerEmail = "Please enter your email";
-  } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.referrerEmail.trim())) {
+  } else if (!EMAIL_RE.test(data.referrerEmail.trim())) {
     errors.referrerEmail = "Please enter a valid email address";
   }
   // Optional referrer phone — only validate when present.
@@ -244,7 +240,7 @@ export function ReferForm({ copy }: { copy: Copy }) {
         style={{
           background: "#fff",
           border: `1px solid ${alpha(c.ink, 0.08)}`,
-          borderRadius: "1.5rem",
+          borderRadius: "2rem",
           padding: "clamp(32px, 6vw, 48px) clamp(20px, 4vw, 32px)",
           textAlign: "center",
           outline: "none",
@@ -312,62 +308,24 @@ export function ReferForm({ copy }: { copy: Copy }) {
       style={{
         background: "#fff",
         border: `1px solid ${alpha(c.ink, 0.08)}`,
-        borderRadius: "1.5rem",
+        borderRadius: "2rem",
         padding: "32px",
         boxShadow: `0 4px 32px -16px ${alpha(c.ink, 0.18)}`,
       }}
     >
       {hasErrors && (
-        <div
-          ref={errorSummaryRef}
-          tabIndex={-1}
-          role="alert"
-          aria-live="assertive"
-          style={{
-            marginBottom: 24,
-            padding: "14px 16px",
-            background: alpha(c.accent, 0.08),
-            border: `1px solid ${alpha(c.accent, 0.2)}`,
-            borderRadius: "0.75rem",
-            fontFamily: theme.fonts.body,
-            color: c.accentText,
-            outline: "none",
-          }}
-        >
-          <p style={{ fontSize: typeScale.bodySm, fontWeight: 600 }}>
-            Please fix {errorEntries.length === 1 ? "this" : `these ${errorEntries.length}`}{" "}
-            {errorEntries.length === 1 ? "field" : "fields"}:
-          </p>
-          <ul
-            style={{
-              marginTop: 8,
-              paddingLeft: 20,
-              fontSize: typeScale.micro,
-              listStyle: "disc",
-              display: "flex",
-              flexDirection: "column",
-              gap: 4,
+        <div style={{ marginBottom: 24 }}>
+          <FormErrorSummary
+            ref={errorSummaryRef}
+            errors={errorEntries as Array<[string, string]>}
+            labels={FIELD_LABELS}
+            fieldIdFor={(key) => `refer-${key}`}
+            headings={{
+              one: "Please fix this field:",
+              many: (n) => `Please fix these ${n} fields:`,
             }}
-          >
-            {errorEntries.map(([key, msg]) => (
-              <li key={key} style={{ overflowWrap: "anywhere" }}>
-                <a
-                  href={`#refer-${key}`}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    const el = document.getElementById(`refer-${key}`);
-                    if (el && typeof (el as HTMLElement).focus === "function") {
-                      (el as HTMLElement).focus();
-                      el.scrollIntoView({ block: "center", behavior: reduceMotion ? "auto" : "smooth" });
-                    }
-                  }}
-                  style={{ color: c.accentText, textDecoration: "underline" }}
-                >
-                  {FIELD_LABELS[key as string] || (key as string)}: {msg}
-                </a>
-              </li>
-            ))}
-          </ul>
+            smoothScroll={!reduceMotion}
+          />
         </div>
       )}
       <FieldGroup
@@ -413,7 +371,7 @@ export function ReferForm({ copy }: { copy: Copy }) {
             type="tel"
             value={formatPhone(data.referrerPhone)}
             error={errors.referrerPhone}
-            onChange={(v) => update("referrerPhone", v.replace(/\D/g, "").slice(0, 10))}
+            onChange={(v) => update("referrerPhone", normalizePhone(v))}
             autoComplete="tel"
             inputMode="tel"
             placeholder="(555) 123-4567"
@@ -462,7 +420,7 @@ export function ReferForm({ copy }: { copy: Copy }) {
           required
           value={formatPhone(data.patientPhone)}
           error={errors.patientPhone}
-          onChange={(v) => update("patientPhone", v.replace(/\D/g, "").slice(0, 10))}
+          onChange={(v) => update("patientPhone", normalizePhone(v))}
           inputMode="tel"
           placeholder="(555) 123-4567"
           hint="US numbers only. We use this to schedule the intake call."
@@ -509,29 +467,13 @@ export function ReferForm({ copy }: { copy: Copy }) {
           gap: 12,
         }}
       >
-        <button
+        <Button
           type="submit"
+          variant="primary"
+          size="lg"
           disabled={submitting}
-          aria-busy={submitting}
-          className="hover:-translate-y-0.5"
-          style={{
-            display: "inline-flex",
-            alignItems: "center",
-            justifyContent: "center",
-            gap: 8,
-            fontFamily: theme.fonts.body,
-            fontWeight: 600,
-            fontSize: typeScale.body,
-            padding: "16px 32px",
-            background: c.brandGreen,
-            color: "#fff",
-            border: "none",
-            borderRadius: "10rem",
-            cursor: submitting ? "wait" : "pointer",
-            opacity: submitting ? 0.7 : 1,
-            transition: `transform 0.2s ${ease.standard}, box-shadow 0.2s ${ease.standard}, background 0.2s ease`,
-            boxShadow: `0 4px 16px -4px ${alpha(c.brandGreen, 0.4)}`,
-          }}
+          iconRight={!submitting ? <ArrowIcon /> : undefined}
+          style={submitting ? { cursor: "wait", opacity: 0.7 } : undefined}
         >
           {submitting ? (
             <>
@@ -550,12 +492,9 @@ export function ReferForm({ copy }: { copy: Copy }) {
               <span className="sr-only">Sending the referral, please wait</span>
             </>
           ) : (
-            <>
-              {copy.submit}
-              <ArrowIcon />
-            </>
+            copy.submit
           )}
-        </button>
+        </Button>
         <style jsx>{`
           @keyframes refer-spinner {
             to {
@@ -681,160 +620,4 @@ function Divider() {
   );
 }
 
-type FieldProps = {
-  id: string;
-  label: string;
-  value: string;
-  onChange: (v: string) => void;
-  type?: "text" | "email" | "tel";
-  as?: "input" | "textarea";
-  required?: boolean;
-  placeholder?: string;
-  autoComplete?: string;
-  inputMode?: "text" | "email" | "tel" | "numeric";
-  hint?: string;
-  error?: string;
-  maxLength?: number;
-};
-
-function Field({
-  id,
-  label,
-  value,
-  onChange,
-  type = "text",
-  as = "input",
-  required,
-  placeholder,
-  autoComplete,
-  inputMode,
-  hint,
-  error,
-  maxLength,
-}: FieldProps) {
-  const { theme } = useTheme();
-  const c = theme.colors;
-  const errorId = `${id}-error`;
-  const hintId = `${id}-hint`;
-  const describedBy = error ? errorId : hint ? hintId : undefined;
-
-  const inputStyle: React.CSSProperties = {
-    width: "100%",
-    padding: "12px 14px",
-    fontFamily: theme.fonts.body,
-    fontSize: typeScale.bodySm,
-    color: c.ink,
-    background: c.cream,
-    border: `1px solid ${error ? c.accent : alpha(c.ink, 0.14)}`,
-    borderRadius: "0.75rem",
-    outline: "none",
-    transition: "border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease",
-  };
-
-  const onFocus = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    e.currentTarget.style.borderColor = c.brandGreen;
-    e.currentTarget.style.background = "#fff";
-    e.currentTarget.style.boxShadow = `0 0 0 3px ${alpha(c.brandGreen, 0.12)}`;
-  };
-  const onBlur = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    e.currentTarget.style.borderColor = error ? c.accent : alpha(c.ink, 0.14);
-    e.currentTarget.style.background = c.cream;
-    e.currentTarget.style.boxShadow = "none";
-  };
-
-  return (
-    <div style={{ minWidth: 0 }}>
-      <label
-        htmlFor={id}
-        style={{
-          display: "block",
-          fontFamily: theme.fonts.body,
-          fontSize: typeScale.bodySm,
-          fontWeight: 500,
-          color: c.ink,
-          marginBottom: 6,
-          overflowWrap: "break-word",
-        }}
-      >
-        {label}
-        {required && (
-          <>
-            <span aria-hidden style={{ color: c.accent, marginLeft: 4 }}>
-              *
-            </span>
-            <span className="sr-only"> (required)</span>
-          </>
-        )}
-      </label>
-      {as === "textarea" ? (
-        <textarea
-          id={id}
-          name={id}
-          value={value}
-          onChange={(e) => onChange(e.target.value)}
-          onFocus={onFocus}
-          onBlur={onBlur}
-          required={required}
-          aria-required={required ? true : undefined}
-          placeholder={placeholder}
-          maxLength={maxLength}
-          rows={3}
-          aria-invalid={error ? true : undefined}
-          aria-describedby={describedBy}
-          style={{ ...inputStyle, resize: "vertical", minHeight: 88 }}
-        />
-      ) : (
-        <input
-          id={id}
-          name={id}
-          type={type}
-          value={value}
-          onChange={(e) => onChange(e.target.value)}
-          onFocus={onFocus}
-          onBlur={onBlur}
-          required={required}
-          aria-required={required ? true : undefined}
-          placeholder={placeholder}
-          autoComplete={autoComplete}
-          inputMode={inputMode}
-          maxLength={maxLength}
-          aria-invalid={error ? true : undefined}
-          aria-describedby={describedBy}
-          style={inputStyle}
-        />
-      )}
-      {error ? (
-        <p
-          id={errorId}
-          role="alert"
-          aria-live="polite"
-          style={{
-            marginTop: 6,
-            fontFamily: theme.fonts.body,
-            fontSize: typeScale.micro,
-            color: c.accentText,
-            fontWeight: 500,
-            overflowWrap: "anywhere",
-          }}
-        >
-          {error}
-        </p>
-      ) : hint ? (
-        <p
-          id={hintId}
-          style={{
-            marginTop: 6,
-            fontFamily: theme.fonts.body,
-            fontSize: typeScale.micro,
-            color: alpha(c.ink, 0.55),
-            lineHeight: 1.5,
-            overflowWrap: "break-word",
-          }}
-        >
-          {hint}
-        </p>
-      ) : null}
-    </div>
-  );
-}
 

@@ -4,9 +4,15 @@
 import { motion, useReducedMotion, type Variants } from "framer-motion";
 import { EASE } from "@/lib/motion";
 import { ImageFrame } from "@/components/atoms/ImageFrame";
+import { useTheme } from "@/lib/theme-context";
+import { alpha } from "@/lib/themes";
+import { Eyebrow } from "@/components/atoms/Eyebrow";
+import { Heading } from "@/components/atoms/Heading";
+import { Lead } from "@/components/atoms/Lead";
+import { bookingPage, type CareOption } from "@/content/pages/booking";
 import type { StateChoice } from "./StepState";
 
-const GREEN = "#083630";
+export type { CareOption };
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 24 },
@@ -18,64 +24,10 @@ const staggerContainer: Variants = {
   show: { transition: { staggerChildren: 0.08, delayChildren: 0.05 } },
 };
 
-export type CareOption = {
-  id: string;
-  city: string;
-  state: string;
-  description: string;
-  kind: "clinic" | "video";
-  image: string;
-  imageAlt?: string;
-  address?: string;
-};
-
-const careOptionsByState: Record<"MA" | "CA", CareOption[]> = {
-  MA: [
-    {
-      id: "danvers",
-      city: "Danvers",
-      state: "Massachusetts",
-      description: "In-person clinic, north of Boston",
-      kind: "clinic",
-      image: "/assets/danvers-clinic.webp",
-      imageAlt: "Mindspan Danvers clinic on Boston’s North Shore",
-      address: "99 Conifer Hill Drive, Danvers, MA 01923",
-    },
-    {
-      id: "video-ma",
-      city: "Video visit",
-      state: "From anywhere in Massachusetts",
-      description: "See your provider on your phone or computer, no driving, no waiting room",
-      kind: "video",
-      image: "/assets/video-visit-poster.webp",
-      imageAlt: "Mindspan video visit, anywhere in Massachusetts",
-    },
-  ],
-  CA: [
-    {
-      id: "bay-area",
-      city: "Bay Area",
-      state: "California",
-      description: "In-person clinic",
-      kind: "clinic",
-      image: "/assets/bay-area-clinic.webp",
-      imageAlt: "Mindspan Bay Area clinic exterior in San Jose, California",
-      address: "2520 Samaritan Dr, Suite 201B, San Jose, CA 95124",
-    },
-    {
-      id: "video-ca",
-      city: "Video visit",
-      state: "From anywhere in California",
-      description: "See your provider on your phone or computer, no driving, no waiting room",
-      kind: "video",
-      image: "/assets/video-visit-poster.webp",
-      imageAlt: "Mindspan video visit, anywhere in California",
-    },
-  ],
-};
+const careCopy = bookingPage.care;
 
 export function getCareOption(id: string): CareOption | undefined {
-  return [...careOptionsByState.MA, ...careOptionsByState.CA].find(
+  return [...careCopy.optionsByState.MA, ...careCopy.optionsByState.CA].find(
     (o) => o.id === id
   );
 }
@@ -92,17 +44,30 @@ export default function StepCareOption({
   onChange,
 }: StepCareOptionProps) {
   const reducedMotion = useReducedMotion();
-  const options = careOptionsByState[state];
+  const { theme } = useTheme();
+  const c = theme.colors;
+  const options = careCopy.optionsByState[state];
 
   return (
     <div>
-      <h2 className="studio-h2" style={{ color: GREEN }}>
-        How would you like to be seen?
-      </h2>
-      <p className="studio-lead mt-3" style={{ color: "rgba(8,54,48,0.7)" }}>
-        Visit one of our clinics, or see your provider over video, whatever
-        works best for you.
-      </p>
+      <Eyebrow color={c.accent}>{careCopy.eyebrow}</Eyebrow>
+      <Heading
+        as="h2"
+        variant="h2"
+        fontFamily={theme.fonts.heading}
+        color={c.brandGreen}
+        className="mt-3"
+      >
+        {careCopy.title}
+      </Heading>
+      <Lead
+        size="md"
+        color={alpha(c.brandGreen, 0.7)}
+        className="mt-3"
+        maxWidth="56ch"
+      >
+        {careCopy.lead}
+      </Lead>
 
       <motion.div
         className={`mt-10 grid gap-5 ${
@@ -142,7 +107,7 @@ export default function StepCareOption({
               {isSelected && (
                 <motion.div
                   className="absolute top-6 right-6 z-20 h-7 w-7 rounded-full flex items-center justify-center"
-                  style={{ background: GREEN }}
+                  style={{ background: c.brandGreen }}
                   initial={reducedMotion ? false : { scale: 0 }}
                   animate={{ scale: 1 }}
                   transition={{ duration: 0.25, ease: EASE }}
@@ -172,13 +137,13 @@ export default function StepCareOption({
 
                 <div
                   className="absolute top-6 left-6 flex items-center gap-2 rounded-full bg-white/95 backdrop-blur px-3 py-1.5 text-[11px] font-semibold shadow-sm"
-                  style={{ color: GREEN }}
+                  style={{ color: c.brandGreen }}
                 >
                   <span
                     className="h-2 w-2 rounded-full animate-pulse"
-                    style={{ background: "#22c55e" }}
+                    style={{ background: c.accent }}
                   />
-                  Taking patients
+                  {careCopy.takingPatients}
                 </div>
               </div>
 
@@ -186,8 +151,8 @@ export default function StepCareOption({
                 <h3
                   className="text-lg font-semibold leading-tight"
                   style={{
-                    color: GREEN,
-                    fontFamily: "var(--font-pt-serif), Georgia, serif",
+                    color: c.brandGreen,
+                    fontFamily: theme.fonts.heading,
                     letterSpacing: "-0.02em",
                   }}
                 >
@@ -195,20 +160,20 @@ export default function StepCareOption({
                 </h3>
                 <p
                   className="mt-1 text-sm"
-                  style={{ color: "rgba(8,54,48,0.55)" }}
+                  style={{ color: alpha(c.brandGreen, 0.55) }}
                 >
                   {opt.state}
                 </p>
                 <p
                   className="mt-2 text-xs"
-                  style={{ color: "rgba(8,54,48,0.72)" }}
+                  style={{ color: alpha(c.brandGreen, 0.72) }}
                 >
                   {opt.description}
                 </p>
                 {opt.address && (
                   <p
                     className="mt-2 text-xs"
-                    style={{ color: "rgba(8,54,48,0.55)" }}
+                    style={{ color: alpha(c.brandGreen, 0.55) }}
                   >
                     {opt.address}
                   </p>

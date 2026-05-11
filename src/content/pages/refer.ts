@@ -17,14 +17,14 @@ export const referPage = {
     eyebrow: "Send a referral",
     title: "Takes about 30 seconds.",
     lead:
-      "We just need enough to call you back. Everything else — MBI, DOB, records — we will collect when we reach out.",
+      "We just need enough to call you back. Everything else (MBI, DOB, records) we will collect when we reach out.",
     submit: "Send referral",
     submitting: "Sending…",
     successTitle: "Referral received.",
     successBody:
       "Thank you. Our team will reach out within one business day to collect any remaining chart details and schedule the patient.",
     privacy:
-      "Submissions are encrypted in transit. Please do not include MBI, full DOB, or clinical notes here — we capture those on a HIPAA-compliant intake call.",
+      "Submissions are encrypted in transit. Please do not include MBI, full DOB, or clinical notes here. We capture those on a HIPAA-compliant intake call.",
   },
   alt: {
     title: "Prefer a phone call or fax?",
