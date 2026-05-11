@@ -11,7 +11,8 @@ export type Audience = {
 export const audiencesIntro = {
   eyebrow: "Who we see",
   title: "Wherever you are coming from, you are in the right place.",
-  lead: "A short note, directly to you.",
+  lead:
+    "Some of you are here for a parent or spouse. Others are here because of something you have noticed in yourself. Either way, you are not too early, and you are not alone.",
   image: "/assets/consultation-1.webp",
   imageAlt: "A consultation in a sunlit room",
 } as const;
