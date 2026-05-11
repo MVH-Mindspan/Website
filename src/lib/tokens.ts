@@ -39,6 +39,24 @@ export const tracking = {
   wide: "0.08em",
 } as const;
 
+/**
+ * Corner radius scale.
+ *
+ * Rule for nested rounded elements:
+ *   outer_radius = inner_radius + padding
+ *
+ * Concentric pairs (outer -> inner -> required padding to nearest edge):
+ *   xl -> md -> 0.75rem (12px)   canonical ImageFrame-in-card
+ *   xl -> sm -> 1.25rem (20px)
+ *   xl -> lg -> 0.5rem (8px)
+ *   lg -> sm -> 0.75rem (12px)
+ *
+ * `pill` (10rem) and `50%` (circles) are exempt; they are shape primitives,
+ * not part of the nesting system. The rule only binds when an inner shape is
+ * visually framed by the outer wall (e.g. ImageFrame at the top of a card).
+ * Content sitting in the body of a card with normal layout padding does not
+ * need to follow it.
+ */
 export const radius = {
   sm: "0.75rem",
   md: "1.25rem",

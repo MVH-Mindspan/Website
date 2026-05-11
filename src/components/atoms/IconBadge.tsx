@@ -1,4 +1,5 @@
 import type { CSSProperties, ReactNode } from "react";
+import { radius } from "@/lib/tokens";
 
 export function IconBadge({
   children,
@@ -24,7 +25,7 @@ export function IconBadge({
         justifyContent: "center",
         width: size,
         height: size,
-        borderRadius: "1rem",
+        borderRadius: radius.sm,
         background,
         color,
         flexShrink: 0,

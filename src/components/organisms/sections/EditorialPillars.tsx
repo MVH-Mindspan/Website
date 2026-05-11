@@ -47,7 +47,7 @@ export function EditorialPillars({
                 >
                   {p.image && (
                     <div
-                      className="relative overflow-hidden rounded-[1.75rem]"
+                      className="relative overflow-hidden rounded-[2rem]"
                       style={{
                         boxShadow:
                           "0 30px 60px -30px rgba(32,30,23,0.28), 0 2px 8px rgba(32,30,23,0.06)",

@@ -91,7 +91,7 @@ export function VideoFeature({
 
   const media = (
     <div
-      className="relative overflow-hidden rounded-[1.75rem]"
+      className="relative overflow-hidden rounded-[2rem]"
       style={{
         aspectRatio: "16 / 9",
         boxShadow:
