@@ -176,16 +176,15 @@ export default function StepState({ value, onChange }: StepStateProps) {
           />
         </svg>
         <p className="text-sm" style={{ color: "rgba(8,54,48,0.7)" }}>
-          <strong style={{ color: GREEN }}>Already a patient?</strong>{" "}
-          Book directly through your{" "}
+          <strong style={{ color: GREEN }}>Already a current patient or caregiver?</strong>{" "}
           <a
-            href="https://my.mindspan.co/login"
+            href="https://oncehub.com/mindspan_danvers"
             target="_blank"
             rel="noopener noreferrer"
             className="font-medium underline underline-offset-2 hover:no-underline"
             style={{ color: "#fb4d17" }}
           >
-            member portal
+            Book an appointment
           </a>
           .
         </p>
