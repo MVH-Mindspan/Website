@@ -7,7 +7,6 @@ import { ImageFrame } from "@/components/atoms/ImageFrame";
 import type { StateChoice } from "./StepState";
 
 const GREEN = "#083630";
-const CREAM = "#efeeeb";
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 24 },
@@ -25,7 +24,7 @@ export type CareOption = {
   state: string;
   description: string;
   kind: "clinic" | "video";
-  image?: string;
+  image: string;
   imageAlt?: string;
   address?: string;
 };
@@ -48,6 +47,8 @@ const careOptionsByState: Record<"MA" | "CA", CareOption[]> = {
       state: "From anywhere in Massachusetts",
       description: "See your provider on your phone or computer, no driving, no waiting room",
       kind: "video",
+      image: "/assets/video-visit-poster.webp",
+      imageAlt: "Mindspan video visit, anywhere in Massachusetts",
     },
   ],
   CA: [
@@ -67,6 +68,8 @@ const careOptionsByState: Record<"MA" | "CA", CareOption[]> = {
       state: "From anywhere in California",
       description: "See your provider on your phone or computer, no driving, no waiting room",
       kind: "video",
+      image: "/assets/video-visit-poster.webp",
+      imageAlt: "Mindspan video visit, anywhere in California",
     },
   ],
 };
@@ -158,37 +161,14 @@ export default function StepCareOption({
               )}
 
               <div className="relative">
-                {opt.image ? (
-                  <ImageFrame radius="1.25rem" className="m-3 mb-0">
-                    <img
-                      src={opt.image}
-                      alt={opt.imageAlt ?? ""}
-                      className="block w-full object-cover aspect-[16/10] transition-transform duration-500 group-hover:scale-[1.02]"
-                      loading="lazy"
-                    />
-                  </ImageFrame>
-                ) : (
-                  <div
-                    className="relative overflow-hidden m-3 mb-0 rounded-[1.25rem] aspect-[16/10] flex items-center justify-center"
-                    style={{ background: CREAM }}
-                  >
-                    <div
-                      className="h-16 w-16 rounded-2xl flex items-center justify-center"
-                      style={{ background: "rgba(8,54,48,0.08)" }}
-                    >
-                      <svg viewBox="0 0 24 24" className="h-8 w-8" style={{ color: GREEN }}>
-                        <path
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="1.5"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M15.75 10.5l4.72-4.72a.75.75 0 011.28.53v11.38a.75.75 0 01-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 002.25-2.25v-9a2.25 2.25 0 00-2.25-2.25h-9A2.25 2.25 0 002.25 7.5v9a2.25 2.25 0 002.25 2.25z"
-                        />
-                      </svg>
-                    </div>
-                  </div>
-                )}
+                <ImageFrame radius="1.25rem" className="m-3 mb-0">
+                  <img
+                    src={opt.image}
+                    alt={opt.imageAlt ?? ""}
+                    className="block w-full object-cover aspect-[16/10] transition-transform duration-500 group-hover:scale-[1.02]"
+                    loading="lazy"
+                  />
+                </ImageFrame>
 
                 <div
                   className="absolute top-6 left-6 flex items-center gap-2 rounded-full bg-white/95 backdrop-blur px-3 py-1.5 text-[11px] font-semibold shadow-sm"
