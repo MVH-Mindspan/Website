@@ -7,6 +7,7 @@ export const footer = {
       title: "For patients & families",
       links: [
         { label: "Book an appointment", href: "/book-a-visit" },
+        { label: "Free assessment", href: "https://assessment.mindspan.co/" },
         { label: "How it works", href: "/about/how-it-works" },
         { label: "Science & technology", href: "/about/science" },
         { label: "GUIDE Program", href: "/guide" },
