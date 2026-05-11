@@ -3,6 +3,13 @@
 import { useState, useCallback, useEffect, useRef } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { EASE } from "@/lib/motion";
+import { useTheme } from "@/lib/theme-context";
+import { alpha } from "@/lib/themes";
+import { ArrowIcon } from "@/components/atoms/ArrowIcon";
+import { Button } from "@/components/atoms/Button";
+import { Container } from "@/components/atoms/Container";
+import { bookingPage } from "@/content/pages/booking";
+import { isEmail } from "@/lib/forms";
 import ProgressBar from "./ProgressBar";
 import StepState, { type StateChoice } from "./StepState";
 import StepCareOption from "./StepCareOption";
@@ -13,6 +20,11 @@ import { ANALYTICS_EVENTS, track } from "@/lib/analytics";
 
 const STORAGE_KEY = "mindspan:booking:v1";
 const SUBMIT_TIMEOUT_MS = 15000;
+const detailsErrors = bookingPage.details.errors;
+const waitlistErrors = bookingPage.waitlist.errors;
+const submitErrorCopy = bookingPage.submitErrors;
+const srHeadings = bookingPage.srHeadings;
+const shellCopy = bookingPage.shell;
 
 // Field order on the details step, used to scroll the first invalid field
 // into view when validation fails.
@@ -81,60 +93,56 @@ const initialFormData: FormData = {
 type StepId = "state" | "waitlist" | "care" | "details" | "review";
 
 const BOOKING_STEPS: { id: StepId; label: string }[] = [
-  { id: "state", label: "Where" },
-  { id: "care", label: "How" },
-  { id: "details", label: "You" },
-  { id: "review", label: "Confirm" },
+  { id: "state", label: shellCopy.progressLabels[0] },
+  { id: "care", label: shellCopy.progressLabels[1] },
+  { id: "details", label: shellCopy.progressLabels[2] },
+  { id: "review", label: shellCopy.progressLabels[3] },
 ];
 
 type StepErrors = Record<string, string>;
 
-// Loose, RFC-friendly email shape. Accepts +aliases, dots, and most TLDs.
-// We deliberately don't try to be smarter than the user.
-const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
 function validateDetails(data: FormData): StepErrors {
   const errors: StepErrors = {};
-  if (!data.bookingFor) errors.bookingFor = "Please select who this visit is for";
-  if (!data.firstName.trim()) errors.firstName = "Please enter your first name";
-  if (!data.lastName.trim()) errors.lastName = "Please enter your last name";
+  if (!data.bookingFor) errors.bookingFor = detailsErrors.bookingForRequired;
+  if (!data.firstName.trim()) errors.firstName = detailsErrors.firstNameRequired;
+  if (!data.lastName.trim()) errors.lastName = detailsErrors.lastNameRequired;
   const email = data.email.trim();
   if (!email) {
-    errors.email = "Please enter your email";
-  } else if (!EMAIL_RE.test(email)) {
-    errors.email = "Please enter a valid email address";
+    errors.email = detailsErrors.emailRequired;
+  } else if (!isEmail(email)) {
+    errors.email = detailsErrors.emailInvalid;
   }
   const phoneDigits = data.phone.replace(/\D/g, "");
   if (!phoneDigits) {
-    errors.phone = "Please enter your phone number";
+    errors.phone = detailsErrors.phoneRequired;
   } else if (phoneDigits.length < 10) {
-    errors.phone = "Please enter a 10-digit US phone number";
+    errors.phone = detailsErrors.phoneInvalid;
   }
   if (data.bookingFor === "loved-one") {
     if (!data.patientFirstName.trim())
-      errors.patientFirstName = "Please enter the patient's first name";
+      errors.patientFirstName = detailsErrors.patientFirstNameRequired;
     if (!data.patientLastName.trim())
-      errors.patientLastName = "Please enter the patient's last name";
+      errors.patientLastName = detailsErrors.patientLastNameRequired;
     if (!data.relationship.trim())
-      errors.relationship = "Please tell us your relationship";
+      errors.relationship = detailsErrors.relationshipRequired;
   }
   return errors;
 }
 
 function validateWaitlist(data: FormData): StepErrors {
   const errors: StepErrors = {};
-  if (!data.firstName.trim()) errors.firstName = "Please enter your first name";
+  if (!data.firstName.trim()) errors.firstName = waitlistErrors.firstNameRequired;
   const email = data.email.trim();
   if (!email) {
-    errors.email = "Please enter your email";
-  } else if (!EMAIL_RE.test(email)) {
-    errors.email = "Please enter a valid email address";
+    errors.email = waitlistErrors.emailRequired;
+  } else if (!isEmail(email)) {
+    errors.email = waitlistErrors.emailInvalid;
   }
   const phoneDigits = data.phone.replace(/\D/g, "");
   if (!phoneDigits) {
-    errors.phone = "Please enter your phone number";
+    errors.phone = waitlistErrors.phoneRequired;
   } else if (phoneDigits.length < 10) {
-    errors.phone = "Please enter a 10-digit US phone number";
+    errors.phone = waitlistErrors.phoneInvalid;
   }
   return errors;
 }
@@ -186,31 +194,23 @@ async function submitForm(
       const isClientError = res.status >= 400 && res.status < 500;
       return {
         ok: false,
-        error: isClientError
-          ? "Something in your information didn't come through. Please double-check and try again, or email us at hello@mindspan.co."
-          : "Our scheduling system is having a hiccup. Please try again in a moment, or email us at hello@mindspan.co.",
+        error: isClientError ? submitErrorCopy.client : submitErrorCopy.server,
       };
     }
     return { ok: true };
   } catch (err) {
     const error = err as { name?: string };
     if (error?.name === "AbortError") {
-      return {
-        ok: false,
-        error:
-          "That took longer than expected. Please check your connection and try again.",
-      };
+      return { ok: false, error: submitErrorCopy.timeout };
     }
-    return {
-      ok: false,
-      error:
-        "We couldn't reach our servers. Please check your connection and try again, or email us at hello@mindspan.co.",
-    };
+    return { ok: false, error: submitErrorCopy.network };
   }
 }
 
 export default function BookingWizard() {
   const reducedMotion = useReducedMotion();
+  const { theme } = useTheme();
+  const c = theme.colors;
   const [stepId, setStepId] = useState<StepId>("state");
   const [direction, setDirection] = useState(1);
   const [formData, setFormData] = useState<FormData>(initialFormData);
@@ -418,9 +418,7 @@ export default function BookingWizard() {
     // Re-validate to catch any state cleared by rapid back-navigation.
     const detailErrors = validateDetails(formData);
     if (Object.keys(detailErrors).length > 0 || !formData.state || !formData.careOption) {
-      setSubmitError(
-        "Some required information is missing. Please go back and complete every step."
-      );
+      setSubmitError(bookingPage.review.submitMissing);
       return;
     }
     setSubmitError(undefined);
@@ -490,9 +488,7 @@ export default function BookingWizard() {
     (e: React.MouseEvent<HTMLAnchorElement>) => {
       if (submitted) return;
       if (!hasFormProgress(formData)) return;
-      const confirmed = window.confirm(
-        "Leave booking? Your progress so far will be cleared."
-      );
+      const confirmed = window.confirm(shellCopy.exitConfirm);
       if (!confirmed) {
         e.preventDefault();
         return;
@@ -559,15 +555,16 @@ export default function BookingWizard() {
   };
 
   return (
-    <div className="min-h-screen" style={{ background: "#efeeeb" }}>
+    <div className="min-h-screen" style={{ background: c.cream }}>
       <a
         href="#main-content"
-        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[1000] focus:rounded-full focus:bg-[#083630] focus:px-5 focus:py-3 focus:text-sm focus:font-semibold focus:text-white focus:shadow-lg focus:outline-none"
+        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[1000] focus:rounded-full focus:px-5 focus:py-3 focus:text-sm focus:font-semibold focus:text-white focus:shadow-lg focus:outline-none"
+        style={{ background: c.brandGreen }}
       >
-        Skip to main content
+        {shellCopy.skipToMain}
       </a>
       <header className="py-6">
-        <div className="studio-container flex items-center justify-between">
+        <Container className="flex items-center justify-between">
           <a
             href="/"
             onClick={handleExitClick}
@@ -584,18 +581,18 @@ export default function BookingWizard() {
             href="/"
             onClick={handleExitClick}
             className="text-sm font-medium flex items-center gap-1.5 transition-colors"
-            style={{ color: "rgba(8,54,48,0.72)" }}
+            style={{ color: alpha(c.brandGreen, 0.72) }}
           >
             <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M19 12H5M12 19l-7-7 7-7" />
             </svg>
-            Back to site
+            {shellCopy.backToSite}
           </a>
-        </div>
+        </Container>
       </header>
 
       {showProgress && (
-        <div className="studio-container pb-8">
+        <Container className="pb-8">
           <div className="max-w-2xl mx-auto">
             <ProgressBar
               steps={BOOKING_STEPS.map((s) => s.label)}
@@ -603,10 +600,11 @@ export default function BookingWizard() {
               onStepClick={handleProgressClick}
             />
           </div>
-        </div>
+        </Container>
       )}
 
-      <main id="main-content" className="studio-container pb-32" aria-busy={submitting}>
+      <main id="main-content" className="pb-32" aria-busy={submitting}>
+        <Container>
         {/* Hidden focus target so screen readers land on the step heading
             on step change. We use this rather than focusing the heading
             directly to avoid disturbing visual styles. */}
@@ -617,25 +615,25 @@ export default function BookingWizard() {
           aria-live="polite"
         >
           {submitted
-            ? "Submission complete"
+            ? srHeadings.submitted
             : stepId === "state"
-              ? "Step: Where do you live?"
+              ? srHeadings.state
               : stepId === "care"
-                ? "Step: How would you like to be seen?"
+                ? srHeadings.care
                 : stepId === "details"
-                  ? "Step: Your details"
+                  ? srHeadings.details
                   : stepId === "review"
-                    ? "Step: Review and confirm"
+                    ? srHeadings.review
                     : stepId === "waitlist"
-                      ? "Step: Join the waitlist"
+                      ? srHeadings.waitlist
                       : ""}
         </div>
         <div
           className="max-w-3xl mx-auto rounded-3xl p-4 sm:p-6 md:p-10 lg:p-12 min-w-0"
           style={{
             background: "#fff",
-            border: "1px solid rgba(8,54,48,0.06)",
-            boxShadow: "0 4px 40px -12px rgba(8,54,48,0.08)",
+            border: `1px solid ${alpha(c.brandGreen, 0.06)}`,
+            boxShadow: `0 4px 40px -12px ${alpha(c.brandGreen, 0.08)}`,
           }}
         >
           <AnimatePresence mode="wait" custom={direction}>
@@ -657,33 +655,27 @@ export default function BookingWizard() {
         {(showBack || showContinue) && !submitted && (
           <div className="max-w-3xl mx-auto mt-6 flex items-center justify-between px-2">
             {showBack ? (
-              <button
-                type="button"
-                onClick={back}
-                className="studio-btn studio-btn-ghost"
-              >
-                <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2">
+              <Button variant="ghostDark" onClick={back}>
+                <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
                   <path d="M19 12H5M12 19l-7-7 7-7" />
                 </svg>
                 Back
-              </button>
+              </Button>
             ) : (
               <div />
             )}
             {showContinue && (
-              <button
-                type="button"
+              <Button
+                variant="primary"
                 onClick={handleDetailsContinue}
-                className="studio-btn studio-btn-primary"
+                iconRight={<ArrowIcon />}
               >
                 Continue
-                <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M5 12h14M13 5l7 7-7 7" />
-                </svg>
-              </button>
+              </Button>
             )}
           </div>
         )}
+        </Container>
       </main>
     </div>
   );

@@ -2,9 +2,14 @@
 
 import { motion, useReducedMotion, type Variants } from "framer-motion";
 import { EASE } from "@/lib/motion";
+import { useTheme } from "@/lib/theme-context";
+import { alpha } from "@/lib/themes";
+import { Eyebrow } from "@/components/atoms/Eyebrow";
+import { Heading } from "@/components/atoms/Heading";
+import { Lead } from "@/components/atoms/Lead";
+import { bookingPage, type StateChoice } from "@/content/pages/booking";
 
-const GREEN = "#083630";
-const CREAM = "#efeeeb";
+export type { StateChoice };
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 24 },
@@ -16,29 +21,7 @@ const staggerContainer: Variants = {
   show: { transition: { staggerChildren: 0.08, delayChildren: 0.05 } },
 };
 
-export type StateChoice = "MA" | "CA" | "Other";
-
-const choices: {
-  id: StateChoice;
-  title: string;
-  subtitle: string;
-}[] = [
-  {
-    id: "MA",
-    title: "Massachusetts",
-    subtitle: "We see patients here",
-  },
-  {
-    id: "CA",
-    title: "California",
-    subtitle: "We see patients here",
-  },
-  {
-    id: "Other",
-    title: "Somewhere else",
-    subtitle: "Join the waitlist for your area",
-  },
-];
+const stateCopy = bookingPage.state;
 
 type StepStateProps = {
   value: StateChoice | "";
@@ -47,15 +30,29 @@ type StepStateProps = {
 
 export default function StepState({ value, onChange }: StepStateProps) {
   const reducedMotion = useReducedMotion();
+  const { theme } = useTheme();
+  const c = theme.colors;
 
   return (
     <div>
-      <h2 className="studio-h2" style={{ color: GREEN }}>
-        Where do you live?
-      </h2>
-      <p className="studio-lead mt-3" style={{ color: "rgba(8,54,48,0.7)" }}>
-        We see patients in Massachusetts and California today.
-      </p>
+      <Eyebrow color={c.accent}>{stateCopy.eyebrow}</Eyebrow>
+      <Heading
+        as="h2"
+        variant="h2"
+        fontFamily={theme.fonts.heading}
+        color={c.brandGreen}
+        className="mt-3"
+      >
+        {stateCopy.title}
+      </Heading>
+      <Lead
+        size="md"
+        color={alpha(c.brandGreen, 0.7)}
+        className="mt-3"
+        maxWidth="56ch"
+      >
+        {stateCopy.lead}
+      </Lead>
 
       <motion.div
         className="mt-10 grid sm:grid-cols-3 gap-4"
@@ -63,13 +60,13 @@ export default function StepState({ value, onChange }: StepStateProps) {
         initial={reducedMotion ? false : "hidden"}
         animate="show"
       >
-        {choices.map((c) => {
-          const isSelected = value === c.id;
+        {stateCopy.choices.map((choice) => {
+          const isSelected = value === choice.id;
           return (
             <motion.button
-              key={c.id}
+              key={choice.id}
               type="button"
-              onClick={() => onChange(c.id)}
+              onClick={() => onChange(choice.id as StateChoice)}
               variants={fadeUp}
               whileHover={reducedMotion ? {} : { y: -3 }}
               whileTap={reducedMotion ? {} : { scale: 0.98 }}
@@ -86,7 +83,7 @@ export default function StepState({ value, onChange }: StepStateProps) {
               {isSelected && (
                 <motion.div
                   className="absolute top-3 right-3 h-7 w-7 rounded-full flex items-center justify-center"
-                  style={{ background: GREEN }}
+                  style={{ background: c.brandGreen }}
                   initial={reducedMotion ? false : { scale: 0 }}
                   animate={{ scale: 1 }}
                   transition={{ duration: 0.25, ease: EASE }}
@@ -107,12 +104,12 @@ export default function StepState({ value, onChange }: StepStateProps) {
               <div className="flex flex-col h-full">
                 <div
                   className="h-14 w-14 rounded-2xl flex items-center justify-center mb-4"
-                  style={{ background: CREAM }}
+                  style={{ background: c.cream }}
                 >
                   <svg
                     viewBox="0 0 24 24"
                     className="h-7 w-7"
-                    style={{ color: GREEN }}
+                    style={{ color: c.brandGreen }}
                   >
                     <path
                       fill="none"
@@ -135,18 +132,18 @@ export default function StepState({ value, onChange }: StepStateProps) {
                 <h3
                   className="text-xl font-semibold leading-tight"
                   style={{
-                    color: GREEN,
-                    fontFamily: "var(--font-pt-serif), Georgia, serif",
+                    color: c.brandGreen,
+                    fontFamily: theme.fonts.heading,
                     letterSpacing: "-0.02em",
                   }}
                 >
-                  {c.title}
+                  {choice.title}
                 </h3>
                 <p
                   className="mt-2 text-sm"
-                  style={{ color: "rgba(8,54,48,0.6)" }}
+                  style={{ color: alpha(c.brandGreen, 0.6) }}
                 >
-                  {c.subtitle}
+                  {choice.subtitle}
                 </p>
               </div>
             </motion.button>
@@ -157,14 +154,14 @@ export default function StepState({ value, onChange }: StepStateProps) {
       <div
         className="mt-10 rounded-xl p-4 flex items-start gap-3"
         style={{
-          background: "rgba(8,54,48,0.03)",
-          border: "1px solid rgba(8,54,48,0.06)",
+          background: alpha(c.brandGreen, 0.03),
+          border: `1px solid ${alpha(c.brandGreen, 0.06)}`,
         }}
       >
         <svg
           viewBox="0 0 24 24"
           className="h-5 w-5 mt-0.5 shrink-0"
-          style={{ color: "rgba(8,54,48,0.72)" }}
+          style={{ color: alpha(c.brandGreen, 0.72) }}
         >
           <path
             fill="none"
@@ -175,16 +172,16 @@ export default function StepState({ value, onChange }: StepStateProps) {
             d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z"
           />
         </svg>
-        <p className="text-sm" style={{ color: "rgba(8,54,48,0.7)" }}>
-          <strong style={{ color: GREEN }}>Already a current patient or caregiver?</strong>{" "}
+        <p className="text-sm" style={{ color: alpha(c.brandGreen, 0.7) }}>
+          <strong style={{ color: c.brandGreen }}>{stateCopy.existingPatient.label}</strong>{" "}
           <a
-            href="https://oncehub.com/mindspan_danvers"
+            href={stateCopy.existingPatient.href}
             target="_blank"
             rel="noopener noreferrer"
             className="font-medium underline underline-offset-2 hover:no-underline"
-            style={{ color: "#fb4d17" }}
+            style={{ color: c.accent }}
           >
-            Book an appointment
+            {stateCopy.existingPatient.cta}
           </a>
           .
         </p>

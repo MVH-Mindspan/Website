@@ -1,6 +1,6 @@
 "use client";
 
-import { forwardRef } from "react";
+import { Field } from "@/components/molecules/Field";
 
 type FormFieldProps = {
   label: string;
@@ -20,140 +20,47 @@ type FormFieldProps = {
   inputMode?: "text" | "email" | "tel" | "numeric";
 };
 
-const inputClasses =
-  "w-full rounded-xl border px-4 py-3 text-base sm:text-[0.9375rem] leading-snug transition-all duration-200 bg-white placeholder:text-[rgba(8,54,48,0.6)]";
-const focusClasses =
-  "focus:border-[#083630] focus:ring-2 focus:ring-[#083630]/10 focus:outline-none";
-const errorClasses = "border-red-400 focus:border-red-500 focus:ring-red-500/10";
-const normalBorder = "border-[rgba(8,54,48,0.15)]";
+// Compat wrapper: booking steps use `name="X"` and rely on the canonical
+// `field-${name}` id pattern (focusFirstError + error-summary anchor links).
+// All visual treatment lives in the shared Field molecule.
+export default function FormField({
+  label,
+  name,
+  type = "text",
+  placeholder,
+  required,
+  value,
+  onChange,
+  onBlur,
+  error,
+  hint,
+  options,
+  maxLength,
+  autoComplete,
+  inputMode,
+}: FormFieldProps) {
+  const id = `field-${name}`;
+  const as = type === "textarea" ? "textarea" : type === "select" ? "select" : "input";
+  const inputType: "text" | "email" | "tel" =
+    type === "email" ? "email" : type === "tel" ? "tel" : "text";
 
-const FormField = forwardRef<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement, FormFieldProps>(
-  function FormField(
-    {
-      label,
-      name,
-      type = "text",
-      placeholder,
-      required,
-      value,
-      onChange,
-      onBlur,
-      error,
-      hint,
-      options,
-      className = "",
-      maxLength,
-      autoComplete,
-      inputMode,
-    },
-    ref
-  ) {
-    const id = `field-${name}`;
-    const errorId = `${id}-error`;
-    const hintId = `${id}-hint`;
-    const borderClass = error ? errorClasses : normalBorder;
-    const describedBy = error ? errorId : hint ? hintId : undefined;
-    const ariaProps = {
-      "aria-invalid": error ? true : undefined,
-      "aria-describedby": describedBy,
-      "aria-required": required ? true : undefined,
-    } as const;
-
-    return (
-      <div className={`min-w-0 ${className}`}>
-        <label
-          htmlFor={id}
-          className="block text-sm font-medium mb-1.5 break-words"
-          style={{ color: "#083630" }}
-        >
-          {label}
-          {required && (
-            <span aria-hidden="true" className="text-[#fb4d17] ml-0.5">*</span>
-          )}
-          {required && (
-            <span className="sr-only"> (required)</span>
-          )}
-        </label>
-
-        {type === "textarea" ? (
-          <textarea
-            ref={ref as React.Ref<HTMLTextAreaElement>}
-            id={id}
-            name={name}
-            placeholder={placeholder}
-            required={required}
-            value={value}
-            onChange={(e) => onChange(e.target.value)}
-            onBlur={onBlur}
-            rows={3}
-            maxLength={maxLength}
-            autoComplete={autoComplete}
-            className={`${inputClasses} ${focusClasses} ${borderClass} resize-none`}
-            style={{ color: "#111" }}
-            {...ariaProps}
-          />
-        ) : type === "select" ? (
-          <select
-            ref={ref as React.Ref<HTMLSelectElement>}
-            id={id}
-            name={name}
-            required={required}
-            value={value}
-            onChange={(e) => onChange(e.target.value)}
-            onBlur={onBlur}
-            className={`${inputClasses} ${focusClasses} ${borderClass} appearance-none bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2212%22%20height%3D%2212%22%20viewBox%3D%220%200%2012%2012%22%3E%3Cpath%20d%3D%22M6%208L1%203h10z%22%20fill%3D%22%23083630%22%2F%3E%3C%2Fsvg%3E')] bg-[length:12px] bg-[right_16px_center] bg-no-repeat pr-10`}
-            style={{ color: value ? "#111" : "rgba(8,54,48,0.6)" }}
-            {...ariaProps}
-          >
-            <option value="" disabled>
-              {placeholder || "Select..."}
-            </option>
-            {options?.map((opt) => (
-              <option key={opt.value} value={opt.value}>
-                {opt.label}
-              </option>
-            ))}
-          </select>
-        ) : (
-          <input
-            ref={ref as React.Ref<HTMLInputElement>}
-            id={id}
-            name={name}
-            type={type}
-            placeholder={placeholder}
-            required={required}
-            value={value}
-            onChange={(e) => onChange(e.target.value)}
-            onBlur={onBlur}
-            maxLength={maxLength}
-            autoComplete={autoComplete}
-            inputMode={inputMode}
-            className={`${inputClasses} ${focusClasses} ${borderClass}`}
-            style={{ color: "#111" }}
-            {...ariaProps}
-          />
-        )}
-
-        {error ? (
-          <p
-            id={errorId}
-            role="alert"
-            aria-live="polite"
-            className="mt-1.5 text-xs text-red-500 font-medium break-words"
-          >
-            {error}
-          </p>
-        ) : hint ? (
-          <p
-            id={hintId}
-            className="mt-1.5 text-xs font-medium text-[rgba(8,54,48,0.55)] leading-relaxed"
-          >
-            {hint}
-          </p>
-        ) : null}
-      </div>
-    );
-  }
-);
-
-export default FormField;
+  return (
+    <Field
+      id={id}
+      label={label}
+      value={value}
+      onChange={onChange}
+      onBlur={onBlur}
+      type={inputType}
+      as={as}
+      required={required}
+      placeholder={placeholder}
+      autoComplete={autoComplete}
+      inputMode={inputMode}
+      hint={hint}
+      error={error}
+      maxLength={maxLength}
+      options={options}
+    />
+  );
+}

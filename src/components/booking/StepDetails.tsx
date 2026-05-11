@@ -3,20 +3,18 @@
 import { useCallback } from "react";
 import { motion, useReducedMotion, type Variants } from "framer-motion";
 import { EASE } from "@/lib/motion";
+import { useTheme } from "@/lib/theme-context";
+import { alpha } from "@/lib/themes";
+import { Eyebrow } from "@/components/atoms/Eyebrow";
+import { Heading } from "@/components/atoms/Heading";
+import { Lead } from "@/components/atoms/Lead";
+import { FormErrorSummary } from "@/components/molecules/FormErrorSummary";
+import { bookingPage } from "@/content/pages/booking";
+import { formatPhone, normalizePhone } from "@/lib/forms";
 import FormField from "./FormField";
 
-const GREEN = "#083630";
-
-const FIELD_LABELS: Record<string, string> = {
-  bookingFor: "Who is this visit for",
-  patientFirstName: "Patient's first name",
-  patientLastName: "Patient's last name",
-  relationship: "Your relationship to the patient",
-  firstName: "First name",
-  lastName: "Last name",
-  email: "Email",
-  phone: "Phone number",
-};
+const detailsCopy = bookingPage.details;
+const FIELD_LABELS = detailsCopy.fieldLabels;
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 24 },
@@ -45,46 +43,15 @@ type StepDetailsProps = {
   errors: Record<string, string>;
 };
 
-const RELATIONSHIP_OPTIONS = [
-  { label: "Spouse or partner", value: "spouse-partner" },
-  { label: "Parent", value: "parent" },
-  { label: "Adult child", value: "adult-child" },
-  { label: "Sibling", value: "sibling" },
-  { label: "Other family member", value: "other-family" },
-  { label: "Friend", value: "friend" },
-  { label: "Professional caregiver", value: "professional-caregiver" },
-  { label: "Other", value: "other" },
-];
-
-const BOOKING_FOR_CHOICES: { id: BookingFor; title: string; subtitle: string }[] = [
-  {
-    id: "self",
-    title: "Myself",
-    subtitle: "I'm the patient",
-  },
-  {
-    id: "loved-one",
-    title: "A loved one",
-    subtitle: "I'm helping arrange their care",
-  },
-];
-
-function formatPhone(raw: string): string {
-  const digits = raw.replace(/\D/g, "").slice(0, 10);
-  if (digits.length === 0) return "";
-  if (digits.length <= 3) return `(${digits}`;
-  if (digits.length <= 6) return `(${digits.slice(0, 3)}) ${digits.slice(3)}`;
-  return `(${digits.slice(0, 3)}) ${digits.slice(3, 6)}-${digits.slice(6)}`;
-}
-
 export default function StepDetails({ data, onChange, errors }: StepDetailsProps) {
   const reducedMotion = useReducedMotion();
+  const { theme } = useTheme();
+  const c = theme.colors;
   const isCaregiver = data.bookingFor === "loved-one";
 
   const handlePhoneChange = useCallback(
     (value: string) => {
-      const digits = value.replace(/\D/g, "").slice(0, 10);
-      onChange("phone", digits);
+      onChange("phone", normalizePhone(value));
     },
     [onChange]
   );
@@ -96,63 +63,42 @@ export default function StepDetails({ data, onChange, errors }: StepDetailsProps
   // that triggers the most actionable AT cue. The summary block here is a
   // visual + scroll target only. We do not steal focus here.
 
-  const contactHeading = isCaregiver ? "Your contact info" : "Tell us about yourself";
-  const contactSubtitle = isCaregiver
-    ? "We'll use these details to reach you about their care."
-    : "We just need a few details so our team can reach you.";
+  const contactHeading = isCaregiver ? detailsCopy.titleCaregiver : detailsCopy.titleSelf;
+  const contactSubtitle = isCaregiver ? detailsCopy.leadCaregiver : detailsCopy.leadSelf;
 
   return (
     <div>
-      <h2 className="studio-h2" style={{ color: GREEN }}>
+      <Eyebrow color={c.accent}>{isCaregiver ? detailsCopy.eyebrowCaregiver : detailsCopy.eyebrowSelf}</Eyebrow>
+      <Heading
+        as="h2"
+        variant="h2"
+        fontFamily={theme.fonts.heading}
+        color={c.brandGreen}
+        className="mt-3"
+      >
         {contactHeading}
-      </h2>
-      <p className="studio-lead mt-3" style={{ color: "rgba(8,54,48,0.7)" }}>
+      </Heading>
+      <Lead
+        size="md"
+        color={alpha(c.brandGreen, 0.7)}
+        className="mt-3"
+        maxWidth="56ch"
+      >
         {contactSubtitle}
-      </p>
+      </Lead>
 
       {hasErrors && (
-        <div
-          role="alert"
-          aria-live="assertive"
-          className="mt-6 rounded-xl p-4 text-sm"
-          style={{
-            background: "rgba(220,38,38,0.06)",
-            border: "1px solid rgba(220,38,38,0.25)",
-            color: "#7f1d1d",
-          }}
-        >
-          <p className="font-semibold">
-            Please fix {errorEntries.length === 1 ? "this" : `these ${errorEntries.length}`}{" "}
-            {errorEntries.length === 1 ? "field" : "fields"} before continuing:
-          </p>
-          <ul className="mt-2 list-disc pl-5 space-y-0.5">
-            {errorEntries.map(([key, msg]) => (
-              <li key={key} className="break-words">
-                <a
-                  href={`#field-${key}`}
-                  className="underline underline-offset-2 hover:no-underline"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    const candidates = [
-                      `field-${key}`,
-                      `field-${key}-self`,
-                      `field-${key}-loved-one`,
-                    ];
-                    for (const id of candidates) {
-                      const el = document.getElementById(id);
-                      if (el && typeof (el as HTMLElement).focus === "function") {
-                        (el as HTMLElement).focus();
-                        el.scrollIntoView({ block: "center", behavior: "smooth" });
-                        return;
-                      }
-                    }
-                  }}
-                >
-                  {FIELD_LABELS[key] || key}: {msg}
-                </a>
-              </li>
-            ))}
-          </ul>
+        <div className="mt-6">
+          <FormErrorSummary
+            errors={errorEntries as Array<[string, string]>}
+            labels={FIELD_LABELS}
+            fieldIdFor={(key) => [
+              `field-${key}`,
+              `field-${key}-self`,
+              `field-${key}-loved-one`,
+            ]}
+            headings={detailsCopy.errorSummary}
+          />
         </div>
       )}
 
@@ -166,10 +112,10 @@ export default function StepDetails({ data, onChange, errors }: StepDetailsProps
           <fieldset>
             <legend
               className="block text-sm font-medium mb-3"
-              style={{ color: GREEN }}
+              style={{ color: c.brandGreen }}
             >
-              Who is this visit for?
-              <span aria-hidden="true" className="text-[#fb4d17] ml-0.5">*</span>
+              {detailsCopy.bookingForLegend}
+              <span aria-hidden="true" className="ml-0.5" style={{ color: c.accent }}>*</span>
               <span className="sr-only"> (required)</span>
             </legend>
             <div
@@ -179,15 +125,15 @@ export default function StepDetails({ data, onChange, errors }: StepDetailsProps
               aria-invalid={errors.bookingFor ? true : undefined}
               aria-describedby={errors.bookingFor ? "field-bookingFor-error" : undefined}
             >
-              {BOOKING_FOR_CHOICES.map((c) => {
-                const selected = data.bookingFor === c.id;
+              {detailsCopy.bookingForChoices.map((choice) => {
+                const selected = data.bookingFor === choice.id;
                 return (
                   <button
-                    key={c.id}
-                    id={`field-bookingFor-${c.id}`}
+                    key={choice.id}
+                    id={`field-bookingFor-${choice.id}`}
                     type="button"
                     role="radio"
-                    onClick={() => onChange("bookingFor", c.id)}
+                    onClick={() => onChange("bookingFor", choice.id)}
                     aria-checked={selected}
                     className={`
                       relative text-left rounded-xl px-4 py-4 cursor-pointer min-w-0
@@ -227,15 +173,15 @@ export default function StepDetails({ data, onChange, errors }: StepDetailsProps
                       <span className="flex flex-col min-w-0">
                         <span
                           className="text-base font-semibold leading-tight break-words"
-                          style={{ color: GREEN }}
+                          style={{ color: c.brandGreen }}
                         >
-                          {c.title}
+                          {choice.title}
                         </span>
                         <span
                           className="mt-0.5 text-sm break-words"
-                          style={{ color: "rgba(8,54,48,0.6)" }}
+                          style={{ color: alpha(c.brandGreen, 0.6) }}
                         >
-                          {c.subtitle}
+                          {choice.subtitle}
                         </span>
                       </span>
                     </div>
@@ -248,7 +194,8 @@ export default function StepDetails({ data, onChange, errors }: StepDetailsProps
                 id="field-bookingFor-error"
                 role="alert"
                 aria-live="polite"
-                className="mt-2 text-xs text-red-500 font-medium"
+                className="mt-2 text-xs font-medium"
+                style={{ color: c.accentText }}
               >
                 {errors.bookingFor}
               </p>
@@ -267,24 +214,24 @@ export default function StepDetails({ data, onChange, errors }: StepDetailsProps
             <div>
               <h3
                 className="text-base font-semibold"
-                style={{ color: GREEN }}
+                style={{ color: c.brandGreen }}
               >
-                About the patient
+                {detailsCopy.patientGroup.title}
               </h3>
               <p
                 className="text-sm mt-1"
-                style={{ color: "rgba(8,54,48,0.6)" }}
+                style={{ color: alpha(c.brandGreen, 0.6) }}
               >
-                A few details about the person you're booking for.
+                {detailsCopy.patientGroup.subtitle}
               </p>
             </div>
 
             <div className="grid sm:grid-cols-2 gap-4">
               <FormField
-                label="Patient's first name"
+                label={FIELD_LABELS.patientFirstName}
                 name="patientFirstName"
                 required
-                placeholder="John"
+                placeholder={detailsCopy.placeholders.patientFirstName}
                 value={data.patientFirstName}
                 onChange={(v) => onChange("patientFirstName", v)}
                 error={errors.patientFirstName}
@@ -292,10 +239,10 @@ export default function StepDetails({ data, onChange, errors }: StepDetailsProps
                 autoComplete="off"
               />
               <FormField
-                label="Patient's last name"
+                label={FIELD_LABELS.patientLastName}
                 name="patientLastName"
                 required
-                placeholder="Smith"
+                placeholder={detailsCopy.placeholders.patientLastName}
                 value={data.patientLastName}
                 onChange={(v) => onChange("patientLastName", v)}
                 error={errors.patientLastName}
@@ -305,15 +252,15 @@ export default function StepDetails({ data, onChange, errors }: StepDetailsProps
             </div>
 
             <FormField
-              label="Your relationship to the patient"
+              label={FIELD_LABELS.relationship}
               name="relationship"
               type="select"
               required
-              placeholder="Select a relationship"
+              placeholder={detailsCopy.placeholders.relationship}
               value={data.relationship}
               onChange={(v) => onChange("relationship", v)}
               error={errors.relationship}
-              options={RELATIONSHIP_OPTIONS}
+              options={detailsCopy.relationshipOptions}
             />
           </motion.div>
         )}
@@ -323,25 +270,25 @@ export default function StepDetails({ data, onChange, errors }: StepDetailsProps
             <div>
               <h3
                 className="text-base font-semibold"
-                style={{ color: GREEN }}
+                style={{ color: c.brandGreen }}
               >
-                About you
+                {detailsCopy.selfGroup.title}
               </h3>
               <p
                 className="text-sm mt-1"
-                style={{ color: "rgba(8,54,48,0.6)" }}
+                style={{ color: alpha(c.brandGreen, 0.6) }}
               >
-                So our team knows how to reach you.
+                {detailsCopy.selfGroup.subtitle}
               </p>
             </div>
           )}
 
           <div className="grid sm:grid-cols-2 gap-4">
             <FormField
-              label="First name"
+              label={FIELD_LABELS.firstName}
               name="firstName"
               required
-              placeholder="Jane"
+              placeholder={detailsCopy.placeholders.firstName}
               value={data.firstName}
               onChange={(v) => onChange("firstName", v)}
               error={errors.firstName}
@@ -349,10 +296,10 @@ export default function StepDetails({ data, onChange, errors }: StepDetailsProps
               autoComplete="given-name"
             />
             <FormField
-              label="Last name"
+              label={FIELD_LABELS.lastName}
               name="lastName"
               required
-              placeholder="Smith"
+              placeholder={detailsCopy.placeholders.lastName}
               value={data.lastName}
               onChange={(v) => onChange("lastName", v)}
               error={errors.lastName}
@@ -362,11 +309,11 @@ export default function StepDetails({ data, onChange, errors }: StepDetailsProps
           </div>
 
           <FormField
-            label="Email"
+            label={FIELD_LABELS.email}
             name="email"
             type="email"
             required
-            placeholder="jane@example.com"
+            placeholder={detailsCopy.placeholders.email}
             value={data.email}
             onChange={(v) => onChange("email", v)}
             error={errors.email}
@@ -376,18 +323,18 @@ export default function StepDetails({ data, onChange, errors }: StepDetailsProps
           />
 
           <FormField
-            label="Phone number"
+            label={FIELD_LABELS.phone}
             name="phone"
             type="tel"
             required
-            placeholder="(555) 123-4567"
+            placeholder={detailsCopy.placeholders.phone}
             value={formatPhone(data.phone)}
             onChange={handlePhoneChange}
             error={errors.phone}
             maxLength={20}
             autoComplete="tel-national"
             inputMode="tel"
-            hint="US numbers only. We use this for scheduling reminders."
+            hint={detailsCopy.phoneHint}
           />
         </motion.div>
       </motion.div>

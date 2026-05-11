@@ -3,10 +3,19 @@
 import { useCallback } from "react";
 import { motion, useReducedMotion, type Variants } from "framer-motion";
 import { EASE } from "@/lib/motion";
+import { useTheme } from "@/lib/theme-context";
+import { alpha } from "@/lib/themes";
+import { ArrowIcon } from "@/components/atoms/ArrowIcon";
+import { Button } from "@/components/atoms/Button";
+import { Eyebrow } from "@/components/atoms/Eyebrow";
+import { Heading } from "@/components/atoms/Heading";
+import { Lead } from "@/components/atoms/Lead";
+import { bookingPage } from "@/content/pages/booking";
+import { formatPhone, normalizePhone } from "@/lib/forms";
 import FormField from "./FormField";
 import SubmitErrorBlock from "./SubmitErrorBlock";
 
-const GREEN = "#083630";
+const waitlistCopy = bookingPage.waitlist;
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 24 },
@@ -17,14 +26,6 @@ const staggerContainer: Variants = {
   hidden: {},
   show: { transition: { staggerChildren: 0.06, delayChildren: 0.05 } },
 };
-
-function formatPhone(raw: string): string {
-  const digits = raw.replace(/\D/g, "").slice(0, 10);
-  if (digits.length === 0) return "";
-  if (digits.length <= 3) return `(${digits}`;
-  if (digits.length <= 6) return `(${digits.slice(0, 3)}) ${digits.slice(3)}`;
-  return `(${digits.slice(0, 3)}) ${digits.slice(3, 6)}-${digits.slice(6)}`;
-}
 
 type StepWaitlistProps = {
   data: {
@@ -50,11 +51,12 @@ export default function StepWaitlist({
   submitError,
 }: StepWaitlistProps) {
   const reducedMotion = useReducedMotion();
+  const { theme } = useTheme();
+  const c = theme.colors;
 
   const handlePhoneChange = useCallback(
     (value: string) => {
-      const digits = value.replace(/\D/g, "").slice(0, 10);
-      onChange("phone", digits);
+      onChange("phone", normalizePhone(value));
     },
     [onChange]
   );
@@ -69,9 +71,9 @@ export default function StepWaitlist({
       >
         <div
           className="mx-auto h-16 w-16 rounded-full flex items-center justify-center mb-6"
-          style={{ background: "rgba(34,197,94,0.1)" }}
+          style={{ background: alpha(c.brandGreen, 0.08), color: c.brandGreen }}
         >
-          <svg viewBox="0 0 24 24" className="h-8 w-8 text-green-600">
+          <svg viewBox="0 0 24 24" className="h-8 w-8">
             <path
               fill="none"
               stroke="currentColor"
@@ -82,34 +84,51 @@ export default function StepWaitlist({
             />
           </svg>
         </div>
-        <h2 className="studio-h2" style={{ color: GREEN }}>
-          You're on the list
-        </h2>
-        <p
-          className="studio-lead mt-4 mx-auto max-w-md"
-          style={{ color: "rgba(8,54,48,0.7)" }}
+        <Heading
+          as="h2"
+          variant="h2"
+          fontFamily={theme.fonts.heading}
+          color={c.brandGreen}
         >
-          We'll reach out the moment Mindspan is available in your area.
-        </p>
-        <a
-          href="/"
-          className="studio-btn studio-btn-primary mt-8 inline-flex"
+          {waitlistCopy.success.title}
+        </Heading>
+        <Lead
+          size="md"
+          color={alpha(c.brandGreen, 0.7)}
+          className="mt-4 mx-auto"
+          maxWidth="32rem"
         >
-          Back to homepage
-        </a>
+          {waitlistCopy.success.body}
+        </Lead>
+        <div className="mt-8 inline-flex">
+          <Button href="/" variant="primary">
+            {waitlistCopy.success.backToHome}
+          </Button>
+        </div>
       </motion.div>
     );
   }
 
   return (
     <div>
-      <h2 className="studio-h2" style={{ color: GREEN }}>
-        We're not in your state yet
-      </h2>
-      <p className="studio-lead mt-3" style={{ color: "rgba(8,54,48,0.7)" }}>
-        Drop your details and we'll let you know the moment Mindspan opens up in
-        your area.
-      </p>
+      <Eyebrow color={c.accent}>{waitlistCopy.eyebrow}</Eyebrow>
+      <Heading
+        as="h2"
+        variant="h2"
+        fontFamily={theme.fonts.heading}
+        color={c.brandGreen}
+        className="mt-3"
+      >
+        {waitlistCopy.title}
+      </Heading>
+      <Lead
+        size="md"
+        color={alpha(c.brandGreen, 0.7)}
+        className="mt-3"
+        maxWidth="56ch"
+      >
+        {waitlistCopy.lead}
+      </Lead>
 
       <motion.form
         className="mt-10 space-y-5 max-w-lg"
@@ -125,10 +144,10 @@ export default function StepWaitlist({
       >
         <motion.div variants={fadeUp}>
           <FormField
-            label="First name"
+            label={waitlistCopy.fieldLabels.firstName}
             name="firstName"
             required
-            placeholder="Jane"
+            placeholder={waitlistCopy.placeholders.firstName}
             value={data.firstName}
             onChange={(v) => onChange("firstName", v)}
             error={errors.firstName}
@@ -139,11 +158,11 @@ export default function StepWaitlist({
 
         <motion.div variants={fadeUp}>
           <FormField
-            label="Email"
+            label={waitlistCopy.fieldLabels.email}
             name="email"
             type="email"
             required
-            placeholder="jane@example.com"
+            placeholder={waitlistCopy.placeholders.email}
             value={data.email}
             onChange={(v) => onChange("email", v)}
             error={errors.email}
@@ -155,11 +174,11 @@ export default function StepWaitlist({
 
         <motion.div variants={fadeUp}>
           <FormField
-            label="Phone number"
+            label={waitlistCopy.fieldLabels.phone}
             name="phone"
             type="tel"
             required
-            placeholder="(555) 123-4567"
+            placeholder={waitlistCopy.placeholders.phone}
             value={formatPhone(data.phone)}
             onChange={handlePhoneChange}
             error={errors.phone}
@@ -176,11 +195,13 @@ export default function StepWaitlist({
         )}
 
         <motion.div variants={fadeUp} className="pt-4">
-          <button
+          <Button
             type="submit"
+            variant="accent"
+            size="lg"
             disabled={submitting}
-            aria-busy={submitting}
-            className="studio-btn studio-btn-accent justify-center text-base px-10 w-full sm:w-auto disabled:cursor-wait"
+            iconRight={!submitting ? <ArrowIcon /> : undefined}
+            style={submitting ? { cursor: "wait", opacity: 0.7 } : undefined}
           >
             {submitting ? (
               <>
@@ -188,30 +209,18 @@ export default function StepWaitlist({
                   aria-hidden="true"
                   className="h-4 w-4 border-2 border-white/30 border-t-white rounded-full animate-spin"
                 />
-                <span>Joining...</span>
-                <span className="sr-only">Submitting your information, please wait</span>
+                <span>{waitlistCopy.submitting}</span>
+                <span className="sr-only">{waitlistCopy.submittingAria}</span>
               </>
             ) : (
-              <>
-                Join the waitlist
-                <svg
-                  aria-hidden="true"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  className="h-4 w-4"
-                >
-                  <path d="M5 12h14M13 5l7 7-7 7" />
-                </svg>
-              </>
+              waitlistCopy.submit
             )}
-          </button>
+          </Button>
           <p
             className="text-xs mt-3"
-            style={{ color: "rgba(8,54,48,0.72)" }}
+            style={{ color: alpha(c.brandGreen, 0.72) }}
           >
-            We'll only use your information to let you know when we're available.
+            {waitlistCopy.privacy}
           </p>
         </motion.div>
       </motion.form>

@@ -2,6 +2,8 @@
 
 import { motion, useReducedMotion } from "framer-motion";
 import { EASE } from "@/lib/motion";
+import { useTheme } from "@/lib/theme-context";
+import { alpha } from "@/lib/themes";
 
 
 type ProgressBarProps = {
@@ -12,6 +14,8 @@ type ProgressBarProps = {
 
 export default function ProgressBar({ steps, currentStep, onStepClick }: ProgressBarProps) {
   const reducedMotion = useReducedMotion();
+  const { theme } = useTheme();
+  const c = theme.colors;
 
   return (
     <nav aria-label="Booking progress" className="w-full">
@@ -19,12 +23,12 @@ export default function ProgressBar({ steps, currentStep, onStepClick }: Progres
         {/* Connecting line background */}
         <div
           className="absolute top-[18px] sm:top-4 left-0 right-0 h-[2px] mx-3 sm:mx-6 md:mx-8"
-          style={{ background: "rgba(8,54,48,0.08)" }}
+          style={{ background: alpha(c.brandGreen, 0.08) }}
         />
         {/* Active line */}
         <motion.div
           className="absolute top-[18px] sm:top-4 left-0 h-[2px] mx-3 sm:mx-6 md:mx-8"
-          style={{ background: "#083630" }}
+          style={{ background: c.brandGreen }}
           initial={false}
           animate={{
             width: `${(currentStep / Math.max(steps.length - 1, 1)) * 100}%`,

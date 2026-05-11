@@ -2,11 +2,20 @@
 
 import { motion, useReducedMotion, type Variants } from "framer-motion";
 import { EASE } from "@/lib/motion";
+import { useTheme } from "@/lib/theme-context";
+import { alpha } from "@/lib/themes";
+import { ArrowIcon } from "@/components/atoms/ArrowIcon";
+import { Button } from "@/components/atoms/Button";
+import { Eyebrow } from "@/components/atoms/Eyebrow";
+import { Heading } from "@/components/atoms/Heading";
+import { Lead } from "@/components/atoms/Lead";
+import { bookingPage } from "@/content/pages/booking";
+import { formatPhone } from "@/lib/forms";
 import { getCareOption } from "./StepCareOption";
 import SubmitErrorBlock from "./SubmitErrorBlock";
 
-const GREEN = "#083630";
-const ORANGE = "#fb4d17";
+const reviewCopy = bookingPage.review;
+const RELATIONSHIP_LABELS = reviewCopy.relationshipLabels;
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 24 },
@@ -30,24 +39,6 @@ type FormData = {
   patientLastName: string;
   relationship: string;
 };
-
-const RELATIONSHIP_LABELS: Record<string, string> = {
-  "spouse-partner": "Spouse or partner",
-  parent: "Parent",
-  "adult-child": "Adult child",
-  sibling: "Sibling",
-  "other-family": "Other family member",
-  friend: "Friend",
-  "professional-caregiver": "Professional caregiver",
-  other: "Other",
-};
-
-function formatPhone(digits: string): string {
-  if (digits.length === 0) return "";
-  if (digits.length <= 3) return `(${digits}`;
-  if (digits.length <= 6) return `(${digits.slice(0, 3)}) ${digits.slice(3)}`;
-  return `(${digits.slice(0, 3)}) ${digits.slice(3, 6)}-${digits.slice(6)}`;
-}
 
 function careOptionLabel(id: string): string {
   const opt = getCareOption(id);
@@ -76,19 +67,21 @@ function ReviewSection({
   onEdit: () => void;
   children: React.ReactNode;
 }) {
+  const { theme } = useTheme();
+  const c = theme.colors;
   return (
     <div
       className="rounded-xl p-5"
       style={{
-        background: "rgba(8,54,48,0.02)",
-        border: "1px solid rgba(8,54,48,0.08)",
+        background: alpha(c.brandGreen, 0.02),
+        border: `1px solid ${alpha(c.brandGreen, 0.08)}`,
       }}
     >
       <div className="flex items-center justify-between mb-3">
         <h3
           className="text-sm font-semibold uppercase tracking-wider"
           style={{
-            color: "rgba(8,54,48,0.72)",
+            color: alpha(c.brandGreen, 0.72),
             fontSize: "0.6875rem",
             letterSpacing: "0.12em",
           }}
@@ -99,9 +92,9 @@ function ReviewSection({
           type="button"
           onClick={onEdit}
           className="text-xs font-medium px-3 py-1 rounded-full transition-colors"
-          style={{ color: ORANGE, background: "rgba(251,77,23,0.06)" }}
+          style={{ color: c.accent, background: alpha(c.accent, 0.06) }}
         >
-          Edit
+          {reviewCopy.edit}
         </button>
       </div>
       {children}
@@ -110,18 +103,20 @@ function ReviewSection({
 }
 
 function ReviewRow({ label, value }: { label: string; value: string }) {
+  const { theme } = useTheme();
+  const c = theme.colors;
   if (!value) return null;
   return (
     <div className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4 py-1.5">
       <dt
         className="text-sm shrink-0 sm:w-28"
-        style={{ color: "rgba(8,54,48,0.5)" }}
+        style={{ color: alpha(c.brandGreen, 0.5) }}
       >
         {label}
       </dt>
       <dd
         className="text-sm font-medium break-words min-w-0"
-        style={{ color: GREEN }}
+        style={{ color: c.brandGreen }}
       >
         {value}
       </dd>
@@ -139,6 +134,8 @@ export default function StepReview({
   submitError,
 }: StepReviewProps) {
   const reducedMotion = useReducedMotion();
+  const { theme } = useTheme();
+  const c = theme.colors;
 
   if (submitted) {
     return (
@@ -150,9 +147,9 @@ export default function StepReview({
       >
         <div
           className="mx-auto h-16 w-16 rounded-full flex items-center justify-center mb-6"
-          style={{ background: "rgba(34,197,94,0.1)" }}
+          style={{ background: alpha(c.brandGreen, 0.08), color: c.brandGreen }}
         >
-          <svg viewBox="0 0 24 24" className="h-8 w-8 text-green-600">
+          <svg viewBox="0 0 24 24" className="h-8 w-8">
             <path
               fill="none"
               stroke="currentColor"
@@ -163,37 +160,51 @@ export default function StepReview({
             />
           </svg>
         </div>
-        <h2 className="studio-h2" style={{ color: GREEN }}>
-          You're all set
-        </h2>
-        <p
-          className="studio-lead mt-4 mx-auto max-w-md"
-          style={{ color: "rgba(8,54,48,0.7)" }}
+        <Heading
+          as="h2"
+          variant="h2"
+          fontFamily={theme.fonts.heading}
+          color={c.brandGreen}
         >
-          Our team will reach out within one business day to schedule your
-          visit.
-        </p>
-        <a
-          href="/"
-          className="studio-btn studio-btn-primary mt-8 inline-flex"
+          {reviewCopy.success.title}
+        </Heading>
+        <Lead
+          size="md"
+          color={alpha(c.brandGreen, 0.7)}
+          className="mt-4 mx-auto"
+          maxWidth="32rem"
         >
-          Back to homepage
-        </a>
+          {reviewCopy.success.body}
+        </Lead>
+        <div className="mt-8 inline-flex">
+          <Button href="/" variant="primary">
+            {reviewCopy.success.backToHome}
+          </Button>
+        </div>
       </motion.div>
     );
   }
 
   return (
     <div>
-      <h2 className="studio-h2" style={{ color: GREEN }}>
-        Almost done
-      </h2>
-      <p
-        className="studio-lead mt-3"
-        style={{ color: "rgba(8,54,48,0.7)" }}
+      <Eyebrow color={c.accent}>{reviewCopy.eyebrow}</Eyebrow>
+      <Heading
+        as="h2"
+        variant="h2"
+        fontFamily={theme.fonts.heading}
+        color={c.brandGreen}
+        className="mt-3"
       >
-        Confirm everything looks right and we'll be in touch.
-      </p>
+        {reviewCopy.title}
+      </Heading>
+      <Lead
+        size="md"
+        color={alpha(c.brandGreen, 0.7)}
+        className="mt-3"
+        maxWidth="56ch"
+      >
+        {reviewCopy.lead}
+      </Lead>
 
       <motion.div
         className="mt-10 space-y-4"
@@ -202,8 +213,8 @@ export default function StepReview({
         animate="show"
       >
         <motion.div variants={fadeUp}>
-          <ReviewSection title="Visit type" onEdit={onEditCare}>
-            <p className="text-sm font-medium" style={{ color: GREEN }}>
+          <ReviewSection title={reviewCopy.sectionLabels.visit} onEdit={onEditCare}>
+            <p className="text-sm font-medium" style={{ color: c.brandGreen }}>
               {careOptionLabel(data.careOption)}
             </p>
           </ReviewSection>
@@ -211,14 +222,14 @@ export default function StepReview({
 
         {data.bookingFor === "loved-one" && (
           <motion.div variants={fadeUp}>
-            <ReviewSection title="Patient" onEdit={onEditDetails}>
+            <ReviewSection title={reviewCopy.sectionLabels.patient} onEdit={onEditDetails}>
               <dl className="space-y-0.5">
                 <ReviewRow
-                  label="Name"
+                  label={reviewCopy.rowLabels.name}
                   value={`${data.patientFirstName} ${data.patientLastName}`.trim()}
                 />
                 <ReviewRow
-                  label="Relationship"
+                  label={reviewCopy.rowLabels.relationship}
                   value={RELATIONSHIP_LABELS[data.relationship] || data.relationship}
                 />
               </dl>
@@ -228,16 +239,16 @@ export default function StepReview({
 
         <motion.div variants={fadeUp}>
           <ReviewSection
-            title={data.bookingFor === "loved-one" ? "Your contact info" : "Your details"}
+            title={data.bookingFor === "loved-one" ? reviewCopy.sectionLabels.yourContactCaregiver : reviewCopy.sectionLabels.yourDetails}
             onEdit={onEditDetails}
           >
             <dl className="space-y-0.5">
               <ReviewRow
-                label="Name"
+                label={reviewCopy.rowLabels.name}
                 value={`${data.firstName} ${data.lastName}`.trim()}
               />
-              <ReviewRow label="Email" value={data.email} />
-              <ReviewRow label="Phone" value={formatPhone(data.phone)} />
+              <ReviewRow label={reviewCopy.rowLabels.email} value={data.email} />
+              <ReviewRow label={reviewCopy.rowLabels.phone} value={formatPhone(data.phone)} />
             </dl>
           </ReviewSection>
         </motion.div>
@@ -249,12 +260,14 @@ export default function StepReview({
         )}
 
         <motion.div variants={fadeUp} className="pt-6 flex flex-col items-center">
-          <button
-            type="button"
+          <Button
+            type="submit"
+            variant="accent"
+            size="lg"
             onClick={onSubmit}
             disabled={submitting}
-            aria-busy={submitting}
-            className="studio-btn studio-btn-accent justify-center text-base px-10 disabled:cursor-wait"
+            iconRight={!submitting ? <ArrowIcon /> : undefined}
+            style={submitting ? { cursor: "wait", opacity: 0.7 } : undefined}
           >
             {submitting ? (
               <>
@@ -262,30 +275,18 @@ export default function StepReview({
                   aria-hidden="true"
                   className="h-4 w-4 border-2 border-white/30 border-t-white rounded-full animate-spin"
                 />
-                <span>Submitting...</span>
-                <span className="sr-only">Sending your booking request, please wait</span>
+                <span>{reviewCopy.submitting}</span>
+                <span className="sr-only">{reviewCopy.submittingAria}</span>
               </>
             ) : (
-              <>
-                Confirm and submit
-                <svg
-                  aria-hidden="true"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  className="h-4 w-4"
-                >
-                  <path d="M5 12h14M13 5l7 7-7 7" />
-                </svg>
-              </>
+              reviewCopy.submit
             )}
-          </button>
+          </Button>
           <p
             className="text-center text-xs mt-3"
-            style={{ color: "rgba(8,54,48,0.72)" }}
+            style={{ color: alpha(c.brandGreen, 0.72) }}
           >
-            Your information is secure and only used to schedule your visit.
+            {reviewCopy.privacy}
           </p>
         </motion.div>
       </motion.div>
