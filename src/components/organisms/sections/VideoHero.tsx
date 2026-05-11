@@ -105,6 +105,7 @@ export function VideoHero({
               letterSpacing: "-0.02em",
               lineHeight: 0.98,
               maxWidth: "16ch",
+              textWrap: "pretty",
             }}
           >
             {headline}
