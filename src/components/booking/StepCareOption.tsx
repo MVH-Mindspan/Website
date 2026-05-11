@@ -141,7 +141,7 @@ export default function StepCareOption({
                 >
                   <span
                     className="h-2 w-2 rounded-full animate-pulse"
-                    style={{ background: c.accent }}
+                    style={{ background: c.brandGreen }}
                   />
                   {careCopy.takingPatients}
                 </div>
