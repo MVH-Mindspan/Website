@@ -23,7 +23,7 @@ export function LocationCards({
   tone,
 }: {
   id?: string;
-  intro?: { eyebrow: string; title: string; lead: string };
+  intro?: { eyebrow: string; title: string; lead: string; note?: string };
   locations: readonly Location[];
   groupByKind?: boolean;
   tone?: "sand" | "cream";
@@ -45,6 +45,22 @@ export function LocationCards({
             title={intro.title}
             lead={intro.lead}
           />
+        )}
+
+        {intro?.note && (
+          <p
+            className="mt-5"
+            style={{
+              fontFamily: theme.fonts.body,
+              fontSize: typeScale.bodySm,
+              color: alpha(c.ink, 0.55),
+              fontStyle: "italic",
+              lineHeight: 1.55,
+              maxWidth: "62ch",
+            }}
+          >
+            {intro.note}
+          </p>
         )}
 
         {groupByKind ? (
