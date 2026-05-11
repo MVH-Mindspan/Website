@@ -1,11 +1,12 @@
 "use client";
 
+/* eslint-disable @next/next/no-img-element */
 import { motion, useReducedMotion, type Variants } from "framer-motion";
 import { EASE } from "@/lib/motion";
+import { ImageFrame } from "@/components/atoms/ImageFrame";
 import type { StateChoice } from "./StepState";
 
 const GREEN = "#083630";
-const ORANGE = "#fb4d17";
 const CREAM = "#efeeeb";
 
 const fadeUp: Variants = {
@@ -24,8 +25,9 @@ export type CareOption = {
   state: string;
   description: string;
   kind: "clinic" | "video";
-  bbox?: string;
-  marker?: string;
+  image?: string;
+  imageAlt?: string;
+  address?: string;
 };
 
 const careOptionsByState: Record<"MA" | "CA", CareOption[]> = {
@@ -36,8 +38,9 @@ const careOptionsByState: Record<"MA" | "CA", CareOption[]> = {
       state: "Massachusetts",
       description: "In-person clinic, north of Boston",
       kind: "clinic",
-      bbox: "-70.97,42.555,-70.89,42.595",
-      marker: "42.575,-70.933",
+      image: "/assets/danvers-clinic.webp",
+      imageAlt: "Mindspan Danvers clinic on Boston’s North Shore",
+      address: "99 Conifer Hill Drive, Danvers, MA 01923",
     },
     {
       id: "video-ma",
@@ -54,8 +57,9 @@ const careOptionsByState: Record<"MA" | "CA", CareOption[]> = {
       state: "California",
       description: "In-person clinic",
       kind: "clinic",
-      bbox: "-122.52,37.70,-122.35,37.82",
-      marker: "37.775,-122.418",
+      image: "/assets/bay-area-clinic.webp",
+      imageAlt: "Mindspan Bay Area clinic exterior in San Jose, California",
+      address: "2520 Samaritan Dr, Suite 201B, San Jose, CA 95124",
     },
     {
       id: "video-ca",
@@ -107,10 +111,6 @@ export default function StepCareOption({
       >
         {options.map((opt) => {
           const isSelected = value === opt.id;
-          const hasMap = opt.bbox && opt.marker;
-          const mapSrc = hasMap
-            ? `https://www.openstreetmap.org/export/embed.html?bbox=${opt.bbox}&layer=mapnik&marker=${opt.marker}`
-            : null;
 
           return (
             <motion.button
@@ -138,7 +138,7 @@ export default function StepCareOption({
             >
               {isSelected && (
                 <motion.div
-                  className="absolute top-3 right-3 z-20 h-7 w-7 rounded-full flex items-center justify-center"
+                  className="absolute top-6 right-6 z-20 h-7 w-7 rounded-full flex items-center justify-center"
                   style={{ background: GREEN }}
                   initial={reducedMotion ? false : { scale: 0 }}
                   animate={{ scale: 1 }}
@@ -157,30 +157,21 @@ export default function StepCareOption({
                 </motion.div>
               )}
 
-              <div
-                className="relative overflow-hidden h-36"
-                style={{ background: CREAM }}
-              >
-                {mapSrc ? (
-                  <>
-                    <iframe
-                      src={mapSrc}
-                      className="absolute left-0 right-0 top-0 w-full border-0 pointer-events-none transition-transform duration-500 group-hover:scale-[1.05]"
-                      style={{ height: "calc(100% + 60px)" }}
+              <div className="relative">
+                {opt.image ? (
+                  <ImageFrame radius="1.25rem" className="m-3 mb-0">
+                    <img
+                      src={opt.image}
+                      alt={opt.imageAlt ?? ""}
+                      className="block w-full object-cover aspect-[16/10] transition-transform duration-500 group-hover:scale-[1.02]"
                       loading="lazy"
-                      title={`Map of ${opt.city}, ${opt.state}`}
-                      aria-hidden="true"
                     />
-                    <div
-                      className="absolute inset-0"
-                      style={{
-                        background:
-                          "linear-gradient(180deg, rgba(8,54,48,0.0) 0%, rgba(8,54,48,0.08) 60%, rgba(8,54,48,0.2) 100%)",
-                      }}
-                    />
-                  </>
+                  </ImageFrame>
                 ) : (
-                  <div className="absolute inset-0 flex items-center justify-center">
+                  <div
+                    className="relative overflow-hidden m-3 mb-0 rounded-[1.25rem] aspect-[16/10] flex items-center justify-center"
+                    style={{ background: CREAM }}
+                  >
                     <div
                       className="h-16 w-16 rounded-2xl flex items-center justify-center"
                       style={{ background: "rgba(8,54,48,0.08)" }}
@@ -200,7 +191,7 @@ export default function StepCareOption({
                 )}
 
                 <div
-                  className="absolute top-3 left-3 flex items-center gap-2 rounded-full bg-white/95 backdrop-blur px-3 py-1.5 text-[11px] font-semibold shadow-sm"
+                  className="absolute top-6 left-6 flex items-center gap-2 rounded-full bg-white/95 backdrop-blur px-3 py-1.5 text-[11px] font-semibold shadow-sm"
                   style={{ color: GREEN }}
                 >
                   <span
@@ -209,18 +200,6 @@ export default function StepCareOption({
                   />
                   Taking patients
                 </div>
-
-                {opt.kind === "video" && (
-                  <div
-                    className="absolute bottom-3 left-3 rounded-full px-3 py-1 text-[11px] font-semibold"
-                    style={{
-                      background: ORANGE,
-                      color: "#fff",
-                    }}
-                  >
-                    Easiest option
-                  </div>
-                )}
               </div>
 
               <div className="p-5">
@@ -246,6 +225,14 @@ export default function StepCareOption({
                 >
                   {opt.description}
                 </p>
+                {opt.address && (
+                  <p
+                    className="mt-2 text-xs"
+                    style={{ color: "rgba(8,54,48,0.55)" }}
+                  >
+                    {opt.address}
+                  </p>
+                )}
               </div>
             </motion.button>
           );
