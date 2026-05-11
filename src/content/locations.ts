@@ -21,6 +21,7 @@ export const locationsIntro = {
   title: "Visit a clinic, or see your provider on video.",
   lead:
     "Clinics in Massachusetts and California, plus video visits anywhere in those two states.",
+  note: "We're actively expanding into new markets. More locations coming soon.",
 } as const;
 
 export const locations: Location[] = [
