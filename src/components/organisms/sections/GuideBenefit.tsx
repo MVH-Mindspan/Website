@@ -122,7 +122,7 @@ export function GuideBenefit({
               style={{
                 background: "#fff",
                 border: `1px solid ${alpha(c.ink, 0.08)}`,
-                borderRadius: "1.5rem",
+                borderRadius: "1.25rem",
                 padding: "28px 28px",
               }}
             >

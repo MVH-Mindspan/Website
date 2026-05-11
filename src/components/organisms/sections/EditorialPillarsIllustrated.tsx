@@ -55,7 +55,7 @@ export function EditorialPillarsIllustrated({
                   className={`md:col-span-7 ${reverse ? "md:order-2" : ""}`}
                 >
                   <div
-                    className="relative overflow-hidden rounded-[1.75rem]"
+                    className="relative overflow-hidden rounded-[2rem]"
                     style={{
                       aspectRatio: "5/4",
                       background: alpha(c.sand, 0.4),

@@ -60,7 +60,7 @@ export function FeatureCardGrid({
         background: sectionBg,
         color: sectionText,
         padding: "clamp(56px, 10vw, 96px) 0",
-        borderRadius: rounded ? "2.2rem 2.2rem 0 0" : undefined,
+        borderRadius: rounded ? "2rem 2rem 0 0" : undefined,
         scrollMarginTop: "96px",
       }}
     >
