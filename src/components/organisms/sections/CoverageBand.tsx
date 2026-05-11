@@ -68,7 +68,7 @@ export function CoverageBand({ appointments }: { appointments?: Appointments }) 
                 strokeLinejoin="round"
               />
             </svg>
-            <span>Covered by Medicare and many health plans</span>
+            <span>Covered by Medicare, Medicaid, and many health plans</span>
           </span>
         </div>
 

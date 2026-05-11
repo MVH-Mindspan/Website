@@ -7,7 +7,7 @@ export const whatWeTreatPage = {
   metadata: buildMetadata({
     title: "What We Treat | Mindspan",
     description:
-      "Mindspan specializes in memory loss, Alzheimer's, MCI, dementia, and proactive brain health. See a neurologist in weeks, covered by Medicare and most major plans.",
+      "Mindspan specializes in memory loss, Alzheimer's, MCI, dementia, and proactive brain health. See a neurologist in weeks, covered by Medicare, Medicaid, and many health plans.",
     canonical: "/what-we-treat",
   }),
 

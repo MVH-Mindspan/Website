@@ -12,33 +12,30 @@ export const coveragePage = {
   metadata: buildMetadata({
     title: "Coverage & Cost | Mindspan",
     description:
-      "Mindspan is covered by Medicare and most major insurance plans. We handle the insurance so you can focus on your health.",
+      "Mindspan is covered by Medicare, Medicaid, and many health plans. We handle the insurance so you can focus on your health.",
     canonical: "/coverage",
   }),
 
   hero: {
     eyebrow: "Coverage & cost",
-    title: "Covered by Medicare and most major plans.",
-    lead: "We know cost and coverage anxiety is one of the main reasons people delay care. So let\u2019s answer this upfront: Mindspan accepts Medicare and most major insurance. We handle the insurance so you don\u2019t have to.",
+    title: "Covered by Medicare, Medicaid, and many health plans.",
+    lead: "We know cost and coverage anxiety is one of the main reasons people delay care. So let\u2019s answer this upfront: Mindspan accepts Medicare, Medicaid, and many health plans. We handle the insurance so you don\u2019t have to.",
   },
 
   howItWorks: {
     intro: {
       eyebrow: "How coverage works",
       title: "Billed like any other specialist visit.",
-      lead: "Mindspan is an in-network specialist for most major plans. Your visit is billed the same way a visit to any neurologist or specialist would be, through your insurance.",
+      lead: "Mindspan is an in-network specialist for many health plans. Your visit is billed the same way a visit to any neurologist or specialist would be, through your insurance.",
       image: "/assets/consultation-2.webp",
       imageAlt: "A member of the Mindspan care team",
     },
     insurance: {
       id: "insurance",
       eyebrow: "What we accept",
-      title: "Medicare, Medicaid, and most major plans.",
-      body: "We accept Medicare, most Medicare Advantage plans, and major commercial insurance including Blue Cross Blue Shield, Aetna, Cigna, United Healthcare, and others. Our team will verify your specific coverage before your first visit.",
+      title: "Medicare, Medicaid, and many health plans.",
+      body: "We accept Medicare, Medicaid, and many health plans. Our team will verify your specific coverage before your first visit.",
       bullets: [
-        "Medicare and most Medicare Advantage plans",
-        "Blue Cross Blue Shield",
-        "Aetna, Cigna, United Healthcare, and other major plans",
         "We verify your coverage before your first visit",
         "No surprise bills, we\u2019ll tell you what to expect upfront",
         "Our team handles prior authorizations and paperwork",
@@ -70,7 +67,7 @@ export const coveragePage = {
 
   stats: [
     { value: "100%", label: "Of visits billed through insurance" },
-    { value: "Medicare", label: "Most major plans accepted" },
+    { value: "Medicare", label: "Medicaid and many health plans" },
     { value: "2\u20133 wks", label: "Average time to see a neurologist" },
     { value: "0", label: "Out-of-pocket surprises, we tell you upfront" },
   ] satisfies Stat[],
