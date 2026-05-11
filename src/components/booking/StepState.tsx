@@ -179,11 +179,13 @@ export default function StepState({ value, onChange }: StepStateProps) {
           <strong style={{ color: GREEN }}>Already a patient?</strong>{" "}
           Book directly through your{" "}
           <a
-            href="https://assessment.mindspan.co"
+            href="https://my.mindspan.co/login"
+            target="_blank"
+            rel="noopener noreferrer"
             className="font-medium underline underline-offset-2 hover:no-underline"
             style={{ color: "#fb4d17" }}
           >
-            patient portal
+            member portal
           </a>
           .
         </p>
