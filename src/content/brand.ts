@@ -8,8 +8,9 @@ export const brand = {
     "Board-certified neurologists. In-clinic and video visits. Covered by insurance.",
   primaryCta: "Book a visit",
   primaryCtaHref: "/book-a-visit",
-  phone: "(617) 420-9000",
-  phoneHref: "tel:+16174209000",
+  phone: "(978) 850-3914",
+  phoneHref: "tel:+19788503914",
+  phoneHours: "9am–9pm ET / 6am–6pm PT",
   secondaryCta: "Find a clinic",
   secondaryCtaHref: "#locations",
   footerTagline:

@@ -1,5 +1,6 @@
 "use client";
 
+import { useCallback, useState } from "react";
 import { useTheme } from "@/lib/theme-context";
 import { alpha } from "@/lib/themes";
 import { type as typeScale } from "@/lib/tokens";
@@ -7,10 +8,21 @@ import { Container } from "@/components/atoms/Container";
 import { Eyebrow } from "@/components/atoms/Eyebrow";
 import { Heading } from "@/components/atoms/Heading";
 import { Lead } from "@/components/atoms/Lead";
+import { Field } from "@/components/molecules/Field";
 import { Reveal } from "@/components/molecules/Reveal";
 import { ReferForm } from "./ReferForm";
 
 type AltAction = { label: string; value: string; href: string | null };
+
+type Contact = { value: string; href: string | null };
+
+type ReferLocation = {
+  id: string;
+  label: string;
+  phone: Contact;
+  fax: Contact;
+  hours: string;
+};
 
 type Props = {
   eyebrow: string;
@@ -25,15 +37,41 @@ type Props = {
   };
   alt: {
     title: string;
-    phone: AltAction;
-    fax: AltAction;
+    promptNoLocation: string;
     email: AltAction;
   };
+  locations: ReadonlyArray<ReferLocation>;
+  defaultLocationId?: string;
 };
 
-export function ReferSection({ eyebrow, title, lead, form, alt }: Props) {
+export function ReferSection({
+  eyebrow,
+  title,
+  lead,
+  form,
+  alt,
+  locations,
+  defaultLocationId = "",
+}: Props) {
   const { theme } = useTheme();
   const c = theme.colors;
+  const [locationId, setLocationId] = useState(defaultLocationId);
+  const [locationError, setLocationError] = useState<string | undefined>();
+  const selectedLocation = locations.find((l) => l.id === locationId);
+
+  const handleLocationChange = useCallback((id: string) => {
+    setLocationId(id);
+    setLocationError(undefined);
+  }, []);
+
+  const validateLocation = useCallback(() => {
+    if (!locationId) {
+      setLocationError("Please select a clinic to refer to");
+      return false;
+    }
+    setLocationError(undefined);
+    return true;
+  }, [locationId]);
 
   return (
     <section
@@ -60,9 +98,77 @@ export function ReferSection({ eyebrow, title, lead, form, alt }: Props) {
           </Lead>
         </Reveal>
 
-        <div className="refer-grid" style={{ marginTop: 32 }}>
+        <Reveal>
+          <div
+            style={{
+              marginTop: 32,
+              background: "#fff",
+              border: `1px solid ${alpha(c.brandGreen, 0.16)}`,
+              borderRadius: "1.25rem",
+              padding: "24px 28px",
+              boxShadow: `0 4px 24px -20px ${alpha(c.ink, 0.18)}`,
+            }}
+          >
+            <p
+              style={{
+                fontFamily: theme.fonts.body,
+                fontSize: typeScale.micro,
+                letterSpacing: "0.12em",
+                textTransform: "uppercase",
+                color: c.brandGreen,
+                fontWeight: 600,
+                marginBottom: 6,
+              }}
+            >
+              Step 1 · Which clinic?
+            </p>
+            <div className="refer-clinic-row">
+              <div className="refer-clinic-copy">
+                <Heading
+                  as="h2"
+                  variant="h4"
+                  fontFamily={theme.fonts.heading}
+                  color={c.ink}
+                >
+                  Which clinic should see this patient?
+                </Heading>
+                <p
+                  style={{
+                    fontFamily: theme.fonts.body,
+                    fontSize: typeScale.bodySm,
+                    color: alpha(c.ink, 0.65),
+                    lineHeight: 1.55,
+                    marginTop: 6,
+                  }}
+                >
+                  This routes the referral to that clinic and updates the phone and fax shown
+                  on the right.
+                </p>
+              </div>
+              <div className="refer-clinic-field">
+                <Field
+                  id="refer-locationId"
+                  label="Refer to"
+                  as="select"
+                  required
+                  value={locationId}
+                  error={locationError}
+                  onChange={handleLocationChange}
+                  placeholder="Select a clinic…"
+                  options={locations.map((l) => ({ label: l.label, value: l.id }))}
+                />
+              </div>
+            </div>
+          </div>
+        </Reveal>
+
+        <div className="refer-grid" style={{ marginTop: 24 }}>
           <Reveal className="refer-form-col">
-            <ReferForm copy={form} />
+            <ReferForm
+              copy={form}
+              locationId={locationId}
+              onValidateLocation={validateLocation}
+            />
           </Reveal>
 
           <Reveal className="refer-aside-col" delay={1}>
@@ -98,7 +204,9 @@ export function ReferSection({ eyebrow, title, lead, form, alt }: Props) {
                   marginBottom: 20,
                 }}
               >
-                Many practices send referrals by phone or secure fax. We accept either.
+                {selectedLocation
+                  ? `Sending to Mindspan ${selectedLocation.label}.`
+                  : alt.promptNoLocation}
               </p>
 
               <ul
@@ -111,8 +219,22 @@ export function ReferSection({ eyebrow, title, lead, form, alt }: Props) {
                   listStyle: "none",
                 }}
               >
-                <AltRow {...alt.phone} icon={<PhoneIcon />} />
-                <AltRow {...alt.fax} icon={<FaxIcon />} />
+                {selectedLocation && (
+                  <>
+                    <AltRow
+                      label={`Call · ${selectedLocation.hours}`}
+                      value={selectedLocation.phone.value}
+                      href={selectedLocation.phone.href}
+                      icon={<PhoneIcon />}
+                    />
+                    <AltRow
+                      label="Secure fax"
+                      value={selectedLocation.fax.value}
+                      href={selectedLocation.fax.href}
+                      icon={<FaxIcon />}
+                    />
+                  </>
+                )}
                 <AltRow {...alt.email} icon={<MailIcon />} />
               </ul>
 
@@ -137,6 +259,20 @@ export function ReferSection({ eyebrow, title, lead, form, alt }: Props) {
           .refer-grid {
             grid-template-columns: 1fr;
             gap: 32px;
+          }
+        }
+        .refer-clinic-row {
+          display: grid;
+          grid-template-columns: minmax(0, 1fr) minmax(240px, 320px);
+          gap: 32px;
+          align-items: end;
+          margin-top: 8px;
+        }
+        @media (max-width: 720px) {
+          .refer-clinic-row {
+            grid-template-columns: 1fr;
+            gap: 16px;
+            align-items: start;
           }
         }
       `}</style>

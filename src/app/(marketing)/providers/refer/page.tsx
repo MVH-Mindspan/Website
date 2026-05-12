@@ -20,6 +20,8 @@ export default function ReferPage() {
           privacy: referPage.form.privacy,
         }}
         alt={referPage.alt}
+        locations={referPage.locations}
+        defaultLocationId={referPage.defaultLocationId}
       />
       <FinalCTA {...finalCta} />
     </>

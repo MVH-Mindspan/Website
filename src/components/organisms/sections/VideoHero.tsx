@@ -143,21 +143,22 @@ export function VideoHero({
             {subhead}
           </p>
           {cta && (
+            <>
             <div className="hero-ctas">
               <a
-                href={cta.href}
-                {...externalLinkProps(cta.href)}
+                href={brand.phoneHref}
                 onClick={() =>
                   track(ANALYTICS_EVENTS.ctaClicked, {
                     location: "video_hero",
-                    variant: "primary",
-                    label: cta.label,
-                    href: cta.href,
+                    variant: "phone",
+                    href: brand.phoneHref,
                   })
                 }
                 className="hero-cta-primary"
                 style={{
-                  display: "inline-block",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 8,
                   fontFamily: theme.fonts.body,
                   fontSize: typeScale.bodySm,
                   fontWeight: 600,
@@ -171,33 +172,6 @@ export function VideoHero({
                 onMouseEnter={(e) => (e.currentTarget.style.background = c.cream)}
                 onMouseLeave={(e) => (e.currentTarget.style.background = "#fff")}
               >
-                {cta.label}
-              </a>
-              <a
-                href={brand.phoneHref}
-                onClick={() =>
-                  track(ANALYTICS_EVENTS.ctaClicked, {
-                    location: "video_hero",
-                    variant: "phone",
-                    href: brand.phoneHref,
-                  })
-                }
-                className="hero-cta-secondary"
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: 8,
-                  fontFamily: theme.fonts.body,
-                  fontSize: typeScale.bodySm,
-                  fontWeight: 600,
-                  color: c.cream,
-                  padding: "14px 22px",
-                  border: `1px solid ${alpha(c.cream, 0.45)}`,
-                  borderRadius: "10rem",
-                  textDecoration: "none",
-                  background: "transparent",
-                }}
-              >
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden>
                   <path
                     d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z"
@@ -209,7 +183,47 @@ export function VideoHero({
                 </svg>
                 Talk to us: {brand.phone}
               </a>
+              <a
+                href={cta.href}
+                {...externalLinkProps(cta.href)}
+                onClick={() =>
+                  track(ANALYTICS_EVENTS.ctaClicked, {
+                    location: "video_hero",
+                    variant: "secondary",
+                    label: cta.label,
+                    href: cta.href,
+                  })
+                }
+                className="hero-cta-secondary"
+                style={{
+                  display: "inline-block",
+                  fontFamily: theme.fonts.body,
+                  fontSize: typeScale.bodySm,
+                  fontWeight: 600,
+                  color: c.cream,
+                  padding: "14px 22px",
+                  border: `1px solid ${alpha(c.cream, 0.45)}`,
+                  borderRadius: "10rem",
+                  textDecoration: "none",
+                  background: "transparent",
+                }}
+              >
+                {cta.label}
+              </a>
             </div>
+            <p
+              style={{
+                fontFamily: theme.fonts.body,
+                fontSize: typeScale.body,
+                color: c.cream,
+                fontWeight: 500,
+                marginTop: 14,
+                letterSpacing: "0.01em",
+              }}
+            >
+              {brand.phoneHours}
+            </p>
+            </>
           )}
         </div>
       </div>

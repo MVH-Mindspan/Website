@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useTheme } from "@/lib/theme-context";
 import { alpha } from "@/lib/themes";
-import { ease, type as typeScale } from "@/lib/tokens";
+import { ease, easeArrays, type as typeScale } from "@/lib/tokens";
 import { brand } from "@/content/brand";
 import { audienceNav, nav } from "@/content/nav";
 import { ANALYTICS_EVENTS, track } from "@/lib/analytics";
@@ -178,7 +178,7 @@ export function SiteHeader() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.18, ease: ease.expressive }}
+            transition={{ duration: 0.18, ease: easeArrays.expressive }}
           />
         )}
       </AnimatePresence>
@@ -327,7 +327,7 @@ export function SiteHeader() {
                 }}
                 transition={{
                   duration: reduceMotion ? 0 : 0.2,
-                  ease: ease.expressive,
+                  ease: easeArrays.expressive,
                 }}
               />
               <motion.span
@@ -348,7 +348,7 @@ export function SiteHeader() {
                 }}
                 transition={{
                   duration: reduceMotion ? 0 : 0.2,
-                  ease: ease.expressive,
+                  ease: easeArrays.expressive,
                 }}
               />
             </span>
@@ -380,7 +380,7 @@ export function SiteHeader() {
               initial={panelInitial}
               animate={panelAnimate}
               exit={panelExit}
-              transition={{ duration: reduceMotion ? 0.12 : 0.22, ease: ease.expressive }}
+              transition={{ duration: reduceMotion ? 0.12 : 0.22, ease: easeArrays.expressive }}
             >
               <div className="flex flex-col">
                 {[...nav, audienceNav.providers].map((n, i, arr) => {

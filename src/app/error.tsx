@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import Link from "next/link";
+import { brand } from "@/content/brand";
 
 const CREAM = "#FBF7F0";
 const GREEN = "#083630";
@@ -108,11 +109,11 @@ export default function GlobalError({
         >
           Need a hand?{" "}
           <a
-            href="tel:+16174209000"
+            href={brand.phoneHref}
             className="v2-link"
             style={{ color: GREEN, fontWeight: 600, textDecoration: "none" }}
           >
-            Call (617) 420-9000
+            Call {brand.phone}
           </a>
           .
         </p>

@@ -17,6 +17,7 @@ export function FinalCTA({
   lead,
   primary,
   secondary,
+  secondaryNote,
   signature,
 }: {
   eyebrow: string;
@@ -24,6 +25,7 @@ export function FinalCTA({
   lead: string;
   primary: { label: string; href: string };
   secondary?: { label: string; href: string };
+  secondaryNote?: string;
   signature?: string;
 }) {
   const { theme } = useTheme();
@@ -134,6 +136,20 @@ export function FinalCTA({
             {primary.label} <ArrowIcon />
           </a>
         </div>
+        {secondaryNote && secondary && (
+          <p
+            className="mt-4"
+            style={{
+              color: "rgba(255,255,255,0.78)",
+              fontFamily: theme.fonts.body,
+              fontSize: typeScale.bodySm,
+              fontWeight: 500,
+              letterSpacing: "0.01em",
+            }}
+          >
+            {secondaryNote}
+          </p>
+        )}
         {signature && (
           <p
             className="mt-10"

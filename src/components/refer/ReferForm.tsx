@@ -4,7 +4,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { useTheme } from "@/lib/theme-context";
 import { alpha } from "@/lib/themes";
-import { ease, type as typeScale } from "@/lib/tokens";
+import { easeArrays, type as typeScale } from "@/lib/tokens";
 import { ArrowIcon } from "@/components/atoms/ArrowIcon";
 import { Button } from "@/components/atoms/Button";
 import { Heading } from "@/components/atoms/Heading";
@@ -93,7 +93,15 @@ type Copy = {
   privacy: string;
 };
 
-export function ReferForm({ copy }: { copy: Copy }) {
+export function ReferForm({
+  copy,
+  locationId,
+  onValidateLocation,
+}: {
+  copy: Copy;
+  locationId: string;
+  onValidateLocation: () => boolean;
+}) {
   const { theme } = useTheme();
   const c = theme.colors;
   const reduceMotion = useReducedMotion();
@@ -144,8 +152,22 @@ export function ReferForm({ copy }: { copy: Copy }) {
       e.preventDefault();
       if (submitting || submitted) return;
       const stepErrors = validate(data);
-      if (Object.keys(stepErrors).length > 0) {
+      const locationOk = onValidateLocation();
+      if (!locationOk || Object.keys(stepErrors).length > 0) {
         setErrors(stepErrors);
+        if (!locationOk) {
+          requestAnimationFrame(() => {
+            const el = document.getElementById("refer-locationId");
+            if (el && typeof (el as HTMLElement).focus === "function") {
+              (el as HTMLElement).focus();
+              el.scrollIntoView({
+                block: "center",
+                behavior: reduceMotion ? "auto" : "smooth",
+              });
+            }
+          });
+          return;
+        }
         // Focus the error summary so AT users hear the count + list, then
         // queue moving focus into the first invalid field on the next frame.
         requestAnimationFrame(() => {
@@ -174,6 +196,7 @@ export function ReferForm({ copy }: { copy: Copy }) {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
+            location: locationId,
             referrer: {
               firstName: data.referrerFirstName.trim(),
               lastName: data.referrerLastName.trim(),
@@ -224,7 +247,7 @@ export function ReferForm({ copy }: { copy: Copy }) {
         }
       }
     },
-    [data, submitting, submitted, reduceMotion]
+    [data, locationId, onValidateLocation, submitting, submitted, reduceMotion]
   );
 
   if (submitted) {
@@ -236,7 +259,7 @@ export function ReferForm({ copy }: { copy: Copy }) {
         aria-live="polite"
         initial={reduceMotion ? false : { opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.35, ease: ease.expressive as unknown as number[] }}
+        transition={{ duration: 0.35, ease: easeArrays.expressive }}
         style={{
           background: "#fff",
           border: `1px solid ${alpha(c.ink, 0.08)}`,

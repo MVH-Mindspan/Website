@@ -1,4 +1,5 @@
 import { buildMetadata } from "@/lib/seo";
+import { brand } from "@/content/brand";
 import type { FAQItem } from "../faq";
 
 export const guidePage = {
@@ -20,7 +21,7 @@ export const guidePage = {
     subhead:
       "Medicare\u2019s coordinated dementia care model. Around-the-clock specialist support, no out-of-pocket cost for covered visits, and respite for the primary caregiver. If you qualify, Mindspan handles enrollment.",
     primaryCta: { label: "See the benefits", href: "#benefits" },
-    secondaryCta: { label: "Talk to us: (617) 420-9000", href: "tel:+16174209000" },
+    secondaryCta: { label: `Talk to us: ${brand.phone}`, href: brand.phoneHref },
   },
 
   benefitsIntro: {
@@ -206,7 +207,7 @@ export const guidePage = {
     title: "Start with a conversation.\nWe will figure out what applies.",
     lead:
       "You do not need to know whether you qualify for GUIDE before you reach out. Come talk to us, we sort out coverage, eligibility, and next steps together.",
-    primary: { label: "Talk to us: (617) 420-9000", href: "tel:+16174209000" },
+    primary: { label: `Talk to us: ${brand.phone}`, href: brand.phoneHref },
     signature: "With care, the Mindspan team",
   },
 } as const;
