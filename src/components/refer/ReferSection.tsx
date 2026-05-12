@@ -130,7 +130,7 @@ export function ReferSection({
                   fontFamily={theme.fonts.heading}
                   color={c.ink}
                 >
-                  Which clinic should see this patient?
+                  Which clinic would you like to refer to?
                 </Heading>
                 <p
                   style={{

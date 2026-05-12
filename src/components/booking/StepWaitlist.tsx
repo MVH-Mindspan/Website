@@ -146,6 +146,20 @@ export default function StepWaitlist({
       >
         <motion.div variants={fadeUp}>
           <FormField
+            label={waitlistCopy.fieldLabels.stateOfResidence}
+            name="stateOfResidence"
+            type="select"
+            required
+            placeholder={waitlistCopy.placeholders.stateOfResidence}
+            value={data.stateOfResidence}
+            onChange={(v) => onChange("stateOfResidence", v)}
+            error={errors.stateOfResidence}
+            options={waitlistCopy.stateOptions}
+          />
+        </motion.div>
+
+        <motion.div variants={fadeUp}>
+          <FormField
             label={waitlistCopy.fieldLabels.firstName}
             name="firstName"
             required
@@ -169,20 +183,6 @@ export default function StepWaitlist({
             error={errors.lastName}
             maxLength={120}
             autoComplete="family-name"
-          />
-        </motion.div>
-
-        <motion.div variants={fadeUp}>
-          <FormField
-            label={waitlistCopy.fieldLabels.stateOfResidence}
-            name="stateOfResidence"
-            type="select"
-            required
-            placeholder={waitlistCopy.placeholders.stateOfResidence}
-            value={data.stateOfResidence}
-            onChange={(v) => onChange("stateOfResidence", v)}
-            error={errors.stateOfResidence}
-            options={waitlistCopy.stateOptions}
           />
         </motion.div>
 

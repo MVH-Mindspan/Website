@@ -119,6 +119,26 @@ export function ReferForm({
   const errorSummaryRef = useRef<HTMLDivElement | null>(null);
   const successWrapperRef = useRef<HTMLDivElement | null>(null);
 
+  const handleReferAnother = useCallback(() => {
+    setData((prev) => ({
+      ...prev,
+      patientFirstName: "",
+      patientLastName: "",
+      patientPhone: "",
+      notes: "",
+    }));
+    setErrors({});
+    setSubmitError(undefined);
+    setSubmitted(false);
+    requestAnimationFrame(() => {
+      const el = document.getElementById("refer-patientFirstName");
+      if (el && typeof (el as HTMLElement).focus === "function") {
+        (el as HTMLElement).focus();
+        el.scrollIntoView({ block: "center", behavior: reduceMotion ? "auto" : "smooth" });
+      }
+    });
+  }, [reduceMotion]);
+
   useEffect(() => {
     isMountedRef.current = true;
     return () => {
@@ -317,6 +337,17 @@ export function ReferForm({
         >
           {copy.successBody}
         </p>
+        <div style={{ marginTop: 28, display: "flex", justifyContent: "center" }}>
+          <Button
+            type="button"
+            variant="primary"
+            size="md"
+            onClick={handleReferAnother}
+            iconRight={<ArrowIcon />}
+          >
+            Refer another patient
+          </Button>
+        </div>
       </motion.div>
     );
   }

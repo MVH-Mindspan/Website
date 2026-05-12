@@ -40,11 +40,11 @@ const DETAILS_FIELD_ORDER = [
 ] as const;
 
 const WAITLIST_FIELD_ORDER = [
+  "stateOfResidence",
   "firstName",
   "lastName",
-  "stateOfResidence",
-  "email",
   "phone",
+  "email",
 ] as const;
 
 function focusFirstError(orderedKeys: readonly string[], errors: StepErrors) {
