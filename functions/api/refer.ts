@@ -3,6 +3,8 @@ import { appendRow, type SheetsEnv } from "../_lib/sheets";
 const TAB = "pcp referrals";
 
 type Payload = {
+  location?: unknown;
+  locationLabel?: unknown;
   referrer?: {
     firstName?: unknown;
     lastName?: unknown;
@@ -47,6 +49,7 @@ export async function onRequestPost(context: {
     return json(400, { error: "invalid_json" });
   }
 
+  const location = str(body.locationLabel) || str(body.location);
   const rFirst = str(body.referrer?.firstName);
   const rLast = str(body.referrer?.lastName);
   const rEmail = str(body.referrer?.email);
@@ -57,6 +60,7 @@ export async function onRequestPost(context: {
   const pPhone = str(body.patient?.phone);
   const notes = str(body.notes);
 
+  if (!location) return json(400, { error: "missing_location" });
   if (!rFirst || !rLast) return json(400, { error: "missing_referrer_name" });
   if (!isEmail(rEmail)) return json(400, { error: "invalid_referrer_email" });
   if (rPhone && digits(rPhone).length < 10) {
@@ -68,6 +72,7 @@ export async function onRequestPost(context: {
   try {
     await appendRow(env, TAB, [
       new Date().toISOString(),
+      location,
       rFirst,
       rLast,
       rEmail,

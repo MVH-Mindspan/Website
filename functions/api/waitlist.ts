@@ -4,6 +4,7 @@ const TAB = "waitlist";
 
 type Payload = {
   firstName?: unknown;
+  lastName?: unknown;
   email?: unknown;
   phone?: unknown;
   state?: unknown;
@@ -39,11 +40,14 @@ export async function onRequestPost(context: {
   }
 
   const firstName = str(body.firstName);
+  const lastName = str(body.lastName);
   const email = str(body.email);
   const phone = str(body.phone);
   const state = str(body.state);
 
-  if (!firstName) return json(400, { error: "missing_name" });
+  if (!firstName) return json(400, { error: "missing_first_name" });
+  if (!lastName) return json(400, { error: "missing_last_name" });
+  if (!state) return json(400, { error: "missing_state" });
   if (!isEmail(email)) return json(400, { error: "invalid_email" });
   if (digits(phone).length < 10) return json(400, { error: "invalid_phone" });
 
@@ -52,8 +56,9 @@ export async function onRequestPost(context: {
       new Date().toISOString(),
       state,
       firstName,
-      email,
+      lastName,
       phone,
+      email,
     ]);
   } catch (err) {
     console.error("waitlist.append_failed", (err as Error).message);

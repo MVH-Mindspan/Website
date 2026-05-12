@@ -96,10 +96,12 @@ type Copy = {
 export function ReferForm({
   copy,
   locationId,
+  locationLabel,
   onValidateLocation,
 }: {
   copy: Copy;
   locationId: string;
+  locationLabel: string;
   onValidateLocation: () => boolean;
 }) {
   const { theme } = useTheme();
@@ -197,6 +199,7 @@ export function ReferForm({
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             location: locationId,
+            locationLabel,
             referrer: {
               firstName: data.referrerFirstName.trim(),
               lastName: data.referrerLastName.trim(),
@@ -247,7 +250,7 @@ export function ReferForm({
         }
       }
     },
-    [data, locationId, onValidateLocation, submitting, submitted, reduceMotion]
+    [data, locationId, locationLabel, onValidateLocation, submitting, submitted, reduceMotion]
   );
 
   if (submitted) {

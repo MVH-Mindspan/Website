@@ -309,20 +309,6 @@ export default function StepDetails({ data, onChange, errors }: StepDetailsProps
           </div>
 
           <FormField
-            label={FIELD_LABELS.email}
-            name="email"
-            type="email"
-            placeholder={detailsCopy.placeholders.email}
-            value={data.email}
-            onChange={(v) => onChange("email", v)}
-            error={errors.email}
-            maxLength={255}
-            autoComplete="email"
-            inputMode="email"
-            hint={detailsCopy.emailHint}
-          />
-
-          <FormField
             label={FIELD_LABELS.phone}
             name="phone"
             type="tel"
@@ -335,6 +321,20 @@ export default function StepDetails({ data, onChange, errors }: StepDetailsProps
             autoComplete="tel-national"
             inputMode="tel"
             hint={detailsCopy.phoneHint}
+          />
+
+          <FormField
+            label={FIELD_LABELS.email}
+            name="email"
+            type="email"
+            placeholder={detailsCopy.placeholders.email}
+            value={data.email}
+            onChange={(v) => onChange("email", v)}
+            error={errors.email}
+            maxLength={255}
+            autoComplete="email"
+            inputMode="email"
+            hint={detailsCopy.emailHint}
           />
         </motion.div>
       </motion.div>
