@@ -1,9 +1,23 @@
 // Cloudflare Worker — serves static Next.js export from ./out
-// plus dummy /api endpoints for the booking funnel.
+// plus /api endpoints that append to Google Sheets.
 
-interface Env {
+import { onRequestPost as bookHandler } from "./functions/api/book";
+import { onRequestPost as waitlistHandler } from "./functions/api/waitlist";
+import { onRequestPost as referHandler } from "./functions/api/refer";
+import type { SheetsEnv } from "./functions/_lib/sheets";
+
+interface Env extends SheetsEnv {
   ASSETS: Fetcher;
 }
+
+const API_HANDLERS: Record<
+  string,
+  (ctx: { request: Request; env: SheetsEnv }) => Promise<Response>
+> = {
+  "/api/book": bookHandler,
+  "/api/waitlist": waitlistHandler,
+  "/api/refer": referHandler,
+};
 
 const CORS_HEADERS = {
   "Access-Control-Allow-Origin": "*",
@@ -46,25 +60,18 @@ export default {
       return proxyPostHog(request, url);
     }
 
-    if (
-      url.pathname === "/api/book" ||
-      url.pathname === "/api/waitlist" ||
-      url.pathname === "/api/refer"
-    ) {
+    const handler = API_HANDLERS[url.pathname];
+    if (handler) {
       if (request.method === "OPTIONS") {
         return new Response(null, { status: 204, headers: CORS_HEADERS });
       }
       if (request.method !== "POST") {
         return jsonResponse({ ok: false, error: "Method not allowed" }, { status: 405 });
       }
-      try {
-        const payload = await request.json();
-        // Dummy: log and ack. Wire to real destination later.
-        console.log(`[${url.pathname}]`, JSON.stringify(payload));
-        return jsonResponse({ ok: true });
-      } catch {
-        return jsonResponse({ ok: false, error: "Invalid JSON" }, { status: 400 });
-      }
+      const res = await handler({ request, env });
+      const merged = new Headers(res.headers);
+      for (const [k, v] of Object.entries(CORS_HEADERS)) merged.set(k, v);
+      return new Response(res.body, { status: res.status, headers: merged });
     }
 
     return env.ASSETS.fetch(request);
