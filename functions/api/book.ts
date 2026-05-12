@@ -58,7 +58,7 @@ export async function onRequestPost(context: {
   if (!state || !careOption || !bookingFor || !firstName || !lastName) {
     return json(400, { error: "missing_required_fields" });
   }
-  if (!isEmail(email)) return json(400, { error: "invalid_email" });
+  if (email && !isEmail(email)) return json(400, { error: "invalid_email" });
   if (digits(phone).length < 10) return json(400, { error: "invalid_phone" });
   if (bookingFor === "loved-one") {
     if (!patientFirstName || !patientLastName || !relationship) {
