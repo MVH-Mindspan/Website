@@ -206,7 +206,7 @@ export const howItWorksPage = {
       title: "Starting is simple. You can do it from home.",
       lead:
         "Complete the quick sign-up process, and we\u2019ll take care of coordinating specialists, next steps, and ongoing care, guiding you the whole way.",
-      image: "/assets/what-to-expect-consultation.webp",
+      image: "/assets/latest-science.webp",
       imageAlt:
         "A Mindspan neurologist reviewing a brain scan on a monitor with two patients in a sunlit clinic room.",
     },
