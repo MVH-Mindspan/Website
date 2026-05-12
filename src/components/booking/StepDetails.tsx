@@ -312,7 +312,6 @@ export default function StepDetails({ data, onChange, errors }: StepDetailsProps
             label={FIELD_LABELS.email}
             name="email"
             type="email"
-            required
             placeholder={detailsCopy.placeholders.email}
             value={data.email}
             onChange={(v) => onChange("email", v)}
@@ -320,6 +319,7 @@ export default function StepDetails({ data, onChange, errors }: StepDetailsProps
             maxLength={255}
             autoComplete="email"
             inputMode="email"
+            hint={detailsCopy.emailHint}
           />
 
           <FormField

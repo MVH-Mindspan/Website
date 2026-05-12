@@ -148,11 +148,11 @@ export const bookingPage = {
       { label: "Other", value: "other" },
     ] as { label: string; value: string }[],
     phoneHint: "US numbers only. We use this for scheduling reminders.",
+    emailHint: "Optional",
     errors: {
       bookingForRequired: "Please select who this visit is for",
       firstNameRequired: "Please enter your first name",
       lastNameRequired: "Please enter your last name",
-      emailRequired: "Please enter your email",
       emailInvalid: "Please enter a valid email address",
       phoneRequired: "Please enter your phone number",
       phoneInvalid: "Please enter a 10-digit US phone number",

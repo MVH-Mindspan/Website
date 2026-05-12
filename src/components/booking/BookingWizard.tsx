@@ -107,9 +107,7 @@ function validateDetails(data: FormData): StepErrors {
   if (!data.firstName.trim()) errors.firstName = detailsErrors.firstNameRequired;
   if (!data.lastName.trim()) errors.lastName = detailsErrors.lastNameRequired;
   const email = data.email.trim();
-  if (!email) {
-    errors.email = detailsErrors.emailRequired;
-  } else if (!isEmail(email)) {
+  if (email && !isEmail(email)) {
     errors.email = detailsErrors.emailInvalid;
   }
   const phoneDigits = data.phone.replace(/\D/g, "");

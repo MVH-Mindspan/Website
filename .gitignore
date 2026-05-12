@@ -10,6 +10,7 @@ out/
 
 # cloudflare
 .wrangler/
+.dev.vars
 
 # logs
 *.log
