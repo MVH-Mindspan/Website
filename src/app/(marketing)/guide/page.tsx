@@ -7,6 +7,7 @@ import {
   FinalCTA,
 } from "@/components/organisms/sections";
 import { CmsDisclosure } from "@/components/atoms/CmsDisclosure";
+import { brand } from "@/content/brand";
 import { guidePage } from "@/content/pages/guide";
 import { JsonLd } from "@/lib/json-ld";
 import { buildFaqSchema, buildBreadcrumbSchema } from "@/lib/schema";
@@ -34,12 +35,12 @@ export default function GuidePage() {
         columns={3}
         rounded={false}
         tone="sand"
-        secondary={{ label: "Talk to us: (617) 420-9000", href: "tel:+16174209000" }}
+        secondary={{ label: `Talk to us: ${brand.phone}`, href: brand.phoneHref }}
       />
 
       <FeatureSpotlight
         {...guidePage.support247}
-        secondary={{ label: "Talk to us: (617) 420-9000", href: "tel:+16174209000" }}
+        secondary={{ label: `Talk to us: ${brand.phone}`, href: brand.phoneHref }}
       />
 
       <SimpleSteps
@@ -51,7 +52,7 @@ export default function GuidePage() {
       <SimpleSteps
         intro={guidePage.howEnrollmentIntro}
         stages={guidePage.howEnrollmentSteps}
-        secondary={{ label: "Talk to us: (617) 420-9000", href: "tel:+16174209000" }}
+        secondary={{ label: `Talk to us: ${brand.phone}`, href: brand.phoneHref }}
       />
 
       <FAQ

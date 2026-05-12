@@ -65,14 +65,7 @@ export default function HomePage() {
         groupByKind
         tone="sand"
       />
-      <FinalCTA
-        eyebrow={finalCta.eyebrow}
-        title={finalCta.title}
-        lead={finalCta.lead}
-        primary={finalCta.primary}
-        secondary={finalCta.secondary}
-        signature={finalCta.signature}
-      />
+      <FinalCTA {...finalCta} />
     </>
   );
 }

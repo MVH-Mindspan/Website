@@ -28,8 +28,27 @@ export const referPage = {
   },
   alt: {
     title: "Prefer a phone call or fax?",
-    phone: { label: "Call our referral line", value: "(617) 420-9000", href: "tel:+16174209000" },
-    fax: { label: "Secure fax", value: "(617) 420-9001", href: null },
+    promptNoLocation: "Select a clinic above to see the right phone and secure fax.",
     email: { label: "Email", value: "referrals@mindspan.co", href: "mailto:referrals@mindspan.co" },
   },
+  defaultLocationId: "danvers",
+  locations: [
+    {
+      id: "danvers",
+      label: "MA - Danvers",
+      phone: { value: "(978) 850-3914", href: "tel:+19788503914" },
+      fax: { value: "(844) 689-3306", href: null },
+      hours: "Mon–Fri, 9am–6pm ET",
+    },
+    {
+      id: "bay-area",
+      label: "CA - Bay Area",
+      phone: { value: "(669) 291-2202", href: "tel:+16692912202" },
+      fax: { value: "(844) 689-7419", href: null },
+      hours: "Mon–Fri, 9am–6pm PT",
+    },
+  ],
 } as const;
+
+export type ReferLocation = (typeof referPage)["locations"][number];
+export type ReferLocationId = ReferLocation["id"];

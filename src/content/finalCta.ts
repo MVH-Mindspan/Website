@@ -7,5 +7,6 @@ export const finalCta = {
     "No commitment. No pressure. Tell us what is going on, and we will help you figure out what comes next, even if it turns out that next isn\u2019t with us.",
   primary: { label: "Book a visit", href: "/book-a-visit" },
   secondary: { label: `Talk to us: ${brand.phone}`, href: brand.phoneHref },
+  secondaryNote: brand.phoneHours,
   signature: "With care, the Mindspan team",
 } as const;
