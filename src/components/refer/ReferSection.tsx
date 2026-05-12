@@ -167,6 +167,7 @@ export function ReferSection({
             <ReferForm
               copy={form}
               locationId={locationId}
+              locationLabel={selectedLocation?.label ?? ""}
               onValidateLocation={validateLocation}
             />
           </Reveal>

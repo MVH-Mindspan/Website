@@ -247,8 +247,8 @@ export default function StepReview({
                 label={reviewCopy.rowLabels.name}
                 value={`${data.firstName} ${data.lastName}`.trim()}
               />
-              <ReviewRow label={reviewCopy.rowLabels.email} value={data.email} />
               <ReviewRow label={reviewCopy.rowLabels.phone} value={formatPhone(data.phone)} />
+              <ReviewRow label={reviewCopy.rowLabels.email} value={data.email} />
             </dl>
           </ReviewSection>
         </motion.div>

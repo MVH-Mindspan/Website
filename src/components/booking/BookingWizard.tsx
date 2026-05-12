@@ -35,11 +35,17 @@ const DETAILS_FIELD_ORDER = [
   "relationship",
   "firstName",
   "lastName",
+  "phone",
+  "email",
+] as const;
+
+const WAITLIST_FIELD_ORDER = [
+  "firstName",
+  "lastName",
+  "stateOfResidence",
   "email",
   "phone",
 ] as const;
-
-const WAITLIST_FIELD_ORDER = ["firstName", "email", "phone"] as const;
 
 function focusFirstError(orderedKeys: readonly string[], errors: StepErrors) {
   if (typeof document === "undefined") return;
@@ -66,6 +72,7 @@ type BookingFor = "self" | "loved-one" | "";
 
 type FormData = {
   state: StateChoice | "";
+  stateOfResidence: string;
   careOption: string;
   bookingFor: BookingFor;
   firstName: string;
@@ -79,6 +86,7 @@ type FormData = {
 
 const initialFormData: FormData = {
   state: "",
+  stateOfResidence: "",
   careOption: "",
   bookingFor: "",
   firstName: "",
@@ -130,6 +138,9 @@ function validateDetails(data: FormData): StepErrors {
 function validateWaitlist(data: FormData): StepErrors {
   const errors: StepErrors = {};
   if (!data.firstName.trim()) errors.firstName = waitlistErrors.firstNameRequired;
+  if (!data.lastName.trim()) errors.lastName = waitlistErrors.lastNameRequired;
+  if (!data.stateOfResidence.trim())
+    errors.stateOfResidence = waitlistErrors.stateOfResidenceRequired;
   const email = data.email.trim();
   if (!email) {
     errors.email = waitlistErrors.emailRequired;
@@ -148,6 +159,7 @@ function validateWaitlist(data: FormData): StepErrors {
 function hasFormProgress(data: FormData): boolean {
   return Boolean(
     data.state ||
+      data.stateOfResidence ||
       data.careOption ||
       data.bookingFor ||
       data.firstName.trim() ||
@@ -392,9 +404,10 @@ export default function BookingWizard() {
       "/api/waitlist",
       {
         firstName: formData.firstName.trim(),
+        lastName: formData.lastName.trim(),
         email: formData.email.trim(),
         phone: formData.phone,
-        state: formData.state,
+        state: formData.stateOfResidence,
       },
       controller.signal
     );
@@ -404,10 +417,10 @@ export default function BookingWizard() {
     setSubmitting(false);
     if (result.ok) {
       setSubmitted(true);
-      track(ANALYTICS_EVENTS.waitlistSubmitted, { state: formData.state });
+      track(ANALYTICS_EVENTS.waitlistSubmitted, { state: formData.stateOfResidence });
     } else {
       setSubmitError(result.error);
-      track(ANALYTICS_EVENTS.waitlistSubmitFailed, { state: formData.state });
+      track(ANALYTICS_EVENTS.waitlistSubmitFailed, { state: formData.stateOfResidence });
     }
   }, [formData, submitting, submitted]);
 
@@ -510,7 +523,13 @@ export default function BookingWizard() {
       case "waitlist":
         return (
           <StepWaitlist
-            data={formData}
+            data={{
+              firstName: formData.firstName,
+              lastName: formData.lastName,
+              stateOfResidence: formData.stateOfResidence,
+              email: formData.email,
+              phone: formData.phone,
+            }}
             onChange={updateField}
             errors={errors}
             onSubmit={handleWaitlistSubmit}

@@ -30,6 +30,8 @@ const staggerContainer: Variants = {
 type StepWaitlistProps = {
   data: {
     firstName: string;
+    lastName: string;
+    stateOfResidence: string;
     email: string;
     phone: string;
   };
@@ -158,17 +160,29 @@ export default function StepWaitlist({
 
         <motion.div variants={fadeUp}>
           <FormField
-            label={waitlistCopy.fieldLabels.email}
-            name="email"
-            type="email"
+            label={waitlistCopy.fieldLabels.lastName}
+            name="lastName"
             required
-            placeholder={waitlistCopy.placeholders.email}
-            value={data.email}
-            onChange={(v) => onChange("email", v)}
-            error={errors.email}
-            maxLength={255}
-            autoComplete="email"
-            inputMode="email"
+            placeholder={waitlistCopy.placeholders.lastName}
+            value={data.lastName}
+            onChange={(v) => onChange("lastName", v)}
+            error={errors.lastName}
+            maxLength={120}
+            autoComplete="family-name"
+          />
+        </motion.div>
+
+        <motion.div variants={fadeUp}>
+          <FormField
+            label={waitlistCopy.fieldLabels.stateOfResidence}
+            name="stateOfResidence"
+            type="select"
+            required
+            placeholder={waitlistCopy.placeholders.stateOfResidence}
+            value={data.stateOfResidence}
+            onChange={(v) => onChange("stateOfResidence", v)}
+            error={errors.stateOfResidence}
+            options={waitlistCopy.stateOptions}
           />
         </motion.div>
 
@@ -185,6 +199,22 @@ export default function StepWaitlist({
             maxLength={20}
             autoComplete="tel-national"
             inputMode="tel"
+          />
+        </motion.div>
+
+        <motion.div variants={fadeUp}>
+          <FormField
+            label={waitlistCopy.fieldLabels.email}
+            name="email"
+            type="email"
+            required
+            placeholder={waitlistCopy.placeholders.email}
+            value={data.email}
+            onChange={(v) => onChange("email", v)}
+            error={errors.email}
+            maxLength={255}
+            autoComplete="email"
+            inputMode="email"
           />
         </motion.div>
 
