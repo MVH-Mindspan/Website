@@ -162,7 +162,7 @@ export function SplitCards({
         </div>
 
         {(closing || cta) && (
-          <Reveal className="mt-12 max-w-3xl">
+          <Reveal className="mt-12 max-w-3xl mx-auto text-center">
             {closing && (
               <Lead
                 size="bodyCard"
