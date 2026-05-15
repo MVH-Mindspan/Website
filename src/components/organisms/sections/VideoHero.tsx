@@ -86,6 +86,10 @@ export function VideoHero({
         }}
       />
       <div
+        className="sm:hidden absolute inset-0"
+        style={{ background: alpha("#201E17", 0.15) }}
+      />
+      <div
         className="absolute bottom-0 left-0 right-0 flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 lg:gap-16 hero-content"
         style={{ padding: "64px clamp(24px, 5vw, 80px)" }}
       >
