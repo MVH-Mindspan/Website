@@ -54,7 +54,18 @@ export default async function OpengraphImage() {
             left: 0,
             width: "100%",
             height: "100%",
-            backgroundColor: "rgba(251, 247, 240, 0.55)",
+            backgroundColor: "rgba(251, 247, 240, 0.35)",
+          }}
+        />
+        <div
+          style={{
+            position: "absolute",
+            top: 95,
+            left: 80,
+            width: 1040,
+            height: 440,
+            background:
+              "radial-gradient(ellipse at center, rgba(251, 247, 240, 0.92) 0%, rgba(251, 247, 240, 0.78) 28%, rgba(251, 247, 240, 0.45) 55%, rgba(251, 247, 240, 0) 78%)",
           }}
         />
         {/* eslint-disable-next-line @next/next/no-img-element */}
