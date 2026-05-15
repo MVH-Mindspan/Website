@@ -216,6 +216,7 @@ export function VideoHero({
               </a>
             </div>
             <p
+              className="hero-hours"
               style={{
                 fontFamily: theme.fonts.body,
                 fontSize: typeScale.body,
@@ -255,6 +256,9 @@ export function VideoHero({
             justify-content: center;
             text-align: center;
             white-space: normal;
+          }
+          .hero-hours {
+            text-align: center;
           }
         }
       `}</style>
