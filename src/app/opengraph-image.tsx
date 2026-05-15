@@ -13,7 +13,7 @@ export default async function OpengraphImage() {
     process.cwd(),
     "public",
     "assets",
-    "mindspan-logo-with-slogan-green@2x.png",
+    "mindspan-logo-with-slogan-black@2x.png",
   );
 
   const heroDataUrl = `data:image/png;base64,${readFileSync(heroPath).toString("base64")}`;
