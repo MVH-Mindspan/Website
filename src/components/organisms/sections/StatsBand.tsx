@@ -262,6 +262,24 @@ function ComparisonStat({
       >
         {stat.label}
       </p>
+      {stat.link && (
+        <a
+          href={stat.link.href}
+          style={{
+            display: "inline-block",
+            marginTop: 6,
+            fontFamily: theme.fonts.body,
+            fontSize: typeScale.bodySm,
+            color: c.brandGreen,
+            textDecoration: "underline",
+            textUnderlineOffset: "0.2em",
+            textDecorationThickness: "1px",
+            textDecorationColor: alpha(c.brandGreen, 0.4),
+          }}
+        >
+          {stat.link.label}
+        </a>
+      )}
     </div>
   );
 }
