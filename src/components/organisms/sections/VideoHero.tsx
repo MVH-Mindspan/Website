@@ -8,6 +8,7 @@ import { externalLinkProps } from "@/lib/links";
 import { useHeroVideo } from "@/lib/use-hero-video";
 import { brand } from "@/content/brand";
 import { ANALYTICS_EVENTS, track } from "@/lib/analytics";
+import { ScrollHint } from "@/components/molecules/ScrollHint";
 
 export function VideoHero({
   video,
@@ -232,6 +233,7 @@ export function VideoHero({
           )}
         </div>
       </div>
+      <ScrollHint color={c.cream} />
       <style jsx>{`
         .hero-cta-primary,
         .hero-cta-secondary {

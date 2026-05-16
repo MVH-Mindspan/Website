@@ -12,6 +12,7 @@ import { Heading } from "@/components/atoms/Heading";
 import { Lead } from "@/components/atoms/Lead";
 import { ArrowIcon } from "@/components/atoms/ArrowIcon";
 import { Reveal } from "@/components/molecules/Reveal";
+import { ScrollHint } from "@/components/molecules/ScrollHint";
 import { ANALYTICS_EVENTS, track } from "@/lib/analytics";
 
 type HeroProps = {
@@ -248,6 +249,7 @@ function MediaHero({
           </Container>
         </div>
       </div>
+      <ScrollHint color={c.cream} />
     </section>
   );
 }
