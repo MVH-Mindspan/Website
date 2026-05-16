@@ -12,7 +12,7 @@ const technologyCards: TechCard[] = [
     eyebrow: "Mindy, your assessment guide",
     title: "Step-by-step screening, from home or in clinic.",
     body:
-      "Mindy walks you through MoCA, MIS, FAST, and intake at your own pace, then sends a structured summary to your care team. The same assessments your neurologist would administer, ready before your visit so the time together can focus on you.",
+      "Mindy walks you through the Montreal Cognitive Assessment (a 10-minute cognitive screening), the Memory Impairment Screen (a brief memory check), the Functional Assessment Staging Tool (a snapshot of daily functioning), and intake at your own pace, then sends a structured summary to your care team. The same assessments your neurologist would administer, ready before your visit so the time together can focus on you.",
     icon: "chat",
   },
   {
