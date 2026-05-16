@@ -100,6 +100,8 @@ export default async function LocationDetailPage({ params }: Params) {
         />
       )}
 
+      {detail.provider && <ProviderProfile {...detail.provider} />}
+
       {detail.stages && (
         <EditorialStages
           intro={detail.stages.intro}
@@ -127,8 +129,6 @@ export default async function LocationDetailPage({ params }: Params) {
           tone="sand"
         />
       )}
-
-      {detail.provider && <ProviderProfile {...detail.provider} />}
 
       {detail.careTeam && (
         <CareTeamGrid
