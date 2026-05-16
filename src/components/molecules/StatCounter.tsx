@@ -10,21 +10,61 @@ import { type } from "@/lib/tokens";
 // e.g. "-1.5K" -> "-1.5". Falls back to rendering value as-is when no number is present.
 const NUMERIC = /(-?\d+(?:\.\d+)?)/;
 
-export function StatCounter({ value, label }: { value: string; label: string }) {
+function formatTemplate(
+  template: string,
+  target: number,
+  progress: number,
+  isDecimal: boolean
+): string {
+  const match = template.match(NUMERIC);
+  if (!match) return template;
+  const prefix = template.slice(0, match.index);
+  const suffix = template.slice((match.index ?? 0) + match[1].length);
+  const current = target * progress;
+  return (
+    prefix +
+    (isDecimal ? current.toFixed(1) : Math.round(current).toString()) +
+    suffix
+  );
+}
+
+export function StatCounter({
+  value,
+  valueShort,
+  label,
+}: {
+  value: string;
+  valueShort?: string;
+  label: string;
+}) {
   const ref = useRef<HTMLParagraphElement>(null);
-  const [displayed, setDisplayed] = useState(value);
-  const [counting, setCounting] = useState(false);
-  const hasAnimated = useRef(false);
   const { theme } = useTheme();
   const reduceMotion = useReducedMotion();
 
+  const numMatch = value.match(NUMERIC);
+  const rawTarget = numMatch ? parseFloat(numMatch[1]) : NaN;
+  const isDecimal = numMatch ? numMatch[1].includes(".") : false;
+  const canAnimate =
+    Number.isFinite(rawTarget) &&
+    Math.abs(rawTarget) <= 1_000_000_000 &&
+    rawTarget > 0;
+  const target = canAnimate ? rawTarget : 0;
+
+  // progress goes 0 -> 1 once the counter scrolls into view. Initial value of 1
+  // means SSR / pre-animation renders the final number, matching prior behavior.
+  const [progress, setProgress] = useState(1);
+  const [counting, setCounting] = useState(false);
+  const hasAnimated = useRef(false);
+
   useEffect(() => {
     if (!ref.current || hasAnimated.current) return;
-
-    if (reduceMotion) {
-      // Show final number immediately, no count-up.
+    if (!canAnimate) {
       hasAnimated.current = true;
-      setDisplayed(value);
+      return;
+    }
+    if (reduceMotion) {
+      hasAnimated.current = true;
+      setProgress(1);
       return;
     }
 
@@ -34,29 +74,6 @@ export function StatCounter({ value, label }: { value: string; label: string }) 
         hasAnimated.current = true;
         obs.disconnect();
 
-        const match = value.match(NUMERIC);
-        if (!match) {
-          setDisplayed(value);
-          return;
-        }
-        const target = parseFloat(match[1]);
-        // Guard against NaN, ±Infinity, or absurdly large values that would
-        // jitter layout while counting up.
-        if (
-          !Number.isFinite(target) ||
-          Math.abs(target) > 1_000_000_000
-        ) {
-          setDisplayed(value);
-          return;
-        }
-        const prefix = value.slice(0, match.index);
-        const suffix = value.slice((match.index ?? 0) + match[1].length);
-        const isDecimal = match[1].includes(".");
-        // 0 or negative starting target: nothing meaningful to count up to.
-        if (target <= 0) {
-          setDisplayed(value);
-          return;
-        }
         const duration = 1200;
         const start = performance.now();
         setCounting(true);
@@ -64,15 +81,10 @@ export function StatCounter({ value, label }: { value: string; label: string }) 
         const tick = (now: number) => {
           const t = Math.min((now - start) / duration, 1);
           const eased = 1 - Math.pow(1 - t, 4);
-          const current = target * eased;
-          setDisplayed(
-            prefix +
-              (isDecimal ? current.toFixed(1) : Math.round(current).toString()) +
-              suffix
-          );
+          setProgress(eased);
           if (t < 1) requestAnimationFrame(tick);
           else {
-            setDisplayed(value);
+            setProgress(1);
             setCounting(false);
           }
         };
@@ -82,7 +94,10 @@ export function StatCounter({ value, label }: { value: string; label: string }) 
     );
     obs.observe(ref.current);
     return () => obs.disconnect();
-  }, [value, reduceMotion]);
+  }, [canAnimate, reduceMotion]);
+
+  const render = (template: string) =>
+    canAnimate ? formatTemplate(template, target, progress, isDecimal) : template;
 
   return (
     <div>
@@ -105,7 +120,14 @@ export function StatCounter({ value, label }: { value: string; label: string }) 
           overflowWrap: "anywhere",
         }}
       >
-        {displayed}
+        {valueShort ? (
+          <>
+            <span className="hidden sm:inline">{render(value)}</span>
+            <span className="inline sm:hidden">{render(valueShort)}</span>
+          </>
+        ) : (
+          render(value)
+        )}
       </p>
       <p
         style={{
