@@ -88,6 +88,8 @@ export default async function LocationDetailPage({ params }: Params) {
         )}
       </PageHero>
 
+      {detail.provider && <ProviderProfile {...detail.provider} />}
+
       {detail.services && (
         <FeatureCardGrid
           id="services"
@@ -99,8 +101,6 @@ export default async function LocationDetailPage({ params }: Params) {
           secondary={detail.services.secondary}
         />
       )}
-
-      {detail.provider && <ProviderProfile {...detail.provider} />}
 
       {detail.stages && (
         <EditorialStages
