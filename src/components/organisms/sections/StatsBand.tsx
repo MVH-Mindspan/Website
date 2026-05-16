@@ -104,7 +104,7 @@ export function StatsBand({
           >
             {rest.map((s) => (
               <div key={s.label} style={{ textAlign: "center" }}>
-                <StatCounter value={s.value} label={s.label} />
+                <StatCounter value={s.value} valueShort={s.valueShort} label={s.label} />
               </div>
             ))}
           </Reveal>
@@ -144,6 +144,36 @@ export function StatsBand({
   );
 }
 
+// Range pattern: "2–3 weeks", "1-5 days" (handles en-dash, em-dash, hyphen).
+const RANGE_PATTERN = /^(.*?)(\d[\d.]*)(\s*[–—-]\s*)(\d[\d.]*)(.*)$/;
+// Single-number pattern: "12+ months", "98%", "1,200 patients".
+const SINGLE_PATTERN = /(\d[\d.]*)/;
+
+function formatComparisonValue(template: string, progress: number): string {
+  const range = template.match(RANGE_PATTERN);
+  if (range) {
+    const [, prefix, n1Str, sep, n2Str, suffix] = range;
+    const n1 = parseFloat(n1Str);
+    const n2 = parseFloat(n2Str);
+    const isDec = n1Str.includes(".") || n2Str.includes(".");
+    const fmt = (n: number) =>
+      isDec ? n.toFixed(1) : Math.round(n).toString();
+    return prefix + fmt(n1 * progress) + sep + fmt(n2 * progress) + suffix;
+  }
+  const numMatch = template.match(SINGLE_PATTERN);
+  if (!numMatch) return template;
+  const target = parseFloat(numMatch[1]);
+  const prefix = template.slice(0, numMatch.index);
+  const suffix = template.slice((numMatch.index ?? 0) + numMatch[1].length);
+  const isDec = numMatch[1].includes(".");
+  const cur = target * progress;
+  return (
+    prefix +
+    (isDec ? cur.toFixed(1) : Math.round(cur).toString()) +
+    suffix
+  );
+}
+
 function ComparisonStat({
   stat,
   align,
@@ -158,7 +188,8 @@ function ComparisonStat({
   const isRight = align === "right";
 
   const ref = useRef<HTMLParagraphElement>(null);
-  const [displayed, setDisplayed] = useState(stat.value);
+  // progress = 1 keeps SSR and pre-animation renders at the final number.
+  const [progress, setProgress] = useState(1);
   const hasAnimated = useRef(false);
 
   useEffect(() => {
@@ -179,52 +210,12 @@ function ComparisonStat({
 
         const duration = 1400;
         const start = performance.now();
-
-        // Range pattern: "2–3 wks", "1-5 days" (handles en-dash, em-dash, hyphen)
-        const rangeMatch = stat.value.match(
-          /^(.*?)(\d[\d.]*)(\s*[–—-]\s*)(\d[\d.]*)(.*)$/
-        );
-        if (rangeMatch) {
-          const [, prefix, n1Str, sep, n2Str, suffix] = rangeMatch;
-          const n1 = parseFloat(n1Str);
-          const n2 = parseFloat(n2Str);
-          const isDec = n1Str.includes(".") || n2Str.includes(".");
-          const fmt = (n: number) =>
-            isDec ? n.toFixed(1) : Math.round(n).toString();
-          const tick = (now: number) => {
-            const t = Math.min((now - start) / duration, 1);
-            const e = 1 - Math.pow(1 - t, 4);
-            setDisplayed(prefix + fmt(n1 * e) + sep + fmt(n2 * e) + suffix);
-            if (t < 1) requestAnimationFrame(tick);
-            else setDisplayed(stat.value);
-          };
-          requestAnimationFrame(tick);
-          return;
-        }
-
-        // Single-number pattern: "12+ months", "98%", "1,200 patients"
-        const numMatch = stat.value.match(/(\d[\d.]*)/);
-        if (!numMatch) {
-          setDisplayed(stat.value);
-          return;
-        }
-        const target = parseFloat(numMatch[1]);
-        const prefix = stat.value.slice(0, numMatch.index);
-        const suffix = stat.value.slice(
-          (numMatch.index ?? 0) + numMatch[1].length
-        );
-        const isDec = numMatch[1].includes(".");
         const tick = (now: number) => {
           const t = Math.min((now - start) / duration, 1);
           const e = 1 - Math.pow(1 - t, 4);
-          const cur = target * e;
-          setDisplayed(
-            prefix +
-              (isDec ? cur.toFixed(1) : Math.round(cur).toString()) +
-              suffix
-          );
+          setProgress(e);
           if (t < 1) requestAnimationFrame(tick);
-          else setDisplayed(stat.value);
+          else setProgress(1);
         };
         requestAnimationFrame(tick);
       },
@@ -233,6 +224,9 @@ function ComparisonStat({
     obs.observe(ref.current);
     return () => obs.disconnect();
   }, [stat.value]);
+
+  const renderValue = (template: string) =>
+    formatComparisonValue(template, progress);
 
   return (
     <div className="comparison-stat" style={{ textAlign: align }}>
@@ -248,7 +242,14 @@ function ComparisonStat({
           fontVariantNumeric: "tabular-nums",
         }}
       >
-        {displayed}
+        {stat.valueShort ? (
+          <>
+            <span className="hidden sm:inline">{renderValue(stat.value)}</span>
+            <span className="inline sm:hidden">{renderValue(stat.valueShort)}</span>
+          </>
+        ) : (
+          renderValue(stat.value)
+        )}
       </p>
       <p
         style={{

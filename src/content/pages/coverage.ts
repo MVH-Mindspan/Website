@@ -68,7 +68,7 @@ export const coveragePage = {
   stats: [
     { value: "100%", label: "Of visits billed through insurance" },
     { value: "Medicare", label: "Medicaid and many health plans" },
-    { value: "2\u20133 wks", label: "Average time to see a neurologist" },
+    { value: "2\u20133 weeks", valueShort: "2\u20133 wks", label: "Average time to see a neurologist" },
     { value: "0", label: "Out-of-pocket surprises, we tell you upfront" },
   ] satisfies Stat[],
 

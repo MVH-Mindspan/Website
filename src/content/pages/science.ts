@@ -95,13 +95,13 @@ const outcomePillarsIntro = {
 };
 
 const proofStats: Stat[] = [
-  { value: "2 to 3 wks", label: "Average time to a Mindspan neurologist" },
-  { value: "12 mo", label: "Typical specialist wait elsewhere" },
+  { value: "2 to 3 weeks", valueShort: "2 to 3 wks", label: "Average time to a Mindspan neurologist" },
+  { value: "12 months", valueShort: "12 mo", label: "Typical specialist wait elsewhere" },
   {
     value: "70,000+",
     label: "Cognitive care patients informing our Digital Twin",
   },
-  { value: "20 yrs", label: "Of cognitive research in every plan" },
+  { value: "20 years", valueShort: "20 yrs", label: "Of cognitive research in every plan" },
 ];
 
 export const sciencePage = {

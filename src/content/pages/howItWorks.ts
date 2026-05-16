@@ -70,8 +70,8 @@ const comparison: { problem: Protocol; solution: Protocol } = {
 };
 
 const stats: Stat[] = [
-  { value: "2\u20133 wks", label: "Average time to see a neurologist" },
-  { value: "30 min", label: "Free at-home cognitive screening" },
+  { value: "2\u20133 weeks", valueShort: "2\u20133 wks", label: "Average time to see a neurologist" },
+  { value: "30 minutes", valueShort: "30 min", label: "Free at-home cognitive screening" },
   { value: "100%", label: "Of visits billed through insurance" },
   { value: "4 phases", label: "Of coordinated, ongoing cognitive care" },
 ];
