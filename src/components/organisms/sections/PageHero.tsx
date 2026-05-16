@@ -14,6 +14,7 @@ import { ArrowIcon } from "@/components/atoms/ArrowIcon";
 import { Reveal } from "@/components/molecules/Reveal";
 import { ScrollHint } from "@/components/molecules/ScrollHint";
 import { ANALYTICS_EVENTS, track } from "@/lib/analytics";
+import { externalLinkProps } from "@/lib/links";
 
 type HeroProps = {
   eyebrow: string;
@@ -304,6 +305,7 @@ function HeroAside({
           {primaryCta && (
             <a
               href={primaryCta.href}
+              {...externalLinkProps(primaryCta.href)}
               onClick={() =>
                 track(ANALYTICS_EVENTS.ctaClicked, {
                   location: "page_hero_aside",
@@ -336,6 +338,7 @@ function HeroAside({
           {secondaryCta && (
             <a
               href={secondaryCta.href}
+              {...externalLinkProps(secondaryCta.href)}
               onClick={() =>
                 track(ANALYTICS_EVENTS.ctaClicked, {
                   location: "page_hero_aside",
@@ -402,6 +405,7 @@ function AvailabilityPill({
   return (
     <a
       href={availability.cta.href}
+      {...externalLinkProps(availability.cta.href)}
       onClick={() =>
         track(ANALYTICS_EVENTS.ctaClicked, {
           location: "page_hero_availability",

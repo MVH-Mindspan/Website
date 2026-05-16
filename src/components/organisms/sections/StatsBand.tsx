@@ -6,6 +6,7 @@ import { alpha } from "@/lib/themes";
 import { type as typeScale } from "@/lib/tokens";
 import { StatCounter } from "@/components/molecules/StatCounter";
 import { Reveal } from "@/components/molecules/Reveal";
+import { externalLinkProps } from "@/lib/links";
 import type { Stat } from "@/content/stats";
 
 export function StatsBand({
@@ -265,6 +266,7 @@ function ComparisonStat({
       {stat.link && (
         <a
           href={stat.link.href}
+          {...externalLinkProps(stat.link.href)}
           style={{
             display: "inline-block",
             marginTop: 6,
