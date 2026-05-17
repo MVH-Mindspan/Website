@@ -11,6 +11,7 @@ import { ImageFrame } from "@/components/atoms/ImageFrame";
 import { Reveal } from "@/components/molecules/Reveal";
 import { SectionHeader } from "@/components/molecules/SectionHeader";
 import { externalLinkProps } from "@/lib/links";
+import { linkifyNeurologists } from "@/lib/linkify";
 import type { JourneyStage } from "@/content/journey";
 
 export function SimpleSteps({
@@ -130,7 +131,7 @@ export function SimpleSteps({
                   marginTop: 12,
                 }}
               >
-                {step.body}
+                {linkifyNeurologists(step.body)}
               </p>
               {step.cta && (
                 <a

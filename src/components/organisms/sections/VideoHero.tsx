@@ -6,6 +6,7 @@ import { alpha } from "@/lib/themes";
 import { ease, type as typeScale } from "@/lib/tokens";
 import { externalLinkProps } from "@/lib/links";
 import { useHeroVideo } from "@/lib/use-hero-video";
+import { linkifyNeurologists } from "@/lib/linkify";
 import { brand } from "@/content/brand";
 import { ANALYTICS_EVENTS, track } from "@/lib/analytics";
 import { ScrollHint } from "@/components/molecules/ScrollHint";
@@ -145,7 +146,7 @@ export function VideoHero({
               marginBottom: cta ? 20 : 0,
             }}
           >
-            {subhead}
+            {linkifyNeurologists(subhead)}
           </p>
           {cta && (
             <>

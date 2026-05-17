@@ -7,6 +7,7 @@ import { Container } from "@/components/atoms/Container";
 import { Eyebrow } from "@/components/atoms/Eyebrow";
 import { Reveal } from "@/components/molecules/Reveal";
 import { SectionHeader } from "@/components/molecules/SectionHeader";
+import { linkifyNeurologists } from "@/lib/linkify";
 import {
   JourneyIllustration,
   type JourneyIllustrationKind,
@@ -107,7 +108,7 @@ export function EditorialPillarsIllustrated({
                       letterSpacing: "-0.015em",
                     }}
                   >
-                    {p.title}
+                    {linkifyNeurologists(p.title)}
                   </h3>
 
                   <p
@@ -120,7 +121,7 @@ export function EditorialPillarsIllustrated({
                       maxWidth: "46ch",
                     }}
                   >
-                    {p.body}
+                    {linkifyNeurologists(p.body)}
                   </p>
                 </div>
               </Reveal>
