@@ -57,6 +57,7 @@ export type ClinicPromotion = {
 };
 
 export type LocationDetail = {
+  metaDescription?: string;
   hero: {
     eyebrow: string;
     title: string;
@@ -155,6 +156,7 @@ export function getLocationPage(location: Location) {
     metadata: buildMetadata({
       title,
       description:
+        detail?.metaDescription ??
         detail?.hero.lead ??
         `Mindspan cognitive care in ${location.city}, ${location.state}.`,
       canonical: location.href,

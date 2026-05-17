@@ -4,6 +4,8 @@ import type { LocationDetail } from "../pages/locationDetail";
 const BOOKING_HREF = "/book-a-visit";
 
 export const videoCaliforniaDetail: LocationDetail = {
+  metaDescription:
+    "Online memory and dementia care for California. The same neurologist visits as our Bay Area clinic, by video. First visits in 2 to 3 weeks.",
   hero: {
     eyebrow: "Video visits, California",
     title: "See your neurologist from home, anywhere in California.",

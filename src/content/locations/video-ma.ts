@@ -4,6 +4,8 @@ import type { LocationDetail } from "../pages/locationDetail";
 const BOOKING_HREF = "/book-a-visit";
 
 export const videoMassachusettsDetail: LocationDetail = {
+  metaDescription:
+    "Online memory and dementia care for Massachusetts. The same neurologist visits as our Danvers clinic, by video. First visits in 2 to 3 weeks.",
   hero: {
     eyebrow: "Video visits, Massachusetts",
     title:

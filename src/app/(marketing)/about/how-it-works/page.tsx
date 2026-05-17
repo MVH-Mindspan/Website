@@ -11,12 +11,23 @@ import {
 import { howItWorksPage } from "@/content/pages/howItWorks";
 import { whatWeTreatPage } from "@/content/pages/whatWeTreat";
 import { faq, faqIntro } from "@/content/faq";
+import { JsonLd } from "@/lib/json-ld";
+import { buildBreadcrumbSchema } from "@/lib/schema";
+import { SITE_URL } from "@/lib/seo";
 
 export const metadata = howItWorksPage.metadata;
 
 export default function HowItWorksPage() {
   return (
     <>
+      <JsonLd
+        id="ld-breadcrumb"
+        data={buildBreadcrumbSchema([
+          { name: "Home", url: `${SITE_URL}/` },
+          { name: "About", url: `${SITE_URL}/about` },
+          { name: "How It Works", url: `${SITE_URL}/about/how-it-works` },
+        ])}
+      />
       <VideoHero {...howItWorksPage.hero} />
 
       <SplitCards

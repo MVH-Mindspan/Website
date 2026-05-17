@@ -40,7 +40,7 @@ export const aboutPage = {
   metadata: buildMetadata({
     title: "About Mindspan | Cognitive Care & Dementia Specialists",
     description:
-      "Why we started Mindspan, what we believe about cognitive care, and the team bringing it to life.",
+      "Mindspan is a specialist clinic for memory and dementia care. Board-certified neurologists, the latest science, and visits in weeks not months.",
     canonical: "/about",
   }),
   hero: {
