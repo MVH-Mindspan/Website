@@ -56,7 +56,7 @@ const mindyVideo = {
     "Mindy is the calmest part of starting care. She walks you through validated cognitive testing at your own pace, asks the questions a great clinician would ask, and quietly hands her work off to your neurologist before your visit. The time you spend with us stays focused on you, not on filling out forms.",
   youtubeId: "_e8psq9FPVY",
   posterAlt: "A short film introducing Mindy, the Mindspan cognitive assessment guide",
-  primary: { label: "Start a free assessment", href: ASSESSMENT_HREF },
+  primary: { label: "Start a free assessment today", href: ASSESSMENT_HREF },
 };
 
 const outcomePillars: JourneyStage[] = [
@@ -119,7 +119,7 @@ export const sciencePage = {
     subTagline: "Built around you, every visit.",
     subhead:
       "Two investments shape how we care for you: the clinical protocols every Mindspan patient receives, and the technology that delivers them faster, safer, and more personal than anywhere else.",
-    cta: { label: "Start a free assessment", href: ASSESSMENT_HREF },
+    cta: { label: "Start a free assessment today", href: ASSESSMENT_HREF },
   },
   technologyIntro,
   technologyCards,
@@ -132,7 +132,7 @@ export const sciencePage = {
     title: "See a specialist in weeks, not months or years.",
     lead:
       "Early answers mean better outcomes, and more time with the people who matter most.",
-    primary: { label: "Start a free assessment", href: ASSESSMENT_HREF },
+    primary: { label: "Start a free assessment today", href: ASSESSMENT_HREF },
     secondary: { label: "Talk to our care team", href: BOOKING_HREF },
     signature: "With care, the Mindspan team",
   },

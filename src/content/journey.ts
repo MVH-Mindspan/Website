@@ -19,7 +19,7 @@ export const journey: JourneyStage[] = [
     title: "Get assessed",
     body:
       "Start with a short online screening from home, no account, no cost, no clinic visit. You\u2019ll get clear feedback on whether a neurologist visit makes sense.",
-    cta: { label: "Start a free assessment", href: "https://assessment.mindspan.co/" },
+    cta: { label: "Start a free assessment today", href: "https://assessment.mindspan.co/" },
     image: "/assets/get-assessed.webp",
     imageAlt: "A Mindspan clinician reviewing assessment results on a tablet with a patient",
   },
