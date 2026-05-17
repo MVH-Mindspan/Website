@@ -6,6 +6,7 @@ import { alpha } from "@/lib/themes";
 import { Eyebrow } from "@/components/atoms/Eyebrow";
 import { Heading } from "@/components/atoms/Heading";
 import { Lead } from "@/components/atoms/Lead";
+import { linkifyNeurologists } from "@/lib/linkify";
 import { Reveal } from "./Reveal";
 
 type Tone = "dark" | "light";
@@ -92,7 +93,7 @@ export function SectionHeader({
         fontFamily={theme.fonts.heading}
         className="mt-4 text-balance"
       >
-        {title}
+        {linkifyNeurologists(title)}
       </Heading>
       {lead && (
         <Lead
@@ -102,7 +103,7 @@ export function SectionHeader({
           className="mt-5"
           style={align === "center" ? { marginInline: "auto" } : undefined}
         >
-          {lead}
+          {linkifyNeurologists(lead)}
         </Lead>
       )}
     </>

@@ -1,5 +1,6 @@
 import type { CSSProperties } from "react";
 import { Bullet } from "@/components/atoms/Bullet";
+import { linkifyNeurologists } from "@/lib/linkify";
 
 export function BulletList({
   items,
@@ -26,7 +27,7 @@ export function BulletList({
         <li key={`${i}-${item.slice(0, 32)}`} className="flex items-start gap-3">
           <Bullet color={bulletColor} />
           {/* min-w-0 lets long words/URLs wrap inside narrow grid cells. */}
-          <span className="min-w-0 break-words">{item}</span>
+          <span className="min-w-0 break-words">{linkifyNeurologists(item)}</span>
         </li>
       ))}
     </ul>

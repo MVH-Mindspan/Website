@@ -26,7 +26,7 @@ export function ProvidersPreview({
   if (providers.length === 0) return null;
 
   return (
-    <section style={{ background: bg, padding: "clamp(56px, 10vw, 96px) 0" }}>
+    <section id="our-neurologists" style={{ background: bg, padding: "clamp(56px, 10vw, 96px) 0" }}>
       <Container>
         <SectionHeader
           eyebrow={intro.eyebrow}
