@@ -6,7 +6,7 @@ export const guidePage = {
   metadata: buildMetadata({
     title: "The GUIDE Program | Mindspan",
     description:
-      "Mindspan participates in GUIDE, Medicare’s coordinated dementia care model. Around-the-clock specialist support, no out-of-pocket cost for covered visits, and respite for the primary caregiver. We handle enrollment for qualifying families.",
+      "GUIDE is Medicare’s dementia care model: 24/7 specialist access, $0 cost for covered visits, and caregiver respite. Mindspan handles enrollment.",
     canonical: "/guide",
   }),
 

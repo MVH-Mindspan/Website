@@ -5,6 +5,8 @@ const BOOKING_HREF = "/book-a-visit";
 const EXISTING_HREF = "https://oncehub.com/mindspan_danvers";
 
 export const danversDetail: LocationDetail = {
+  metaDescription:
+    "Memory and dementia care in Danvers, MA. A board-certified neurologist focused on Alzheimer’s, MCI, and dementia. First visits in 2 to 3 weeks.",
   hero: {
     eyebrow: "Danvers, Massachusetts",
     title:

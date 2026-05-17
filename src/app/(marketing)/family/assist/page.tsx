@@ -10,12 +10,22 @@ import {
 } from "@/components/organisms/sections";
 import { assistPage } from "@/content/pages/assist";
 import { coveragePage } from "@/content/pages/coverage";
+import { JsonLd } from "@/lib/json-ld";
+import { buildBreadcrumbSchema } from "@/lib/schema";
+import { SITE_URL } from "@/lib/seo";
 
 export const metadata = assistPage.metadata;
 
 export default function AssistPage() {
   return (
     <>
+      <JsonLd
+        id="ld-breadcrumb"
+        data={buildBreadcrumbSchema([
+          { name: "Home", url: `${SITE_URL}/` },
+          { name: "Assist a Loved One", url: `${SITE_URL}/family/assist` },
+        ])}
+      />
       <VideoHero
         video={assistPage.hero.video}
         poster={assistPage.hero.poster}

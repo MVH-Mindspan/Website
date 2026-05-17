@@ -2,12 +2,23 @@ import { FinalCTA } from "@/components/organisms/sections/FinalCTA";
 import { ReferSection } from "@/components/refer/ReferSection";
 import { referPage } from "@/content/pages/refer";
 import { finalCta } from "@/content";
+import { JsonLd } from "@/lib/json-ld";
+import { buildBreadcrumbSchema } from "@/lib/schema";
+import { SITE_URL } from "@/lib/seo";
 
 export const metadata = referPage.metadata;
 
 export default function ReferPage() {
   return (
     <>
+      <JsonLd
+        id="ld-breadcrumb"
+        data={buildBreadcrumbSchema([
+          { name: "Home", url: `${SITE_URL}/` },
+          { name: "For Referring Clinicians", url: `${SITE_URL}/providers` },
+          { name: "Refer a Patient", url: `${SITE_URL}/providers/refer` },
+        ])}
+      />
       <ReferSection
         eyebrow={referPage.hero.eyebrow}
         title="Refer a patient in 30 seconds."

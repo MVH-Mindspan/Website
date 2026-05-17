@@ -17,12 +17,22 @@ import {
   referralPathwayIntro,
   referralPathwayCta,
 } from "@/content";
+import { JsonLd } from "@/lib/json-ld";
+import { buildBreadcrumbSchema } from "@/lib/schema";
+import { SITE_URL } from "@/lib/seo";
 
 export const metadata = providersPage.metadata;
 
 export default function ProvidersPage() {
   return (
     <>
+      <JsonLd
+        id="ld-breadcrumb"
+        data={buildBreadcrumbSchema([
+          { name: "Home", url: `${SITE_URL}/` },
+          { name: "For Referring Clinicians", url: `${SITE_URL}/providers` },
+        ])}
+      />
       <VideoHero {...providersPage.hero} />
       <div id="how-we-work">
         <SplitCards
