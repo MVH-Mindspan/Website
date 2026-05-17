@@ -150,7 +150,7 @@ export const audiences = [
     title: "You deserve to be taken seriously.",
     body:
       "Maybe a word slipped that used to come easily. Maybe you walked into a room and forgot why. It might be nothing, it might be something. Either way, you deserve a neurologist who sits with you, explains what’s happening, and tells you what to do next.",
-    cta: "Start a free assessment",
+    cta: "Start a free assessment today",
     href: "/book-a-visit",
   },
   {

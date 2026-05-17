@@ -33,7 +33,7 @@ export const audiences: Audience[] = [
     title: "You deserve to be taken seriously.",
     body:
       "Maybe a word slipped. Maybe you walked into a room and forgot why. It might be nothing, but you deserve to know either way.",
-    cta: "Start a free assessment",
+    cta: "Start a free assessment today",
     href: "https://assessment.mindspan.co/",
   },
   {

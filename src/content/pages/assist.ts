@@ -182,7 +182,7 @@ export const assistPage = {
     closing:
       "The assessment is free and takes about 30 minutes. If it indicates further evaluation would help, we\u2019ll schedule a specialist visit within weeks, not months.",
     cta: {
-      label: "Start a caregiver-assisted free assessment",
+      label: "Start a caregiver-assisted free assessment today",
       href: "https://assessment.mindspan.co/",
     },
   },
@@ -224,6 +224,6 @@ export const assistPage = {
     lead:
       "Early diagnosis means better outcomes, and more time with the people who matter most.",
     primary: { label: "Introduce a loved one", href: BOOKING_HREF },
-    secondary: { label: "Start a free assessment", href: "https://assessment.mindspan.co/" },
+    secondary: { label: "Start a free assessment today", href: "https://assessment.mindspan.co/" },
   },
 } as const;

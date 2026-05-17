@@ -117,7 +117,7 @@ const howToStart: JourneyStage[] = [
     title: "Sign up in minutes",
     body:
       "Tell us a little about you. The screening opens immediately and our care team is on call if any question feels unclear. There\u2019s no cost and no commitment.",
-    cta: { label: "Start a free screening", href: "https://assessment.mindspan.co/" },
+    cta: { label: "Start a free screening today", href: "https://assessment.mindspan.co/" },
   },
   {
     kicker: "Step 02",
@@ -154,7 +154,7 @@ export const howItWorksPage = {
     subTagline: "What to expect",
     subhead:
       "From a free at-home screening to ongoing care guided by a board-certified neurologist, here\u2019s exactly what your Mindspan journey looks like.",
-    cta: { label: "Start a free screening", href: "https://assessment.mindspan.co/" },
+    cta: { label: "Start a free screening today", href: "https://assessment.mindspan.co/" },
     playbackRate: 0.9,
   },
 
@@ -218,7 +218,7 @@ export const howItWorksPage = {
     title: "See a specialist in weeks, not months or years.",
     lead:
       "Early answers mean better outcomes, and more time with the people who matter most.",
-    primary: { label: "Start a free screening", href: "https://assessment.mindspan.co/" },
+    primary: { label: "Start a free screening today", href: "https://assessment.mindspan.co/" },
     secondary: { label: "Talk to our care team", href: BOOKING_HREF },
   },
 } as const;

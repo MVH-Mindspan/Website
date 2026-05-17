@@ -251,7 +251,7 @@ export const videoMassachusettsDetail: LocationDetail = {
         title: "You deserve to be taken seriously.",
         body:
           "Maybe a word slipped. Maybe you walked into a room and forgot why. It might be nothing, but you deserve to know either way, and you don’t need to drive across the state to find out.",
-        cta: "Start a free assessment",
+        cta: "Start a free assessment today",
         href: "https://assessment.mindspan.co/",
       },
       {
