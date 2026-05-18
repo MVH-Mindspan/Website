@@ -32,6 +32,7 @@ export function ProvidersPreview({
           eyebrow={intro.eyebrow}
           title={intro.title}
           lead={intro.lead}
+          linkify={false}
         />
         <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 md:gap-6">
           {providers.map((p, i) => (
@@ -117,6 +118,21 @@ export function ProvidersPreview({
               >
                 {p.bio}
               </p>
+              {p.location && (
+                <a
+                  href={p.location.href}
+                  style={{
+                    fontFamily: theme.fonts.body,
+                    fontSize: typeScale.bodySm,
+                    fontWeight: 600,
+                    color: c.brandGreen,
+                    textDecoration: "none",
+                    marginTop: 14,
+                  }}
+                >
+                  {p.location.label} &rarr;
+                </a>
+              )}
             </Reveal>
           ))}
         </div>

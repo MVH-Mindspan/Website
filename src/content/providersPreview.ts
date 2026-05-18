@@ -6,6 +6,7 @@ export type ProviderPreview = {
   initials: string;
   image?: string;
   imageAlt?: string;
+  location?: { label: string; href: string };
 };
 
 export const providersPreviewIntro = {
@@ -32,6 +33,7 @@ export const providersPreview: ProviderPreview[] = [
     initials: "TK",
     image: "/assets/tim-kelliher.webp",
     imageAlt: "Dr. Timothy Kelliher, MD",
+    location: { label: "Book a visit in Danvers", href: "/locations/danvers" },
   },
   {
     id: "nr",
@@ -52,5 +54,6 @@ export const providersPreview: ProviderPreview[] = [
     initials: "NS",
     image: "/assets/noor-sachdev.webp",
     imageAlt: "Dr. Noor Sachdev, MD",
+    location: { label: "Book a visit in San Jose", href: "/locations/bay-area" },
   },
 ];
