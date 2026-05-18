@@ -23,6 +23,7 @@ export function SectionHeader({
   eyebrowColor,
   className,
   style,
+  linkify = true,
 }: {
   eyebrow: string;
   title: string;
@@ -34,6 +35,7 @@ export function SectionHeader({
   eyebrowColor?: string;
   className?: string;
   style?: CSSProperties;
+  linkify?: boolean;
 }) {
   const { theme } = useTheme();
   const c = theme.colors;
@@ -93,7 +95,7 @@ export function SectionHeader({
         fontFamily={theme.fonts.heading}
         className="mt-4 text-balance"
       >
-        {linkifyNeurologists(title)}
+        {linkify ? linkifyNeurologists(title) : title}
       </Heading>
       {lead && (
         <Lead
@@ -103,7 +105,7 @@ export function SectionHeader({
           className="mt-5"
           style={align === "center" ? { marginInline: "auto" } : undefined}
         >
-          {linkifyNeurologists(lead)}
+          {linkify ? linkifyNeurologists(lead) : lead}
         </Lead>
       )}
     </>
