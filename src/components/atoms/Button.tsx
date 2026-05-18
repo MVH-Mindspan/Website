@@ -47,30 +47,32 @@ export function Button({
   const { theme } = useTheme();
   const c = theme.colors;
 
-  // Liquid Glass button recipe: lower alpha = actual see-through, strong
-  // blur intensity, well-defined glass rim. The point is for the underlying
-  // photo/section to be CLEARLY visible through the button surface.
+  // Variant strategy:
+  // - primary / secondary / accent are SOLID CTAs. They carry text-on-color
+  //   pairs that need WCAG AA contrast, so backgrounds stay opaque. They still
+  //   get a subtle inset highlight + soft drop shadow for refinement.
+  // - ghostDark / ghostLight are translucent on purpose. Glass behaviour only
+  //   makes sense for surfaces where the underlying section/photo should show
+  //   through; ghosts are designed to sit on contrasting backgrounds.
   const variantStyles: Record<Variant, CSSProperties> = {
     primary: {
-      background: alpha(c.brandGreen, 0.55),
+      background: c.brandGreen,
       color: "#fff",
-      border: "1px solid rgba(255, 255, 255, 0.3)",
       boxShadow:
-        "inset 0 1px 0 rgba(255, 255, 255, 0.3), 0 8px 24px -8px rgba(8, 54, 48, 0.35)",
+        "inset 0 1px 0 rgba(255, 255, 255, 0.18), 0 8px 24px -8px rgba(8, 54, 48, 0.35)",
     },
     secondary: {
-      background: "rgba(255, 255, 255, 0.4)",
+      background: "#fff",
       color: c.brandGreen,
-      border: "1px solid rgba(255, 255, 255, 0.65)",
+      border: `1px solid ${alpha(c.ink, 0.08)}`,
       boxShadow:
-        "inset 0 1px 0 rgba(255, 255, 255, 0.7), 0 8px 24px -8px rgba(8, 54, 48, 0.18)",
+        "inset 0 1px 0 rgba(255, 255, 255, 0.9), 0 8px 24px -8px rgba(8, 54, 48, 0.18)",
     },
     accent: {
-      background: alpha(c.accent, 0.55),
+      background: c.accent,
       color: "#fff",
-      border: "1px solid rgba(255, 255, 255, 0.3)",
       boxShadow:
-        "inset 0 1px 0 rgba(255, 255, 255, 0.35), 0 8px 24px -8px rgba(251, 77, 23, 0.45)",
+        "inset 0 1px 0 rgba(255, 255, 255, 0.22), 0 8px 24px -8px rgba(251, 77, 23, 0.45)",
     },
     ghostDark: {
       background: alpha(c.ink, 0.04),
@@ -79,6 +81,9 @@ export function Button({
       boxShadow:
         "inset 0 1px 0 rgba(255, 255, 255, 0.5), 0 4px 16px -4px rgba(8, 54, 48, 0.12)",
     },
+    // ghostLight is only safe on dark backgrounds (hero photo, primary teal
+    // section). On a light section the white-on-translucent-white text would
+    // be invisible.
     ghostLight: {
       background: "rgba(255, 255, 255, 0.08)",
       color: "#fff",
