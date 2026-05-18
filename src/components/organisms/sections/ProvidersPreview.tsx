@@ -118,6 +118,21 @@ export function ProvidersPreview({
               >
                 {p.bio}
               </p>
+              {p.location && (
+                <a
+                  href={p.location.href}
+                  style={{
+                    fontFamily: theme.fonts.body,
+                    fontSize: typeScale.bodySm,
+                    fontWeight: 600,
+                    color: c.brandGreen,
+                    textDecoration: "none",
+                    marginTop: 14,
+                  }}
+                >
+                  {p.location.label} &rarr;
+                </a>
+              )}
             </Reveal>
           ))}
         </div>
