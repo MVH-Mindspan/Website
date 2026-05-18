@@ -1,9 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { useTheme } from "@/lib/theme-context";
 import { alpha } from "@/lib/themes";
-import { ease, type as typeScale } from "@/lib/tokens";
+import { type as typeScale } from "@/lib/tokens";
 import { externalLinkProps } from "@/lib/links";
 import { useHeroVideo } from "@/lib/use-hero-video";
 import { linkifyNeurologists } from "@/lib/linkify";
@@ -30,13 +29,7 @@ export function VideoHero({
 }) {
   const { theme } = useTheme();
   const c = theme.colors;
-  const [loaded, setLoaded] = useState(false);
   const { videoRef, showVideo, ended } = useHeroVideo({ playbackRate });
-
-  useEffect(() => {
-    const timer = setTimeout(() => setLoaded(true), 200);
-    return () => clearTimeout(timer);
-  }, []);
 
   return (
     <section
@@ -95,13 +88,7 @@ export function VideoHero({
         className="absolute bottom-0 left-0 right-0 flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 lg:gap-16 hero-content"
         style={{ padding: "64px clamp(24px, 5vw, 80px)" }}
       >
-        <div
-          style={{
-            opacity: loaded ? 1 : 0,
-            transform: loaded ? "none" : "translateY(24px)",
-            transition: `opacity 0.8s ${ease.expressive}, transform 0.8s ${ease.expressive}`,
-          }}
-        >
+        <div>
           <h1
             style={{
               fontFamily: theme.fonts.heading,
@@ -117,14 +104,7 @@ export function VideoHero({
             {headline}
           </h1>
         </div>
-        <div
-          style={{
-            maxWidth: 520,
-            opacity: loaded ? 1 : 0,
-            transform: loaded ? "none" : "translateY(18px)",
-            transition: `opacity 0.8s ${ease.expressive} 0.2s, transform 0.8s ${ease.expressive} 0.2s`,
-          }}
-        >
+        <div style={{ maxWidth: 520 }}>
           <p
             className="font-semibold"
             style={{
