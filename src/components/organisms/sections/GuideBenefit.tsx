@@ -41,10 +41,9 @@ export function GuideBenefit({
     <section style={{ background: c.cream, padding: "clamp(48px, 8vw, 80px) 0" }}>
       <Container>
         <Reveal
-          className="rounded-[2rem]"
+          className="v2-card rounded-[2rem]"
           style={{
-            background: c.sand,
-            border: `1px solid ${alpha(c.ink, 0.08)}`,
+            background: alpha(c.sand, 0.7),
             padding: "clamp(32px, 5vw, 56px)",
           }}
         >
@@ -119,9 +118,9 @@ export function GuideBenefit({
               )}
             </div>
             <div
+              className="v2-card"
               style={{
-                background: "#fff",
-                border: `1px solid ${alpha(c.ink, 0.08)}`,
+                background: "rgba(255, 255, 255, 0.7)",
                 borderRadius: "1.25rem",
                 padding: "28px 28px",
               }}

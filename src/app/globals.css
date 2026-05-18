@@ -404,6 +404,191 @@ h1, h2, h3 {
   .animate-ping { animation: none; }
 }
 
+/* === Liquid Glass card surface ===
+   Five layered moves to read as proper Liquid Glass:
+   1. STRONG BACKDROP FILTER — blur(36px) + saturate(180%) + brightness(1.04)
+      for a true frosted feel; the brightness lifts the surface so it looks
+      illuminated rather than washed-out.
+   2. SURFACE GRADIENT (::before) — vertical white-to-transparent gradient
+      inside the card, brighter at top. Simulates light pooling on the glass.
+   3. SPECULAR HIGHLIGHT (::after) — a thin horizontal light line at the
+      very top edge, fading at the ends. The signature "light catches the
+      rim" gleam.
+   4. GLASS RIM — inset 1px white ring at low opacity for the edge catch.
+   5. SOFT LIFT SHADOW — long, low drop shadow only. No inset depth, no
+      outline rim, no bevel.
+   Card bgs MUST be set translucent (e.g. alpha(c.cream, 0.7)) for the
+   backdrop-filter to read. */
+.v2-card,
+.v2-card-dark {
+  position: relative;
+  isolation: isolate;
+  backdrop-filter: blur(36px) saturate(180%) brightness(1.04);
+  -webkit-backdrop-filter: blur(36px) saturate(180%) brightness(1.04);
+  /* Long, slow, expo easing — settles like real glass.
+     Transform leads (lift), shadow + filter follow. */
+  transition:
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    backdrop-filter 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    -webkit-backdrop-filter 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.v2-card {
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.55),
+    0 1px 1px rgba(8, 54, 48, 0.04),
+    0 18px 44px -16px rgba(8, 54, 48, 0.18);
+}
+.v2-card-dark {
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.16),
+    0 1px 1px rgba(0, 0, 0, 0.12),
+    0 18px 44px -16px rgba(0, 0, 0, 0.32);
+}
+/* Surface gradient — top of card brighter, fading to invisible by 50% down.
+   Sits BEHIND content via z-index -1 in the isolated context. */
+.v2-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: -1;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.22) 0%,
+    rgba(255, 255, 255, 0.08) 18%,
+    transparent 50%
+  );
+}
+.v2-card-dark::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: -1;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.14) 0%,
+    rgba(255, 255, 255, 0.04) 18%,
+    transparent 50%
+  );
+}
+/* Specular highlight — thin gleaming line at the very top edge, fading at
+   the ends. This is THE Liquid Glass signature: the way light catches the
+   top rim of a glass pane. */
+.v2-card::after,
+.v2-card-dark::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 8%;
+  right: 8%;
+  height: 1px;
+  pointer-events: none;
+}
+.v2-card::after {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.85) 50%,
+    transparent 100%
+  );
+}
+.v2-card-dark::after {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.45) 50%,
+    transparent 100%
+  );
+}
+@media (hover: hover) {
+  .v2-card:hover {
+    transform: translateY(-3px);
+    /* Glass "comes alive": blur deepens, saturation pops, surface brightens */
+    backdrop-filter: blur(48px) saturate(210%) brightness(1.06);
+    -webkit-backdrop-filter: blur(48px) saturate(210%) brightness(1.06);
+    box-shadow:
+      inset 0 0 0 1px rgba(255, 255, 255, 0.78),
+      0 2px 2px rgba(8, 54, 48, 0.05),
+      0 32px 64px -20px rgba(8, 54, 48, 0.26);
+  }
+  .v2-card-dark:hover {
+    transform: translateY(-3px);
+    backdrop-filter: blur(48px) saturate(210%) brightness(1.06);
+    -webkit-backdrop-filter: blur(48px) saturate(210%) brightness(1.06);
+    box-shadow:
+      inset 0 0 0 1px rgba(255, 255, 255, 0.28),
+      0 2px 2px rgba(0, 0, 0, 0.14),
+      0 32px 64px -20px rgba(0, 0, 0, 0.4);
+  }
+}
+.v2-card:active,
+.v2-card-dark:active {
+  /* Press settles down; quicker easing for tactile feedback */
+  transform: translateY(-1px);
+  transition:
+    transform 0.15s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.15s cubic-bezier(0.22, 1, 0.36, 1);
+}
+@media (prefers-reduced-motion: reduce) {
+  .v2-card, .v2-card-dark { transition: none !important; }
+  .v2-card:hover, .v2-card-dark:hover { transform: none !important; }
+}
+
+/* === Liquid Glass button hover orchestration ===
+   Every Button gets a deliberate, layered hover: 2px lift on a slow expo
+   curve, blur intensifies, shadow blooms, and any inner arrow icon nudges
+   right. Activates on the .v2-btn class added by the Button atom. */
+.v2-btn {
+  transition:
+    transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+    background 0.35s ease,
+    color 0.3s ease,
+    border-color 0.35s ease,
+    box-shadow 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+    backdrop-filter 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+    -webkit-backdrop-filter 0.45s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+.v2-btn svg,
+.v2-btn .v2-btn-icon {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+@media (hover: hover) {
+  .v2-btn:hover {
+    transform: translateY(-2px) !important;
+    backdrop-filter: blur(28px) saturate(190%) !important;
+    -webkit-backdrop-filter: blur(28px) saturate(190%) !important;
+  }
+  .v2-btn:hover svg:last-child,
+  .v2-btn:hover .v2-btn-icon {
+    transform: translateX(4px);
+  }
+}
+.v2-btn:active {
+  transform: translateY(0) scale(0.98) !important;
+  transition:
+    transform 0.12s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.12s cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  .v2-btn, .v2-btn svg, .v2-btn .v2-btn-icon {
+    transition: none !important;
+  }
+  .v2-btn:hover { transform: none !important; }
+  .v2-btn:hover svg:last-child,
+  .v2-btn:hover .v2-btn-icon { transform: none !important; }
+  .v2-btn:active { transform: none !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .v2-card, .v2-card-dark { transition: none !important; }
+  .v2-card:hover, .v2-card-dark:hover { transform: none !important; }
+}
+
 /* === Scroll-reveal (consumed by <Reveal>) === */
 .reveal {
   opacity: 0;

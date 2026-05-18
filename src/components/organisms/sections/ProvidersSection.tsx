@@ -19,11 +19,10 @@ function ProviderBlock({ card }: { card: ProviderCard }) {
 
   return (
     <Reveal
-      className="rounded-[2rem] p-5 sm:p-6 md:p-8 lg:p-10 relative overflow-hidden group"
+      className={`${dark ? "v2-card-dark" : "v2-card"} rounded-[2rem] p-5 sm:p-6 md:p-8 lg:p-10 relative overflow-hidden group`}
       style={{
-        background: dark ? c.primary : c.cream,
+        background: alpha(dark ? c.primary : c.cream, dark ? 0.85 : 0.7),
         color: dark ? "#fff" : undefined,
-        border: dark ? undefined : `1px solid ${alpha(c.ink, 0.06)}`,
       }}
     >
       {dark && (

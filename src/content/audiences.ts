@@ -6,6 +6,7 @@ export type Audience = {
   cta: string;
   href: string;
   bullets?: readonly string[];
+  caption?: string;
 };
 
 export const audiencesIntro = {

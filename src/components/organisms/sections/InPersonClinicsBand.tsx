@@ -10,6 +10,7 @@ import { Lead } from "@/components/atoms/Lead";
 import { Button } from "@/components/atoms/Button";
 import { ArrowIcon } from "@/components/atoms/ArrowIcon";
 import { ImageFrame } from "@/components/atoms/ImageFrame";
+import { CardCaption } from "@/components/molecules/CardCaption";
 import { Reveal } from "@/components/molecules/Reveal";
 import { SectionHeader } from "@/components/molecules/SectionHeader";
 import type { ClinicPromotion } from "@/content/pages/locationDetail";
@@ -47,10 +48,9 @@ export function InPersonClinicsBand({
           {clinics.map((clinic, i) => (
             <Reveal
               key={clinic.city}
-              className="rounded-[2rem] overflow-hidden flex flex-col group"
+              className="v2-card rounded-[2rem] overflow-hidden flex flex-col group"
               style={{
-                background: c.cream,
-                border: `1px solid ${alpha(c.ink, 0.06)}`,
+                background: alpha(c.cream, 0.7),
                 animationDelay: `${i * 80}ms`,
               }}
             >
@@ -104,6 +104,11 @@ export function InPersonClinicsBand({
                 >
                   {clinic.blurb}
                 </Lead>
+                {clinic.caption && (
+                  <CardCaption color={alpha(c.ink, 0.55)} className="mt-5">
+                    {clinic.caption}
+                  </CardCaption>
+                )}
                 <div className="mt-auto pt-7">
                   <Button
                     href={clinic.cta.href}

@@ -38,16 +38,15 @@ export function StatsBand({
       >
         {first && second && (
           <Reveal
-            className="stats-comparison"
+            className="stats-comparison v2-card"
             style={{
               display: "grid",
               gridTemplateColumns: "1fr auto 1fr",
               alignItems: "center",
               gap: 0,
-              background: cardBg,
+              background: alpha(cardBg, 0.7),
               borderRadius: "1.5rem",
               padding: "clamp(28px, 5vw, 40px) clamp(24px, 5vw, 48px)",
-              border: `1px solid ${alpha(c.ink, 0.07)}`,
             }}
           >
             <ComparisonStat stat={first} align="left" highlight />

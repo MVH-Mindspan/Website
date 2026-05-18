@@ -38,9 +38,9 @@ export function FAQ({
             return (
               <div
                 key={it.id}
+                className="v2-card"
                 style={{
-                  background: "#fff",
-                  border: `1px solid ${alpha(c.ink, 0.1)}`,
+                  background: "rgba(255, 255, 255, 0.7)",
                   borderRadius: "1.5rem",
                   overflow: "hidden",
                 }}

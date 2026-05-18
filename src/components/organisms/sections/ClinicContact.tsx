@@ -34,10 +34,9 @@ export function ClinicContact(props: ClinicContactType) {
           </Reveal>
 
           <Reveal
-            className="rounded-[2rem] p-8 md:p-10"
+            className="v2-card rounded-[2rem] p-8 md:p-10"
             style={{
-              background: c.skySoft,
-              border: `1px solid ${alpha(c.ink, 0.06)}`,
+              background: alpha(c.skySoft, 0.7),
             }}
           >
             <Eyebrow color={c.accentText}>Visit us</Eyebrow>
