@@ -205,13 +205,16 @@ export default function StepDetails({ data, onChange, errors }: StepDetailsProps
 
         {isCaregiver && (
           <motion.div
+            key="patient-block"
             className="space-y-5 max-w-lg"
-            variants={fadeUp}
-            initial={reducedMotion ? false : { opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, ease: EASE }}
+            initial={reducedMotion ? false : "hidden"}
+            animate="show"
+            variants={{
+              hidden: {},
+              show: { transition: { staggerChildren: 0.06, delayChildren: 0.05 } },
+            }}
           >
-            <div>
+            <motion.div variants={fadeUp}>
               <h3
                 className="text-base font-semibold"
                 style={{ color: c.brandGreen }}
@@ -224,9 +227,9 @@ export default function StepDetails({ data, onChange, errors }: StepDetailsProps
               >
                 {detailsCopy.patientGroup.subtitle}
               </p>
-            </div>
+            </motion.div>
 
-            <div className="grid sm:grid-cols-2 gap-4">
+            <motion.div variants={fadeUp} className="grid sm:grid-cols-2 gap-4">
               <FormField
                 label={FIELD_LABELS.patientFirstName}
                 name="patientFirstName"
@@ -249,19 +252,21 @@ export default function StepDetails({ data, onChange, errors }: StepDetailsProps
                 maxLength={120}
                 autoComplete="off"
               />
-            </div>
+            </motion.div>
 
-            <FormField
-              label={FIELD_LABELS.relationship}
-              name="relationship"
-              type="select"
-              required
-              placeholder={detailsCopy.placeholders.relationship}
-              value={data.relationship}
-              onChange={(v) => onChange("relationship", v)}
-              error={errors.relationship}
-              options={detailsCopy.relationshipOptions}
-            />
+            <motion.div variants={fadeUp}>
+              <FormField
+                label={FIELD_LABELS.relationship}
+                name="relationship"
+                type="select"
+                required
+                placeholder={detailsCopy.placeholders.relationship}
+                value={data.relationship}
+                onChange={(v) => onChange("relationship", v)}
+                error={errors.relationship}
+                options={detailsCopy.relationshipOptions}
+              />
+            </motion.div>
           </motion.div>
         )}
 

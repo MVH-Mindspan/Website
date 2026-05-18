@@ -1,9 +1,11 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
-import { EASE } from "@/lib/motion";
 import { useTheme } from "@/lib/theme-context";
 import { alpha } from "@/lib/themes";
+import { easeArrays } from "@/lib/tokens";
+
+const REVEAL = easeArrays.reveal;
 
 
 type ProgressBarProps = {
@@ -25,16 +27,16 @@ export default function ProgressBar({ steps, currentStep, onStepClick }: Progres
           className="absolute top-[18px] sm:top-4 left-0 right-0 h-[2px] mx-3 sm:mx-6 md:mx-8"
           style={{ background: alpha(c.brandGreen, 0.08) }}
         />
-        {/* Active line */}
+        {/* Active line — scaleX for a smoother, compositor-only fill. */}
         <motion.div
-          className="absolute top-[18px] sm:top-4 left-0 h-[2px] mx-3 sm:mx-6 md:mx-8"
-          style={{ background: c.brandGreen }}
+          className="absolute top-[18px] sm:top-4 left-0 right-0 h-[2px] mx-3 sm:mx-6 md:mx-8"
+          style={{ background: c.brandGreen, transformOrigin: "left" }}
           initial={false}
           animate={{
-            width: `${(currentStep / Math.max(steps.length - 1, 1)) * 100}%`,
+            scaleX: currentStep / Math.max(steps.length - 1, 1),
           }}
           transition={
-            reducedMotion ? { duration: 0 } : { duration: 0.5, ease: EASE }
+            reducedMotion ? { duration: 0 } : { duration: 0.55, ease: REVEAL }
           }
         />
 
@@ -66,7 +68,13 @@ export default function ProgressBar({ steps, currentStep, onStepClick }: Progres
                 `}
               >
                 {isCompleted ? (
-                  <svg viewBox="0 0 12 12" className="h-3.5 w-3.5">
+                  <motion.svg
+                    viewBox="0 0 12 12"
+                    className="h-3.5 w-3.5"
+                    initial={reducedMotion ? false : { opacity: 0, scale: 0.7 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.3, ease: REVEAL }}
+                  >
                     <path
                       d="M2 6l3 3 5-5"
                       fill="none"
@@ -75,7 +83,7 @@ export default function ProgressBar({ steps, currentStep, onStepClick }: Progres
                       strokeLinecap="round"
                       strokeLinejoin="round"
                     />
-                  </svg>
+                  </motion.svg>
                 ) : (
                   i + 1
                 )}

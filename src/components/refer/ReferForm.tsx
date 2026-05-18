@@ -1,15 +1,15 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { useReducedMotion } from "framer-motion";
 import { useTheme } from "@/lib/theme-context";
 import { alpha } from "@/lib/themes";
-import { easeArrays, type as typeScale } from "@/lib/tokens";
+import { type as typeScale } from "@/lib/tokens";
 import { ArrowIcon } from "@/components/atoms/ArrowIcon";
 import { Button } from "@/components/atoms/Button";
-import { Heading } from "@/components/atoms/Heading";
 import { Field } from "@/components/molecules/Field";
 import { FormErrorSummary } from "@/components/molecules/FormErrorSummary";
+import { SuccessExhale } from "@/components/molecules/SuccessExhale";
 import { EMAIL_RE, formatPhone, normalizePhone } from "@/lib/forms";
 
 const SUBMIT_TIMEOUT_MS = 15000;
@@ -275,80 +275,39 @@ export function ReferForm({
 
   if (submitted) {
     return (
-      <motion.div
+      <div
         ref={successWrapperRef}
         tabIndex={-1}
         role="status"
         aria-live="polite"
-        initial={reduceMotion ? false : { opacity: 0, y: 12 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.35, ease: easeArrays.expressive }}
         style={{
           background: "#fff",
           border: `1px solid ${alpha(c.ink, 0.08)}`,
           borderRadius: "2rem",
           padding: "clamp(32px, 6vw, 48px) clamp(20px, 4vw, 32px)",
-          textAlign: "center",
           outline: "none",
         }}
       >
-        <div
-          aria-hidden
-          style={{
-            width: 56,
-            height: 56,
-            borderRadius: "50%",
-            background: alpha(c.brandGreen, 0.08),
-            color: c.brandGreen,
-            display: "inline-flex",
-            alignItems: "center",
-            justifyContent: "center",
-            marginBottom: 16,
-          }}
-        >
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-            <path
-              d="M5 12.5l4.5 4.5L19 7.5"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        </div>
-        <Heading
-          as="h3"
-          variant="h3"
-          fontFamily={theme.fonts.heading}
-          color={c.ink}
-        >
-          {copy.successTitle}
-        </Heading>
-        <p
-          style={{
-            marginTop: 12,
-            fontFamily: theme.fonts.body,
-            fontSize: typeScale.body,
-            color: alpha(c.ink, 0.7),
-            lineHeight: 1.6,
-            maxWidth: "44ch",
-            marginInline: "auto",
-          }}
-        >
-          {copy.successBody}
-        </p>
-        <div style={{ marginTop: 28, display: "flex", justifyContent: "center" }}>
-          <Button
-            type="button"
-            variant="primary"
-            size="md"
-            onClick={handleReferAnother}
-            iconRight={<ArrowIcon />}
-          >
-            Refer another patient
-          </Button>
-        </div>
-      </motion.div>
+        <SuccessExhale
+          title={copy.successTitle}
+          body={copy.successBody}
+          headingAs="h3"
+          headingColor={c.ink}
+          bodyColor={alpha(c.ink, 0.7)}
+          size="md"
+          action={
+            <Button
+              type="button"
+              variant="primary"
+              size="md"
+              onClick={handleReferAnother}
+              iconRight={<ArrowIcon />}
+            >
+              Refer another patient
+            </Button>
+          }
+        />
+      </div>
     );
   }
 
