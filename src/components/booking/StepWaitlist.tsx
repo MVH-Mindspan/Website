@@ -10,6 +10,7 @@ import { Button } from "@/components/atoms/Button";
 import { Eyebrow } from "@/components/atoms/Eyebrow";
 import { Heading } from "@/components/atoms/Heading";
 import { Lead } from "@/components/atoms/Lead";
+import { SuccessExhale } from "@/components/molecules/SuccessExhale";
 import { bookingPage } from "@/content/pages/booking";
 import { formatPhone, normalizePhone } from "@/lib/forms";
 import FormField from "./FormField";
@@ -65,49 +66,17 @@ export default function StepWaitlist({
 
   if (submitted) {
     return (
-      <motion.div
-        className="text-center py-12"
-        initial={reducedMotion ? false : { opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.6, ease: EASE }}
-      >
-        <div
-          className="mx-auto h-16 w-16 rounded-full flex items-center justify-center mb-6"
-          style={{ background: alpha(c.brandGreen, 0.08), color: c.brandGreen }}
-        >
-          <svg viewBox="0 0 24 24" className="h-8 w-8">
-            <path
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M4.5 12.75l6 6 9-13.5"
-            />
-          </svg>
-        </div>
-        <Heading
-          as="h2"
-          variant="h2"
-          fontFamily={theme.fonts.heading}
-          color={c.brandGreen}
-        >
-          {waitlistCopy.success.title}
-        </Heading>
-        <Lead
-          size="md"
-          color={alpha(c.brandGreen, 0.7)}
-          className="mt-4 mx-auto"
-          maxWidth="32rem"
-        >
-          {waitlistCopy.success.body}
-        </Lead>
-        <div className="mt-8 inline-flex">
-          <Button href="/" variant="primary">
-            {waitlistCopy.success.backToHome}
-          </Button>
-        </div>
-      </motion.div>
+      <div className="py-12" role="status" aria-live="polite">
+        <SuccessExhale
+          title={waitlistCopy.success.title}
+          body={waitlistCopy.success.body}
+          action={
+            <Button href="/" variant="primary">
+              {waitlistCopy.success.backToHome}
+            </Button>
+          }
+        />
+      </div>
     );
   }
 

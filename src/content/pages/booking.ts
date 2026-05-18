@@ -170,7 +170,7 @@ export const bookingPage = {
     title: "Almost done",
     lead: "Confirm everything looks right and we'll be in touch.",
     submit: "Confirm and submit",
-    submitting: "Submitting...",
+    submitting: "Booking your visit",
     submittingAria: "Sending your booking request, please wait",
     privacy: "Your information is secure and only used to schedule your visit.",
     edit: "Edit",
@@ -211,7 +211,7 @@ export const bookingPage = {
     lead:
       "Drop your details and we'll let you know the moment Mindspan opens up in your area.",
     submit: "Join the waitlist",
-    submitting: "Joining...",
+    submitting: "Adding you to the list",
     submittingAria: "Submitting your information, please wait",
     privacy:
       "We'll only use your information to let you know when we're available.",

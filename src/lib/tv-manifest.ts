@@ -20,7 +20,6 @@ export const tvImages = [
   "/assets/providers-hero-poster.webp",
   "/assets/science-hero-poster-v2.webp",
   "/assets/video-visit-poster.webp",
-  "/assets/what-to-expect-consultation.webp",
   "/assets/what-to-expect-conversation.webp",
   "/assets/what-to-expect-hero.webp",
 ] as const;

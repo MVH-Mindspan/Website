@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { PT_Serif, Inter, EB_Garamond, Figtree } from "next/font/google";
 import { ThemeProvider } from "@/lib/theme-context";
 import { PostHogProvider } from "@/components/PostHogProvider";
+import { ConsoleSignature } from "@/components/dev/ConsoleSignature";
 import { SITE_URL } from "@/lib/seo";
 import "./globals.css";
 
@@ -65,6 +66,7 @@ export default function RootLayout({
         <PostHogProvider>
           <ThemeProvider>{children}</ThemeProvider>
         </PostHogProvider>
+        <ConsoleSignature />
       </body>
     </html>
   );

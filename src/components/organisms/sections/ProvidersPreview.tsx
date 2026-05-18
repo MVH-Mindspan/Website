@@ -46,7 +46,11 @@ export function ProvidersPreview({
               }}
             >
               {p.image ? (
-                <ImageFrame radius="50%" style={{ marginBottom: 20 }}>
+                <ImageFrame
+                  radius="50%"
+                  className="reveal-blur-target"
+                  style={{ marginBottom: 20 }}
+                >
                   <img
                     src={p.image}
                     alt={p.imageAlt ?? p.name}
