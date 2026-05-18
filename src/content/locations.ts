@@ -14,6 +14,7 @@ export type Location = {
   ctaLabel: string;
   image?: string;
   imageAlt?: string;
+  caption?: string;
 };
 
 export const locationsIntro = {

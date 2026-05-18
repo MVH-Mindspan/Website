@@ -3,6 +3,7 @@ export type TechCard = {
   eyebrow: string;
   title: string;
   body: string;
+  caption?: string;
   icon:
     | "brain"
     | "grid"

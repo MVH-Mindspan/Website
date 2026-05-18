@@ -10,6 +10,7 @@ import { Heading } from "@/components/atoms/Heading";
 import { ImageFrame } from "@/components/atoms/ImageFrame";
 import { Lead } from "@/components/atoms/Lead";
 import { BulletList } from "@/components/molecules/BulletList";
+import { CardCaption } from "@/components/molecules/CardCaption";
 import { Reveal } from "@/components/molecules/Reveal";
 import { SectionHeader } from "@/components/molecules/SectionHeader";
 import { IconBadge } from "@/components/atoms/IconBadge";
@@ -78,10 +79,9 @@ export function SplitCards({
 
         <div className={`mt-12 grid gap-6 md:gap-8 ${edge ? "lg:grid-cols-2" : ""}`}>
           <Reveal
-            className="rounded-[2rem] p-5 sm:p-6 md:p-8 lg:p-10 min-w-0"
+            className="v2-card rounded-[2rem] p-5 sm:p-6 md:p-8 lg:p-10 min-w-0"
             style={{
-              background: tone === "sand" ? c.cream : c.skySoft,
-              border: `1px solid ${alpha(c.ink, 0.06)}`,
+              background: alpha(tone === "sand" ? c.cream : c.skySoft, 0.7),
             }}
           >
             <IconBadge background={c.sky} color={c.brandGreen}>
@@ -113,12 +113,17 @@ export function SplitCards({
               color={alpha(c.ink, 0.82)}
               className="mt-8 text-base"
             />
+            {core.caption && (
+              <CardCaption color={alpha(c.ink, 0.55)} className="mt-8">
+                {core.caption}
+              </CardCaption>
+            )}
           </Reveal>
 
           {edge && (
             <Reveal
-              className="rounded-[2rem] p-8 md:p-10 relative overflow-hidden text-white min-w-0"
-              style={{ background: c.brandGreen }}
+              className="v2-card-dark rounded-[2rem] p-8 md:p-10 relative overflow-hidden text-white min-w-0"
+              style={{ background: alpha(c.brandGreen, 0.85) }}
             >
               <div
                 className="absolute inset-0 opacity-60 pointer-events-none"
@@ -156,6 +161,11 @@ export function SplitCards({
                   bulletColor="#A8D2FB"
                   className="mt-8 text-base text-white/85"
                 />
+                {edge.caption && (
+                  <CardCaption color="rgba(255, 255, 255, 0.6)" className="mt-8">
+                    {edge.caption}
+                  </CardCaption>
+                )}
               </div>
             </Reveal>
           )}

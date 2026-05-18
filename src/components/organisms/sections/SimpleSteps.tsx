@@ -78,9 +78,9 @@ export function SimpleSteps({
           {stages.map((step, i) => (
             <Reveal
               key={step.title}
-              className="flex flex-col rounded-[1.5rem] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_36px_-18px_rgba(0,0,0,0.18)] min-w-0"
+              className="v2-card flex flex-col rounded-[1.5rem] min-w-0"
               style={{
-                background: cardBg,
+                background: alpha(cardBg, 0.7),
                 padding: "28px",
                 animationDelay: `${i * 80}ms`,
               }}

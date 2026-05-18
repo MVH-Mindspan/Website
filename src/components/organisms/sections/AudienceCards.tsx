@@ -10,6 +10,7 @@ import { ImageFrame } from "@/components/atoms/ImageFrame";
 import { Lead } from "@/components/atoms/Lead";
 import { ArrowIcon } from "@/components/atoms/ArrowIcon";
 import { BulletList } from "@/components/molecules/BulletList";
+import { CardCaption } from "@/components/molecules/CardCaption";
 import { Reveal } from "@/components/molecules/Reveal";
 import { SectionHeader } from "@/components/molecules/SectionHeader";
 import { externalLinkProps } from "@/lib/links";
@@ -74,10 +75,9 @@ export function AudienceCards({
             <Reveal
               key={a.id}
               as="article"
-              className="rounded-[2rem] p-5 sm:p-6 md:p-8 flex flex-col group transition-all duration-300 hover:-translate-y-1 active:scale-[0.98] shadow-[inset_0_1px_0_rgba(255,255,255,0.45),0_1px_2px_rgba(32,30,23,0.06),0_10px_24px_-12px_rgba(32,30,23,0.18)] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.5),0_2px_4px_rgba(32,30,23,0.08),0_24px_48px_-16px_rgba(32,30,23,0.24)]"
+              className="v2-card rounded-[2rem] p-5 sm:p-6 md:p-8 flex flex-col group"
               style={{
-                background: c.skySoft,
-                border: `1px solid ${alpha(c.ink, 0.08)}`,
+                background: alpha(c.skySoft, 0.7),
                 animationDelay: `${i * 80}ms`,
               }}
             >
@@ -96,7 +96,7 @@ export function AudienceCards({
                   size="bodyCard"
                   maxWidth={false}
                   color={alpha(c.ink, 0.72)}
-                  className={a.bullets && a.bullets.length > 0 ? "mt-5 break-words" : "mt-5 flex-1 break-words"}
+                  className="mt-5 break-words"
                 >
                   {a.body}
                 </Lead>
@@ -105,10 +105,15 @@ export function AudienceCards({
                     items={a.bullets}
                     bulletColor={c.brandGreen}
                     color={alpha(c.ink, 0.78)}
-                    className="mt-8 text-base flex-1"
+                    className="mt-8 text-base"
                   />
                 )}
-                <div className="mt-8">
+                {a.caption && (
+                  <CardCaption color={alpha(c.ink, 0.55)} className="mt-6">
+                    {a.caption}
+                  </CardCaption>
+                )}
+                <div className="mt-auto pt-8">
                   <span
                     className="inline-flex items-center gap-2 font-semibold text-sm transition-all group-hover:-translate-y-0.5"
                     style={{

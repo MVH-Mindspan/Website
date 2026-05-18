@@ -38,10 +38,9 @@ export function ProvidersPreview({
             <Reveal
               key={p.id}
               as="article"
-              className="rounded-[2rem] p-5 sm:p-6 md:p-8 flex flex-col items-center text-center"
+              className="v2-card rounded-[2rem] p-5 sm:p-6 md:p-8 flex flex-col items-center text-center"
               style={{
-                background: "#fff",
-                border: `1px solid ${alpha(c.ink, 0.06)}`,
+                background: "rgba(255, 255, 255, 0.7)",
                 animationDelay: `${i * 80}ms`,
               }}
             >

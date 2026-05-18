@@ -5,12 +5,13 @@ import { useTheme } from "@/lib/theme-context";
 import { alpha } from "@/lib/themes";
 import { type as typeScale } from "@/lib/tokens";
 import { Container } from "@/components/atoms/Container";
-import { Heading } from "@/components/atoms/Heading";
 import { Eyebrow } from "@/components/atoms/Eyebrow";
+import { Heading } from "@/components/atoms/Heading";
 import { Lead } from "@/components/atoms/Lead";
 import { Button } from "@/components/atoms/Button";
 import { ArrowIcon } from "@/components/atoms/ArrowIcon";
 import { ImageFrame } from "@/components/atoms/ImageFrame";
+import { CardCaption } from "@/components/molecules/CardCaption";
 import { Reveal } from "@/components/molecules/Reveal";
 import { SectionHeader } from "@/components/molecules/SectionHeader";
 import type { Location } from "@/content/locations";
@@ -133,10 +134,9 @@ function LocationCard({
 
   return (
     <Reveal
-      className="group flex flex-col rounded-[2rem] overflow-hidden"
+      className="v2-card group flex flex-col rounded-[2rem] overflow-hidden"
       style={{
-        background: c.cream,
-        border: `1px solid ${alpha(c.ink, 0.06)}`,
+        background: alpha(c.cream, 0.7),
         animationDelay: `${i * 80}ms`,
       }}
     >
@@ -170,6 +170,11 @@ function LocationCard({
         >
           {l.summary}
         </Lead>
+        {l.caption && (
+          <CardCaption color={alpha(c.ink, 0.55)} className="mt-5">
+            {l.caption}
+          </CardCaption>
+        )}
         <div className="mt-auto pt-6">
           <Button
             href={l.href}

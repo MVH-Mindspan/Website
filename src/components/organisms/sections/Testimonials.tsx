@@ -32,10 +32,9 @@ export function Testimonials({
             <Reveal
               key={q.id}
               as="article"
-              className="rounded-[2rem] p-8 flex flex-col min-w-0"
+              className="v2-card rounded-[2rem] p-8 flex flex-col min-w-0"
               style={{
-                background: "#fff",
-                border: `1px solid ${alpha(c.ink, 0.08)}`,
+                background: "rgba(255, 255, 255, 0.7)",
                 animationDelay: `${i * 80}ms`,
               }}
             >

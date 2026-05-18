@@ -3,7 +3,6 @@
 import type { CSSProperties, ReactNode } from "react";
 import { useTheme } from "@/lib/theme-context";
 import { alpha } from "@/lib/themes";
-import { ease } from "@/lib/tokens";
 
 type Variant = "primary" | "secondary" | "accent" | "ghostDark" | "ghostLight";
 type Size = "sm" | "md" | "lg";
@@ -48,19 +47,44 @@ export function Button({
   const { theme } = useTheme();
   const c = theme.colors;
 
+  // Liquid Glass button recipe: lower alpha = actual see-through, strong
+  // blur intensity, well-defined glass rim. The point is for the underlying
+  // photo/section to be CLEARLY visible through the button surface.
   const variantStyles: Record<Variant, CSSProperties> = {
-    primary: { background: c.brandGreen, color: "#fff" },
-    secondary: { background: "#fff", color: c.brandGreen },
-    accent: { background: c.accent, color: "#fff" },
+    primary: {
+      background: alpha(c.brandGreen, 0.55),
+      color: "#fff",
+      border: "1px solid rgba(255, 255, 255, 0.3)",
+      boxShadow:
+        "inset 0 1px 0 rgba(255, 255, 255, 0.3), 0 8px 24px -8px rgba(8, 54, 48, 0.35)",
+    },
+    secondary: {
+      background: "rgba(255, 255, 255, 0.4)",
+      color: c.brandGreen,
+      border: "1px solid rgba(255, 255, 255, 0.65)",
+      boxShadow:
+        "inset 0 1px 0 rgba(255, 255, 255, 0.7), 0 8px 24px -8px rgba(8, 54, 48, 0.18)",
+    },
+    accent: {
+      background: alpha(c.accent, 0.55),
+      color: "#fff",
+      border: "1px solid rgba(255, 255, 255, 0.3)",
+      boxShadow:
+        "inset 0 1px 0 rgba(255, 255, 255, 0.35), 0 8px 24px -8px rgba(251, 77, 23, 0.45)",
+    },
     ghostDark: {
-      background: "transparent",
+      background: alpha(c.ink, 0.04),
       color: c.ink,
-      border: `1px solid ${alpha(c.ink, 0.25)}`,
+      border: `1px solid ${alpha(c.ink, 0.3)}`,
+      boxShadow:
+        "inset 0 1px 0 rgba(255, 255, 255, 0.5), 0 4px 16px -4px rgba(8, 54, 48, 0.12)",
     },
     ghostLight: {
-      background: "transparent",
+      background: "rgba(255, 255, 255, 0.08)",
       color: "#fff",
-      border: "1px solid rgba(255,255,255,0.35)",
+      border: "1px solid rgba(255, 255, 255, 0.65)",
+      boxShadow:
+        "inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 4px 16px -4px rgba(0, 0, 0, 0.2)",
     },
   };
 
@@ -72,7 +96,8 @@ export function Button({
     fontFamily: theme.fonts.body,
     fontWeight: 600,
     borderRadius: "10rem",
-    transition: `transform 0.2s ${ease.standard}, background 0.25s ease, color 0.25s ease, box-shadow 0.25s ${ease.standard}`,
+    backdropFilter: "blur(32px) saturate(180%) brightness(1.08)",
+    WebkitBackdropFilter: "blur(32px) saturate(180%) brightness(1.08)",
     textWrap: "balance",
     cursor: disabled ? "not-allowed" : "pointer",
     opacity: disabled ? 0.5 : 1,
@@ -89,9 +114,7 @@ export function Button({
     </>
   );
 
-  const hoverClass = disabled
-    ? ""
-    : "hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98]";
+  const hoverClass = disabled ? "" : "v2-btn";
   const combined = `${hoverClass} ${className ?? ""}`.trim();
 
   if (href && !disabled) {

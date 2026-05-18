@@ -5,6 +5,7 @@ export type Protocol = {
   body: string;
   bullets: string[];
   icon: "shield" | "bullseye";
+  caption?: string;
 };
 
 export const protocolsIntro = {

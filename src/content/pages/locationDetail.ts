@@ -54,6 +54,7 @@ export type ClinicPromotion = {
   imageAlt: string;
   blurb: string;
   cta: { label: string; href: string };
+  caption?: string;
 };
 
 export type LocationDetail = {

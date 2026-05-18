@@ -9,6 +9,7 @@ import { Lead } from "@/components/atoms/Lead";
 import { IconBadge } from "@/components/atoms/IconBadge";
 import { Button } from "@/components/atoms/Button";
 import { ArrowIcon } from "@/components/atoms/ArrowIcon";
+import { CardCaption } from "@/components/molecules/CardCaption";
 import { Reveal } from "@/components/molecules/Reveal";
 import { SectionHeader } from "@/components/molecules/SectionHeader";
 import type { TechCard } from "@/content/technology";
@@ -48,10 +49,11 @@ export function FeatureCardGrid({
   const isSand = tone === "sand";
   const sectionBg = isSand ? c.sand : c.primary;
   const sectionText = isSand ? c.ink : c.cream;
-  const cardBg = isSand ? c.cream : c.primaryLight;
-  const cardBorder = isSand ? `1px solid ${alpha(c.ink, 0.06)}` : undefined;
+  const cardBg = isSand ? alpha(c.cream, 0.7) : alpha(c.primaryLight, 0.85);
   const eyebrowColor = isSand ? alpha(c.ink, 0.6) : alpha(c.cream, 0.6);
   const bodyColor = isSand ? alpha(c.ink, 0.7) : alpha(c.cream, 0.65);
+  const captionColor = isSand ? alpha(c.ink, 0.55) : alpha(c.cream, 0.55);
+  const cardSurfaceClass = isSand ? "v2-card" : "v2-card-dark";
 
   return (
     <section
@@ -77,10 +79,9 @@ export function FeatureCardGrid({
           {cards.map((card, i) => (
             <Reveal
               key={card.id}
-              className="group rounded-[2rem] p-5 sm:p-6 md:p-8 transition-all duration-300 hover:-translate-y-1 active:scale-[0.98] min-w-0"
+              className={`${cardSurfaceClass} group rounded-[2rem] p-5 sm:p-6 md:p-8 min-w-0 flex flex-col`}
               style={{
                 background: cardBg,
-                border: cardBorder,
                 animationDelay: `${i * 80}ms`,
               }}
             >
@@ -111,6 +112,11 @@ export function FeatureCardGrid({
               >
                 {card.body}
               </Lead>
+              {card.caption && (
+                <CardCaption color={captionColor} className="mt-auto pt-6">
+                  {card.caption}
+                </CardCaption>
+              )}
             </Reveal>
           ))}
         </div>
