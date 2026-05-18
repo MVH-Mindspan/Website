@@ -36,6 +36,7 @@ export default function NotFound() {
       <Container width="narrow">
         <div
           aria-hidden="true"
+          className="notfound-rule"
           style={{
             width: 64,
             height: 1,
@@ -114,7 +115,7 @@ export default function NotFound() {
             <Link
               key={link.href}
               href={link.href}
-              className="block rounded-2xl px-5 py-4 transition-colors"
+              className="notfound-card block rounded-2xl px-5 py-4"
               style={{
                 background: "rgba(255,255,255,0.6)",
                 border: "1px solid rgba(8,54,48,0.08)",

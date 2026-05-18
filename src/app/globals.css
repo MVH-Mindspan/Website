@@ -606,6 +606,69 @@ h1, h2, h3 {
   .reveal { opacity: 1; transform: none; transition: none; }
 }
 
+/* Blur-up image reveal. Place on any descendant of a .reveal node (e.g. a
+   provider headshot). When the parent .reveal acquires .on, the image fades
+   and unblurs in tandem. Quietly "developed photograph" instead of a flat
+   fade. */
+.reveal-blur-target {
+  filter: blur(10px);
+  opacity: 0;
+  transition: filter 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: filter, opacity;
+}
+.reveal.on .reveal-blur-target {
+  filter: blur(0);
+  opacity: 1;
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal-blur-target { filter: none; opacity: 1; transition: none; }
+}
+
+/* === 404 page === */
+@keyframes notfound-rule-draw {
+  from { width: 0; }
+  to { width: 64px; }
+}
+.notfound-rule {
+  animation: notfound-rule-draw 0.85s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.notfound-card {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.notfound-card:hover {
+  transform: translateY(-2px);
+  background-color: rgba(233, 222, 203, 0.55);
+  border-color: rgba(8, 54, 48, 0.16);
+  box-shadow: 0 8px 24px -16px rgba(8, 54, 48, 0.2);
+}
+@media (prefers-reduced-motion: reduce) {
+  .notfound-rule { animation: none; }
+  .notfound-card:hover { transform: none; }
+}
+
+/* === Field affirmation check === */
+/* Opacity-only animation so the parent's transform (translateY for inputs,
+   none for textareas) is preserved across both cases. */
+@keyframes field-affirm-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.field-affirm {
+  animation: field-affirm-in 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .field-affirm { animation: none; }
+}
+
+/* === Smooth in-page anchor scrolling === */
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
+
 /* === Marketing (v2) scope === */
 .v2-scope {
   overflow-x: hidden;

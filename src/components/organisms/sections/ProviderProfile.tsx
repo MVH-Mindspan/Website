@@ -26,7 +26,7 @@ export function ProviderProfile(props: ProviderProfileType) {
             <img
               src={props.image}
               alt={props.imageAlt}
-              className="w-full object-cover"
+              className="w-full object-cover reveal-blur-target"
               style={{
                 aspectRatio: "1/1",
                 objectPosition: "center top",
