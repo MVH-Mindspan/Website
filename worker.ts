@@ -56,6 +56,13 @@ export default {
   async fetch(request: Request, env: Env): Promise<Response> {
     const url = new URL(request.url);
 
+    if (url.pathname === "/locations/bay-area-ca") {
+      return Response.redirect(
+        `${url.origin}/locations/bay-area${url.search}`,
+        301,
+      );
+    }
+
     if (url.pathname.startsWith("/ingest/")) {
       return proxyPostHog(request, url);
     }
