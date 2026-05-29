@@ -1,6 +1,6 @@
 # Mindspan
 
-> Mindspan is a specialist neurology clinic focused on Alzheimer's disease, dementia, and cognitive decline. Board-certified neurologists see new patients within 2-3 weeks. Covered by Medicare and most major commercial plans. In-person clinics in Danvers, Massachusetts and the San Francisco Bay Area; telehealth available statewide in Massachusetts and California.
+> Mindspan is a specialist neurology clinic focused on Alzheimer's disease, dementia, and cognitive decline. Board-certified neurologists see new patients within 2-3 weeks. Covered by Medicare and most major commercial plans. In-person clinics in Danvers, Massachusetts and the San Francisco Bay Area.
 
 ## Clinicians
 
@@ -18,8 +18,6 @@
 - [Locations](https://mindspan.co/locations): Service areas across Massachusetts and California
 - [Danvers, MA Clinic](https://mindspan.co/locations/danvers): In-person memory clinic on Boston's North Shore
 - [Bay Area, CA Clinic](https://mindspan.co/locations/bay-area): In-person clinic in the South Bay
-- [Video Visits in Massachusetts](https://mindspan.co/locations/video-ma): Statewide telehealth neurology
-- [Video Visits in California](https://mindspan.co/locations/video-ca): Statewide telehealth neurology
 - [For Providers](https://mindspan.co/providers): Referral workflow, co-management model, EHR integration
 - [Refer a Patient](https://mindspan.co/providers/refer): Provider referral submission
 - [Family Support](https://mindspan.co/family/assist): Caregiver and family-focused resources
@@ -39,7 +37,6 @@
 ## Service Area
 
 - In-person: Danvers, Massachusetts (greater Boston / North Shore) and the San Francisco Bay Area (San Jose / South Bay)
-- Telehealth: anywhere in Massachusetts or California
 
 ## Insurance
 

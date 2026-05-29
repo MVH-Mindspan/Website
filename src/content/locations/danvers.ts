@@ -1,4 +1,5 @@
 import { CMS_AUTHOR_DISCLAIMER } from "@/content/guide-disclosures";
+import { VIDEO_VISITS_ENABLED } from "@/lib/flags";
 import type { LocationDetail } from "../pages/locationDetail";
 
 const BOOKING_HREF = "/book-a-visit";
@@ -168,7 +169,9 @@ export const danversDetail: LocationDetail = {
       "Board Eligible in Electrodiagnostic Medicine",
     ],
     affiliations: "Beverly Hospital · Addison Gilbert Hospital",
-    availability: "Accepting new patients. Video visits also available.",
+    availability: VIDEO_VISITS_ENABLED
+      ? "Accepting new patients. Video visits also available."
+      : "Accepting new patients.",
     cta: { label: "Book a visit with Dr. Kelliher", href: BOOKING_HREF },
   },
 

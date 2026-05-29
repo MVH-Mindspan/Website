@@ -1,4 +1,5 @@
 import { buildMetadata } from "@/lib/seo";
+import { VIDEO_VISITS_ENABLED } from "@/lib/flags";
 import type { JourneyStage } from "../journey";
 import type { Protocol } from "../protocols";
 import type { TechCard } from "../technology";
@@ -25,8 +26,9 @@ const journeyStages: IllustratedPillar[] = [
   {
     kicker: "See a specialist",
     title: "Meet a board-certified neurologist within weeks.",
-    body:
-      "If your report suggests further evaluation, we connect you with a board-certified neurologist within weeks, not 18 months. Visits happen in our clinics or on video, and your insurance is billed like any other specialist appointment.",
+    body: VIDEO_VISITS_ENABLED
+      ? "If your report suggests further evaluation, we connect you with a board-certified neurologist within weeks, not 18 months. Visits happen in our clinics or on video, and your insurance is billed like any other specialist appointment."
+      : "If your report suggests further evaluation, we connect you with a board-certified neurologist within weeks, not 18 months. Visits happen in our clinics, and your insurance is billed like any other specialist appointment.",
     illustration: "meet",
   },
   {
@@ -61,7 +63,9 @@ const comparison: { problem: Protocol; solution: Protocol } = {
       "Mindspan compresses an eighteen-month wait into a few weeks. Start with a free screening tonight. If a neurologist visit makes sense, we book one within weeks and bring the latest cognitive science to your plan from day one.",
     bullets: [
       "A free at-home screening you can take in about 30 minutes",
-      "A board-certified neurologist seen within weeks, in clinic or on video",
+      VIDEO_VISITS_ENABLED
+        ? "A board-certified neurologist seen within weeks, in clinic or on video"
+        : "A board-certified neurologist seen within weeks, in clinic",
       "Advanced diagnostics and FDA-approved therapies, billed through insurance",
       "A care team that stays with you and your family between visits",
     ],

@@ -1,3 +1,5 @@
+import { VIDEO_VISITS_ENABLED } from "@/lib/flags";
+
 export type FAQItem = { id: string; question: string; answer: string };
 
 export const faqIntro = {
@@ -18,12 +20,16 @@ export const faq: FAQItem[] = [
     answer:
       "Yes. We bill Medicare, Medicaid, and many health plans. If your loved one has a dementia diagnosis and is on Original Medicare (not Medicare Advantage or PACE), there may be additional Medicare-supported benefits available; we confirm eligibility during onboarding.",
   },
-  {
-    id: "video",
-    question: "Can my parent be seen by video?",
-    answer:
-      "Yes. Every visit type can be done by video with a family member present. We also have clinics in Massachusetts and California for in-person visits.",
-  },
+  ...(VIDEO_VISITS_ENABLED
+    ? [
+        {
+          id: "video",
+          question: "Can my parent be seen by video?",
+          answer:
+            "Yes. Every visit type can be done by video with a family member present. We also have clinics in Massachusetts and California for in-person visits.",
+        },
+      ]
+    : []),
   {
     id: "caregiver",
     question: "I am worried about a parent or spouse. Can I come too?",

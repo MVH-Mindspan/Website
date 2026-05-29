@@ -1,11 +1,15 @@
+import { VIDEO_VISITS_ENABLED } from "@/lib/flags";
+
 export const brand = {
   name: "Mindspan",
   headline: "When memory starts to change, you shouldn\u2019t have to wait.",
-  subhead:
-    "Expert care for memory loss, Alzheimer\u2019s, and dementia, in person or by video.",
+  subhead: VIDEO_VISITS_ENABLED
+    ? "Expert care for memory loss, Alzheimer\u2019s, and dementia, in person or by video."
+    : "Expert care for memory loss, Alzheimer\u2019s, and dementia.",
   subTagline: "Seen in weeks, not months.",
-  reassurance:
-    "Board-certified neurologists. In-clinic and video visits. Covered by insurance.",
+  reassurance: VIDEO_VISITS_ENABLED
+    ? "Board-certified neurologists. In-clinic and video visits. Covered by insurance."
+    : "Board-certified neurologists. Covered by insurance.",
   primaryCta: "Book a visit",
   primaryCtaHref: "/book-a-visit",
   phone: "(978) 850-3914",
@@ -13,8 +17,9 @@ export const brand = {
   phoneHours: "9am–9pm ET / 6am–6pm PT",
   secondaryCta: "Find a clinic",
   secondaryCtaHref: "#locations",
-  footerTagline:
-    "Specialist neurologists for Alzheimer\u2019s, dementia, and cognitive change. Clinics in Massachusetts and California, plus video visits. We bill insurance.",
+  footerTagline: VIDEO_VISITS_ENABLED
+    ? "Specialist neurologists for Alzheimer\u2019s, dementia, and cognitive change. Clinics in Massachusetts and California, plus video visits. We bill insurance."
+    : "Specialist neurologists for Alzheimer\u2019s, dementia, and cognitive change. Clinics in Massachusetts and California. We bill insurance.",
   signature: "With care, the Mindspan team",
 } as const;
 

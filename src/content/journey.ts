@@ -1,3 +1,5 @@
+import { VIDEO_VISITS_ENABLED } from "@/lib/flags";
+
 export type JourneyStage = {
   kicker: string;
   title: string;
@@ -26,8 +28,9 @@ export const journey: JourneyStage[] = [
   {
     kicker: "Who\u2019s in the room?",
     title: "Meeting your neurologist",
-    body:
-      "An unhurried visit, in clinic or by video. Your neurologist goes through your history and where you are today. You\u2019ll leave with real answers.",
+    body: VIDEO_VISITS_ENABLED
+      ? "An unhurried visit, in clinic or by video. Your neurologist goes through your history and where you are today. You\u2019ll leave with real answers."
+      : "An unhurried visit in our clinic. Your neurologist goes through your history and where you are today. You\u2019ll leave with real answers.",
     cta: { label: "View our clinic locations", href: "#locations" },
     image: "/assets/meet-neuro.webp",
     imageAlt: "A Mindspan neurologist consulting with a patient and their partner",
@@ -44,9 +47,12 @@ export const journey: JourneyStage[] = [
   {
     kicker: "What happens next?",
     title: "Ongoing partnership",
-    body:
-      "Your Mindspan team stays with you by video, by phone, and in clinic. Things change; we adjust. You\u2019re not doing this alone.",
+    body: VIDEO_VISITS_ENABLED
+      ? "Your Mindspan team stays with you by video, by phone, and in clinic. Things change; we adjust. You\u2019re not doing this alone."
+      : "Your Mindspan team stays with you by phone and in clinic. Things change; we adjust. You\u2019re not doing this alone.",
     image: "/assets/ongoing-partnership.webp",
-    imageAlt: "A patient on a video visit with their Mindspan care team",
+    imageAlt: VIDEO_VISITS_ENABLED
+      ? "A patient on a video visit with their Mindspan care team"
+      : "A patient with their Mindspan care team",
   },
 ];

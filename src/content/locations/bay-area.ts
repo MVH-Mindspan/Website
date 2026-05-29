@@ -1,4 +1,5 @@
 import { CMS_AUTHOR_DISCLAIMER } from "@/content/guide-disclosures";
+import { VIDEO_VISITS_ENABLED } from "@/lib/flags";
 import type { LocationDetail } from "../pages/locationDetail";
 
 const BOOKING_HREF = "/book-a-visit";
@@ -169,7 +170,9 @@ export const bayAreaDetail: LocationDetail = {
       "American Association of Neuromuscular & Electrodiagnostic Medicine",
     ],
     affiliations: "Good Samaritan Hospital, San Jose \u00b7 El Camino Health",
-    availability: "Accepting new patients. Video visits also available.",
+    availability: VIDEO_VISITS_ENABLED
+      ? "Accepting new patients. Video visits also available."
+      : "Accepting new patients.",
     cta: { label: "Book a visit with Dr. Sachdev", href: BOOKING_HREF },
   },
 
