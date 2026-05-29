@@ -1,4 +1,5 @@
 import { buildMetadata } from "@/lib/seo";
+import { VIDEO_VISITS_ENABLED } from "@/lib/flags";
 
 export type StateChoice = "MA" | "CA" | "Other";
 export type CareOptionKind = "clinic" | "video";
@@ -44,8 +45,12 @@ export const bookingPage = {
   },
   care: {
     eyebrow: "Visit format",
-    title: "How would you like to be seen?",
-    lead: "Visit one of our clinics, or see your provider over video, whatever works best for you.",
+    title: VIDEO_VISITS_ENABLED
+      ? "How would you like to be seen?"
+      : "Where would you like to be seen?",
+    lead: VIDEO_VISITS_ENABLED
+      ? "Visit one of our clinics, or see your provider over video, whatever works best for you."
+      : "Choose the clinic that works best for you.",
     takingPatients: "Taking patients",
     optionsByState: {
       MA: [
@@ -59,16 +64,20 @@ export const bookingPage = {
           imageAlt: "Mindspan Danvers clinic on Boston’s North Shore",
           address: "99 Conifer Hill Drive, Danvers, MA 01923",
         },
-        {
-          id: "video-ma",
-          city: "Video visit",
-          state: "From anywhere in Massachusetts",
-          description:
-            "See your provider on your phone or computer, no driving, no waiting room",
-          kind: "video",
-          image: "/assets/video-visit-poster.webp",
-          imageAlt: "Mindspan video visit, anywhere in Massachusetts",
-        },
+        ...(VIDEO_VISITS_ENABLED
+          ? ([
+              {
+                id: "video-ma",
+                city: "Video visit",
+                state: "From anywhere in Massachusetts",
+                description:
+                  "See your provider on your phone or computer, no driving, no waiting room",
+                kind: "video",
+                image: "/assets/video-visit-poster.webp",
+                imageAlt: "Mindspan video visit, anywhere in Massachusetts",
+              },
+            ] satisfies CareOption[])
+          : []),
       ],
       CA: [
         {
@@ -81,16 +90,20 @@ export const bookingPage = {
           imageAlt: "Mindspan Bay Area clinic exterior in San Jose, California",
           address: "2520 Samaritan Dr, Suite 201B, San Jose, CA 95124",
         },
-        {
-          id: "video-ca",
-          city: "Video visit",
-          state: "From anywhere in California",
-          description:
-            "See your provider on your phone or computer, no driving, no waiting room",
-          kind: "video",
-          image: "/assets/video-visit-poster.webp",
-          imageAlt: "Mindspan video visit, anywhere in California",
-        },
+        ...(VIDEO_VISITS_ENABLED
+          ? ([
+              {
+                id: "video-ca",
+                city: "Video visit",
+                state: "From anywhere in California",
+                description:
+                  "See your provider on your phone or computer, no driving, no waiting room",
+                kind: "video",
+                image: "/assets/video-visit-poster.webp",
+                imageAlt: "Mindspan video visit, anywhere in California",
+              },
+            ] satisfies CareOption[])
+          : []),
       ],
     } satisfies Record<"MA" | "CA", CareOption[]>,
   },

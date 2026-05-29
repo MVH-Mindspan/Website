@@ -1,5 +1,18 @@
+import { VIDEO_VISITS_ENABLED } from "@/lib/flags";
+
 export type FooterLink = { label: string; href: string };
 export type FooterColumn = { title: string; links: FooterLink[] };
+
+const locationLinks: FooterLink[] = [
+  { label: "Danvers, MA", href: "/locations/danvers" },
+  { label: "Bay Area, CA", href: "/locations/bay-area" },
+  ...(VIDEO_VISITS_ENABLED
+    ? [
+        { label: "Video visits, MA", href: "/locations/video-ma" },
+        { label: "Video visits, CA", href: "/locations/video-ca" },
+      ]
+    : []),
+];
 
 export const footer = {
   columns: [
@@ -26,12 +39,7 @@ export const footer = {
     },
     {
       title: "Locations",
-      links: [
-        { label: "Danvers, MA", href: "/locations/danvers" },
-        { label: "Bay Area, CA", href: "/locations/bay-area" },
-        { label: "Video visits, MA", href: "/locations/video-ma" },
-        { label: "Video visits, CA", href: "/locations/video-ca" },
-      ],
+      links: locationLinks,
     },
   ] satisfies FooterColumn[],
   legal: [

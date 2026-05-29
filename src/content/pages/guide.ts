@@ -1,5 +1,6 @@
 import { buildMetadata } from "@/lib/seo";
 import { brand } from "@/content/brand";
+import { VIDEO_VISITS_ENABLED } from "@/lib/flags";
 import type { FAQItem } from "../faq";
 
 export const guidePage = {
@@ -88,8 +89,9 @@ export const guidePage = {
     body:
       "A medical question at 10pm. A scary change on a Saturday. The specialist line is staffed around the clock for GUIDE families, so you are not alone with the hard moments. One number, day or night, answered by someone who knows dementia care. The line is operated by Ianacare, our GUIDE Partner Organization.",
     image: "/assets/guide-247.webp",
-    imageAlt:
-      "A Mindspan specialist on a video visit at her desk in the evening.",
+    imageAlt: VIDEO_VISITS_ENABLED
+      ? "A Mindspan specialist on a video visit at her desk in the evening."
+      : "A Mindspan specialist working at her desk in the evening.",
   },
 
   eligibilityIntro: {
@@ -188,12 +190,16 @@ export const guidePage = {
       answer:
         "We are currently a GUIDE participant in MA and CA only. If you have a loved one in one of those states, we can work with you even if you live elsewhere. If your loved one is in another state, we are not able to enroll you in GUIDE today, we can tell you what is available in your area.",
     },
-    {
-      id: "caregiver-out-of-state",
-      question: "My parent is in Massachusetts but I live in another state. Does this work?",
-      answer:
-        "Yes. Video visits work from anywhere, and the GUIDE benefits follow the patient. We coordinate directly with you as the caregiver, you can be involved from a different state.",
-    },
+    ...(VIDEO_VISITS_ENABLED
+      ? [
+          {
+            id: "caregiver-out-of-state",
+            question: "My parent is in Massachusetts but I live in another state. Does this work?",
+            answer:
+              "Yes. Video visits work from anywhere, and the GUIDE benefits follow the patient. We coordinate directly with you as the caregiver, you can be involved from a different state.",
+          },
+        ]
+      : []),
     {
       id: "vs-hospice",
       question: "Is this the same as hospice or palliative care?",

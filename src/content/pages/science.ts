@@ -1,4 +1,5 @@
 import { buildMetadata } from "@/lib/seo";
+import { VIDEO_VISITS_ENABLED } from "@/lib/flags";
 import type { JourneyStage } from "../journey";
 import type { TechCard } from "../technology";
 import type { Stat } from "../stats";
@@ -83,7 +84,9 @@ const outcomePillars: JourneyStage[] = [
     body:
       "Between visits, the orchestration engine tracks every required check, every scan, every medication decision. Cortex answers the questions caregivers actually have, and pages your clinician when something needs real attention. Your primary care doctor stays in the loop, and no one in your family is left alone with this.",
     image: "/assets/ongoing-partnership.webp",
-    imageAlt: "A patient on a video visit with their Mindspan care team",
+    imageAlt: VIDEO_VISITS_ENABLED
+      ? "A patient on a video visit with their Mindspan care team"
+      : "A patient with their Mindspan care team",
   },
 ];
 

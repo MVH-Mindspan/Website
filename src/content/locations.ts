@@ -1,3 +1,5 @@
+import { VIDEO_VISITS_ENABLED } from "@/lib/flags";
+
 export type LocationKind = "clinic" | "video";
 
 export type Location = {
@@ -17,15 +19,22 @@ export type Location = {
   caption?: string;
 };
 
-export const locationsIntro = {
-  eyebrow: "Where we see patients",
-  title: "Visit a clinic, or see your provider on video.",
-  lead:
-    "Clinics in Massachusetts and California, plus video visits anywhere in those two states.",
-  note: "We're actively expanding into new markets. More locations coming soon.",
-} as const;
+export const locationsIntro = VIDEO_VISITS_ENABLED
+  ? ({
+      eyebrow: "Where we see patients",
+      title: "Visit a clinic, or see your provider on video.",
+      lead:
+        "Clinics in Massachusetts and California, plus video visits anywhere in those two states.",
+      note: "We're actively expanding into new markets. More locations coming soon.",
+    } as const)
+  : ({
+      eyebrow: "Where we see patients",
+      title: "Visit a clinic in Massachusetts or California.",
+      lead: "Specialty memory care in Danvers and the Bay Area.",
+      note: "We're actively expanding into new markets. More locations coming soon.",
+    } as const);
 
-export const locations: Location[] = [
+const allLocations: Location[] = [
   {
     slug: "danvers",
     city: "Danvers",
@@ -87,6 +96,10 @@ export const locations: Location[] = [
     ctaLabel: "Book a video visit",
   },
 ];
+
+export const locations: Location[] = VIDEO_VISITS_ENABLED
+  ? allLocations
+  : allLocations.filter((l) => l.kind !== "video");
 
 export function getLocation(slug: string): Location | undefined {
   return locations.find((l) => l.slug === slug);
