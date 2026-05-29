@@ -65,7 +65,7 @@ export const bookingPage = {
           address: "99 Conifer Hill Drive, Danvers, MA 01923",
         },
         ...(VIDEO_VISITS_ENABLED
-          ? [
+          ? ([
               {
                 id: "video-ma",
                 city: "Video visit",
@@ -76,7 +76,7 @@ export const bookingPage = {
                 image: "/assets/video-visit-poster.webp",
                 imageAlt: "Mindspan video visit, anywhere in Massachusetts",
               },
-            ]
+            ] satisfies CareOption[])
           : []),
       ],
       CA: [
@@ -91,7 +91,7 @@ export const bookingPage = {
           address: "2520 Samaritan Dr, Suite 201B, San Jose, CA 95124",
         },
         ...(VIDEO_VISITS_ENABLED
-          ? [
+          ? ([
               {
                 id: "video-ca",
                 city: "Video visit",
@@ -102,7 +102,7 @@ export const bookingPage = {
                 image: "/assets/video-visit-poster.webp",
                 imageAlt: "Mindspan video visit, anywhere in California",
               },
-            ]
+            ] satisfies CareOption[])
           : []),
       ],
     } satisfies Record<"MA" | "CA", CareOption[]>,
