@@ -134,6 +134,7 @@ function LocationCard({
 
   return (
     <Reveal
+      dataProximity="subtle"
       className="v2-card group flex flex-col rounded-[2rem] overflow-hidden"
       style={{
         background: alpha(c.cream, 0.7),
@@ -145,7 +146,7 @@ function LocationCard({
           <img
             src={l.image}
             alt={l.imageAlt ?? ""}
-            className="block w-full object-cover transition-transform duration-500 group-hover:scale-[1.02] aspect-[4/3] sm:aspect-[16/10]"
+            className="block w-full object-cover prox-inner-img aspect-[4/3] sm:aspect-[16/10]"
             loading="lazy"
           />
         </ImageFrame>

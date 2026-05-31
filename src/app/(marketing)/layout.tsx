@@ -1,5 +1,6 @@
 import { SiteHeader } from "@/components/organisms/SiteHeader";
 import { SiteFooter } from "@/components/organisms/SiteFooter";
+import { ProximityField } from "@/components/proximity/ProximityField";
 
 export default function MarketingLayout({
   children,
@@ -17,6 +18,7 @@ export default function MarketingLayout({
       <SiteHeader />
       <main id="main-content">{children}</main>
       <SiteFooter />
+      <ProximityField />
     </div>
   );
 }

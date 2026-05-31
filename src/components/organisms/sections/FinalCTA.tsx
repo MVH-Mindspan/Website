@@ -97,7 +97,8 @@ export function FinalCTA({
                   href: secondary.href,
                 })
               }
-              className="inline-flex items-center gap-2 font-semibold transition-all"
+              className="inline-flex items-center gap-2 font-semibold transition-all prox-cta"
+              data-proximity=""
               style={{
                 fontFamily: theme.fonts.body,
                 padding: "16px 32px",
@@ -122,7 +123,8 @@ export function FinalCTA({
                 href: primary.href,
               })
             }
-            className="inline-flex items-center gap-2 font-semibold transition-all hover:-translate-y-0.5 hover:shadow-[0_12px_32px_-8px_rgba(0,0,0,0.4)]"
+            className="inline-flex items-center gap-2 font-semibold transition-all prox-cta"
+            data-proximity=""
             style={{
               fontFamily: theme.fonts.body,
               padding: "16px 32px",

@@ -214,6 +214,7 @@ export function SiteHeader() {
                   href={n.href}
                   className="v2-header-link"
                   data-active={active ? "true" : undefined}
+                  data-proximity=""
                   aria-current={active ? "page" : undefined}
                   style={linkBase}
                 >
@@ -228,6 +229,7 @@ export function SiteHeader() {
           <a
             href={audienceNav.refer.href}
             className="hidden nav:inline-flex v2-header-refer items-center gap-2 font-medium px-5 py-3"
+            data-proximity=""
             style={{
               fontFamily: theme.fonts.body,
               fontSize: typeScale.bodySm,
@@ -251,6 +253,7 @@ export function SiteHeader() {
               })
             }
             className="v2-header-cta font-semibold px-4 nav:px-6 py-2 nav:py-3"
+            data-proximity=""
             style={{
               fontFamily: theme.fonts.body,
               fontSize: typeScale.bodySm,

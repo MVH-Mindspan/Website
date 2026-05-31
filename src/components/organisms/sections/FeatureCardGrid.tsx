@@ -79,6 +79,7 @@ export function FeatureCardGrid({
           {cards.map((card, i) => (
             <Reveal
               key={card.id}
+              dataProximity="strong"
               className={`${cardSurfaceClass} group rounded-[2rem] p-5 sm:p-6 md:p-8 min-w-0 flex flex-col`}
               style={{
                 background: cardBg,
@@ -88,7 +89,7 @@ export function FeatureCardGrid({
               <IconBadge
                 background={c.sky}
                 color={c.brandGreen}
-                className="transition-transform duration-500 ease-out group-hover:scale-[1.06]"
+                className="prox-badge"
               >
                 <SectionIcon name={card.icon} />
               </IconBadge>

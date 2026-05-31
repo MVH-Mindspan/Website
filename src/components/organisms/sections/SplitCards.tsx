@@ -79,6 +79,7 @@ export function SplitCards({
 
         <div className={`mt-12 grid gap-6 md:gap-8 ${edge ? "lg:grid-cols-2" : ""}`}>
           <Reveal
+            dataProximity="subtle"
             className="v2-card rounded-[2rem] p-5 sm:p-6 md:p-8 lg:p-10 min-w-0"
             style={{
               background: alpha(tone === "sand" ? c.cream : c.skySoft, 0.7),
@@ -122,6 +123,7 @@ export function SplitCards({
 
           {edge && (
             <Reveal
+              dataProximity="subtle"
               className="v2-card-dark rounded-[2rem] p-8 md:p-10 relative overflow-hidden text-white min-w-0"
               style={{ background: alpha(c.brandGreen, 0.85) }}
             >

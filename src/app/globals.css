@@ -589,6 +589,197 @@ h1, h2, h3 {
   .v2-card:hover, .v2-card-dark:hover { transform: none !important; }
 }
 
+/* === Pointer-proximity "pre-hover" delight ============================
+   ProximityField (src/components/proximity/ProximityField.tsx) writes
+   --proximity (0 = far, 1 = touching) onto [data-proximity] elements as the
+   cursor approaches. --prox-eff bridges that into the existing :hover end
+   state — :hover pins it to 1 — so the proximity ramp lands exactly on the
+   hover look and there is NO jump when hover actually fires.
+
+   Lift is driven by the CSS `translate` property, never `transform`, so it
+   composes with the .reveal scroll-entrance (which animates `transform`) and
+   the button press `scale` instead of overwriting them. Selectors carry
+   [data-proximity] so they out-specify .reveal and only touch opted-in nodes;
+   untagged .v2-card / .v2-btn keep their original hover-only behaviour.
+
+   Visual ramps live under (prefers-reduced-motion: no-preference); the engine
+   itself also never runs under reduce-motion or on touch, so this is belt and
+   suspenders. */
+[data-proximity] {
+  --proximity: 0;
+  --prox-eff: var(--proximity);
+}
+@media (hover: hover) {
+  [data-proximity]:hover {
+    --prox-eff: 1;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* ── Cards: lift + glass-shadow bloom that interpolates from the resting
+     shadow to the existing :hover shadow as --prox-eff goes 0 → 1. ───────── */
+  .v2-card[data-proximity],
+  .v2-card-dark[data-proximity] {
+    transition:
+      translate 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+      box-shadow 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+      backdrop-filter 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+      -webkit-backdrop-filter 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    translate: 0 calc(var(--prox-eff) * -3px);
+  }
+  .v2-card[data-proximity] {
+    box-shadow:
+      inset 0 0 0 1px rgba(255, 255, 255, calc(0.55 + 0.23 * var(--prox-eff))),
+      0 calc(1px + 1px * var(--prox-eff)) calc(1px + 1px * var(--prox-eff)) rgba(8, 54, 48, calc(0.04 + 0.01 * var(--prox-eff))),
+      0 calc(18px + 14px * var(--prox-eff)) calc(44px + 20px * var(--prox-eff)) calc(-16px - 4px * var(--prox-eff)) rgba(8, 54, 48, calc(0.18 + 0.08 * var(--prox-eff)));
+  }
+  .v2-card-dark[data-proximity] {
+    box-shadow:
+      inset 0 0 0 1px rgba(255, 255, 255, calc(0.16 + 0.12 * var(--prox-eff))),
+      0 calc(1px + 1px * var(--prox-eff)) calc(1px + 1px * var(--prox-eff)) rgba(0, 0, 0, calc(0.12 + 0.02 * var(--prox-eff))),
+      0 calc(18px + 14px * var(--prox-eff)) calc(44px + 20px * var(--prox-eff)) calc(-16px - 4px * var(--prox-eff)) rgba(0, 0, 0, calc(0.32 + 0.08 * var(--prox-eff)));
+  }
+  @media (hover: hover) {
+    /* Cancel the generic hover translateY so only `translate` lifts (no double). */
+    .v2-card[data-proximity]:hover,
+    .v2-card-dark[data-proximity]:hover {
+      transform: none;
+    }
+    .v2-card[data-proximity]:active,
+    .v2-card-dark[data-proximity]:active {
+      --prox-eff: 0.4;
+      transform: none;
+      transition: translate 0.15s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+  }
+
+  /* ── Signature moment: the IconBadge "wave" in the feature grid.
+     Each "strong" card computes its own --prox-eff from the cursor's distance,
+     and its badge (inherits the variable) scales + glows in proportion. As the
+     pointer sweeps the row, adjacent badges light in sequence — a calm wave,
+     no extra JS. Sky-blue glow (#A8D2FB) matches the badge's own accent. */
+  .v2-card[data-proximity="strong"] .prox-badge,
+  .v2-card-dark[data-proximity="strong"] .prox-badge {
+    scale: calc(1 + var(--prox-eff) * 0.08);
+    box-shadow: 0 0 calc(var(--prox-eff) * 22px) rgba(168, 210, 251, calc(var(--prox-eff) * 0.5));
+    transition:
+      scale 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+      box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* ── Inner card elements that used to react only on card :hover (group-hover).
+     Driving them off the parent card's inherited --prox-eff makes them ramp in
+     lockstep with the card's proximity, so they reach the hover end-state on
+     approach and never snap when hover actually fires. */
+  .v2-card[data-proximity] .prox-inner-cta,
+  .v2-card-dark[data-proximity] .prox-inner-cta {
+    translate: 0 calc(var(--prox-eff) * -2px);
+    transition: translate 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .v2-card[data-proximity] .prox-inner-img,
+  .v2-card-dark[data-proximity] .prox-inner-img {
+    scale: calc(1 + var(--prox-eff) * 0.02);
+    transition: scale 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* ── Buttons: lift via translate + a soft glow halo that fades in behind
+     the pill (opacity-driven, compositor-friendly). ─────────────────────── */
+  .v2-btn[data-proximity] {
+    position: relative;
+    transition:
+      translate 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+      background 0.35s ease,
+      color 0.3s ease,
+      border-color 0.35s ease,
+      box-shadow 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+      backdrop-filter 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+      -webkit-backdrop-filter 0.45s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    translate: 0 calc(var(--prox-eff) * -2px);
+  }
+  .v2-btn[data-proximity]::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    z-index: -1;
+    opacity: var(--prox-eff);
+    box-shadow: 0 12px 30px -8px rgba(8, 54, 48, 0.4);
+    transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  @media (hover: hover) {
+    .v2-btn[data-proximity]:hover {
+      transform: none !important; /* lift lives on `translate`; avoid doubling */
+    }
+    .v2-btn[data-proximity]:active {
+      --prox-eff: 0;
+      transform: scale(0.98) !important;
+    }
+  }
+
+  /* ── Hand-rolled CTA pills that aren't the Button atom: the hero CTAs in
+     VideoHero / PageHero, the FinalCTA band, and the editorial / step /
+     provider CTAs. Same -2px lift as buttons, driven by the shared --prox-eff
+     so it ramps in on approach and lands on :hover with no jump. Lift only (no
+     glow halo): these sit on very different backgrounds — white pills over dark
+     video, green pills on cream — where one glow colour can't read everywhere.
+     !important on the transition wins over the inline `transition: background`
+     that the hero CTAs set; `background` stays in the list so their hover
+     colour-swap still eases. */
+  .prox-cta[data-proximity] {
+    translate: 0 calc(var(--prox-eff) * -2px);
+    transition:
+      translate 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+      background 0.2s ease !important;
+  }
+  .prox-cta[data-proximity]:active {
+    /* Settle the lift down on press; the scale comes from the global pill :active. */
+    --prox-eff: 0;
+  }
+
+  /* ── Header nav links: brighten toward the hover colour on approach; the
+     underline draw stays the hover/focus reward. ───────────────────────── */
+  .v2-header-link[data-proximity] {
+    color: color-mix(in srgb, var(--nav-fg), var(--nav-fg-strong) calc(var(--prox-eff) * 100%));
+  }
+
+  /* ── Header CTA pill: same gentle lift as buttons (it lifts -1px on hover). */
+  .v2-header-cta[data-proximity] {
+    transition:
+      translate 0.25s cubic-bezier(0.22, 0.61, 0.36, 1),
+      box-shadow 0.25s cubic-bezier(0.22, 0.61, 0.36, 1),
+      background 0.2s ease;
+    translate: 0 calc(var(--prox-eff) * -1px);
+  }
+  @media (hover: hover) {
+    .v2-header-cta[data-proximity]:hover {
+      transform: none;
+    }
+  }
+
+  /* ── Header secondary (refer) pill: same -1px lift as the CTA. */
+  .v2-header-refer[data-proximity] {
+    transition:
+      translate 0.25s cubic-bezier(0.22, 0.61, 0.36, 1),
+      background 0.2s ease,
+      border-color 0.2s ease;
+    translate: 0 calc(var(--prox-eff) * -1px);
+  }
+  @media (hover: hover) {
+    .v2-header-refer[data-proximity]:hover {
+      transform: none;
+    }
+  }
+
+  /* ── Footer links: brighten toward full white on approach; the underline
+     draw stays the hover/focus reward. Resting value (--prox-eff: 0) equals
+     the inherited white/75, so nothing changes at rest. */
+  .v2-link[data-proximity] {
+    color: color-mix(in srgb, rgba(255, 255, 255, 0.75), #fff calc(var(--prox-eff) * 100%));
+    transition: color 0.3s ease;
+  }
+}
+
 /* === Scroll-reveal (consumed by <Reveal>) === */
 .reveal {
   opacity: 0;

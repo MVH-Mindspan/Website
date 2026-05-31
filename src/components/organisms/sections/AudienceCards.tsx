@@ -75,6 +75,7 @@ export function AudienceCards({
             <Reveal
               key={a.id}
               as="article"
+              dataProximity="subtle"
               className="v2-card rounded-[2rem] p-5 sm:p-6 md:p-8 flex flex-col group"
               style={{
                 background: alpha(c.skySoft, 0.7),
@@ -115,7 +116,7 @@ export function AudienceCards({
                 )}
                 <div className="mt-auto pt-8">
                   <span
-                    className="inline-flex items-center gap-2 font-semibold text-sm transition-all group-hover:-translate-y-0.5"
+                    className="inline-flex items-center gap-2 font-semibold text-sm transition-all prox-inner-cta"
                     style={{
                       padding: "10px 20px",
                       background: c.brandGreen,
