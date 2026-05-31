@@ -78,6 +78,7 @@ export function SimpleSteps({
           {stages.map((step, i) => (
             <Reveal
               key={step.title}
+              dataProximity="subtle"
               className="v2-card flex flex-col rounded-[1.5rem] min-w-0"
               style={{
                 background: alpha(cardBg, 0.7),
@@ -137,7 +138,8 @@ export function SimpleSteps({
                 <a
                   href={step.cta.href}
                   {...externalLinkProps(step.cta.href)}
-                  className="inline-flex items-center gap-2 font-semibold transition-all hover:-translate-y-0.5 self-start"
+                  className="inline-flex items-center gap-2 font-semibold transition-all prox-cta self-start"
+                  data-proximity=""
                   style={{
                     fontFamily: theme.fonts.body,
                     fontSize: typeScale.bodySm,

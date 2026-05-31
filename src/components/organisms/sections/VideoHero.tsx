@@ -140,7 +140,8 @@ export function VideoHero({
                     href: brand.phoneHref,
                   })
                 }
-                className="hero-cta-primary"
+                className="hero-cta-primary prox-cta"
+                data-proximity=""
                 style={{
                   display: "inline-flex",
                   alignItems: "center",
@@ -180,7 +181,8 @@ export function VideoHero({
                     href: cta.href,
                   })
                 }
-                className="hero-cta-secondary"
+                className="hero-cta-secondary prox-cta"
+                data-proximity=""
                 style={{
                   display: "inline-block",
                   fontFamily: theme.fonts.body,

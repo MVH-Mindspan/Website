@@ -125,7 +125,8 @@ export function EditorialStages({
                 <a
                   href={step.cta.href}
                   {...externalLinkProps(step.cta.href)}
-                  className="inline-flex items-center gap-2 font-semibold transition-all hover:-translate-y-0.5 mt-6"
+                  className="inline-flex items-center gap-2 font-semibold transition-all prox-cta mt-6"
+                  data-proximity=""
                   style={{
                     fontFamily: theme.fonts.body,
                     fontSize: typeScale.bodySm,

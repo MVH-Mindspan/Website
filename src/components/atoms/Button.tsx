@@ -145,6 +145,7 @@ export function Button({
         aria-label={ariaLabel}
         className={combined}
         style={baseStyle}
+        data-proximity=""
       >
         {content}
       </a>
@@ -176,6 +177,7 @@ export function Button({
       aria-label={ariaLabel}
       className={combined}
       style={baseStyle}
+      data-proximity={disabled ? undefined : ""}
     >
       {content}
     </button>

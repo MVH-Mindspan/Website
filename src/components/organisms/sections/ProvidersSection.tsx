@@ -19,6 +19,7 @@ function ProviderBlock({ card }: { card: ProviderCard }) {
 
   return (
     <Reveal
+      dataProximity="subtle"
       className={`${dark ? "v2-card-dark" : "v2-card"} rounded-[2rem] p-5 sm:p-6 md:p-8 lg:p-10 relative overflow-hidden group`}
       style={{
         background: alpha(dark ? c.primary : c.cream, dark ? 0.85 : 0.7),
@@ -64,7 +65,8 @@ function ProviderBlock({ card }: { card: ProviderCard }) {
         <div className="mt-8 flex flex-wrap gap-3">
           <a
             href={card.primaryCta.href}
-            className="inline-flex items-center gap-2 font-semibold transition-all hover:-translate-y-0.5"
+            className="inline-flex items-center gap-2 font-semibold transition-all prox-cta"
+            data-proximity=""
             style={{
               fontFamily: theme.fonts.body,
               padding: "14px 28px",
@@ -78,7 +80,8 @@ function ProviderBlock({ card }: { card: ProviderCard }) {
           </a>
           <a
             href={card.secondaryCta.href}
-            className="inline-flex items-center gap-2 font-medium transition-all"
+            className="inline-flex items-center gap-2 font-medium transition-all prox-cta"
+            data-proximity=""
             style={{
               fontFamily: theme.fonts.body,
               padding: "14px 28px",

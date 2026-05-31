@@ -25,6 +25,7 @@ function FooterLink({
     <a
       href={href}
       className={className}
+      data-proximity=""
       {...(external
         ? { target: "_blank", rel: "noopener noreferrer" }
         : {})}

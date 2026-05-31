@@ -314,7 +314,8 @@ function HeroAside({
                   href: primaryCta.href,
                 })
               }
-              className="hero-aside-primary"
+              className="hero-aside-primary prox-cta"
+              data-proximity=""
               style={{
                 display: "inline-flex",
                 alignItems: "center",
@@ -347,7 +348,8 @@ function HeroAside({
                   href: secondaryCta.href,
                 })
               }
-              className="hero-aside-secondary"
+              className="hero-aside-secondary prox-cta"
+              data-proximity=""
               style={{
                 display: "inline-flex",
                 alignItems: "center",

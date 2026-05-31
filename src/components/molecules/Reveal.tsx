@@ -10,6 +10,9 @@ type Props = {
   className?: string;
   style?: CSSProperties;
   id?: string;
+  /** Opt this node into the pointer-proximity "pre-hover" effect.
+   *  "strong" is reserved for signature moments (e.g. the feature-grid wave). */
+  dataProximity?: "subtle" | "strong";
 };
 
 export function Reveal({
@@ -19,6 +22,7 @@ export function Reveal({
   className,
   style,
   id,
+  dataProximity,
 }: Props) {
   const ref = useRef<HTMLElement | null>(null);
   const reduceMotion = useReducedMotion();
@@ -60,6 +64,7 @@ export function Reveal({
       id={id}
       className={`reveal${delayClass} ${className ?? ""}`.trim()}
       style={style}
+      data-proximity={dataProximity}
     >
       {children}
     </Tag>
