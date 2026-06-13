@@ -2,7 +2,8 @@
 
 import { useTheme } from "@/lib/theme-context";
 import { alpha } from "@/lib/themes";
-import { type as typeScale } from "@/lib/tokens";
+import { type as typeScale, container, measure } from "@/lib/tokens";
+import { Grid, GridCol } from "@/components/atoms/Grid";
 import { Reveal } from "@/components/molecules/Reveal";
 
 export function EditorialIntro({
@@ -22,7 +23,7 @@ export function EditorialIntro({
       id={id}
       className="relative"
       style={{
-        background: "#201E17",
+        background: c.primary,
         color: c.cream,
         padding: "clamp(40px, 7vw, 56px) 0",
         scrollMarginTop: "96px",
@@ -34,39 +35,37 @@ export function EditorialIntro({
           background: "linear-gradient(to bottom, transparent, rgba(0,0,0,0.18))",
         }}
       />
-      <Reveal
-        className="editorial-grid"
-        style={{
-          maxWidth: "min(1320px, 92vw)",
-          marginInline: "auto",
-          display: "grid",
-          gridTemplateColumns: "80px 1fr 1fr",
-          gap: "0 32px",
-          alignItems: "center",
-        }}
-      >
-        <h2
-          style={{
-            fontFamily: theme.fonts.heading,
-            fontSize: typeScale.h2,
-            fontWeight: 400,
-            lineHeight: 1.15,
-            gridColumn: "1 / 3",
-          }}
-        >
-          {title}
-        </h2>
-        <p
-          style={{
-            fontFamily: theme.fonts.body,
-            fontSize: typeScale.leadMd,
-            color: alpha(c.cream, 0.7),
-            lineHeight: 1.6,
-            maxWidth: "42ch",
-          }}
-        >
-          {lead}
-        </p>
+      <Reveal style={{ maxWidth: container.width, marginInline: "auto" }}>
+        {/* Two-block editorial split on the modular grid: heading on cols 1-5,
+            lede on cols 7-12, leaving col 6 as a true gutter between them. */}
+        <Grid style={{ alignItems: "center" }}>
+          <GridCol
+            span={5}
+            as="h2"
+            style={{
+              fontFamily: theme.fonts.heading,
+              fontSize: typeScale.h2,
+              fontWeight: 400,
+              lineHeight: 1.15,
+            }}
+          >
+            {title}
+          </GridCol>
+          <GridCol
+            span={6}
+            start={7}
+            as="p"
+            style={{
+              fontFamily: theme.fonts.body,
+              fontSize: typeScale.leadMd,
+              color: alpha(c.cream, 0.7),
+              lineHeight: 1.6,
+              maxWidth: measure.lead,
+            }}
+          >
+            {lead}
+          </GridCol>
+        </Grid>
       </Reveal>
     </section>
   );

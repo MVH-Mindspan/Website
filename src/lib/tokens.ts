@@ -84,4 +84,40 @@ export const section = {
   padYLg: "112px",
 } as const;
 
+/**
+ * Modular grid — single source of truth for column count + gutter.
+ * 12 columns + an 8px baseline is the robust general web default in the
+ * Mueller-Brockmann / International Typographic Style. Sections opt in via the
+ * `<Grid>` / `<GridCol>` atoms and place elements by column line, so every
+ * heading, lede, and card snaps to the same lines.
+ */
+export const grid = {
+  columns: 12,
+  columnGap: "32px", // == Tailwind gap-8; matches the historical editorial gutter
+} as const;
+
+/**
+ * Measure (line-length caps) — one value per role. Replaces the ad-hoc spread
+ * of 42ch / 58ch / 62ch / 65ch that drifted across sections. Keeping a single
+ * measure per role is what holds the copy to a consistent reading rhythm.
+ */
+export const measure = {
+  body: "68ch", // long-form body copy
+  lead: "62ch", // section lede / SectionHeader lead (flush-left default)
+  leadCentered: "58ch", // narrower when centered (optical balance)
+} as const;
+
+/**
+ * 8px rhythm scale — canonical reference for inter-element copy spacing.
+ * Tailwind's 4px spacing scale maps onto this 1:1 (mt-2=8, mt-4=16, mt-6=24,
+ * mt-8=32, mt-12=48), so card internals snap to it by using only 8-multiples.
+ */
+export const space = {
+  xs: "8px",
+  sm: "16px",
+  md: "24px",
+  lg: "32px",
+  xl: "48px",
+} as const;
+
 export type Tone = "dark" | "light" | "muted";

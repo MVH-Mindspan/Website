@@ -42,6 +42,7 @@ export function LocationCards({
       <Container>
         {intro && (
           <SectionHeader
+            layout="split"
             eyebrow={intro.eyebrow}
             title={intro.title}
             lead={intro.lead}

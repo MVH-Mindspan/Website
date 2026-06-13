@@ -29,6 +29,7 @@ export function ProvidersPreview({
     <section id="our-neurologists" style={{ background: bg, padding: "clamp(56px, 10vw, 96px) 0" }}>
       <Container>
         <SectionHeader
+          layout="split"
           eyebrow={intro.eyebrow}
           title={intro.title}
           lead={intro.lead}
