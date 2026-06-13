@@ -14,6 +14,7 @@ import { CardCaption } from "@/components/molecules/CardCaption";
 import { Reveal } from "@/components/molecules/Reveal";
 import { SectionHeader } from "@/components/molecules/SectionHeader";
 import { externalLinkProps } from "@/lib/links";
+import { grid } from "@/lib/tokens";
 import type { Audience } from "@/content/audiences";
 
 export function AudienceCards({
@@ -41,6 +42,7 @@ export function AudienceCards({
     <section id="families" style={{ background: bg, padding: "clamp(56px, 10vw, 96px) 0" }}>
       <Container>
         <SectionHeader
+          layout="split"
           eyebrow={intro.eyebrow}
           title={intro.title}
           lead={intro.lead}
@@ -63,7 +65,10 @@ export function AudienceCards({
         )}
 
         <div
-          className={`mt-12 grid grid-cols-1 gap-5 md:gap-6 ${
+          // One gutter everywhere: card columns share the section's modular-grid
+          // gutter (grid.columnGap) instead of an ad-hoc gap-5/gap-6.
+          style={{ gap: grid.columnGap }}
+          className={`mt-12 grid grid-cols-1 ${
             audiences.length === 2
               ? "md:grid-cols-2"
               : audiences.length === 1
@@ -97,7 +102,7 @@ export function AudienceCards({
                   size="bodyCard"
                   maxWidth={false}
                   color={alpha(c.ink, 0.72)}
-                  className="mt-5 break-words"
+                  className="mt-4 break-words"
                 >
                   {a.body}
                 </Lead>

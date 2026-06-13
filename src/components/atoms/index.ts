@@ -3,6 +3,7 @@ export { Bullet } from "./Bullet";
 export { Button } from "./Button";
 export { Container } from "./Container";
 export { Eyebrow } from "./Eyebrow";
+export { Grid, GridCol } from "./Grid";
 export { Heading } from "./Heading";
 export { IconBadge } from "./IconBadge";
 export { ImageFrame } from "./ImageFrame";

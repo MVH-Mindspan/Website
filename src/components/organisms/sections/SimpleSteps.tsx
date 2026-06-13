@@ -138,12 +138,11 @@ export function SimpleSteps({
                 <a
                   href={step.cta.href}
                   {...externalLinkProps(step.cta.href)}
-                  className="inline-flex items-center gap-2 font-semibold transition-all prox-cta self-start"
+                  className="inline-flex items-center gap-2 font-semibold text-sm whitespace-nowrap transition-all prox-cta self-start"
                   data-proximity=""
                   style={{
                     fontFamily: theme.fonts.body,
-                    fontSize: typeScale.bodySm,
-                    padding: "12px 24px",
+                    padding: "10px 20px",
                     background: c.brandGreen,
                     color: "#fff",
                     borderRadius: "10rem",
