@@ -32,5 +32,6 @@ export {
   type ProviderPreview,
 } from "./providersPreview";
 export { testimonials, testimonialsIntro, type Testimonial } from "./testimonials";
+export { mindspanPath, mindspanPathIntro, mindspanPathCta } from "./path";
 export { finalCta } from "./finalCta";
 export { homeHero } from "./hero";

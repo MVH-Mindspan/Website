@@ -1,5 +1,6 @@
 import {
   VideoHero,
+  RippleFlow,
   SplitCards,
   EditorialPillarsIllustrated,
   StatsBand,
@@ -9,6 +10,7 @@ import {
   FinalCTA,
 } from "@/components/organisms/sections";
 import { howItWorksPage } from "@/content/pages/howItWorks";
+import { mindspanPath, mindspanPathIntro, mindspanPathCta } from "@/content/path";
 import { whatWeTreatPage } from "@/content/pages/whatWeTreat";
 import { faq, faqIntro } from "@/content/faq";
 import { JsonLd } from "@/lib/json-ld";
@@ -29,6 +31,14 @@ export default function HowItWorksPage() {
         ])}
       />
       <VideoHero {...howItWorksPage.hero} />
+
+      <RippleFlow
+        variant="rail"
+        tone="primary"
+        intro={mindspanPathIntro}
+        steps={mindspanPath}
+        cta={mindspanPathCta}
+      />
 
       <SplitCards
         tone="sand"

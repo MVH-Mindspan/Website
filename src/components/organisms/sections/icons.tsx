@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 
-type Icon =
+export type Icon =
   | "shield"
   | "bullseye"
   | "brain"

@@ -1,6 +1,7 @@
 import { VideoHero } from "@/components/organisms/sections/VideoHero";
 import { CoverageBand } from "@/components/organisms/sections/CoverageBand";
 import { EditorialStages } from "@/components/organisms/sections/EditorialStages";
+import { RippleFlow } from "@/components/organisms/sections/RippleFlow";
 import { StatsBand } from "@/components/organisms/sections/StatsBand";
 import { AudienceCards } from "@/components/organisms/sections/AudienceCards";
 import { Testimonials } from "@/components/organisms/sections/Testimonials";
@@ -11,11 +12,15 @@ import {
   homeHero,
   announcement,
   journey,
+  journeyIntro,
   stats,
   audiences,
   audiencesIntro,
   locations,
   locationsIntro,
+  mindspanPath,
+  mindspanPathIntro,
+  mindspanPathCta,
   finalCta,
   testimonials,
   testimonialsIntro,
@@ -56,7 +61,14 @@ export default function HomePage() {
         providers={providersPreview}
         tone="cream"
       />
-      <EditorialStages stages={journey} tone="sand" />
+      <RippleFlow
+        variant="rail"
+        tone="primary"
+        intro={mindspanPathIntro}
+        steps={mindspanPath}
+        cta={mindspanPathCta}
+      />
+      <EditorialStages stages={journey} intro={journeyIntro} align="center" tone="sand" />
       <Testimonials intro={testimonialsIntro} quotes={testimonials} tone="cream" />
       <LocationCards
         id="locations"

@@ -33,4 +33,9 @@ export {
   type LegalDocumentContent,
 } from "./LegalDocument";
 export { GuideBenefit } from "./GuideBenefit";
+export {
+  RippleFlow,
+  type RippleStep,
+  type RippleVariant,
+} from "./RippleFlow";
 export { SectionIcon } from "./icons";
