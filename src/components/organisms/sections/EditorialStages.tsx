@@ -15,10 +15,12 @@ export function EditorialStages({
   stages,
   intro,
   tone = "cream",
+  align = "left",
 }: {
   stages: readonly JourneyStage[];
   intro?: { eyebrow: string; title: string; lead: string };
   tone?: "sand" | "cream";
+  align?: "left" | "center";
 }) {
   const { theme } = useTheme();
   const c = theme.colors;
@@ -35,6 +37,7 @@ export function EditorialStages({
               eyebrow={intro.eyebrow}
               title={intro.title}
               lead={intro.lead}
+              align={align}
             />
           </div>
         )}

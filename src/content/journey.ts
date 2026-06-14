@@ -10,9 +10,10 @@ export type JourneyStage = {
 };
 
 export const journeyIntro = {
-  title: "What care at Mindspan actually looks like.",
+  eyebrow: "Step by step",
+  title: "What care at Mindspan looks like.",
   lead:
-    "Every family\u2019s journey is different, but the shape is the same. From first concern through to ongoing care, you\u2019ll know exactly what comes next at every step.",
+    "Every family\u2019s journey is different, but the shape is the same. Here is what each step looks like in practice, and who is beside you for it.",
 } as const;
 
 export const journey: JourneyStage[] = [
