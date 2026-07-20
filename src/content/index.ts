@@ -2,6 +2,7 @@ export { brand } from "./brand";
 export { nav, type NavLink } from "./nav";
 export { footer, type FooterColumn, type FooterLink } from "./footer";
 export { announcement } from "./announcement";
+export { clinicianBand } from "./clinicianBand";
 export { journey, journeyIntro, type JourneyStage } from "./journey";
 export { stats, type Stat } from "./stats";
 export { protocols, protocolsIntro, type Protocol } from "./protocols";

@@ -9,7 +9,8 @@ import { Lead } from "@/components/atoms/Lead";
 import { ArrowIcon } from "@/components/atoms/ArrowIcon";
 import { Reveal } from "@/components/molecules/Reveal";
 import { externalLinkProps } from "@/lib/links";
-import { ANALYTICS_EVENTS, track } from "@/lib/analytics";
+import { ANALYTICS_EVENTS, funnelFor, track } from "@/lib/analytics";
+import type { Testimonial } from "@/content/testimonials";
 
 export function FinalCTA({
   eyebrow,
@@ -19,6 +20,7 @@ export function FinalCTA({
   secondary,
   secondaryNote,
   signature,
+  testimonial,
 }: {
   eyebrow: string;
   title: string;
@@ -27,6 +29,7 @@ export function FinalCTA({
   secondary?: { label: string; href: string };
   secondaryNote?: string;
   signature?: string;
+  testimonial?: Testimonial;
 }) {
   const { theme } = useTheme();
   const c = theme.colors;
@@ -34,6 +37,7 @@ export function FinalCTA({
   return (
     <section
       className="relative overflow-hidden text-white"
+      data-analytics-location="final_cta"
       style={{ background: c.primary, padding: "clamp(56px, 10vw, 96px) 0" }}
     >
       <div className="absolute inset-0 pointer-events-none" aria-hidden>
@@ -93,6 +97,7 @@ export function FinalCTA({
                 track(ANALYTICS_EVENTS.ctaClicked, {
                   location: "final_cta",
                   variant: "secondary",
+                  funnel: funnelFor(secondary.href),
                   label: secondary.label,
                   href: secondary.href,
                 })
@@ -119,6 +124,7 @@ export function FinalCTA({
               track(ANALYTICS_EVENTS.ctaClicked, {
                 location: "final_cta",
                 variant: "primary",
+                funnel: funnelFor(primary.href),
                 label: primary.label,
                 href: primary.href,
               })
@@ -151,6 +157,32 @@ export function FinalCTA({
           >
             {secondaryNote}
           </p>
+        )}
+        {testimonial && (
+          <figure style={{ margin: "40px auto 0", maxWidth: "48ch" }}>
+            <blockquote
+              style={{
+                fontFamily: theme.fonts.accent,
+                fontStyle: "italic",
+                fontSize: typeScale.leadMd,
+                color: "rgba(255,255,255,0.9)",
+                lineHeight: 1.45,
+                textWrap: "pretty",
+              }}
+            >
+              “{testimonial.quote}”
+            </blockquote>
+            <figcaption
+              style={{
+                marginTop: 8,
+                fontFamily: theme.fonts.body,
+                fontSize: typeScale.bodySm,
+                color: "rgba(255,255,255,0.7)",
+              }}
+            >
+              {testimonial.name} · {testimonial.relation}
+            </figcaption>
+          </figure>
         )}
         {signature && (
           <p

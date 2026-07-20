@@ -8,13 +8,16 @@ import { StatCounter } from "@/components/molecules/StatCounter";
 import { Reveal } from "@/components/molecules/Reveal";
 import { externalLinkProps } from "@/lib/links";
 import type { Stat } from "@/content/stats";
+import type { Testimonial } from "@/content/testimonials";
 
 export function StatsBand({
   stats,
   tone = "sand",
+  testimonial,
 }: {
   stats: readonly Stat[];
   tone?: "sand" | "cream";
+  testimonial?: Testimonial;
 }) {
   const { theme } = useTheme();
   const c = theme.colors;
@@ -26,7 +29,10 @@ export function StatsBand({
   if (stats.length === 0) return null;
 
   return (
-    <section style={{ background: bg, padding: "clamp(48px, 8vw, 72px) 0" }}>
+    <section
+      data-analytics-location="stats_band"
+      style={{ background: bg, padding: "clamp(48px, 8vw, 72px) 0" }}
+    >
       <div
         style={{
           maxWidth: "min(1320px, 92vw)",
@@ -90,6 +96,37 @@ export function StatsBand({
               />
             </div>
             <ComparisonStat stat={second} align="right" />
+          </Reveal>
+        )}
+
+        {testimonial && (
+          <Reveal delay={1} style={{ marginTop: -16, textAlign: "center" }}>
+            <figure style={{ margin: 0 }}>
+              <blockquote
+                style={{
+                  fontFamily: theme.fonts.accent,
+                  fontStyle: "italic",
+                  fontSize: typeScale.leadMd,
+                  color: alpha(c.ink, 0.82),
+                  lineHeight: 1.45,
+                  maxWidth: "48ch",
+                  marginInline: "auto",
+                  textWrap: "pretty",
+                }}
+              >
+                “{testimonial.quote}”
+              </blockquote>
+              <figcaption
+                style={{
+                  marginTop: 10,
+                  fontFamily: theme.fonts.body,
+                  fontSize: typeScale.bodySm,
+                  color: alpha(c.ink, 0.72),
+                }}
+              >
+                {testimonial.name} · {testimonial.relation}
+              </figcaption>
+            </figure>
           </Reveal>
         )}
 
