@@ -47,6 +47,7 @@ export function SiteFooter() {
   return (
     <footer
       className="text-white/75"
+      data-analytics-location="site_footer"
       style={{
         background: c.primary,
         padding: "80px 0 48px",

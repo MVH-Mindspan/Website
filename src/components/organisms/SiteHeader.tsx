@@ -8,7 +8,7 @@ import { alpha } from "@/lib/themes";
 import { ease, easeArrays, type as typeScale } from "@/lib/tokens";
 import { brand } from "@/content/brand";
 import { audienceNav, nav } from "@/content/nav";
-import { ANALYTICS_EVENTS, track } from "@/lib/analytics";
+import { ANALYTICS_EVENTS, funnelFor, track } from "@/lib/analytics";
 
 export function SiteHeader() {
   const { theme } = useTheme();
@@ -185,6 +185,7 @@ export function SiteHeader() {
 
       <nav
         className="fixed top-4 left-1/2 -translate-x-1/2 z-[999] flex items-center justify-between"
+        data-analytics-location="site_header"
         style={navStyle}
       >
         <a href="/" className="inline-flex items-center" aria-label={brand.name}>
@@ -249,6 +250,8 @@ export function SiteHeader() {
               track(ANALYTICS_EVENTS.ctaClicked, {
                 location: "site_header",
                 variant: "primary",
+                funnel: funnelFor(brand.primaryCtaHref),
+                label: brand.primaryCta,
                 href: brand.primaryCtaHref,
               })
             }
@@ -435,6 +438,8 @@ export function SiteHeader() {
                     track(ANALYTICS_EVENTS.ctaClicked, {
                       location: "site_header_mobile",
                       variant: "phone",
+                      funnel: "booking",
+                      label: brand.phone,
                       href: brand.phoneHref,
                     });
                     setOpen(false);
@@ -534,6 +539,8 @@ export function SiteHeader() {
                   track(ANALYTICS_EVENTS.ctaClicked, {
                     location: "site_header_mobile",
                     variant: "primary",
+                    funnel: funnelFor(brand.primaryCtaHref),
+                    label: brand.primaryCta,
                     href: brand.primaryCtaHref,
                   });
                   setOpen(false);
