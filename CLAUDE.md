@@ -24,15 +24,16 @@ src/
     atoms/        ArrowIcon, Bullet, Button, Container, Eyebrow, Heading, IconBadge, Lead, Pill
     molecules/    BulletList, Reveal, SectionHeader, StatCounter
     organisms/
-      SiteHeader, SiteFooter
-      sections/   VideoHero, PageHero, EditorialIntro, TeaserBanner, EditorialStages,
+      SiteHeader, SiteFooter, MobileActionBar (homepage sticky mobile bar)
+      sections/   VideoHero, PageHero, EditorialIntro, ClinicianBand, EditorialStages,
                   StatsBand, SplitCards, FeatureCardGrid, AudienceCards, LocationCards,
-                  ProvidersSection, FinalCTA, icons
+                  ProvidersSection, FAQ, Testimonials, FinalCTA, icons
     booking/      booking wizard (feature module)
     home-legacy/  MindspanHome — frozen Mindspan Brand v1 homepage
     dev/          StyleSwitcher (dev-only theme toggle)
   content/        typed copy modules (brand, nav, footer, journey, stats, protocols, technology,
-                  audiences, locations, providers, finalCta, hero, announcement)
+                  audiences, locations, providers, finalCta, hero, announcement, faq,
+                  testimonials, clinicianBand, actionBar)
     pages/        per-page metadata + hero copy (home, about, locations, locationDetail,
                   providers, refer, careers, legal)
   lib/
