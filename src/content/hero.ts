@@ -7,7 +7,7 @@ export const homeHero = {
   subTagline: brand.subTagline,
   subhead: brand.subhead,
   cta: { label: "Start the free assessment", href: "https://assessment.mindspan.co/" },
-  ctaNote: "Free, from home. Seen in 2⁠–⁠3 weeks, not 12+ months.",
+  ctaNote: "Seen in 2⁠–⁠3 weeks, not 12+ months.",
   secondaryCta: { label: "Book a visit", href: "/book-a-visit" },
   reassurance: brand.coverage,
 } as const;
