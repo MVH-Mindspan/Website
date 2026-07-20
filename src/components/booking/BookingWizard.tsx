@@ -229,6 +229,9 @@ export default function BookingWizard() {
   const [submitted, setSubmitted] = useState(false);
   const [submitError, setSubmitError] = useState<string | undefined>(undefined);
   const [hydrated, setHydrated] = useState(false);
+  // A ?state= preselect is cosmetic until the visitor actually interacts —
+  // it must not arm the leave-confirmation dialog or persist a session.
+  const [stateTouched, setStateTouched] = useState(false);
 
   const stepHeadingRef = useRef<HTMLDivElement | null>(null);
   const submitControllerRef = useRef<AbortController | null>(null);
@@ -273,20 +276,44 @@ export default function BookingWizard() {
   // Hydrate from sessionStorage after mount (avoid SSR mismatch).
   useEffect(() => {
     setHydrated(true);
+    let restoredStep: StepId = "state";
     try {
       const raw = sessionStorage.getItem(STORAGE_KEY);
-      if (!raw) return;
-      const parsed = JSON.parse(raw) as { formData?: FormData; stepId?: StepId };
-      if (parsed.formData) {
-        setFormData({ ...initialFormData, ...parsed.formData });
-      }
-      if (parsed.stepId) {
-        setStepId(parsed.stepId);
+      if (raw) {
+        const parsed = JSON.parse(raw) as { formData?: FormData; stepId?: StepId };
+        if (parsed.formData) {
+          setFormData({ ...initialFormData, ...parsed.formData });
+          // Stored progress came from real interaction in this session.
+          setStateTouched(true);
+        }
+        if (parsed.stepId) {
+          setStepId(parsed.stepId);
+          restoredStep = parsed.stepId;
+        }
       }
     } catch {
       // Corrupt storage — ignore and start fresh.
     }
+    // Preselect from an explicit ?state= link (location pages, campaigns).
+    // Only while still on the first step — never override a choice someone
+    // already made deeper in the flow.
+    if (restoredStep === "state") {
+      try {
+        const param = new URLSearchParams(window.location.search).get("state");
+        if (param === "MA" || param === "CA" || param === "Other") {
+          setFormData((prev) => ({ ...prev, state: param }));
+        }
+      } catch {
+        // Malformed URL — ignore.
+      }
+    }
   }, []);
+
+  // Progress the visitor actually made, ignoring an untouched ?state=
+  // preselect.
+  const userProgress =
+    hasFormProgress(formData) &&
+    (stateTouched || hasFormProgress({ ...formData, state: "" }));
 
   // Persist formData + stepId until submitted. Clear on success.
   useEffect(() => {
@@ -296,7 +323,7 @@ export default function BookingWizard() {
         sessionStorage.removeItem(STORAGE_KEY);
         return;
       }
-      if (hasFormProgress(formData)) {
+      if (userProgress) {
         sessionStorage.setItem(
           STORAGE_KEY,
           JSON.stringify({ formData, stepId })
@@ -305,20 +332,19 @@ export default function BookingWizard() {
     } catch {
       // Storage unavailable (e.g. private mode quota) — silently degrade.
     }
-  }, [formData, stepId, submitted, hydrated]);
+  }, [formData, stepId, submitted, hydrated, userProgress]);
 
   // Warn on accidental tab close / refresh while form has unsaved data.
   useEffect(() => {
     if (submitted) return;
-    const dirty = hasFormProgress(formData);
-    if (!dirty) return;
+    if (!userProgress) return;
     const handler = (e: BeforeUnloadEvent) => {
       e.preventDefault();
       e.returnValue = "";
     };
     window.addEventListener("beforeunload", handler);
     return () => window.removeEventListener("beforeunload", handler);
-  }, [formData, submitted]);
+  }, [userProgress, submitted]);
 
   const updateField = useCallback((field: string, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
@@ -346,6 +372,8 @@ export default function BookingWizard() {
   const handleStateSelect = useCallback(
     (state: StateChoice) => {
       updateField("state", state);
+      setStateTouched(true);
+      track(ANALYTICS_EVENTS.bookingStateSelected, { state });
       if (autoAdvanceTimeoutRef.current) {
         clearTimeout(autoAdvanceTimeoutRef.current);
       }
@@ -465,6 +493,10 @@ export default function BookingWizard() {
         state: formData.state,
         careOption: formData.careOption,
       });
+      track(ANALYTICS_EVENTS.bookingCompleted, {
+        state: formData.state,
+        careOption: formData.careOption,
+      });
     } else {
       setSubmitError(result.error);
       track(ANALYTICS_EVENTS.bookingSubmitFailed, {
@@ -498,7 +530,7 @@ export default function BookingWizard() {
   const handleExitClick = useCallback(
     (e: React.MouseEvent<HTMLAnchorElement>) => {
       if (submitted) return;
-      if (!hasFormProgress(formData)) return;
+      if (!userProgress) return;
       const confirmed = window.confirm(shellCopy.exitConfirm);
       if (!confirmed) {
         e.preventDefault();
@@ -511,7 +543,7 @@ export default function BookingWizard() {
         // ignore
       }
     },
-    [formData, submitted, stepId]
+    [userProgress, submitted, stepId]
   );
 
   const renderStep = () => {
