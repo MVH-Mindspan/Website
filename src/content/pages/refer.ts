@@ -22,14 +22,18 @@ export const referPage = {
     submitting: "Sending…",
     successTitle: "Referral received.",
     successBody:
-      "Thank you. Our team will reach out within one business day to collect any remaining chart details and schedule the patient.",
+      "Thank you. We call the patient within one business day to schedule, and you get a structured note back in your chart after the visit.",
     privacy:
       "Submissions are encrypted in transit. Please do not include MBI, full DOB, or clinical notes here. We capture those on a HIPAA-compliant intake call.",
   },
   alt: {
     title: "Prefer a phone call or fax?",
-    promptNoLocation: "Select a clinic above to see the right phone and secure fax.",
+    promptNoLocation: "Either clinic can take your referral by phone, fax, or secure email.",
     email: { label: "Email", value: "referrals@mindspan.co", href: "mailto:referrals@mindspan.co" },
+  },
+  pad: {
+    label: "Printable referral pad (PDF)",
+    href: "/downloads/mindspan-referral-pad.pdf",
   },
   defaultLocationId: "danvers",
   locations: [

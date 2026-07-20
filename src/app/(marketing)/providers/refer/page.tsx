@@ -31,6 +31,7 @@ export default function ReferPage() {
           privacy: referPage.form.privacy,
         }}
         alt={referPage.alt}
+        pad={referPage.pad}
         locations={referPage.locations}
         defaultLocationId={referPage.defaultLocationId}
       />

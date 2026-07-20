@@ -1,0 +1,121 @@
+<!doctype html>
+<!--
+  Source for public/downloads/mindspan-referral-pad.pdf.
+  Regenerate with:
+    npx playwright pdf file://$PWD/scripts/referral-pad.html public/downloads/mindspan-referral-pad.pdf
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Mindspan patient referral pad</title>
+<style>
+  @page { size: Letter; margin: 0; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 8.5in; }
+  body {
+    font-family: "Figtree", "Helvetica Neue", Arial, system-ui, sans-serif;
+    color: #201E17;
+    padding: 0.7in 0.75in 0.55in;
+    font-size: 10.5pt;
+    line-height: 1.45;
+  }
+  .serif { font-family: Georgia, "Times New Roman", serif; }
+  header { display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 2px solid #083630; padding-bottom: 14px; }
+  .wordmark { font-family: Georgia, serif; font-size: 24pt; color: #083630; letter-spacing: -0.01em; }
+  .doc-title { text-align: right; }
+  .doc-title h1 { font-size: 13pt; font-weight: 600; color: #083630; }
+  .doc-title p { font-size: 9pt; color: #6b675c; }
+  .intro { margin-top: 14px; font-size: 9.5pt; color: #4c483e; }
+  h2 { font-size: 8.5pt; letter-spacing: 0.12em; text-transform: uppercase; color: #c93a0e; margin: 22px 0 8px; }
+  .clinics { display: flex; gap: 16px; }
+  .clinic {
+    flex: 1; border: 1px solid #d8d2c2; border-radius: 10px; padding: 12px 14px; background: #FBF7F0;
+  }
+  .clinic .check { display: flex; align-items: center; gap: 8px; font-weight: 700; color: #083630; font-size: 10.5pt; }
+  .clinic .box { width: 12px; height: 12px; border: 1.5px solid #083630; border-radius: 3px; display: inline-block; }
+  .clinic dl { margin-top: 8px; font-size: 9.5pt; }
+  .clinic dt { float: left; width: 78px; color: #6b675c; }
+  .clinic dd { margin-left: 78px; font-weight: 600; }
+  .clinic .hours { color: #6b675c; font-weight: 400; font-size: 8.5pt; margin-top: 4px; }
+  .field { margin-bottom: 16px; }
+  .field label { display: block; font-size: 8.5pt; color: #6b675c; margin-bottom: 14px; }
+  .field .line { border-bottom: 1px solid #b7b1a2; height: 1px; }
+  .row { display: flex; gap: 24px; }
+  .row .field { flex: 1; }
+  .notes .line { margin-bottom: 22px; }
+  .next {
+    margin-top: 20px; border: 1px solid #d8d2c2; border-left: 4px solid #083630;
+    border-radius: 8px; padding: 10px 14px; font-size: 9.5pt; background: #FBF7F0;
+  }
+  .next strong { color: #083630; }
+  footer { margin-top: 18px; font-size: 8.5pt; color: #6b675c; }
+  footer p + p { margin-top: 4px; }
+</style>
+</head>
+<body>
+  <header>
+    <div class="wordmark">Mindspan</div>
+    <div class="doc-title">
+      <h1>Patient referral</h1>
+      <p>Board-certified neurologists for memory loss, Alzheimer&rsquo;s, and dementia</p>
+    </div>
+  </header>
+
+  <p class="intro">
+    Fill out this pad and fax it to the clinic you are referring to. First visit typically
+    within two to three weeks, with a structured note back in your chart after the visit.
+    The patient stays your patient.
+  </p>
+
+  <h2>Step 1 &middot; Choose a clinic and fax this form</h2>
+  <div class="clinics">
+    <div class="clinic">
+      <div class="check"><span class="box"></span> MA &ndash; Danvers</div>
+      <dl>
+        <dt>Secure fax</dt><dd>(844) 689-3306</dd>
+        <dt>Phone</dt><dd>(978) 850-3914</dd>
+      </dl>
+      <p class="hours">Mon&ndash;Fri, 9am&ndash;6pm ET &middot; 99 Conifer Hill Drive, Danvers, MA 01923</p>
+    </div>
+    <div class="clinic">
+      <div class="check"><span class="box"></span> CA &ndash; Bay Area</div>
+      <dl>
+        <dt>Secure fax</dt><dd>(844) 689-7419</dd>
+        <dt>Phone</dt><dd>(669) 291-2202</dd>
+      </dl>
+      <p class="hours">Mon&ndash;Fri, 9am&ndash;6pm PT &middot; 2520 Samaritan Dr, Suite 201B, San Jose, CA 95124</p>
+    </div>
+  </div>
+
+  <h2>Step 2 &middot; Referring provider</h2>
+  <div class="row">
+    <div class="field"><label>Your name</label><div class="line"></div></div>
+    <div class="field"><label>Practice name</label><div class="line"></div></div>
+  </div>
+  <div class="row">
+    <div class="field"><label>Direct phone</label><div class="line"></div></div>
+    <div class="field"><label>Email</label><div class="line"></div></div>
+  </div>
+
+  <h2>Step 3 &middot; Patient you are referring</h2>
+  <div class="row">
+    <div class="field"><label>Patient&rsquo;s name</label><div class="line"></div></div>
+    <div class="field"><label>Best phone for the patient or their caregiver</label><div class="line"></div></div>
+  </div>
+  <div class="field notes">
+    <label>Anything we should know? (urgency, language preference, caregiver context)</label>
+    <div class="line"></div>
+    <div class="line"></div>
+  </div>
+
+  <div class="next">
+    <strong>What happens next:</strong> we call the patient within one business day to
+    schedule, and you get a structured note back in your chart after the visit.
+  </div>
+
+  <footer>
+    <p>Please do not include MBI, full DOB, or clinical notes here. We capture those on a HIPAA-compliant intake call.</p>
+    <p>Prefer email or online? referrals@mindspan.co &middot; mindspan.co/providers/refer &middot; Covered by Medicare, Medicaid, and many health plans.</p>
+  </footer>
+</body>
+</html>
