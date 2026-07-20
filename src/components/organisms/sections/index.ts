@@ -1,6 +1,7 @@
 export { VideoHero } from "./VideoHero";
 export { PageHero } from "./PageHero";
 export { EditorialIntro } from "./EditorialIntro";
+export { ClinicianBand } from "./ClinicianBand";
 export { CoverageBand } from "./CoverageBand";
 export { EditorialStages } from "./EditorialStages";
 export { SimpleSteps } from "./SimpleSteps";

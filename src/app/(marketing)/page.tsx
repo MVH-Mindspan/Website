@@ -1,5 +1,6 @@
 import { VideoHero } from "@/components/organisms/sections/VideoHero";
 import { CoverageBand } from "@/components/organisms/sections/CoverageBand";
+import { ClinicianBand } from "@/components/organisms/sections/ClinicianBand";
 import { EditorialStages } from "@/components/organisms/sections/EditorialStages";
 import { RippleFlow } from "@/components/organisms/sections/RippleFlow";
 import { StatsBand } from "@/components/organisms/sections/StatsBand";
@@ -7,10 +8,13 @@ import { AudienceCards } from "@/components/organisms/sections/AudienceCards";
 import { Testimonials } from "@/components/organisms/sections/Testimonials";
 import { ProvidersPreview } from "@/components/organisms/sections/ProvidersPreview";
 import { LocationCards } from "@/components/organisms/sections/LocationCards";
+import { FAQ } from "@/components/organisms/sections/FAQ";
 import { FinalCTA } from "@/components/organisms/sections/FinalCTA";
+import { MobileActionBar } from "@/components/organisms/MobileActionBar";
 import {
   homeHero,
   announcement,
+  clinicianBand,
   journey,
   journeyIntro,
   stats,
@@ -27,6 +31,8 @@ import {
   providersPreview,
   providersPreviewIntro,
 } from "@/content";
+import { actionBar } from "@/content/actionBar";
+import { faqIntro, homeFaq } from "@/content/faq";
 import { homePage } from "@/content/pages/home";
 import { JsonLd } from "@/lib/json-ld";
 import {
@@ -48,9 +54,12 @@ export default function HomePage() {
         subTagline={homeHero.subTagline}
         subhead={homeHero.subhead}
         cta={homeHero.cta}
+        ctaNote={homeHero.ctaNote}
+        secondaryCta={homeHero.secondaryCta}
+        reassurance={homeHero.reassurance}
       />
       <CoverageBand appointments={announcement} />
-      <StatsBand stats={stats} tone="cream" />
+      <StatsBand stats={stats} tone="cream" testimonial={testimonials[0]} />
       <AudienceCards
         intro={audiencesIntro}
         audiences={audiences.filter((a) => a.id !== "doctors")}
@@ -61,6 +70,7 @@ export default function HomePage() {
         providers={providersPreview}
         tone="cream"
       />
+      <ClinicianBand {...clinicianBand} />
       <RippleFlow
         variant="rail"
         tone="primary"
@@ -77,7 +87,9 @@ export default function HomePage() {
         groupByKind
         tone="sand"
       />
-      <FinalCTA {...finalCta} />
+      <FAQ intro={faqIntro} items={homeFaq} tone="cream" />
+      <FinalCTA {...finalCta} testimonial={testimonials[2]} />
+      <MobileActionBar {...actionBar} />
     </>
   );
 }

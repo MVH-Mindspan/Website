@@ -40,6 +40,7 @@ type Props = {
     promptNoLocation: string;
     email: AltAction;
   };
+  pad?: { label: string; href: string };
   locations: ReadonlyArray<ReferLocation>;
   defaultLocationId?: string;
 };
@@ -50,6 +51,7 @@ export function ReferSection({
   lead,
   form,
   alt,
+  pad,
   locations,
   defaultLocationId = "",
 }: Props) {
@@ -75,6 +77,7 @@ export function ReferSection({
 
   return (
     <section
+      data-analytics-location="refer"
       style={{
         background: c.cream,
         paddingTop: "max(120px, 14vh)",
@@ -166,6 +169,7 @@ export function ReferSection({
           <Reveal className="refer-form-col">
             <ReferForm
               copy={form}
+              pad={pad}
               locationId={locationId}
               locationLabel={selectedLocation?.label ?? ""}
               onValidateLocation={validateLocation}
@@ -210,34 +214,93 @@ export function ReferSection({
                   : alt.promptNoLocation}
               </p>
 
-              <ul
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: 14,
-                  margin: 0,
-                  padding: 0,
-                  listStyle: "none",
-                }}
-              >
-                {selectedLocation && (
-                  <>
-                    <AltRow
-                      label={`Call · ${selectedLocation.hours}`}
-                      value={selectedLocation.phone.value}
-                      href={selectedLocation.phone.href}
-                      icon={<PhoneIcon />}
-                    />
-                    <AltRow
-                      label="Secure fax"
-                      value={selectedLocation.fax.value}
-                      href={selectedLocation.fax.href}
-                      icon={<FaxIcon />}
-                    />
-                  </>
-                )}
+              <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+                {locations.map((loc) => {
+                  const isSelected = loc.id === locationId;
+                  return (
+                    <div
+                      key={loc.id}
+                      style={{
+                        borderRadius: "0.9rem",
+                        padding: "10px 14px",
+                        margin: "0 -14px",
+                        background: isSelected
+                          ? alpha(c.brandGreen, 0.07)
+                          : "transparent",
+                        border: `1px solid ${
+                          isSelected ? alpha(c.brandGreen, 0.18) : "transparent"
+                        }`,
+                        transition: "background 0.2s ease, border-color 0.2s ease",
+                      }}
+                    >
+                      <p
+                        style={{
+                          fontFamily: theme.fonts.body,
+                          fontSize: typeScale.micro,
+                          letterSpacing: "0.1em",
+                          textTransform: "uppercase",
+                          color: alpha(c.ink, 0.65),
+                          fontWeight: 600,
+                          display: "flex",
+                          alignItems: "center",
+                          gap: 8,
+                        }}
+                      >
+                        {loc.label}
+                        {isSelected && (
+                          <span
+                            style={{
+                              background: c.brandGreen,
+                              color: "#fff",
+                              borderRadius: "10rem",
+                              padding: "2px 10px",
+                              fontSize: "0.6875rem",
+                              letterSpacing: "0.06em",
+                            }}
+                          >
+                            Selected
+                          </span>
+                        )}
+                      </p>
+                      <AltRow
+                        label={`Call · ${loc.hours}`}
+                        value={loc.phone.value}
+                        href={loc.phone.href}
+                        icon={<PhoneIcon />}
+                      />
+                      <AltRow
+                        label="Secure fax"
+                        value={loc.fax.value}
+                        href={loc.fax.href}
+                        icon={<FaxIcon />}
+                      />
+                    </div>
+                  );
+                })}
                 <AltRow {...alt.email} icon={<MailIcon />} />
-              </ul>
+                {pad && (
+                  <a
+                    href={pad.href}
+                    download
+                    style={{
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: 8,
+                      minHeight: 44,
+                      fontFamily: theme.fonts.body,
+                      fontSize: typeScale.bodySm,
+                      fontWeight: 600,
+                      color: c.brandGreen,
+                      textDecoration: "underline",
+                      textUnderlineOffset: 4,
+                      textDecorationColor: alpha(c.brandGreen, 0.4),
+                    }}
+                  >
+                    <DownloadIcon />
+                    {pad.label}
+                  </a>
+                )}
+              </div>
 
             </aside>
           </Reveal>
@@ -335,7 +398,7 @@ function AltRow({
   );
 
   return (
-    <li>
+    <div>
       {href ? (
         <a
           href={href}
@@ -354,7 +417,7 @@ function AltRow({
           {inner}
         </div>
       )}
-    </li>
+    </div>
   );
 }
 
@@ -381,6 +444,20 @@ function FaxIcon() {
         strokeLinejoin="round"
       />
       <path d="M5 11h6v3H5z" stroke="currentColor" strokeWidth="1.4" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+function DownloadIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden>
+      <path
+        d="M8 2v8m0 0 3-3M8 10 5 7M3 12.5h10"
+        stroke="currentColor"
+        strokeWidth="1.4"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
     </svg>
   );
 }

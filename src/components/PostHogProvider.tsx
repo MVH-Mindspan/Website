@@ -3,6 +3,8 @@
 import { useEffect, Suspense } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 import posthog from "posthog-js";
+import { AnalyticsBridge } from "@/components/AnalyticsBridge";
+import { flushPreInitEvents } from "@/lib/analytics";
 
 function PageViewTracker() {
   const pathname = usePathname();
@@ -44,6 +46,10 @@ export function PostHogProvider({ children }: { children: React.ReactNode }) {
         capture_pageleave: true,
         autocapture: true,
         person_profiles: "identified_only",
+        // Write the identity cookie on .mindspan.co so the assessment app
+        // (assessment.mindspan.co, same PostHog project) sees the same
+        // distinct_id and the funnel joins across the subdomain handoff.
+        cross_subdomain_cookie: true,
         session_recording: {
           // Mask every input value and every visible text node from session
           // replay. Caregivers fill in personal health info on this site, so
@@ -52,6 +58,12 @@ export function PostHogProvider({ children }: { children: React.ReactNode }) {
           maskTextSelector: "*",
         },
       });
+      // Expose the instance like the snippet install does, so QA tooling and
+      // browser debugging can reach it.
+      (window as Window & { posthog?: typeof posthog }).posthog = posthog;
+      // Deliver anything track() buffered before init (e.g. mount-time
+      // events from components whose effects ran before this one).
+      flushPreInitEvents();
     } catch {
       // Init can throw if a tracking blocker mangles the script, or if the
       // browser blocks storage access. Children must still render.
@@ -63,6 +75,7 @@ export function PostHogProvider({ children }: { children: React.ReactNode }) {
       <Suspense fallback={null}>
         <PageViewTracker />
       </Suspense>
+      <AnalyticsBridge />
       {children}
     </>
   );

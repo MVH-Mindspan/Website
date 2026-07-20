@@ -49,3 +49,22 @@ export const faq: FAQItem[] = [
       "You will leave with a clear plan. If further testing or imaging is needed, we coordinate it. We send clean notes back to your primary care physician, and we stay involved as long as you need us.",
   },
 ];
+
+// Homepage-specific FAQ: leads with cost, the assessment handoff, speed, and
+// geography — the four questions that stall families before they convert.
+export const homeFaq: FAQItem[] = [
+  faq.find((f) => f.id === "medicare")!,
+  {
+    id: "after-assessment",
+    question: "What happens after the free assessment?",
+    answer:
+      "You get clear feedback on whether a neurologist visit makes sense. If it does, you can book a visit right away and our team will reach out within one business day to schedule. If not, you have peace of mind, and you can take the screening again whenever something changes.",
+  },
+  faq.find((f) => f.id === "wait")!,
+  {
+    id: "outside",
+    question: "What if we live outside Massachusetts or California?",
+    answer:
+      "We see patients in Massachusetts and California today. If you are somewhere else, join the waitlist in the booking flow and we will let you know the moment Mindspan opens in your area.",
+  },
+];

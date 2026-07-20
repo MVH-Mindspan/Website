@@ -11,9 +11,11 @@ import type { FAQItem } from "@/content/faq";
 export function FAQ({
   intro,
   items,
+  tone = "sand",
 }: {
   intro: { eyebrow: string; title: string };
   items: readonly FAQItem[];
+  tone?: "sand" | "cream";
 }) {
   const { theme } = useTheme();
   const c = theme.colors;
@@ -21,8 +23,13 @@ export function FAQ({
 
   if (items.length === 0) return null;
 
+  const bg = tone === "cream" ? c.cream : c.sand;
+
   return (
-    <section style={{ background: c.sand, padding: "clamp(56px, 10vw, 96px) 0" }}>
+    <section
+      data-analytics-location="faq"
+      style={{ background: bg, padding: "clamp(56px, 10vw, 96px) 0" }}
+    >
       <Container>
         <div className="grid grid-cols-1 lg:grid-cols-[minmax(280px,360px)_1fr] gap-10 lg:gap-16 items-start">
           <div className="lg:sticky lg:top-24">

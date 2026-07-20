@@ -11,6 +11,7 @@ import { Field } from "@/components/molecules/Field";
 import { FormErrorSummary } from "@/components/molecules/FormErrorSummary";
 import { SuccessExhale } from "@/components/molecules/SuccessExhale";
 import { EMAIL_RE, formatPhone, normalizePhone } from "@/lib/forms";
+import { ANALYTICS_EVENTS, track } from "@/lib/analytics";
 
 const SUBMIT_TIMEOUT_MS = 15000;
 
@@ -95,11 +96,13 @@ type Copy = {
 
 export function ReferForm({
   copy,
+  pad,
   locationId,
   locationLabel,
   onValidateLocation,
 }: {
   copy: Copy;
+  pad?: { label: string; href: string };
   locationId: string;
   locationLabel: string;
   onValidateLocation: () => boolean;
@@ -118,6 +121,7 @@ export function ReferForm({
   const isMountedRef = useRef(true);
   const errorSummaryRef = useRef<HTMLDivElement | null>(null);
   const successWrapperRef = useRef<HTMLDivElement | null>(null);
+  const startedRef = useRef(false);
 
   const handleReferAnother = useCallback(() => {
     setData((prev) => ({
@@ -156,6 +160,10 @@ export function ReferForm({
 
   const update = useCallback(
     <K extends keyof FormData>(field: K, value: FormData[K]) => {
+      if (!startedRef.current) {
+        startedRef.current = true;
+        track(ANALYTICS_EVENTS.referFormStarted, { location: "refer_form" });
+      }
       setData((prev) => ({ ...prev, [field]: value }));
       setErrors((prev) => {
         if (prev[field]) {
@@ -246,6 +254,7 @@ export function ReferForm({
           );
         } else {
           setSubmitted(true);
+          track(ANALYTICS_EVENTS.referFormSubmitted, { clinic: locationId });
           if (typeof window !== "undefined") {
             window.scrollTo({ top: 0, behavior: reduceMotion ? "instant" : "smooth" });
           }
@@ -296,15 +305,42 @@ export function ReferForm({
           bodyColor={alpha(c.ink, 0.7)}
           size="md"
           action={
-            <Button
-              type="button"
-              variant="primary"
-              size="md"
-              onClick={handleReferAnother}
-              iconRight={<ArrowIcon />}
+            <div
+              style={{
+                display: "flex",
+                flexWrap: "wrap",
+                gap: 12,
+                justifyContent: "center",
+              }}
             >
-              Refer another patient
-            </Button>
+              <Button
+                type="button"
+                variant="primary"
+                size="md"
+                onClick={handleReferAnother}
+                iconRight={<ArrowIcon />}
+              >
+                Refer another patient
+              </Button>
+              {pad && (
+                <Button
+                  href={pad.href}
+                  variant="secondary"
+                  size="md"
+                  onClick={() =>
+                    track(ANALYTICS_EVENTS.ctaClicked, {
+                      location: "refer_success",
+                      variant: "download",
+                      funnel: "referral",
+                      label: pad.label,
+                      href: pad.href,
+                    })
+                  }
+                >
+                  {pad.label}
+                </Button>
+              )}
+            </div>
           }
         />
       </div>
