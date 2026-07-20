@@ -7,7 +7,7 @@ import { externalLinkProps } from "@/lib/links";
 import { useHeroVideo } from "@/lib/use-hero-video";
 import { linkifyNeurologists } from "@/lib/linkify";
 import { brand } from "@/content/brand";
-import { ANALYTICS_EVENTS, track } from "@/lib/analytics";
+import { ANALYTICS_EVENTS, funnelFor, track } from "@/lib/analytics";
 import { ScrollHint } from "@/components/molecules/ScrollHint";
 
 export function VideoHero({
@@ -17,6 +17,9 @@ export function VideoHero({
   subTagline,
   subhead,
   cta,
+  ctaNote,
+  secondaryCta,
+  reassurance,
   playbackRate = 1,
 }: {
   video: string;
@@ -25,6 +28,9 @@ export function VideoHero({
   subTagline: string;
   subhead: string;
   cta?: { label: string; href: string };
+  ctaNote?: string;
+  secondaryCta?: { label: string; href: string };
+  reassurance?: string;
   playbackRate?: number;
 }) {
   const { theme } = useTheme();
@@ -34,6 +40,7 @@ export function VideoHero({
   return (
     <section
       className="relative w-full overflow-hidden hero-section"
+      data-analytics-location="video_hero"
       style={{
         height: "100vh",
         minHeight: 600,
@@ -130,34 +137,160 @@ export function VideoHero({
           </p>
           {cta && (
             <>
-            <div className="hero-ctas">
+            <div className="hero-ctas" style={{ alignItems: ctaNote ? "flex-start" : "center" }}>
+              <div className="hero-cta-col">
+                <a
+                  href={cta.href}
+                  {...externalLinkProps(cta.href)}
+                  onClick={() =>
+                    track(ANALYTICS_EVENTS.ctaClicked, {
+                      location: "video_hero",
+                      variant: "primary",
+                      funnel: funnelFor(cta.href),
+                      label: cta.label,
+                      href: cta.href,
+                    })
+                  }
+                  className="hero-cta-primary prox-cta"
+                  data-proximity=""
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    gap: 8,
+                    fontFamily: theme.fonts.body,
+                    fontSize: typeScale.bodySm,
+                    fontWeight: 600,
+                    color: c.brandGreen,
+                    background: "#fff",
+                    padding: "14px 28px",
+                    borderRadius: "10rem",
+                    textDecoration: "none",
+                    transition: `background 0.2s ease`,
+                  }}
+                  onMouseEnter={(e) => (e.currentTarget.style.background = c.cream)}
+                  onMouseLeave={(e) => (e.currentTarget.style.background = "#fff")}
+                >
+                  {cta.label}
+                  <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden>
+                    <path
+                      d="M1 5h8m0 0L5.5 1.5M9 5 5.5 8.5"
+                      stroke="currentColor"
+                      strokeWidth="1.6"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </a>
+                {ctaNote && (
+                  <p
+                    className="hero-cta-note"
+                    style={{
+                      fontFamily: theme.fonts.body,
+                      fontSize: typeScale.bodySm,
+                      color: alpha(c.cream, 0.95),
+                      fontWeight: 500,
+                      marginTop: 10,
+                      lineHeight: 1.4,
+                      letterSpacing: "0.01em",
+                      textShadow: `0 1px 12px ${alpha("#201E17", 0.6)}, 0 0 2px ${alpha("#201E17", 0.45)}`,
+                    }}
+                  >
+                    {ctaNote}
+                  </p>
+                )}
+              </div>
+              {secondaryCta && (
+                <a
+                  href={secondaryCta.href}
+                  {...externalLinkProps(secondaryCta.href)}
+                  onClick={() =>
+                    track(ANALYTICS_EVENTS.ctaClicked, {
+                      location: "video_hero",
+                      variant: "secondary",
+                      funnel: funnelFor(secondaryCta.href),
+                      label: secondaryCta.label,
+                      href: secondaryCta.href,
+                    })
+                  }
+                  className="hero-cta-secondary prox-cta"
+                  data-proximity=""
+                  style={{
+                    display: "inline-block",
+                    fontFamily: theme.fonts.body,
+                    fontSize: typeScale.bodySm,
+                    fontWeight: 600,
+                    color: c.cream,
+                    padding: "14px 22px",
+                    border: `1px solid ${alpha(c.cream, 0.45)}`,
+                    borderRadius: "10rem",
+                    textDecoration: "none",
+                    background: "transparent",
+                  }}
+                >
+                  {secondaryCta.label}
+                </a>
+              )}
+            </div>
+            {reassurance && (
+              <p
+                className="hero-reassurance"
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 8,
+                  fontFamily: theme.fonts.body,
+                  fontSize: typeScale.bodySm,
+                  color: alpha(c.cream, 0.92),
+                  fontWeight: 500,
+                  marginTop: 16,
+                }}
+              >
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden>
+                  <circle cx="8" cy="8" r="7" stroke="currentColor" strokeWidth="1.4" />
+                  <path
+                    d="M5 8.2 7.2 10.4 11 6"
+                    stroke="currentColor"
+                    strokeWidth="1.6"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+                {reassurance}
+              </p>
+            )}
+            <p
+              className="hero-hours"
+              style={{
+                fontFamily: theme.fonts.body,
+                fontSize: typeScale.body,
+                color: c.cream,
+                fontWeight: 500,
+                marginTop: reassurance ? 8 : 14,
+                letterSpacing: "0.01em",
+              }}
+            >
               <a
                 href={brand.phoneHref}
                 onClick={() =>
                   track(ANALYTICS_EVENTS.ctaClicked, {
                     location: "video_hero",
                     variant: "phone",
+                    funnel: "booking",
+                    label: brand.phone,
                     href: brand.phoneHref,
                   })
                 }
-                className="hero-cta-primary prox-cta"
-                data-proximity=""
                 style={{
                   display: "inline-flex",
                   alignItems: "center",
                   gap: 8,
-                  fontFamily: theme.fonts.body,
-                  fontSize: typeScale.bodySm,
-                  fontWeight: 600,
-                  color: c.brandGreen,
-                  background: "#fff",
-                  padding: "14px 28px",
-                  borderRadius: "10rem",
-                  textDecoration: "none",
-                  transition: `background 0.2s ease`,
+                  minHeight: 48,
+                  color: c.cream,
+                  textDecoration: "underline",
+                  textUnderlineOffset: 4,
+                  textDecorationColor: alpha(c.cream, 0.5),
                 }}
-                onMouseEnter={(e) => (e.currentTarget.style.background = c.cream)}
-                onMouseLeave={(e) => (e.currentTarget.style.background = "#fff")}
               >
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden>
                   <path
@@ -170,47 +303,12 @@ export function VideoHero({
                 </svg>
                 Talk to us: {brand.phone}
               </a>
-              <a
-                href={cta.href}
-                {...externalLinkProps(cta.href)}
-                onClick={() =>
-                  track(ANALYTICS_EVENTS.ctaClicked, {
-                    location: "video_hero",
-                    variant: "secondary",
-                    label: cta.label,
-                    href: cta.href,
-                  })
-                }
-                className="hero-cta-secondary prox-cta"
-                data-proximity=""
-                style={{
-                  display: "inline-block",
-                  fontFamily: theme.fonts.body,
-                  fontSize: typeScale.bodySm,
-                  fontWeight: 600,
-                  color: c.cream,
-                  padding: "14px 22px",
-                  border: `1px solid ${alpha(c.cream, 0.45)}`,
-                  borderRadius: "10rem",
-                  textDecoration: "none",
-                  background: "transparent",
-                }}
-              >
-                {cta.label}
-              </a>
-            </div>
-            <p
-              className="hero-hours"
-              style={{
-                fontFamily: theme.fonts.body,
-                fontSize: typeScale.body,
-                color: c.cream,
-                fontWeight: 500,
-                marginTop: 14,
-                letterSpacing: "0.01em",
-              }}
-            >
-              {brand.phoneHours}
+              <span className="hero-hours-sep" style={{ color: alpha(c.cream, 0.75) }}>
+                {" · "}
+              </span>
+              <span className="hero-hours-time" style={{ color: alpha(c.cream, 0.75) }}>
+                {brand.phoneHours}
+              </span>
             </p>
             </>
           )}
@@ -228,11 +326,21 @@ export function VideoHero({
           gap: 12px;
           align-items: center;
         }
+        .hero-cta-col {
+          display: flex;
+          flex-direction: column;
+          /* The pill (nowrap) sets the column width; the note wraps under
+             it instead of stretching the pill to the note's length. */
+          width: min-content;
+        }
         @media (max-width: 640px) {
           .hero-ctas {
             flex-direction: column;
-            align-items: stretch;
+            align-items: stretch !important;
             gap: 10px;
+            width: 100%;
+          }
+          .hero-cta-col {
             width: 100%;
           }
           .hero-cta-primary,
@@ -242,8 +350,22 @@ export function VideoHero({
             text-align: center;
             white-space: normal;
           }
-          .hero-hours {
+          .hero-cta-note {
             text-align: center;
+          }
+          .hero-hours,
+          .hero-reassurance {
+            justify-content: center;
+            text-align: center;
+          }
+          /* Stack the hours as their own line so the phone number and the
+             time range each stay whole. */
+          .hero-hours-sep {
+            display: none;
+          }
+          .hero-hours-time {
+            display: block;
+            margin-top: 2px;
           }
         }
       `}</style>

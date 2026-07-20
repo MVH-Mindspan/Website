@@ -6,5 +6,8 @@ export const homeHero = {
   headline: "When memory starts to change, you shouldn’t have to wait.",
   subTagline: brand.subTagline,
   subhead: brand.subhead,
-  cta: { label: "Book an appointment", href: "/book-a-visit" },
+  cta: { label: "Start the free assessment", href: "https://assessment.mindspan.co/" },
+  ctaNote: "Free, from home. Seen in 2⁠–⁠3 weeks, not 12+ months.",
+  secondaryCta: { label: "Book a visit", href: "/book-a-visit" },
+  reassurance: brand.coverage,
 } as const;

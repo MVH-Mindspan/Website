@@ -10,6 +10,7 @@ export const brand = {
   reassurance: VIDEO_VISITS_ENABLED
     ? "Board-certified neurologists. In-clinic and video visits. Covered by insurance."
     : "Board-certified neurologists. Covered by insurance.",
+  coverage: "Covered by Medicare, Medicaid, and many health plans",
   primaryCta: "Book a visit",
   primaryCtaHref: "/book-a-visit",
   phone: "(978) 850-3914",

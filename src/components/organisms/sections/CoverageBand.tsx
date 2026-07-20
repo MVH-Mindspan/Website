@@ -4,6 +4,8 @@ import { useTheme } from "@/lib/theme-context";
 import { alpha } from "@/lib/themes";
 import { type as typeScale } from "@/lib/tokens";
 import { ArrowIcon } from "@/components/atoms/ArrowIcon";
+import { brand } from "@/content/brand";
+import { ANALYTICS_EVENTS, funnelFor, track } from "@/lib/analytics";
 
 type Appointments = {
   href: string;
@@ -19,6 +21,7 @@ export function CoverageBand({ appointments }: { appointments?: Appointments }) 
   return (
     <section
       aria-label="Insurance coverage"
+      data-analytics-location="coverage_band"
       style={{
         background: c.sand,
         borderBottom: `1px solid ${alpha(c.ink, 0.08)}`,
@@ -68,7 +71,7 @@ export function CoverageBand({ appointments }: { appointments?: Appointments }) 
                 strokeLinejoin="round"
               />
             </svg>
-            <span>Covered by Medicare, Medicaid, and many health plans</span>
+            <span>{brand.coverage}</span>
           </span>
         </div>
 
@@ -82,6 +85,15 @@ export function CoverageBand({ appointments }: { appointments?: Appointments }) 
             <a
               href={appointments.href}
               aria-label={appointments.ariaLabel}
+              onClick={() =>
+                track(ANALYTICS_EVENTS.ctaClicked, {
+                  location: "coverage_band",
+                  variant: "primary",
+                  funnel: funnelFor(appointments.href),
+                  label: appointments.primary,
+                  href: appointments.href,
+                })
+              }
               className="coverage-band-appointments inline-flex items-center transition-opacity"
               style={{
                 gap: 10,
