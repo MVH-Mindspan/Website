@@ -1,15 +1,13 @@
 import {
   PageHero,
   AudienceCards,
-  SimpleSteps,
+  EditorialStages,
   GuideBenefit,
   FeatureSpotlight,
-  SplitCards,
   EditorialIntro,
   FAQ,
   FinalCTA,
 } from "@/components/organisms/sections";
-import { finalCta } from "@/content";
 import { digitalTwinPage } from "@/content/pages/digitalTwin";
 import { JsonLd } from "@/lib/json-ld";
 import { buildBreadcrumbSchema, buildFaqSchema } from "@/lib/schema";
@@ -17,6 +15,9 @@ import { SITE_URL } from "@/lib/seo";
 
 export const metadata = digitalTwinPage.metadata;
 
+// One story, slowly: the question, who it is for, how it works (with real
+// screens), what to know, why to trust it, its limits, the next step with a
+// neurologist, questions, and it ends on the start action.
 export default function DigitalTwinPage() {
   const page = digitalTwinPage;
   return (
@@ -32,24 +33,13 @@ export default function DigitalTwinPage() {
 
       <PageHero {...page.hero} />
 
-      <AudienceCards
-        intro={page.forYou.intro}
-        audiences={page.forYou.audiences}
-        tone="cream"
-      />
+      <AudienceCards intro={page.forYou.intro} audiences={page.forYou.audiences} tone="cream" />
 
-      <SimpleSteps intro={page.views.intro} stages={page.views.stages} tone="sand" />
+      <EditorialStages intro={page.steps.intro} stages={page.steps.stages} tone="sand" />
 
-      <GuideBenefit {...page.share} />
+      <GuideBenefit {...page.goodToKnow} />
 
-      <FeatureSpotlight {...page.science} tone="sand" imagePosition="left" />
-
-      <SplitCards
-        intro={page.compare.intro}
-        core={page.compare.core}
-        edge={page.compare.edge}
-        closing={page.compare.closing}
-      />
+      <FeatureSpotlight {...page.research} tone="sand" imagePosition="left" />
 
       <EditorialIntro {...page.notADiagnosis} />
 
@@ -57,7 +47,7 @@ export default function DigitalTwinPage() {
 
       <FAQ intro={page.faqIntro} items={page.faq} tone="sand" />
 
-      <FinalCTA {...finalCta} />
+      <FinalCTA {...page.closing} />
     </>
   );
 }

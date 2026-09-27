@@ -189,7 +189,7 @@ export const danversDetail: LocationDetail = {
     newPatient: { label: "Enroll and book a visit", href: BOOKING_HREF },
     existingPatient: { label: "Book a follow-up", href: EXISTING_HREF },
     link: {
-      label: "See a ten-year memory projection with our Digital Twin",
+      label: "See a 10-year memory projection with our Digital Twin",
       href: digitalTwinHref("location-danvers"),
     },
   },

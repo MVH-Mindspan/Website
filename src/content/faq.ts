@@ -77,11 +77,11 @@ export const homeFaq: FAQItem[] = [
   },
   {
     id: "digital-twin",
-    question: "Can we see how memory may change over the next ten years?",
+    question: "Can we see how memory may change over the next 10 years?",
     answer:
-      "An introduction to our Digital Twin gives a ten-year projection of memory and daily life, for you or a loved one, with and without added care. It takes about ten minutes online. It is an estimate, not a diagnosis, and is best read with a neurologist.",
+      "Yes. Our 10-year projection shows how memory and daily life may change, for you or for someone you love. It is free and takes about 10 minutes, from home. It is an estimate, not a diagnosis.",
     link: {
-      label: "Explore the Digital Twin",
+      label: "Learn about the 10-year projection",
       href: digitalTwinHref("home-faq"),
     },
   },

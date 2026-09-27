@@ -115,6 +115,9 @@ export function FinalCTA({
               }}
             >
               {secondary.label}
+              {externalLinkProps(secondary.href).target === "_blank" && (
+                <span className="sr-only"> (opens in new tab)</span>
+              )}
             </a>
           )}
           <a
@@ -142,6 +145,9 @@ export function FinalCTA({
             }}
           >
             {primary.label} <ArrowIcon />
+            {externalLinkProps(primary.href).target === "_blank" && (
+              <span className="sr-only"> (opens in new tab)</span>
+            )}
           </a>
         </div>
         {secondaryNote && secondary && (

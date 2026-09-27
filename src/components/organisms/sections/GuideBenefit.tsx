@@ -9,6 +9,7 @@ import { Heading } from "@/components/atoms/Heading";
 import { Lead } from "@/components/atoms/Lead";
 import { Reveal } from "@/components/molecules/Reveal";
 import { Button } from "@/components/atoms/Button";
+import { externalLinkProps } from "@/lib/links";
 
 export function GuideBenefit({
   eyebrow,
@@ -111,8 +112,11 @@ export function GuideBenefit({
               </ul>
               {cta && (
                 <div className="mt-8">
-                  <Button href={cta.href} variant="primary">
+                  <Button href={cta.href} {...externalLinkProps(cta.href)} variant="primary">
                     {cta.label}
+                    {externalLinkProps(cta.href).target === "_blank" && (
+                      <span className="sr-only"> (opens in new tab)</span>
+                    )}
                   </Button>
                 </div>
               )}

@@ -13,13 +13,13 @@ export const homePage = {
   projection: {
     id: "ten-year-projection",
     eyebrow: "An introduction to our Digital Twin",
-    title: "See how the next ten years may go, for you or someone you love.",
+    title: "What might the next 10 years look like?",
     body:
-      "Answer plain questions from home, for yourself or a loved one, in about ten minutes. See how memory and daily life may change over the next ten years, and how the latest science may change that path. It is an estimate, not a diagnosis, and a good way to start a conversation with a neurologist.",
+      "Answer simple questions from home, for yourself or for someone you love. It is free and takes about 10 minutes. A chart then shows how memory may change over 10 years, with and without care. It is an estimate, not a diagnosis.",
     image: "/assets/digital-brain.webp",
     imageAlt: "A sculpture of a brain on a plinth, lit in segments of different colors.",
     secondary: {
-      label: "See the ten-year projection",
+      label: "Learn about the 10-year projection",
       href: digitalTwinHref("home-projection"),
     },
   },

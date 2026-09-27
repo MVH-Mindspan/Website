@@ -140,6 +140,9 @@ export function EditorialStages({
                   }}
                 >
                   {step.cta.label} <ArrowIcon />
+                  {externalLinkProps(step.cta.href).target === "_blank" && (
+                    <span className="sr-only"> (opens in new tab)</span>
+                  )}
                 </a>
               )}
               {step.link && (

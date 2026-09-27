@@ -132,7 +132,7 @@ export const sciencePage = {
     eyebrow: "An introduction to our Digital Twin",
     title: "A first look at the Digital Twin, from home.",
     body:
-      "This introduction works from far fewer details than the full Digital Twin, and you enter them yourself. Answer for yourself or a loved one in about ten minutes. See how the next ten years may go, with and without added care. It draws on research about groups of people, not one person\u2019s records, so it is an estimate, not a diagnosis.",
+      "This introduction works from far fewer details than the full Digital Twin, and you enter them yourself. Answer for yourself or a loved one in about 10 minutes. See how the next 10 years may go, with and without added care. It draws on research about groups of people, not one person\u2019s records, so it is an estimate, not a diagnosis.",
     image: "/assets/get-assessed.webp",
     imageAlt:
       "A younger woman in a yellow sweater and an older woman with silver hair sit on a bench by a sunlit window, looking at a tablet together.",

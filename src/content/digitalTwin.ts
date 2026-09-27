@@ -25,7 +25,13 @@ export type DigitalTwinEntry =
   | "footer";
 
 /** Where a link to the tool lives on /digital-twin. */
-export type TwinToolEntry = "dt-hero" | "dt-card-self" | "dt-card-loved-one";
+export type TwinToolEntry =
+  | "dt-hero"
+  | "dt-card-self"
+  | "dt-card-loved-one"
+  | "dt-steps"
+  | "dt-good-to-know"
+  | "dt-closing";
 
 export function digitalTwinHref(entry: DigitalTwinEntry): string {
   return `${DIGITAL_TWIN_PATH}?from=${entry}`;

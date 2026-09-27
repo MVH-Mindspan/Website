@@ -203,7 +203,7 @@ export const assistPage = {
     eyebrow: "An introduction to our Digital Twin",
     title: "See what the years ahead may look like for them.",
     body:
-      "Answer on their behalf in about ten minutes, or answer together. Unlike the free assessment, this projection does not test memory. It shows how the next ten years may go, and what care may mean for your time with them. It is an estimate, not a diagnosis, and a good way to start a conversation with a neurologist.",
+      "Answer on their behalf in about 10 minutes, or answer together. Unlike the free assessment, this projection does not test memory. It shows how the next 10 years may go, and what care may mean for your time with them. It is an estimate, not a diagnosis, and a good way to start a conversation with a neurologist.",
     image: "/assets/guide-life.webp",
     imageAlt:
       "An older man with a gray beard stands in a sunlit kitchen, holding a mug and looking out the window.",

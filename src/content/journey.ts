@@ -46,7 +46,7 @@ export const journey: JourneyStage[] = [
       "Your neurologist builds a care plan around your specific situation, not a generic protocol. Your history, your biology, your goals.",
     cta: { label: "Explore the science behind your plan", href: "/about/science" },
     link: {
-      label: "See a ten-year memory projection with our Digital Twin",
+      label: "See a 10-year memory projection with our Digital Twin",
       href: digitalTwinHref("home-step-03"),
     },
     image: "/assets/latest-science.webp",
