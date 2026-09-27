@@ -16,6 +16,7 @@ export type DigitalTwinEntry =
   | "home-who-we-see-self"
   | "home-step-03"
   | "home-faq"
+  | "home-projection"
   | "science-feature"
   | "assist-feature"
   | "how-it-works-step-03"
