@@ -3,6 +3,7 @@ import {
   AudienceCards,
   EditorialStages,
   GuideBenefit,
+  FeatureCardGrid,
   FeatureSpotlight,
   EditorialIntro,
   FAQ,
@@ -16,8 +17,9 @@ import { SITE_URL } from "@/lib/seo";
 export const metadata = digitalTwinPage.metadata;
 
 // One story, slowly: the question, who it is for, how it works (with real
-// screens), what to know, why to trust it, its limits, the next step with a
-// neurologist, questions, and it ends on the start action.
+// report screens), what to know, the science, how it fits our care, its
+// limits, the next step with a neurologist, questions, and it ends on the
+// start action.
 export default function DigitalTwinPage() {
   const page = digitalTwinPage;
   return (
@@ -39,7 +41,16 @@ export default function DigitalTwinPage() {
 
       <GuideBenefit {...page.goodToKnow} />
 
-      <FeatureSpotlight {...page.research} tone="sand" imagePosition="left" />
+      <FeatureCardGrid
+        id="science"
+        intro={page.science.intro}
+        cards={page.science.cards}
+        columns={2}
+        rounded={false}
+        secondary={page.science.secondary}
+      />
+
+      <FeatureSpotlight {...page.technology} tone="sand" imagePosition="left" />
 
       <EditorialIntro {...page.notADiagnosis} />
 

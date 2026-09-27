@@ -4,6 +4,7 @@ import { twinToolHref } from "../digitalTwin";
 import type { Audience } from "../audiences";
 import type { FAQItem } from "../faq";
 import type { JourneyStage } from "../journey";
+import type { TechCard } from "../technology";
 
 // Written for older readers, some with memory changes: one idea per
 // section, short sentences, numerals, and the same two actions everywhere
@@ -42,9 +43,9 @@ const steps: JourneyStage[] = [
     title: "Answer simple questions.",
     body:
       "It opens in a new tab. Tell us who it is for. Then answer questions about memory, mood, and health. It takes about 10 minutes, and you can stop and come back.",
-    image: "/assets/twin-report-start.webp",
+    image: "/assets/twin-report-question.webp",
     imageAlt:
-      "Example screen from the Digital Twin introduction. It asks \u201cWho is this for?\u201d with two choices, \u201cStart for me\u201d and \u201cStart for them.\u201d",
+      "Example question screen. It asks “What is the highest level of education you completed?” with large answer buttons, and a progress bar shows phase 2 of 7.",
   },
   {
     kicker: "See",
@@ -56,6 +57,15 @@ const steps: JourneyStage[] = [
       "Example chart for a sample profile. A line starts at stage 3, mild changes, and moves slowly toward stage 5 over 10 years, inside a shaded range of possible outcomes.",
   },
   {
+    kicker: "Everyday life",
+    title: "See what it means for daily life.",
+    body:
+      "The report also explains the years in terms of everyday life. It looks at things like getting out and about, money and paperwork, and the kitchen. For each, it shows if it may be done on your own, together with someone, or with help.",
+    image: "/assets/twin-report-daily-life.webp",
+    imageAlt:
+      "Example everyday-life view for a sample profile. A key explains independent, together, and with help. For getting out and about, it says a helping hand may be enough for about 5 more years before more help is needed.",
+  },
+  {
     kicker: "Compare",
     title: "See what care may change.",
     body:
@@ -64,6 +74,41 @@ const steps: JourneyStage[] = [
     imageAlt:
       "Example chart for a sample profile. A solid line with science-backed care stays above a dashed line without added care, showing a slower pace over 10 years.",
     cta: { label: START_LABEL, href: twinToolHref("dt-steps") },
+  },
+];
+
+const scienceCards: TechCard[] = [
+  {
+    id: "memory-change",
+    eyebrow: "Where it starts",
+    title: "How memory usually changes.",
+    body:
+      "The projection starts from how much memory test scores usually change in a year, for people of a similar age and starting score. Then it adjusts for health answers, like blood pressure, hearing, and mood.",
+    icon: "refresh",
+  },
+  {
+    id: "stages",
+    eyebrow: "The stages",
+    title: "Seven clear stages.",
+    body:
+      "The stages are adapted from the 2024 staging guide of the Alzheimer’s Association. They run from steady, to mild changes, to late stage.",
+    icon: "grid",
+  },
+  {
+    id: "care",
+    eyebrow: "What care may do",
+    title: "Care, based on large studies.",
+    body:
+      "The effects of healthy habits come from large studies, like the U.S. POINTER study and the 2024 Lancet Commission report on dementia. Treatment effects come from published trials and reviews.",
+    icon: "shield",
+  },
+  {
+    id: "range",
+    eyebrow: "An honest range",
+    title: "No one’s path is fixed.",
+    body:
+      "The shaded band on the chart shows the range of possible outcomes. A visit with a neurologist can help narrow it.",
+    icon: "bullseye",
   },
 ];
 
@@ -138,7 +183,7 @@ export const digitalTwinPage = {
   steps: {
     intro: {
       eyebrow: "How it works",
-      title: "Three simple steps.",
+      title: "Four simple steps.",
       lead: "These are example screens from a sample profile. Yours will look different.",
     },
     stages: steps,
@@ -167,15 +212,24 @@ export const digitalTwinPage = {
     cta: { label: START_LABEL, href: twinToolHref("dt-good-to-know") },
   },
 
-  research: {
-    id: "research",
-    eyebrow: "Built on research",
+  science: {
+    intro: {
+      eyebrow: "The science",
+      title: "What the projection is built on.",
+      lead: "Published research, explained in plain words.",
+    },
+    cards: scienceCards,
+    secondary: { label: "See the science behind our care", href: "/about/science#technology" },
+  },
+
+  technology: {
+    id: "digital-twin",
+    eyebrow: "Part of our care",
     title: "An early look at the Digital Twin our neurologists use.",
     body:
-      "The projection is built from published research. It uses data on how memory usually changes each year for people with Alzheimer’s, and on what care may do. In clinic, our neurologists build a full Digital Twin from a person’s own history, tests, and imaging, and use it to plan care.",
+      "In clinic, our neurologists build a full Digital Twin from a person’s own history, tests, and imaging. They use it to plan care, and update it at every visit. This projection is a first look, from home.",
     image: "/assets/latest-science.webp",
     imageAlt: "A Mindspan neurologist reviews brain imaging with an older couple in clinic.",
-    secondary: { label: "See the science behind our care", href: "/about/science#technology" },
   },
 
   notADiagnosis: {

@@ -15,7 +15,8 @@ const EXCLUDED_BASENAMES = new Set([
   "danvers-clinic",
   "bay-area-clinic",
   // UI screenshots of the Digital Twin report, not photography.
-  "twin-report-start",
+  "twin-report-question",
+  "twin-report-daily-life",
   "twin-report-projection",
   "twin-report-with-care",
 ]);
