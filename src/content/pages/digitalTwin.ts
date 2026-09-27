@@ -45,7 +45,7 @@ const steps: JourneyStage[] = [
       "It opens in a new tab. Tell us who it is for. Then answer questions about memory, mood, and health. It takes about 10 minutes, and you can stop and come back.",
     image: "/assets/twin-report-question.webp",
     imageAlt:
-      "Example question screen. It asks “What is the highest level of education you completed?” with large answer buttons, and a progress bar shows phase 2 of 7.",
+      "Example question screen. It asks “Where would you place yourself today?” A slider is set to “Mild changes or better”: daily life carries on as usual.",
   },
   {
     kicker: "See",
@@ -60,10 +60,10 @@ const steps: JourneyStage[] = [
     kicker: "Everyday life",
     title: "See what it means for daily life.",
     body:
-      "The report also explains the years in terms of everyday life. It looks at things like getting out and about, money and paperwork, and the kitchen. For each, it shows if it may be done on your own, together with someone, or with help.",
+      "The report also explains the years in everyday terms, like getting out and about, money and paperwork, and the kitchen. A timeline shows when each may be done on your own, together with someone, or with help. It shows this with care and without it.",
     image: "/assets/twin-report-daily-life.webp",
     imageAlt:
-      "Example everyday-life view for a sample profile. A key explains independent, together, and with help. For getting out and about, it says a helping hand may be enough for about 5 more years before more help is needed.",
+      "Example everyday-life timeline for getting out and about, for a sample profile. Two bars run from today to 10 years. With science-backed care, the stage of doing things together with someone lasts longer before more help is needed.",
   },
   {
     kicker: "Compare",
