@@ -334,6 +334,9 @@ function HeroAside({
               onMouseLeave={(e) => (e.currentTarget.style.background = "#fff")}
             >
               {primaryCta.label} <ArrowIcon />
+              {externalLinkProps(primaryCta.href).target === "_blank" && (
+                <span className="sr-only"> (opens in new tab)</span>
+              )}
             </a>
           )}
           {secondaryCta && (
@@ -366,6 +369,9 @@ function HeroAside({
               }}
             >
               {secondaryCta.label}
+              {externalLinkProps(secondaryCta.href).target === "_blank" && (
+                <span className="sr-only"> (opens in new tab)</span>
+              )}
             </a>
           )}
         </div>

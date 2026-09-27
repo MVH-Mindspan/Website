@@ -14,7 +14,7 @@ import { CardCaption } from "@/components/molecules/CardCaption";
 import { Reveal } from "@/components/molecules/Reveal";
 import { SectionHeader } from "@/components/molecules/SectionHeader";
 import { externalLinkProps } from "@/lib/links";
-import { grid } from "@/lib/tokens";
+import { grid, type as typeScale } from "@/lib/tokens";
 import type { Audience } from "@/content/audiences";
 
 export function AudienceCards({
@@ -76,65 +76,92 @@ export function AudienceCards({
               : "sm:grid-cols-2 md:grid-cols-3"
           }`}
         >
-          {audiences.map((a, i) => (
-            <Reveal
-              key={a.id}
-              as="article"
-              dataProximity="subtle"
-              className="v2-card rounded-[2rem] p-5 sm:p-6 md:p-8 flex flex-col group"
-              style={{
-                background: alpha(c.skySoft, 0.7),
-                animationDelay: `${i * 80}ms`,
-              }}
-            >
-              <a href={a.href} {...externalLinkProps(a.href)} className="flex flex-col flex-1 min-w-0">
-                <Eyebrow color={c.accentText}>{a.kicker}</Eyebrow>
-                <Heading
-                  as="h3"
-                  variant="h4"
-                  color={c.ink}
-                  fontFamily={theme.fonts.heading}
-                  className="mt-4 break-words"
-                >
-                  {a.title}
-                </Heading>
-                <Lead
-                  size="bodyCard"
-                  maxWidth={false}
-                  color={alpha(c.ink, 0.72)}
-                  className="mt-4 break-words"
-                >
-                  {a.body}
-                </Lead>
-                {a.bullets && a.bullets.length > 0 && (
-                  <BulletList
-                    items={a.bullets}
-                    bulletColor={c.brandGreen}
-                    color={alpha(c.ink, 0.78)}
-                    className="mt-8 text-base"
-                  />
-                )}
-                {a.caption && (
-                  <CardCaption color={alpha(c.ink, 0.55)} className="mt-6">
-                    {a.caption}
-                  </CardCaption>
-                )}
-                <div className="mt-auto pt-8">
-                  <span
-                    className="inline-flex items-center gap-2 font-semibold text-sm transition-all prox-inner-cta"
+          {audiences.map((a, i) => {
+            const cardLinkProps = externalLinkProps(a.href);
+            return (
+              <Reveal
+                key={a.id}
+                as="article"
+                dataProximity="subtle"
+                className="v2-card rounded-[2rem] p-5 sm:p-6 md:p-8 flex flex-col group"
+                style={{
+                  background: alpha(c.skySoft, 0.7),
+                  animationDelay: `${i * 80}ms`,
+                }}
+              >
+                <a href={a.href} {...cardLinkProps} className="flex flex-col flex-1 min-w-0">
+                  <Eyebrow color={c.accentText}>{a.kicker}</Eyebrow>
+                  <Heading
+                    as="h3"
+                    variant="h4"
+                    color={c.ink}
+                    fontFamily={theme.fonts.heading}
+                    className="mt-4 break-words"
+                  >
+                    {a.title}
+                  </Heading>
+                  <Lead
+                    size="bodyCard"
+                    maxWidth={false}
+                    color={alpha(c.ink, 0.72)}
+                    className="mt-4 break-words"
+                  >
+                    {a.body}
+                  </Lead>
+                  {a.bullets && a.bullets.length > 0 && (
+                    <BulletList
+                      items={a.bullets}
+                      bulletColor={c.brandGreen}
+                      color={alpha(c.ink, 0.78)}
+                      className="mt-8 text-base"
+                    />
+                  )}
+                  {a.caption && (
+                    <CardCaption color={alpha(c.ink, 0.55)} className="mt-6">
+                      {a.caption}
+                    </CardCaption>
+                  )}
+                  <div className="mt-auto pt-8">
+                    <span
+                      className="inline-flex items-center gap-2 font-semibold text-sm transition-all prox-inner-cta"
+                      style={{
+                        padding: "10px 20px",
+                        background: c.brandGreen,
+                        color: "#fff",
+                        borderRadius: "10rem",
+                      }}
+                    >
+                      {a.cta} <ArrowIcon />
+                    </span>
+                  </div>
+                  {cardLinkProps.target === "_blank" && (
+                    <span className="sr-only"> (opens in new tab)</span>
+                  )}
+                </a>
+                {/* Secondary link sits outside the card link: anchors can't nest. */}
+                {a.link && (
+                  <a
+                    href={a.link.href}
+                    {...externalLinkProps(a.link.href)}
+                    className="self-start"
                     style={{
-                      padding: "10px 20px",
-                      background: c.brandGreen,
-                      color: "#fff",
-                      borderRadius: "10rem",
+                      display: "inline-block",
+                      marginTop: 20,
+                      fontFamily: theme.fonts.body,
+                      fontSize: typeScale.bodySm,
+                      color: c.brandGreen,
+                      textDecoration: "underline",
+                      textUnderlineOffset: "0.2em",
+                      textDecorationThickness: "1px",
+                      textDecorationColor: alpha(c.brandGreen, 0.4),
                     }}
                   >
-                    {a.cta} <ArrowIcon />
-                  </span>
-                </div>
-              </a>
-            </Reveal>
-          ))}
+                    {a.link.label}
+                  </a>
+                )}
+              </Reveal>
+            );
+          })}
         </div>
       </Container>
     </section>

@@ -6,6 +6,7 @@ import { alpha } from "@/lib/themes";
 import { type as typeScale, ease } from "@/lib/tokens";
 import { Container } from "@/components/atoms/Container";
 import { SectionHeader } from "@/components/molecules/SectionHeader";
+import { externalLinkProps } from "@/lib/links";
 import type { FAQItem } from "@/content/faq";
 
 export function FAQ({
@@ -116,6 +117,25 @@ export function FAQ({
                   }}
                 >
                   {it.answer}
+                  {it.link && (
+                    <>
+                      {" "}
+                      <a
+                        href={it.link.href}
+                        {...externalLinkProps(it.link.href)}
+                        style={{
+                          color: c.brandGreen,
+                          fontWeight: 500,
+                          textDecoration: "underline",
+                          textUnderlineOffset: "0.2em",
+                          textDecorationThickness: "1px",
+                          textDecorationColor: alpha(c.brandGreen, 0.4),
+                        }}
+                      >
+                        {it.link.label}
+                      </a>
+                    </>
+                  )}
                 </div>
               </div>
             );

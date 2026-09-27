@@ -142,6 +142,26 @@ export function EditorialStages({
                   {step.cta.label} <ArrowIcon />
                 </a>
               )}
+              {step.link && (
+                <a
+                  href={step.link.href}
+                  {...externalLinkProps(step.link.href)}
+                  style={{
+                    display: "block",
+                    width: "fit-content",
+                    marginTop: step.cta ? 16 : 24,
+                    fontFamily: theme.fonts.body,
+                    fontSize: typeScale.bodySm,
+                    color: c.brandGreen,
+                    textDecoration: "underline",
+                    textUnderlineOffset: "0.2em",
+                    textDecorationThickness: "1px",
+                    textDecorationColor: alpha(c.brandGreen, 0.4),
+                  }}
+                >
+                  {step.link.label}
+                </a>
+              )}
             </div>
 
             <div className="flex flex-col justify-center stage-image">

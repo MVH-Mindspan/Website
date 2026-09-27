@@ -1,6 +1,7 @@
 import { CMS_AUTHOR_DISCLAIMER } from "@/content/guide-disclosures";
 import { VIDEO_VISITS_ENABLED } from "@/lib/flags";
 import type { LocationDetail } from "../pages/locationDetail";
+import { digitalTwinHref } from "../digitalTwin";
 
 const BOOKING_HREF = "/book-a-visit";
 const EXISTING_HREF = "https://oncehub.com/mindspan_danvers";
@@ -188,6 +189,10 @@ export const bayAreaDetail: LocationDetail = {
     hours: "Monday\u2013Friday, 9am\u20135pm PST",
     newPatient: { label: "Enroll and book a visit", href: BOOKING_HREF },
     existingPatient: { label: "Book a follow-up", href: EXISTING_HREF },
+    link: {
+      label: "See a ten-year memory projection with our Digital Twin",
+      href: digitalTwinHref("location-bay-area"),
+    },
   },
 
   guide: {

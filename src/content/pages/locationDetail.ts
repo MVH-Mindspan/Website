@@ -19,6 +19,8 @@ export type ClinicContact = {
   hours: string;
   newPatient: { label: string; href: string };
   existingPatient: { label: string; href: string };
+  /** Optional text link under the booking buttons. */
+  link?: { label: string; href: string };
 };
 
 export type ProviderProfile = {

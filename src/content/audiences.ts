@@ -1,3 +1,5 @@
+import { digitalTwinHref } from "./digitalTwin";
+
 export type Audience = {
   id: string;
   kicker: string;
@@ -7,6 +9,8 @@ export type Audience = {
   href: string;
   bullets?: readonly string[];
   caption?: string;
+  /** Optional secondary text link rendered under the card, outside the card link. */
+  link?: { label: string; href: string };
 };
 
 export const audiencesIntro = {
@@ -27,6 +31,10 @@ export const audiences: Audience[] = [
       "You\u2019ve been noticing changes, making calls, and being told to wait. Bring your loved one to us. We\u2019ll take it from here together.",
     cta: "Book a visit",
     href: "/book-a-visit",
+    link: {
+      label: "See what the years ahead may hold for them, with our Digital Twin",
+      href: digitalTwinHref("home-who-we-see-caregiver"),
+    },
   },
   {
     id: "patients",
@@ -36,6 +44,10 @@ export const audiences: Audience[] = [
       "Maybe a word slipped. Maybe you walked into a room and forgot why. It might be nothing, but you deserve to know either way.",
     cta: "Start a free assessment today",
     href: "https://assessment.mindspan.co/",
+    link: {
+      label: "See what the years ahead may hold for you, with our Digital Twin",
+      href: digitalTwinHref("home-who-we-see-self"),
+    },
   },
   {
     id: "doctors",
