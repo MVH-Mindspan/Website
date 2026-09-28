@@ -1,5 +1,13 @@
+"use client";
+
 import type { TwinChart } from "@/content/twinReport";
 import { TwinScreen, twin } from "./TwinScreen";
+import { fadeStyle, revealStyle, useUnfold } from "./useUnfold";
+
+// On first view the paths unfold from Today to 10 years: the path without
+// added care first, then the path with care.
+const LINE_MS = 1100;
+const LINE_STAGGER = 450;
 
 // Recreation of the tool's "How this may change over time" chart. The band
 // and line paths are the tool's own SVG geometry. The plot stretches to the
@@ -27,6 +35,15 @@ export function TwinProjectionChart({
   const h = y1 - y0;
   const top = (y: number) => `${((y - y0) / h) * 100}%`;
   const height = "h-[300px] @xl:h-[340px]";
+  // Last line finishes at (n-1)*stagger + LINE_MS; its label fades 150ms after.
+  const { ref, phase } = useUnfold<HTMLDivElement>((chart.lines.length - 1) * LINE_STAGGER + LINE_MS + 150);
+  const svgProps = {
+    viewBox: `${x0} ${y0} ${w} ${h}`,
+    preserveAspectRatio: "none" as const,
+    width: "100%",
+    height: "100%",
+    style: { display: "block", overflow: "visible" as const },
+  };
   const stages = chart.stageLabels.map((s) => {
     const [num, ...rest] = s.text.split(". ");
     return { ...s, num, name: rest.join(". ") };
@@ -85,14 +102,9 @@ export function TwinProjectionChart({
             ))}
           </div>
 
-          <div className={`relative ${height}`}>
-            <svg
-              viewBox={`${x0} ${y0} ${w} ${h}`}
-              preserveAspectRatio="none"
-              width="100%"
-              height="100%"
-              style={{ display: "block", overflow: "visible" }}
-            >
+          <div ref={ref} className={`relative ${height}`}>
+            {/* Gridlines stay put; the band and paths unfold over them. */}
+            <svg {...svgProps}>
               {chart.gridlines.map((y) => (
                 <line
                   key={y}
@@ -105,10 +117,20 @@ export function TwinProjectionChart({
                   vectorEffect="non-scaling-stroke"
                 />
               ))}
-              <path d={chart.band} fill="rgba(8, 54, 48, 0.1)" />
-              {chart.lines.map((line) => (
+            </svg>
+            {chart.lines.map((line, i) => (
+              <svg
+                key={line.d.slice(0, 40) + line.style}
+                {...svgProps}
+                style={{
+                  ...svgProps.style,
+                  position: "absolute",
+                  inset: 0,
+                  ...revealStyle(phase, LINE_MS, i * LINE_STAGGER, "0", "4px"),
+                }}
+              >
+                {i === 0 && <path d={chart.band} fill="rgba(8, 54, 48, 0.1)" />}
                 <path
-                  key={line.d.slice(0, 40) + line.style}
                   d={line.d}
                   fill="none"
                   stroke={line.style === "dashed" ? twin.ink(0.5) : twin.primary}
@@ -118,8 +140,8 @@ export function TwinProjectionChart({
                   strokeLinecap="round"
                   vectorEffect="non-scaling-stroke"
                 />
-              ))}
-            </svg>
+              </svg>
+            ))}
             {/* Today's marker, drawn in HTML so it stays round. */}
             <span
               style={{
@@ -139,7 +161,7 @@ export function TwinProjectionChart({
           {/* Where each line ends at 10 years. When two ends sit close, the
               upper label grows upward and the lower one downward. */}
           <div className={`relative ${height}`}>
-            {chart.lines.map((line) => (
+            {chart.lines.map((line, i) => (
               <span
                 key={line.end.label}
                 style={{
@@ -150,6 +172,8 @@ export function TwinProjectionChart({
                   transform: `translateY(${endShift(chart, line.end.y)})`,
                   color: line.end.muted ? twin.ink(0.62) : twin.primary,
                   lineHeight: 1.2,
+                  // Each end label arrives just as its path reaches 10 years.
+                  ...fadeStyle(phase, 400, i * LINE_STAGGER + LINE_MS - 250),
                 }}
               >
                 <span className="block text-[13px] @xl:text-[14px]" style={{ fontWeight: 600 }}>

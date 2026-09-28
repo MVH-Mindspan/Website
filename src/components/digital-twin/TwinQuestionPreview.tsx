@@ -1,5 +1,8 @@
+"use client";
+
 import type { TwinQuestion } from "@/content/twinReport";
 import { TwinScreen, twin } from "./TwinScreen";
+import { UNFOLD_EASE, revealStyle, useUnfold } from "./useUnfold";
 
 // Recreation of the tool's "Where would you place yourself today?" screen:
 // phase rail, question, and the stage slider, using the tool's own styles at
@@ -9,6 +12,8 @@ const THUMB = 56;
 
 export function TwinQuestionPreview({ question, label }: { question: TwinQuestion; label: string }) {
   const q = question;
+  // On first view the slider settles into place, as if someone just answered.
+  const { ref, phase } = useUnfold<HTMLDivElement>(150 + 900);
   return (
     <TwinScreen label={label}>
       <PhaseRail phase={q.phase} />
@@ -65,7 +70,7 @@ export function TwinQuestionPreview({ question, label }: { question: TwinQuestio
           </p>
 
           {/* Slider: 10px sand track, gradient fill, 56px handle. */}
-          <div style={{ position: "relative", height: THUMB + 16, marginTop: 8 }}>
+          <div ref={ref} style={{ position: "relative", height: THUMB + 16, marginTop: 8 }}>
             <div
               style={{
                 position: "absolute",
@@ -89,23 +94,36 @@ export function TwinQuestionPreview({ question, label }: { question: TwinQuestio
                 transform: "translateY(-50%)",
                 background: `linear-gradient(90deg, ${twin.primary}, ${twin.accent})`,
                 borderRadius: 999,
+                ...revealStyle(phase, 900, 150, "999px"),
               }}
             />
-            <div
-              style={{
-                position: "absolute",
-                top: "50%",
-                // Native range thumbs travel within the track minus their width.
-                left: `calc(${THUMB / 2}px + (100% - ${THUMB}px) * ${q.fillPercent / 100})`,
-                width: THUMB,
-                height: THUMB,
-                transform: "translate(-50%, -50%)",
-                borderRadius: "50%",
-                background: twin.primary,
-                border: "4px solid #fff",
-                boxShadow: "0 2px 6px #08363038, 0 12px 28px -8px #08363066",
-              }}
-            />
+            {/* Native range thumbs travel within the track minus their width,
+                so the handle rides a rail inset by half its size. The mover is
+                the rail's width, so translateX(%) maps to the slider value. */}
+            <div style={{ position: "absolute", top: "50%", left: THUMB / 2, right: THUMB / 2, height: 0 }}>
+              <div
+                style={{
+                  width: "100%",
+                  transform: `translateX(${phase === "armed" ? 0 : q.fillPercent}%)`,
+                  transition: phase === "play" ? `transform 900ms ${UNFOLD_EASE} 150ms` : "none",
+                }}
+              >
+                <div
+                  style={{
+                    position: "absolute",
+                    left: 0,
+                    top: 0,
+                    width: THUMB,
+                    height: THUMB,
+                    transform: "translate(-50%, -50%)",
+                    borderRadius: "50%",
+                    background: twin.primary,
+                    border: "4px solid #fff",
+                    boxShadow: "0 2px 6px #08363038, 0 12px 28px -8px #08363066",
+                  }}
+                />
+              </div>
+            </div>
           </div>
 
           {/* Narrow cards show the two ends of the scale; wider cards show all four. */}

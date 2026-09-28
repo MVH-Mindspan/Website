@@ -186,7 +186,6 @@ export const digitalTwinPage = {
     intro: {
       eyebrow: "Who is it for?",
       title: "Start for yourself, or for someone you love.",
-      lead: "Pick the one that fits. You can change it later.",
     },
     audiences,
   },

@@ -1,7 +1,8 @@
 "use client";
 
 /* eslint-disable @next/next/no-img-element */
-import { useState } from "react";
+import { useRef, useState } from "react";
+import { useInView } from "framer-motion";
 import { useTheme } from "@/lib/theme-context";
 import { alpha } from "@/lib/themes";
 import { radius, type as typeScale } from "@/lib/tokens";
@@ -39,6 +40,9 @@ export function VideoIntro({
   const { theme } = useTheme();
   const c = theme.colors;
   const [playing, setPlaying] = useState(false);
+  // Two soft rings around Play the first time the player comes into view.
+  const playerRef = useRef<HTMLDivElement>(null);
+  const invite = useInView(playerRef, { once: true, amount: 0.6 });
 
   return (
     <section
@@ -62,6 +66,7 @@ export function VideoIntro({
           </Eyebrow>
 
           <div
+            ref={playerRef}
             style={{
               position: "relative",
               // Never taller than the screen (landscape phones), minus the header.
@@ -126,6 +131,16 @@ export function VideoIntro({
                   // Centered on the player at every size.
                   className="left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 inline-flex items-center whitespace-nowrap gap-2.5 py-1.5 pl-1.5 pr-4 text-[15px] sm:gap-3.5 sm:py-3.5 sm:pl-4 sm:pr-6 sm:text-[17px] group-hover:scale-105 group-focus-visible:scale-105"
                 >
+                  <span
+                    aria-hidden="true"
+                    className={invite ? "play-invite" : undefined}
+                    style={{
+                      position: "absolute",
+                      inset: 0,
+                      borderRadius: radius.pill,
+                      pointerEvents: "none",
+                    }}
+                  />
                   <span
                     className="w-9 h-9 sm:w-12 sm:h-12"
                     style={{

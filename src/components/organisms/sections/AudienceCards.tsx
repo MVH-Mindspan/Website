@@ -27,7 +27,7 @@ export function AudienceCards({
   intro: {
     eyebrow: string;
     title: string;
-    lead: string;
+    lead?: string;
     image?: string;
     imageAlt?: string;
   };

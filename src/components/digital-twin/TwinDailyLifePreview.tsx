@@ -1,5 +1,8 @@
+"use client";
+
 import type { TwinDailyLife } from "@/content/twinReport";
 import { TwinScreen, twin } from "./TwinScreen";
+import { revealStyle, useUnfold } from "./useUnfold";
 
 // Recreation of the tool's everyday-life view: the Independent / Together /
 // With help key, then one room ("Out and about") opened to its timeline of
@@ -21,6 +24,8 @@ export function TwinDailyLifePreview({
   label: string;
 }) {
   const d = dailyLife;
+  // On first view the years fill in, lane by lane, from Today to 10 years.
+  const { ref, phase } = useUnfold<HTMLDivElement>(100 + (dailyLife.lanes.length - 1) * 350 + 1000);
   return (
     <TwinScreen label={label} style={{ background: "transparent", boxShadow: "none", borderRadius: 0, overflow: "visible" }}>
       {/* Section key */}
@@ -87,8 +92,8 @@ export function TwinDailyLifePreview({
             ))}
           </div>
 
-          <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-            {d.lanes.map((lane) => (
+          <div ref={ref} style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+            {d.lanes.map((lane, i) => (
               <div key={lane.label}>
                 <span style={{ display: "block", margin: "0 0 4px", fontSize: "0.8125rem", fontWeight: 700, color: twin.muted70 }}>
                   {lane.label}
@@ -101,6 +106,7 @@ export function TwinDailyLifePreview({
                     borderRadius: 7,
                     overflow: "hidden",
                     boxShadow: `inset 0 0 0 1px ${twin.ink(0.08)}`,
+                    ...revealStyle(phase, 1000, 100 + i * 350, "7px"),
                   }}
                 >
                   <span style={{ flex: `${lane.together} 1 0%`, background: twin.together }} />

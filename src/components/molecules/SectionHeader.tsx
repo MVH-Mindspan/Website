@@ -120,13 +120,13 @@ export function SectionHeader({
             {eyebrowNode}
             {headingNode}
           </GridCol>
-          <GridCol span={5}>
-            {lead && (
+          {lead && (
+            <GridCol span={5}>
               <Lead size="lg" color={leadColor} maxWidth={measure.lead}>
                 {linkify ? linkifyNeurologists(lead) : lead}
               </Lead>
-            )}
-          </GridCol>
+            </GridCol>
+          )}
         </Grid>
       </Reveal>
     );
