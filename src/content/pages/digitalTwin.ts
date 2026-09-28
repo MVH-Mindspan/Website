@@ -27,6 +27,7 @@ const audiences: Audience[] = [
     body: "See what the next 10 years may look like for you, and what care may change.",
     cta: "Start for me",
     href: twinToolHref("dt-card-self"),
+    icon: "user",
   },
   {
     id: "loved-one",
@@ -35,6 +36,7 @@ const audiences: Audience[] = [
     body: "Answer for them, or with them. See what the next 10 years may look like for them.",
     cta: "Start for them",
     href: twinToolHref("dt-card-loved-one"),
+    icon: "users",
   },
 ];
 
@@ -219,18 +221,6 @@ export const digitalTwinPage = {
     ],
     footnote: `Questions? Call us at ${brand.phone}.`,
     cta: { label: START_LABEL, href: twinToolHref("dt-good-to-know") },
-  },
-
-  // A calm, image-led pause between the checklist and the science.
-  together: {
-    id: "together",
-    eyebrow: "At your own pace",
-    title: "Sit down together, at home.",
-    body:
-      "Many families answer the questions together. There is no rush. You can take a break and come back later on the same device.",
-    image: "/assets/digital-twin-together.webp",
-    imageAlt:
-      "An older woman and man sit in armchairs by a sunlit window, smiling as they look at a tablet together.",
   },
 
   science: {

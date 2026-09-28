@@ -11,6 +11,8 @@ export type Audience = {
   caption?: string;
   /** Optional secondary text link rendered under the card, outside the card link. */
   link?: { label: string; href: string };
+  /** Optional icon tile above the kicker, to make each choice easy to spot. */
+  icon?: "user" | "users";
 };
 
 export const audiencesIntro = {

@@ -9,6 +9,8 @@ import { Heading } from "@/components/atoms/Heading";
 import { ImageFrame } from "@/components/atoms/ImageFrame";
 import { Lead } from "@/components/atoms/Lead";
 import { ArrowIcon } from "@/components/atoms/ArrowIcon";
+import { IconBadge } from "@/components/atoms/IconBadge";
+import { SectionIcon } from "./icons";
 import { BulletList } from "@/components/molecules/BulletList";
 import { CardCaption } from "@/components/molecules/CardCaption";
 import { Reveal } from "@/components/molecules/Reveal";
@@ -90,6 +92,11 @@ export function AudienceCards({
                 }}
               >
                 <a href={a.href} {...cardLinkProps} className="flex flex-col flex-1 min-w-0">
+                  {a.icon && (
+                    <IconBadge background={c.sky} color={c.brandGreen} className="mb-5">
+                      <SectionIcon name={a.icon} />
+                    </IconBadge>
+                  )}
                   <Eyebrow color={c.accentText}>{a.kicker}</Eyebrow>
                   <Heading
                     as="h3"

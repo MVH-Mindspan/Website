@@ -24,8 +24,8 @@ import { SITE_URL } from "@/lib/seo";
 export const metadata = digitalTwinPage.metadata;
 
 // One story, slowly: the question, the intro video, who it is for, how it works (with real
-// report screens), what to know, a calm pause, the science, how it fits our
-// care, its limits, the next step with a neurologist, questions, and it ends
+// report screens), what to know, the science, how it fits our
+// care, its limits, questions, the next step with a neurologist, and it ends
 // on the start action.
 export default function DigitalTwinPage() {
   const page = digitalTwinPage;
@@ -79,8 +79,6 @@ export default function DigitalTwinPage() {
 
       <GuideBenefit {...page.goodToKnow} />
 
-      <FeatureSpotlight {...page.together} tone="sand" imagePosition="left" />
-
       <FeatureCardGrid
         id="science"
         intro={page.science.intro}
@@ -94,9 +92,9 @@ export default function DigitalTwinPage() {
 
       <EditorialIntro {...page.notADiagnosis} />
 
-      <FeatureSpotlight {...page.plan} tone="cream" />
-
       <FAQ intro={page.faqIntro} items={page.faq} tone="sand" />
+
+      <FeatureSpotlight {...page.plan} tone="cream" />
 
       <FinalCTA {...page.closing} />
     </>
