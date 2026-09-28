@@ -14,6 +14,8 @@ const EXCLUDED_BASENAMES = new Set([
   "noor-sachdev",
   "danvers-clinic",
   "bay-area-clinic",
+  // Title card from the Digital Twin intro video, not photography.
+  "digital-twin-intro-poster",
 ]);
 
 const IMAGE_RE = /\/assets\/[a-zA-Z0-9_\-./]+\.(?:webp|png|jpg|jpeg|avif)/g;
