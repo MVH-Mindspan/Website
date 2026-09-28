@@ -933,6 +933,13 @@ h1, h2, h3 {
   color: var(--nav-fg);
   transition: color 0.25s ease;
 }
+/* Invisible 44px-tall hit area around each nav link, so the text box (and
+   its hover underline) keeps its size and stays aligned with the header. */
+.v2-header-link::before {
+  content: "";
+  position: absolute;
+  inset: -10px -6px;
+}
 .v2-header-link::after {
   content: "";
   position: absolute;

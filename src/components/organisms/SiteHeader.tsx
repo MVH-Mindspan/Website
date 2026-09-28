@@ -216,7 +216,7 @@ export function SiteHeader() {
               <li key={n.label}>
                 <a
                   href={n.href}
-                  className="v2-header-link inline-flex items-center min-h-11"
+                  className="v2-header-link"
                   data-active={active ? "true" : undefined}
                   data-proximity=""
                   aria-current={active ? "page" : undefined}
