@@ -23,7 +23,7 @@ import { SITE_URL } from "@/lib/seo";
 
 export const metadata = digitalTwinPage.metadata;
 
-// One story, slowly: the intro video, the question, who it is for, how it works (with real
+// One story, slowly: the question, the intro video, who it is for, how it works (with real
 // report screens), what to know, a calm pause, the science, how it fits our
 // care, its limits, the next step with a neurologist, questions, and it ends
 // on the start action.
@@ -40,9 +40,9 @@ export default function DigitalTwinPage() {
       />
       <JsonLd id="ld-faq" data={buildFaqSchema(page.faq)} />
 
-      <VideoIntro {...page.intro} />
-
       <VideoHero {...page.hero} />
+
+      <VideoIntro {...page.intro} />
 
       <AudienceCards intro={page.forYou.intro} audiences={page.forYou.audiences} tone="cream" />
 

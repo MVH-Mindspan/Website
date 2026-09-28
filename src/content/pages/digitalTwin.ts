@@ -154,7 +154,7 @@ export const digitalTwinPage = {
     canonical: "/digital-twin",
   }),
 
-  // First section: the intro video, the quickest way to understand the twin.
+  // Intro video right under the hero: the quickest way to understand the twin.
   // The transcript is the video's on-screen text, in order.
   intro: {
     id: "intro-video",

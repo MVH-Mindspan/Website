@@ -8,7 +8,7 @@ import { radius, type as typeScale } from "@/lib/tokens";
 import { Container } from "@/components/atoms/Container";
 import { Eyebrow } from "@/components/atoms/Eyebrow";
 
-// A large, self-hosted explainer video as the first section of a page.
+// A large, self-hosted explainer video section.
 // Click to play with sound and native controls (keyboard and captions
 // friendly); nothing downloads until the visitor presses play. An optional
 // transcript of the on-screen text sits underneath for anyone who can't or
@@ -46,8 +46,7 @@ export function VideoIntro({
       style={{
         background: c.primary,
         color: c.cream,
-        paddingTop: "max(120px, 15vh)",
-        paddingBottom: "clamp(48px, 8vw, 88px)",
+        padding: "clamp(56px, 9vw, 96px) 0",
         scrollMarginTop: "96px",
       }}
     >
