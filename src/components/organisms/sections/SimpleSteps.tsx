@@ -152,6 +152,28 @@ export function SimpleSteps({
                   {step.cta.label} <ArrowIcon />
                 </a>
               )}
+              {step.link && (
+                <a
+                  href={step.link.href}
+                  {...externalLinkProps(step.link.href)}
+                  className="self-start"
+                  style={{
+                    display: "inline-block",
+                    // 10px padding + matching negative margins: 44px touch target, same layout.
+                    padding: "10px 0",
+                    margin: `${step.cta ? 6 : 10}px 0 -10px`,
+                    fontFamily: theme.fonts.body,
+                    fontSize: typeScale.bodySm,
+                    color: c.brandGreen,
+                    textDecoration: "underline",
+                    textUnderlineOffset: "0.2em",
+                    textDecorationThickness: "1px",
+                    textDecorationColor: alpha(c.brandGreen, 0.4),
+                  }}
+                >
+                  {step.link.label}
+                </a>
+              )}
             </Reveal>
           ))}
         </div>

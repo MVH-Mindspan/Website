@@ -1,6 +1,13 @@
 import { VIDEO_VISITS_ENABLED } from "@/lib/flags";
+import { digitalTwinHref } from "./digitalTwin";
 
-export type FAQItem = { id: string; question: string; answer: string };
+export type FAQItem = {
+  id: string;
+  question: string;
+  answer: string;
+  /** Optional link shown after the answer. Not included in FAQPage JSON-LD. */
+  link?: { label: string; href: string };
+};
 
 export const faqIntro = {
   eyebrow: "Common questions",
@@ -52,6 +59,7 @@ export const faq: FAQItem[] = [
 
 // Homepage-specific FAQ: leads with cost, the assessment handoff, speed, and
 // geography — the four questions that stall families before they convert.
+// The last item points to the Digital Twin introduction.
 export const homeFaq: FAQItem[] = [
   faq.find((f) => f.id === "medicare")!,
   {
@@ -66,5 +74,15 @@ export const homeFaq: FAQItem[] = [
     question: "What if we live outside Massachusetts or California?",
     answer:
       "We see patients in Massachusetts and California today. If you are somewhere else, join the waitlist in the booking flow and we will let you know the moment Mindspan opens in your area.",
+  },
+  {
+    id: "digital-twin",
+    question: "Can we see how memory may change over the next 10 years?",
+    answer:
+      "Yes. Our 10-year projection shows how memory and daily life may change, for you or for someone you love. It is free and takes about 10 minutes, from home. It is an estimate, not a diagnosis.",
+    link: {
+      label: "Learn about the 10\u2011year projection",
+      href: digitalTwinHref("home-faq"),
+    },
   },
 ];

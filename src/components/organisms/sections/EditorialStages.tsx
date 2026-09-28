@@ -1,6 +1,7 @@
 "use client";
 
 /* eslint-disable @next/next/no-img-element */
+import type { ReactNode } from "react";
 import { useTheme } from "@/lib/theme-context";
 import { alpha } from "@/lib/themes";
 import { type as typeScale } from "@/lib/tokens";
@@ -16,11 +17,14 @@ export function EditorialStages({
   intro,
   tone = "cream",
   align = "left",
+  visuals,
 }: {
   stages: readonly JourneyStage[];
   intro?: { eyebrow: string; title: string; lead: string };
   tone?: "sand" | "cream";
   align?: "left" | "center";
+  /** Optional per-stage visual (by index) rendered instead of the stage image. */
+  visuals?: readonly ReactNode[];
 }) {
   const { theme } = useTheme();
   const c = theme.colors;
@@ -88,7 +92,7 @@ export function EditorialStages({
               )}
             </div>
 
-            <div style={{ paddingRight: 32 }}>
+            <div className="sm:pr-8">
               <p
                 style={{
                   fontFamily: theme.fonts.body,
@@ -104,6 +108,7 @@ export function EditorialStages({
               </p>
               <h3
                 style={{
+                  textWrap: "balance",
                   fontFamily: theme.fonts.heading,
                   fontSize: typeScale.h3,
                   fontWeight: 500,
@@ -128,24 +133,51 @@ export function EditorialStages({
                 <a
                   href={step.cta.href}
                   {...externalLinkProps(step.cta.href)}
-                  className="inline-flex items-center gap-2 font-semibold transition-all prox-cta mt-6"
+                  className="inline-flex items-center justify-center text-center gap-2 font-semibold transition-all prox-cta mt-6"
                   data-proximity=""
                   style={{
                     fontFamily: theme.fonts.body,
                     fontSize: typeScale.bodySm,
-                    padding: "12px 24px",
+                    padding: "12px clamp(18px, 5vw, 24px)",
                     background: c.brandGreen,
                     color: "#fff",
                     borderRadius: "10rem",
                   }}
                 >
                   {step.cta.label} <ArrowIcon />
+                  {externalLinkProps(step.cta.href).target === "_blank" && (
+                    <span className="sr-only"> (opens in new tab)</span>
+                  )}
+                </a>
+              )}
+              {step.link && (
+                <a
+                  href={step.link.href}
+                  {...externalLinkProps(step.link.href)}
+                  style={{
+                    display: "block",
+                    width: "fit-content",
+                    // 10px padding + matching negative margins: 44px touch target, same layout.
+                    padding: "10px 0",
+                    margin: `${step.cta ? 6 : 14}px 0 -10px`,
+                    fontFamily: theme.fonts.body,
+                    fontSize: typeScale.bodySm,
+                    color: c.brandGreen,
+                    textDecoration: "underline",
+                    textUnderlineOffset: "0.2em",
+                    textDecorationThickness: "1px",
+                    textDecorationColor: alpha(c.brandGreen, 0.4),
+                  }}
+                >
+                  {step.link.label}
                 </a>
               )}
             </div>
 
-            <div className="flex flex-col justify-center stage-image">
-              {step.image && (
+            <div className={`flex flex-col justify-center ${visuals?.[i] ? "stage-visual" : "stage-image"}`}>
+              {visuals?.[i] ? (
+                visuals[i]
+              ) : step.image && (
                 <ImageFrame radius="1rem">
                   <img
                     src={step.image}

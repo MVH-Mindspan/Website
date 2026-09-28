@@ -933,6 +933,13 @@ h1, h2, h3 {
   color: var(--nav-fg);
   transition: color 0.25s ease;
 }
+/* Invisible 44px-tall hit area around each nav link, so the text box (and
+   its hover underline) keeps its size and stays aligned with the header. */
+.v2-header-link::before {
+  content: "";
+  position: absolute;
+  inset: -10px -6px;
+}
 .v2-header-link::after {
   content: "";
   position: absolute;
@@ -1098,6 +1105,12 @@ h1, h2, h3 {
   .v2-scope .stage-image {
     display: none !important;
   }
+  /* Coded visuals (e.g. /digital-twin report screens) carry the story, so
+     they stay: full width, under the stage text. */
+  .v2-scope .stage-visual {
+    grid-column: 1 / -1;
+    margin-top: 28px;
+  }
 }
 
 @media (max-width: 640px) {
@@ -1119,3 +1132,16 @@ h1, h2, h3 {
 
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* Video intro: two soft glows invite a first play, then stop. An even
+   spread (not a scale) keeps the halo the same width all round the pill. */
+@keyframes play-invite {
+  from { box-shadow: 0 0 0 0 rgba(251, 247, 240, 0.55); }
+  to { box-shadow: 0 0 0 16px rgba(251, 247, 240, 0); }
+}
+.play-invite {
+  animation: play-invite 1.6s cubic-bezier(0.22, 0.61, 0.36, 1) 0.5s 2 both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .play-invite { animation: none; }
+}

@@ -9,6 +9,7 @@ import { Heading } from "@/components/atoms/Heading";
 import { Button } from "@/components/atoms/Button";
 import { ArrowIcon } from "@/components/atoms/ArrowIcon";
 import { Reveal } from "@/components/molecules/Reveal";
+import { externalLinkProps } from "@/lib/links";
 import type { ClinicContact as ClinicContactType } from "@/content/pages/locationDetail";
 
 export function ClinicContact(props: ClinicContactType) {
@@ -124,6 +125,27 @@ export function ClinicContact(props: ClinicContactType) {
                 {props.existingPatient.label}
               </Button>
             </div>
+            {props.link && (
+              <a
+                href={props.link.href}
+                {...externalLinkProps(props.link.href)}
+                style={{
+                  display: "inline-block",
+                  // 10px padding + matching negative margins: 44px touch target, same layout.
+                  padding: "10px 0",
+                  margin: "10px 0 -10px",
+                  fontFamily: theme.fonts.body,
+                  fontSize: typeScale.bodySm,
+                  color: c.brandGreen,
+                  textDecoration: "underline",
+                  textUnderlineOffset: "0.2em",
+                  textDecorationThickness: "1px",
+                  textDecorationColor: alpha(c.brandGreen, 0.4),
+                }}
+              >
+                {props.link.label}
+              </a>
+            )}
           </Reveal>
         </div>
       </Container>

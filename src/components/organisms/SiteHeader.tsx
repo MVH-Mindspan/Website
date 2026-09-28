@@ -146,7 +146,9 @@ export function SiteHeader() {
       backdropFilter: "blur(20px) saturate(140%)",
       WebkitBackdropFilter: "blur(20px) saturate(140%)",
       borderRadius: "10rem",
-      padding: scrolled ? "8px 12px 8px 24px" : "12px 12px 12px 24px",
+      padding: scrolled
+        ? "8px 12px 8px clamp(14px, 5vw, 24px)"
+        : "12px 12px 12px clamp(14px, 5vw, 24px)",
       boxShadow: scrolled ? scrolledShadow : baseShadow,
       transition: `padding 0.4s ${ease.expressive}, box-shadow 0.4s ease`,
       ["--nav-fg" as string]: alpha(c.cream, 0.7),
@@ -184,11 +186,11 @@ export function SiteHeader() {
       </AnimatePresence>
 
       <nav
-        className="fixed top-4 left-1/2 -translate-x-1/2 z-[999] flex items-center justify-between"
+        className="fixed top-4 left-1/2 -translate-x-1/2 z-[999] flex items-center justify-between gap-2"
         data-analytics-location="site_header"
         style={navStyle}
       >
-        <a href="/" className="inline-flex items-center" aria-label={brand.name}>
+        <a href="/" className="inline-flex items-center min-w-0 shrink min-h-11" aria-label={brand.name}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/assets/mindspan-wordmark-white.png"
@@ -197,16 +199,17 @@ export function SiteHeader() {
             width={175}
             height={28}
             style={{
-              height: 28,
+              // Sized by height so the wordmark keeps its shape and leaves
+              // room for the button and menu on small phones.
+              height: "clamp(15px, 5vw, 28px)",
               width: "auto",
-              maxWidth: "min(175px, 38vw)",
               aspectRatio: "850 / 136",
               display: "block",
             }}
           />
         </a>
 
-        <ul className="hidden nav:flex items-center gap-8">
+        <ul className="hidden nav:flex items-center gap-6 min-[1440px]:gap-8">
           {[...nav, audienceNav.providers].map((n) => {
             const active = isActive(n.href);
             return (
@@ -226,7 +229,7 @@ export function SiteHeader() {
           })}
         </ul>
 
-        <div className="flex items-center gap-2 nav:gap-3">
+        <div className="flex shrink-0 items-center gap-2 nav:gap-3">
           <a
             href={audienceNav.refer.href}
             className="hidden nav:inline-flex v2-header-refer items-center gap-2 font-medium px-5 py-3"
@@ -255,7 +258,7 @@ export function SiteHeader() {
                 href: brand.primaryCtaHref,
               })
             }
-            className="v2-header-cta font-semibold px-4 nav:px-6 py-2 nav:py-3"
+            className="v2-header-cta inline-flex items-center min-h-11 font-semibold px-3 min-[380px]:px-4 nav:px-6 py-2 nav:py-3"
             data-proximity=""
             style={{
               fontFamily: theme.fonts.body,

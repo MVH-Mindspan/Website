@@ -6,6 +6,7 @@ import {
 import type { JourneyStage } from "../journey";
 import type { Protocol } from "../protocols";
 import type { TechCard } from "../technology";
+import { digitalTwinHref } from "../digitalTwin";
 
 const BOOKING_HREF = "/book-a-visit";
 
@@ -195,6 +196,21 @@ export const assistPage = {
         "Getting started is straightforward and private. Complete a brief assessment from home, and we\u2019ll take care of coordinating specialists, next steps, and ongoing care, guiding you the whole way.",
     },
     items: howToStart,
+  },
+
+  digitalTwin: {
+    id: "digital-twin",
+    eyebrow: "An introduction to our Digital Twin",
+    title: "See what the years ahead may look like for them.",
+    body:
+      "Answer on their behalf in about 10 minutes, or answer together. Unlike the free assessment, this projection does not test memory. It shows how the next 10 years may go, and what care may mean for your time with them. It is an estimate, not a diagnosis, and a good way to start a conversation with a neurologist.",
+    image: "/assets/guide-life.webp",
+    imageAlt:
+      "An older man with a gray beard stands in a sunlit kitchen, holding a mug and looking out the window.",
+    secondary: {
+      label: "Explore the Digital Twin",
+      href: digitalTwinHref("assist-feature"),
+    },
   },
 
   guideBenefit: {

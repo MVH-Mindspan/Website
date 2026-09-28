@@ -9,6 +9,7 @@ import { Heading } from "@/components/atoms/Heading";
 import { Lead } from "@/components/atoms/Lead";
 import { Reveal } from "@/components/molecules/Reveal";
 import { Button } from "@/components/atoms/Button";
+import { externalLinkProps } from "@/lib/links";
 
 export function GuideBenefit({
   eyebrow,
@@ -44,10 +45,10 @@ export function GuideBenefit({
           className="v2-card rounded-[2rem]"
           style={{
             background: alpha(c.sand, 0.7),
-            padding: "clamp(32px, 5vw, 56px)",
+            padding: "clamp(20px, 5vw, 56px)",
           }}
         >
-          <div className="grid md:grid-cols-[1.1fr_0.9fr] gap-10 md:gap-14 items-start">
+          <div className="grid xl:grid-cols-[1.1fr_0.9fr] gap-10 xl:gap-14 items-start">
             <div>
               <Eyebrow color={c.brandGreen}>{eyebrow}</Eyebrow>
               <Heading
@@ -111,18 +112,21 @@ export function GuideBenefit({
               </ul>
               {cta && (
                 <div className="mt-8">
-                  <Button href={cta.href} variant="primary">
+                  <Button href={cta.href} {...externalLinkProps(cta.href)} variant="primary">
                     {cta.label}
+                    {externalLinkProps(cta.href).target === "_blank" && (
+                      <span className="sr-only"> (opens in new tab)</span>
+                    )}
                   </Button>
                 </div>
               )}
             </div>
             <div
-              className="v2-card"
+              className="v2-card xl:sticky xl:top-28"
               style={{
                 background: "rgba(255, 255, 255, 0.7)",
                 borderRadius: "1.25rem",
-                padding: "28px 28px",
+                padding: "clamp(20px, 4vw, 28px)",
               }}
             >
               <div
@@ -184,11 +188,11 @@ export function GuideBenefit({
                   style={{
                     fontFamily: theme.fonts.body,
                     fontSize: typeScale.bodySm,
-                    color: alpha(c.ink, 0.55),
+                    color: alpha(c.ink, 0.72),
                     lineHeight: 1.5,
                   }}
                 >
-                  {paragraph}
+                  {linkPhones(paragraph, c.brandGreen)}
                 </p>
               ))}
             </div>
@@ -196,5 +200,33 @@ export function GuideBenefit({
         </Reveal>
       </Container>
     </section>
+  );
+}
+
+// US phone numbers in footnotes become tap-to-call links that never split
+// across lines, with a 44px touch target.
+const PHONE = /(\(\d{3}\) \d{3}-\d{4})/;
+function linkPhones(text: string, color: string) {
+  const parts = text.split(PHONE);
+  if (parts.length === 1) return text;
+  return parts.map((part, i) =>
+    PHONE.test(part) ? (
+      <a
+        key={i}
+        href={`tel:+1${part.replace(/\D/g, "")}`}
+        style={{
+          color,
+          fontWeight: 600,
+          whiteSpace: "nowrap",
+          textDecoration: "underline",
+          textUnderlineOffset: "0.2em",
+          padding: "13px 0",
+        }}
+      >
+        {part}
+      </a>
+    ) : (
+      part
+    ),
   );
 }

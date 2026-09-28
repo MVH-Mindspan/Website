@@ -21,8 +21,10 @@ export function VideoHero({
   secondaryCta,
   reassurance,
   playbackRate = 1,
+  mediaPosition = "center",
 }: {
-  video: string;
+  /** Omit to show `poster` as a still hero image. */
+  video?: string;
   poster?: string;
   headline: string;
   subTagline: string;
@@ -32,6 +34,8 @@ export function VideoHero({
   secondaryCta?: { label: string; href: string };
   reassurance?: string;
   playbackRate?: number;
+  /** CSS object-position for the poster/video, e.g. "35% 50%" to keep the subject in frame. */
+  mediaPosition?: string;
 }) {
   const { theme } = useTheme();
   const c = theme.colors;
@@ -42,12 +46,17 @@ export function VideoHero({
       className="relative w-full overflow-hidden hero-section"
       data-analytics-location="video_hero"
       style={{
-        height: "100vh",
-        minHeight: 600,
+        // At least one screen tall, but free to grow: on small or landscape
+        // phones the content can be taller than the viewport, and pinning it
+        // to a fixed height pushed the headline under the header.
+        minHeight: "max(600px, 100svh)",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "flex-end",
         background: "#201E17",
       }}
     >
-      {showVideo && (
+      {showVideo && video && (
         // eslint-disable-next-line jsx-a11y/media-has-caption
         <video
           ref={videoRef}
@@ -59,6 +68,7 @@ export function VideoHero({
           preload="none"
           aria-hidden
           style={{
+            objectPosition: mediaPosition,
             transform: ended ? "scale(1.1)" : "scale(1)",
             transition: "transform 16s linear",
             transformOrigin: "center center",
@@ -68,12 +78,13 @@ export function VideoHero({
           <source src={video} type="video/mp4" />
         </video>
       )}
-      {!showVideo && poster && (
+      {(!showVideo || !video) && poster && (
         // eslint-disable-next-line @next/next/no-img-element
         <img
           src={poster}
           alt=""
           className="absolute inset-0 w-full h-full object-cover"
+          style={{ objectPosition: mediaPosition }}
           loading="eager"
         />
       )}
@@ -81,19 +92,25 @@ export function VideoHero({
       <div
         className="absolute inset-0"
         style={{
-          background: `linear-gradient(to top, ${alpha("#201E17", 0.72)} 0%, ${alpha(
+          background: `linear-gradient(to top, ${alpha("#201E17", 0.76)} 0%, ${alpha(
             "#201E17",
-            0.18
+            0.32
           )} 45%, ${alpha("#201E17", 0.08)} 100%)`,
         }}
       />
       <div
         className="sm:hidden absolute inset-0"
-        style={{ background: alpha("#201E17", 0.15) }}
+        style={{ background: alpha("#201E17", 0.28) }}
       />
       <div
-        className="absolute bottom-0 left-0 right-0 flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 lg:gap-16 hero-content"
-        style={{ padding: "64px clamp(24px, 5vw, 80px)" }}
+        className="relative w-full flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 lg:gap-16 hero-content"
+        style={{
+          // Top padding clears the floating header when the content fills the hero.
+          padding: "max(112px, 14vh) 0 clamp(40px, 7vw, 64px)",
+          // Same side inset as the page Container (min(1320px, 92vw)), so the
+          // hero text lines up with the header and every section below.
+          paddingInline: "max(24px, 4vw, calc((100% - 1320px) / 2))",
+        }}
       >
         <div>
           <h1
@@ -120,6 +137,7 @@ export function VideoHero({
               color: c.cream,
               marginBottom: 8,
               lineHeight: 1.4,
+              textShadow: `0 1px 12px ${alpha("#201E17", 0.6)}, 0 0 2px ${alpha("#201E17", 0.45)}`,
             }}
           >
             {subTagline}
@@ -128,9 +146,10 @@ export function VideoHero({
             style={{
               fontFamily: theme.fonts.body,
               fontSize: typeScale.bodySm,
-              color: alpha(c.cream, 0.78),
+              color: alpha(c.cream, 0.92),
               lineHeight: 1.55,
               marginBottom: cta ? 20 : 0,
+              textShadow: `0 1px 12px ${alpha("#201E17", 0.6)}, 0 0 2px ${alpha("#201E17", 0.45)}`,
             }}
           >
             {linkifyNeurologists(subhead)}
@@ -172,6 +191,9 @@ export function VideoHero({
                   onMouseLeave={(e) => (e.currentTarget.style.background = "#fff")}
                 >
                   {cta.label}
+                  {externalLinkProps(cta.href).target === "_blank" && (
+                    <span className="sr-only"> (opens in new tab)</span>
+                  )}
                   <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden>
                     <path
                       d="M1 5h8m0 0L5.5 1.5M9 5 5.5 8.5"
@@ -229,6 +251,9 @@ export function VideoHero({
                   }}
                 >
                   {secondaryCta.label}
+                  {externalLinkProps(secondaryCta.href).target === "_blank" && (
+                    <span className="sr-only"> (opens in new tab)</span>
+                  )}
                 </a>
               )}
             </div>
@@ -349,6 +374,7 @@ export function VideoHero({
             justify-content: center;
             text-align: center;
             white-space: normal;
+            padding-inline: 18px !important;
           }
           .hero-cta-note {
             text-align: center;

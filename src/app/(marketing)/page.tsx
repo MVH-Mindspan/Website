@@ -2,6 +2,7 @@ import { VideoHero } from "@/components/organisms/sections/VideoHero";
 import { CoverageBand } from "@/components/organisms/sections/CoverageBand";
 import { ClinicianBand } from "@/components/organisms/sections/ClinicianBand";
 import { EditorialStages } from "@/components/organisms/sections/EditorialStages";
+import { FeatureSpotlight } from "@/components/organisms/sections/FeatureSpotlight";
 import { RippleFlow } from "@/components/organisms/sections/RippleFlow";
 import { StatsBand } from "@/components/organisms/sections/StatsBand";
 import { AudienceCards } from "@/components/organisms/sections/AudienceCards";
@@ -78,6 +79,7 @@ export default function HomePage() {
         steps={mindspanPath}
         cta={mindspanPathCta}
       />
+      <FeatureSpotlight {...homePage.projection} tone="cream" imagePosition="left" />
       <EditorialStages stages={journey} intro={journeyIntro} align="center" tone="sand" />
       <Testimonials intro={testimonialsIntro} quotes={testimonials} tone="cream" />
       <LocationCards

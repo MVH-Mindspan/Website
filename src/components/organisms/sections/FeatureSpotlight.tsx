@@ -11,6 +11,7 @@ import { Button } from "@/components/atoms/Button";
 import { ArrowIcon } from "@/components/atoms/ArrowIcon";
 import { ImageFrame } from "@/components/atoms/ImageFrame";
 import { Reveal } from "@/components/molecules/Reveal";
+import { externalLinkProps } from "@/lib/links";
 
 type Tone = "cream" | "sand";
 
@@ -64,13 +65,24 @@ export function FeatureSpotlight({
       {(primary || secondary) && (
         <div className="mt-8 flex flex-wrap items-center gap-3">
           {primary && (
-            <Button href={primary.href} variant="primary" iconRight={<ArrowIcon />}>
+            <Button
+              href={primary.href}
+              {...externalLinkProps(primary.href)}
+              variant="primary"
+              iconRight={<ArrowIcon />}
+            >
               {primary.label}
+              <NewTabLabel href={primary.href} />
             </Button>
           )}
           {secondary && (
-            <Button href={secondary.href} variant="ghostDark">
+            <Button
+              href={secondary.href}
+              {...externalLinkProps(secondary.href)}
+              variant="ghostDark"
+            >
               {secondary.label}
+              <NewTabLabel href={secondary.href} />
             </Button>
           )}
         </div>
@@ -83,7 +95,7 @@ export function FeatureSpotlight({
       <img
         src={image}
         alt={imageAlt}
-        className="w-full object-cover block aspect-[4/3] sm:aspect-[16/10]"
+        className="w-full object-cover block aspect-[4/3] min-[480px]:aspect-[16/9] sm:aspect-[16/10]"
         loading="lazy"
       />
     </ImageFrame>
@@ -100,7 +112,7 @@ export function FeatureSpotlight({
       }}
     >
       <Container>
-        <Reveal className="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
+        <Reveal className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
           {imagePosition === "left" ? (
             <>
               {picture}
@@ -116,4 +128,11 @@ export function FeatureSpotlight({
       </Container>
     </section>
   );
+}
+
+// Same screen-reader cue the footer uses for links that open a new tab.
+function NewTabLabel({ href }: { href: string }) {
+  return externalLinkProps(href).target === "_blank" ? (
+    <span className="sr-only"> (opens in new tab)</span>
+  ) : null;
 }
