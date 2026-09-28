@@ -154,16 +154,15 @@ export const digitalTwinPage = {
     canonical: "/digital-twin",
   }),
 
+  // Same full-bleed hero as the main pages, with a still image.
   hero: {
-    eyebrow: "An introduction to our Digital Twin",
-    title: "What might the next 10 years look like?",
-    subTagline: "Free. About 10 minutes, from home.",
+    poster: "/assets/digital-twin-hero.webp",
+    headline: "What might the next 10 years look like?",
+    subTagline: "An introduction to our Digital Twin.",
     subhead:
       "Answer simple questions. A chart then shows how memory may change over 10 years, with and without care. For you, or for someone you love.",
-    image: "/assets/get-assessed.webp",
-    imageAlt:
-      "A younger woman in a yellow sweater and an older woman with silver hair sit on a bench by a sunlit window, looking at a tablet together.",
-    primaryCta: { label: START_LABEL, href: twinToolHref("dt-hero") },
+    cta: { label: START_LABEL, href: twinToolHref("dt-hero") },
+    ctaNote: "Free. About 10 minutes, from home.",
     secondaryCta: { label: "Book a visit", href: BOOKING_HREF },
   },
 

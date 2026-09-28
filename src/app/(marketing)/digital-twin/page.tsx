@@ -1,5 +1,5 @@
 import {
-  PageHero,
+  VideoHero,
   AudienceCards,
   EditorialStages,
   GuideBenefit,
@@ -39,7 +39,7 @@ export default function DigitalTwinPage() {
       />
       <JsonLd id="ld-faq" data={buildFaqSchema(page.faq)} />
 
-      <PageHero {...page.hero} />
+      <VideoHero {...page.hero} />
 
       <AudienceCards intro={page.forYou.intro} audiences={page.forYou.audiences} tone="cream" />
 

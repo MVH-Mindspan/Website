@@ -22,7 +22,8 @@ export function VideoHero({
   reassurance,
   playbackRate = 1,
 }: {
-  video: string;
+  /** Omit to show `poster` as a still hero image. */
+  video?: string;
   poster?: string;
   headline: string;
   subTagline: string;
@@ -47,7 +48,7 @@ export function VideoHero({
         background: "#201E17",
       }}
     >
-      {showVideo && (
+      {showVideo && video && (
         // eslint-disable-next-line jsx-a11y/media-has-caption
         <video
           ref={videoRef}
@@ -68,7 +69,7 @@ export function VideoHero({
           <source src={video} type="video/mp4" />
         </video>
       )}
-      {!showVideo && poster && (
+      {(!showVideo || !video) && poster && (
         // eslint-disable-next-line @next/next/no-img-element
         <img
           src={poster}
@@ -172,6 +173,9 @@ export function VideoHero({
                   onMouseLeave={(e) => (e.currentTarget.style.background = "#fff")}
                 >
                   {cta.label}
+                  {externalLinkProps(cta.href).target === "_blank" && (
+                    <span className="sr-only"> (opens in new tab)</span>
+                  )}
                   <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden>
                     <path
                       d="M1 5h8m0 0L5.5 1.5M9 5 5.5 8.5"
@@ -229,6 +233,9 @@ export function VideoHero({
                   }}
                 >
                   {secondaryCta.label}
+                  {externalLinkProps(secondaryCta.href).target === "_blank" && (
+                    <span className="sr-only"> (opens in new tab)</span>
+                  )}
                 </a>
               )}
             </div>
