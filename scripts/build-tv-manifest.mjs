@@ -14,11 +14,6 @@ const EXCLUDED_BASENAMES = new Set([
   "noor-sachdev",
   "danvers-clinic",
   "bay-area-clinic",
-  // UI screenshots of the Digital Twin report, not photography.
-  "twin-report-question",
-  "twin-report-daily-life",
-  "twin-report-projection",
-  "twin-report-with-care",
 ]);
 
 const IMAGE_RE = /\/assets\/[a-zA-Z0-9_\-./]+\.(?:webp|png|jpg|jpeg|avif)/g;

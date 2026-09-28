@@ -43,7 +43,6 @@ const steps: JourneyStage[] = [
     title: "Answer simple questions.",
     body:
       "It opens in a new tab. Tell us who it is for. Then answer questions about memory, mood, and health. It takes about 10 minutes, and you can stop and come back.",
-    image: "/assets/twin-report-question.webp",
     imageAlt:
       "Example question screen. It asks “Where would you place yourself today?” A slider is set to “Mild changes or better”: daily life carries on as usual.",
   },
@@ -52,7 +51,6 @@ const steps: JourneyStage[] = [
     title: "See the next 10 years.",
     body:
       "A simple chart shows how memory and daily life may change over 10 years, across 7 stages. It is based on people at a similar stage. The shaded band shows a range, because no one\u2019s path is fixed.",
-    image: "/assets/twin-report-projection.webp",
     imageAlt:
       "Example chart for a sample profile. A line starts at stage 3, mild changes, and moves slowly toward stage 5 over 10 years, inside a shaded range of possible outcomes.",
   },
@@ -61,16 +59,14 @@ const steps: JourneyStage[] = [
     title: "See what it means for daily life.",
     body:
       "The report also explains the years in everyday terms, like getting out and about, money and paperwork, and the kitchen. A timeline shows when each may be done on your own, together with someone, or with help. It shows this with care and without it.",
-    image: "/assets/twin-report-daily-life.webp",
     imageAlt:
-      "Example everyday-life timeline for getting out and about, for a sample profile. Two bars run from today to 10 years. With science-backed care, the stage of doing things together with someone lasts longer before more help is needed.",
+      "Example everyday-life view for a sample profile. A key explains independent, together, and with help. For getting out and about, two bars run from today to 10 years. With science-backed care, the stage of doing things together with someone lasts longer before more help is needed.",
   },
   {
     kicker: "Compare",
     title: "See what care may change.",
     body:
       "Add care, like healthy habits and treatment. Then compare the path with care and without it. Care may slow the changes. That can mean more time at each stage.",
-    image: "/assets/twin-report-with-care.webp",
     imageAlt:
       "Example chart for a sample profile. A solid line with science-backed care stays above a dashed line without added care, showing a slower pace over 10 years.",
     cta: { label: START_LABEL, href: twinToolHref("dt-steps") },
@@ -184,7 +180,7 @@ export const digitalTwinPage = {
     intro: {
       eyebrow: "How it works",
       title: "Four simple steps.",
-      lead: "These are example screens from a sample profile. Yours will look different.",
+      lead: "These are real screens from the tool, shown for a sample profile. Yours will look different.",
     },
     stages: steps,
   },

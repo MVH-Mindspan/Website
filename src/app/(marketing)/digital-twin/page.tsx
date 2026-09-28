@@ -9,7 +9,13 @@ import {
   FAQ,
   FinalCTA,
 } from "@/components/organisms/sections";
+import {
+  TwinQuestionPreview,
+  TwinProjectionChart,
+  TwinDailyLifePreview,
+} from "@/components/digital-twin";
 import { digitalTwinPage } from "@/content/pages/digitalTwin";
+import { twinReport } from "@/content/twinReport";
 import { JsonLd } from "@/lib/json-ld";
 import { buildBreadcrumbSchema, buildFaqSchema } from "@/lib/schema";
 import { SITE_URL } from "@/lib/seo";
@@ -37,7 +43,36 @@ export default function DigitalTwinPage() {
 
       <AudienceCards intro={page.forYou.intro} audiences={page.forYou.audiences} tone="cream" />
 
-      <EditorialStages intro={page.steps.intro} stages={page.steps.stages} tone="sand" />
+      <EditorialStages
+        intro={page.steps.intro}
+        stages={page.steps.stages}
+        tone="sand"
+        visuals={[
+          <TwinQuestionPreview
+            key="question"
+            question={twinReport.question}
+            label={page.steps.stages[0].imageAlt ?? ""}
+          />,
+          <TwinProjectionChart
+            key="projection"
+            chart={twinReport.projection}
+            title={twinReport.chartTitle}
+            label={page.steps.stages[1].imageAlt ?? ""}
+          />,
+          <TwinDailyLifePreview
+            key="daily-life"
+            dailyLife={twinReport.dailyLife}
+            title={twinReport.chartTitle}
+            label={page.steps.stages[2].imageAlt ?? ""}
+          />,
+          <TwinProjectionChart
+            key="with-care"
+            chart={twinReport.withCare}
+            title={twinReport.chartTitle}
+            label={page.steps.stages[3].imageAlt ?? ""}
+          />,
+        ]}
+      />
 
       <GuideBenefit {...page.goodToKnow} />
 

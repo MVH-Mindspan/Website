@@ -1,6 +1,7 @@
 "use client";
 
 /* eslint-disable @next/next/no-img-element */
+import type { ReactNode } from "react";
 import { useTheme } from "@/lib/theme-context";
 import { alpha } from "@/lib/themes";
 import { type as typeScale } from "@/lib/tokens";
@@ -16,11 +17,14 @@ export function EditorialStages({
   intro,
   tone = "cream",
   align = "left",
+  visuals,
 }: {
   stages: readonly JourneyStage[];
   intro?: { eyebrow: string; title: string; lead: string };
   tone?: "sand" | "cream";
   align?: "left" | "center";
+  /** Optional per-stage visual (by index) rendered instead of the stage image. */
+  visuals?: readonly ReactNode[];
 }) {
   const { theme } = useTheme();
   const c = theme.colors;
@@ -167,8 +171,10 @@ export function EditorialStages({
               )}
             </div>
 
-            <div className="flex flex-col justify-center stage-image">
-              {step.image && (
+            <div className={`flex flex-col justify-center ${visuals?.[i] ? "stage-visual" : "stage-image"}`}>
+              {visuals?.[i] ? (
+                visuals[i]
+              ) : step.image && (
                 <ImageFrame radius="1rem">
                   <img
                     src={step.image}

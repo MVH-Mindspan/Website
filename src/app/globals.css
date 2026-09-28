@@ -1098,6 +1098,12 @@ h1, h2, h3 {
   .v2-scope .stage-image {
     display: none !important;
   }
+  /* Coded visuals (e.g. /digital-twin report screens) carry the story, so
+     they stay: full width, under the stage text. */
+  .v2-scope .stage-visual {
+    grid-column: 1 / -1;
+    margin-top: 28px;
+  }
 }
 
 @media (max-width: 640px) {
