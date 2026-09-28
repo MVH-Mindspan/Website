@@ -10,7 +10,7 @@ type Size = "sm" | "md" | "lg";
 const sizeStyles: Record<Size, CSSProperties> = {
   sm: { padding: "12px 20px", fontSize: "0.875rem", minHeight: 44 },
   md: { padding: "14px 28px", fontSize: "0.9375rem", minHeight: 44 },
-  lg: { padding: "16px 32px", fontSize: "1rem", minHeight: 48 },
+  lg: { padding: "16px clamp(20px, 6vw, 32px)", fontSize: "1rem", minHeight: 48 },
 };
 
 type Props = {
@@ -104,6 +104,7 @@ export function Button({
     backdropFilter: "blur(32px) saturate(180%) brightness(1.08)",
     WebkitBackdropFilter: "blur(32px) saturate(180%) brightness(1.08)",
     textWrap: "balance",
+    textAlign: "center",
     cursor: disabled ? "not-allowed" : "pointer",
     opacity: disabled ? 0.5 : 1,
     maxWidth: "100%",

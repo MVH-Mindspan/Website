@@ -52,13 +52,21 @@ export function VideoIntro({
     >
       <Container>
         <div style={{ maxWidth: 1120, marginInline: "auto" }}>
-          <Eyebrow color={alpha(c.cream, 0.75)} style={{ textAlign: "center", marginBottom: 20 }}>
-            {eyebrow}
+          <Eyebrow color={alpha(c.cream, 0.75)} style={{ textAlign: "center", marginBottom: 20, textWrap: "balance" }}>
+            {eyebrow.split(" \u00b7 ").map((part, i) => (
+              <span key={part} style={{ display: "inline-block" }}>
+                {i > 0 && <span aria-hidden="true">{"\u00a0\u00b7 "}</span>}
+                {part}
+              </span>
+            ))}
           </Eyebrow>
 
           <div
             style={{
               position: "relative",
+              // Never taller than the screen (landscape phones), minus the header.
+              width: "min(100%, calc((100svh - 120px) * 16 / 9))",
+              marginInline: "auto",
               aspectRatio: "16 / 9",
               borderRadius: radius.lg,
               overflow: "hidden",
@@ -107,9 +115,6 @@ export function VideoIntro({
                   aria-hidden="true"
                   style={{
                     position: "absolute",
-                    left: "50%",
-                    top: "50%",
-                    transform: "translate(-50%, -50%)",
                     borderRadius: radius.pill,
                     background: c.cream,
                     color: c.primary,
@@ -118,7 +123,9 @@ export function VideoIntro({
                     boxShadow: "0 16px 40px -12px rgba(0, 0, 0, 0.55)",
                     transition: "transform 0.2s ease",
                   }}
-                  className="inline-flex items-center whitespace-nowrap gap-2.5 py-1.5 pl-1.5 pr-4 text-[15px] sm:gap-3.5 sm:py-3.5 sm:pl-4 sm:pr-6 sm:text-[17px] group-hover:scale-105 group-focus-visible:scale-105"
+                  // Centered on phones; top-right on larger players, clear of the
+                  // subject and of the title printed low on the poster.
+                  className="left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 sm:left-auto sm:right-[4%] sm:top-[7%] sm:translate-x-0 sm:translate-y-0 inline-flex items-center whitespace-nowrap gap-2.5 py-1.5 pl-1.5 pr-4 text-[15px] sm:gap-3.5 sm:py-3.5 sm:pl-4 sm:pr-6 sm:text-[17px] group-hover:scale-105 group-focus-visible:scale-105"
                 >
                   <span
                     className="w-9 h-9 sm:w-12 sm:h-12"

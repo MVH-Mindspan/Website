@@ -8,7 +8,8 @@
 export type TwinChartLine = {
   d: string;
   style: "solid" | "dashed";
-  end: { y: number; stage: string; label: string; muted: boolean };
+  /** `label` is the tool's line-end name; `short` is shown beside the line (the legend carries the full name). */
+  end: { y: number; stage: string; label: string; short: string; muted: boolean };
 };
 
 export type TwinChart = {
@@ -83,7 +84,7 @@ export const twinReport = {
       {
         d: withoutCarePath,
         style: "solid",
-        end: { y: 232.5371, stage: "Stage 5", label: "Both paths", muted: false },
+        end: { y: 232.5371, stage: "Stage 5", label: "Both paths", short: "Both paths", muted: false },
       },
     ],
     legend: [
@@ -103,12 +104,12 @@ export const twinReport = {
       {
         d: withoutCarePath,
         style: "dashed",
-        end: { y: 232.5371, stage: "Stage 5", label: "Without added care", muted: true },
+        end: { y: 232.5371, stage: "Stage 5", label: "Without added care", short: "Without care", muted: true },
       },
       {
         d: withCarePath,
         style: "solid",
-        end: { y: 186.0646, stage: "Stage 5", label: "With science-backed care", muted: false },
+        end: { y: 186.0646, stage: "Stage 5", label: "With science-backed care", short: "With care", muted: false },
       },
     ],
     legend: [

@@ -24,14 +24,14 @@ export function TwinDailyLifePreview({
   return (
     <TwinScreen label={label} style={{ background: "transparent", boxShadow: "none", borderRadius: 0, overflow: "visible" }}>
       {/* Section key */}
-      <div className="grid grid-cols-1 sm:grid-cols-3" style={{ gap: "14px 22px", marginBottom: 20 }}>
+      <div className="grid grid-cols-1 @3xl:grid-cols-3" style={{ gap: "14px 22px", marginBottom: 20 }}>
         {d.key.map((k) => (
           <div key={k.name}>
             <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
               <Glyph color={glyphColor[k.kind]} size={16} />
               <b style={{ fontSize: "0.9375rem", fontWeight: 700, color: twin.primary }}>{k.name}</b>
             </div>
-            <p style={{ margin: "4px 0 0 24px", fontSize: "0.8125rem", lineHeight: 1.5, color: twin.muted70 }}>
+            <p style={{ margin: "4px 0 0 24px", fontSize: "0.9375rem", lineHeight: 1.5, color: twin.ink(0.75) }}>
               {k.body}
             </p>
           </div>
@@ -79,7 +79,7 @@ export function TwinDailyLifePreview({
             {d.key.map((k) => (
               <span
                 key={k.name}
-                style={{ display: "inline-flex", alignItems: "center", gap: 6, fontSize: "0.75rem", fontWeight: 600, color: twin.muted66 }}
+                style={{ display: "inline-flex", alignItems: "center", gap: 6, fontSize: "0.8125rem", fontWeight: 600, color: twin.muted70 }}
               >
                 <Glyph color={glyphColor[k.kind]} size={13} />
                 {k.name}
@@ -90,7 +90,7 @@ export function TwinDailyLifePreview({
           <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
             {d.lanes.map((lane) => (
               <div key={lane.label}>
-                <span style={{ display: "block", margin: "0 0 4px", fontSize: "0.75rem", fontWeight: 700, color: twin.muted60 }}>
+                <span style={{ display: "block", margin: "0 0 4px", fontSize: "0.8125rem", fontWeight: 700, color: twin.muted70 }}>
                   {lane.label}
                 </span>
                 <span
@@ -128,9 +128,9 @@ export function TwinDailyLifePreview({
                     paddingTop: 9,
                     left: `${pos * 100}%`,
                     transform: `translateX(${-pos * 100}%)`,
-                    fontSize: "0.75rem",
+                    fontSize: "0.8125rem",
                     fontWeight: 600,
-                    color: twin.muted58,
+                    color: twin.muted70,
                     whiteSpace: "nowrap",
                   }}
                 >

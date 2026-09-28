@@ -108,19 +108,31 @@ export function TwinQuestionPreview({ question, label }: { question: TwinQuestio
             />
           </div>
 
-          <div style={{ display: "flex", justifyContent: "space-between", gap: 8, fontSize: "0.8125rem", fontWeight: 500 }}>
-            {q.scale.map((s, i) => (
-              <span
-                key={s}
-                style={{
-                  flex: "1 1 0%",
-                  textAlign: "center",
-                  color: i === q.activeScale ? twin.primary : twin.ink(0.55),
-                }}
-              >
-                {s}
-              </span>
-            ))}
+          {/* Narrow cards show the two ends of the scale; wider cards show all four. */}
+          <div style={{ display: "flex", justifyContent: "space-between", gap: 24, fontSize: "0.875rem", fontWeight: 500, lineHeight: 1.35 }}>
+            {q.scale.map((s, i) => {
+              const last = i === q.scale.length - 1;
+              const middle = i > 0 && !last;
+              return (
+                <span
+                  key={s}
+                  className={
+                    middle
+                      ? "hidden @md:block @md:text-center"
+                      : i === 0
+                        ? "text-left @md:text-center"
+                        : "text-right @md:text-center"
+                  }
+                  style={{
+                    flex: "1 1 0%",
+                    maxWidth: middle ? undefined : "45%",
+                    color: i === q.activeScale ? twin.primary : twin.ink(0.7),
+                  }}
+                >
+                  {s}
+                </span>
+              );
+            })}
           </div>
         </div>
       </div>
@@ -173,8 +185,9 @@ function PhaseRail({ phase }: { phase: TwinQuestion["phase"] }) {
             </svg>
           </span>
           <span
-            className="hidden sm:inline"
+            className="hidden @md:inline"
             style={{
+              whiteSpace: "nowrap",
               fontWeight: 600,
               letterSpacing: "0.06em",
               textTransform: "uppercase",
@@ -184,14 +197,14 @@ function PhaseRail({ phase }: { phase: TwinQuestion["phase"] }) {
           >
             {phase.prefix}
           </span>
-          <span className="hidden sm:inline" style={{ color: twin.ink(0.5) }}>
+          <span className="hidden @md:inline" style={{ color: twin.ink(0.5) }}>
             {"·"}
           </span>
-          <span style={{ fontFamily: twin.heading, fontSize: "1rem", color: twin.primary, fontWeight: 600 }}>
+          <span style={{ fontFamily: twin.heading, fontSize: "1rem", color: twin.primary, fontWeight: 600, whiteSpace: "nowrap" }}>
             {phase.name}
           </span>
         </span>
-        <span style={{ color: twin.ink(0.55), fontVariantNumeric: "tabular-nums", whiteSpace: "nowrap" }}>
+        <span style={{ color: twin.ink(0.7), fontVariantNumeric: "tabular-nums", whiteSpace: "nowrap" }}>
           {phase.step}
         </span>
       </div>

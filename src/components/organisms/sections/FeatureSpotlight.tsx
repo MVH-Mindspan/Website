@@ -95,7 +95,7 @@ export function FeatureSpotlight({
       <img
         src={image}
         alt={imageAlt}
-        className="w-full object-cover block aspect-[4/3] sm:aspect-[16/10]"
+        className="w-full object-cover block aspect-[4/3] min-[480px]:aspect-[16/9] sm:aspect-[16/10]"
         loading="lazy"
       />
     </ImageFrame>
@@ -112,7 +112,7 @@ export function FeatureSpotlight({
       }}
     >
       <Container>
-        <Reveal className="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
+        <Reveal className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
           {imagePosition === "left" ? (
             <>
               {picture}

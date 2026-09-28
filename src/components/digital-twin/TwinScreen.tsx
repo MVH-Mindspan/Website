@@ -46,6 +46,8 @@ export function TwinScreen({
       style={{
         margin: 0,
         width: "100%",
+        // The recreations respond to their own width (step column, phone, tablet).
+        containerType: "inline-size",
         background: twin.cream,
         color: twin.primary,
         fontFamily: twin.body,

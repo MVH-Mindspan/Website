@@ -146,7 +146,9 @@ export function AudienceCards({
                     className="self-start"
                     style={{
                       display: "inline-block",
-                      marginTop: 20,
+                      // 10px padding + matching negative margins: 44px touch target, same layout.
+                    padding: "10px 0",
+                    margin: "10px 0 -10px",
                       fontFamily: theme.fonts.body,
                       fontSize: typeScale.bodySm,
                       color: c.brandGreen,

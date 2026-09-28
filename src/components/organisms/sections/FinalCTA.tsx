@@ -83,12 +83,13 @@ export function FinalCTA({
           style={{
             marginInline: "auto",
             fontSize: typeScale.leadLg,
-            textWrap: "pretty",
+            textWrap: "balance",
           }}
         >
           {lead}
         </Lead>
-        <div className="mt-10 flex flex-wrap justify-center gap-3">
+        {/* Phones: primary on top, both full width. Wider: side by side. */}
+        <div className="mt-10 flex flex-col-reverse items-stretch gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-center">
           {secondary && (
             <a
               href={secondary.href}
@@ -102,11 +103,11 @@ export function FinalCTA({
                   href: secondary.href,
                 })
               }
-              className="inline-flex items-center gap-2 font-semibold transition-all prox-cta"
+              className="inline-flex items-center justify-center text-center gap-2 font-semibold transition-all prox-cta"
               data-proximity=""
               style={{
                 fontFamily: theme.fonts.body,
-                padding: "16px 32px",
+                padding: "16px clamp(16px, 5vw, 32px)",
                 color: "#fff",
                 border: "1px solid rgba(255,255,255,0.45)",
                 background: "transparent",
@@ -132,11 +133,11 @@ export function FinalCTA({
                 href: primary.href,
               })
             }
-            className="inline-flex items-center gap-2 font-semibold transition-all prox-cta"
+            className="inline-flex items-center justify-center text-center gap-2 font-semibold transition-all prox-cta"
             data-proximity=""
             style={{
               fontFamily: theme.fonts.body,
-              padding: "16px 32px",
+              padding: "16px clamp(16px, 5vw, 32px)",
               background: "#fff",
               color: c.brandGreen,
               borderRadius: "10rem",

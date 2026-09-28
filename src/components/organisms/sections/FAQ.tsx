@@ -130,6 +130,8 @@ export function FAQ({
                           textUnderlineOffset: "0.2em",
                           textDecorationThickness: "1px",
                           textDecorationColor: alpha(c.brandGreen, 0.4),
+                          // Inline padding grows the touch target without shifting the text.
+                          padding: "12px 0",
                         }}
                       >
                         {it.link.label}

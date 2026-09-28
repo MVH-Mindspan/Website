@@ -178,7 +178,7 @@ export function VideoFeature({
       }}
     >
       <Container>
-        <Reveal className="grid items-center gap-10 md:grid-cols-2 md:gap-16">
+        <Reveal className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
           {videoPosition === "left" ? (
             <>
               {media}

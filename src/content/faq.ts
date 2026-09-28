@@ -81,7 +81,7 @@ export const homeFaq: FAQItem[] = [
     answer:
       "Yes. Our 10-year projection shows how memory and daily life may change, for you or for someone you love. It is free and takes about 10 minutes, from home. It is an estimate, not a diagnosis.",
     link: {
-      label: "Learn about the 10-year projection",
+      label: "Learn about the 10\u2011year projection",
       href: digitalTwinHref("home-faq"),
     },
   },

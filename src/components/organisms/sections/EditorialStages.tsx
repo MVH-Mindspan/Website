@@ -92,7 +92,7 @@ export function EditorialStages({
               )}
             </div>
 
-            <div style={{ paddingRight: 32 }}>
+            <div className="sm:pr-8">
               <p
                 style={{
                   fontFamily: theme.fonts.body,
@@ -108,6 +108,7 @@ export function EditorialStages({
               </p>
               <h3
                 style={{
+                  textWrap: "balance",
                   fontFamily: theme.fonts.heading,
                   fontSize: typeScale.h3,
                   fontWeight: 500,
@@ -132,12 +133,12 @@ export function EditorialStages({
                 <a
                   href={step.cta.href}
                   {...externalLinkProps(step.cta.href)}
-                  className="inline-flex items-center gap-2 font-semibold transition-all prox-cta mt-6"
+                  className="inline-flex items-center justify-center text-center gap-2 font-semibold transition-all prox-cta mt-6"
                   data-proximity=""
                   style={{
                     fontFamily: theme.fonts.body,
                     fontSize: typeScale.bodySm,
-                    padding: "12px 24px",
+                    padding: "12px clamp(18px, 5vw, 24px)",
                     background: c.brandGreen,
                     color: "#fff",
                     borderRadius: "10rem",
@@ -156,7 +157,9 @@ export function EditorialStages({
                   style={{
                     display: "block",
                     width: "fit-content",
-                    marginTop: step.cta ? 16 : 24,
+                    // 10px padding + matching negative margins: 44px touch target, same layout.
+                    padding: "10px 0",
+                    margin: `${step.cta ? 6 : 14}px 0 -10px`,
                     fontFamily: theme.fonts.body,
                     fontSize: typeScale.bodySm,
                     color: c.brandGreen,

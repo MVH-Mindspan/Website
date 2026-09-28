@@ -19,7 +19,7 @@ export const homePage = {
     image: "/assets/digital-brain.webp",
     imageAlt: "A sculpture of a brain on a plinth, lit in segments of different colors.",
     secondary: {
-      label: "Learn about the 10-year projection",
+      label: "Learn about the 10\u2011year projection",
       href: digitalTwinHref("home-projection"),
     },
   },

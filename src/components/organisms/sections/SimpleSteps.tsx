@@ -159,7 +159,9 @@ export function SimpleSteps({
                   className="self-start"
                   style={{
                     display: "inline-block",
-                    marginTop: step.cta ? 16 : 20,
+                    // 10px padding + matching negative margins: 44px touch target, same layout.
+                    padding: "10px 0",
+                    margin: `${step.cta ? 6 : 10}px 0 -10px`,
                     fontFamily: theme.fonts.body,
                     fontSize: typeScale.bodySm,
                     color: c.brandGreen,

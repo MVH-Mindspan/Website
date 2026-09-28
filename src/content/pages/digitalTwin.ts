@@ -16,7 +16,8 @@ import type { TechCard } from "../technology";
 // text, because a new tab can disorient older readers.
 
 const BOOKING_HREF = "/book-a-visit";
-const START_LABEL = "Start the 10-year projection";
+// Non-breaking hyphen so buttons never wrap as "10-" / "year".
+const START_LABEL = "Start the 10\u2011year projection";
 
 const audiences: Audience[] = [
   {
@@ -167,6 +168,8 @@ export const digitalTwinPage = {
   // Same full-bleed hero as the main pages, with a still image.
   hero: {
     poster: "/assets/digital-twin-hero.webp",
+    // Keep the clinician and the scan in frame on narrow and portrait screens.
+    mediaPosition: "35% 50%",
     headline: "What might the next 10 years look like?",
     subTagline: "An introduction to our Digital Twin.",
     subhead:
@@ -242,7 +245,7 @@ export const digitalTwinPage = {
   technology: {
     id: "digital-twin",
     eyebrow: "Part of our care",
-    title: "An early look at the Digital Twin our neurologists use.",
+    title: "An early look at the Digital\u00a0Twin our neurologists use.",
     body:
       "In clinic, our neurologists build a full Digital Twin from a person’s own history, tests, and imaging. They use it to plan care, and update it at every visit. This projection is a first look, from home.",
     image: "/assets/latest-science.webp",
