@@ -160,7 +160,7 @@ export const digitalTwinPage = {
     id: "intro-video",
     eyebrow: "Watch first \u00b7 Under 3 minutes",
     // Versioned file name: assets are cached for a day, so a new cut needs a new name.
-    src: "/assets/digital-twin-intro-v6.mp4",
+    src: "/assets/digital-twin-intro-v8.mp4",
     poster: "/assets/digital-twin-intro-poster.webp",
     playLabel: "Play the introduction to the Digital Twin, 2 minutes 37 seconds, with sound",
     duration: "2:37",
