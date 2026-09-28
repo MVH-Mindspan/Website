@@ -207,6 +207,18 @@ export const digitalTwinPage = {
     cta: { label: START_LABEL, href: twinToolHref("dt-good-to-know") },
   },
 
+  // A calm, image-led pause between the checklist and the science.
+  together: {
+    id: "together",
+    eyebrow: "At your own pace",
+    title: "Sit down together, at home.",
+    body:
+      "Many families answer the questions together. There is no rush. You can take a break and come back later on the same device.",
+    image: "/assets/digital-twin-together.webp",
+    imageAlt:
+      "An older woman and man sit in armchairs by a sunlit window, smiling as they look at a tablet together.",
+  },
+
   science: {
     intro: {
       eyebrow: "The science",
