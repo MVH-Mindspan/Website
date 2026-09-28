@@ -155,7 +155,6 @@ export const digitalTwinPage = {
   }),
 
   // Intro video right under the hero: the quickest way to understand the twin.
-  // The transcript is the video's on-screen text, in order.
   intro: {
     id: "intro-video",
     eyebrow: "Watch first \u00b7 Under 3 minutes",
@@ -163,26 +162,6 @@ export const digitalTwinPage = {
     poster: "/assets/digital-twin-intro-poster.webp",
     playLabel: "Play the introduction to the Digital Twin, 2 minutes 37 seconds, with sound",
     duration: "2:37",
-    transcript: {
-      summary: "Read what the video shows",
-      lines: [
-        "The science of memory care is moving fast. Now you can see what it could change for you.",
-        "See the difference the latest science could make to your journey. Drawn from people who started where you are today.",
-        "The space between the paths is time. More time at each stage. More of daily life that stays yours.",
-        "For you: you’ve noticed changes in yourself. See what acting early could protect.",
-        "For someone you love: you’re caring for someone you love. See what the right care could give you both.",
-        "Answer simple questions. Choose the care, and watch the path change. See the difference: the gap between the paths is the time care may protect.",
-        "See the difference in everyday life. The twin turns each stage into seven rooms of daily life. Each room shows how you may manage: independent, on your own; together, with someone alongside you; or with help, when someone else takes the lead.",
-        "Ten years, two paths. Watch the years unfold, with and without care. Same starting point. Two paths through daily life.",
-        "One room, up close: the kitchen may stay yours about 2 years longer. Cooking the family recipes. Hosting a dinner.",
-        "Some rooms may stay yours past year 10. In this sample, the living room: conversation, phone calls and familiar faces.",
-        "Access to the latest science may change your cognitive future. That means more time. More time with the people you love. More time doing the things you value. More time for new science to reach you.",
-        "Through Mindspan: the latest science, pointed at you. Board-certified neurologists, advanced diagnostics, FDA-approved therapies and clinical trials.",
-        "Your projection grows into a full Digital Twin, built from your own tests and history, and kept current as you go.",
-        "Mindspan neurologists: seen in weeks, not months. Most new patients are seen within 2 to 3 weeks.",
-        "See what the latest science could mean for your journey. For you, or for someone you love. Free. About 10 minutes. From home. An estimate, not a diagnosis, based on research about groups of people with an Alzheimer’s diagnosis.",
-      ],
-    },
   },
 
   // Same full-bleed hero as the main pages, with a still image.
