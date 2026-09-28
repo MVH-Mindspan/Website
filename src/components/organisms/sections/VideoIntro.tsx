@@ -123,9 +123,8 @@ export function VideoIntro({
                     boxShadow: "0 16px 40px -12px rgba(0, 0, 0, 0.55)",
                     transition: "transform 0.2s ease",
                   }}
-                  // Centered on phones; top-right on larger players, clear of the
-                  // subject and of the title printed low on the poster.
-                  className="left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 sm:left-auto sm:right-[4%] sm:top-[7%] sm:translate-x-0 sm:translate-y-0 inline-flex items-center whitespace-nowrap gap-2.5 py-1.5 pl-1.5 pr-4 text-[15px] sm:gap-3.5 sm:py-3.5 sm:pl-4 sm:pr-6 sm:text-[17px] group-hover:scale-105 group-focus-visible:scale-105"
+                  // Centered on the player at every size.
+                  className="left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 inline-flex items-center whitespace-nowrap gap-2.5 py-1.5 pl-1.5 pr-4 text-[15px] sm:gap-3.5 sm:py-3.5 sm:pl-4 sm:pr-6 sm:text-[17px] group-hover:scale-105 group-focus-visible:scale-105"
                 >
                   <span
                     className="w-9 h-9 sm:w-12 sm:h-12"
