@@ -51,7 +51,7 @@ export const footer = {
     { label: "Affiliates", href: "/affiliates" },
   ] satisfies FooterLink[],
   // Labelled so the New York mailing address is never read as a clinic.
-  mailingAddressLabel: "Mailing address (no patient visits)",
+  mailingAddressLabel: "Mailing address",
   mailingAddress: ["169 Madison Ave, Suite 90030", "New York, NY 10016"],
   copyright: "\u00a9 2026 Mindspan",
   clinicalEntities: `Clinical services are provided by ${clinics.danvers.legalName} (Massachusetts), Mindspan Medical CT, P.C. (Connecticut) and ${clinics.bayArea.legalName}.`,

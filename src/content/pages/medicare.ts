@@ -30,14 +30,17 @@ export const medicarePage = {
     eyebrow: "",
     title: `${danvers.legalName} accepts Medicare assignment.`,
     lead: `Danvers clinic: ${danvers.addressDisplay}. Phone: ${danvers.phone}. NPI: ${danvers.npi}.`,
-    // Until clinics.ts has the direct listing URL, the button opens the search
-    // page and says so, rather than promising a listing it doesn't open.
+    leadLines: [
+      `San Jose clinic: ${bayArea.legalName} also accepts Medicare assignment. ${bayArea.addressDisplay}. Phone: ${bayArea.phone}. NPI: ${bayArea.npi}.`,
+    ],
+    // Shown only once clinics.ts has the direct listing URL; a link to the
+    // generic Care Compare search page isn't worth a hero button.
     careCompare: danvers.careCompareUrl
       ? {
           label: `Find ${danvers.legalName} on Medicare Care Compare`,
           href: danvers.careCompareUrl,
         }
-      : { label: "Search Medicare Care Compare", href: "https://www.medicare.gov/care-compare/" },
+      : null,
     call: { label: `Talk to us: ${danvers.phone}`, href: danvers.phoneHref },
   },
 

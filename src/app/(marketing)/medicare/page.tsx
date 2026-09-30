@@ -35,16 +35,23 @@ export default function MedicarePage() {
       {/* No clinician nodes: this page doesn't show the clinicians. */}
       <JsonLd id="ld-clinics" data={buildAllClinicsSchema({ withClinicians: false })} />
 
-      <PageHero eyebrow={hero.eyebrow} title={hero.title} lead={hero.lead}>
+      <PageHero
+        eyebrow={hero.eyebrow}
+        title={hero.title}
+        lead={hero.lead}
+        leadLines={hero.leadLines}
+      >
         <div className="flex flex-wrap gap-3">
-          <Button
-            href={hero.careCompare.href}
-            variant="primary"
-            size="lg"
-            iconRight={<ArrowIcon />}
-          >
-            {hero.careCompare.label}
-          </Button>
+          {hero.careCompare && (
+            <Button
+              href={hero.careCompare.href}
+              variant="primary"
+              size="lg"
+              iconRight={<ArrowIcon />}
+            >
+              {hero.careCompare.label}
+            </Button>
+          )}
           <Button href={hero.call.href} variant="ghostDark" size="lg">
             {hero.call.label}
           </Button>
