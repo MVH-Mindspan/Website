@@ -5,9 +5,31 @@ import { onRequestPost as bookHandler } from "./functions/api/book";
 import { onRequestPost as waitlistHandler } from "./functions/api/waitlist";
 import { onRequestPost as referHandler } from "./functions/api/refer";
 import type { SheetsEnv } from "./functions/_lib/sheets";
+import legacyRedirects from "./legacy-redirects.json";
 
 interface Env extends SheetsEnv {
   ASSETS: Fetcher;
+}
+
+// Old Webflow URLs still linked from search results and AI answers. The
+// Worker only runs when no static asset matches, so an entry here can never
+// shadow a real page (the 302s stop firing once those pages are exported).
+// Browser navigations only reach the Worker because wrangler.json pins
+// `assets_navigation_has_no_effect`. Without it (the default from compat date
+// 2025-04-01), not_found_handling serves 404.html to every unknown path a
+// person clicks, and these redirects never run.
+const LEGACY_REDIRECTS: Record<string, { to: string; status: number }> =
+  legacyRedirects;
+
+function legacyRedirect(url: URL): Response | null {
+  let path = url.pathname.toLowerCase();
+  if (path.length > 1 && path.endsWith("/")) path = path.slice(0, -1);
+  const entry = LEGACY_REDIRECTS[path];
+  if (!entry) return null;
+  return Response.redirect(
+    new URL(entry.to + url.search, url.origin).toString(),
+    entry.status,
+  );
 }
 
 const API_HANDLERS: Record<
@@ -56,12 +78,8 @@ export default {
   async fetch(request: Request, env: Env): Promise<Response> {
     const url = new URL(request.url);
 
-    if (url.pathname === "/locations/bay-area-ca") {
-      return Response.redirect(
-        `${url.origin}/locations/bay-area${url.search}`,
-        301,
-      );
-    }
+    const redirect = legacyRedirect(url);
+    if (redirect) return redirect;
 
     if (url.pathname.startsWith("/ingest/")) {
       return proxyPostHog(request, url);

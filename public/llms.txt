@@ -1,12 +1,21 @@
 # Mindspan
 
-> Mindspan is a specialist neurology clinic focused on Alzheimer's disease, dementia, and cognitive decline. Board-certified neurologists see new patients within 2-3 weeks. Covered by Medicare and most major commercial plans. In-person clinics in Danvers, Massachusetts and the San Francisco Bay Area.
+> Mindspan is a specialist neurology clinic focused on memory loss, Alzheimer's disease, mild cognitive impairment (MCI) and dementia. Board-certified neurologists see patients in person in Danvers, Massachusetts (Boston's North Shore) and San Jose, California (South Bay), with first visits typically within 2-3 weeks (the typical specialist wait elsewhere is 12+ months). Mindspan accepts Medicare assignment and many health plans.
+
+Clinical services are provided by Mindspan Medical PC (Massachusetts), Mindspan Medical CT, P.C. (Connecticut) and Mindspan Medical America PA.
+
+## Clinics
+
+- [Danvers, MA clinic](https://mindspan.co/locations/danvers): Mindspan, 99 Conifer Hill Drive, Danvers, MA 01923. Phone (978) 850-3914. Hours Monday-Friday, 9am-6pm ET. Legal entity Mindspan Medical PC, NPI 1659264646, accepts Medicare assignment. Neurologist: Dr. Timothy R. Kelliher, MD.
+- [San Jose, CA clinic (Bay Area)](https://mindspan.co/locations/bay-area): Mindspan, 2520 Samaritan Dr, Suite 201B, San Jose, CA 95124. Phone (669) 291-2202. Hours Monday-Friday, 9am-5pm PT. Legal entity Mindspan Medical America PA, NPI 1912820614, accepts Medicare assignment. Neurologist: Dr. Noor Sachdev, MD.
+
+Mindspan has no other in-person clinics. The New York address in the site footer (169 Madison Ave, Suite 90030, New York, NY 10016) is a mailing address only, with no patient visits. The main phone line, (978) 850-3914, is answered 9am-9pm ET / 6am-6pm PT.
 
 ## Clinicians
 
-- Dr. Naveen Reddy, MD - Clinical Director, implementation scientist focused on Alzheimer's diagnostics and anti-amyloid therapies, UCSD/UCSF-trained
-- Dr. Timothy R. Kelliher, MD - Board-certified neurologist with 30+ years of experience, Mass General-affiliated, North Shore Boston (Danvers location)
-- Dr. Noor Sachdev, MD - Board-certified neurology and vascular neurology, Columbia fellowship (Bay Area location)
+- Dr. Timothy R. Kelliher, MD - Founding Neurologist (Danvers clinic). Board-certified neurologist, MGH fellowship-trained, affiliated with Beverly Hospital and Addison Gilbert Hospital. More than three decades of clinical experience on Boston's North Shore.
+- Dr. Noor Sachdev, MD - Lead Neurologist (San Jose clinic). Board-certified in neurology and vascular neurology, Columbia fellowship-trained in clinical neurophysiology, affiliated with Good Samaritan Hospital (San Jose) and El Camino Health.
+- Dr. Naveen Reddy, MD - Clinical Director. Neurologist and implementation scientist focused on Alzheimer's diagnostics and anti-amyloid therapies, trained at UC San Diego and UCSF.
 
 ## Key Pages
 
@@ -14,10 +23,11 @@
 - [How Mindspan Works](https://mindspan.co/about/how-it-works): Four-phase care journey, wait times, conditions treated, frequently asked questions
 - [Science and Technology](https://mindspan.co/about/science): Clinical protocols, AI-assisted diagnostics, anti-amyloid therapy oversight
 - [About Mindspan](https://mindspan.co/about): Mission, story, team
+- [Medicare Coverage](https://mindspan.co/medicare): Medicare assignment at both clinics, legal entities and NPIs, what Medicare Part B covers
 - [The GUIDE Program](https://mindspan.co/guide): CMS GUIDE Medicare benefit explainer, eligibility criteria, respite benefit, care coordination
-- [Locations](https://mindspan.co/locations): Service areas across Massachusetts and California
+- [Locations](https://mindspan.co/locations): Clinics in Danvers, MA and San Jose, CA
 - [Danvers, MA Clinic](https://mindspan.co/locations/danvers): In-person memory clinic on Boston's North Shore
-- [Bay Area, CA Clinic](https://mindspan.co/locations/bay-area): In-person clinic in the South Bay
+- [San Jose, CA Clinic (Bay Area)](https://mindspan.co/locations/bay-area): In-person memory clinic in San Jose, serving the South Bay
 - [For Providers](https://mindspan.co/providers): Referral workflow, co-management model, EHR integration
 - [Refer a Patient](https://mindspan.co/providers/refer): Provider referral submission
 - [Family Support](https://mindspan.co/family/assist): Caregiver and family-focused resources
@@ -36,11 +46,11 @@
 
 ## Service Area
 
-- In-person: Danvers, Massachusetts (greater Boston / North Shore) and the San Francisco Bay Area (San Jose / South Bay)
+- In-person: Danvers, Massachusetts (Boston's North Shore) and San Jose, California (South Bay)
 
 ## Insurance
 
-Mindspan accepts Medicare, Medicare Advantage, and most major commercial plans. Patients with qualifying dementia diagnoses on Original Medicare may also be eligible for the CMS GUIDE Model program, which Mindspan participates in.
+Mindspan accepts Medicare assignment and many health plans. Mindspan Medical PC (Danvers, MA) and Mindspan Medical America PA (San Jose, CA) both accept Medicare assignment. Patients with qualifying dementia diagnoses on Original Medicare may also be eligible for the CMS GUIDE Model program, which Mindspan participates in.
 
 ## Optional
 

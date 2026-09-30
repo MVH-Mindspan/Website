@@ -1,26 +1,10 @@
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
 import type { MetadataRoute } from "next";
 import { SITE_URL } from "@/lib/seo";
 import { locations } from "@/content/locations";
 
 export const dynamic = "force-static";
-
-const ROUTE_LAST_MODIFIED: Record<string, string> = {
-  "/": "2026-05-07",
-  "/about": "2026-05-07",
-  "/about/how-it-works": "2026-05-07",
-  "/about/science": "2026-05-07",
-  "/guide": "2026-05-07",
-  "/family/assist": "2026-05-07",
-  "/providers": "2026-05-07",
-  "/providers/refer": "2026-05-07",
-  "/locations": "2026-05-07",
-  "/careers": "2026-05-07",
-  "/book-a-visit": "2026-05-07",
-  "/affiliates": "2026-05-07",
-  "/tos": "2026-05-07",
-  "/privacy-notice": "2026-05-07",
-  "/informed-consent": "2026-05-07",
-};
 
 const STATIC_PATHS: ReadonlyArray<string> = [
   "/",
@@ -29,6 +13,7 @@ const STATIC_PATHS: ReadonlyArray<string> = [
   "/about/science",
   "/guide",
   "/family/assist",
+  "/medicare",
   "/providers",
   "/providers/refer",
   "/locations",
@@ -40,18 +25,33 @@ const STATIC_PATHS: ReadonlyArray<string> = [
   "/informed-consent",
 ];
 
+/**
+ * Route → last commit date, written by `scripts/build-lastmod.mjs` in
+ * prebuild. Missing file or route (dev, shallow clone) means no lastmod is
+ * published rather than a guessed one.
+ */
+function readLastModified(): Record<string, string> {
+  try {
+    const file = join(process.cwd(), "src/generated/lastmod.json");
+    return JSON.parse(readFileSync(file, "utf8"));
+  } catch {
+    return {};
+  }
+}
+
 export default function sitemap(): MetadataRoute.Sitemap {
-  const today = new Date().toISOString().slice(0, 10);
+  const lastModified = readLastModified();
 
-  const staticEntries: MetadataRoute.Sitemap = STATIC_PATHS.map((path) => ({
-    url: `${SITE_URL}${path === "/" ? "" : path}${path === "/" ? "/" : ""}`,
-    lastModified: ROUTE_LAST_MODIFIED[path] ?? today,
-  }));
+  const entry = (path: string, url: string): MetadataRoute.Sitemap[number] =>
+    lastModified[path] ? { url, lastModified: lastModified[path] } : { url };
 
-  const locationEntries: MetadataRoute.Sitemap = locations.map((loc) => ({
-    url: `${SITE_URL}/locations/${loc.slug}`,
-    lastModified: ROUTE_LAST_MODIFIED[`/locations/${loc.slug}`] ?? today,
-  }));
+  const staticEntries: MetadataRoute.Sitemap = STATIC_PATHS.map((path) =>
+    entry(path, `${SITE_URL}${path === "/" ? "" : path}${path === "/" ? "/" : ""}`),
+  );
+
+  const locationEntries: MetadataRoute.Sitemap = locations.map((loc) =>
+    entry(`/locations/${loc.slug}`, `${SITE_URL}/locations/${loc.slug}`),
+  );
 
   return [...staticEntries, ...locationEntries];
 }

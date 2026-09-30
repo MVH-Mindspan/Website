@@ -5,10 +5,11 @@
   "scripts": {
     "predev": "node scripts/build-tv-manifest.mjs",
     "dev": "next dev",
-    "prebuild": "node scripts/build-tv-manifest.mjs",
+    "prebuild": "node scripts/build-tv-manifest.mjs && node scripts/build-lastmod.mjs",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "indexnow": "node scripts/indexnow.mjs"
   },
   "dependencies": {
     "framer-motion": "^11.18.2",
