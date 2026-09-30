@@ -3,7 +3,12 @@ import { VIDEO_VISITS_ENABLED } from "@/lib/flags";
 import type { JourneyStage } from "../journey";
 import type { Protocol } from "../protocols";
 import type { TechCard } from "../technology";
-import type { Stat } from "../stats";
+import {
+  MINDSPAN_FIRST_VISIT,
+  TYPICAL_SPECIALIST_WAIT,
+  TYPICAL_SPECIALIST_WAIT_ADJ,
+  type Stat,
+} from "../stats";
 import type { IllustratedPillar } from "@/components/organisms/sections";
 
 const BOOKING_HREF = "/book-a-visit";
@@ -27,8 +32,8 @@ const journeyStages: IllustratedPillar[] = [
     kicker: "See a specialist",
     title: "Meet a board-certified neurologist within weeks.",
     body: VIDEO_VISITS_ENABLED
-      ? "If your report suggests further evaluation, we connect you with a board-certified neurologist within weeks, not 18 months. Visits happen in our clinics or on video, and your insurance is billed like any other specialist appointment."
-      : "If your report suggests further evaluation, we connect you with a board-certified neurologist within weeks, not 18 months. Visits happen in our clinics, and your insurance is billed like any other specialist appointment.",
+      ? `If your report suggests further evaluation, we connect you with a board-certified neurologist within weeks, not ${TYPICAL_SPECIALIST_WAIT}. Visits happen in our clinics or on video, and your insurance is billed like any other specialist appointment.`
+      : `If your report suggests further evaluation, we connect you with a board-certified neurologist within weeks, not ${TYPICAL_SPECIALIST_WAIT}. Visits happen in our clinics, and your insurance is billed like any other specialist appointment.`,
     illustration: "meet",
   },
   {
@@ -44,9 +49,9 @@ const comparison: { problem: Protocol; solution: Protocol } = {
   problem: {
     id: "typical",
     eyebrow: "The typical wait",
-    title: "Eighteen months before anyone can tell you what\u2019s going on.",
+    title: `${TYPICAL_SPECIALIST_WAIT} before anyone can tell you what\u2019s going on.`,
     body:
-      "In most of the country, a worried family books a primary-care visit, gets referred to a neurologist, and then waits. The average wait for a specialist cognitive assessment is twelve to eighteen months, the most precious window of all.",
+      `In most of the country, a worried family books a primary-care visit, gets referred to a neurologist, and then waits. The typical wait for a specialist cognitive assessment is ${TYPICAL_SPECIALIST_WAIT}, the most precious window of all.`,
     bullets: [
       "Months of uncertainty between first worry and first answer",
       "Multiple referrals before anyone with the right training is in the room",
@@ -60,7 +65,7 @@ const comparison: { problem: Protocol; solution: Protocol } = {
     eyebrow: "The Mindspan path",
     title: "Answers today. A neurologist within weeks.",
     body:
-      "Mindspan compresses an eighteen-month wait into a few weeks. Start with a free screening tonight. If a neurologist visit makes sense, we book one within weeks and bring the latest cognitive science to your plan from day one.",
+      `Mindspan compresses a ${TYPICAL_SPECIALIST_WAIT_ADJ} wait into a few weeks. Start with a free screening tonight. If a neurologist visit makes sense, we book one within weeks and bring the latest cognitive science to your plan from day one.`,
     bullets: [
       "A free at-home screening you can take in about 30 minutes",
       VIDEO_VISITS_ENABLED
@@ -74,7 +79,7 @@ const comparison: { problem: Protocol; solution: Protocol } = {
 };
 
 const stats: Stat[] = [
-  { value: "2\u20133 weeks", valueShort: "2\u20133 wks", label: "Average time to see a neurologist" },
+  { value: MINDSPAN_FIRST_VISIT, valueShort: "2\u20133 wks", label: "Typical time to see a neurologist" },
   { value: "30 minutes", valueShort: "30 min", label: "Free at-home cognitive screening" },
   { value: "100%", label: "Of visits billed through insurance" },
   { value: "4 phases", label: "Of coordinated, ongoing cognitive care" },

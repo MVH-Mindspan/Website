@@ -41,7 +41,7 @@ export const protocols: { core: Protocol; edge: Protocol } = {
     body:
       "The breakthroughs that change outcomes, delivered as part of normal care. Not clinical trial, not concierge, just better medicine.",
     bullets: [
-      "Blood biomarker panel that can confirm amyloid status without needing a PET scan",
+      "Blood biomarker panel that can help confirm amyloid status without needing a PET scan",
       "Genetic testing (APOE) for personalized risk and safer treatment decisions",
       "Biological disease staging so your neurologist knows exactly where things stand",
       "A complete, living picture of your brain health, updated at every visit",

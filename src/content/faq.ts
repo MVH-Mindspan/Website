@@ -1,4 +1,5 @@
 import { VIDEO_VISITS_ENABLED } from "@/lib/flags";
+import { MINDSPAN_FIRST_VISIT, TYPICAL_SPECIALIST_WAIT } from "./stats";
 
 export type FAQItem = { id: string; question: string; answer: string };
 
@@ -12,7 +13,7 @@ export const faq: FAQItem[] = [
     id: "wait",
     question: "How quickly can we be seen?",
     answer:
-      "Most new patients see a Mindspan neurologist within two to three weeks. Typical wait times at a hospital neurology clinic are twelve months or longer.",
+      `Most new patients see a Mindspan neurologist within ${MINDSPAN_FIRST_VISIT}. Typical wait times at a hospital neurology clinic are ${TYPICAL_SPECIALIST_WAIT}.`,
   },
   {
     id: "medicare",
