@@ -149,7 +149,7 @@ export function EditorialStages({
                 <ImageFrame radius="1rem">
                   <img
                     src={step.image}
-                    alt={step.imageAlt ?? step.title}
+                    alt={step.imageAlt ?? ""}
                     className="w-full object-cover aspect-[4/3] sm:aspect-[16/10]"
                     loading="lazy"
                   />

@@ -122,8 +122,12 @@ export function StatCounter({
       >
         {valueShort ? (
           <>
-            <span className="hidden sm:inline">{render(value)}</span>
-            <span className="inline sm:hidden">{render(valueShort)}</span>
+            {/* Full value stays in the accessibility tree (and in extracted
+                text) at every width; the short mobile variant is visual only. */}
+            <span className="sr-only sm:not-sr-only">{render(value)}</span>
+            <span aria-hidden className="inline sm:hidden">
+              {render(valueShort)}
+            </span>
           </>
         ) : (
           render(value)

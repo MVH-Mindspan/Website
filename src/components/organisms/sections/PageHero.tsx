@@ -20,6 +20,8 @@ type HeroProps = {
   eyebrow: string;
   title: string;
   lead?: string;
+  /** Extra lead paragraphs under `lead` (editorial hero only). */
+  leadLines?: readonly string[];
   location?: string;
   availability?: { text: string; cta: { label: string; href: string } };
   image?: string;
@@ -46,6 +48,7 @@ function EditorialHero({
   eyebrow,
   title,
   lead,
+  leadLines,
   location,
   availability,
   children,
@@ -83,6 +86,11 @@ function EditorialHero({
               {lead}
             </Lead>
           )}
+          {leadLines?.map((line) => (
+            <Lead key={line} size="lg" color={alpha(c.ink, 0.7)} className="mt-3">
+              {line}
+            </Lead>
+          ))}
           {children && <div className="mt-8">{children}</div>}
         </Reveal>
       </Container>

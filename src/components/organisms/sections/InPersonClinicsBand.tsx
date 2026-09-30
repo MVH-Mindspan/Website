@@ -48,9 +48,10 @@ export function InPersonClinicsBand({
           {clinics.map((clinic, i) => (
             <Reveal
               key={clinic.city}
-              className="v2-card rounded-[2rem] overflow-hidden flex flex-col group"
+              className="v2-card rounded-[2rem] flex flex-col group"
               style={{
                 background: alpha(c.cream, 0.7),
+                overflow: "hidden",
                 animationDelay: `${i * 80}ms`,
               }}
             >

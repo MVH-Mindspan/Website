@@ -1,11 +1,15 @@
 import { CMS_AUTHOR_DISCLAIMER } from "@/content/guide-disclosures";
 import { VIDEO_VISITS_ENABLED } from "@/lib/flags";
+import { clinics } from "../clinics";
+import { TYPICAL_SPECIALIST_WAIT_ADJ } from "../stats";
 import type { LocationDetail } from "../pages/locationDetail";
 
 const BOOKING_HREF = "/book-a-visit";
 const EXISTING_HREF = "https://oncehub.com/mindspan_danvers";
+const clinic = clinics.danvers;
 
 export const danversDetail: LocationDetail = {
+  seoTitle: "Memory Clinic & Neurologist in Danvers, MA (North Shore) | Mindspan",
   metaDescription:
     "Memory and dementia care in Danvers, MA. A board-certified neurologist focused on Alzheimer’s, MCI, and dementia. First visits in 2 to 3 weeks.",
   hero: {
@@ -13,7 +17,7 @@ export const danversDetail: LocationDetail = {
     title:
       "Alzheimer’s & dementia care on Boston’s North Shore. Act early. Preserve what matters most.",
     lead:
-      "Our Danvers clinic offers specialized memory care that goes beyond standard neurology, from early MCI detection to advanced Alzheimer’s treatments and clinical trials. Skip the typical 18+ month wait to see a neurologist.",
+      `Our Danvers clinic offers specialized memory care that goes beyond standard neurology, from early MCI detection to advanced Alzheimer’s treatments and clinical trials. Skip the typical ${TYPICAL_SPECIALIST_WAIT_ADJ} wait to see a neurologist.`,
     location: "99 Conifer Hill Drive · Danvers, MA 01923",
     availability: {
       text: "Appointments available this month",
@@ -77,25 +81,31 @@ export const danversDetail: LocationDetail = {
     },
     items: [
       {
-        kicker: "Stage 0",
+        kicker: "Baseline",
         title: "Normal cognition",
         body:
           "No memory or thinking concerns. Regular screening helps establish a baseline for future comparison.",
         image: "/assets/get-assessed.webp",
+        imageAlt:
+          "A woman shows an older woman something on a tablet as they sit together on a bench by a sunlit window",
       },
       {
-        kicker: "Stage 1–2",
+        kicker: "Early changes",
         title: "Mild cognitive impairment (MCI)",
         body:
           "Noticeable memory lapses beyond normal aging. Often manageable, and treatable when caught early.",
         image: "/assets/consultation-2.webp",
+        imageAlt:
+          "A clinician explains a brain scan on a wall screen to an older woman and a younger companion",
       },
       {
-        kicker: "Stage 3+",
+        kicker: "Later changes",
         title: "Dementia",
         body:
           "A progressive decline affecting daily function. Mindspan Danvers provides advanced therapies, ongoing clinical care, and access to the latest science for all stages.",
         image: "/assets/consultation-1.webp",
+        imageAlt:
+          "A clinician talks with an older man across a table in a sunlit consultation room",
       },
     ],
   },
@@ -105,7 +115,7 @@ export const danversDetail: LocationDetail = {
       eyebrow: "Why specialized matters",
       title: "Why choose a specialized memory center on the North Shore?",
       lead:
-        "General neurologists see patients with dozens of conditions. At Mindspan Danvers, our team specializes exclusively in memory and cognitive disorders, giving you access to deeper expertise, advanced diagnostics, FDA-approved therapies, clinical trials, and a clinical care team that stays with you from first assessment through ongoing treatment.",
+        "General neurologists see patients with dozens of conditions. At Mindspan Danvers, our team focuses on memory and cognitive disorders, giving you access to deeper expertise, advanced diagnostics, FDA-approved therapies, clinical trials, and a clinical care team that stays with you from first assessment through ongoing treatment.",
       image: "/assets/digital-brain.webp",
       imageAlt:
         "Advanced brain imaging used for early-stage cognitive diagnostics at Mindspan Danvers",
@@ -115,7 +125,7 @@ export const danversDetail: LocationDetail = {
       eyebrow: "Subspecialty expertise",
       title: "Expertise you can’t get at a general practice.",
       body:
-        "Our clinicians train specifically in early-stage Alzheimer’s, Lewy Body, vascular dementia, and frontotemporal disorders.",
+        "Our clinicians evaluate and treat early-stage Alzheimer’s, Lewy Body, vascular dementia, and frontotemporal disorders.",
       bullets: [
         "Early-stage Alzheimer’s disease",
         "Lewy Body dementia",
@@ -127,7 +137,7 @@ export const danversDetail: LocationDetail = {
     edge: {
       id: "rapid-access",
       eyebrow: "Rapid access",
-      title: "No 18-month wait. Seen within weeks.",
+      title: `No ${TYPICAL_SPECIALIST_WAIT_ADJ} wait. Seen within weeks.`,
       body:
         "Today, many patients wait months to see a specialist. By the time they are evaluated, they may already be outside the window where treatment can meaningfully slow the disease. Our Danvers clinic prioritizes rapid access so treatment can begin while it is most effective.",
       bullets: [
@@ -173,18 +183,34 @@ export const danversDetail: LocationDetail = {
       ? "Accepting new patients. Video visits also available."
       : "Accepting new patients.",
     cta: { label: "Book a visit with Dr. Kelliher", href: BOOKING_HREF },
+    givenName: "Timothy",
+    additionalName: "R.",
+    familyName: "Kelliher",
+    honorificSuffix: "MD",
+    // Confirmed on Medicare Care Compare at Mindspan Medical PC, Danvers.
+    npi: "1043314198",
+    boardCertifications: ["Neurology"],
+    alumniOf: [
+      "Boston University",
+      "Boston University Chobanian & Avedisian School of Medicine",
+      "Carney Hospital",
+      "Boston Medical Center",
+      "Massachusetts General Hospital",
+    ],
+    hospitalAffiliations: [
+      { name: "Beverly Hospital", locality: "Beverly", region: "MA" },
+      { name: "Addison Gilbert Hospital", locality: "Gloucester", region: "MA" },
+    ],
   },
 
   contact: {
-    address: "99 Conifer Hill Drive, Danvers, MA 01923",
-    mapEmbedSrc:
-      "https://www.openstreetmap.org/export/embed.html?bbox=-70.955,42.565,-70.915,42.585&layer=mapnik&marker=42.572362,-70.937862",
-    phone: "(978) 850-3914",
-    phoneHref: "tel:+19788503914",
-    email: "PracticeManager@Mindspan.co",
-    emailHref:
-      "mailto:PracticeManager@Mindspan.co?subject=Mindspan%20Danvers%20patient%20enquiry",
-    hours: "Monday–Friday, 9am–6pm EST",
+    address: clinic.addressDisplay,
+    mapEmbedSrc: clinic.mapEmbedSrc,
+    phone: clinic.phone,
+    phoneHref: clinic.phoneHref,
+    email: clinic.email,
+    emailHref: `mailto:${clinic.email}?subject=Mindspan%20Danvers%20patient%20enquiry`,
+    hours: clinic.hours,
     newPatient: { label: "Enroll and book a visit", href: BOOKING_HREF },
     existingPatient: { label: "Book a follow-up", href: EXISTING_HREF },
   },
@@ -239,7 +265,7 @@ export const danversDetail: LocationDetail = {
     lead:
       "See a specialist in weeks, not months or years. Early diagnosis means better outcomes, and more time with the people who matter most.",
     primary: { label: "Book a visit today", href: BOOKING_HREF },
-    secondary: { label: "Call (978) 850-3914", href: "tel:+19788503914" },
+    secondary: { label: `Call ${clinic.phone}`, href: clinic.phoneHref },
     signature: "With care, the Mindspan Danvers team",
   },
 };

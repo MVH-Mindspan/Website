@@ -7,9 +7,15 @@ export type Stat = {
   link?: { label: string; href: string };
 };
 
+// Wait-time facts shared across pages, so every page quotes the same numbers.
+export const MINDSPAN_FIRST_VISIT = "2–3 weeks";
+export const TYPICAL_SPECIALIST_WAIT = "12+ months";
+// Compound-adjective form for copy like "a 12+ month wait".
+export const TYPICAL_SPECIALIST_WAIT_ADJ = TYPICAL_SPECIALIST_WAIT.replace(/s$/, "");
+
 export const stats: Stat[] = [
   {
-    value: "2–3 weeks",
+    value: MINDSPAN_FIRST_VISIT,
     valueShort: "2–3 wks",
     label: "To see a Mindspan neurologist",
     link: {
@@ -17,5 +23,5 @@ export const stats: Stat[] = [
       href: "https://assessment.mindspan.co/",
     },
   },
-  { value: "12+ months", label: "Typical specialist wait" },
+  { value: TYPICAL_SPECIALIST_WAIT, label: "Typical specialist wait" },
 ];

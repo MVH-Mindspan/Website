@@ -36,8 +36,11 @@ import { faqIntro, homeFaq } from "@/content/faq";
 import { homePage } from "@/content/pages/home";
 import { JsonLd } from "@/lib/json-ld";
 import {
-  buildMedicalOrganizationSchema,
-  buildWebSiteSchema,
+  buildAllClinicsSchema,
+  buildAllCliniciansSchema,
+  buildFaqSchema,
+  excludeFaqItems,
+  UNCONFIRMED_FAQ_IDS,
 } from "@/lib/schema";
 
 export const metadata = homePage.metadata;
@@ -45,8 +48,13 @@ export const metadata = homePage.metadata;
 export default function HomePage() {
   return (
     <>
-      <JsonLd id="ld-organization" data={buildMedicalOrganizationSchema()} />
-      <JsonLd id="ld-website" data={buildWebSiteSchema()} />
+      <JsonLd id="ld-clinics" data={buildAllClinicsSchema()} />
+      {/* The clinic nodes' `employee` refs point here; ProvidersPreview shows both. */}
+      <JsonLd id="ld-clinicians" data={buildAllCliniciansSchema()} />
+      <JsonLd
+        id="ld-faq"
+        data={buildFaqSchema(excludeFaqItems(homeFaq, UNCONFIRMED_FAQ_IDS))}
+      />
       <VideoHero
         video={homeHero.video}
         poster={homeHero.poster}

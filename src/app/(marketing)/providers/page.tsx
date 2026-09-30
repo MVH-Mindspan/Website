@@ -17,8 +17,13 @@ import {
   referralPathwayIntro,
   referralPathwayCta,
 } from "@/content";
+import { clinicalDirector } from "@/content/providersPreview";
 import { JsonLd } from "@/lib/json-ld";
-import { buildBreadcrumbSchema } from "@/lib/schema";
+import {
+  buildAllCliniciansSchema,
+  buildBreadcrumbSchema,
+  buildTeamMemberSchema,
+} from "@/lib/schema";
 import { SITE_URL } from "@/lib/seo";
 
 export const metadata = providersPage.metadata;
@@ -32,6 +37,13 @@ export default function ProvidersPage() {
           { name: "Home", url: `${SITE_URL}/` },
           { name: "For Referring Clinicians", url: `${SITE_URL}/providers` },
         ])}
+      />
+      <JsonLd
+        id="ld-care-team"
+        data={[
+          ...buildAllCliniciansSchema(),
+          buildTeamMemberSchema(clinicalDirector, "/providers"),
+        ]}
       />
       <VideoHero {...providersPage.hero} />
       <div id="how-we-work">

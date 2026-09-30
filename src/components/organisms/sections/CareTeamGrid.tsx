@@ -47,9 +47,10 @@ export function CareTeamGrid({
           {providers.map((p, i) => (
             <Reveal
               key={p.name}
-              className="v2-card rounded-[2rem] overflow-hidden flex flex-col"
+              className="v2-card rounded-[2rem] flex flex-col"
               style={{
                 background: alpha(c.sand, 0.7),
+                overflow: "hidden",
                 animationDelay: `${i * 80}ms`,
               }}
             >

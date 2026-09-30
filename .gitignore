@@ -8,6 +8,9 @@ out/
 # typescript
 *.tsbuildinfo
 
+# build-time generated data (scripts/build-lastmod.mjs)
+src/generated/
+
 # cloudflare
 .wrangler/
 .dev.vars

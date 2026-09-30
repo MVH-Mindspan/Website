@@ -1,4 +1,5 @@
 import { CMS_AUTHOR_DISCLAIMER } from "@/content/guide-disclosures";
+import { TYPICAL_SPECIALIST_WAIT_ADJ } from "../stats";
 import type { LocationDetail } from "../pages/locationDetail";
 
 const BOOKING_HREF = "/book-a-visit";
@@ -10,7 +11,7 @@ export const videoCaliforniaDetail: LocationDetail = {
     eyebrow: "Video visits, California",
     title: "See your neurologist from home, anywhere in California.",
     lead:
-      "Specialty memory care, on your phone, tablet, or computer. No driving, no waiting room, no 18-month wait. The same unhurried visits we give patients in our Bay Area clinic, from wherever you’re most comfortable in California.",
+      `Specialty memory care, on your phone, tablet, or computer. No driving, no waiting room, no ${TYPICAL_SPECIALIST_WAIT_ADJ} wait. The same unhurried visits we give patients in our Bay Area clinic, from wherever you’re most comfortable in California.`,
     location: "Statewide · California",
     availability: {
       text: "Video appointments available this month",
@@ -74,25 +75,31 @@ export const videoCaliforniaDetail: LocationDetail = {
     },
     items: [
       {
-        kicker: "Stage 0",
+        kicker: "Baseline",
         title: "Normal cognition",
         body:
           "No memory or thinking concerns. A baseline video visit makes future comparison straightforward.",
         image: "/assets/get-assessed.webp",
+        imageAlt:
+          "A woman shows an older woman something on a tablet as they sit together on a bench by a sunlit window",
       },
       {
-        kicker: "Stage 1–2",
+        kicker: "Early changes",
         title: "Mild cognitive impairment (MCI)",
         body:
           "Noticeable memory lapses beyond normal aging. Often manageable, and treatable when caught early. Video makes it easier to involve a spouse or adult child in the visit.",
         image: "/assets/consultation-2.webp",
+        imageAlt:
+          "A clinician explains a brain scan on a wall screen to an older woman and a younger companion",
       },
       {
-        kicker: "Stage 3+",
+        kicker: "Later changes",
         title: "Dementia",
         body:
           "A progressive decline affecting daily function. Video visits reduce the burden of getting to and from the clinic, while still giving you full access to advanced therapies and ongoing clinical care.",
         image: "/assets/consultation-1.webp",
+        imageAlt:
+          "A clinician talks with an older man across a table in a sunlit consultation room",
       },
     ],
   },
@@ -102,7 +109,7 @@ export const videoCaliforniaDetail: LocationDetail = {
       eyebrow: "Why specialized matters",
       title: "Why choose a specialized memory center for video care?",
       lead:
-        "General telehealth services see patients with dozens of conditions. At Mindspan, our team specializes exclusively in memory and cognitive disorders, giving you access to deeper expertise, advanced diagnostics, FDA-approved therapies, clinical trials, and a clinical care team that stays with you from first assessment through ongoing treatment.",
+        "General telehealth services see patients with dozens of conditions. At Mindspan, our team focuses on memory and cognitive disorders, giving you access to deeper expertise, advanced diagnostics, FDA-approved therapies, clinical trials, and a clinical care team that stays with you from first assessment through ongoing treatment.",
       image: "/assets/digital-brain.webp",
       imageAlt:
         "Advanced brain imaging used for early-stage cognitive diagnostics at Mindspan",
@@ -112,7 +119,7 @@ export const videoCaliforniaDetail: LocationDetail = {
       eyebrow: "Subspecialty expertise",
       title: "The same expertise, on screen.",
       body:
-        "Our clinicians train specifically in early-stage Alzheimer’s, Lewy Body, vascular dementia, and frontotemporal disorders. The visit format changes; the standard of care does not.",
+        "Our clinicians evaluate and treat early-stage Alzheimer’s, Lewy Body, vascular dementia, and frontotemporal disorders. The visit format changes; the standard of care does not.",
       bullets: [
         "Early-stage Alzheimer’s disease",
         "Lewy Body dementia",

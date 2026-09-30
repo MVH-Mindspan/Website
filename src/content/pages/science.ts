@@ -2,7 +2,11 @@ import { buildMetadata } from "@/lib/seo";
 import { VIDEO_VISITS_ENABLED } from "@/lib/flags";
 import type { JourneyStage } from "../journey";
 import type { TechCard } from "../technology";
-import type { Stat } from "../stats";
+import {
+  TYPICAL_SPECIALIST_WAIT,
+  TYPICAL_SPECIALIST_WAIT_ADJ,
+  type Stat,
+} from "../stats";
 
 const ASSESSMENT_HREF = "https://assessment.mindspan.co/";
 const BOOKING_HREF = "/book-a-visit";
@@ -65,7 +69,7 @@ const outcomePillars: JourneyStage[] = [
     kicker: "Faster answers",
     title: "Confirmed answers in weeks, not months.",
     body:
-      "Your at-home screening with Mindy, paired with our blood biomarker panel, can confirm what is going on without waiting on a PET scan or a twelve-month specialist queue. Most families have a real picture in weeks. Less anxiety, more time to act.",
+      `Your at-home screening with Mindy, paired with our blood biomarker panel, can help confirm what is going on without waiting on a PET scan or a ${TYPICAL_SPECIALIST_WAIT_ADJ} specialist queue. Most families have a real picture in weeks. Less anxiety, more time to act.`,
     image: "/assets/latest-science.webp",
     imageAlt:
       "A Mindspan neurologist reviewing brain imaging with a couple in clinic",
@@ -98,8 +102,8 @@ const outcomePillarsIntro = {
 };
 
 const proofStats: Stat[] = [
-  { value: "2 to 3 weeks", valueShort: "2 to 3 wks", label: "Average time to a Mindspan neurologist" },
-  { value: "12 months", valueShort: "12 mo", label: "Typical specialist wait elsewhere" },
+  { value: "2 to 3 weeks", valueShort: "2 to 3 wks", label: "Typical time to a Mindspan neurologist" },
+  { value: TYPICAL_SPECIALIST_WAIT, valueShort: "12+ mo", label: "Typical specialist wait elsewhere" },
   {
     value: "70,000+",
     label: "Cognitive care patients informing our Digital Twin",

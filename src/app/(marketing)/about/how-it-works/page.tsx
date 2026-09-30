@@ -12,12 +12,23 @@ import {
 import { howItWorksPage } from "@/content/pages/howItWorks";
 import { mindspanPath, mindspanPathIntro, mindspanPathCta } from "@/content/path";
 import { whatWeTreatPage } from "@/content/pages/whatWeTreat";
-import { faq, faqIntro } from "@/content/faq";
+import { faq, faqIntro, homeFaq } from "@/content/faq";
 import { JsonLd } from "@/lib/json-ld";
-import { buildBreadcrumbSchema } from "@/lib/schema";
+import {
+  buildBreadcrumbSchema,
+  buildFaqSchema,
+  excludeFaqItems,
+  UNCONFIRMED_FAQ_IDS,
+} from "@/lib/schema";
 import { SITE_URL } from "@/lib/seo";
 
 export const metadata = howItWorksPage.metadata;
+
+// Mark up only the questions not already on the homepage, so each Q&A has one home.
+const faqSchemaItems = excludeFaqItems(faq, [
+  ...homeFaq.map((item) => item.id),
+  ...UNCONFIRMED_FAQ_IDS,
+]);
 
 export default function HowItWorksPage() {
   return (
@@ -30,6 +41,9 @@ export default function HowItWorksPage() {
           { name: "How It Works", url: `${SITE_URL}/about/how-it-works` },
         ])}
       />
+      {faqSchemaItems.length > 0 && (
+        <JsonLd id="ld-faq" data={buildFaqSchema(faqSchemaItems)} />
+      )}
       <VideoHero {...howItWorksPage.hero} />
 
       <RippleFlow

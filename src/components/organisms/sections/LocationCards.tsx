@@ -16,6 +16,8 @@ import { Reveal } from "@/components/molecules/Reveal";
 import { SectionHeader } from "@/components/molecules/SectionHeader";
 import type { Location } from "@/content/locations";
 
+type HeadingTag = "h2" | "h3" | "h4";
+
 export function LocationCards({
   id,
   intro,
@@ -34,6 +36,10 @@ export function LocationCards({
   const inPerson = locations.filter((l) => l.kind === "clinic");
   const video = locations.filter((l) => l.kind === "video");
   const bg = tone === "sand" ? c.sand : tone === "cream" ? c.cream : undefined;
+  // Keep the outline sequential: under the intro's h2 when there is one,
+  // otherwise directly under the page h1 (e.g. /locations).
+  const groupTag: HeadingTag = intro ? "h3" : "h2";
+  const cardTag: HeadingTag = !groupByKind ? groupTag : intro ? "h4" : "h3";
 
   if (locations.length === 0 && !intro) return null;
 
@@ -68,10 +74,20 @@ export function LocationCards({
         {groupByKind ? (
           <div className={intro ? "mt-14 flex flex-col gap-16" : "flex flex-col gap-16"}>
             {inPerson.length > 0 && (
-              <LocationGroup heading="In-person clinics" locations={inPerson} />
+              <LocationGroup
+                heading="In-person clinics"
+                headingAs={groupTag}
+                cardHeadingAs={cardTag}
+                locations={inPerson}
+              />
             )}
             {video.length > 0 && (
-              <LocationGroup heading="Video visits" locations={video} />
+              <LocationGroup
+                heading="Video visits"
+                headingAs={groupTag}
+                cardHeadingAs={cardTag}
+                locations={video}
+              />
             )}
           </div>
         ) : (
@@ -79,7 +95,7 @@ export function LocationCards({
             className={`grid sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12${intro ? " mt-14" : ""}`}
           >
             {locations.map((l, i) => (
-              <LocationCard key={l.slug} location={l} index={i} />
+              <LocationCard key={l.slug} location={l} index={i} headingAs={cardTag} />
             ))}
           </div>
         )}
@@ -90,9 +106,13 @@ export function LocationCards({
 
 function LocationGroup({
   heading,
+  headingAs: Tag,
+  cardHeadingAs,
   locations,
 }: {
   heading: string;
+  headingAs: HeadingTag;
+  cardHeadingAs: HeadingTag;
   locations: Location[];
 }) {
   const { theme } = useTheme();
@@ -101,7 +121,7 @@ function LocationGroup({
 
   return (
     <div>
-      <h3
+      <Tag
         className="mb-8"
         style={{
           fontFamily: theme.fonts.body,
@@ -113,10 +133,10 @@ function LocationGroup({
         }}
       >
         {heading}
-      </h3>
+      </Tag>
       <div className={`grid sm:grid-cols-2 ${cols} gap-x-6 sm:gap-x-8 gap-y-8 sm:gap-y-12`}>
         {locations.map((l, i) => (
-          <LocationCard key={l.slug} location={l} index={i} />
+          <LocationCard key={l.slug} location={l} index={i} headingAs={cardHeadingAs} />
         ))}
       </div>
     </div>
@@ -126,9 +146,11 @@ function LocationGroup({
 function LocationCard({
   location: l,
   index: i,
+  headingAs,
 }: {
   location: Location;
   index: number;
+  headingAs: HeadingTag;
 }) {
   const { theme } = useTheme();
   const c = theme.colors;
@@ -136,9 +158,10 @@ function LocationCard({
   return (
     <Reveal
       dataProximity="subtle"
-      className="v2-card group flex flex-col rounded-[2rem] overflow-hidden"
+      className="v2-card group flex flex-col rounded-[2rem]"
       style={{
         background: alpha(c.cream, 0.7),
+        overflow: "hidden",
         animationDelay: `${i * 80}ms`,
       }}
     >
@@ -155,7 +178,7 @@ function LocationCard({
       <div className="p-6 md:p-7 flex flex-col flex-1 min-w-0">
         <Eyebrow color={c.accentText}>{l.eyebrow}</Eyebrow>
         <Heading
-          as="h4"
+          as={headingAs}
           variant="h4"
           color={c.ink}
           fontFamily={theme.fonts.heading}

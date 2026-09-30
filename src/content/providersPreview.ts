@@ -7,6 +7,10 @@ export type ProviderPreview = {
   image?: string;
   imageAlt?: string;
   location?: { label: string; href: string };
+  // Structured name for JSON-LD (Person). Display text uses `name` above.
+  givenName?: string;
+  familyName?: string;
+  honorificSuffix?: string;
 };
 
 export const providersPreviewIntro = {
@@ -23,6 +27,22 @@ export const providersPreviewClinicianIntro = {
     "Board-certified neurologists with subspecialty depth in memory and cognitive care. Your patient sees the same clinician across visits, with a structured note back to your chart after every encounter.",
 } as const;
 
+// Clinical Director: not tied to one clinic, so /providers describes him as a
+// Person working for the organization (no physician type or NPI until confirmed).
+export const clinicalDirector = {
+  id: "nr",
+  name: "Dr. Naveen Reddy, MD",
+  role: "Clinical Director",
+  bio:
+    "Neurologist and implementation scientist focused on Alzheimer’s diagnostics and anti-amyloid therapies. Trained at UC San Diego and UCSF.",
+  initials: "NR",
+  image: "/assets/naveen-reddy.webp",
+  imageAlt: "Dr. Naveen Reddy, MD",
+  givenName: "Naveen",
+  familyName: "Reddy",
+  honorificSuffix: "MD",
+} satisfies ProviderPreview;
+
 export const providersPreview: ProviderPreview[] = [
   {
     id: "tk",
@@ -35,16 +55,7 @@ export const providersPreview: ProviderPreview[] = [
     imageAlt: "Dr. Timothy Kelliher, MD",
     location: { label: "Book a visit in Danvers", href: "/locations/danvers" },
   },
-  {
-    id: "nr",
-    name: "Dr. Naveen Reddy, MD",
-    role: "Clinical Director",
-    bio:
-      "Neurologist and implementation scientist focused on Alzheimer’s diagnostics and anti-amyloid therapies. Trained at UC San Diego and UCSF.",
-    initials: "NR",
-    image: "/assets/naveen-reddy.webp",
-    imageAlt: "Dr. Naveen Reddy, MD",
-  },
+  clinicalDirector,
   {
     id: "ns",
     name: "Dr. Noor Sachdev, MD",

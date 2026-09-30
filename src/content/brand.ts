@@ -15,6 +15,7 @@ export const brand = {
   primaryCtaHref: "/book-a-visit",
   phone: "(978) 850-3914",
   phoneHref: "tel:+19788503914",
+  // Hours the phone line is answered, not clinic hours (those live in clinics.ts).
   phoneHours: "9am–9pm ET / 6am–6pm PT",
   secondaryCta: "Find a clinic",
   secondaryCtaHref: "#locations",

@@ -6,6 +6,7 @@ import {
 import type { JourneyStage } from "../journey";
 import type { Protocol } from "../protocols";
 import type { TechCard } from "../technology";
+import { TYPICAL_SPECIALIST_WAIT_ADJ } from "../stats";
 
 const BOOKING_HREF = "/book-a-visit";
 
@@ -16,13 +17,17 @@ const stages: JourneyStage[] = [
     body:
       "Our screening tools make it easy to get started in an environment where your loved one feels comfortable. You can help administer initial assessments from home, reducing stress while gathering meaningful information early.",
     image: "/assets/get-assessed.webp",
+    imageAlt:
+      "A woman helps an older woman with a tablet as they sit together on a bench by a sunlit window",
   },
   {
     kicker: "Engage",
     title: "See a specialist in weeks, not months.",
     body:
-      "If screening shows that further evaluation would help, enrollment is simple. Mindspan sees your loved one within weeks, rather than the 18+ month wait most families face for specialist cognitive care.",
+      `If screening shows that further evaluation would help, enrollment is simple. Mindspan sees your loved one within weeks, rather than the ${TYPICAL_SPECIALIST_WAIT_ADJ} wait most families face for specialist cognitive care.`,
     image: "/assets/assist-specialist.webp",
+    imageAlt:
+      "A clinician points to a brain scan on a wall screen while an older woman and a younger woman listen",
   },
   {
     kicker: "Join",
@@ -30,6 +35,8 @@ const stages: JourneyStage[] = [
     body:
       "Traditional healthcare often leaves families on the sidelines. At Mindspan, we welcome you as part of the care team from the very beginning, practical, respectful, and sustainable involvement built around your life.",
     image: "/assets/assist-table.webp",
+    imageAlt:
+      "A clinician talks across a table with an older man and a younger woman who is taking notes",
   },
   {
     kicker: "Empower",
@@ -37,6 +44,8 @@ const stages: JourneyStage[] = [
     body:
       "Whether you attend visits in person or join remotely, you remain informed and supported at every stage. Clear updates, guidance on next steps, and ongoing access to our care team, so you can focus on your loved one without feeling lost or alone.",
     image: "/assets/ongoing-partnership.webp",
+    imageAlt:
+      "A clinician at a desk talks with an older man shown on a large wall screen",
   },
 ];
 
@@ -195,6 +204,10 @@ export const assistPage = {
         "Getting started is straightforward and private. Complete a brief assessment from home, and we\u2019ll take care of coordinating specialists, next steps, and ongoing care, guiding you the whole way.",
     },
     items: howToStart,
+  },
+
+  coverage: {
+    cta: { label: "Learn about Medicare coverage", href: "/medicare" },
   },
 
   guideBenefit: {

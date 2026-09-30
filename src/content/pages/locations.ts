@@ -3,10 +3,10 @@ import { VIDEO_VISITS_ENABLED } from "@/lib/flags";
 
 export const locationsPage = {
   metadata: buildMetadata({
-    title: "Our Locations | Mindspan",
+    title: "Memory & Dementia Clinics in Danvers, MA and San Jose, CA | Mindspan",
     description: VIDEO_VISITS_ENABLED
-      ? "Cognitive care clinics in Massachusetts and California, plus video visits statewide in both. Find the one nearest you."
-      : "Cognitive care clinics in Massachusetts and California. Find the one nearest you.",
+      ? "Memory and dementia care clinics in Danvers, MA (North Shore) and San Jose, CA (Bay Area), plus video visits statewide in both states. Find the one nearest you."
+      : "Memory and dementia care clinics in Danvers, MA (North Shore) and San Jose, CA (Bay Area). Find the one nearest you.",
     canonical: "/locations",
   }),
   hero: VIDEO_VISITS_ENABLED

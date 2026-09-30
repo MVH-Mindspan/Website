@@ -34,6 +34,20 @@ export type ProviderProfile = {
   affiliations: string;
   availability: string;
   cta: { label: string; href: string };
+  // Structured facts for JSON-LD, kept next to the display strings above so
+  // schema never has to parse copy. Visible text still comes from the fields above.
+  givenName: string;
+  additionalName?: string;
+  familyName: string;
+  honorificSuffix: string;
+  /** Only set once confirmed against the NPPES registry. */
+  npi?: string;
+  /** ABPN board certifications, by specialty name. */
+  boardCertifications: readonly string[];
+  /** Institutions only (no degrees or programs). */
+  alumniOf: readonly string[];
+  memberOf?: readonly string[];
+  hospitalAffiliations: readonly { name: string; locality?: string; region?: string }[];
 };
 
 export type CareTeamMember = {
@@ -58,6 +72,8 @@ export type ClinicPromotion = {
 };
 
 export type LocationDetail = {
+  /** Overrides the generated `<title>` (see buildLocationTitle). */
+  seoTitle?: string;
   metaDescription?: string;
   hero: {
     eyebrow: string;
@@ -142,7 +158,12 @@ const detailMap: Record<string, LocationDetail> = {
   "video-ca": videoCaliforniaDetail,
 };
 
-function buildLocationTitle(location: Location): string {
+export function getLocationDetail(slug: string): LocationDetail | undefined {
+  return detailMap[slug];
+}
+
+function buildLocationTitle(location: Location, detail?: LocationDetail): string {
+  if (detail?.seoTitle) return detail.seoTitle;
   const stateAbbrev = location.state === "Massachusetts" ? "MA" : "CA";
   if (location.kind === "video") {
     return `Online Dementia Specialist in ${location.state} | Mindspan Video`;
@@ -152,7 +173,7 @@ function buildLocationTitle(location: Location): string {
 
 export function getLocationPage(location: Location) {
   const detail = detailMap[location.slug];
-  const title = buildLocationTitle(location);
+  const title = buildLocationTitle(location, detail);
   return {
     metadata: buildMetadata({
       title,

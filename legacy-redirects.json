@@ -1,0 +1,19 @@
+{
+  "/locations/irvine-ca": { "to": "/locations", "status": 301 },
+  "/locations/contact-us": { "to": "/locations", "status": 301 },
+  "/locations/california": { "to": "/locations/bay-area", "status": 301 },
+  "/locations/california-locations": { "to": "/locations/bay-area", "status": 301 },
+  "/locations/bay-area-ca": { "to": "/locations/bay-area", "status": 301 },
+  "/locations/massachusetts-locations": { "to": "/locations/danvers", "status": 301 },
+  "/locations/ma-telehealth": { "to": "/locations/danvers", "status": 301 },
+  "/locations/cms-guide-california": { "to": "/guide", "status": 301 },
+  "/locations/cms-guide-massachusetts": { "to": "/guide", "status": 301 },
+  "/about/frontier-care": { "to": "/about/science", "status": 301 },
+  "/features": { "to": "/about/how-it-works", "status": 301 },
+  "/what-we-treat": { "to": "/about/how-it-works", "status": 301 },
+  "/pricing": { "to": "/medicare", "status": 301 },
+  "/coverage": { "to": "/medicare", "status": 301 },
+  "/home/home-3": { "to": "/", "status": 301 },
+  "/locations/video-ma": { "to": "/locations", "status": 302 },
+  "/locations/video-ca": { "to": "/locations", "status": 302 }
+}
