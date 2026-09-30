@@ -1,11 +1,15 @@
 import { CMS_AUTHOR_DISCLAIMER } from "@/content/guide-disclosures";
 import { VIDEO_VISITS_ENABLED } from "@/lib/flags";
+import { clinics } from "../clinics";
+import { TYPICAL_SPECIALIST_WAIT_ADJ } from "../stats";
 import type { LocationDetail } from "../pages/locationDetail";
 
 const BOOKING_HREF = "/book-a-visit";
 const EXISTING_HREF = "https://oncehub.com/mindspan_danvers";
+const clinic = clinics.bayArea;
 
 export const bayAreaDetail: LocationDetail = {
+  seoTitle: "Memory Clinic & Neurologist in San Jose, CA (Bay Area) | Mindspan",
   metaDescription:
     "Memory and dementia care in San Jose / Bay Area. A board-certified neurologist focused on Alzheimer’s, MCI, and dementia. First visits in 2 to 3 weeks.",
   hero: {
@@ -77,25 +81,31 @@ export const bayAreaDetail: LocationDetail = {
     },
     items: [
       {
-        kicker: "Stage 0",
+        kicker: "Baseline",
         title: "Normal cognition",
         body:
           "No memory or thinking concerns. Regular screening helps establish a baseline for future comparison.",
         image: "/assets/get-assessed.webp",
+        imageAlt:
+          "A woman shows an older woman something on a tablet as they sit together on a bench by a sunlit window",
       },
       {
-        kicker: "Stage 1\u20132",
+        kicker: "Early changes",
         title: "Early memory changes",
         body:
           "Noticeable changes in memory or thinking that go beyond what\u2019s typical. Often manageable, and treatable when caught early.",
         image: "/assets/consultation-2.webp",
+        imageAlt:
+          "A clinician explains a brain scan on a wall screen to an older woman and a younger companion",
       },
       {
-        kicker: "Stage 3+",
+        kicker: "Later changes",
         title: "Dementia",
         body:
           "A progressive decline affecting daily function. Mindspan Bay Area provides advanced therapies, ongoing clinical care, and access to the latest science for all stages.",
         image: "/assets/consultation-1.webp",
+        imageAlt:
+          "A clinician talks with an older man across a table in a sunlit consultation room",
       },
     ],
   },
@@ -105,7 +115,7 @@ export const bayAreaDetail: LocationDetail = {
       eyebrow: "Why specialized matters",
       title: "Why choose a specialized memory center in the Bay Area?",
       lead:
-        "General neurologists see patients with dozens of conditions. At Mindspan Bay Area, our team specializes exclusively in memory and cognitive disorders, giving you access to advanced diagnostics, FDA-approved therapies, clinical trials, and a clinical care team that stays with you from first assessment through ongoing treatment.",
+        "General neurologists see patients with dozens of conditions. At Mindspan Bay Area, our team focuses on memory and cognitive disorders, giving you access to advanced diagnostics, FDA-approved therapies, clinical trials, and a clinical care team that stays with you from first assessment through ongoing treatment.",
       image: "/assets/digital-brain.webp",
       imageAlt:
         "Advanced brain imaging used for early-stage cognitive diagnostics at Mindspan Bay Area",
@@ -115,7 +125,7 @@ export const bayAreaDetail: LocationDetail = {
       eyebrow: "Subspecialty expertise",
       title: "Expertise you can\u2019t get at a general practice.",
       body:
-        "Our clinicians train specifically in early-stage Alzheimer\u2019s, Lewy Body, vascular dementia, and frontotemporal disorders.",
+        "Our clinicians evaluate and treat early-stage Alzheimer\u2019s, Lewy Body, vascular dementia, and frontotemporal disorders.",
       bullets: [
         "Early-stage Alzheimer\u2019s disease",
         "Lewy Body dementia",
@@ -127,7 +137,7 @@ export const bayAreaDetail: LocationDetail = {
     edge: {
       id: "rapid-access",
       eyebrow: "Rapid access",
-      title: "No 18-month wait. Seen within weeks.",
+      title: `No ${TYPICAL_SPECIALIST_WAIT_ADJ} wait. Seen within weeks.`,
       body:
         "Today, many patients wait months to see a specialist. By the time they are evaluated, they may already be outside the window where treatment can meaningfully slow the disease. Our Bay Area clinic prioritizes rapid access so treatment can begin while it is most effective.",
       bullets: [
@@ -174,18 +184,32 @@ export const bayAreaDetail: LocationDetail = {
       ? "Accepting new patients. Video visits also available."
       : "Accepting new patients.",
     cta: { label: "Book a visit with Dr. Sachdev", href: BOOKING_HREF },
+    givenName: "Noor",
+    familyName: "Sachdev",
+    honorificSuffix: "MD",
+    // No `npi` until the owner confirms it against NPPES.
+    boardCertifications: ["Neurology", "Vascular Neurology"],
+    alumniOf: [
+      "University of Southern California",
+      "Keck School of Medicine of USC",
+      "Baylor College of Medicine",
+      "Columbia University",
+    ],
+    memberOf: ["American Association of Neuromuscular & Electrodiagnostic Medicine"],
+    hospitalAffiliations: [
+      { name: "Good Samaritan Hospital", locality: "San Jose", region: "CA" },
+      { name: "El Camino Health" },
+    ],
   },
 
   contact: {
-    address: "2520 Samaritan Dr, Suite 201B, San Jose, CA 95124",
-    mapEmbedSrc:
-      "https://www.openstreetmap.org/export/embed.html?bbox=-121.96,37.23,-121.92,37.27&layer=mapnik&marker=37.250619,-121.942763",
-    phone: "(669) 291-2202",
-    phoneHref: "tel:+16692912202",
-    email: "SanJose@Mindspan.co",
-    emailHref:
-      "mailto:SanJose@Mindspan.co?subject=Mindspan%20Bay%20Area%20patient%20enquiry",
-    hours: "Monday\u2013Friday, 9am\u20135pm PST",
+    address: clinic.addressDisplay,
+    mapEmbedSrc: clinic.mapEmbedSrc,
+    phone: clinic.phone,
+    phoneHref: clinic.phoneHref,
+    email: clinic.email,
+    emailHref: `mailto:${clinic.email}?subject=Mindspan%20Bay%20Area%20patient%20enquiry`,
+    hours: clinic.hours,
     newPatient: { label: "Enroll and book a visit", href: BOOKING_HREF },
     existingPatient: { label: "Book a follow-up", href: EXISTING_HREF },
   },
@@ -240,7 +264,7 @@ export const bayAreaDetail: LocationDetail = {
     lead:
       "See a specialist in weeks, not months or years. Early diagnosis means better outcomes, and more time with the people who matter most.",
     primary: { label: "Book a visit today", href: BOOKING_HREF },
-    secondary: { label: "Call (669) 291-2202", href: "tel:+16692912202" },
+    secondary: { label: `Call ${clinic.phone}`, href: clinic.phoneHref },
     signature: "With care, the Mindspan Bay Area team",
   },
 };

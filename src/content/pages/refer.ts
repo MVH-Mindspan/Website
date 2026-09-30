@@ -1,4 +1,5 @@
 import { buildMetadata } from "@/lib/seo";
+import { clinics } from "@/content/clinics";
 
 export const referPage = {
   metadata: buildMetadata({
@@ -40,16 +41,16 @@ export const referPage = {
     {
       id: "danvers",
       label: "MA - Danvers",
-      phone: { value: "(978) 850-3914", href: "tel:+19788503914" },
+      phone: { value: clinics.danvers.phone, href: clinics.danvers.phoneHref },
       fax: { value: "(844) 689-3306", href: null },
-      hours: "Mon–Fri, 9am–6pm ET",
+      hours: clinics.danvers.hoursShort,
     },
     {
       id: "bay-area",
       label: "CA - Bay Area",
-      phone: { value: "(669) 291-2202", href: "tel:+16692912202" },
+      phone: { value: clinics.bayArea.phone, href: clinics.bayArea.phoneHref },
       fax: { value: "(844) 689-7419", href: null },
-      hours: "Mon–Fri, 9am–6pm PT",
+      hours: clinics.bayArea.hoursShort,
     },
   ],
 } as const;

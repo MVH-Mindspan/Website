@@ -10,7 +10,12 @@ import { CmsDisclosure } from "@/components/atoms/CmsDisclosure";
 import { brand } from "@/content/brand";
 import { guidePage } from "@/content/pages/guide";
 import { JsonLd } from "@/lib/json-ld";
-import { buildFaqSchema, buildBreadcrumbSchema } from "@/lib/schema";
+import {
+  buildFaqSchema,
+  buildBreadcrumbSchema,
+  excludeFaqItems,
+  UNCONFIRMED_FAQ_IDS,
+} from "@/lib/schema";
 import { SITE_URL } from "@/lib/seo";
 
 export const metadata = guidePage.metadata;
@@ -25,7 +30,10 @@ export default function GuidePage() {
           { name: "GUIDE Program", url: `${SITE_URL}/guide` },
         ])}
       />
-      <JsonLd id="ld-faq" data={buildFaqSchema(guidePage.faq)} />
+      <JsonLd
+        id="ld-faq"
+        data={buildFaqSchema(excludeFaqItems(guidePage.faq, UNCONFIRMED_FAQ_IDS))}
+      />
       <PageHero {...guidePage.hero} />
 
       <FeatureCardGrid

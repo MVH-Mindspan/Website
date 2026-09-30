@@ -7,8 +7,6 @@ export type Location = {
   city: string;
   state: string;
   href: string;
-  bbox: string;
-  marker: string;
   kind: LocationKind;
   eyebrow: string;
   headline: string;
@@ -40,8 +38,6 @@ const allLocations: Location[] = [
     city: "Danvers",
     state: "Massachusetts",
     href: "/locations/danvers",
-    bbox: "-70.97,42.555,-70.89,42.595",
-    marker: "42.575,-70.933",
     kind: "clinic",
     eyebrow: "Mindspan Danvers",
     headline: "In-person care in Danvers, Massachusetts.",
@@ -56,8 +52,6 @@ const allLocations: Location[] = [
     city: "Video visits",
     state: "Massachusetts",
     href: "/locations/video-ma",
-    bbox: "-73.51,41.24,-69.93,42.89",
-    marker: "42.36,-71.06",
     kind: "video",
     eyebrow: "Mindspan video visits",
     headline: "Video visits anywhere in Massachusetts.",
@@ -70,11 +64,9 @@ const allLocations: Location[] = [
     city: "Bay Area",
     state: "California",
     href: "/locations/bay-area",
-    bbox: "-122.52,37.70,-122.35,37.82",
-    marker: "37.775,-122.418",
     kind: "clinic",
     eyebrow: "Mindspan Bay Area",
-    headline: "In-person care in Bay Area, California.",
+    headline: "In-person care in San Jose, California.",
     summary:
       "Specialty memory care in San Jose. Convenient for patients across the South Bay, Peninsula, and East Bay, with rapid access to advanced diagnostics and clinical trials.",
     ctaLabel: "Visit our Bay Area clinic",
@@ -86,8 +78,6 @@ const allLocations: Location[] = [
     city: "Video visits",
     state: "California",
     href: "/locations/video-ca",
-    bbox: "-124.41,32.53,-114.13,42.01",
-    marker: "37.0,-119.4",
     kind: "video",
     eyebrow: "Mindspan video visits",
     headline: "Video visits anywhere in California.",
