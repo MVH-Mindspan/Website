@@ -20,9 +20,10 @@ function ProviderBlock({ card }: { card: ProviderCard }) {
   return (
     <Reveal
       dataProximity="subtle"
-      className={`${dark ? "v2-card-dark" : "v2-card"} rounded-[2rem] p-5 sm:p-6 md:p-8 lg:p-10 relative overflow-hidden group`}
+      className={`${dark ? "v2-card-dark" : "v2-card"} rounded-[2rem] p-5 sm:p-6 md:p-8 lg:p-10 relative group`}
       style={{
         background: alpha(dark ? c.primary : c.cream, dark ? 0.85 : 0.7),
+        overflow: "hidden",
         color: dark ? "#fff" : undefined,
       }}
     >

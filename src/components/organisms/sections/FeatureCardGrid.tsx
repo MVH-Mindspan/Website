@@ -97,7 +97,7 @@ export function FeatureCardGrid({
                 {card.eyebrow}
               </Eyebrow>
               <Heading
-                as="h4"
+                as="h3"
                 variant="h4"
                 color={sectionText}
                 fontFamily={theme.fonts.heading}

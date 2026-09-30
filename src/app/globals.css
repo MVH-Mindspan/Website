@@ -816,6 +816,30 @@ h1, h2, h3 {
   .reveal-blur-target { filter: none; opacity: 1; transition: none; }
 }
 
+/* No-JS fallback. <Reveal> only adds .on from an IntersectionObserver, so
+   without scripting the content would stay invisible. */
+@media (scripting: none) {
+  .reveal,
+  .reveal-blur-target {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    transition: none !important;
+  }
+}
+
+/* FAQ answers collapse with CSS instead of the `hidden` attribute, so text
+   extractors that skip hidden nodes still read every answer. */
+.faq-panel[data-open="false"] { display: none; }
+
+/* The FAQ trigger fills the top of a card that clips its overflow, so the
+   outset ring from `.v2-scope button:focus-visible` would be cut off. Draw it
+   inside, following the card's corner radius. */
+.v2-scope .faq-trigger:focus-visible {
+  outline-offset: -3px;
+  border-radius: 1.5rem;
+}
+
 /* === 404 page === */
 @keyframes notfound-rule-draw {
   from { width: 0; }

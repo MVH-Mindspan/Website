@@ -89,18 +89,20 @@ export function ProvidersPreview({
                   {p.initials}
                 </div>
               )}
-              <div
+              <h3
                 style={{
                   fontFamily: theme.fonts.heading,
                   fontSize: typeScale.leadMd,
                   color: c.ink,
                   lineHeight: 1.2,
+                  // Opt out of the global h3 tracking.
+                  letterSpacing: "inherit",
                   maxWidth: "20ch",
                   wordBreak: "break-word",
                 }}
               >
                 {p.name}
-              </div>
+              </h3>
               <div
                 style={{
                   fontFamily: theme.fonts.body,

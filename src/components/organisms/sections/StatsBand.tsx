@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { useTheme } from "@/lib/theme-context";
 import { alpha } from "@/lib/themes";
 import { type as typeScale } from "@/lib/tokens";
@@ -14,10 +14,14 @@ export function StatsBand({
   stats,
   tone = "sand",
   testimonial,
+  comparisonLabel,
 }: {
   stats: readonly Stat[];
   tone?: "sand" | "cream";
   testimonial?: Testimonial;
+  /** Accessible name for the first-vs-second comparison. When set, the
+   *  comparison is wrapped in a labelled <section> landmark. */
+  comparisonLabel?: string;
 }) {
   const { theme } = useTheme();
   const c = theme.colors;
@@ -43,60 +47,62 @@ export function StatsBand({
         }}
       >
         {first && second && (
-          <Reveal
-            className="stats-comparison v2-card"
-            style={{
-              display: "grid",
-              gridTemplateColumns: "1fr auto 1fr",
-              alignItems: "center",
-              gap: 0,
-              background: alpha(cardBg, 0.7),
-              borderRadius: "1.5rem",
-              padding: "clamp(28px, 5vw, 40px) clamp(24px, 5vw, 48px)",
-            }}
-          >
-            <ComparisonStat stat={first} align="left" highlight />
-            <div
-              className="stats-comparison-divider"
+          <ComparisonRegion label={comparisonLabel}>
+            <Reveal
+              className="stats-comparison v2-card"
               style={{
-                display: "flex",
-                flexDirection: "column",
+                display: "grid",
+                gridTemplateColumns: "1fr auto 1fr",
                 alignItems: "center",
-                gap: 8,
-                padding: "0 clamp(16px, 4vw, 40px)",
+                gap: 0,
+                background: alpha(cardBg, 0.7),
+                borderRadius: "1.5rem",
+                padding: "clamp(28px, 5vw, 40px) clamp(24px, 5vw, 48px)",
               }}
             >
+              <ComparisonStat stat={first} align="left" highlight />
               <div
-                className="stats-comparison-line"
+                className="stats-comparison-divider"
                 style={{
-                  width: 1,
-                  height: 40,
-                  background: alpha(c.ink, 0.15),
-                }}
-              />
-              <span
-                style={{
-                  fontFamily: theme.fonts.body,
-                  fontSize: typeScale.bodySm,
-                  fontWeight: 700,
-                  color: alpha(c.ink, 0.55),
-                  letterSpacing: "0.08em",
-                  textTransform: "uppercase",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  gap: 8,
+                  padding: "0 clamp(16px, 4vw, 40px)",
                 }}
               >
-                vs
-              </span>
-              <div
-                className="stats-comparison-line"
-                style={{
-                  width: 1,
-                  height: 40,
-                  background: alpha(c.ink, 0.15),
-                }}
-              />
-            </div>
-            <ComparisonStat stat={second} align="right" />
-          </Reveal>
+                <div
+                  className="stats-comparison-line"
+                  style={{
+                    width: 1,
+                    height: 40,
+                    background: alpha(c.ink, 0.15),
+                  }}
+                />
+                <span
+                  style={{
+                    fontFamily: theme.fonts.body,
+                    fontSize: typeScale.bodySm,
+                    fontWeight: 700,
+                    color: alpha(c.ink, 0.55),
+                    letterSpacing: "0.08em",
+                    textTransform: "uppercase",
+                  }}
+                >
+                  vs
+                </span>
+                <div
+                  className="stats-comparison-line"
+                  style={{
+                    width: 1,
+                    height: 40,
+                    background: alpha(c.ink, 0.15),
+                  }}
+                />
+              </div>
+              <ComparisonStat stat={second} align="right" />
+            </Reveal>
+          </ComparisonRegion>
         )}
 
         {testimonial && (
@@ -179,6 +185,16 @@ export function StatsBand({
       `}</style>
     </section>
   );
+}
+
+function ComparisonRegion({
+  label,
+  children,
+}: {
+  label?: string;
+  children: ReactNode;
+}) {
+  return label ? <section aria-label={label}>{children}</section> : <>{children}</>;
 }
 
 // Range pattern: "2–3 weeks", "1-5 days" (handles en-dash, em-dash, hyphen).
@@ -266,7 +282,7 @@ function ComparisonStat({
     formatComparisonValue(template, progress);
 
   return (
-    <div className="comparison-stat" style={{ textAlign: align }}>
+    <figure className="comparison-stat" style={{ textAlign: align, margin: 0 }}>
       <p
         ref={ref}
         style={{
@@ -281,43 +297,49 @@ function ComparisonStat({
       >
         {stat.valueShort ? (
           <>
-            <span className="hidden sm:inline">{renderValue(stat.value)}</span>
-            <span className="inline sm:hidden">{renderValue(stat.valueShort)}</span>
+            {/* Full value stays in the accessibility tree (and in extracted
+                text) at every width; the short mobile variant is visual only. */}
+            <span className="sr-only sm:not-sr-only">{renderValue(stat.value)}</span>
+            <span aria-hidden className="inline sm:hidden">
+              {renderValue(stat.valueShort)}
+            </span>
           </>
         ) : (
           renderValue(stat.value)
         )}
       </p>
-      <p
-        style={{
-          fontFamily: theme.fonts.body,
-          fontSize: typeScale.body,
-          color: isRight ? alpha(c.ink, 0.5) : alpha(c.ink, 0.72),
-          lineHeight: 1.4,
-          fontWeight: isRight ? 400 : 500,
-        }}
-      >
-        {stat.label}
-      </p>
-      {stat.link && (
-        <a
-          href={stat.link.href}
-          {...externalLinkProps(stat.link.href)}
+      <figcaption>
+        <p
           style={{
-            display: "inline-block",
-            marginTop: 6,
             fontFamily: theme.fonts.body,
-            fontSize: typeScale.bodySm,
-            color: c.brandGreen,
-            textDecoration: "underline",
-            textUnderlineOffset: "0.2em",
-            textDecorationThickness: "1px",
-            textDecorationColor: alpha(c.brandGreen, 0.4),
+            fontSize: typeScale.body,
+            color: isRight ? alpha(c.ink, 0.5) : alpha(c.ink, 0.72),
+            lineHeight: 1.4,
+            fontWeight: isRight ? 400 : 500,
           }}
         >
-          {stat.link.label}
-        </a>
-      )}
-    </div>
+          {stat.label}
+        </p>
+        {stat.link && (
+          <a
+            href={stat.link.href}
+            {...externalLinkProps(stat.link.href)}
+            style={{
+              display: "inline-block",
+              marginTop: 6,
+              fontFamily: theme.fonts.body,
+              fontSize: typeScale.bodySm,
+              color: c.brandGreen,
+              textDecoration: "underline",
+              textUnderlineOffset: "0.2em",
+              textDecorationThickness: "1px",
+              textDecorationColor: alpha(c.brandGreen, 0.4),
+            }}
+          >
+            {stat.link.label}
+          </a>
+        )}
+      </figcaption>
+    </figure>
   );
 }

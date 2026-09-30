@@ -42,6 +42,7 @@ export function FAQ({
             const isOpen = openId === it.id;
             const panelId = `faq-panel-${it.id}`;
             const buttonId = `faq-button-${it.id}`;
+            const questionId = `faq-question-${it.id}`;
             return (
               <div
                 key={it.id}
@@ -52,61 +53,84 @@ export function FAQ({
                   overflow: "hidden",
                 }}
               >
-                <button
-                  type="button"
-                  id={buttonId}
-                  onClick={() => setOpenId(isOpen ? null : it.id)}
-                  aria-expanded={isOpen}
-                  aria-controls={panelId}
-                  className="w-full text-left flex items-center justify-between gap-6"
-                  style={{
-                    padding: "22px 28px",
-                    fontFamily: theme.fonts.heading,
-                    fontSize: typeScale.leadMd,
-                    color: c.ink,
-                    lineHeight: 1.3,
-                    background: "transparent",
-                    border: 0,
-                    cursor: "pointer",
-                  }}
-                >
-                  <span className="min-w-0 break-words">{it.question}</span>
-                  <span
-                    aria-hidden
-                    style={{
-                      flexShrink: 0,
-                      width: 32,
-                      height: 32,
-                      borderRadius: "50%",
-                      background: isOpen ? c.brandGreen : alpha(c.ink, 0.06),
-                      color: isOpen ? "#fff" : c.ink,
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      transition: `background 0.2s ease, transform 0.3s ${ease.expressive}`,
-                      transform: isOpen ? "rotate(45deg)" : "rotate(0deg)",
-                    }}
+                {/* The question is a real heading outside the button so text
+                    extractors (which drop <button>) keep it. The empty button
+                    shares the grid cell, giving the same click target, focus
+                    ring and name as a full-row button. It stays in flow so the
+                    card's rounded clip still bounds it; pointer-events-none
+                    passes clicks on the text and icon through to it. */}
+                <div className="grid grid-cols-1">
+                  <div
+                    className="pointer-events-none text-left flex items-center justify-between gap-6"
+                    style={{ gridArea: "1 / 1", padding: "22px 28px" }}
                   >
-                    <svg
-                      width="12"
-                      height="12"
-                      viewBox="0 0 12 12"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="1.8"
-                      strokeLinecap="round"
-                      aria-hidden
+                    <h3
+                      id={questionId}
+                      className="min-w-0 break-words"
+                      style={{
+                        fontFamily: theme.fonts.heading,
+                        fontSize: typeScale.leadMd,
+                        color: c.ink,
+                        lineHeight: 1.3,
+                        // Opt out of the global h3 tracking.
+                        letterSpacing: "inherit",
+                      }}
                     >
-                      <line x1="6" y1="1" x2="6" y2="11" />
-                      <line x1="1" y1="6" x2="11" y2="6" />
-                    </svg>
-                  </span>
-                </button>
+                      {it.question}
+                    </h3>
+                    <span
+                      aria-hidden
+                      style={{
+                        flexShrink: 0,
+                        width: 32,
+                        height: 32,
+                        borderRadius: "50%",
+                        background: isOpen ? c.brandGreen : alpha(c.ink, 0.06),
+                        color: isOpen ? "#fff" : c.ink,
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        transition: `background 0.2s ease, transform 0.3s ${ease.expressive}`,
+                        transform: isOpen ? "rotate(45deg)" : "rotate(0deg)",
+                      }}
+                    >
+                      <svg
+                        width="12"
+                        height="12"
+                        viewBox="0 0 12 12"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="1.8"
+                        strokeLinecap="round"
+                        aria-hidden
+                      >
+                        <line x1="6" y1="1" x2="6" y2="11" />
+                        <line x1="1" y1="6" x2="11" y2="6" />
+                      </svg>
+                    </span>
+                  </div>
+                  <button
+                    type="button"
+                    id={buttonId}
+                    className="faq-trigger"
+                    onClick={() => setOpenId(isOpen ? null : it.id)}
+                    aria-expanded={isOpen}
+                    aria-controls={panelId}
+                    aria-labelledby={questionId}
+                    style={{
+                      gridArea: "1 / 1",
+                      background: "transparent",
+                      border: 0,
+                      cursor: "pointer",
+                    }}
+                  />
+                </div>
                 <div
                   id={panelId}
                   role="region"
-                  aria-labelledby={buttonId}
-                  hidden={!isOpen}
+                  aria-labelledby={questionId}
+                  data-open={isOpen}
+                  className="faq-panel"
                   style={{
                     padding: isOpen ? "0 28px 24px" : 0,
                     fontFamily: theme.fonts.body,
