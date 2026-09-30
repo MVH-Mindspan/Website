@@ -61,6 +61,7 @@ export default function AssistPage() {
       <SplitCards
         intro={coveragePage.howItWorks.intro}
         core={coveragePage.howItWorks.insurance}
+        cta={assistPage.coverage.cta}
       />
       <GuideBenefit {...assistPage.guideBenefit} />
       <FinalCTA

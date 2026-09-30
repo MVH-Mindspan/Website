@@ -70,13 +70,16 @@ export function SiteFooter() {
               {brand.footerTagline}
             </p>
             {mailingAddress.length > 0 && (
-              <address className="mt-3 text-xs text-white/55 leading-relaxed not-italic">
-                {mailingAddress.map((line) => (
-                  <span key={line} className="block">
-                    {line}
-                  </span>
-                ))}
-              </address>
+              <div className="mt-3 text-xs text-white/55 leading-relaxed">
+                {footer.mailingAddressLabel && <p>{footer.mailingAddressLabel}</p>}
+                <address className="not-italic">
+                  {mailingAddress.map((line) => (
+                    <span key={line} className="block">
+                      {line}
+                    </span>
+                  ))}
+                </address>
+              </div>
             )}
             {brand.phone && brand.phoneHref && (
               <p className="mt-3 text-xs text-white/55">
@@ -112,12 +115,19 @@ export function SiteFooter() {
           )}
         </div>
         <div
-          className="mt-12 sm:mt-16 pt-6 sm:pt-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 sm:gap-6 text-sm"
+          className="mt-12 sm:mt-16 pt-6 sm:pt-8 flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 sm:gap-6 text-sm"
           style={{ borderTop: "1px solid rgba(255,255,255,0.1)" }}
         >
-          <p>{footer.copyright}</p>
+          <div className="min-w-0">
+            <p>{footer.copyright}</p>
+            {footer.clinicalEntities && (
+              <p className="mt-2 max-w-xl text-xs text-white/55 leading-relaxed">
+                {footer.clinicalEntities}
+              </p>
+            )}
+          </div>
           {legal.length > 0 && (
-            <div className="flex flex-wrap gap-x-5 gap-y-2">
+            <div className="flex flex-wrap gap-x-5 gap-y-2 sm:shrink-0">
               {legal.map((l) => (
                 <FooterLink
                   key={l.label}
