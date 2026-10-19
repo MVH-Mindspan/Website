@@ -144,6 +144,27 @@ export function buildBreadcrumbSchema(
   };
 }
 
+export function buildVideoObjectSchema(video: {
+  name: string;
+  description: string;
+  contentUrl: string;
+  thumbnailUrl: string;
+  uploadDate: string;
+  duration: string;
+}): SchemaObject {
+  return {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    name: video.name,
+    description: video.description,
+    contentUrl: `${SITE_URL}${video.contentUrl}`,
+    thumbnailUrl: `${SITE_URL}${video.thumbnailUrl}`,
+    uploadDate: video.uploadDate,
+    duration: video.duration,
+    publisher: { "@id": ORG_ID },
+  };
+}
+
 export function buildMedicalClinicSchema(
   location: Location,
   detail: LocationDetail,
@@ -169,6 +190,11 @@ export function buildMedicalClinicSchema(
     parentOrganization: { "@id": ORG_ID },
     priceRange: "$$",
     paymentAccepted: "Insurance, Medicare",
+    availableService: detail.availableServices?.map((service) => ({
+      "@type": "MedicalTest",
+      name: service.name,
+      url: `${SITE_URL}${service.href}`,
+    })),
   };
 }
 

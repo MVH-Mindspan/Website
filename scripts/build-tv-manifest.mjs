@@ -14,6 +14,10 @@ const EXCLUDED_BASENAMES = new Set([
   "noor-sachdev",
   "danvers-clinic",
   "bay-area-clinic",
+  "danvers-biomarkers",
+  "biomarkers-blood-draw",
+  "biomarkers-tubes",
+  "biomarkers-explainer-poster",
 ]);
 
 const IMAGE_RE = /\/assets\/[a-zA-Z0-9_\-./]+\.(?:webp|png|jpg|jpeg|avif)/g;

@@ -15,6 +15,7 @@ export { SplitCards } from "./SplitCards";
 export { FeatureCardGrid } from "./FeatureCardGrid";
 export { FeatureSpotlight } from "./FeatureSpotlight";
 export { VideoFeature } from "./VideoFeature";
+export { VideoShowcase } from "./VideoShowcase";
 export { AudienceCards } from "./AudienceCards";
 export { LocationCards } from "./LocationCards";
 export { ProvidersSection } from "./ProvidersSection";
@@ -26,6 +27,7 @@ export { FinalCTA } from "./FinalCTA";
 export { Testimonials } from "./Testimonials";
 export { ProvidersPreview } from "./ProvidersPreview";
 export { FAQ } from "./FAQ";
+export { QuestionCards, type QuestionCardItem } from "./QuestionCards";
 export {
   LegalDocument,
   type LegalBlock,

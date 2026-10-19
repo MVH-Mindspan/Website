@@ -60,6 +60,18 @@ const mindyVideo = {
   primary: { label: "Start a free assessment today", href: ASSESSMENT_HREF },
 };
 
+const biomarkerSpotlight = {
+  id: "biomarkers",
+  eyebrow: "Biomarker testing",
+  title: "One blood draw, four measures.",
+  body:
+    "Brain biomarker blood tests look for plaque (p-tau217 and the amyloid ratio), the brain\u2019s repair crew (GFAP), and wear on nerve cells (NfL). For many people, they answer the question that used to take a PET scan.",
+  image: "/assets/biomarkers-tubes.webp",
+  imageAlt:
+    "Capped blood sample tubes in a small steel rack on a clinic console, lit by late afternoon sun.",
+  primary: { label: "Learn about biomarker testing", href: "/biomarkers" },
+};
+
 const outcomePillars: JourneyStage[] = [
   {
     kicker: "Faster answers",
@@ -126,6 +138,7 @@ export const sciencePage = {
   },
   technologyIntro,
   technologyCards,
+  biomarkerSpotlight,
   mindyVideo,
   outcomePillarsIntro,
   outcomePillars,

@@ -26,7 +26,7 @@ export function FeatureCardGrid({
   secondary,
 }: {
   id?: string;
-  intro: { eyebrow: string; title: string; lead: string };
+  intro: { eyebrow: string; title: string; lead?: string };
   cards: readonly TechCard[];
   columns?: 2 | 3 | 4;
   rounded?: boolean;
@@ -93,15 +93,17 @@ export function FeatureCardGrid({
               >
                 <SectionIcon name={card.icon} />
               </IconBadge>
-              <Eyebrow color={eyebrowColor} className="mt-6">
-                {card.eyebrow}
-              </Eyebrow>
+              {card.eyebrow && (
+                <Eyebrow color={eyebrowColor} className="mt-6">
+                  {card.eyebrow}
+                </Eyebrow>
+              )}
               <Heading
-                as="h4"
+                as="h3"
                 variant="h4"
                 color={sectionText}
                 fontFamily={theme.fonts.heading}
-                className="mt-4 break-words"
+                className={`${card.eyebrow ? "mt-4" : "mt-6"} break-words`}
               >
                 {card.title}
               </Heading>
