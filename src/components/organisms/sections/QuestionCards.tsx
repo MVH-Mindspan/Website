@@ -4,7 +4,6 @@ import { useTheme } from "@/lib/theme-context";
 import { alpha } from "@/lib/themes";
 import { tracking, type as typeScale } from "@/lib/tokens";
 import { Container } from "@/components/atoms/Container";
-import { Eyebrow } from "@/components/atoms/Eyebrow";
 import { Heading } from "@/components/atoms/Heading";
 import { Pill } from "@/components/atoms/Pill";
 import { Reveal } from "@/components/molecules/Reveal";
@@ -21,22 +20,17 @@ export type QuestionCardItem = {
  * Numbered question cards: a question, an optional tag pill, and a
  * labelled note. Notes follow the tag in natural flow, so dividers line
  * up across the row whenever titles share a line count.
- *
- * `compact` renders a highlights strip: no notes, tighter spacing, and an
- * intro without a title, whose eyebrow becomes the section's h2.
  */
 export function QuestionCards({
   id,
   intro,
   items,
   tone = "cream",
-  compact = false,
 }: {
   id?: string;
-  intro: { eyebrow: string; title?: string; lead?: string };
+  intro: { eyebrow: string; title: string; lead?: string };
   items: readonly QuestionCardItem[];
   tone?: "cream" | "sand";
-  compact?: boolean;
 }) {
   const { theme } = useTheme();
   const c = theme.colors;
@@ -54,22 +48,14 @@ export function QuestionCards({
       style={{
         background: sectionBg,
         color: c.ink,
-        padding: compact ? "clamp(40px, 6vw, 64px) 0" : "clamp(56px, 10vw, 96px) 0",
+        padding: "clamp(56px, 10vw, 96px) 0",
         scrollMarginTop: "96px",
       }}
     >
       <Container>
-        {intro.title ? (
-          <SectionHeader eyebrow={intro.eyebrow} title={intro.title} lead={intro.lead} />
-        ) : (
-          <Eyebrow as="h2" color={c.accentText}>
-            {intro.eyebrow}
-          </Eyebrow>
-        )}
+        <SectionHeader eyebrow={intro.eyebrow} title={intro.title} lead={intro.lead} />
 
-        <ol
-          className={`${intro.title ? "mt-12" : "mt-6"} grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6`}
-        >
+        <ol className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6">
           {items.map((item, i) => (
             <Reveal
               key={item.id}
@@ -103,39 +89,37 @@ export function QuestionCards({
                   {item.tag}
                 </Pill>
               )}
-              {!compact && (
-                <div
-                  className="mt-6"
+              <div
+                className="mt-6"
+                style={{
+                  borderTop: `1px solid ${alpha(c.ink, 0.14)}`,
+                  paddingTop: 16,
+                }}
+              >
+                <p
                   style={{
-                    borderTop: `1px solid ${alpha(c.ink, 0.14)}`,
-                    paddingTop: 16,
+                    fontFamily: theme.fonts.body,
+                    fontSize: typeScale.micro,
+                    fontWeight: 600,
+                    letterSpacing: tracking.eyebrow,
+                    textTransform: "uppercase",
+                    color: c.brandGreen,
                   }}
                 >
-                  <p
-                    style={{
-                      fontFamily: theme.fonts.body,
-                      fontSize: typeScale.micro,
-                      fontWeight: 600,
-                      letterSpacing: tracking.eyebrow,
-                      textTransform: "uppercase",
-                      color: c.brandGreen,
-                    }}
-                  >
-                    {item.note.label}
-                  </p>
-                  <p
-                    style={{
-                      fontFamily: theme.fonts.body,
-                      fontSize: typeScale.body,
-                      lineHeight: 1.55,
-                      color: alpha(c.ink, 0.7),
-                      marginTop: 8,
-                    }}
-                  >
-                    {item.note.body}
-                  </p>
-                </div>
-              )}
+                  {item.note.label}
+                </p>
+                <p
+                  style={{
+                    fontFamily: theme.fonts.body,
+                    fontSize: typeScale.body,
+                    lineHeight: 1.55,
+                    color: alpha(c.ink, 0.7),
+                    marginTop: 8,
+                  }}
+                >
+                  {item.note.body}
+                </p>
+              </div>
             </Reveal>
           ))}
         </ol>

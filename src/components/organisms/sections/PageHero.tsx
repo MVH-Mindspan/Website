@@ -32,6 +32,8 @@ type HeroProps = {
   subhead?: string;
   primaryCta?: { label: string; href: string };
   secondaryCta?: { label: string; href: string };
+  /** Media hero fills the viewport, matching the VideoHero pages. */
+  fullscreen?: boolean;
 };
 
 export function PageHero(props: HeroProps) {
@@ -106,9 +108,11 @@ function MediaHero({
   subhead,
   primaryCta,
   secondaryCta,
+  fullscreen = false,
 }: HeroProps) {
   const { theme } = useTheme();
   const c = theme.colors;
+  const minHeight = fullscreen ? "max(600px, 100svh)" : "min(820px, 92vh)";
   const hasAside =
     Boolean(subTagline) || Boolean(subhead) || Boolean(primaryCta) || Boolean(secondaryCta);
   const { videoRef, showVideo } = useHeroVideo({ playbackRate });
@@ -118,7 +122,7 @@ function MediaHero({
     <section
       className="relative w-full overflow-hidden"
       style={{
-        minHeight: "min(820px, 92vh)",
+        minHeight,
         background: "#1a1814",
         color: c.cream,
       }}
@@ -180,7 +184,7 @@ function MediaHero({
       <div
         className="relative"
         style={{
-          minHeight: "min(820px, 92vh)",
+          minHeight,
           display: "flex",
           flexDirection: "column",
           justifyContent: "flex-end",

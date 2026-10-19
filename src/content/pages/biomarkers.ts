@@ -47,9 +47,7 @@ export const biomarkersPage = {
     uploadDate: "2026-10-20",
   },
 
-  highlightsIntro: {
-    eyebrow: "One blood draw, four measures",
-  },
+  highlightsLabel: "One blood draw, four measures",
 
   whyIntro: {
     eyebrow: "Why we use them",

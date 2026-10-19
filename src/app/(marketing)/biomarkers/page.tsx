@@ -7,6 +7,7 @@ import {
   FAQ,
   FinalCTA,
 } from "@/components/organisms/sections";
+import { HeroHighlights } from "@/components/molecules/HeroHighlights";
 import { biomarkersPage } from "@/content/pages/biomarkers";
 import { JsonLd } from "@/lib/json-ld";
 import {
@@ -41,14 +42,12 @@ export default function BiomarkersPage() {
           duration: durationIso,
         })}
       />
-      <PageHero {...biomarkersPage.hero} />
-      <QuestionCards
-        id="highlights"
-        intro={biomarkersPage.highlightsIntro}
-        items={biomarkersPage.questions}
-        tone="sand"
-        compact
-      />
+      <PageHero {...biomarkersPage.hero} fullscreen>
+        <HeroHighlights
+          label={biomarkersPage.highlightsLabel}
+          items={biomarkersPage.questions}
+        />
+      </PageHero>
       <VideoShowcase {...explainer} tone="cream" />
       <FeatureCardGrid
         id="why"
