@@ -6,6 +6,7 @@ export const tvImages = [
   "/assets/assist-hero-poster.webp",
   "/assets/assist-specialist.webp",
   "/assets/assist-table.webp",
+  "/assets/biomarkers-hero.webp",
   "/assets/consultation-1.webp",
   "/assets/consultation-2.webp",
   "/assets/digital-brain.webp",

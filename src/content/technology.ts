@@ -1,19 +1,12 @@
+import type { Icon } from "@/components/organisms/sections/icons";
+
 export type TechCard = {
   id: string;
-  eyebrow: string;
+  eyebrow?: string;
   title: string;
   body: string;
   caption?: string;
-  icon:
-    | "brain"
-    | "grid"
-    | "chat"
-    | "bullseye"
-    | "shield"
-    | "calendar"
-    | "home"
-    | "video"
-    | "refresh";
+  icon: Icon;
 };
 
 export const technologyIntro = {

@@ -169,6 +169,11 @@ export function buildMedicalClinicSchema(
     parentOrganization: { "@id": ORG_ID },
     priceRange: "$$",
     paymentAccepted: "Insurance, Medicare",
+    availableService: detail.availableServices?.map((service) => ({
+      "@type": "MedicalTest",
+      name: service.name,
+      url: `${SITE_URL}${service.href}`,
+    })),
   };
 }
 

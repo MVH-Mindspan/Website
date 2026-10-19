@@ -9,7 +9,10 @@ export type Icon =
   | "calendar"
   | "home"
   | "video"
-  | "refresh";
+  | "refresh"
+  | "drop"
+  | "monitor-check"
+  | "document";
 
 export function SectionIcon({ name }: { name: Icon }): ReactNode {
   const base = {
@@ -90,5 +93,30 @@ export function SectionIcon({ name }: { name: Icon }): ReactNode {
           <path d="M3 21v-5h5" />
         </svg>
       );
+    case "drop":
+      return (
+        <svg {...base}>
+          <path d="M12 3.5s6 7 6 11a6 6 0 0 1-12 0c0-4 6-11 6-11z" />
+        </svg>
+      );
+    case "monitor-check":
+      return (
+        <svg {...base}>
+          <rect x="3" y="4" width="18" height="13" rx="2" />
+          <path d="M8 20h8M12 17v3" />
+          <path d="m7 11 3 2.5 6-5.5" />
+        </svg>
+      );
+    case "document":
+      return (
+        <svg {...base}>
+          <path d="M5 3h10l4 4v14H5z" />
+          <path d="M15 3v4h4M8 11h8M8 14.5h8M8 18h5" />
+        </svg>
+      );
+    default: {
+      const unhandled: never = name;
+      return unhandled;
+    }
   }
 }

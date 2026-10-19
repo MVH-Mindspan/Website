@@ -26,6 +26,7 @@ export { FinalCTA } from "./FinalCTA";
 export { Testimonials } from "./Testimonials";
 export { ProvidersPreview } from "./ProvidersPreview";
 export { FAQ } from "./FAQ";
+export { QuestionCards, type QuestionCardItem } from "./QuestionCards";
 export {
   LegalDocument,
   type LegalBlock,

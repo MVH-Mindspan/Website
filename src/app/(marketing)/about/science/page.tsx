@@ -1,6 +1,7 @@
 import { VideoHero } from "@/components/organisms/sections/VideoHero";
 import { SplitCards } from "@/components/organisms/sections/SplitCards";
 import { FeatureCardGrid } from "@/components/organisms/sections/FeatureCardGrid";
+import { FeatureSpotlight } from "@/components/organisms/sections/FeatureSpotlight";
 import { VideoFeature } from "@/components/organisms/sections/VideoFeature";
 import { EditorialPillars } from "@/components/organisms/sections/EditorialPillars";
 import { StatsBand } from "@/components/organisms/sections/StatsBand";
@@ -36,6 +37,11 @@ export default function SciencePage() {
         cards={sciencePage.technologyCards}
         columns={2}
         tone="primary"
+      />
+      <FeatureSpotlight
+        {...sciencePage.biomarkerSpotlight}
+        imagePosition="left"
+        tone="cream"
       />
       <VideoFeature {...sciencePage.mindyVideo} tone="sand" />
       <EditorialPillars

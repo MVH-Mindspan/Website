@@ -77,6 +77,18 @@ export type LocationDetail = {
     primary?: { label: string; href: string };
     secondary?: { label: string; href: string };
   };
+  spotlight?: {
+    id?: string;
+    eyebrow: string;
+    title: string;
+    body: string;
+    image: string;
+    imageAlt: string;
+    imagePosition?: "left" | "right";
+    primary?: { label: string; href: string };
+    secondary?: { label: string; href: string };
+  };
+  availableServices?: readonly { name: string; href: string }[];
   stages?: {
     intro: { eyebrow: string; title: string; lead: string };
     items: readonly JourneyStage[];

@@ -68,6 +68,21 @@ export const danversDetail: LocationDetail = {
     primary: { label: "See the science behind our care", href: "/about/science" },
   },
 
+  spotlight: {
+    id: "biomarkers",
+    eyebrow: "Biomarker testing",
+    title: "Brain biomarker blood tests, here in Danvers.",
+    body:
+      "One blood draw at our Danvers clinic measures four brain biomarkers: p-tau217, the amyloid ratio, GFAP, and NfL. Your neurologist reads the results with your memory testing and health history, often without sending you for a PET scan.",
+    image: "/assets/danvers-biomarkers.webp",
+    imageAlt:
+      "A Mindspan care coordinator walking a patient down a sunlit clinic corridor.",
+    primary: { label: "Learn about biomarker testing", href: "/biomarkers" },
+    secondary: { label: "Book a visit", href: BOOKING_HREF },
+  },
+
+  availableServices: [{ name: "Biomarker testing", href: "/biomarkers" }],
+
   stages: {
     intro: {
       eyebrow: "Understanding the journey",

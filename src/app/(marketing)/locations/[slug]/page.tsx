@@ -7,6 +7,7 @@ import {
   EditorialStages,
   SplitCards,
   FeatureCardGrid,
+  FeatureSpotlight,
   AudienceCards,
   ProviderProfile,
   CareTeamGrid,
@@ -100,6 +101,10 @@ export default async function LocationDetailPage({ params }: Params) {
           primary={detail.services.primary}
           secondary={detail.services.secondary}
         />
+      )}
+
+      {detail.spotlight && (
+        <FeatureSpotlight {...detail.spotlight} tone="sand" />
       )}
 
       {detail.stages && (
