@@ -3,7 +3,6 @@ import { brand } from "@/content/brand";
 import type { FAQItem } from "../faq";
 import type { JourneyStage } from "../journey";
 import type { TechCard } from "../technology";
-import type { Measure } from "@/components/molecules/MeasureRow";
 import type { QuestionCardItem } from "@/components/organisms/sections";
 
 const BOOKING_HREF = "/book-a-visit";
@@ -48,14 +47,8 @@ export const biomarkersPage = {
     uploadDate: "2026-10-20",
   },
 
-  measures: {
-    label: "One blood draw, four measures",
-    items: [
-      { name: "p-tau217", meaning: "Plaque", accent: "plaque" },
-      { name: "Amyloid ratio", meaning: "Plaque", accent: "plaque" },
-      { name: "GFAP", meaning: "The brain’s repair crew", accent: "repair" },
-      { name: "NfL", meaning: "Wear on nerve cells", accent: "wear" },
-    ] satisfies Measure[],
+  highlightsIntro: {
+    eyebrow: "One blood draw, four measures",
   },
 
   whyIntro: {

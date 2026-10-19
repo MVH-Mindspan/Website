@@ -7,7 +7,6 @@ import {
   FAQ,
   FinalCTA,
 } from "@/components/organisms/sections";
-import { MeasureRow } from "@/components/molecules/MeasureRow";
 import { biomarkersPage } from "@/content/pages/biomarkers";
 import { JsonLd } from "@/lib/json-ld";
 import {
@@ -42,9 +41,14 @@ export default function BiomarkersPage() {
           duration: durationIso,
         })}
       />
-      <PageHero {...biomarkersPage.hero}>
-        <MeasureRow {...biomarkersPage.measures} />
-      </PageHero>
+      <PageHero {...biomarkersPage.hero} />
+      <QuestionCards
+        id="highlights"
+        intro={biomarkersPage.highlightsIntro}
+        items={biomarkersPage.questions}
+        tone="sand"
+        compact
+      />
       <VideoShowcase {...explainer} tone="cream" />
       <FeatureCardGrid
         id="why"
