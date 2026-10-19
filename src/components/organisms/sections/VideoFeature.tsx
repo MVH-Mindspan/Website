@@ -14,12 +14,18 @@ import { Reveal } from "@/components/molecules/Reveal";
 
 type Tone = "cream" | "sand";
 
+/** Either a YouTube embed or a self-hosted MP4 (which needs its own poster). */
+type VideoSource =
+  | { youtubeId: string; src?: never; poster?: string }
+  | { src: string; poster: string; youtubeId?: never };
+
 export function VideoFeature({
   id,
   eyebrow,
   title,
   body,
   youtubeId,
+  src,
   posterAlt,
   poster,
   videoPosition = "right",
@@ -31,14 +37,12 @@ export function VideoFeature({
   eyebrow: string;
   title: string;
   body: string;
-  youtubeId: string;
   posterAlt: string;
-  poster?: string;
   videoPosition?: "left" | "right";
   tone?: Tone;
   primary?: { label: string; href: string };
   secondary?: { label: string; href: string };
-}) {
+} & VideoSource) {
   const { theme } = useTheme();
   const c = theme.colors;
   const [playing, setPlaying] = useState(false);
@@ -99,7 +103,26 @@ export function VideoFeature({
         background: alpha(c.ink, 0.06),
       }}
     >
-      {playing ? (
+      {playing && src ? (
+        // Self-hosted videos must carry burned-in captions (no <track> here).
+        // eslint-disable-next-line jsx-a11y/media-has-caption
+        <video
+          src={src}
+          poster={posterSrc}
+          aria-label={posterAlt}
+          controls
+          autoPlay
+          playsInline
+          preload="auto"
+          style={{
+            position: "absolute",
+            inset: 0,
+            width: "100%",
+            height: "100%",
+            background: "#000",
+          }}
+        />
+      ) : playing ? (
         <iframe
           src={embedSrc}
           title={posterAlt}

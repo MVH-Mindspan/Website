@@ -32,6 +32,20 @@ export const biomarkersPage = {
     secondaryCta: { label: `Talk to us: ${brand.phone}`, href: brand.phoneHref },
   },
 
+  explainerVideo: {
+    id: "explainer",
+    eyebrow: "Your blood test, explained",
+    title: "The whole test, in under five minutes.",
+    body:
+      "Mindy, Mindspan\u2019s AI assistant, walks you through LucentAD Complete: the four markers it measures, why it is often used instead of a PET scan, what your results can and can\u2019t tell you, and what it costs.",
+    src: "/assets/biomarkers-explainer.mp4",
+    poster: "/assets/biomarkers-explainer-poster.webp",
+    posterAlt:
+      "Your blood test, explained: a short Mindspan video about LucentAD Complete, narrated by Mindy",
+    durationIso: "PT4M46S",
+    uploadDate: "2026-10-20",
+  },
+
   measures: {
     label: "One blood draw, four measures",
     items: [

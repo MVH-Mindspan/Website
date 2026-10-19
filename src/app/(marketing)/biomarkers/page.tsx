@@ -1,6 +1,7 @@
 import {
   PageHero,
   FeatureCardGrid,
+  VideoFeature,
   QuestionCards,
   SimpleSteps,
   FAQ,
@@ -9,12 +10,17 @@ import {
 import { MeasureRow } from "@/components/molecules/MeasureRow";
 import { biomarkersPage } from "@/content/pages/biomarkers";
 import { JsonLd } from "@/lib/json-ld";
-import { buildBreadcrumbSchema, buildFaqSchema } from "@/lib/schema";
+import {
+  buildBreadcrumbSchema,
+  buildFaqSchema,
+  buildVideoObjectSchema,
+} from "@/lib/schema";
 import { SITE_URL } from "@/lib/seo";
 
 export const metadata = biomarkersPage.metadata;
 
 export default function BiomarkersPage() {
+  const { durationIso, uploadDate, ...explainer } = biomarkersPage.explainerVideo;
   return (
     <>
       <JsonLd
@@ -25,9 +31,21 @@ export default function BiomarkersPage() {
         ])}
       />
       <JsonLd id="ld-faq" data={buildFaqSchema(biomarkersPage.faq)} />
+      <JsonLd
+        id="ld-video"
+        data={buildVideoObjectSchema({
+          name: explainer.eyebrow,
+          description: explainer.body,
+          contentUrl: explainer.src,
+          thumbnailUrl: explainer.poster,
+          uploadDate,
+          duration: durationIso,
+        })}
+      />
       <PageHero {...biomarkersPage.hero}>
         <MeasureRow {...biomarkersPage.measures} />
       </PageHero>
+      <VideoFeature {...explainer} tone="cream" />
       <FeatureCardGrid
         id="why"
         intro={biomarkersPage.whyIntro}
