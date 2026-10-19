@@ -1,7 +1,7 @@
 import {
   PageHero,
   FeatureCardGrid,
-  VideoFeature,
+  VideoShowcase,
   QuestionCards,
   SimpleSteps,
   FAQ,
@@ -45,7 +45,7 @@ export default function BiomarkersPage() {
       <PageHero {...biomarkersPage.hero}>
         <MeasureRow {...biomarkersPage.measures} />
       </PageHero>
-      <VideoFeature {...explainer} tone="cream" />
+      <VideoShowcase {...explainer} tone="cream" />
       <FeatureCardGrid
         id="why"
         intro={biomarkersPage.whyIntro}

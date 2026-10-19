@@ -15,6 +15,7 @@ export { SplitCards } from "./SplitCards";
 export { FeatureCardGrid } from "./FeatureCardGrid";
 export { FeatureSpotlight } from "./FeatureSpotlight";
 export { VideoFeature } from "./VideoFeature";
+export { VideoShowcase } from "./VideoShowcase";
 export { AudienceCards } from "./AudienceCards";
 export { LocationCards } from "./LocationCards";
 export { ProvidersSection } from "./ProvidersSection";

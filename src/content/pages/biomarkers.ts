@@ -42,6 +42,8 @@ export const biomarkersPage = {
     poster: "/assets/biomarkers-explainer-poster.webp",
     posterAlt:
       "Your blood test, explained: a short Mindspan video about LucentAD Complete, narrated by Mindy",
+    meta: "4 min 46 sec \u00b7 Captions on screen",
+    labels: { play: "Play video", pause: "Pause", fullscreen: "Watch full screen" },
     durationIso: "PT4M46S",
     uploadDate: "2026-10-20",
   },

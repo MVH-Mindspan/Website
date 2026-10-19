@@ -16,6 +16,7 @@ export const ANALYTICS_EVENTS = {
   providersCtaClicked: "providers_cta_click",
   referFormStarted: "refer_form_start",
   referFormSubmitted: "refer_form_submit",
+  videoPlayed: "video_played",
 } as const;
 
 type AnalyticsEvent = (typeof ANALYTICS_EVENTS)[keyof typeof ANALYTICS_EVENTS];
