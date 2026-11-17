@@ -49,8 +49,13 @@ export default async function WatchPage({ params }: { params: Promise<{ slug: st
           className="watch-title"
           style={{ fontWeight: 500 }}
         >
-          {film.title}{" "}
-          <em style={{ fontFamily: fonts.accent, fontWeight: 400 }}>{film.titleEmphasis}</em>
+          {film.title}
+          {film.titleEmphasis && (
+            <>
+              {" "}
+              <em style={{ fontFamily: fonts.accent, fontWeight: 400 }}>{film.titleEmphasis}</em>
+            </>
+          )}
         </Heading>
         <Lead size="md" color={alpha(colors.cream, 0.78)} maxWidth="62ch">
           {film.lead}
