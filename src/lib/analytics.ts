@@ -20,6 +20,7 @@ export const ANALYTICS_EVENTS = {
   videoProgress: "video_progress",
   videoComplete: "video_complete",
   videoChapterSelect: "video_chapter_select",
+  videoDownload: "video_download",
 } as const;
 
 type AnalyticsEvent = (typeof ANALYTICS_EVENTS)[keyof typeof ANALYTICS_EVENTS];

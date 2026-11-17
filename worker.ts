@@ -45,12 +45,27 @@ function parseRange(value: string | null): ByteRange | undefined {
   return end >= offset ? { offset, length: end - offset + 1 } : undefined;
 }
 
-function mediaHeaders(obj: R2Object): Headers {
+// "?download=<name>" turns the response into a file download. The name is
+// reduced to safe characters and always keeps the file's own extension.
+function attachmentName(url: URL, key: string): string | null {
+  if (!url.searchParams.has("download")) return null;
+  const ext = key.slice(key.lastIndexOf("."));
+  let name = (url.searchParams.get("download") ?? "")
+    .replace(/[^A-Za-z0-9 ._-]/g, "")
+    .trim()
+    .slice(0, 100);
+  if (!name) name = key.slice(key.lastIndexOf("/") + 1);
+  if (!name.toLowerCase().endsWith(ext.toLowerCase())) name += ext;
+  return name;
+}
+
+function mediaHeaders(obj: R2Object, filename?: string | null): Headers {
   const headers = new Headers();
   obj.writeHttpMetadata(headers);
   for (const [k, v] of Object.entries(MEDIA_HEADERS)) headers.set(k, v);
   headers.set("ETag", obj.httpEtag);
   headers.set("Last-Modified", obj.uploaded.toUTCString());
+  if (filename) headers.set("Content-Disposition", `attachment; filename="${filename}"`);
   return headers;
 }
 
@@ -75,11 +90,12 @@ async function serveMedia(request: Request, env: Env, url: URL): Promise<Respons
   }
   const key = url.pathname.slice(MEDIA_PREFIX.length);
   if (!MEDIA_KEY.test(key)) return mediaNotFound();
+  const filename = attachmentName(url, key);
 
   if (request.method === "HEAD") {
     const head = await env.MEDIA.head(key);
     if (!head) return mediaNotFound();
-    const headers = mediaHeaders(head);
+    const headers = mediaHeaders(head, filename);
     headers.set("Content-Length", String(head.size));
     return new Response(null, { status: 200, headers });
   }
@@ -100,7 +116,7 @@ async function serveMedia(request: Request, env: Env, url: URL): Promise<Respons
   }
   if (!obj) return mediaNotFound();
 
-  const headers = mediaHeaders(obj);
+  const headers = mediaHeaders(obj, filename);
   if (!("body" in obj) || !obj.body) {
     // A precondition failed: If-None-Match / If-Modified-Since mean 304,
     // If-Match / If-Unmodified-Since mean 412.

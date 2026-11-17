@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { Eyebrow } from "@/components/atoms/Eyebrow";
 import { Heading } from "@/components/atoms/Heading";
 import { Lead } from "@/components/atoms/Lead";
+import { DownloadLink } from "@/components/watch/DownloadLink";
 import { FilmPlayer } from "@/components/watch/FilmPlayer";
 import {
   clinicVideoFilm,
@@ -41,6 +42,7 @@ export default async function ClinicVideoPage({ params }: { params: Promise<{ sl
           </svg>
           {clinicVideosPage.backLabel}
         </Link>
+        <DownloadLink video={film.video} slug={film.slug} label={film.downloadLabel} />
       </header>
 
       <div className="watch-intro">
