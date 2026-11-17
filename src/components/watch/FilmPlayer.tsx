@@ -40,7 +40,8 @@ export function FilmPlayer({ film }: { film: Film }) {
   const sentMilestones = useRef(new Set<number>());
   const sentComplete = useRef(false);
 
-  const { video, chapters } = film;
+  const { video } = film;
+  const chapters = video.chapters;
 
   // Must run synchronously inside the click/tap handler: iOS only allows
   // playback with sound from a direct user gesture.
@@ -74,26 +75,30 @@ export function FilmPlayer({ film }: { film: Film }) {
     [film.slug, started],
   );
 
-  const enterFullscreen = useCallback(() => {
-    const el = videoRef.current as IOSVideo | null;
-    if (!el) return;
-    if (!started) playFrom(null, "fullscreen");
-    try {
-      if (el.requestFullscreen && document.fullscreenEnabled) {
-        el.requestFullscreen()
-          .then(() => {
-            const orientation = screen.orientation as LockableOrientation | undefined;
-            orientation?.lock?.("landscape").catch(() => {});
-          })
-          .catch(() => {});
-      } else if (el.webkitSupportsFullscreen && el.webkitEnterFullscreen) {
-        // iPhone: no element fullscreen, only the native video player.
-        el.webkitEnterFullscreen();
+  // Also synchronous inside the tap: fullscreen needs the user gesture too.
+  const enterFullscreen = useCallback(
+    (source = "fullscreen") => {
+      const el = videoRef.current as IOSVideo | null;
+      if (!el) return;
+      if (!started) playFrom(null, source);
+      try {
+        if (el.requestFullscreen && document.fullscreenEnabled) {
+          el.requestFullscreen()
+            .then(() => {
+              const orientation = screen.orientation as LockableOrientation | undefined;
+              orientation?.lock?.("landscape").catch(() => {});
+            })
+            .catch(() => {});
+        } else if (el.webkitSupportsFullscreen && el.webkitEnterFullscreen) {
+          // iPhone: no element fullscreen, only the native video player.
+          el.webkitEnterFullscreen();
+        }
+      } catch {
+        // Fullscreen unavailable (some in-app browsers). Inline still works.
       }
-    } catch {
-      // Fullscreen unavailable (some in-app browsers). Inline still works.
-    }
-  }, [playFrom, started]);
+    },
+    [playFrom, started],
+  );
 
   useEffect(() => {
     const el = videoRef.current as IOSVideo | null;
@@ -165,7 +170,9 @@ export function FilmPlayer({ film }: { film: Film }) {
           <button
             type="button"
             className="watch-cover"
-            onClick={() => playFrom(null, "poster")}
+            onClick={() =>
+              film.playFullscreen ? enterFullscreen("poster") : playFrom(null, "poster")
+            }
             aria-label={`${film.playLabel}: ${video.ariaLabel}`}
           >
             <span className="watch-play-pill">
@@ -187,24 +194,26 @@ export function FilmPlayer({ film }: { film: Film }) {
               <Button variant="secondary" size="lg" onClick={() => playFrom(0, "replay")}>
                 {film.end.replayLabel}
               </Button>
-              <Button variant="ghostLight" size="lg" href={film.end.siteHref}>
-                {film.end.siteLabel}
+              <Button variant="ghostLight" size="lg" href={film.end.link.href}>
+                {film.end.link.label}
               </Button>
             </div>
-            <a
-              className="watch-end-phone"
-              href={brand.phoneHref}
-              data-analytics-location={`watch_${film.slug}`}
-            >
-              {film.end.phonePrompt}
-            </a>
+            {film.end.phonePrompt && (
+              <a
+                className="watch-end-phone"
+                href={brand.phoneHref}
+                data-analytics-location={`watch_${film.slug}`}
+              >
+                {film.end.phonePrompt}
+              </a>
+            )}
           </div>
         )}
       </div>
 
       <div className="watch-touch-row">
         <p className="watch-rotate-hint">{film.rotateHint}</p>
-        <button type="button" className="watch-fullscreen" onClick={enterFullscreen}>
+        <button type="button" className="watch-fullscreen" onClick={() => enterFullscreen()}>
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden="true">
             <path d="M1 5V1h4M11 1h4v4M15 11v4h-4M5 15H1v-4" />
           </svg>

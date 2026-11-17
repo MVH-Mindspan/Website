@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { buildMetadata } from "@/lib/seo";
 import { brand } from "./brand";
+import { firstVisitIntroV10, type VideoAsset } from "./videos";
 
 /**
  * Unlisted films served at /watch/<slug>.
@@ -8,45 +9,30 @@ import { brand } from "./brand";
  * These pages are noindex, are not in the sitemap, and must never be linked
  * from the site. Share the URL directly (email, messages).
  *
- * The video file lives in the R2 bucket "mindspan-media" and is served by
- * worker.ts at /media/<key> (with byte-range support). Keys are versioned:
- * upload a new cut under a new key and update `src`; never overwrite a key.
+ * Video files and chapter times live in ./videos.ts.
  */
 
-export type FilmChapter = {
-  label: string;
-  /** Seconds into the film where this chapter starts. */
-  start: number;
-};
+export type { VideoChapter as FilmChapter } from "./videos";
 
 export type Film = {
   slug: string;
   metadata: Metadata;
   eyebrow: string;
   title: string;
-  titleEmphasis: string;
+  titleEmphasis?: string;
   lead: string;
-  video: {
-    src: string;
-    poster: string;
-    width: number;
-    height: number;
-    /** Seconds. */
-    duration: number;
-    durationLabel: string;
-    ariaLabel: string;
-  };
+  video: VideoAsset & { ariaLabel: string };
   playLabel: string;
+  /** Start playback in full screen (clinic TVs). */
+  playFullscreen?: boolean;
   fullscreenLabel: string;
   rotateHint: string;
   chaptersLabel: string;
-  chapters: FilmChapter[];
   end: {
     heading: string;
     replayLabel: string;
-    siteLabel: string;
-    siteHref: string;
-    phonePrompt: string;
+    link: { label: string; href: string };
+    phonePrompt?: string;
   };
 };
 
@@ -67,30 +53,17 @@ export const films = [
     titleEmphasis: "Mindspan.",
     lead: "Six minutes with Mindy, our AI assistant, on what happens at a first visit.",
     video: {
-      src: "/media/watch/first-visit-intro-v10.mp4",
-      poster: "/assets/watch/first-visit-poster-v10.webp",
-      width: 1920,
-      height: 1080,
-      duration: 368.6,
-      durationLabel: "6 min",
+      ...firstVisitIntroV10,
       ariaLabel: "Your first visit to Mindspan, a six-minute film",
     },
     playLabel: "Play",
     fullscreenLabel: "Full screen",
     rotateHint: "Turn your phone sideways for a bigger picture.",
     chaptersLabel: "Chapters",
-    // Start times measured from the chapter bar burned into the film (v10).
-    chapters: [
-      { label: "Welcome", start: 0 },
-      { label: "Discover", start: 123.4 },
-      { label: "Decide", start: 214.1 },
-      { label: "Care", start: 246.5 },
-    ],
     end: {
       heading: "Thanks for watching.",
       replayLabel: "Watch again",
-      siteLabel: "Visit mindspan.co",
-      siteHref: "/?from=watch-first-visit",
+      link: { label: "Visit mindspan.co", href: "/?from=watch-first-visit" },
       phonePrompt: `Questions? Call ${brand.phone}`,
     },
   },

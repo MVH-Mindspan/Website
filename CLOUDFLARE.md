@@ -47,16 +47,21 @@ unseekable in Chrome. Large video therefore lives in the R2 bucket
 
 Keys are versioned. A new cut gets a new key; never overwrite one.
 
-### Add an unlisted film (/watch/<slug>)
+### Add a video
 
 1. Upload the MP4 (faststart) before pushing. Without `--remote`, wrangler writes to local storage:
    ```
    npx wrangler r2 object put mindspan-media/watch/<name>-v1.mp4 --file <file.mp4> --content-type video/mp4 --remote
    ```
-2. Add a poster (WebP) and a 1200x630 OG image (JPEG) under `public/assets/watch/`.
-3. Add an entry to `films` in `src/content/watch.ts`. The page builds at `/watch/<slug>`.
-4. Never link it from the site, and keep it out of `sitemap.ts` and `robots.ts`.
-   The page is noindex.
+2. Add a poster (WebP, 1600x900) under `public/assets/watch/`. That folder is kept out of the TV signage slideshow.
+3. Add the file to `src/content/videos.ts` (src, poster, duration, chapters).
+4. Then publish it in one or both places:
+   - **Clinic TV library** (`/clinic-videos/<slug>`): add an entry to `clinicVideos` in
+     `src/content/clinicVideos.ts`, under an existing or new situation.
+   - **Unlisted film page** (`/watch/<slug>`): add an entry to `films` in `src/content/watch.ts`,
+     plus a 1200x630 OG image (JPEG) for link previews.
+5. Never link these pages from the site, and keep them out of `sitemap.ts` and `robots.ts`.
+   They are noindex.
 
 To test locally, seed local R2 with the same `put` command using `--local`. Then run
 `npm run build && npx wrangler dev`. `next dev` does not run the Worker, so `/media` 404s there.
