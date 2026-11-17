@@ -16,6 +16,9 @@ const EXCLUDED_BASENAMES = new Set([
   "bay-area-clinic",
 ]);
 
+// Unlisted film pages (/watch/*) must never surface elsewhere, TV included.
+const EXCLUDED_PREFIXES = ["/assets/watch/"];
+
 const IMAGE_RE = /\/assets\/[a-zA-Z0-9_\-./]+\.(?:webp|png|jpg|jpeg|avif)/g;
 
 async function* walk(dir) {
@@ -32,6 +35,7 @@ for await (const file of walk(CONTENT_DIR)) {
   const matches = text.match(IMAGE_RE);
   if (!matches) continue;
   for (const m of matches) {
+    if (EXCLUDED_PREFIXES.some((prefix) => m.startsWith(prefix))) continue;
     const base = m.split("/").pop().replace(/\.(webp|png|jpg|jpeg|avif)$/i, "");
     if (EXCLUDED_BASENAMES.has(base)) continue;
     found.add(m);

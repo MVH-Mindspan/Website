@@ -5,5 +5,11 @@
   "assets": {
     "directory": "./out",
     "binding": "ASSETS"
-  }
+  },
+  "r2_buckets": [
+    {
+      "binding": "MEDIA",
+      "bucket_name": "mindspan-media"
+    }
+  ]
 }
