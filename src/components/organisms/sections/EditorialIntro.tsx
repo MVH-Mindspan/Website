@@ -43,6 +43,7 @@ export function EditorialIntro({
             span={5}
             as="h2"
             style={{
+              textWrap: "balance",
               fontFamily: theme.fonts.heading,
               fontSize: typeScale.h2,
               fontWeight: 400,

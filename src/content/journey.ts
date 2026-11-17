@@ -1,10 +1,13 @@
 import { VIDEO_VISITS_ENABLED } from "@/lib/flags";
+import { digitalTwinHref } from "./digitalTwin";
 
 export type JourneyStage = {
   kicker: string;
   title: string;
   body: string;
   cta?: { label: string; href: string };
+  /** Optional secondary text link, rendered under the CTA. */
+  link?: { label: string; href: string };
   image?: string;
   imageAlt?: string;
 };
@@ -42,6 +45,10 @@ export const journey: JourneyStage[] = [
     body:
       "Your neurologist builds a care plan around your specific situation, not a generic protocol. Your history, your biology, your goals.",
     cta: { label: "Explore the science behind your plan", href: "/about/science" },
+    link: {
+      label: "See a 10\u2011year memory projection with our Digital Twin",
+      href: digitalTwinHref("home-step-03"),
+    },
     image: "/assets/latest-science.webp",
     imageAlt: "A Mindspan neurologist reviewing brain imaging with a couple in clinic",
   },

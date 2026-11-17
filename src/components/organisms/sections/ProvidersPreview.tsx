@@ -35,7 +35,7 @@ export function ProvidersPreview({
           lead={intro.lead}
           linkify={false}
         />
-        <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 md:gap-6">
+        <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6">
           {providers.map((p, i) => (
             <Reveal
               key={p.id}

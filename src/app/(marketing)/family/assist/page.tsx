@@ -3,6 +3,7 @@ import {
   EditorialIntro,
   EditorialPillars,
   FeatureCardGrid,
+  FeatureSpotlight,
   SimpleSteps,
   SplitCards,
   GuideBenefit,
@@ -58,6 +59,7 @@ export default function AssistPage() {
         intro={assistPage.howToStart.intro}
         stages={assistPage.howToStart.items}
       />
+      <FeatureSpotlight {...assistPage.digitalTwin} tone="sand" />
       <SplitCards
         intro={coveragePage.howItWorks.intro}
         core={coveragePage.howItWorks.insurance}

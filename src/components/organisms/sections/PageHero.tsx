@@ -197,7 +197,7 @@ function MediaHero({
             <div
               className={
                 hasAside
-                  ? "flex flex-col md:flex-row md:items-end md:justify-between gap-6 md:gap-16"
+                  ? "flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 lg:gap-16"
                   : ""
               }
             >
@@ -272,7 +272,7 @@ function HeroAside({
   const c = theme.colors;
 
   return (
-    <div className="w-full md:w-auto" style={{ maxWidth: 520 }}>
+    <div className="w-full lg:w-auto" style={{ maxWidth: 520 }}>
       {subTagline && (
         <p
           className="font-semibold"
@@ -334,6 +334,9 @@ function HeroAside({
               onMouseLeave={(e) => (e.currentTarget.style.background = "#fff")}
             >
               {primaryCta.label} <ArrowIcon />
+              {externalLinkProps(primaryCta.href).target === "_blank" && (
+                <span className="sr-only"> (opens in new tab)</span>
+              )}
             </a>
           )}
           {secondaryCta && (
@@ -366,6 +369,9 @@ function HeroAside({
               }}
             >
               {secondaryCta.label}
+              {externalLinkProps(secondaryCta.href).target === "_blank" && (
+                <span className="sr-only"> (opens in new tab)</span>
+              )}
             </a>
           )}
         </div>

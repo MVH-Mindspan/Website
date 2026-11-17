@@ -9,6 +9,7 @@ export const tvImages = [
   "/assets/consultation-1.webp",
   "/assets/consultation-2.webp",
   "/assets/digital-brain.webp",
+  "/assets/digital-twin-hero.webp",
   "/assets/get-assessed.webp",
   "/assets/guide-247.webp",
   "/assets/guide-hero.webp",

@@ -40,3 +40,4 @@ export {
   type RippleVariant,
 } from "./RippleFlow";
 export { SectionIcon } from "./icons";
+export { VideoIntro } from "./VideoIntro";

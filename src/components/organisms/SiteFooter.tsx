@@ -24,7 +24,7 @@ function FooterLink({
   return (
     <a
       href={href}
-      className={className}
+      className={`${className ?? ""} inline-block py-1`}
       data-proximity=""
       {...(external
         ? { target: "_blank", rel: "noopener noreferrer" }
@@ -70,7 +70,7 @@ export function SiteFooter() {
               {brand.footerTagline}
             </p>
             {mailingAddress.length > 0 && (
-              <address className="mt-3 text-xs text-white/55 leading-relaxed not-italic">
+              <address className="mt-3 text-sm text-white/70 leading-relaxed not-italic">
                 {mailingAddress.map((line) => (
                   <span key={line} className="block">
                     {line}
@@ -79,7 +79,7 @@ export function SiteFooter() {
               </address>
             )}
             {brand.phone && brand.phoneHref && (
-              <p className="mt-3 text-xs text-white/55">
+              <p className="mt-2 text-sm text-white/70">
                 <FooterLink
                   href={brand.phoneHref}
                   className="v2-link hover:text-white"
@@ -95,7 +95,7 @@ export function SiteFooter() {
                 <p className="text-white font-semibold mb-4 text-sm">
                   {col.title}
                 </p>
-                <ul className="space-y-2 text-sm">
+                <ul className="space-y-0 text-sm">
                   {col.links.map((link) => (
                     <li key={link.label}>
                       <FooterLink

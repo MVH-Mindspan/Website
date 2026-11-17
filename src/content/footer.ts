@@ -1,4 +1,5 @@
 import { VIDEO_VISITS_ENABLED } from "@/lib/flags";
+import { digitalTwinHref } from "./digitalTwin";
 
 export type FooterLink = { label: string; href: string };
 export type FooterColumn = { title: string; links: FooterLink[] };
@@ -23,6 +24,7 @@ export const footer = {
         { label: "Free assessment", href: "https://assessment.mindspan.co/" },
         { label: "How it works", href: "/about/how-it-works" },
         { label: "Science & technology", href: "/about/science" },
+        { label: "Digital Twin", href: digitalTwinHref("footer") },
         { label: "GUIDE Program", href: "/guide" },
         { label: "For caregivers", href: "/family/assist" },
         { label: "Member portal", href: "https://my.mindspan.co/login" },

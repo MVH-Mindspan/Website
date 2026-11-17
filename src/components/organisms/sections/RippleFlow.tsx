@@ -405,8 +405,10 @@ const CSS = `
 .rf-caption { max-width: 52ch; margin-inline: auto; line-height: 1.55; }
 .rf-cta { margin-top: 28px; }
 
-/* ---- Mobile: vertical stacked mini-timeline (all variants unify) ---- */
-@media (max-width: 719px) {
+/* ---- Phones and tablets: vertical stacked mini-timeline (all variants unify).
+   Below ~1024px the horizontal rail's five label pills collide or run off
+   screen, so the vertical timeline is used up to there. ---- */
+@media (max-width: 1023px) {
   /* Shrink-wrap the timeline to its widest row and center it, so the
      icon + label column sits balanced rather than jammed against the edge. */
   .rf-band { width: fit-content; max-width: 100%; margin-inline: auto; }

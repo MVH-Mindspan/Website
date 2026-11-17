@@ -13,6 +13,7 @@
 - [Home](https://mindspan.co/): Brand overview, value proposition, locations, providers
 - [How Mindspan Works](https://mindspan.co/about/how-it-works): Four-phase care journey, wait times, conditions treated, frequently asked questions
 - [Science and Technology](https://mindspan.co/about/science): Clinical protocols, AI-assisted diagnostics, anti-amyloid therapy oversight
+- [Digital Twin](https://mindspan.co/digital-twin): An introduction to the Mindspan Digital Twin, a 10-year cognitive projection for patients and families, with and without care, its evidence basis, not a diagnosis
 - [About Mindspan](https://mindspan.co/about): Mission, story, team
 - [The GUIDE Program](https://mindspan.co/guide): CMS GUIDE Medicare benefit explainer, eligibility criteria, respite benefit, care coordination
 - [Locations](https://mindspan.co/locations): Service areas across Massachusetts and California

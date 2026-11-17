@@ -14,6 +14,8 @@ const EXCLUDED_BASENAMES = new Set([
   "noor-sachdev",
   "danvers-clinic",
   "bay-area-clinic",
+  // Title card from the Digital Twin intro video, not photography.
+  "digital-twin-intro-poster",
 ]);
 
 // Unlisted film pages (/watch/*) must never surface elsewhere, TV included.

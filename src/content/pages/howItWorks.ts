@@ -5,6 +5,7 @@ import type { Protocol } from "../protocols";
 import type { TechCard } from "../technology";
 import type { Stat } from "../stats";
 import type { IllustratedPillar } from "@/components/organisms/sections";
+import { digitalTwinHref } from "../digitalTwin";
 
 const BOOKING_HREF = "/book-a-visit";
 
@@ -134,6 +135,10 @@ const howToStart: JourneyStage[] = [
     title: "Begin coordinated care",
     body:
       "Your neurologist puts a plan in place, advanced diagnostics where useful, therapies when indicated, and lifestyle targets tailored to you. Your primary care doctor is kept in the loop.",
+    link: {
+      label: "Get a first look at the Digital Twin behind the plan",
+      href: digitalTwinHref("how-it-works-step-03"),
+    },
   },
   {
     kicker: "Step 04",

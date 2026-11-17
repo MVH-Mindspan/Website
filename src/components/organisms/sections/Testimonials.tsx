@@ -27,7 +27,7 @@ export function Testimonials({
     <section style={{ background: bg, padding: "clamp(56px, 10vw, 96px) 0" }}>
       <Container>
         <SectionHeader eyebrow={intro.eyebrow} title={intro.title} />
-        <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 md:gap-6">
+        <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6">
           {quotes.map((q, i) => (
             <Reveal
               key={q.id}
