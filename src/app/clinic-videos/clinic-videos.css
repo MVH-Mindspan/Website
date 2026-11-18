@@ -101,7 +101,8 @@
   gap: 0.75rem;
 }
 
-.clinic-card-download {
+.clinic-card-actions {
+  justify-content: flex-start;
   margin-left: 0.25rem;
 }
 
@@ -208,6 +209,7 @@
   font-size: 1rem;
   font-weight: 600;
   text-decoration: none;
+  white-space: nowrap;
 }
 
 .clinic-back:hover,

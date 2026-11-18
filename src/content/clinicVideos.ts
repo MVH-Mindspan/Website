@@ -1,5 +1,5 @@
 import { buildMetadata } from "@/lib/seo";
-import type { Film } from "./watch";
+import { filmShareUrl, getFilm, type Film } from "./watch";
 import { firstVisitIntroV10, referralOverviewV1, type VideoAsset } from "./videos";
 
 /**
@@ -12,6 +12,7 @@ import { firstVisitIntroV10, referralOverviewV1, type VideoAsset } from "./video
  * Unlisted: noindex, not in the sitemap, never linked from the site.
  *
  * To add a video: upload the file (see CLOUDFLARE.md), add it to ./videos.ts,
+ * add a patient-facing page for it in ./watch.ts (that is what Share sends),
  * then add an entry below. To add a situation, add it to `situations`;
  * situations show in this order, and only when they have videos.
  */
@@ -27,6 +28,11 @@ export type ClinicVideo = {
   situationId: string;
   summary: string;
   video: VideoAsset;
+  /**
+   * Slug of the standalone /watch page that Share sends. That page has no
+   * route back to this library, so a patient only sees that one video.
+   */
+  shareSlug: string;
 };
 
 export const situations = [
@@ -42,6 +48,7 @@ export const clinicVideos = [
     summary:
       "For patients referred by their primary care doctor. Mindy explains who we are, what a referral means, and what happens next.",
     video: referralOverviewV1,
+    shareSlug: "referral",
   },
   {
     slug: "discover-205-intro",
@@ -50,6 +57,7 @@ export const clinicVideos = [
     summary:
       "Mindy welcomes the patient and walks through the visit: Welcome, Discover, Decide and Care.",
     video: firstVisitIntroV10,
+    shareSlug: "first-visit",
   },
 ] satisfies ClinicVideo[];
 
@@ -67,7 +75,22 @@ export const clinicVideosPage = {
   videoCount: (n: number) => (n === 1 ? "1 video" : `${n} videos`),
   backLabel: "All videos",
   downloadLabel: "Download",
+  shareLabel: "Share",
 };
+
+// Fail the build if a video shares a /watch page that does not exist.
+for (const v of clinicVideos) {
+  if (!getFilm(v.shareSlug)) {
+    throw new Error(`clinicVideos: "${v.slug}" shares /watch/${v.shareSlug}, which is not in films`);
+  }
+}
+
+/** What Share sends for a library video: its standalone /watch page. */
+export function shareTarget(v: ClinicVideo): { url: string; title: string } {
+  const film = getFilm(v.shareSlug);
+  const title = film ? [film.title, film.titleEmphasis].filter(Boolean).join(" ") : v.title;
+  return { url: filmShareUrl(v.shareSlug), title };
+}
 
 export function situationFor(id: string): ClinicSituation | undefined {
   return situations.find((s) => s.id === id);
@@ -104,6 +127,7 @@ export function clinicVideoFilm(v: ClinicVideo): Film {
     playFullscreen: true,
     fullscreenLabel: "Full screen",
     downloadLabel: clinicVideosPage.downloadLabel,
+    shareLabel: clinicVideosPage.shareLabel,
     rotateHint: "Turn the screen sideways for a bigger picture.",
     chaptersLabel: "Chapters",
     end: {

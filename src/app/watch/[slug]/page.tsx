@@ -5,7 +5,8 @@ import { Heading } from "@/components/atoms/Heading";
 import { Lead } from "@/components/atoms/Lead";
 import { DownloadLink } from "@/components/watch/DownloadLink";
 import { FilmPlayer } from "@/components/watch/FilmPlayer";
-import { films, getFilm } from "@/content/watch";
+import { ShareButton } from "@/components/watch/ShareButton";
+import { filmShareUrl, films, getFilm } from "@/content/watch";
 import { alpha, brandV2Theme } from "@/lib/themes";
 
 const { colors, fonts } = brandV2Theme;
@@ -38,7 +39,15 @@ export default async function WatchPage({ params }: { params: Promise<{ slug: st
             height={22}
           />
         </a>
-        <DownloadLink video={film.video} slug={film.slug} label={film.downloadLabel} />
+        <div className="video-actions">
+          <ShareButton
+            url={filmShareUrl(film.slug)}
+            title={[film.title, film.titleEmphasis].filter(Boolean).join(" ")}
+            slug={film.slug}
+            label={film.shareLabel}
+          />
+          <DownloadLink video={film.video} slug={film.slug} label={film.downloadLabel} />
+        </div>
       </header>
 
       <div className="watch-intro">
