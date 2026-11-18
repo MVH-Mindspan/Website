@@ -57,6 +57,7 @@ export const clinicVideosPage = {
   situationsLabel: "Situations",
   videoCount: (n: number) => (n === 1 ? "1 video" : `${n} videos`),
   backLabel: "All videos",
+  downloadLabel: "Download",
 };
 
 export function situationFor(id: string): ClinicSituation | undefined {
@@ -93,6 +94,7 @@ export function clinicVideoFilm(v: ClinicVideo): Film {
     playLabel: "Play full screen",
     playFullscreen: true,
     fullscreenLabel: "Full screen",
+    downloadLabel: clinicVideosPage.downloadLabel,
     rotateHint: "Turn the screen sideways for a bigger picture.",
     chaptersLabel: "Chapters",
     end: {

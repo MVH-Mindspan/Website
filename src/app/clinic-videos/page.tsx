@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Eyebrow } from "@/components/atoms/Eyebrow";
 import { Heading } from "@/components/atoms/Heading";
 import { Lead } from "@/components/atoms/Lead";
+import { DownloadLink } from "@/components/watch/DownloadLink";
 import { clinicVideosPage, situationsWithVideos } from "@/content/clinicVideos";
 import { alpha, brandV2Theme } from "@/lib/themes";
 
@@ -75,6 +76,12 @@ export default function ClinicVideosPage() {
                   <span className="clinic-card-title">{v.title}</span>
                   <span className="clinic-card-summary">{v.summary}</span>
                 </Link>
+                <DownloadLink
+                  video={v.video}
+                  slug={v.slug}
+                  label={page.downloadLabel}
+                  className="video-download clinic-card-download"
+                />
               </li>
             ))}
           </ul>

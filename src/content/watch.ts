@@ -26,6 +26,7 @@ export type Film = {
   /** Start playback in full screen (clinic TVs). */
   playFullscreen?: boolean;
   fullscreenLabel: string;
+  downloadLabel: string;
   rotateHint: string;
   chaptersLabel: string;
   end: {
@@ -58,6 +59,7 @@ export const films = [
     },
     playLabel: "Play",
     fullscreenLabel: "Full screen",
+    downloadLabel: "Download",
     rotateHint: "Turn your phone sideways for a bigger picture.",
     chaptersLabel: "Chapters",
     end: {

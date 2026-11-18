@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { Eyebrow } from "@/components/atoms/Eyebrow";
 import { Heading } from "@/components/atoms/Heading";
 import { Lead } from "@/components/atoms/Lead";
+import { DownloadLink } from "@/components/watch/DownloadLink";
 import { FilmPlayer } from "@/components/watch/FilmPlayer";
 import { films, getFilm } from "@/content/watch";
 import { alpha, brandV2Theme } from "@/lib/themes";
@@ -37,6 +38,7 @@ export default async function WatchPage({ params }: { params: Promise<{ slug: st
             height={22}
           />
         </a>
+        <DownloadLink video={film.video} slug={film.slug} label={film.downloadLabel} />
       </header>
 
       <div className="watch-intro">

@@ -21,8 +21,16 @@ export type VideoAsset = {
   /** Seconds. */
   duration: number;
   durationLabel: string;
+  /** File name people get when they download the video. */
+  downloadName: string;
+  sizeLabel: string;
   chapters: VideoChapter[];
 };
+
+/** worker.ts sends the file as an attachment when ?download=<name> is set. */
+export function downloadHref(video: VideoAsset): string {
+  return `${video.src}?download=${encodeURIComponent(video.downloadName)}`;
+}
 
 export const firstVisitIntroV10 = {
   src: "/media/watch/first-visit-intro-v10.mp4",
@@ -31,6 +39,8 @@ export const firstVisitIntroV10 = {
   height: 1080,
   duration: 368.6,
   durationLabel: "6 min",
+  downloadName: "Mindspan First Visit Intro.mp4",
+  sizeLabel: "35 MB",
   // Start times measured from the chapter bar burned into the film (v10).
   chapters: [
     { label: "Welcome", start: 0 },
