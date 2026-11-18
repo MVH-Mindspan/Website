@@ -247,7 +247,9 @@ body:has(.watch-root) {
 /* Chapters mirror the chapter bar burned into the film. */
 .watch-chapters ol {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  /* One equal-width row, whatever the chapter count. */
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(0, 1fr);
   gap: 0.5rem;
   list-style: none;
   margin: 0;
@@ -293,6 +295,13 @@ body:has(.watch-root) {
 }
 
 @media (max-width: 639px) {
+  /* Five or six chapters wrap to two rows of three on phones. */
+  .watch-chapters ol[data-count="5"],
+  .watch-chapters ol[data-count="6"] {
+    grid-auto-flow: row;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
   .watch-page {
     gap: 1.25rem;
   }

@@ -222,7 +222,7 @@ export function FilmPlayer({ film }: { film: Film }) {
       </div>
 
       <nav aria-label={film.chaptersLabel} className="watch-chapters">
-        <ol>
+        <ol data-count={chapters.length}>
           {chapters.map((chapter, i) => {
             const active = started && i === activeChapter;
             return (

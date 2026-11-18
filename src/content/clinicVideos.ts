@@ -1,6 +1,6 @@
 import { buildMetadata } from "@/lib/seo";
 import type { Film } from "./watch";
-import { firstVisitIntroV10, type VideoAsset } from "./videos";
+import { firstVisitIntroV10, referralOverviewV1, type VideoAsset } from "./videos";
 
 /**
  * Clinic video library at /clinic-videos.
@@ -30,10 +30,19 @@ export type ClinicVideo = {
 };
 
 export const situations = [
+  { id: "pcp-referral", label: "PCP referral" },
   { id: "discover-205", label: "Discover 205 visit" },
 ] satisfies ClinicSituation[];
 
 export const clinicVideos = [
+  {
+    slug: "pcp-referral-overview",
+    title: "Referral overview",
+    situationId: "pcp-referral",
+    summary:
+      "For patients referred by their primary care doctor. Mindy explains who we are, what a referral means, and what happens next.",
+    video: referralOverviewV1,
+  },
   {
     slug: "discover-205-intro",
     title: "Intro",
