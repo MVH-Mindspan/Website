@@ -276,6 +276,8 @@ body:has(.watch-root) {
 
 .watch-chapters button {
   width: 100%;
+  /* Equal heights in a row, even when a long label wraps. */
+  height: 100%;
   min-height: 52px;
   display: flex;
   flex-direction: column;
@@ -304,6 +306,9 @@ body:has(.watch-root) {
 .watch-chapter-label {
   font-size: 0.9375rem;
   font-weight: 600;
+  line-height: 1.2;
+  text-align: center;
+  text-wrap: balance;
 }
 
 .watch-chapter-time {

@@ -1,6 +1,11 @@
 import { buildMetadata } from "@/lib/seo";
 import { filmShareUrl, getFilm, type Film } from "./watch";
-import { firstVisitIntroV10, referralOverviewV1, type VideoAsset } from "./videos";
+import {
+  carePlanVisitIntroV2,
+  firstVisitIntroV10,
+  referralOverviewV1,
+  type VideoAsset,
+} from "./videos";
 
 /**
  * Clinic video library at /clinic-videos.
@@ -38,6 +43,7 @@ export type ClinicVideo = {
 export const situations = [
   { id: "pcp-referral", label: "PCP referral" },
   { id: "discover-205", label: "Discover 205 visit" },
+  { id: "care-483", label: "Care 483 visit" },
 ] satisfies ClinicSituation[];
 
 export const clinicVideos = [
@@ -58,6 +64,15 @@ export const clinicVideos = [
       "Mindy welcomes the patient and walks through the visit: Welcome, Discover, Decide and Care.",
     video: firstVisitIntroV10,
     shareSlug: "first-visit",
+  },
+  {
+    slug: "care-483-intro",
+    title: "Intro",
+    situationId: "care-483",
+    summary:
+      "Mindy walks the patient through their care plan visit: what we learned, their plan, and how we follow it together.",
+    video: carePlanVisitIntroV2,
+    shareSlug: "care-plan",
   },
 ] satisfies ClinicVideo[];
 
