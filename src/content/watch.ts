@@ -1,7 +1,12 @@
 import type { Metadata } from "next";
 import { buildMetadata, SITE_URL } from "@/lib/seo";
 import { brand } from "./brand";
-import { firstVisitIntroV10, referralOverviewV1, type VideoAsset } from "./videos";
+import {
+  carePlanVisitIntroV2,
+  firstVisitIntroV10,
+  referralOverviewV1,
+  type VideoAsset,
+} from "./videos";
 
 /**
  * Unlisted films served at /watch/<slug>.
@@ -102,6 +107,38 @@ export const films = [
       heading: "Thanks for watching.",
       replayLabel: "Watch again",
       link: { label: "Visit mindspan.co", href: "/?from=watch-referral" },
+      phonePrompt: `Questions? Call ${brand.phone}`,
+    },
+  },
+  {
+    slug: "care-plan",
+    metadata: buildMetadata({
+      title: "Your care plan visit",
+      description:
+        "A four-minute film. Mindy, our AI assistant, walks through your care plan visit: what we learned, your plan, and how we follow it together.",
+      canonical: "/watch/care-plan",
+      image: "https://mindspan.co/assets/watch/care-plan-visit-og-v2.jpg",
+      imageAlt: "Mindy, Mindspan's AI assistant: this is your care plan visit",
+      noIndex: true,
+    }),
+    eyebrow: "A short film",
+    title: "Your care plan",
+    titleEmphasis: "visit.",
+    lead: "Four minutes with Mindy, our AI assistant, on what we learned, your plan, and how we follow it together.",
+    video: {
+      ...carePlanVisitIntroV2,
+      ariaLabel: "Your care plan visit, a four-minute film",
+    },
+    playLabel: "Play",
+    fullscreenLabel: "Full screen",
+    downloadLabel: "Download",
+    shareLabel: "Share",
+    rotateHint: "Turn your phone sideways for a bigger picture.",
+    chaptersLabel: "Chapters",
+    end: {
+      heading: "Thanks for watching.",
+      replayLabel: "Watch again",
+      link: { label: "Visit mindspan.co", href: "/?from=watch-care-plan" },
       phonePrompt: `Questions? Call ${brand.phone}`,
     },
   },

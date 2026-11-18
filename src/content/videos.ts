@@ -69,3 +69,21 @@ export const referralOverviewV1 = {
     { label: "Your visit", start: 115.25 },
   ],
 } satisfies VideoAsset;
+
+export const carePlanVisitIntroV2 = {
+  src: "/media/watch/care-plan-visit-intro-v2.mp4",
+  poster: "/assets/watch/care-plan-visit-poster-v2.webp",
+  width: 1920,
+  height: 1080,
+  duration: 232.1,
+  durationLabel: "4 min",
+  downloadName: "Mindspan Care Plan Visit Intro.mp4",
+  sizeLabel: "27 MB",
+  // Start times measured from the chapter bar burned into the film (v2).
+  chapters: [
+    { label: "Welcome", start: 0 },
+    { label: "What we learned", start: 48.25 },
+    { label: "Your plan", start: 109.75 },
+    { label: "Together", start: 176.25 },
+  ],
+} satisfies VideoAsset;
