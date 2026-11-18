@@ -49,3 +49,23 @@ export const firstVisitIntroV10 = {
     { label: "Care", start: 246.5 },
   ],
 } satisfies VideoAsset;
+
+export const referralOverviewV1 = {
+  src: "/media/watch/referral-overview-v1.mp4",
+  poster: "/assets/watch/referral-overview-poster-v1.webp",
+  width: 1920,
+  height: 1080,
+  duration: 175.4,
+  durationLabel: "3 min",
+  downloadName: "Mindspan Referral Overview.mp4",
+  sizeLabel: "21 MB",
+  // Start times measured from the chapter bar burned into the film (v1).
+  chapters: [
+    { label: "About us", start: 0 },
+    { label: "Discover", start: 46.0 },
+    { label: "Decide", start: 62.5 },
+    { label: "Care", start: 77.5 },
+    { label: "Science", start: 94.75 },
+    { label: "Your visit", start: 115.25 },
+  ],
+} satisfies VideoAsset;

@@ -36,12 +36,28 @@ body:has(.watch-root) {
 .watch-header {
   width: var(--watch-width);
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: 1rem;
+  gap: 0.75rem 1rem;
 }
 
-/* Download link, shared by /watch and /clinic-videos. */
+/* Share and download, shared by /watch and /clinic-videos. */
+/* Stays one row; on phones the whole group wraps under the logo. */
+.video-actions {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+.video-share {
+  cursor: pointer;
+  background: transparent;
+  font-family: inherit;
+}
+
+.video-share,
 .video-download {
   display: inline-flex;
   align-items: center;
@@ -57,6 +73,8 @@ body:has(.watch-root) {
   white-space: nowrap;
 }
 
+.video-share:hover,
+.video-share:focus-visible,
 .video-download:hover,
 .video-download:focus-visible {
   background: rgba(251, 247, 240, 0.1);
@@ -247,7 +265,9 @@ body:has(.watch-root) {
 /* Chapters mirror the chapter bar burned into the film. */
 .watch-chapters ol {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  /* One equal-width row, whatever the chapter count. */
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(0, 1fr);
   gap: 0.5rem;
   list-style: none;
   margin: 0;
@@ -293,6 +313,13 @@ body:has(.watch-root) {
 }
 
 @media (max-width: 639px) {
+  /* Five or six chapters wrap to two rows of three on phones. */
+  .watch-chapters ol[data-count="5"],
+  .watch-chapters ol[data-count="6"] {
+    grid-auto-flow: row;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
   .watch-page {
     gap: 1.25rem;
   }

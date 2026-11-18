@@ -5,11 +5,13 @@ import { Heading } from "@/components/atoms/Heading";
 import { Lead } from "@/components/atoms/Lead";
 import { DownloadLink } from "@/components/watch/DownloadLink";
 import { FilmPlayer } from "@/components/watch/FilmPlayer";
+import { ShareButton } from "@/components/watch/ShareButton";
 import {
   clinicVideoFilm,
   clinicVideos,
   clinicVideosPage,
   getClinicVideo,
+  shareTarget,
 } from "@/content/clinicVideos";
 import { alpha, brandV2Theme } from "@/lib/themes";
 
@@ -42,7 +44,10 @@ export default async function ClinicVideoPage({ params }: { params: Promise<{ sl
           </svg>
           {clinicVideosPage.backLabel}
         </Link>
-        <DownloadLink video={film.video} slug={film.slug} label={film.downloadLabel} />
+        <div className="video-actions">
+          <ShareButton {...shareTarget(video)} slug={video.slug} label={film.shareLabel} />
+          <DownloadLink video={film.video} slug={film.slug} label={film.downloadLabel} />
+        </div>
       </header>
 
       <div className="watch-intro">
