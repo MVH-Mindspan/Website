@@ -5,6 +5,10 @@
  * at /media/<key> with byte-range support. Keys are versioned: upload a new
  * cut under a new key and point `src` at it; never overwrite a key.
  * Posters live in public/assets/watch/ (kept out of the TV signage manifest).
+ *
+ * Each video has a 1080p file (`src`) and, optionally, a 4K file (`uhd`).
+ * The player streams 4K only on large screens such as clinic TVs and falls
+ * back to 1080p if the 4K file will not play. Both sizes can be downloaded.
  */
 
 export type VideoChapter = {
@@ -13,35 +17,49 @@ export type VideoChapter = {
   start: number;
 };
 
-export type VideoAsset = {
+export type VideoFile = {
   src: string;
+  /** Shown on its download button, e.g. "HD" or "4K". */
+  qualityLabel: string;
+  /** File name people get when they download this file. */
+  downloadName: string;
+  sizeLabel: string;
+};
+
+export type VideoAsset = VideoFile & {
   poster: string;
   width: number;
   height: number;
   /** Seconds. */
   duration: number;
   durationLabel: string;
-  /** File name people get when they download the video. */
-  downloadName: string;
-  sizeLabel: string;
+  /** Optional 4K version of the same cut. */
+  uhd?: VideoFile;
   chapters: VideoChapter[];
 };
 
 /** worker.ts sends the file as an attachment when ?download=<name> is set. */
-export function downloadHref(video: VideoAsset): string {
-  return `${video.src}?download=${encodeURIComponent(video.downloadName)}`;
+export function downloadHref(file: VideoFile): string {
+  return `${file.src}?download=${encodeURIComponent(file.downloadName)}`;
 }
 
-export const firstVisitIntroV10 = {
-  src: "/media/watch/first-visit-intro-v10.mp4",
-  poster: "/assets/watch/first-visit-poster-v10.webp",
+export const firstVisitIntro = {
+  src: "/media/watch/first-visit-intro-v11.mp4",
+  qualityLabel: "HD",
+  downloadName: "Mindspan First Visit Intro.mp4",
+  sizeLabel: "40 MB",
+  uhd: {
+    src: "/media/watch/first-visit-intro-v11-4k.mp4",
+    qualityLabel: "4K",
+    downloadName: "Mindspan First Visit Intro 4K.mp4",
+    sizeLabel: "90 MB",
+  },
+  poster: "/assets/watch/first-visit-poster-v11.webp",
   width: 1920,
   height: 1080,
   duration: 368.6,
   durationLabel: "6 min",
-  downloadName: "Mindspan First Visit Intro.mp4",
-  sizeLabel: "35 MB",
-  // Start times measured from the chapter bar burned into the film (v10).
+  // Start times measured from the chapter bar burned into the film (v11).
   chapters: [
     { label: "Welcome", start: 0 },
     { label: "Discover", start: 123.4 },
@@ -50,16 +68,23 @@ export const firstVisitIntroV10 = {
   ],
 } satisfies VideoAsset;
 
-export const referralOverviewV1 = {
-  src: "/media/watch/referral-overview-v1.mp4",
-  poster: "/assets/watch/referral-overview-poster-v1.webp",
+export const referralOverview = {
+  src: "/media/watch/referral-overview-v2.mp4",
+  qualityLabel: "HD",
+  downloadName: "Mindspan Referral Overview.mp4",
+  sizeLabel: "21 MB",
+  uhd: {
+    src: "/media/watch/referral-overview-v2-4k.mp4",
+    qualityLabel: "4K",
+    downloadName: "Mindspan Referral Overview 4K.mp4",
+    sizeLabel: "49 MB",
+  },
+  poster: "/assets/watch/referral-overview-poster-v2.webp",
   width: 1920,
   height: 1080,
   duration: 175.4,
   durationLabel: "3 min",
-  downloadName: "Mindspan Referral Overview.mp4",
-  sizeLabel: "21 MB",
-  // Start times measured from the chapter bar burned into the film (v1).
+  // Start times measured from the chapter bar burned into the film (v2).
   chapters: [
     { label: "About us", start: 0 },
     { label: "Discover", start: 46.0 },
@@ -70,16 +95,23 @@ export const referralOverviewV1 = {
   ],
 } satisfies VideoAsset;
 
-export const carePlanVisitIntroV2 = {
-  src: "/media/watch/care-plan-visit-intro-v2.mp4",
-  poster: "/assets/watch/care-plan-visit-poster-v2.webp",
+export const carePlanVisitIntro = {
+  src: "/media/watch/care-plan-visit-intro-v3.mp4",
+  qualityLabel: "HD",
+  downloadName: "Mindspan Care Plan Visit Intro.mp4",
+  sizeLabel: "27 MB",
+  uhd: {
+    src: "/media/watch/care-plan-visit-intro-v3-4k.mp4",
+    qualityLabel: "4K",
+    downloadName: "Mindspan Care Plan Visit Intro 4K.mp4",
+    sizeLabel: "65 MB",
+  },
+  poster: "/assets/watch/care-plan-visit-poster-v3.webp",
   width: 1920,
   height: 1080,
   duration: 232.1,
   durationLabel: "4 min",
-  downloadName: "Mindspan Care Plan Visit Intro.mp4",
-  sizeLabel: "27 MB",
-  // Start times measured from the chapter bar burned into the film (v2).
+  // Start times measured from the chapter bar burned into the film (v3).
   chapters: [
     { label: "Welcome", start: 0 },
     { label: "What we learned", start: 48.25 },

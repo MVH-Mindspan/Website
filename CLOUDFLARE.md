@@ -49,12 +49,18 @@ Keys are versioned. A new cut gets a new key; never overwrite one.
 
 ### Add a video
 
-1. Upload the MP4 (faststart) before pushing. Without `--remote`, wrangler writes to local storage:
+1. Upload the MP4s (faststart) before pushing: the 1080p file and, if you have one, the 4K file.
+   Without `--remote`, wrangler writes to local storage:
    ```
-   npx wrangler r2 object put mindspan-media/watch/<name>-v1.mp4 --file <file.mp4> --content-type video/mp4 --remote
+   npx wrangler r2 object put mindspan-media/watch/<name>-v1.mp4 --file <1080p.mp4> --content-type video/mp4 --remote
+   npx wrangler r2 object put mindspan-media/watch/<name>-v1-4k.mp4 --file <4k.mp4> --content-type video/mp4 --remote
    ```
+   To replace a video with a new cut, upload it under the next version (`-v2`) and point
+   `src` (and `uhd.src`) at it. Never overwrite an existing key; it is cached as immutable.
 2. Add a poster (WebP, 1600x900) under `public/assets/watch/`. That folder is kept out of the TV signage slideshow.
-3. Add the file to `src/content/videos.ts` (src, poster, duration, chapters).
+3. Add the file to `src/content/videos.ts` (src, poster, duration, chapters, and `uhd` for the
+   4K file). Large screens such as clinic TVs stream the 4K file; phones stream 1080p. Both
+   sizes show on the Download control.
 4. Then publish it in one or both places:
    - **Clinic TV library** (`/clinic-videos/<slug>`): add an entry to `clinicVideos` in
      `src/content/clinicVideos.ts`, under an existing or new situation.
