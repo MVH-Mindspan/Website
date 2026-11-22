@@ -79,7 +79,7 @@ export default function ClinicVideosPage() {
                 </Link>
                 <div className="video-actions clinic-card-actions">
                   <ShareButton {...shareTarget(v)} slug={v.slug} label={page.shareLabel} />
-                  <DownloadLink video={v.video} slug={v.slug} label={page.downloadLabel} />
+                  <DownloadLink video={v.video} slug={v.slug} label={page.downloadLabel} compact />
                 </div>
               </li>
             ))}

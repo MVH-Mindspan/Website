@@ -1,9 +1,9 @@
 import { buildMetadata } from "@/lib/seo";
 import { filmShareUrl, getFilm, type Film } from "./watch";
 import {
-  carePlanVisitIntroV2,
-  firstVisitIntroV10,
-  referralOverviewV1,
+  carePlanVisitIntro,
+  firstVisitIntro,
+  referralOverview,
   type VideoAsset,
 } from "./videos";
 
@@ -53,7 +53,7 @@ export const clinicVideos = [
     situationId: "pcp-referral",
     summary:
       "For patients referred by their primary care doctor. Mindy explains who we are, what a referral means, and what happens next.",
-    video: referralOverviewV1,
+    video: referralOverview,
     shareSlug: "referral",
   },
   {
@@ -62,7 +62,7 @@ export const clinicVideos = [
     situationId: "discover-205",
     summary:
       "Mindy welcomes the patient and walks through the visit: Welcome, Discover, Decide and Care.",
-    video: firstVisitIntroV10,
+    video: firstVisitIntro,
     shareSlug: "first-visit",
   },
   {
@@ -71,7 +71,7 @@ export const clinicVideos = [
     situationId: "care-483",
     summary:
       "Mindy walks the patient through their care plan visit: what we learned, their plan, and how we follow it together.",
-    video: carePlanVisitIntroV2,
+    video: carePlanVisitIntro,
     shareSlug: "care-plan",
   },
 ] satisfies ClinicVideo[];

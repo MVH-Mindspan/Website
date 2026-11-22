@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { buildMetadata, SITE_URL } from "@/lib/seo";
 import { brand } from "./brand";
 import {
-  carePlanVisitIntroV2,
-  firstVisitIntroV10,
-  referralOverviewV1,
+  carePlanVisitIntro,
+  firstVisitIntro,
+  referralOverview,
   type VideoAsset,
 } from "./videos";
 
@@ -53,7 +53,7 @@ export const films = [
       description:
         "A six-minute film. Mindy, our AI assistant, walks through what happens at a first visit to Mindspan, from welcome to care plan.",
       canonical: "/watch/first-visit",
-      image: "https://mindspan.co/assets/watch/first-visit-og-v10.jpg",
+      image: "https://mindspan.co/assets/watch/first-visit-og-v11.jpg",
       imageAlt: "Mindy, Mindspan's AI assistant, welcomes you to Mindspan",
       noIndex: true,
     }),
@@ -62,7 +62,7 @@ export const films = [
     titleEmphasis: "Mindspan.",
     lead: "Six minutes with Mindy, our AI assistant, on what happens at a first visit.",
     video: {
-      ...firstVisitIntroV10,
+      ...firstVisitIntro,
       ariaLabel: "Your first visit to Mindspan, a six-minute film",
     },
     playLabel: "Play",
@@ -85,7 +85,7 @@ export const films = [
       description:
         "A three-minute film. Mindy, our AI assistant, explains who we are, what a referral from your doctor means, and what happens next.",
       canonical: "/watch/referral",
-      image: "https://mindspan.co/assets/watch/referral-og-v1.jpg",
+      image: "https://mindspan.co/assets/watch/referral-og-v2.jpg",
       imageAlt: "Mindy, Mindspan's AI assistant: your doctor may have referred you to Mindspan",
       noIndex: true,
     }),
@@ -94,7 +94,7 @@ export const films = [
     titleEmphasis: "Mindspan.",
     lead: "Three minutes with Mindy, our AI assistant, on who we are and what happens next.",
     video: {
-      ...referralOverviewV1,
+      ...referralOverview,
       ariaLabel: "Your referral to Mindspan, a three-minute film",
     },
     playLabel: "Play",
@@ -117,7 +117,7 @@ export const films = [
       description:
         "A four-minute film. Mindy, our AI assistant, walks through your care plan visit: what we learned, your plan, and how we follow it together.",
       canonical: "/watch/care-plan",
-      image: "https://mindspan.co/assets/watch/care-plan-visit-og-v2.jpg",
+      image: "https://mindspan.co/assets/watch/care-plan-visit-og-v3.jpg",
       imageAlt: "Mindy, Mindspan's AI assistant: this is your care plan visit",
       noIndex: true,
     }),
@@ -126,7 +126,7 @@ export const films = [
     titleEmphasis: "visit.",
     lead: "Four minutes with Mindy, our AI assistant, on what we learned, your plan, and how we follow it together.",
     video: {
-      ...carePlanVisitIntroV2,
+      ...carePlanVisitIntro,
       ariaLabel: "Your care plan visit, a four-minute film",
     },
     playLabel: "Play",

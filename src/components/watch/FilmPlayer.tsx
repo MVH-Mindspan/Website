@@ -21,6 +21,21 @@ type LockableOrientation = ScreenOrientation & {
   lock?: (orientation: string) => Promise<void>;
 };
 
+type Quality = "hd" | "uhd";
+
+/**
+ * 4K only where it shows: screens at least 1440 physical pixels on their
+ * short side (1440p and 4K monitors, 4K TVs, MacBooks, iPads). Phones and
+ * 1080p screens stay on 1080p, and so does anyone with Save-Data on.
+ */
+function prefersUhd(): boolean {
+  const connection = (navigator as Navigator & { connection?: { saveData?: boolean } })
+    .connection;
+  if (connection?.saveData) return false;
+  const shortSide = Math.min(window.screen.width, window.screen.height);
+  return shortSide * (window.devicePixelRatio || 1) >= 1440;
+}
+
 function formatTime(seconds: number): string {
   const s = Math.floor(seconds);
   return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`;
@@ -42,6 +57,21 @@ export function FilmPlayer({ film }: { film: Film }) {
 
   const { video } = film;
   const chapters = video.chapters;
+
+  // Server HTML always names the 1080p file; large screens switch to 4K
+  // after mount, before anyone presses play.
+  const [quality, setQuality] = useState<Quality>("hd");
+  const qualityRef = useRef<Quality>("hd");
+  const startedRef = useRef(false);
+  const resumeRef = useRef<{ time: number; play: boolean } | null>(null);
+  const src = quality === "uhd" && video.uhd ? video.uhd.src : video.src;
+
+  useEffect(() => {
+    if (video.uhd && prefersUhd()) {
+      qualityRef.current = "uhd";
+      setQuality("uhd");
+    }
+  }, [video.uhd]);
 
   // Must run synchronously inside the click/tap handler: iOS only allows
   // playback with sound from a direct user gesture.
@@ -68,7 +98,12 @@ export function FilmPlayer({ film }: { film: Film }) {
       });
       if (!started) {
         setStarted(true);
-        track(ANALYTICS_EVENTS.videoPlay, { video: film.slug, source });
+        startedRef.current = true;
+        track(ANALYTICS_EVENTS.videoPlay, {
+          video: film.slug,
+          source,
+          quality: qualityRef.current,
+        });
       }
       setEnded(false);
     },
@@ -135,6 +170,23 @@ export function FilmPlayer({ film }: { film: Film }) {
       }
     };
 
+    // If the 4K file will not play (an older TV browser, a weak decoder),
+    // drop to 1080p and carry on from the same point.
+    const onError = () => {
+      if (qualityRef.current !== "uhd") return;
+      resumeRef.current = { time: el.currentTime, play: startedRef.current };
+      qualityRef.current = "hd";
+      setQuality("hd");
+    };
+
+    const onLoadedMetadata = () => {
+      const resume = resumeRef.current;
+      if (!resume) return;
+      resumeRef.current = null;
+      if (resume.time > 0) el.currentTime = resume.time;
+      if (resume.play) el.play().catch(() => {});
+    };
+
     const onFullscreenChange = () => {
       if (!document.fullscreenElement) {
         (screen.orientation as LockableOrientation | undefined)?.unlock?.();
@@ -143,10 +195,14 @@ export function FilmPlayer({ film }: { film: Film }) {
 
     el.addEventListener("timeupdate", onTimeUpdate);
     el.addEventListener("ended", onEnded);
+    el.addEventListener("error", onError);
+    el.addEventListener("loadedmetadata", onLoadedMetadata);
     document.addEventListener("fullscreenchange", onFullscreenChange);
     return () => {
       el.removeEventListener("timeupdate", onTimeUpdate);
       el.removeEventListener("ended", onEnded);
+      el.removeEventListener("error", onError);
+      el.removeEventListener("loadedmetadata", onLoadedMetadata);
       document.removeEventListener("fullscreenchange", onFullscreenChange);
     };
   }, [chapters, film.slug, video.duration]);
@@ -156,7 +212,8 @@ export function FilmPlayer({ film }: { film: Film }) {
       <div className="watch-frame">
         <video
           ref={videoRef}
-          src={video.src}
+          src={src}
+          data-quality={quality}
           poster={video.poster}
           width={video.width}
           height={video.height}
