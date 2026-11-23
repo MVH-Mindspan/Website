@@ -135,23 +135,27 @@ function filmFigure(slug: string, file: string): HastNode {
   if (!film) fail(file, `unknown film "/watch/${slug}" (see src/content/watch.ts)`);
   const v = film.video;
   const title = [film.title, film.titleEmphasis].filter(Boolean).join(" ");
+  // The frame owns the radius, border and shadow (same treatment as ImageFrame).
+  // A <video> element clips its own rounded corners badly, so it stays square.
   return el("figure", { className: ["learn-film"], dataFilm: slug }, [
-    el(
-      "video",
-      {
-        controls: true,
-        preload: "metadata",
-        playsInline: true,
-        poster: v.poster,
-        width: v.width,
-        height: v.height,
-        ariaLabel: v.ariaLabel,
-      },
-      [
-        el("source", { src: v.src, type: "video/mp4" }),
-        text("Your browser cannot play this video."),
-      ],
-    ),
+    el("div", { className: ["learn-film-frame"] }, [
+      el(
+        "video",
+        {
+          controls: true,
+          preload: "metadata",
+          playsInline: true,
+          poster: v.poster,
+          width: v.width,
+          height: v.height,
+          ariaLabel: v.ariaLabel,
+        },
+        [
+          el("source", { src: v.src, type: "video/mp4" }),
+          text("Your browser cannot play this video."),
+        ],
+      ),
+    ]),
     el("figcaption", {}, [text(`${title} ${v.durationLabel}.`)]),
   ]);
 }
