@@ -1119,3 +1119,100 @@ h1, h2, h3 {
 
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* Long-form article body for /learn. Markdown from the CMS lands here, so
+   every element writers can produce is styled once, on the brand scale. */
+.learn-prose {
+  font-family: var(--theme-font-body);
+  font-size: 1.125rem;
+  line-height: 1.7;
+  color: var(--theme-ink);
+  max-width: 68ch;
+}
+.learn-prose > * + * { margin-top: 1.25em; }
+.learn-prose h2,
+.learn-prose h3,
+.learn-prose h4 {
+  font-family: var(--theme-font-heading);
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  line-height: 1.18;
+  text-wrap: balance;
+  scroll-margin-top: 120px;
+}
+.learn-prose h2 { font-size: clamp(1.6rem, 1.2rem + 1.2vw, 2.1rem); margin-top: 2.2em; }
+.learn-prose h3 { font-size: clamp(1.3rem, 1.1rem + 0.6vw, 1.6rem); margin-top: 1.8em; }
+.learn-prose h4 { font-size: 1.2rem; margin-top: 1.6em; }
+.learn-prose p { overflow-wrap: break-word; }
+.learn-prose a {
+  color: var(--theme-primary);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+.learn-prose a:hover { color: var(--theme-accent-hover); }
+.learn-prose strong { font-weight: 600; }
+.learn-prose ul,
+.learn-prose ol { padding-left: 1.4em; }
+.learn-prose ul { list-style: disc; }
+.learn-prose ol { list-style: decimal; }
+.learn-prose li { margin-top: 0.5em; }
+.learn-prose li::marker { color: var(--theme-primary); }
+.learn-prose blockquote {
+  margin-top: 1.6em;
+  padding: 0.25em 0 0.25em 1.25em;
+  border-left: 3px solid var(--theme-accent);
+  font-family: var(--theme-font-heading);
+  font-size: 1.25em;
+  line-height: 1.45;
+  color: var(--theme-primary);
+}
+.learn-prose hr {
+  border: 0;
+  height: 1px;
+  background: color-mix(in srgb, var(--theme-ink) 12%, transparent);
+  margin-top: 2.5em;
+}
+.learn-prose img {
+  display: block;
+  width: 100%;
+  border-radius: 1.5rem;
+  border: 1px solid color-mix(in srgb, var(--theme-ink) 8%, transparent);
+  margin-top: 2em;
+}
+.learn-prose figure figcaption,
+.learn-prose img + em {
+  display: block;
+  margin-top: 0.75em;
+  font-size: 0.9rem;
+  color: color-mix(in srgb, var(--theme-ink) 60%, transparent);
+}
+.learn-prose code {
+  font-size: 0.92em;
+  padding: 0.1em 0.35em;
+  border-radius: 0.35rem;
+  background: var(--theme-sand);
+}
+.learn-prose pre {
+  overflow-x: auto;
+  padding: 1rem 1.25rem;
+  border-radius: 1rem;
+  background: var(--theme-sand);
+}
+.learn-prose pre code { padding: 0; background: none; }
+.learn-prose table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95em;
+}
+.learn-prose th,
+.learn-prose td {
+  text-align: left;
+  padding: 0.6em 0.75em;
+  border-bottom: 1px solid color-mix(in srgb, var(--theme-ink) 12%, transparent);
+}
+.learn-prose th { font-weight: 600; }
+.learn-prose > p:last-child > em:only-child {
+  font-size: 0.95rem;
+  color: color-mix(in srgb, var(--theme-ink) 60%, transparent);
+}

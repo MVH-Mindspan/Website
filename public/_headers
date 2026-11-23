@@ -26,3 +26,10 @@
 
 /assets/watch/*
   X-Robots-Tag: noindex
+
+# CMS editor: never index.
+/admin
+  X-Robots-Tag: noindex, nofollow
+
+/admin/*
+  X-Robots-Tag: noindex, nofollow

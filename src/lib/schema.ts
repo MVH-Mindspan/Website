@@ -3,6 +3,7 @@ import { brand } from "@/content/brand";
 import type { Location } from "@/content/locations";
 import type { LocationDetail, ProviderProfile } from "@/content/pages/locationDetail";
 import type { FAQItem } from "@/content/faq";
+import type { Post } from "@/lib/learn";
 
 type SchemaObject = Record<string, unknown>;
 
@@ -255,4 +256,27 @@ export function locationBreadcrumbItems(
     { name: "Locations", url: `${SITE_URL}/locations` },
     { name: `${location.city}, ${location.state}`, url: `${SITE_URL}${location.href}` },
   ];
+}
+
+export function buildArticleSchema(post: Post): SchemaObject {
+  const url = `${SITE_URL}/learn/${post.slug}`;
+  return {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "@id": `${url}#article`,
+    mainEntityOfPage: url,
+    headline: post.title,
+    description: post.description,
+    datePublished: post.date,
+    dateModified: post.updated ?? post.date,
+    ...(post.image ? { image: [`${SITE_URL}${post.image}`] } : {}),
+    author: {
+      "@type": "Person",
+      name: post.author.name,
+      jobTitle: post.author.role,
+    },
+    publisher: { "@id": ORG_ID },
+    keywords: post.tags.join(", "),
+    inLanguage: "en-US",
+  };
 }

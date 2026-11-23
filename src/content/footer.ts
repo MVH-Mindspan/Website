@@ -25,6 +25,7 @@ export const footer = {
         { label: "Science & technology", href: "/about/science" },
         { label: "GUIDE Program", href: "/guide" },
         { label: "For caregivers", href: "/family/assist" },
+        { label: "Learn", href: "/learn" },
         { label: "Member portal", href: "https://my.mindspan.co/login" },
       ],
     },
