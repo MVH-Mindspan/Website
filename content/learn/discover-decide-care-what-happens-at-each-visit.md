@@ -27,6 +27,10 @@ The work starts before your first visit.
 
 The Discover visit is your first appointment with your Mindspan care team. It is a long visit by design.
 
+Mindy, our AI assistant, walks through the visit in six minutes:
+
+https://mindspan.co/watch/first-visit
+
 Your care team goes through your history with you and with someone who knows you well. We ask for that person to be in the room, or on the call, because the people around you often notice changes before you do. A clinician on the team examines you, reviews the records, and orders what is needed to get a clear picture. That usually means blood tests and brain imaging. Where it helps, it includes newer blood biomarkers.
 
 At a Discover visit you also complete cognitive testing with a trained member of the team. This is more detailed than the check you did at home. It takes time, and it is the part families most often say they wish had happened years earlier.
