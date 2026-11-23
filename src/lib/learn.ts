@@ -11,6 +11,7 @@ import remarkGfm from "remark-gfm";
 import remarkRehype from "remark-rehype";
 import rehypeSlug from "rehype-slug";
 import rehypeStringify from "rehype-stringify";
+import { getFilm } from "@/content/watch";
 
 const CONTENT_ROOT = path.join(process.cwd(), "content");
 const POSTS_DIR = path.join(CONTENT_ROOT, "learn");
@@ -90,15 +91,98 @@ export function estimateReadingMinutes(html: string): number {
   return Math.max(1, Math.round(words / 220));
 }
 
-function renderMarkdown(markdown: string): string {
-  const file = unified()
+// A Mindspan film link on a line by itself becomes an inline player.
+// Writers paste https://mindspan.co/watch/<slug> (or /watch/<slug>) as its
+// own paragraph. Anything else, or the same link inside a sentence, stays a
+// link. The film must exist in src/content/watch.ts; a typo fails the build.
+const FILM_LINK = /^(?:https?:\/\/(?:www\.)?mindspan\.co)?\/watch\/([a-z0-9-]+)\/?$/i;
+
+type HastNode = {
+  type: string;
+  tagName?: string;
+  properties?: Record<string, unknown>;
+  children?: HastNode[];
+  value?: string;
+};
+
+function el(tagName: string, properties: Record<string, unknown>, children: HastNode[] = []): HastNode {
+  return { type: "element", tagName, properties, children };
+}
+
+function text(value: string): HastNode {
+  return { type: "text", value };
+}
+
+function filmSlugOf(paragraph: HastNode): string | null {
+  const kids = (paragraph.children ?? []).filter(
+    (c) => !(c.type === "text" && (c.value ?? "").trim() === ""),
+  );
+  if (kids.length !== 1) return null;
+  const only = kids[0];
+  let url: string | undefined;
+  if (only.type === "element" && only.tagName === "a") {
+    url = String(only.properties?.href ?? "");
+  } else if (only.type === "text") {
+    url = (only.value ?? "").trim();
+  }
+  if (!url) return null;
+  const m = url.match(FILM_LINK);
+  return m ? m[1].toLowerCase() : null;
+}
+
+function filmFigure(slug: string, file: string): HastNode {
+  const film = getFilm(slug);
+  if (!film) fail(file, `unknown film "/watch/${slug}" (see src/content/watch.ts)`);
+  const v = film.video;
+  const title = [film.title, film.titleEmphasis].filter(Boolean).join(" ");
+  return el("figure", { className: ["learn-film"], dataFilm: slug }, [
+    el(
+      "video",
+      {
+        controls: true,
+        preload: "metadata",
+        playsInline: true,
+        poster: v.poster,
+        width: v.width,
+        height: v.height,
+        ariaLabel: v.ariaLabel,
+      },
+      [
+        el("source", { src: v.src, type: "video/mp4" }),
+        text("Your browser cannot play this video."),
+      ],
+    ),
+    el("figcaption", {}, [text(`${title} ${v.durationLabel}.`)]),
+  ]);
+}
+
+function rehypeMindspanFilms(file: string) {
+  return (tree: HastNode) => {
+    const walk = (node: HastNode) => {
+      if (!node.children) return;
+      node.children = node.children.map((child) => {
+        if (child.type === "element" && child.tagName === "p") {
+          const slug = filmSlugOf(child);
+          if (slug) return filmFigure(slug, file);
+        }
+        walk(child);
+        return child;
+      });
+    };
+    walk(tree);
+  };
+}
+
+function renderMarkdown(markdown: string, file: string): string {
+  const out = unified()
     .use(remarkParse)
     .use(remarkGfm)
     .use(remarkRehype)
     .use(rehypeSlug)
+    .use(() => rehypeMindspanFilms(file))
     .use(rehypeStringify)
     .processSync(markdown);
-  return String(file);
+  return String(out);
 }
 
 let authorCache: Map<string, Author> | null = null;
@@ -137,7 +221,7 @@ function parsePost(file: string): Post {
     ? tagsRaw.map((t) => String(t).trim()).filter(Boolean)
     : [];
 
-  const html = renderMarkdown(content);
+  const html = renderMarkdown(content, file);
   const updated = isoDate(fm, "updated", file, false);
 
   return {

@@ -22,6 +22,16 @@ You cannot publish your own post. A reviewer must approve it first. That is inte
 - Images: 1600 by 900 pixels, JPEG or WebP, under 400 KB. Describe the image in the alt text field.
 - The site is public, and so is the GitHub repository behind it. Drafts are visible there before they are published. Do not draft anything confidential.
 
+## Adding a Mindspan film
+
+Paste the film's address on a line of its own, with a blank line above and below:
+
+```
+https://mindspan.co/watch/first-visit
+```
+
+On the site that line becomes a video player with the film's poster. The same address inside a sentence stays an ordinary link. Films that exist today: `first-visit`, `care-plan` and `referral`. Ask the web team to add a new film before linking it, because an unknown film stops the site from building.
+
 ## Authors
 
 Add yourself once under **Authors**. Use your name, your role, and two or three sentences about you. A reviewer approves author entries the same way as posts.
