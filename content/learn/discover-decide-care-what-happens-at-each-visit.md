@@ -20,14 +20,14 @@ Mindspan runs care in three stages, in a fixed order: Discover, Decide, Care. Ea
 The work starts before you meet a neurologist.
 
 - **Intake.** A member of our care team calls you. They take your history, ask what you and your family have noticed, and collect records from your other doctors. Bring the name of your primary care clinician and a list of medications, including supplements.
-- **A memory check at home.** You complete a short cognitive check on a laptop or tablet, at your own pace. It is a screening, not a diagnosis. It gives your neurologist a starting point.
+- **A memory check at home.** You complete a short cognitive check on a laptop or tablet, at your own pace. It is a screening, not a diagnosis. It gives your care team a starting point.
 - **Preparation.** Before the visit, our team reviews what has come in: your history, the check, any prior labs or imaging. If something is missing, we chase it so the visit is not spent on paperwork.
 
 ## Stage one: Discover
 
-The Discover visit is your first appointment with a Mindspan neurologist. It is a long visit by design.
+The Discover visit is your first appointment with your Mindspan care team. It is a long visit by design.
 
-Your neurologist goes through your history with you and with someone who knows you well. We ask for that person to be in the room, or on the call, because the people around you often notice changes before you do. The neurologist does a neurological exam, reviews the records, and orders what is needed to get a clear picture. That usually means blood tests and brain imaging. Where it helps, it includes newer blood biomarkers.
+Your care team goes through your history with you and with someone who knows you well. We ask for that person to be in the room, or on the call, because the people around you often notice changes before you do. A clinician on the team examines you, reviews the records, and orders what is needed to get a clear picture. That usually means blood tests and brain imaging. Where it helps, it includes newer blood biomarkers.
 
 At a Discover visit you also complete cognitive testing with a trained member of the team. This is more detailed than the check you did at home. It takes time, and it is the part families most often say they wish had happened years earlier.
 
