@@ -4,7 +4,6 @@ export const nav: NavLink[] = [
   { label: "How it works", href: "/about/how-it-works" },
   { label: "GUIDE Program", href: "/guide" },
   { label: "For caregivers", href: "/family/assist" },
-  { label: "Learn", href: "/learn" },
 ];
 
 export const audienceNav = {
