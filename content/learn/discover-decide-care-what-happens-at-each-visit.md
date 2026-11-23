@@ -4,7 +4,7 @@ description: Mindspan care follows three stages. Here is what each one is for, w
 date: 2026-11-25
 author: mindspan-care-team
 image: /assets/meet-neuro.webp
-imageAlt: A Mindspan neurologist talking with a patient and their partner in a clinic room.
+imageAlt: A Mindspan clinician talking with a patient and their partner in a clinic room.
 tags:
   - what to expect
   - caregivers
@@ -17,7 +17,7 @@ Mindspan runs care in three stages, in a fixed order: Discover, Decide, Care. Ea
 
 ## Before the first visit
 
-The work starts before you meet a neurologist.
+The work starts before your first visit.
 
 - **Intake.** A member of our care team calls you. They take your history, ask what you and your family have noticed, and collect records from your other doctors. Bring the name of your primary care clinician and a list of medications, including supplements.
 - **A memory check at home.** You complete a short cognitive check on a laptop or tablet, at your own pace. It is a screening, not a diagnosis. It gives your care team a starting point.
