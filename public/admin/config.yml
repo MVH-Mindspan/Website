@@ -1,0 +1,84 @@
+# Decap CMS configuration for mindspan.co/learn.
+# Same format as Sveltia CMS, so the loader script can be swapped later.
+
+backend:
+  name: github
+  repo: MVH-Mindspan/Website
+  branch: main
+  base_url: https://mindspan.co
+  auth_endpoint: api/cms/auth
+  cms_label_prefix: "learn/"
+  commit_messages:
+    create: "learn: add {{collection}} {{slug}}"
+    update: "learn: update {{collection}} {{slug}}"
+    delete: "learn: remove {{collection}} {{slug}}"
+    uploadMedia: "learn: add image {{path}}"
+    deleteMedia: "learn: remove image {{path}}"
+    openAuthoring: "{{message}}"
+
+# Every save creates a branch and a pull request. Nothing is live until a
+# reviewer approves and merges. Columns: Drafts, In review, Ready.
+publish_mode: editorial_workflow
+
+# Run `npm run cms:dev` next to `npm run dev` to edit without GitHub.
+local_backend: true
+
+media_folder: public/learn
+public_folder: /learn
+
+site_url: https://mindspan.co
+display_url: https://mindspan.co/learn
+logo_url: https://mindspan.co/assets/logo-green.png
+
+slug:
+  encoding: unicode
+  clean_accents: true
+
+collections:
+  - name: posts
+    label: Posts
+    label_singular: Post
+    folder: content/learn
+    create: true
+    slug: "{{slug}}"
+    preview_path: "learn/{{slug}}"
+    extension: md
+    format: frontmatter
+    sortable_fields: [date, title]
+    summary: "{{title}} ({{date}})"
+    editor:
+      preview: false
+    fields:
+      - { label: Title, name: title, widget: string, hint: "Plain, specific, under 70 characters." }
+      - { label: Summary, name: description, widget: text, hint: "One or two sentences. Shows on the index page and in search results." }
+      - { label: Date, name: date, widget: datetime, format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false }
+      - label: Author
+        name: author
+        widget: relation
+        collection: authors
+        search_fields: [name]
+        value_field: "{{slug}}"
+        display_fields: [name]
+      - { label: Hero image, name: image, widget: image, required: false, hint: "1600 by 900, JPEG or WebP, under 400 KB." }
+      - { label: Hero image description, name: imageAlt, widget: string, required: false }
+      - { label: Tags, name: tags, widget: list, required: false, hint: "Short, lower case. For example: dementia, caregivers, diagnosis." }
+      - { label: Draft, name: draft, widget: boolean, default: false, hint: "On: hidden from the site even after merge. Off: live once published." }
+      - { label: Body, name: body, widget: markdown }
+
+  - name: authors
+    label: Authors
+    label_singular: Author
+    folder: content/authors
+    create: true
+    slug: "{{slug}}"
+    identifier_field: name
+    extension: md
+    format: frontmatter
+    editor:
+      preview: false
+    fields:
+      - { label: Name, name: name, widget: string }
+      - { label: Role, name: role, widget: string, hint: "For example: Neurologist, Mindspan Danvers" }
+      - { label: Short bio, name: bio, widget: text, hint: "Two or three sentences." }
+      - { label: Photo, name: photo, widget: image, required: false }
+      - { label: Body, name: body, widget: hidden, default: "" }

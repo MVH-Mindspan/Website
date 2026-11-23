@@ -1,12 +1,18 @@
 // Cloudflare Worker — serves static Next.js export from ./out
-// plus /api endpoints that append to Google Sheets and /media/* from R2.
+// plus /api endpoints that append to Google Sheets, /media/* from R2, and
+// the GitHub OAuth handshake for the /admin CMS.
 
 import { onRequestPost as bookHandler } from "./functions/api/book";
 import { onRequestPost as waitlistHandler } from "./functions/api/waitlist";
 import { onRequestPost as referHandler } from "./functions/api/refer";
 import type { SheetsEnv } from "./functions/_lib/sheets";
+import {
+  handleCmsAuth,
+  handleCmsCallback,
+  type CmsAuthEnv,
+} from "./functions/api/cms-auth";
 
-interface Env extends SheetsEnv {
+interface Env extends SheetsEnv, CmsAuthEnv {
   ASSETS: Fetcher;
   MEDIA: R2Bucket;
 }
@@ -205,6 +211,10 @@ export default {
     if (url.pathname.startsWith("/ingest/")) {
       return proxyPostHog(request, url);
     }
+
+    // GitHub sign-in for the Decap CMS editor at /admin (GET only).
+    if (url.pathname === "/api/cms/auth") return handleCmsAuth(request, env);
+    if (url.pathname === "/api/cms/callback") return handleCmsCallback(request, env);
 
     const handler = API_HANDLERS[url.pathname];
     if (handler) {

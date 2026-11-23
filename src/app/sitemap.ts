@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { SITE_URL } from "@/lib/seo";
 import { locations } from "@/content/locations";
+import { getAllPosts } from "@/lib/learn";
 
 export const dynamic = "force-static";
 
@@ -20,6 +21,7 @@ const ROUTE_LAST_MODIFIED: Record<string, string> = {
   "/tos": "2026-05-07",
   "/privacy-notice": "2026-05-07",
   "/informed-consent": "2026-05-07",
+  "/learn": "2026-11-24",
 };
 
 const STATIC_PATHS: ReadonlyArray<string> = [
@@ -38,6 +40,7 @@ const STATIC_PATHS: ReadonlyArray<string> = [
   "/tos",
   "/privacy-notice",
   "/informed-consent",
+  "/learn",
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -53,5 +56,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     lastModified: ROUTE_LAST_MODIFIED[`/locations/${loc.slug}`] ?? today,
   }));
 
-  return [...staticEntries, ...locationEntries];
+  const postEntries: MetadataRoute.Sitemap = getAllPosts().map((post) => ({
+    url: `${SITE_URL}/learn/${post.slug}`,
+    lastModified: post.updated ?? post.date,
+  }));
+
+  return [...staticEntries, ...locationEntries, ...postEntries];
 }

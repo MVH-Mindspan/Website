@@ -18,8 +18,15 @@ export function buildMetadata(opts: {
   image?: string;
   imageAlt?: string;
   noIndex?: boolean;
+  /** Present on blog posts: switches OpenGraph to type "article". */
+  article?: {
+    publishedTime: string;
+    modifiedTime?: string;
+    authors?: string[];
+    tags?: string[];
+  };
 }): Metadata {
-  const { title, description, canonical, image, imageAlt, noIndex } = opts;
+  const { title, description, canonical, image, imageAlt, noIndex, article } = opts;
   const url = canonical.startsWith("http")
     ? canonical
     : `${SITE_URL}${canonical}`;
@@ -31,22 +38,36 @@ export function buildMetadata(opts: {
     title,
     description,
     alternates: { canonical: url },
-    openGraph: {
-      type: "website",
-      siteName: SITE_NAME,
-      title,
-      description,
-      url,
-      locale: DEFAULT_LOCALE,
-      images: [
-        {
-          url: ogImage,
-          width: 1200,
-          height: 630,
-          alt: altText,
+    openGraph: article
+      ? {
+          type: "article",
+          siteName: SITE_NAME,
+          title,
+          description,
+          url,
+          locale: DEFAULT_LOCALE,
+          publishedTime: article.publishedTime,
+          modifiedTime: article.modifiedTime,
+          authors: article.authors,
+          tags: article.tags,
+          images: [{ url: ogImage, width: 1200, height: 630, alt: altText }],
+        }
+      : {
+          type: "website",
+          siteName: SITE_NAME,
+          title,
+          description,
+          url,
+          locale: DEFAULT_LOCALE,
+          images: [
+            {
+              url: ogImage,
+              width: 1200,
+              height: 630,
+              alt: altText,
+            },
+          ],
         },
-      ],
-    },
     twitter: {
       card: "summary_large_image",
       title,

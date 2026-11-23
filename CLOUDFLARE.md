@@ -24,18 +24,65 @@ npm run dev
 ## Routes
 
 - `/` — Mindspan brand homepage
-- `/airbnb` — Airbnb-style version
-- Floating toggle bottom-center switches between them
+- `/learn` — blog index; `/learn/<slug>` posts; `/learn/feed.xml` RSS
+- `/admin` — Decap CMS editor (noindex)
 
-## Optional: Cloudflare Worker (forms API later)
+## Cloudflare Worker (required)
 
-`worker.ts` and `wrangler.json` are included for parity with 100xpath. When you need a form handler (e.g. Book a Visit), deploy via Wrangler instead of Pages:
+Production is the Worker `website` (`wrangler.json`), which serves `./out` through the
+`ASSETS` binding. The Worker is not optional: the forms API (`/api/book`, `/api/waitlist`,
+`/api/refer`), video from R2 (`/media/*`), the PostHog proxy (`/ingest/*`) and CMS sign-in
+(`/api/cms/*`) all run in `worker.ts`.
+
+Deploy by hand with:
 
 ```
-npx wrangler deploy
+npm run build && npx wrangler deploy
 ```
 
-That serves `./out` via the `ASSETS` binding and lets you add `/api/*` routes in `worker.ts`. Until then, Pages is the simpler path.
+For the blog workflow (below) the repo must be connected to Workers Builds so that pushes
+to `main` deploy automatically and pull requests get preview URLs. Dashboard → Workers &
+Pages → `website` → Settings → Builds → connect `MVH-Mindspan/Website`, build command
+`npm run build`, deploy command `npx wrangler deploy`, non-production branch command
+`npx wrangler versions upload`. Previews set `WORKERS_CI_BRANCH`, which `robots.ts` reads
+to keep preview builds out of search.
+
+## Blog (/learn) and the CMS (/admin)
+
+Posts are markdown in `content/learn/`, authors in `content/authors/`. `src/lib/learn.ts`
+reads them at build time. The editor is Decap CMS, served as static files from
+`public/admin/` and configured in `public/admin/config.yml`.
+
+Editorial workflow is on: every save in the editor creates a branch and a pull request
+labelled `learn/...`. Nothing is live until the PR is merged into `main`. Branch protection
+on `main` (one approving review) is what makes the approval step real; set it in GitHub →
+Settings → Branches. Writers need **Write** access to the repo so Decap can open branches.
+
+### One-time setup
+
+1. GitHub → MVH-Mindspan org → Settings → Developer settings → **OAuth Apps** → New.
+   Homepage `https://mindspan.co`, callback `https://mindspan.co/api/cms/callback`.
+2. Store the credentials as Worker secrets:
+   ```
+   npx wrangler secret put GITHUB_OAUTH_CLIENT_ID
+   npx wrangler secret put GITHUB_OAUTH_CLIENT_SECRET
+   ```
+3. Turn on branch protection for `main` (require PR, 1 review, dismiss stale approvals).
+4. Connect Workers Builds (above) so PRs get preview URLs.
+
+### Local editing without GitHub
+
+```
+npm run cms:dev   # starts decap-server on :8081
+npm run dev       # then open http://localhost:3000/admin
+```
+
+Saves write straight to `content/`. `local_backend: true` in `config.yml` enables this and
+is ignored in production when the local server is not running.
+
+### Writer guide
+
+See `content/README.md`.
 
 ## Video (R2 at /media/*)
 
